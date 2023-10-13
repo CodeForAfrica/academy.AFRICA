@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: host.docker.internal:3306
+      WORDPRESS_DB_USER: academyafrica
+      WORDPRESS_DB_PASSWORD: academyafrica
+      WORDPRESS_DB_NAME: academyafrica
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./wp-content/themes:/var/www/html/wp-content/themes
