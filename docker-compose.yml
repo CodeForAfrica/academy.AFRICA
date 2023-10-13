@@ -10,6 +10,7 @@ services:
       - ./wordpress:/var/www/html
       - ./wp-content/themes:/var/www/html/wp-content/themes
       - ./wp-content/plugins:/var/www/html/wp-content/plugins
+      - ./contrib/docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 
   nginx:
     depends_on:
