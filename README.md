@@ -30,6 +30,14 @@
    grep WPENGINE_SESSION_DB_PASSWORD ./sites/environmentname/_wpeprivate/config.json
    ```
 
+   To access the admin dashboard from localhost, add the following to `wp-config.php` in the `wordpress` directory after the `WP_DEBUG` line:
+
+   ```php
+   define( 'WP_SITEURL', 'http://localhost:8080' );
+   define( 'WP_HOME', 'http://localhost:8080' );
+   define( 'DOMAIN_CURRENT_SITE', 'http://localhost:8080' );
+   ```
+
 6. **Start Containers**
 
    Run the following command to start the containers using Docker Compose:
