@@ -35,7 +35,6 @@
    ```php
    define( 'WP_SITEURL', 'http://localhost:8080' );
    define( 'WP_HOME', 'http://localhost:8080' );
-   define( 'DOMAIN_CURRENT_SITE', 'http://localhost:8080' );
    ```
 
 6. **Start Containers**

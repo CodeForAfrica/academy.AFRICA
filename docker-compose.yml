@@ -6,6 +6,11 @@ services:
     image: wordpress:php7.4-fpm
     restart: unless-stopped
     env_file: .env
+    environment:
+      WORDPRESS_CONFIG_EXTRA: |
+          define( 'WP_SITEURL', '${SITE_URL}' );
+          define( 'WP_HOME', '${SITE_URL}' );
+          define( 'WP_DEBUG', ${WP_DEBUG} );
     volumes:
       - ./wordpress:/var/www/html
       - ./wp-content/themes:/var/www/html/wp-content/themes
@@ -15,7 +20,7 @@ services:
   nginx:
     depends_on:
       - wordpress
-    image: nginx:1.19
+    image: nginx:latest
     restart: unless-stopped
     ports:
       - 8080:80
