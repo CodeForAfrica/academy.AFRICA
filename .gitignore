@@ -62,10 +62,7 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 /wp-admin
 /wp-includes
 /wp-content/themes/*
-!/wp-content/themes/academyAfrica
-!/wp-content/themes/hello-elementor
 /wp-content/plugins/*
-!/wp-content/plugins/index.php
 /wp-content/mu-plugins
 .htaccess
 apple-touch-icon-precomposed.png
@@ -111,3 +108,8 @@ wordpress
 *.avi
 
 .env
+
+!/wp-content/themes/academyAfrica
+!/wp-content/themes/hello-elementor
+!/wp-content/plugins/index.php
+!/wp-content/plugins/academy-africa
