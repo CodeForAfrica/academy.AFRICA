@@ -208,12 +208,12 @@ final class Plugin
      * @since 1.0.0
      * @access private
      */
-    public function register_widgets()
+    public function register_widgets($widgets_manager)
     {
         // Include Widget files
         require_once(__DIR__ . '/widgets/hero.php');
 
         // Register widget
-        $widgets_manager->register(new \Academy_Africa_Hero());
+        $widgets_manager->register( new \Academy_Africa_Hero() );
     }
 }
