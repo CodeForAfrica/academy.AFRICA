@@ -19,7 +19,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
 
 	public function get_categories()
 	{
-		return ['basic'];
+		return ['academy-africa'];
 	}
 
 	public function get_keywords()

@@ -199,6 +199,7 @@ final class Plugin
 
         add_action('elementor/widgets/register', [$this, 'register_widgets']);
         add_action('elementor/frontend/after_enqueue_styles', [$this, 'register_widget_styles']);
+        add_action('elementor/elements/categories_registered', [$this, 'add_elementor_widget_categories']);
     }
 
     /**
@@ -237,6 +238,22 @@ final class Plugin
                 'academy-africa'
             ],
             filemtime(plugin_dir_path(__FILE__) . 'assets/css/header.css')
+        );
+    }
+
+    /**
+     * Add custom category
+     * 
+     * @since 1.0.0
+     * @access public
+     */
+    public function add_elementor_widget_categories($elements_manager){
+        $elements_manager->add_category(
+            'academy-africa',
+            [
+                'title' => __('Academy Africa', 'academy-africa'),
+                'icon' => 'fa fa-plug',
+            ]
         );
     }
 }
