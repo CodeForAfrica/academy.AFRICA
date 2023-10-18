@@ -198,6 +198,7 @@ final class Plugin
     {
 
         add_action('elementor/widgets/register', [$this, 'register_widgets']);
+        add_action('elementor/frontend/after_enqueue_styles', [$this, 'register_widget_styles']);
     }
 
     /**
@@ -212,8 +213,30 @@ final class Plugin
     {
         // Include Widget files
         require_once(__DIR__ . '/widgets/hero.php');
+        require_once(__DIR__ . '/widgets/header.php');
 
         // Register widget
-        $widgets_manager->register( new \Academy_Africa_Hero() );
+        $widgets_manager->register(new \Academy_Africa_Hero());
+        $widgets_manager->register(new \Academy_Africa_Header());
+    }
+
+    public function register_widget_styles()
+    {
+        wp_enqueue_style(
+            'academy-africa',
+            plugins_url('assets/css/academy-africa.css', __FILE__),
+            [],
+            [],
+            filemtime(plugin_dir_path(__FILE__) . 'assets/css/academy-africa.css.css')
+        );
+
+        wp_enqueue_style(
+            'academy-africa-header',
+            plugins_url('assets/css/header.css', __FILE__),
+            [
+                'academy-africa'
+            ],
+            filemtime(plugin_dir_path(__FILE__) . 'assets/css/header.css')
+        );
     }
 }

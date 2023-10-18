@@ -1,0 +1,12 @@
+.academy-africa-header {
+    width: 100vw;
+    background-color: var(--color-primary);
+    height: 200px;
+}
+
+.academy-africa-header h1 {
+    color: var(--color-neutral50);
+    text-align: center;
+    padding-top: 50px;
+    font-size: large;
+}

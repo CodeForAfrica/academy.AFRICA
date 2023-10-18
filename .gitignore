@@ -71,6 +71,7 @@ favicon.ico
 wpe-deploy-status-academyafrica
 robots.txt
 wordpress
+node_modules
 
 # large/disallowed file types
 # a CDN should be used for these

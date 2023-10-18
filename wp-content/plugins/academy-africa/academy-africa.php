@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: Academy Africa
  * Description: This plugin provides custom widgets for the Academy Africa website.
@@ -9,7 +10,18 @@
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
+
+// Define Academy Africa Plugin Constants
+
+if (!defined('ACADEMY_AFRICA_PLUGIN_VERSION')) {
+    define('ACADEMY_AFRICA_PLUGIN_VERSION', '1.0.0');
+}
+
+if (!defined('ACADEMY_AFRICA_PLUGIN_DIR')) {
+    define('ACADEMY_AFRICA_PLUGIN_DIR', dirname(__FILE__));
+}
 
 /**
  * Main Elementor Test Extension Class
@@ -21,12 +33,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
 
-function academy_africa_plugin( $widgets_manager ) {
+function academy_africa_plugin($widgets_manager)
+{
 
-    require_once( __DIR__ . '/includes/plugin.php' );
+    require_once(__DIR__ . '/includes/plugin.php');
 
     // Run the plugin
     \Academy_Africa\Plugin::instance();
-
 }
-add_action( 'plugins_loaded', 'academy_africa_plugin' );
+add_action('plugins_loaded', 'academy_africa_plugin');
