@@ -33,6 +33,43 @@ class Academy_Africa_Header extends \Elementor\Widget_Base
         return ['header', 'navigation'];
     }
 
+    protected function register_controls()
+    {
+        $this->start_controls_section(
+            'section_header',
+            [
+                'label' => __('Header', 'academy-africa'),
+            ]
+        );
+
+        // Sign in button text
+        $this->add_control(
+            'sign_in_button_text',
+            [
+                'label' => __('Sign In Button Text', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('Sign In', 'academy-africa'),
+                'placeholder' => __('Sign In', 'academy-africa'),
+            ]
+        );
+
+        // Search bar placeholder text
+        $this->add_control(
+            'search_bar_placeholder_text',
+            [
+                'label' => __('Search Bar Placeholder Text', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('Search Courses', 'academy-africa'),
+                'placeholder' => __('Search Courses', 'academy-africa'),
+            ]
+        );
+
+
+
+
+        $this->end_controls_section();
+    }
+
     function getSiteName()
     {
         return get_bloginfo('name');
@@ -47,6 +84,10 @@ class Academy_Africa_Header extends \Elementor\Widget_Base
 
     protected function render()
     {
+        $settings = $this->get_settings_for_display();
+
+        // inline editing
+        $this->add_inline_editing_attributes('sign_in_button_text', 'none');
 ?>
         <nav class="nav">
             <div class="logo-section">
@@ -57,9 +98,9 @@ class Academy_Africa_Header extends \Elementor\Widget_Base
             </div>
             <div class="navigation-section">
                 <div class="search-bar">
-                    <input type="text" placeholder="Search Courses" class="search-input">
+                    <input type="text" placeholder="<?php echo $settings['search_bar_placeholder_text']; ?>" class="search-input">
                     <button class="search-button">
-                        <img src="./search-icon.png" alt="search" class="search-icon">
+                        <i class="eicon-search search-icon"></i>
                     </button>
                 </div>
                 <div class="navigation-links">
@@ -74,14 +115,16 @@ class Academy_Africa_Header extends \Elementor\Widget_Base
                     </a>
                     <a href="#" class="nav-link">
                         <p class="nav-link-text">About Us</p>
-                        <img src="./arrow-down.png" alt="arrow-down" class="arrow-down">
+                        <i class="eicon-caret-down arrow-down"></i>
                     </a>
                     <a href="#" class="nav-link login-button">
-                        <p class="nav-link-text">Sign In</p>
+                        <p class="nav-link-text" <?php echo $this->get_render_attribute_string('sign_in_button_text'); ?>>
+                            <?php echo $settings['sign_in_button_text']; ?>
+                        </p>
                     </a>
                     <a href="#" class="nav-link nav-button lang-button ">
-                        <img src="./language-icon.png" alt="language" class="icon language-icon">
-                        <img src="./arrow-down.png" alt="arrow-down" class="arrow-down icon">
+                        <i class="eicon-globe arrow-down icon language-icon"></i>
+                        <i class="eicon-caret-down arrow-down icon"></i>
                     </a>
                 </div>
             </div>
