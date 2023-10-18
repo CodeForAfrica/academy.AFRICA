@@ -56,6 +56,7 @@
     align-self: stretch;
     border: none;
     outline: none;
+    border-radius: 0;
 }
 
 .navigation-section .search-bar .search-input::placeholder {
@@ -64,7 +65,7 @@
     justify-content: center;
     flex: 1 0 0;
     align-self: stretch;
-    color: var(#767A94, #767A94);
+    color: #767A94;
     font-family: Open Sans;
     font-size: 14px;
     font-style: italic;
@@ -79,12 +80,14 @@
     align-items: center;
     gap: 8px;
     border: none;
-    background: var(#EFF0FD, #EFF0FD);
+    background: #EFF0FD;
+    border-radius: 0;
 }
 
-.navigation-section .search-bar .search-button img {
-    width: 16px;
-    height: 16px;
+.navigation-section .search-bar .search-button .search-icon {
+    font-size: 16px;
+    font-weight: bolder;
+    color: #0C1A81;
 }
 
 .navigation-section .navigation-links {
@@ -92,8 +95,6 @@
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
-    height: 43px;
-    overflow: hidden;
 }
 
 .navigation-section .navigation-links a {
@@ -117,6 +118,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 21.6px;
+    margin: 0;
 }
 
 .navigation-section .navigation-links .nav-link .arrow-down {
@@ -143,6 +145,7 @@
     line-height: 19px;
     letter-spacing: 1.6px;
     text-transform: uppercase;
+    margin: 0;
 }
 
 .navigation-section .navigation-links .nav-link.lang-button {
@@ -156,13 +159,11 @@
 }
 
 .navigation-section .navigation-links .nav-link.lang-button .language-icon {
-    width: 24px;
-    height: 24px;
+    font-size: 24px;
 }
 
 .navigation-section .navigation-links .nav-link.lang-button .arrow-down {
-    width: 16px;
-    height: 16px;
+    font-size: 16px;
 }
 
 .navigation-section .navigation-links .nav-link.lang-button .icon {
