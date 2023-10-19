@@ -1,118 +1,216 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
 }
 
 
-class Academy_Africa_Footer extends \Elementor\Widget_Base {
-	
-	public function get_name() {
-		return 'footer';
-	}
+class Academy_Africa_Footer extends \Elementor\Widget_Base
+{
 
-	public function get_title() {
-		return esc_html__( 'footer', 'elementor-footer-widget' );
-	}
+    public function get_name()
+    {
+        return 'footer';
+    }
 
-	public function get_icon() {
-		return 'eicon-code';
-	}
+    public function get_style_depends()
+    {
+        return ['academy-africa-footer'];
+    }
 
-	public function get_categories()
+    public function get_title()
+    {
+        return esc_html__('footer', 'elementor-footer-widget');
+    }
+
+    public function get_icon()
+    {
+        return 'eicon-code';
+    }
+
+    public function get_categories()
     {
         return ['academy-africa'];
     }
 
-	public function get_keywords() {
-		return [ ];
-	}
-	protected function register_controls() {
-	}
-	protected function render() {
+    protected function register_controls()
+    {
+        $this->start_controls_section(
+            'section_header',
+            [
+                'label' => __('Header', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'logo',
+            [
+                'label' => esc_html__('Choose Image', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => wp_get_attachment_image_src($this->get_custom_logo()[0], 'full'),
+                ],
+            ]
+        );
+        $this->add_control(
+            'site_description',
+            [
+                'label' => __('Site Description', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('', 'academy-africa'),
+            ]
+        );
+        $links = new \Elementor\Repeater();
 
-		?>
-		<footer class="root">
-        <div class="item">
-            <div class="site-description">
-                <img src="https://cfa.dev.codeforafrica.org/media/cfalogobw.svg" alt="logo" />
-                <p class="description">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap
-                    into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                    the
-                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing
-                    software like Aldus PageMaker including versions of Lorem Ipsum.
-                </p>
-                <div class="connect">
-                    <p>Stay in Touch</p>
+        $links->add_control(
+            'page_link',
+            [
+                'label' => esc_html__('Page Link', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::URL,
+                'default' => [
+                    'url' => '',
+                ],
+            ]
+        );
+
+        $links->add_control(
+            'label',
+            [
+                'label' => esc_html__('Label', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => 'Link Label',
+            ]
+        );
+
+        $this->add_control(
+            'primary_links',
+            [
+                'label' => esc_html__('Primary Links', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $links->get_controls(),
+                'title_field' => '{{{ label }}}',
+            ]
+        );
+
+        $this->add_control(
+            'secondary_links',
+            [
+                'label' => esc_html__('Primary Links', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $links->get_controls(),
+                'title_field' => '{{{ label }}}',
+            ]
+        );
+        $this->add_control(
+            'newsletter_signup_text',
+            [
+                'label' => __('Sign in to our Newslettter', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Subscribe to the Code for Africa newsletter', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'stay_in_touch_text',
+            [
+                'label' => __('Stay in Touch', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('STAY IN TOUCH', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'newsletter_embed_code',
+            [
+                'label' => __('Newsletter embed code', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::CODE,
+            ]
+        );
+        $this->end_controls_section();
+    }
+
+    function get_menu_items($name)
+    {
+        $list = wp_get_nav_menu_items($name);
+        $menu_items = [];
+        foreach ($list as $item) {
+            $menu_items[] = [
+                'title' => $item->title,
+                'url' => $item->url,
+                'id' => $item->ID,
+                'parent_id' => $item->menu_item_parent,
+            ];
+        }
+        $menu = [];
+        foreach ($menu_items as $item) {
+            if ($item['parent_id'] == 0) {
+                $menu[$item['id']] = $item;
+            } else {
+                $menu[$item['parent_id']]['children'][] = $item;
+            }
+        }
+        return $menu;
+    }
+
+    function get_custom_logo()
+    {
+        $custom_logo_id = get_theme_mod('custom_logo');
+        $image = wp_get_attachment_image($custom_logo_id, 'full');
+        return $image;
+    }
+
+
+    protected function render()
+    {
+        $settings = $this->get_settings_for_display();
+        $newsletter_embed_code = $settings['newsletter_embed_code'];
+        $site_description = $settings['site_description'];
+        $stay_in_touch_text = $settings['stay_in_touch_text'];
+        $image_url = isset($settings['logo']['url']) ? esc_url($settings['logo']['url']) : '';
+
+?>
+        <footer class="root">
+            <div class="item">
+                <div class="site-description">
+                    <img height="110" width="250" src="<?php echo $image_url ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
+                    <p class="description" <?php echo $this->get_render_attribute_string('site_description'); ?>>
+                        <? echo $site_description ?>
+                    </p>
+                    <div class="connect">
+                        <p <?php echo $this->get_render_attribute_string('stay_in_touch_text'); ?>>
+                            <? echo $stay_in_touch_text ?>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="item">
-            <div class="links">
-                <a class="primary">
-                    Connect
-                </a>
-                <a href="#" class="primary">
-                    Courses
-                </a>
-                <a href="#" class="primary">
-                    Events
-                </a>
-                <a href="#" class="primary">
-                    Blog
-                </a>
-                <a href="#" class="primary">
-                    About us
-                </a>
-                <a href="#" class="primary">
-                    Sign In
-                </a>
-                <a class="secondary first">
-                    Imprint
-                </a>
-                <a class="secondary">
-                    Privacy Policy
-                </a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="embed">
-                <P class="title">
-                    Subscribe to the Code for Africa newsletter
-                </P>
-                <!-- Begin Mailchimp Signup Form -->
-
-                <div id="mc_embed_signup">
-                    <form
-                        action="https://twitter.us6.list-manage.com/subscribe/post?u=65e5825507b3cec760f272e79&amp;id=c2ff751541"
-                        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                        target="_blank" novalidate="">
-                        <div id="mc_embed_signup_scroll">
-                            <label for="MERGE1">Name</label>
-                            <input type="text" name="MERGE1" id="MERGE1" size="25" value="" placeholder="Your name">
-                            <label for="mce-EMAIL">Email</label>
-                            <input type="email" value="" placeholder="example@email.com" name="EMAIL" class="email"
-                                id="mce-EMAIL" required="">
-                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                                    name="b_65e5825507b3cec760f272e79_c2ff751541" tabindex="-1" value=""></div>
-                            <div class="clear"><input type="submit" value="Sign up" id="mc-embedded-subscribe"
-                                    class="button"></div>
-                        </div>
-                    </form>
+            <div class="item">
+                <div class="links">
+                    <?
+                    if (!empty($settings['primary_links'])) {
+                        foreach ($settings['primary_links'] as $item) {
+                            $page_link = esc_url($item['page_link']['url']);
+                            $label = esc_html($item['label']);
+                            echo '<a href="' . $page_link . '" class="primary">' . $label . '</a>';
+                        }
+                    }
+                    if (!empty($settings['secondary_links'])) {
+                        foreach ($settings['secondary_links'] as $item) {
+                            $page_link = esc_url($item['page_link']['url']);
+                            $label = esc_html($item['label']);
+                            echo '<a href="' . $page_link . '" class="secondary">' . $label . '</a>';
+                        }
+                    }
+                    ?>
                 </div>
-
-                <!--End mc_embed_signup-->
             </div>
-        </div>
-    </footer>
-		<?php
+            <div class="item">
+                <div class="embed">
+                    <P class="title" <?php echo $this->get_render_attribute_string('newsletter_signup_text'); ?>>
+                        <?php echo $settings['newsletter_signup_text']; ?>
+                    </P>
+                    <div <?php echo $this->get_render_attribute_string('newsletter_embed_code'); ?>>
+                        <?php echo $newsletter_embed_code; ?>
+                    </div>
+                </div>
+            </div>
+        </footer>
+<?php
 
-	}
-
+    }
 }

@@ -212,14 +212,7 @@ final class Plugin
      */
     public function register_widgets($widgets_manager)
     {
-        // Include Widget files
-        require_once(__DIR__ . '/widgets/hero.php');
-        require_once(__DIR__ . '/widgets/header.php');
         require_once(__DIR__ . '/widgets/footer.php');
-
-        // Register widget
-        $widgets_manager->register(new \Academy_Africa_Hero());
-        $widgets_manager->register(new \Academy_Africa_Header());
         $widgets_manager->register(new \Academy_Africa_Footer());
     }
 
@@ -230,7 +223,7 @@ final class Plugin
             plugins_url('assets/css/academy-africa.css', __FILE__),
             [],
             [],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/academy-africa.css.css')
+            filemtime(plugin_dir_path(__FILE__) . 'assets/css/academy-africa.css')
         );
 
         wp_enqueue_style(
@@ -241,6 +234,15 @@ final class Plugin
             ],
             filemtime(plugin_dir_path(__FILE__) . 'assets/css/header.css')
         );
+
+        wp_enqueue_style(
+            'academy-africa-footer',
+            plugins_url('assets/css/footer.css', __FILE__),
+            [
+                'academy-africa'
+            ],
+            filemtime(plugin_dir_path(__FILE__) . 'assets/css/footer.css')
+        );
     }
 
     /**
@@ -249,7 +251,8 @@ final class Plugin
      * @since 1.0.0
      * @access public
      */
-    public function add_elementor_widget_categories($elements_manager){
+    public function add_elementor_widget_categories($elements_manager)
+    {
         $elements_manager->add_category(
             'academy-africa',
             [

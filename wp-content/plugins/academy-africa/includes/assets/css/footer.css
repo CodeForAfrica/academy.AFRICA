@@ -41,6 +41,11 @@
   margin-bottom: 60px;
 }
 
+.root .item:nth-child(1) {
+  justify-content: flex-end;
+  padding-left: 100px;
+}
+
 .root .item:nth-child(2) {
   justify-content: flex-end;
 }
@@ -82,7 +87,6 @@
 }
 
 .root .site-description {
-  padding: 0 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -164,8 +168,12 @@
   }
 }
 
-.root .links .secondary {
+.root .links>.secondary~.secondary {
   margin-top: 10px;
+}
+
+.root .links .secondary {
+  margin-top: 30px;
   color: var(--shades-white, #fff);
   font-family: Open Sans;
   font-size: 16px;
@@ -175,8 +183,8 @@
   display: inline-block;
 }
 
-.root .links .secondary.first {
-  margin-top: 30px;
+.root .links .secondary~ {
+  margin-top: 10px;
 }
 
 @media only screen and (max-width: 768px) {
