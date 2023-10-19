@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  wordpress:
+    image: wordpress:6.3.2
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_CONFIG_EXTRA: |
+          define( 'WP_SITEURL', '${SITE_URL}' );
+          define( 'WP_HOME', '${SITE_URL}' );
+          define( 'WP_DEBUG', ${WP_DEBUG} );
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./wp-content/themes:/var/www/html/wp-content/themes
+      - ./wp-content/plugins:/var/www/html/wp-content/plugins
+      - ./contrib/docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
