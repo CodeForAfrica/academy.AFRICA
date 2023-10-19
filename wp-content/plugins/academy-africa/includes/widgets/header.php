@@ -161,7 +161,7 @@ class Academy_Africa_Header extends \Elementor\Widget_Base
                         </p>
                     </a>
                     <a href="#" class="nav-link nav-button lang-button ">
-                        <i class="eicon-globe arrow-down icon language-icon"></i>
+                        <i class="eicon-globe icon language-icon"></i>
                         <i class="eicon-caret-down arrow-down icon"></i>
                     </a>
                 </div>
