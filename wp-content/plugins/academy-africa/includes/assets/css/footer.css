@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;400;500;600&display=swap");
+
 .body1,
 .root .links .primary,
 .root .embed #mc_embed_signup,
@@ -166,6 +168,10 @@
   .root .links .primary {
     text-align: center;
   }
+}
+
+.root .links .icon {
+  color: var(--shades-white, #fff);
 }
 
 .root .links>.secondary~.secondary {

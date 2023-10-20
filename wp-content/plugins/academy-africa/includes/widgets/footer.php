@@ -58,7 +58,25 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
                 'default' => __('', 'academy-africa'),
             ]
         );
+
+        $this->add_control(
+            'stay_in_touch_text',
+            [
+                'label' => __('Stay in Touch', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('STAY IN TOUCH', 'academy-africa'),
+            ]
+        );
         $links = new \Elementor\Repeater();
+
+        $links->add_control(
+            'label',
+            [
+                'label' => esc_html__('Label', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => 'Link Label',
+            ]
+        );
 
         $links->add_control(
             'page_link',
@@ -71,12 +89,42 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
             ]
         );
 
-        $links->add_control(
-            'label',
+        $social_media = new \Elementor\Repeater();
+        $social_media->add_control(
+            'type',
             [
-                'label' => esc_html__('Label', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Link Label',
+                'label' => esc_html__('Type', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'github',
+                'options' => [
+                    'facebook' => esc_html__('Facebook', 'academy-africa'),
+                    'github' => esc_html__('Github', 'academy-africa'),
+                    'slack' => esc_html__('Slack', 'academy-africa'),
+                    'linkedin' => esc_html__('LinkedIn', 'academy-africa'),
+                    'instagram' => esc_html__('Instagram', 'academy-africa'),
+                    'twitter' => esc_html__('Twitter', 'academy-africa'),
+                ]
+            ]
+        );
+
+        $social_media->add_control(
+            'link',
+            [
+                'label' => esc_html__('Page Link', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::URL,
+                'default' => [
+                    'url' => '',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'social_media_links',
+            [
+                'label' => esc_html__('Social Media Links', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $social_media->get_controls(),
+                'title_field' => '{{{ type }}}',
             ]
         );
 
@@ -105,14 +153,6 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
                 'label' => __('Sign in to our Newslettter', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'default' => __('Subscribe to the Code for Africa newsletter', 'academy-africa'),
-            ]
-        );
-        $this->add_control(
-            'stay_in_touch_text',
-            [
-                'label' => __('Stay in Touch', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('STAY IN TOUCH', 'academy-africa'),
             ]
         );
         $this->add_control(
@@ -173,9 +213,20 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
                         <? echo $site_description ?>
                     </p>
                     <div class="connect">
-                        <p <?php echo $this->get_render_attribute_string('stay_in_touch_text'); ?>>
+                        <span style="white-space: nowrap;" <?php echo $this->get_render_attribute_string('stay_in_touch_text'); ?>>
                             <? echo $stay_in_touch_text ?>
-                        </p>
+                        </span>
+                        <?
+                        if (!empty($settings['social_media_links'])) {
+                            foreach ($settings['social_media_links'] as $item) {
+                                $link = esc_url($item['link']['url']);
+                                $type = esc_html($item['type']);
+                                $icon = dirname(plugin_dir_url(__FILE__)) . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=CurrentColor.svg');
+                                $content = file_get_contents($icon);
+                                echo '<a href="' . $link . '" class="icon">' . $content . '</a>';
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -201,9 +252,9 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
             </div>
             <div class="item">
                 <div class="embed">
-                    <P class="title" <?php echo $this->get_render_attribute_string('newsletter_signup_text'); ?>>
+                    <p class="title" <?php echo $this->get_render_attribute_string('newsletter_signup_text'); ?>>
                         <?php echo $settings['newsletter_signup_text']; ?>
-                    </P>
+                    </p>
                     <div <?php echo $this->get_render_attribute_string('newsletter_embed_code'); ?>>
                         <?php echo $newsletter_embed_code; ?>
                     </div>
