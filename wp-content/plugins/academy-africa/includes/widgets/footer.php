@@ -223,7 +223,7 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
                                 $type = esc_html($item['type']);
                                 $icon = dirname(plugin_dir_url(__FILE__)) . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=CurrentColor.svg');
                                 $content = file_get_contents($icon);
-                                echo '<a href="' . $link . '" class="icon">' . $content . '</a>';
+                                echo '<a style="color: #fff" href="' . $link . '" class="icon">' . $content . '</a>';
                             }
                         }
                         ?>
