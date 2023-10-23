@@ -213,7 +213,9 @@ final class Plugin
     public function register_widgets($widgets_manager)
     {
         require_once(__DIR__ . '/widgets/footer.php');
+        require_once(__DIR__ . '/widgets/error.php');
         $widgets_manager->register(new \Academy_Africa_Footer());
+        $widgets_manager->register(new \Academy_Africa_Error());
     }
 
     public function register_widget_styles()
@@ -242,6 +244,15 @@ final class Plugin
                 'academy-africa'
             ],
             filemtime(plugin_dir_path(__FILE__) . 'assets/css/footer.css')
+        );
+
+        wp_enqueue_style(
+            'academy-africa-error',
+            plugins_url('assets/css/error.css', __FILE__),
+            [
+                'academy-africa'
+            ],
+            filemtime(plugin_dir_path(__FILE__) . 'assets/css/error.css')
         );
     }
 
