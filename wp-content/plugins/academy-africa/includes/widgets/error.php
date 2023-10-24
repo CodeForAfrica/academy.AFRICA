@@ -7,7 +7,7 @@ class Academy_Africa_Error extends \Elementor\Widget_Base
 {
     public function get_name()
     {
-        return 'error';
+        return 'Error';
     }
 
     public function get_style_depends()
@@ -17,7 +17,7 @@ class Academy_Africa_Error extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return esc_html__('error', 'elementor-error-widget');
+        return esc_html__('Error', 'elementor-error-widget');
     }
 
     public function get_icon()
@@ -106,7 +106,7 @@ class Academy_Africa_Error extends \Elementor\Widget_Base
                     <? echo $description ?>
                 </p>
                 <div class="actions">
-                    <a class="button" href="#" onclick="location.reload();" <?php echo $this->get_render_attribute_string('refresh'); ?>>
+                    <a class="button" href="" onclick="location.reload();" <?php echo $this->get_render_attribute_string('refresh'); ?>>
                         <? echo $refresh ?>
                     </a>
                     <a class="button" href="/" <?php echo $this->get_render_attribute_string('home'); ?>>
