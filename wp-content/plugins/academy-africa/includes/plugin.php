@@ -214,8 +214,10 @@ final class Plugin
     {
         require_once(__DIR__ . '/widgets/footer.php');
         require_once(__DIR__ . '/widgets/hero.php');
+        require_once(__DIR__ . '/widgets/featured_courses.php');
         $widgets_manager->register(new \Academy_Africa_Footer());
         $widgets_manager->register(new \Academy_Africa_Hero());
+        $widgets_manager->register(new \Academy_Africa_Featured_Courses());
     }
 
     public function register_widget_styles()
@@ -253,6 +255,14 @@ final class Plugin
                 'academy-africa'
             ],
             filemtime(plugin_dir_path(__FILE__) . 'assets/css/footer.css')
+        );
+        wp_enqueue_style(
+            'academy-africa-featured-courses',
+            plugins_url('assets/css/featured-courses.css', __FILE__),
+            [
+                'academy-africa'
+            ],
+            filemtime(plugin_dir_path(__FILE__) . 'assets/css/featured-courses.css')
         );
     }
 
