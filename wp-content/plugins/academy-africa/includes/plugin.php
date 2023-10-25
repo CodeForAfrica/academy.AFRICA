@@ -213,7 +213,9 @@ final class Plugin
     public function register_widgets($widgets_manager)
     {
         require_once(__DIR__ . '/widgets/footer.php');
+        require_once(__DIR__ . '/widgets/hero.php');
         $widgets_manager->register(new \Academy_Africa_Footer());
+        $widgets_manager->register(new \Academy_Africa_Hero());
     }
 
     public function register_widget_styles()
@@ -233,6 +235,15 @@ final class Plugin
                 'academy-africa'
             ],
             filemtime(plugin_dir_path(__FILE__) . 'assets/css/header.css')
+        );
+
+        wp_enqueue_style(
+            'academy-africa-hero',
+            plugins_url('assets/css/hero.css', __FILE__),
+            [
+                'academy-africa'
+            ],
+            filemtime(plugin_dir_path(__FILE__) . 'assets/css/hero.css')
         );
 
         wp_enqueue_style(

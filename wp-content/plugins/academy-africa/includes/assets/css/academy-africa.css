@@ -1,0 +1,18 @@
+.cfa-title {
+  color: var(--primary-700, #0c1a81);
+
+  /* Page/Section_Title */
+  font-family: Lora;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px; /* 120% */
+}
+.cfa-title::after {
+  content: "";
+  width: 60px;
+  height: 6px;
+  background: #ed1c24;
+  margin-top: 32px;
+  display: block;
+}
