@@ -9,7 +9,7 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
 
     public function get_name()
     {
-        return 'footer';
+        return 'Footer';
     }
 
     public function get_style_depends()
@@ -19,7 +19,7 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return esc_html__('footer', 'elementor-footer-widget');
+        return esc_html__('Footer');
     }
 
     public function get_icon()
