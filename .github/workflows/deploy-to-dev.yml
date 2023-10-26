@@ -15,4 +15,4 @@ jobs:
           DEV_ENV: academyafridev
           SRC_PATH: "wp-content/"
           REMOTE_PATH: "wp-content/"
-          FLAGS: "--delete -v"
+          FLAGS: "--delete -r -v"
