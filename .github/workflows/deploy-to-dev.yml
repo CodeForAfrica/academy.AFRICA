@@ -2,7 +2,7 @@ name: Deploy to WP Engine
 on:
   push:
     branches:
-      - main
+      - feature/setup-development-environment
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,3 +15,4 @@ jobs:
           WPE_ENV: academyafridev
           SRC_PATH: "wp-content/"
           REMOTE_PATH: "wp-content/"
+          FLAGS: -azvr --inplace --delete --exclude=".*"  --exclude=wp-content/mu-plugins/
