@@ -2,7 +2,7 @@ name: Deploy to WP Engine
 on:
   push:
     branches:
-      - feature/setup-development-environment
+      - feature/globals-footer
 jobs:
   build:
     runs-on: ubuntu-latest
