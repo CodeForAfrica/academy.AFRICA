@@ -15,4 +15,4 @@ jobs:
           WPE_ENV: academyafridev
           SRC_PATH: "wp-content/"
           REMOTE_PATH: "wp-content/"
-          FLAGS: -azvr --inplace --delete --exclude=".*"  --exclude=wp-content/mu-plugins/
+          FLAGS: -azvr --inplace --delete --exclude=".*"  --exclude=wp-content/mu-plugins/ --exclude-from=ignorefile.txt
