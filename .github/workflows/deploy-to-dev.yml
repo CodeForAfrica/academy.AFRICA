@@ -14,4 +14,4 @@ jobs:
           WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
           WPE_ENV: academyafridev
           SRC_PATH: "wp-content/"
-          REMOTE_PATH: "wp-content/"
+          REMOTE_PATH: "/home/wpe-user/sites/academyafridev/wp-content/"
