@@ -162,7 +162,7 @@
 }
 .learning-pathways .content .card .pathway-card-content {
   padding: 20px;
-  height: 100px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
