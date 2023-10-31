@@ -212,7 +212,7 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
                     <p class="description" <?php echo $this->get_render_attribute_string('site_description'); ?>>
                         <? echo $site_description ?>
                     </p>
-                    <div class="connect">
+                    <div class="footer-connect">
                         <span style="white-space: nowrap;" <?php echo $this->get_render_attribute_string('stay_in_touch_text'); ?>>
                             <? echo $stay_in_touch_text ?>
                         </span>

@@ -1,0 +1,120 @@
+.connect {
+  padding: 134px 16px;
+}
+.connect .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media only screen and (max-width: 512px) {
+  .connect .center {
+    width: 100%;
+  }
+}
+.connect .cfa-title {
+  color: var(--primary-700, #0c1a81);
+}
+.connect .cfa-title h4 {
+  margin: 0;
+  /* Page/Section_Title */
+  font-family: Lora;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+}
+@media only screen and (max-width: 512px) {
+  .connect .cfa-title h4 {
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 512px) and (max-width: 768px) {
+  .connect .cfa-title {
+    text-align: center;
+  }
+}
+.connect .cfa-title::after {
+  content: "";
+  display: block;
+  height: 6px;
+  width: 60px;
+  background: #ed1c24;
+  margin-top: 32px;
+}
+@media only screen and (max-width: 512px) {
+  .connect .cfa-title::after {
+    margin-top: 10px;
+  }
+}
+@media screen and (min-width: 512px) and (max-width: 768px) {
+  .connect .cfa-title::after {
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+  }
+}
+.connect .content {
+  display: flex;
+  gap: 52px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 512px) {
+  .connect .content .africa {
+    width: 100%;
+  }
+}
+.connect .content .banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 400px;
+}
+.connect .content .banner .become-a-member {
+  color: var(--primary-700, #0c1a81);
+  /* Paragraph/P3/Regular */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: center;
+  /* 155.556% */
+  /* 150% */
+  margin: 50px 0 0;
+}
+.connect .content .banner .primary-button {
+  padding: 24px;
+  background: var(--primary-700, #0c1a81);
+  color: var(--primary-50, #eff0fd);
+  display: flex;
+  justify-content: center;
+  max-width: 220px;
+  /* Buttons */
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  /* 118.75% */
+  white-space: nowrap;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.connect .content .share {
+  color: #000;
+  text-align: center;
+  /* Page/Text */
+  font-family: Open Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 36px;
+  /* 150% */
+  margin: 0;
+}

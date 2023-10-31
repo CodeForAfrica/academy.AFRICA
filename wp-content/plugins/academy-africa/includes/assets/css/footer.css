@@ -1,4 +1,3 @@
-
 .body1,
 .root .links .primary,
 .root .embed #mc_embed_signup,
@@ -114,7 +113,7 @@
   margin-top: 52px;
 }
 
-.root .site-description .connect {
+.root .site-description .footer-connect {
   display: flex;
   align-items: center;
   gap: 33px;
@@ -129,7 +128,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .root .site-description .connect {
+  .root .site-description .footer-connect {
     display: block;
     text-align: center;
     width: 100%;
@@ -173,7 +172,7 @@
   color: var(--shades-white, #fff);
 }
 
-.root .links>.secondary~.secondary {
+.root .links > .secondary ~ .secondary {
   margin-top: 10px;
 }
 
@@ -188,7 +187,7 @@
   display: inline-block;
 }
 
-.root .links .secondary~ {
+.root .links .secondary ~ {
   margin-top: 10px;
 }
 

@@ -30,88 +30,257 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
     {
         return ['academy-africa'];
     }
+
+    public function concatenate_with_count($array)
+    {
+        $count = count($array);
+        return $count === 0 ? '' : ($count === 1 ? $array[0] : $array[0] . ' + ' . ($count - 1) . ' more');
+    }
+
+
+    public function get_courses()
+    {
+        return [
+            [
+                'title' => 'Introduction to Data Visualisation with Flourish',
+                'providers' => ['code for africa'],
+                'students_count' => 75,
+                'price' => 'Free',
+                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/user.svg',
+            ],
+            [
+                'title' => 'Fact-checking for Social Media',
+                'providers' => ['pesacheck'],
+                'students_count' => 75,
+                'price' => 'Free',
+                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/user.svg',
+            ],
+            [
+                'title' => 'Drone Journalism',
+                'providers' => ['Sensors Africa', 'pesacheck', 'code for africa'],
+                'students_count' => 75,
+                'price' => 'Free',
+                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/user.svg',
+            ],
+        ];;
+    }
+
+    protected function register_controls()
+    {
+        $this->start_controls_section(
+            'section_title_and_description',
+            [
+                'label' => __('Title and Description', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'title',
+            [
+                'label' => __('Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Develop your skills & get a certificate', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'description',
+            [
+                'label' => __('Description', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::WYSIWYG,
+                'default' => __('Take courses taught by top professionals in the field to advance your knowledge of data science, technology, and media development.', 'academy-africa'),
+            ]
+        );
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'certificate',
+            [
+                'label' => __('Certificate', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'certificate_title',
+            [
+                'label' => __('Certificate Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('CERTIFICATE OF', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'certificate_type',
+            [
+                'label' => __('Certificate Type', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('CCOMPLETION', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'presented_to',
+            [
+                'label' => __('Certificate Presented to', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('PRESENTED TO', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'certificate_description',
+            [
+                'label' => __('Certificate Presented to', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('For completing the academy.AFRICA course', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'certificate_course',
+            [
+                'label' => __('Course', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Data Visualisation', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+
+        $this->end_controls_section();
+        $this->start_controls_section(
+            'banner',
+            [
+                'label' => __('Banner', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'banner_description',
+            [
+                'label' => __('Certificate Presented to', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Gain a certificate of accomplishment when you complete a course!', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'want_to_learn',
+            [
+                'label' => __('Certificate Presented to', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('What would you like to learn today?', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'link_to_courses_label',
+            [
+                'label' => __('Courses Label', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('Explore all courses', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'link_to_courses',
+            [
+                'label' => esc_html__('Courses Link', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::URL,
+                'options' => ['url', 'custom_attributes'],
+                'default' => [
+                    'url' => '/courses',
+                ],
+                'label_block' => true,
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function get_current_user()
+    {
+        return [
+            'first_name' => 'First Name Middle Name',
+            'last_name' => 'Last Name'
+        ];
+    }
+
+    public function get_academy_head()
+    {
+        return [
+            'name' => 'First Name Middle Name',
+            'role' => 'Academy Head',
+            'signature' => '/wp-content/plugins/academy-africa/includes/assets/images/signature.png',
+            'date' => 'MM/DD/YYYY',
+        ];
+    }
+
     protected function render()
     {
+        $settings = $this->get_settings_for_display();
+        $courses = $this->get_courses();
+        $title = $settings['title'];
+        $description = $settings['description'];
+        $courses_link_label = $settings['link_to_courses_label'];
+        $courses_link_url = $settings['link_to_courses'];
+        $want_to_learn = $settings['want_to_learn'];
+        $banner_description = $settings['banner_description'];
+        $certificate_course = $settings['certificate_course'];
+        $certificate_description = $settings['certificate_description'];
+        $presented_to = $settings['presented_to'];
+        $certificate_type = $settings['certificate_type'];
+        $certificate_title = $settings['certificate_title'];
+        $user = $this->get_current_user();
+        $art_board = "/wp-content/plugins/academy-africa/includes/assets/images/artboard.png";
+        $company_image = "/wp-content/plugins/academy-africa/includes/assets/images/cfa_bw.png";
+        $company_name = "academy.Africa";
+        $academy_head = $this->get_academy_head();
 ?>
         <div class="featured-courses">
             <div class="title-description">
                 <p class="title">
-                    Develop your skills & get a certificate
+                    <?php echo $title; ?>
                 </p>
-                <p class="description">
-                    Take courses taught by top professionals in the field to advance your knowledge of data science,
-                    technology,
-                    and media development.
-                </p>
+                <div class="description">
+                    <?php echo $description; ?>
+                </div>
             </div>
+            <!-- Fetch from Learndash -->
             <div class="content">
-                <div class="card">
-                    <img alt="course-logo" class="logo" src="/wp-content/plugins/academy-africa/includes/assets/images/course-image.png" />
-                    <div class="card-content">
-                        <div class="card-title">
-                            <p>
-                                Introduction to Data Visualisation with Flourish
-                            </p>
-                        </div>
-                        <p class="provider">
-                            by CODE FOR AFRICA + 1 more
-                        </p>
-                        <div class="card-footer">
-                            <div class="student-count">
-                                <img alt="user" src="/wp-content/plugins/academy-africa/includes/assets/images/user.svg" />
-                                <span>75</span>
-                            </div>
-                            <div class="tag free">
-                                Free
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img alt="course-logo" class="logo" src="/wp-content/plugins/academy-africa/includes/assets/images/course-image.png" />
-                    <div class="card-content">
-                        <div class="card-title">
-                            <p>
-                                Introduction to Data Visualisation with Flourish
-                            </p>
-                        </div>
-                        <p class="provider">
-                            by CODE FOR AFRICA + 1 more
-                        </p>
-                        <div class="card-footer">
-                            <div class="student-count">
-                                <img alt="user" src="/wp-content/plugins/academy-africa/includes/assets/images/user.svg" />
-                                <span>75</span>
-                            </div>
-                            <div class="tag free">
-                                Free
+                <?
+                if (!empty($courses)) {
+                    foreach ($courses as $course) {
+                        $title = $course['title'];
+                        $provider = $this->concatenate_with_count($course['providers']);
+                        $student_count = $course['students_count'];
+                        $price = $course['price'];
+                ?>
+                        <div class="card">
+                            <img alt="course-logo" class="logo" src="/wp-content/plugins/academy-africa/includes/assets/images/course-image.png" />
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <p>
+                                        <?php echo $title; ?>
+                                    </p>
+                                </div>
+                                <p class="provider">
+                                    by <?php echo $provider; ?>
+                                </p>
+                                <div class="card-footer">
+                                    <div class="student-count">
+                                        <img alt="user" src="/wp-content/plugins/academy-africa/includes/assets/images/user.svg" />
+                                        <span><?php echo $student_count; ?></span>
+                                    </div>
+                                    <div class="tag free">
+                                        <?php echo $price; ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img alt="course-logo" class="logo" src="/wp-content/plugins/academy-africa/includes/assets/images/course-image.png" />
-                    <div class="card-content">
-                        <div class="card-title">
-                            <p>
-                                Introduction to Data Visualisation with Flourish
-                            </p>
-                        </div>
-                        <p class="provider">
-                            by CODE FOR AFRICA + 1 more
-                        </p>
-                        <div class="card-footer">
-                            <div class="student-count">
-                                <img alt="user" src="/wp-content/plugins/academy-africa/includes/assets/images/user.svg" />
-                                <span>75</span>
-                            </div>
-                            <div class="tag free">
-                                Free
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?
+                    }
+                }
+                ?>
             </div>
+            <!-- Fetch from Learndash -->
         </div>
         <div class="certificate-showcase">
             <div class="certificate">
@@ -121,10 +290,10 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     <div class="flex-items">
                         <div style="flex: 1">
                             <p class="certificate-of">
-                                CERTIFICATE OF
+                                <? echo $certificate_title ?>
                             </p>
                             <p class="certificate-type">
-                                COMPLETION
+                                <? echo $certificate_type ?>
                             </p>
                             <hr>
                             </hr>
@@ -144,43 +313,45 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     </div>
                     <div class="course-details">
                         <div class="student">
-                            <p class="title">PRESENTED TO</p>
+                            <p class="title"><? echo $presented_to ?></p>
                             <p class="first-name">
-                                First Name Middle Name
+                                <? echo $user['first_name'] ?>
                             </p>
-                            <p class="last-name">Last Name</p>
+                            <p class="last-name"><? echo $user['last_name'] ?></p>
                         </div>
                         <div class="course">
                             <p class="course-description">
-                                For completing the academy.AFRICA course
+                                <? echo $certificate_description ?>
                             </p>
                             <p class="course-name">
-                                Data Visualisation
+                                <? echo $certificate_course ?>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="certificate-footer">
-                    <img height="40px" width="40px" alt="artwork" src="/wp-content/plugins/academy-africa/includes/assets/images/artboard.png" />
-                    <p class="company-name">academy.AFRICA</p>
-                    <img alt="artwork" src="/wp-content/plugins/academy-africa/includes/assets/images/cfa_bw.png" />
+                    <img height="40px" width="40px" alt="logo" src="<? echo $art_board ?>" />
+                    <p class="company-name">
+                        <? echo $company_name ?>
+                    </p>
+                    <img alt="artwork" src="<? echo $company_image ?>" />
                     <div class="signature">
-                        <img alt="signature" src="/wp-content/plugins/academy-africa/includes/assets/images/signature.png" />
-                        <p class="signee-name">Tolulope Adeyemo</p>
-                        <p class="signee-role">ACADEMY HEAD</p>
-                        <p class="sign-date">DD/MM/YYYY</p>
+                        <img alt="signature" alt="<? echo $academy_head['name'] ?>" src="<? echo $academy_head['signature'] ?>" />
+                        <p class="signee-name"><? echo $academy_head['name'] ?></p>
+                        <p class="signee-role"><? echo $academy_head['role'] ?></p>
+                        <p class="sign-date"><? echo $academy_head['date'] ?></p>
                     </div>
                 </div>
             </div>
             <div class="certificate-showcase-content">
                 <p class="showcase-text">
-                    Gain a certificate of accomplishment when you complete a course!
+                    <? echo $banner_description ?>
                 </p>
                 <p class="course-text">
-                    What would you like to learn today?
+                    <? echo $want_to_learn ?>
                 </p>
-                <a href="#" class="all-courses">
-                    Explore all courses
+                <a class="all-courses" href="<?php echo $courses_link_url; ?>">
+                    <? echo $courses_link_label ?>
                 </a>
             </div>
         </div>

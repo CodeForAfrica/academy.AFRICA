@@ -55,7 +55,6 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
   flex-shrink: 0;
   display: flex;
   border: 0.5px solid var(--neutral-200, #cccfda);
@@ -295,6 +294,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 8.62px;
+  margin: 0;
   /* 128.571% */
 }
 .certificate-showcase .certificate .certificate-footer .signature .signee-role {
@@ -305,6 +305,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: 8.62px;
+  margin: 0;
   /* 128.571% */
 }
 .certificate-showcase .certificate .certificate-footer .signature .sign-date {
@@ -315,6 +316,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 8.62px;
+  margin: 0;
   /* 128.571% */
 }
 .certificate-showcase .certificate .certificate-footer .company-name {
@@ -323,8 +325,8 @@
   font-size: 8px;
   font-style: normal;
   font-weight: 600;
-  margin-left: -20px;
   line-height: 14px;
+  margin: 0 0 0 -20px;
   /* 155.556% */
 }
 .certificate-showcase .certificate-showcase-content {
