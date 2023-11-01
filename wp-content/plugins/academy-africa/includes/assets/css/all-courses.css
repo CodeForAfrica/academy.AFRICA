@@ -15,16 +15,12 @@
   transition: left 0.3s;
   overflow-y: auto;
 }
-@media only screen and (max-width: 512px) {
+@media only screen and (max-width: 768px) {
   .body .sidebar {
     display: none;
   }
 }
-@media only screen and (max-width: 512px) {
-  .body .sidebar {
-    display: none;
-  }
-}
+
 .body .sidebar .filter-by {
   color: var(--shades-black, #000);
   /* Paragraph/P3/Regular */
