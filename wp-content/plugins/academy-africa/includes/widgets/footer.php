@@ -205,58 +205,60 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
         $image_url = isset($settings['logo']['url']) ? esc_url($settings['logo']['url']) : '';
 
 ?>
-        <footer class="root">
-            <div class="item">
-                <div class="site-description">
-                    <img height="110" width="250" src="<?php echo $image_url ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
-                    <p class="description" <?php echo $this->get_render_attribute_string('site_description'); ?>>
-                        <? echo $site_description ?>
-                    </p>
-                    <div class="footer-connect">
-                        <span style="white-space: nowrap;" <?php echo $this->get_render_attribute_string('stay_in_touch_text'); ?>>
-                            <? echo $stay_in_touch_text ?>
-                        </span>
+        <footer>
+            <div class="root">
+                <div class="item">
+                    <div class="site-description">
+                        <img height="110" width="250" src="<?php echo $image_url ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
+                        <p class="description" <?php echo $this->get_render_attribute_string('site_description'); ?>>
+                            <? echo $site_description ?>
+                        </p>
+                        <div class="footer-connect">
+                            <span style="white-space: nowrap;" <?php echo $this->get_render_attribute_string('stay_in_touch_text'); ?>>
+                                <? echo $stay_in_touch_text ?>
+                            </span>
+                            <?
+                            if (!empty($settings['social_media_links'])) {
+                                foreach ($settings['social_media_links'] as $item) {
+                                    $link = esc_url($item['link']['url']);
+                                    $type = esc_html($item['type']);
+                                    $icon = dirname(plugin_dir_url(__FILE__)) . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=CurrentColor.svg');
+                                    $content = file_get_contents($icon);
+                                    echo '<a style="color: #fff" href="' . $link . '" class="icon">' . $content . '</a>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="links">
                         <?
-                        if (!empty($settings['social_media_links'])) {
-                            foreach ($settings['social_media_links'] as $item) {
-                                $link = esc_url($item['link']['url']);
-                                $type = esc_html($item['type']);
-                                $icon = dirname(plugin_dir_url(__FILE__)) . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=CurrentColor.svg');
-                                $content = file_get_contents($icon);
-                                echo '<a style="color: #fff" href="' . $link . '" class="icon">' . $content . '</a>';
+                        if (!empty($settings['primary_links'])) {
+                            foreach ($settings['primary_links'] as $item) {
+                                $page_link = esc_url($item['page_link']['url']);
+                                $label = esc_html($item['label']);
+                                echo '<a href="' . $page_link . '" class="primary">' . $label . '</a>';
+                            }
+                        }
+                        if (!empty($settings['secondary_links'])) {
+                            foreach ($settings['secondary_links'] as $item) {
+                                $page_link = esc_url($item['page_link']['url']);
+                                $label = esc_html($item['label']);
+                                echo '<a href="' . $page_link . '" class="secondary">' . $label . '</a>';
                             }
                         }
                         ?>
                     </div>
                 </div>
-            </div>
-            <div class="item">
-                <div class="links">
-                    <?
-                    if (!empty($settings['primary_links'])) {
-                        foreach ($settings['primary_links'] as $item) {
-                            $page_link = esc_url($item['page_link']['url']);
-                            $label = esc_html($item['label']);
-                            echo '<a href="' . $page_link . '" class="primary">' . $label . '</a>';
-                        }
-                    }
-                    if (!empty($settings['secondary_links'])) {
-                        foreach ($settings['secondary_links'] as $item) {
-                            $page_link = esc_url($item['page_link']['url']);
-                            $label = esc_html($item['label']);
-                            echo '<a href="' . $page_link . '" class="secondary">' . $label . '</a>';
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-            <div class="item">
-                <div class="embed">
-                    <p class="title" <?php echo $this->get_render_attribute_string('newsletter_signup_text'); ?>>
-                        <?php echo $settings['newsletter_signup_text']; ?>
-                    </p>
-                    <div <?php echo $this->get_render_attribute_string('newsletter_embed_code'); ?>>
-                        <?php echo $newsletter_embed_code; ?>
+                <div class="item">
+                    <div class="embed">
+                        <p class="title" <?php echo $this->get_render_attribute_string('newsletter_signup_text'); ?>>
+                            <?php echo $settings['newsletter_signup_text']; ?>
+                        </p>
+                        <div <?php echo $this->get_render_attribute_string('newsletter_embed_code'); ?>>
+                            <?php echo $newsletter_embed_code; ?>
+                        </div>
                     </div>
                 </div>
             </div>

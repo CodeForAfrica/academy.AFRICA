@@ -1,5 +1,7 @@
 .connect {
-  padding: 134px 16px;
+  padding: 134px 0;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 .connect .center {
   display: flex;
@@ -58,9 +60,8 @@
 }
 .connect .content {
   display: flex;
-  gap: 52px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 @media only screen and (max-width: 512px) {

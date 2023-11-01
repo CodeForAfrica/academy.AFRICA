@@ -4,7 +4,8 @@
 }
 .feedback .cfa-title {
   color: var(--primary-700, #0c1a81);
-  padding-left: 16px;
+  max-width: 1440px;
+  margin: auto;
 }
 .feedback .cfa-title h4 {
   /* Page/Section_Title */
@@ -51,28 +52,46 @@
 .feedback .content {
   background: var(--neutral-50, #f7f9fd);
   box-sizing: border-box;
-  padding: 16px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  max-width: 1440px;
+  margin: auto;
+  justify-content: center;
 }
+
 .feedback .content .card {
   background-image: url("/wp-content/plugins/academy-africa/includes/assets/images/background.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  flex: 1;
-  min-width: calc(33.33% - 5px);
   box-sizing: border-box;
-  padding: 32px;
+  padding: 16px;
+  display: flex;
+  box-sizing: border-box;
+  width: calc(33.333% - 32px);
 }
+
+@media only screen and (max-width: 768px) {
+  .feedback .content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .feedback .content .card {
+    width: 360px;
+    justify-content: center;
+  }
+}
+
 @media only screen and (max-width: 512px) {
   .feedback .content .card {
-    min-width: 100%;
+    max-width: 360px;
+    justify-content: center;
   }
 }
 @media screen and (min-width: 512px) and (max-width: 768px) {
   .feedback .content .card {
-    min-width: 100%;
+    max-width: 360px;
+    justify-content: center;
   }
 }
 .feedback .content .content-card {

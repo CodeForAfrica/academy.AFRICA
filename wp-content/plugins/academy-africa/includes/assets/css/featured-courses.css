@@ -1,3 +1,10 @@
+.neutral-bg {
+  background: var(--neutral-50, #f7f9fd);
+}
+.featured-courses {
+  /* background: var(--neutral-50, #f7f9fd); */
+  padding: 40px 0 0;
+}
 .flex {
   display: flex;
 }
@@ -25,7 +32,8 @@
 }
 
 .featured-courses .title-description {
-  padding: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .featured-courses .description {
@@ -44,10 +52,12 @@
 .featured-courses .content {
   background: var(--neutral-50, #f7f9fd);
   box-sizing: border-box;
-  padding: 72px;
+  padding: 72px 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 45px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 .featured-courses .content .card {
   flex: 1;
@@ -148,10 +158,11 @@
 
 .certificate-showcase {
   display: flex;
-  background: var(--neutral-50, #f7f9fd);
-  padding: 16px 72px;
+  padding: 16px;
   gap: 72px;
   flex-wrap: wrap;
+  max-width: 1440px;
+  margin: auto;
 }
 
 @media only screen and (max-width: 512px) {
@@ -162,7 +173,6 @@
 .certificate-showcase .certificate {
   background: var(--shades-white, #fff);
   box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
-  min-width: 400px;
   width: 100%;
   flex: 1;
 }
