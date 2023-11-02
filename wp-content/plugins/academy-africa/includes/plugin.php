@@ -219,6 +219,7 @@ final class Plugin
         require_once(__DIR__ . '/widgets/feedback.php');
         require_once(__DIR__ . '/widgets/partners.php');
         require_once(__DIR__ . '/widgets/all_courses.php');
+        require_once(__DIR__ . '/widgets/my_courses.php');
         require_once(__DIR__ . '/widgets/error.php');
         $widgets_manager->register(new \Academy_Africa_Footer());
         $widgets_manager->register(new \Academy_Africa_Hero());
@@ -228,111 +229,39 @@ final class Plugin
         $widgets_manager->register(new \Academy_Africa_Partners());
         $widgets_manager->register(new \Academy_Africa_All_Courses());
         $widgets_manager->register(new \Academy_Africa_Error());
+        $widgets_manager->register(new \Academy_Africa_My_Courses());
     }
 
     public function register_widget_styles()
     {
-        wp_enqueue_style(
-            'academy-africa',
-            plugins_url('assets/css/academy-africa.css', __FILE__),
-            [],
-            [],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/academy-africa.css')
-        );
+        // Define an array of styles with their dependencies and file paths
+        $styles = [
+            'academy-africa' => 'academy-africa.css',
+            'academy-africa-connect' => 'connect.css',
+            'academy-africa-feedback' => 'feedback.css',
+            'academy-africa-header' => 'header.css',
+            'academy-africa-hero' => 'hero.css',
+            'academy-africa-footer' => 'footer.css',
+            'academy-africa-featured-courses' => 'featured-courses.css',
+            'academy-africa-other-partners' => 'other-partners.css',
+            'academy-africa-all-courses' => 'all-courses.css',
+            'academy-africa-my-courses' => 'my-courses.css',
+            'academy-africa-learning-pathways' => 'learning-pathways.css',
+            'academy-africa-partners' => 'partners.css',
+            'academy-africa-error' => 'error.css',
+        ];
 
-        wp_enqueue_style(
-            'academy-africa-connect',
-            plugins_url('assets/css/connect.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/connect.css')
-        );
+        // Define the base URL for the styles
+        $base_url = plugins_url('assets/css/', __FILE__);
 
-        wp_enqueue_style(
-            'academy-africa-feedback',
-            plugins_url('assets/css/feedback.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/feedback.css')
-        );
+        // Enqueue the styles with their respective dependencies and file modification times
+        foreach ($styles as $handle => $file) {
+            $dependencies = ($handle === 'academy-africa') ? [] : ['academy-africa'];
+            $file_path = plugin_dir_path(__FILE__) . 'assets/css/' . $file;
+            $version = filemtime($file_path);
 
-        wp_enqueue_style(
-            'academy-africa-header',
-            plugins_url('assets/css/header.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/header.css')
-        );
-
-        wp_enqueue_style(
-            'academy-africa-hero',
-            plugins_url('assets/css/hero.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/hero.css')
-        );
-
-        wp_enqueue_style(
-            'academy-africa-footer',
-            plugins_url('assets/css/footer.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/footer.css')
-        );
-        wp_enqueue_style(
-            'academy-africa-featured-courses',
-            plugins_url('assets/css/featured-courses.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/featured-courses.css')
-        );
-        wp_enqueue_style(
-            'academy-africa-other-partners',
-            plugins_url('assets/css/other-partners.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/other-partners.css')
-        );
-        wp_enqueue_style(
-            'academy-africa-all-courses',
-            plugins_url('assets/css/all-courses.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/all-courses.css')
-        );
-        wp_enqueue_style(
-            'academy-africa-learning-pathways',
-            plugins_url('assets/css/learning-pathways.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/learning-pathways.css')
-        );
-        wp_enqueue_style(
-            'academy-africa-partners',
-            plugins_url('assets/css/partners.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/partners.css')
-        );
-
-        wp_enqueue_style(
-            'academy-africa-error',
-            plugins_url('assets/css/error.css', __FILE__),
-            [
-                'academy-africa'
-            ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/css/error.css')
-        );
+            wp_enqueue_style($handle, $base_url . $file, $dependencies, $version);
+        }
     }
 
     /**

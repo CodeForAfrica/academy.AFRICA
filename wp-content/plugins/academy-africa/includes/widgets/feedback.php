@@ -35,18 +35,18 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
     {
         return [
             [
-                "name" => "Tricia Govindasamy",
+                "name" => "Sakina Salem",
                 "role" => "Senior product Manager",
                 "company" => "Code For Africa",
                 "description" => "The Drone Journalism course enhanced my abilities to capture interesting moments. I won an award for the images used in the Sucked Dry Project by InfoNile"
             ], [
-                "name" => "Tricia Govindasamy",
+                "name" => "Sakina Salem",
                 "role" => "Senior product Manager",
                 "company" => "Code For Africa",
                 "description" => "The Drone Journalism course enhanced my abilities to capture interesting moments. I won an award for the images used in the Sucked Dry Project by InfoNile"
             ],
             [
-                "name" => "Tricia Govindasamy",
+                "name" => "Sakina Salem",
                 "role" => "Senior product Manager",
                 "company" => "Code For Africa",
                 "description" => "The Drone Journalism course enhanced my abilities to capture interesting moments. I won an award for the images used in the Sucked Dry Project by InfoNile"
