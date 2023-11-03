@@ -7,6 +7,10 @@
     color: #fff;
 
     .mobile {
+        @include media-breakpoint-up(tablet) {
+            display: none;
+        }
+
         .nav {
             display: flex;
             justify-content: space-between;

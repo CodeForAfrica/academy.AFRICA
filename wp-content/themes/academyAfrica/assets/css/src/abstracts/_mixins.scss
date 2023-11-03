@@ -1,0 +1,27 @@
+@use './breakpoints' as *;
+
+@mixin media-breakpoint-up($breakpoint) {
+    @if $breakpoint == mobile {
+        @media (min-width: $breakpoint-mobile) {
+            @content;
+        }
+    } @else if $breakpoint == tablet {
+        @media (min-width: $breakpoint-tablet) {
+            @content;
+        }
+    } @else if $breakpoint == desktop {
+        @media (min-width: $breakpoint-desktop) {
+            @content;
+        }
+    } @else if $breakpoint == large {
+        @media (min-width: $breakpoint-large) {
+            @content;
+        }
+    } @else if $breakpoint == xlarge {
+        @media (min-width: $breakpoint-xlarge) {
+            @content;
+        }
+    } @else {
+        @error "Invalid breakpoint: '#{$breakpoint}'.";
+    }
+}

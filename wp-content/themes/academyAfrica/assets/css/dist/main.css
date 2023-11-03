@@ -58,6 +58,11 @@ table {
   padding: 20px;
   color: #fff;
 }
+@media (min-width: 768px) {
+  .header .mobile {
+    display: none;
+  }
+}
 .header .mobile .nav {
   display: flex;
   justify-content: space-between;
