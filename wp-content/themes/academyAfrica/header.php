@@ -30,11 +30,8 @@ $skip_link_url = apply_filters( 'hello_elementor_skip_link_url', '#content' );
 <a class="skip-link screen-reader-text" href="<?php echo esc_url( $skip_link_url ); ?>"><?php echo esc_html__( 'Skip to content', 'hello-elementor' ); ?></a>
 <?php } ?>
 
+<!-- get header template -->
 
-<header class="header">
-    <div class="container">
-        <div class="header__inner">
-            <h1>Main Header here </h1>
-        </div>
-    </div>
-</header>
+<?php get_template_part( 'template-parts/header', 'template' ); ?>
+
+

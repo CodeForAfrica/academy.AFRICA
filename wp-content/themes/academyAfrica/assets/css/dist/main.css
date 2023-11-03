@@ -53,9 +53,44 @@ table {
 }
 
 .header {
-  width: 500px;
-  height: 200px;
-  background-color: #1020E1;
+  width: 100vw;
+  background-color: #0C1A81;
+  padding: 20px 40px;
+  color: #fff;
+}
+.header__mobile {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.header__mobile__menu {
+  display: flex;
+  font-size: 24px;
+}
+.header__mobile__menu__close {
+  display: none;
+}
+.header__mobile__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header__mobile__logo__image img {
+  width: 39px;
+  height: 39px;
+}
+.header__mobile__logo__site_name {
+  font-size: 18px;
+  font-weight: 700;
+}
+.header__mobile__logo__site_name a {
+  color: #fff;
+}
+.header__mobile__search__icon {
+  font-size: 24px;
+  color: #fff;
 }
 
 .footer {

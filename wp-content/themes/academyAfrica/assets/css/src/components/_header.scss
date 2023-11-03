@@ -1,7 +1,54 @@
 @use '../abstracts/' as *;
 
 .header {
-    width: 500px;
-    height: 200px;
-    background-color: $color-primary;
+    width: 100vw;
+    background-color: $color-primary-700;
+    padding: 20px 40px;
+    color: #fff;
+
+    &__mobile {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+
+        &__menu {
+            display: flex;
+            font-size: 24px;
+
+            &__close {
+                display: none;
+            }
+        }
+
+        &__logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+
+            &__image {
+                img {
+                    width: 39px;
+                    height: 39px;
+                }
+            }
+
+            &__site_name {
+                font-size: 18px;
+                font-weight: 700;
+
+                a {
+                    color: #fff;
+                }
+            }
+        }
+
+        &__search {
+            &__icon {
+                font-size: 24px;
+                color: #fff;
+            }
+        }
+    }
 }

@@ -33,6 +33,14 @@ function my_theme_enqueue_styles()
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
+
+function load_fa()
+{
+    wp_enqueue_style('load-fa', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+}
+
+add_action('wp_enqueue_scripts', 'load_fa');
+
 function my_theme_enqueue_scripts()
 {
     $js_files = glob(get_stylesheet_directory() . '/assets/js/*.js');
