@@ -26,10 +26,10 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
     <div class="mobile">
         <div class="nav">
             <div class="hamburger">
-                <div class="icon icon-open">
+                <div class="icon open">
                     <i class="fa-solid fa-bars" id="open"></i>
                 </div>
-                <div class="icon icon-close">
+                <div class="icon close" style="display: none;">
                     <i class="fa-solid fa-xmark" id="close"></i>
                 </div>
             </div>

@@ -68,9 +68,6 @@ table {
   display: flex;
   font-size: 24px;
 }
-.header .mobile .nav .hamburger .icon-close {
-  display: none;
-}
 .header .mobile .nav .logo {
   display: flex;
   align-items: center;
@@ -94,12 +91,17 @@ table {
 }
 
 .drawer {
+  display: none;
   width: 100vw;
   background-color: #0C1A81;
   color: #fff;
 }
+.drawer.open {
+  display: flex;
+}
 .drawer .menu {
   color: #fff;
+  width: 100vw;
 }
 .drawer .menu .items {
   display: flex;
