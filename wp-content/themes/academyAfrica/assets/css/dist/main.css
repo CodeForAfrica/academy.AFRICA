@@ -58,7 +58,7 @@ table {
   padding: 20px;
   color: #fff;
 }
-@media (min-width: 768px) {
+@media (min-width: 1152px) {
   .header .mobile {
     display: none;
   }
@@ -93,6 +93,122 @@ table {
 .header .mobile .nav .search .icon {
   font-size: 24px;
   color: #fff;
+}
+@media (max-width: 1152px) {
+  .header .desktop {
+    display: none;
+  }
+}
+.header .desktop .nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-direction: row;
+}
+.header .desktop .nav .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header .desktop .nav .logo .image img {
+  width: 52px;
+  height: 52px;
+}
+.header .desktop .nav .logo .site_name {
+  font-size: 18px;
+  font-weight: 600;
+}
+.header .desktop .nav .logo .site_name a {
+  color: #fff;
+}
+.header .desktop .nav .search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .desktop .nav .search .input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .desktop .nav .search .input input {
+  width: 330px;
+  height: 40px;
+  border: none;
+  border-radius: 0;
+  padding: 0 20px;
+  outline: none;
+}
+.header .desktop .nav .search .input button {
+  border: none;
+  height: 40px;
+  border-radius: 0;
+  background: #EFF0FD;
+  color: #fff;
+  cursor: pointer;
+}
+.header .desktop .nav .search .input button .icon {
+  font-size: 16px;
+  color: #0C1A81;
+}
+.header .desktop .nav .menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header .desktop .nav .menu .items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header .desktop .nav .menu .items .item {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #fff;
+  cursor: pointer;
+}
+.header .desktop .nav .menu .items .item.parent {
+  position: relative;
+}
+.header .desktop .nav .menu .items .item.parent .collapsible {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+.header .desktop .nav .menu .items .item.parent .children {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #0C1A81;
+  color: #fff;
+}
+.header .desktop .nav .menu .items .item.parent .children.open {
+  display: flex;
+  flex-direction: column;
+}
+.header .desktop .nav .menu .items .item.parent .children .item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 20px 0;
+  border: 1px solid #0C1A81;
+  color: #0C1A81;
+  background: #fff;
+}
+.header .desktop .nav .menu .items .item.parent .children .item:last-child {
+  border-top: none;
+}
+.header .desktop .nav .menu .items .item.parent .children .item:hover {
+  background: #EFF0FD;
 }
 
 .drawer {

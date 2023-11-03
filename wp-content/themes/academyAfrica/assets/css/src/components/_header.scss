@@ -7,7 +7,7 @@
     color: #fff;
 
     .mobile {
-        @include media-breakpoint-up(tablet) {
+        @include media-breakpoint-up(desktop) {
             display: none;
         }
 
@@ -51,6 +51,145 @@
                     color: #fff;
                 }
             }
+        }
+    }
+
+    .desktop {
+        @include media-breakpoint-down(desktop) {
+            display: none;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-direction: row;
+
+            .logo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+
+                .image {
+                    img {
+                        width: 52px;
+                        height: 52px;
+                    }
+                }
+
+                .site_name {
+                    font-size: 18px;
+                    font-weight: 600;
+
+                    a {
+                        color: #fff;
+                    }
+                }
+            }
+
+            .search {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .input {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    input {
+                        width: 330px;
+                        height: 40px;
+                        border: none;
+                        border-radius: 0;
+                        padding: 0 20px;
+                        outline: none;
+                    }
+
+                    button {
+                        border: none;
+                        height: 40px;
+                        border-radius: 0;
+                        background: $color-primary-50;
+                        color: #fff;
+                        cursor: pointer;
+
+                        .icon {
+                            font-size: 16px;
+                            color: $color-primary-700;
+                        }
+                    }
+                }
+            }
+
+            .menu {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+
+                .items {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 20px;
+
+                    .item {
+                        font-size: 18px;
+                        font-weight: 600;
+                        text-transform: capitalize;
+                        color: #fff;
+                        cursor: pointer;
+
+                        &.parent {
+                            position: relative;
+                            .collapsible {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: center;
+                                gap: 6px;
+                            }
+
+                            .children {
+                                display: none;
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                width: 100%;
+                                background: $color-primary-700;
+                                color: #fff;
+
+                                &.open {
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+
+                                .item {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: start;
+                                    padding: 20px 0;
+                                    border: 1px solid $color-primary-700;
+                                    color: $color-primary-700;
+                                    background: #fff;
+
+                                    &:last-child {
+                                        border-top: none;
+                                    }
+
+                                    &:hover {
+                                        background: $color-primary-50;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

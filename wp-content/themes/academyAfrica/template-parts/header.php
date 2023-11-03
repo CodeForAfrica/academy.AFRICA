@@ -50,6 +50,61 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
             </div>
         </div>
     </div>
+
+    <!-- Desktop Nav -->
+    <div class="desktop">
+        <div class="nav">
+            <!-- Logo and site name -->
+            <div class="logo">
+                <?php
+                if (has_custom_logo()) {
+                    echo "<div class='image'>";
+                    the_custom_logo();
+                    echo "</div>";
+                }
+                echo '<h1 class="site_name"><a href="' . esc_url(home_url('/')) . '">' . esc_html(get_bloginfo('name')) . '</a></h1>';
+                ?>
+            </div>
+            <!-- Search Bar -->
+            <div class="search">
+                <div class="input">
+                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                        <i class="fa-solid fa-magnifying-glass icon"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Menu -->
+            <div class="menu">
+                <div class="items">
+                    <?php
+                    foreach ($menu_items as $menu_item) {
+                        $class = 'item';
+                        if (count($menu_item['children']) > 0) {
+                            $class .= ' parent';
+                            echo "<div class='" . $class . "'>";
+                            echo "<span class='collapsible'>" . $menu_item['title'] . "
+                    <i class='fa fa-chevron-down icon close'></i>
+                    <i class='fa fa-chevron-up icon open' style='display: none;'></i>
+                    </span>";
+                            echo "<div class='children'>";
+                            foreach ($menu_item['children'] as $child) {
+                                echo "
+                            <a class='item' href='" . $child['url'] . "'>" . $child['title'] . "</a>
+                            ";
+                            }
+                            echo "</div>";
+                            echo "</div>";
+                        } else {
+                            echo "<a class='" . $class . "' href='" . $menu_item['url'] . "'>" . $menu_item['title'] . "</a>";
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </nav>
 <!-- Mobile drawer -->
 <div class="drawer">
