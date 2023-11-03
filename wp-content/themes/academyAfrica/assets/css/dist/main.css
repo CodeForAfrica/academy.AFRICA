@@ -156,6 +156,9 @@ table {
 .drawer .menu .items .item.parent .children .item:last-child {
   border-bottom: none;
 }
+.drawer .menu .items .item.parent .children .item:hover {
+  background: #EFF0FD;
+}
 
 .footer {
   background-color: #1020E1;
