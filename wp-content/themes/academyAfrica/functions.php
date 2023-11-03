@@ -43,3 +43,13 @@ function my_theme_enqueue_scripts()
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
+
+function academy_africa_register_widgets($widgets_manager)
+{
+    require_once(__DIR__ . '/includes/widgets/test_widget.php');
+
+    $widgets_manager->register_widget_type(new \Academy_Africa_Test_Widget());
+}
+
+add_action('elementor/widgets/register', 'academy_africa_register_widgets');
+
