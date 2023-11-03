@@ -1,0 +1,17 @@
+{
+  "name": "academyAfrica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css": "sass assets/css/src:assets/css/dist",
+    "css:watch": "sass --watch assets/css/src:assets/css/dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.69.5"
+  }
+}
