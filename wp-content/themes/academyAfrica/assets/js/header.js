@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const drawer = document.querySelector('.drawer')
 
     hamburger.addEventListener('click', () => {
-        console.log('clicked hamburger')
         drawer.classList.toggle('open')
         openIcon.style.display = openIcon.style.display === 'none' ? 'block' : 'none';
         closeIcon.style.display = closeIcon.style.display === 'none' ? 'block' : 'none';
