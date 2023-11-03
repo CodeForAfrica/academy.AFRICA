@@ -4,14 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeIcon = document.querySelector('.icon.close');
     const drawer = document.querySelector('.drawer')
 
-    console.log(closeIcon)
-    console.log(openIcon)
-
     hamburger.addEventListener('click', () => {
         console.log('clicked hamburger')
         drawer.classList.toggle('open')
         openIcon.style.display = openIcon.style.display === 'none' ? 'block' : 'none';
         closeIcon.style.display = closeIcon.style.display === 'none' ? 'block' : 'none';
+    })
+
+    const parentNavs = document.querySelectorAll('.item.parent')
+
+    parentNavs.forEach(parentNav => {
+        const childNav = parentNav.querySelector('.children')
+        parentNav.addEventListener('click', () => {
+            childNav.classList.toggle('open')
+        })
     })
   });
 

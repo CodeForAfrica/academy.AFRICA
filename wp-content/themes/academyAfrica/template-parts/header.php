@@ -65,17 +65,14 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                     echo "<div class='children'>";
                     foreach ($menu_item['children'] as $child) {
                         echo "
-                            <div class='item'>
-                            <a href='" . $child['url'] . "'>" . $child['title'] . "</a>
-                            </div>
+                            <a class='item' href='" . $child['url'] . "'>" . $child['title'] . "</a>
                             ";
                     }
                     echo "</div>";
+                    echo "</div>";
                 } else {
-                    echo "<div class='" . $class . "'>";
-                    echo "<a href='" . $menu_item['url'] . "'>" . $menu_item['title'] . "</a>";
+                    echo "<a class='" . $class . "' href='" . $menu_item['url'] . "'>" . $menu_item['title'] . "</a>";
                 }
-                echo "</div>";
             }
             ?>
         </div>

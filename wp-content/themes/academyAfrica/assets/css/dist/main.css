@@ -117,8 +117,7 @@ table {
   box-shadow: 0px 1px 0px 0px #E2E8F0;
   border: 0.5px solid #fff;
   text-transform: uppercase;
-}
-.drawer .menu .items .item a {
+  cursor: pointer;
   color: #fff;
 }
 .drawer .menu .items .item.parent {
@@ -139,18 +138,19 @@ table {
   color: #fff;
 }
 .drawer .menu .items .item.parent .children {
-  display: flex;
+  display: none;
   flex-direction: column;
   width: 100%;
   background: #fff;
+}
+.drawer .menu .items .item.parent .children.open {
+  display: flex;
 }
 .drawer .menu .items .item.parent .children .item {
   background: #fff;
   width: 100%;
   border: none;
   border-bottom: 1px solid #0C1A81;
-}
-.drawer .menu .items .item.parent .children .item a {
   color: #0C1A81;
 }
 .drawer .menu .items .item.parent .children .item:last-child {
