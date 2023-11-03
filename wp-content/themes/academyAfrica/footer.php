@@ -1,5 +1,7 @@
 <?php
 
+namespace AcademyAfrica\Theme;
+
 /**
  * The template for displaying the footer.
  *

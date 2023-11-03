@@ -1,4 +1,5 @@
 <?php
+namespace AcademyAfrica\Theme;
 
 /**
  * The template for displaying 404 pages (not found).

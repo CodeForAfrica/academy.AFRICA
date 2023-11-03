@@ -55,42 +55,104 @@ table {
 .header {
   width: 100vw;
   background-color: #0C1A81;
-  padding: 20px 40px;
+  padding: 20px;
   color: #fff;
 }
-.header__mobile {
+.header .mobile .nav {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
 }
-.header__mobile__menu {
+.header .mobile .nav .hamburger {
   display: flex;
   font-size: 24px;
 }
-.header__mobile__menu__close {
+.header .mobile .nav .hamburger .icon-close {
   display: none;
 }
-.header__mobile__logo {
+.header .mobile .nav .logo {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
 }
-.header__mobile__logo__image img {
+.header .mobile .nav .logo .image img {
   width: 39px;
   height: 39px;
 }
-.header__mobile__logo__site_name {
+.header .mobile .nav .logo .site_name {
   font-size: 18px;
   font-weight: 700;
 }
-.header__mobile__logo__site_name a {
+.header .mobile .nav .logo .site_name a {
   color: #fff;
 }
-.header__mobile__search__icon {
+.header .mobile .nav .search .icon {
   font-size: 24px;
   color: #fff;
+}
+
+.drawer {
+  width: 100vw;
+  background-color: #0C1A81;
+  color: #fff;
+}
+.drawer .menu {
+  color: #fff;
+}
+.drawer .menu .items {
+  display: flex;
+  flex-direction: column;
+}
+.drawer .menu .items .item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  align-self: stretch;
+  padding: 20px;
+  background: #0C1A81;
+  box-shadow: 0px 1px 0px 0px #E2E8F0;
+  border: 0.5px solid #fff;
+  text-transform: uppercase;
+}
+.drawer .menu .items .item a {
+  color: #fff;
+}
+.drawer .menu .items .item.parent {
+  padding: 0;
+  padding-bottom: 0;
+}
+.drawer .menu .items .item.parent .collapsible {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+.drawer .menu .items .item.parent .collapsible .icon {
+  font-size: 24px;
+  color: #fff;
+}
+.drawer .menu .items .item.parent .children {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+}
+.drawer .menu .items .item.parent .children .item {
+  background: #fff;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #0C1A81;
+}
+.drawer .menu .items .item.parent .children .item a {
+  color: #0C1A81;
+}
+.drawer .menu .items .item.parent .children .item:last-child {
+  border-bottom: none;
 }
 
 .footer {
