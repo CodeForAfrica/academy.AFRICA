@@ -15,8 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     parentNavs.forEach(parentNav => {
         const childNav = parentNav.querySelector('.children')
+        const chevronOpen = parentNav.querySelector('.icon.open')
+        const chevronClose = parentNav.querySelector('.icon.close')
         parentNav.addEventListener('click', () => {
             childNav.classList.toggle('open')
+            chevronOpen.style.display = chevronOpen.style.display === 'none' ? 'block' : 'none';
+            chevronClose.style.display = chevronClose.style.display === 'none' ? 'block' : 'none';
         })
     })
   });
