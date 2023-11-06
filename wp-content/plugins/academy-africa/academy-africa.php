@@ -33,12 +33,12 @@ if (!defined('ACADEMY_AFRICA_PLUGIN_DIR')) {
 
 
 
-function academy_africa_plugin($widgets_manager)
-{
+// function academy_africa_plugin($widgets_manager)
+// {
 
-    require_once(__DIR__ . '/includes/plugin.php');
+//     require_once(__DIR__ . '/includes/plugin.php');
 
-    // Run the plugin
-    \Academy_Africa\Plugin::instance();
-}
-add_action('plugins_loaded', 'academy_africa_plugin');
+//     // Run the plugin
+//     \Academy_Africa\Plugin::instance();
+// }
+// add_action('plugins_loaded', 'academy_africa_plugin');
