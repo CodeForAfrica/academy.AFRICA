@@ -1,0 +1,60 @@
+@use "../abstracts/" as *;
+
+$font-family_1: Open Sans;
+
+.mui-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--shades-black, #000);
+  font-family: $font-family_1;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    &:checked {
+      ~ {
+        .checkmark {
+          background-color: var(--primary-700, #0c1a81);
+          &:after {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .checkmark {
+    &:after {
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+}
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  background-color: var(--shades-white, #ffffff);
+  border: 2px solid var(--neutral-700, #0c1a81);
+  border-radius: 3px;
+  &:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+}

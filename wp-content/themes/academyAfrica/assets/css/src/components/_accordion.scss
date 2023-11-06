@@ -1,0 +1,77 @@
+$small-screen: 768px;
+$tablet: 1024px;
+$large-screen: 1920px;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == $small-screen {
+    @media only screen and (max-width: $breakpoint) {
+      @content;
+    }
+  }
+  @if $breakpoint == $tablet {
+    @media screen and (min-width: $small-screen) and (max-width: $tablet) {
+      @content;
+    }
+  }
+}
+
+.accordion-parent {
+  background: var(--shades-white, #fff);
+  border: 1px solid #e2e8f0;
+  .accordion {
+    background-color: var(--shades-white, #fff);
+    cursor: pointer;
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--shades-black, #000);
+
+    /* Paragraph/P3/Semi Bold */
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 133.333% */
+    /* Shadow (Border Bottom) */
+    &:after {
+      content: "\2039"; /* Unicode character for "plus" sign (+) */
+      font-size: 20px;
+      float: right;
+      margin-left: 5px;
+      transform: rotate(90deg);
+    }
+  }
+
+  .panel {
+    padding: 0 20px;
+    background: var(--neutral-50, #f7f9fd);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    box-sizing: border-box;
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      @include respond-to($tablet) {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          flex-basis: 50%;
+        }
+      }
+      li {
+        margin: 8px 0;
+      }
+    }
+    &.open {
+      border-top: 1px solid #e2e8f0;
+    }
+  }
+}

@@ -1,0 +1,131 @@
+.divider {
+  margin: 20px 0;
+  border: none;
+  background: #e2e4eb;
+  height: 1px;
+}
+
+.learning-pathways {
+  padding: 80px 60px 40px;
+}
+.learning-pathways .cfa-title {
+  color: var(--primary-700, #0c1a81);
+  font-family: Lora;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+  margin: 0;
+}
+.learning-pathways .cfa-title::after {
+  content: "";
+  display: block;
+  height: 6px;
+  width: 60px;
+  background: #ed1c24;
+  margin-top: 32px;
+}
+.learning-pathways .description {
+  color: var(--shades-black, #000);
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  max-width: 554px;
+  margin: 32px 0;
+}
+.learning-pathways .content {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+.learning-pathways .content .card {
+  border: 0.5px solid var(--neutral-200, #cccfda);
+  background-color: var(--primary-700, #0c1a81);
+  min-width: 280px;
+  width: 280px;
+}
+.learning-pathways .content .card .course-card-pattern {
+  background-image: url("/wp-content/themes/academyAfrica/assets/images/CourseCardPattern.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 145px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.learning-pathways .content .card .course-card-pattern .icon {
+  width: 90px;
+  height: 90px;
+  background: var(--shades-white, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.learning-pathways .content .card .pathway-card-content {
+  padding: 20px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.learning-pathways .content .card .pathway-card-content .pathway-name {
+  color: var(--shades-white, #fff);
+  margin: 0;
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+.learning-pathways .content .card .pathway-card-content .course-count {
+  margin: 0;
+  color: var(--shades-white, #fff);
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+@media only screen and (max-width: 768px) {
+  .pagination-container {
+    justify-content: center;
+  }
+  .pagination-container .pagination {
+    display: none;
+  }
+  .pagination-container .see-all {
+    display: block;
+  }
+  .learning-pathways .cfa-title {
+    font-size: 20px;
+  }
+  .learning-pathways .cfa-title::after {
+    margin-top: 10px;
+  }
+  .learning-pathways .content {
+    justify-content: center;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .learning-pathways .cfa-title {
+    text-align: center;
+  }
+  .learning-pathways .cfa-title::after {
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+  }
+}
+
+/*# sourceMappingURL=learning_pathways.css.map */
