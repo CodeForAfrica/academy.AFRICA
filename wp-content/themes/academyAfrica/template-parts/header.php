@@ -44,8 +44,8 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                 ?>
             </div>
             <div class="search">
-                <div class="icon search-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="button primary">
+                    <i class="fa-solid fa-magnifying-glass icon"></i>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
             <div class="search">
                 <div class="input">
                     <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                    <button class="button primary medium" type="button" id="button-addon2">
                         <i class="fa-solid fa-magnifying-glass icon"></i>
                     </button>
                 </div>
@@ -145,7 +145,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
             <i class="fa-solid fa-magnifying-glass icon"></i>
         </button>
         <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-        <div class="search-close-btn">
+        <div class="button primary search-close-btn">
             <i class="fa-solid fa-xmark"></i>
         </div>
     </div>

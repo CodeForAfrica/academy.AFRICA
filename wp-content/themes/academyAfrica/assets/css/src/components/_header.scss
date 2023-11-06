@@ -48,7 +48,6 @@
             .search {
                 .icon {
                     font-size: 24px;
-                    color: $color-shades-white;
                 }
             }
         }
@@ -108,16 +107,16 @@
                     }
 
                     button {
-                        border: none;
-                        height: 40px;
-                        border-radius: 0;
                         background: $color-primary-50;
                         color: $color-shades-white;
-                        cursor: pointer;
-
                         .icon {
-                            font-size: 16px;
                             color: $color-primary-700;
+                        }
+
+                        &:hover {
+                            background: $color-primary-50;
+                            color: $color-shades-white;
+                            border: none;
                         }
                     }
                 }
