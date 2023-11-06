@@ -122,6 +122,10 @@ table {
   background-color: #0C1A81;
   padding: 20px;
   color: #FFFFFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 @media (min-width: 1152px) {
   .header .mobile {
