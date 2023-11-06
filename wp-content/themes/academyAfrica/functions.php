@@ -55,24 +55,6 @@ function my_theme_enqueue_scripts()
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
 
-function academy_africa_register_widgets($widgets_manager)
-{
-    require_once(__DIR__ . '/includes/widgets/test_widget.php');
-
-    $widgets_manager->register_widget_type(new \Academy_Africa_Test_Widget());
-}
-
-add_action('elementor/widgets/register', 'academy_africa_register_widgets');
-
-function theme_prefix_register_elementor_locations( $elementor_theme_manager ) {
-
-	$elementor_theme_manager->register_all_core_location();
-
-}
-
-add_action( 'elementor/theme/register_locations', 'theme_prefix_register_elementor_locations' );
-
-
 require_once __DIR__ . '/includes/widgets/widgets.php';
 $widget = new \AcademyAfrica\Theme\Widget\Widget();
 $widget->init();
