@@ -11,12 +11,10 @@ namespace AcademyAfrica\Theme;
  */
 
 if (!defined('ABSPATH')) {
-	exit; // Exit if accessed directly.
+    exit; // Exit if accessed directly.
 }
 ?>
-<?php get_template_part('template-parts/footer', 'template'); ?>
-
-<?php wp_footer(); ?>
+<?php get_template_part('template-parts/404', 'template'); ?>
 
 </body>
 

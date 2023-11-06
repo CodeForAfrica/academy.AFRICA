@@ -1,4 +1,5 @@
 <?php
+
 namespace AcademyAfrica\Theme;
 
 /**
@@ -13,17 +14,37 @@ if (!defined('ABSPATH')) {
 ?>
 
 <?php get_header(); ?>
-
+<?
+$status_code = 404;
+$title = "PAGE NOT FOUND";
+$description = "There seems to be an error on this page. Please contact us for more details";
+$refresh = "Refresh";
+$home = "Home";
+?>
 <main id="content" class="site-main">
 
-    <?php if (apply_filters('academy_africa_page_title', true)) : ?>
-        <header class="page-header">
-            <h1 class="entry-title"><?php echo esc_html__('Looks like you\'re Lost again.', 'academy-africa'); ?></h1>
-        </header>
-    <?php endif; ?>
+    <div class="error">
+        <div></div>
+        <div class="content">
+            <p class="code">
+                <? echo $status_code ?>
+            </p>
+            <p class="text">
+                <? echo $title ?>
+            </p>
+            <p class="description">
+                <? echo $description ?>
+            </p>
+            <div class="actions">
+                <a class="button" href="" onclick="location.reload();">
+                    <? echo $refresh ?>
+                </a>
+                <a class="button" href="/">
+                    <? echo $home ?>
+                </a>
+            </div>
+        </div>
 
-    <div class="page-content">
-        <p><?php echo esc_html__('No page in Academy Africa.', 'academy-africa'); ?></p>
     </div>
 
 </main>

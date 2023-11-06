@@ -243,7 +243,9 @@ $font-family_1: Open Sans;
 footer {
   background: var(--primary-700, #0c1a81);
   width: 100%;
-  padding: 100px 0;
+  .root {
+    padding: 100px 20px;
+  }
 }
 
 @media only screen and (max-width: 768px) {

@@ -38,6 +38,7 @@ final class Widget
     {
         $styles = [
             'academy-africa-hero' => 'hero.css',
+            'academy-africa-error' => 'error.css'
         ];
 
         foreach ($styles as $handle => $file) {
