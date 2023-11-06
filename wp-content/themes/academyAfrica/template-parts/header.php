@@ -44,7 +44,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                 ?>
             </div>
             <div class="search">
-                <div class="button primary">
+                <div class="button primary search-icon">
                     <i class="fa-solid fa-magnifying-glass icon"></i>
                 </div>
             </div>

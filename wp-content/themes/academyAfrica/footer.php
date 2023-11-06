@@ -15,11 +15,7 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <main>
-	<div>
-		<div>
-			<h1>Main Footer here </h1>
-		</div>
-	</div>
+	<?php get_template_part('template-parts/footer', 'template'); ?>
 </main>
 
 <?php wp_footer(); ?>
