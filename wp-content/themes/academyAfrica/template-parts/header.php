@@ -20,7 +20,6 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
 
 
 ?>
-
 <nav class="header">
     <!-- Mobile Nav -->
     <div class="mobile">
