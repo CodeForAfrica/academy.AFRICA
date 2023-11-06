@@ -30,11 +30,25 @@ final class Widget
     function register_widgets($widgets_manager)
     {
         require_once(__DIR__ . '/test_widget.php');
+        require_once(__DIR__ . '/hero.php');
 
         $widgets_manager->register_widget_type(new \Academy_Africa_Test_Widget());
+        $widgets_manager->register_widget_type(new \Academy_Africa_Hero());
     }
 
     function register_styles()
     {
+        $styles = [
+            'academy-africa-hero' => 'hero.css',
+        ];
+
+        foreach ($styles as $handle => $file) {
+            wp_enqueue_style(
+                $handle,
+                get_stylesheet_directory_uri() . '/assets/css/dist/widgets/' . $file,
+                [],
+                filemtime(get_stylesheet_directory() . '/assets/css/dist/widgets/' . $file)
+            );
+        }
     }
 }
