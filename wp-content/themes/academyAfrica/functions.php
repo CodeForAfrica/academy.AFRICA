@@ -1,4 +1,7 @@
 <?php
+
+// namespace AcademyAfrica\Theme;
+
 // Exit if accessed directly
 if (!defined('ABSPATH')) exit;
 
@@ -61,3 +64,7 @@ function academy_africa_register_widgets($widgets_manager)
 
 add_action('elementor/widgets/register', 'academy_africa_register_widgets');
 
+
+require_once __DIR__ . '/includes/widgets/widgets.php';
+$widget = new \AcademyAfrica\Theme\Widget\Widget();
+$widget->init();

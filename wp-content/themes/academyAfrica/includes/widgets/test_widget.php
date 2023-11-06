@@ -65,7 +65,7 @@ class Academy_Africa_Test_Widget extends \Elementor\Widget_Base {
         * @return array Test widget categories.
         */
         public function get_categories() {
-            return [ 'general' ];
+            return [ 'academy-africa' ];
         }
     
         /**
