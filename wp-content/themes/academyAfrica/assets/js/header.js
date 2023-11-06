@@ -22,5 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
             chevronClose.style.display = chevronClose.style.display === 'none' ? 'block' : 'none';
         })
     })
+
+    const searchIcon = document.querySelector('.search-icon')
+    const searchForm = document.querySelector('.mobile-search')
+    const searchClose = document.querySelector('.search-close-btn')
+
+    searchIcon.addEventListener('click', () => {
+        searchForm.classList.toggle('open')
+    })
+
+    searchClose.addEventListener('click', () => {
+        searchForm.classList.toggle('open')
+    })
+
   });
 
