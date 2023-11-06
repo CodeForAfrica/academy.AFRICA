@@ -29,10 +29,8 @@ final class Widget
 
     function register_widgets($widgets_manager)
     {
-        require_once(__DIR__ . '/test_widget.php');
         require_once(__DIR__ . '/hero.php');
 
-        $widgets_manager->register_widget_type(new \Academy_Africa_Test_Widget());
         $widgets_manager->register_widget_type(new \Academy_Africa_Hero());
     }
 
