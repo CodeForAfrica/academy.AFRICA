@@ -14,11 +14,9 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 ?>
-<main>
-	<?php get_template_part('template-parts/footer', 'template'); ?>
-</main>
 
-<?php wp_footer(); ?>
+<?php get_template_part('template-parts/footer', 'template'); ?>
+</main>
 
 </body>
 
