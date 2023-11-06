@@ -1,0 +1,397 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.header {
+  width: 100vw;
+  background-color: #0C1A81;
+  padding: 20px;
+  color: #FFFFFF;
+}
+@media (min-width: 1152px) {
+  .header .mobile {
+    display: none;
+  }
+}
+.header .mobile .nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.header .mobile .nav .hamburger {
+  display: flex;
+  font-size: 24px;
+}
+.header .mobile .nav .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header .mobile .nav .logo .image img {
+  width: 39px;
+  height: 39px;
+}
+.header .mobile .nav .logo .site_name {
+  font-size: 18px;
+  font-weight: 700;
+}
+.header .mobile .nav .logo .site_name a {
+  color: #FFFFFF;
+}
+.header .mobile .nav .search .icon {
+  font-size: 24px;
+}
+@media (max-width: 1152px) {
+  .header .desktop {
+    display: none;
+  }
+}
+.header .desktop .nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-direction: row;
+}
+.header .desktop .nav .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header .desktop .nav .logo .image img {
+  width: 52px;
+  height: 52px;
+}
+.header .desktop .nav .logo .site_name {
+  font-size: 18px;
+  font-weight: 600;
+}
+.header .desktop .nav .logo .site_name a {
+  color: #FFFFFF;
+}
+.header .desktop .nav .search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .desktop .nav .search .input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .desktop .nav .search .input input {
+  width: 330px;
+  height: 40px;
+  border: none;
+  border-radius: 0;
+  padding: 0 20px;
+  outline: none;
+}
+.header .desktop .nav .search .input button {
+  background: #EFF0FD;
+  color: #FFFFFF;
+}
+.header .desktop .nav .search .input button .icon {
+  color: #0C1A81;
+}
+.header .desktop .nav .search .input button:hover {
+  background: #EFF0FD;
+  color: #FFFFFF;
+  border: none;
+}
+.header .desktop .nav .menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header .desktop .nav .menu .items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header .desktop .nav .menu .items .item {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.header .desktop .nav .menu .items .item.parent {
+  position: relative;
+}
+.header .desktop .nav .menu .items .item.parent .collapsible {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+.header .desktop .nav .menu .items .item.parent .children {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #0C1A81;
+  color: #FFFFFF;
+}
+.header .desktop .nav .menu .items .item.parent .children.open {
+  display: flex;
+  flex-direction: column;
+}
+.header .desktop .nav .menu .items .item.parent .children .item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 20px 0;
+  border: 1px solid #0C1A81;
+  color: #0C1A81;
+  background: #FFFFFF;
+}
+.header .desktop .nav .menu .items .item.parent .children .item:last-child {
+  border-top: none;
+}
+.header .desktop .nav .menu .items .item.parent .children .item:hover {
+  background: #EFF0FD;
+}
+
+.drawer {
+  display: none;
+  width: 100vw;
+  background-color: #0C1A81;
+  color: #FFFFFF;
+}
+.drawer.open {
+  display: flex;
+}
+.drawer .menu {
+  color: #FFFFFF;
+  width: 100vw;
+}
+.drawer .menu .items {
+  display: flex;
+  flex-direction: column;
+}
+.drawer .menu .items .item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  align-self: stretch;
+  padding: 20px;
+  background: #0C1A81;
+  box-shadow: 0px 1px 0px 0px #E2E8F0;
+  border: 0.5px solid #FFFFFF;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+.drawer .menu .items .item.parent {
+  padding: 0;
+  padding-bottom: 0;
+}
+.drawer .menu .items .item.parent .collapsible {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+.drawer .menu .items .item.parent .collapsible .icon {
+  font-size: 24px;
+  color: #FFFFFF;
+}
+.drawer .menu .items .item.parent .children {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  background: #FFFFFF;
+}
+.drawer .menu .items .item.parent .children.open {
+  display: flex;
+}
+.drawer .menu .items .item.parent .children .item {
+  background: #FFFFFF;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #0C1A81;
+  color: #0C1A81;
+}
+.drawer .menu .items .item.parent .children .item:last-child {
+  border-bottom: none;
+}
+.drawer .menu .items .item.parent .children .item:hover {
+  background: #EFF0FD;
+}
+
+.mobile-search {
+  display: none;
+  padding: 20px;
+  background: #EFF0FD;
+  width: 100%;
+}
+.mobile-search.open {
+  display: block;
+}
+.mobile-search .input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mobile-search .input .search-btn {
+  border: none;
+  background: #0C1A81;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius: 0;
+  cursor: pointer;
+  width: 44px;
+}
+.mobile-search .input input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 0;
+  padding: 0 20px;
+  outline: none;
+  color: #616582;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+}
+.mobile-search .input .search-close-btn {
+  border: none;
+  background: #EFF0FD;
+  color: #0C1A81;
+  padding: 10px;
+  border-radius: 0;
+  cursor: pointer;
+  width: 44px;
+}
+.mobile-search .input .search-close-btn i {
+  font-size: 24px;
+  color: #0C1A81;
+}
+
+/*# sourceMappingURL=main.css.map */
