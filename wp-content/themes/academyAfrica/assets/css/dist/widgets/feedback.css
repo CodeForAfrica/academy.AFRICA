@@ -142,7 +142,7 @@ table {
 .feedback .content {
   background: var(--neutral-50, #f7f9fd);
   box-sizing: border-box;
-  padding: 72px 16px;
+  padding: 72px 20px;
   display: flex;
   flex-wrap: wrap;
 }
