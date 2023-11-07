@@ -1,0 +1,113 @@
+@use '../abstracts/' as *;
+
+$font-family_1: Lora;
+$font-family_2: Open Sans;
+
+.connect {
+    padding: 20px;
+
+    .title-wrapper {
+        display: flex;
+        justify-content: start;
+        left: unset;
+        .cfa-title {
+            h4 {
+                font-size: 20px;
+            }
+
+            &::after {
+                margin-top: 10px;
+                left: unset;
+                transform: unset;
+            }
+        }
+    }
+
+
+    .share-text {
+        .share {
+            color: $color-shades-black;
+            text-align: center;
+            font-family: $font-family_2;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 18px;
+            margin: 0;
+        }
+    }
+
+    .africa {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .africa-img {
+            width: 300px;
+        }
+    }
+
+    .join-slack {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin: 50px 0;
+
+        .share-text {
+            display: none;
+        }
+
+        .become-a-member {
+            color: $color-primary-700;
+            font-family: $font-family_2;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px;
+            text-align: center;
+        }
+
+        .button {
+            width: fit-content;
+            align-self: center;
+        }
+    }
+
+    @include media-breakpoint-up(desktop) {
+
+
+        .content {
+            display: flex;
+            justify-content: start;
+
+            .share-text {
+                display: none;
+            }
+
+            .africa {
+                flex: 1;
+
+                .africa-img{
+                    width: 500px;
+                }
+            }
+
+            .join-slack {
+                flex: 1;
+                .share-text {
+                    display: block;
+
+                    .share{
+                        font-size: 24px;
+                        line-height: 36px;
+                        margin-bottom: 50px;
+                    }
+                  
+                }
+
+            }
+        }
+
+    }
+
+}
