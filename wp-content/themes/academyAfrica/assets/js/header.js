@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const signInMenu = document.querySelectorAll("a[href='#sign-in']");
   Array.from(signInMenu).forEach((element) => {
     element.addEventListener("click", function () {
-      console.error("===========");
       openModal("login");
     });
   });
