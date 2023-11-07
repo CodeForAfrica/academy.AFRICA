@@ -111,7 +111,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
         <div class="items">
             <?php
             foreach ($menu_items as $menu_item) {
-                $class = 'item';
+                $class = 'item' . ' ' . $menu_item["class"];
                 if (count($menu_item['children']) > 0) {
                     $class .= ' parent';
                     echo "<div class='" . $class . "'>";

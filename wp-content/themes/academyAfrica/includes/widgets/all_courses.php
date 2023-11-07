@@ -248,32 +248,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             }
                         }
                         ?>
-                        <button class="accordion">Section 1</button>
-                        <div class="panel">
-                            <ul>
-                                <li>
-                                    <label class="mui-checkbox">
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                        DW Akademie
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="mui-checkbox">
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                        DW Akademie
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="mui-checkbox">
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                        DW Akademie
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                     <hr class="divider">
                     <div class="actions">

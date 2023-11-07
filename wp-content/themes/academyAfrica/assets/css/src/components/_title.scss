@@ -1,43 +1,42 @@
-@use '../abstracts/' as *;
-
+@use "../abstracts/" as *;
 
 .cfa-title {
+  color: $color-primary-700;
+  color: $color-shades-black;
+
+  font-family: Open Sans;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px; /* 125% */
+  margin: 0 0 24px;
+  strong {
     color: $color-primary-700;
-    color: $color-shades-black;
+  }
+  @include media-breakpoint-up(mobile) {
+    font-size: 20px;
+  }
 
-    font-family: Open Sans;
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 60px; /* 125% */
-    margin: 0 0 24px;
-    strong {
-      color: $color-primary-700;
-    }
+  @include media-breakpoint-down(tablet) {
+    text-align: center;
+  }
+  &::after {
+    content: "";
+    display: block;
+    height: 6px;
+    width: 60px;
+    background: $color-secondary-500;
+    margin-top: 32px;
     @include media-breakpoint-up(mobile) {
-      font-size: 20px;
+      margin-top: 10px;
     }
-
-    @include media-breakpoint-up(tablet) {
+    @include media-breakpoint-down(tablet) {
       text-align: center;
-    }
-    &::after {
-      content: "";
-      display: block;
-      height: 6px;
-      width: 60px;
-      background: $color-secondary-500;
-      margin-top: 32px;
-      @include media-breakpoint-up(mobile) {
-        margin-top: 10px;
-      }
-      @include  media-breakpoint-up(tablet)  {
-        text-align: center;
-        position: relative;
-        font-size: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 10px;
-      }
+      position: relative;
+      font-size: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 10px;
     }
   }
+}
