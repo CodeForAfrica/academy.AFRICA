@@ -1,0 +1,9 @@
+.faq-list {
+  padding: 20px;
+}
+.faq-list .title {
+  display: flex;
+  justify-content: start;
+}
+
+/*# sourceMappingURL=faq.css.map */
