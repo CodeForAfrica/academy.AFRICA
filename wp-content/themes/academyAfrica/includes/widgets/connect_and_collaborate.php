@@ -76,13 +76,13 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
-            'about_us_url',
+            'join_us_url',
             [
-                'label' => esc_html__('About us', 'academy-africa'),
+                'label' => esc_html__('Button Link', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::URL,
                 'options' => ['url', 'custom_attributes'],
                 'default' => [
-                    'url' => '/',
+                    'url' => 'https://academy.africa/'
                 ],
                 'label_block' => true,
             ]
@@ -96,7 +96,7 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
         $become_a_member_text = $settings["become_a_member_text"];
         $join_us_on_slack = $settings["join_us_on_slack"];
         $title = $settings["title"];
-        $about_us_url = $settings["about_us_url"];
+        $join_us_url = $settings["join_us_url"]["url"];
 ?>
         <div class="connect">
             <div class="title-wrapper">
@@ -124,7 +124,7 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
                     <p class="become-a-member">
                         <? echo $become_a_member_text ?>
                     </p>
-                    <a href=src="<?php echo $about_us_url ?>" class="button primary large">
+                    <a href="" class="button primary large">
                         <? echo $join_us_on_slack ?>
                     </a>
                 </div>
