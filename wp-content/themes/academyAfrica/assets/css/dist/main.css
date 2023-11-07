@@ -805,11 +805,11 @@ table {
 }
 
 .accordion-parent {
-  background: var(--shades-white, #fff);
+  background: #FFFFFF;
   border: 1px solid #e2e8f0;
 }
 .accordion-parent .accordion {
-  background-color: var(--shades-white, #fff);
+  background-color: #FFFFFF;
   cursor: pointer;
   padding: 20px;
   width: 100%;
@@ -820,17 +820,25 @@ table {
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  color: var(--shades-black, #000);
+  color: #000000;
   /* Paragraph/P3/Semi Bold */
   font-family: Open Sans;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 133.333% */
-  /* Shadow (Border Bottom) */
+  line-height: 24px;
 }
 .accordion-parent .accordion:after {
-  content: "‹"; /* Unicode character for "plus" sign (+) */
+  content: "‹";
+  /* Unicode character for "plus" sign (+) */
+  font-size: 20px;
+  float: right;
+  margin-left: 5px;
+  transform: rotate(90deg);
+}
+.accordion-parent .accordion.active:after {
+  content: "›";
+  /* Unicode character for "minus" sign (-) */
   font-size: 20px;
   float: right;
   margin-left: 5px;
@@ -838,7 +846,7 @@ table {
 }
 .accordion-parent .panel {
   padding: 0 20px;
-  background: var(--neutral-50, #f7f9fd);
+  background: #EFF0FD;
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.2s ease-out;
@@ -863,6 +871,54 @@ table {
 }
 .accordion-parent .panel.open {
   border-top: 1px solid #e2e8f0;
+  padding: 16px 20px;
+}
+
+.cfa-title {
+  color: #0C1A81;
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px; /* 125% */
+  margin: 0 0 24px;
+}
+.cfa-title strong {
+  color: #0C1A81;
+}
+@media (min-width: 390px) {
+  .cfa-title {
+    font-size: 20px;
+  }
+}
+@media (min-width: 768px) {
+  .cfa-title {
+    text-align: center;
+  }
+}
+.cfa-title::after {
+  content: "";
+  display: block;
+  height: 6px;
+  width: 60px;
+  background: #ED1C24;
+  margin-top: 32px;
+}
+@media (min-width: 390px) {
+  .cfa-title::after {
+    margin-top: 10px;
+  }
+}
+@media (min-width: 768px) {
+  .cfa-title::after {
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
