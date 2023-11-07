@@ -1,0 +1,191 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.partners {
+  padding: 80px 20px;
+}
+.partners .cfa-title {
+  color: var(--primary-700, #0c1a81);
+}
+.partners .cfa-title h4 {
+  margin: 0;
+}
+.partners .partner-content {
+  display: flex;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.partners .partner-content .partner {
+  display: flex;
+  flex: 1;
+  height: 100px;
+  width: 100%;
+  flex-basis: calc(33.333333% - 36px);
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.other-partners {
+  margin-bottom: 32px;
+}
+.other-partners .other-partners-title {
+  color: var(--shades-black, #000);
+  text-align: center;
+  /* Section + Topic Headings */
+  font-family: Open Sans;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px; /* 150% */
+}
+@media (max-width: 768px) {
+  .other-partners .other-partners-title {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 800;
+  }
+}
+.other-partners .other-partners-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 20px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+.other-partners .partner-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.other-partners .partner-tag .partner-tag-content {
+  border: 0.2px solid #eeeeee;
+  background: var(--neutral-50, #f7f9fd);
+  padding: 5px 16px;
+  font-family: Open Sans;
+}
+
+/*# sourceMappingURL=partners.css.map */

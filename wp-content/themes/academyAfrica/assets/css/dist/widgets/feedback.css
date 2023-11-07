@@ -1,0 +1,215 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.feedback {
+  padding: 80px 0;
+  background: var(--neutral-50, #f7f9fd);
+}
+.feedback .cfa-title {
+  color: var(--primary-700, #0c1a81);
+  /* Page/Section_Title */
+  font-family: Lora;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+  padding-left: 40px;
+}
+.feedback .cfa-title h4 {
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .feedback .cfa-title h4 {
+    font-size: 20px;
+  }
+}
+.feedback .content {
+  background: var(--neutral-50, #f7f9fd);
+  box-sizing: border-box;
+  padding: 72px 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.feedback .content .card {
+  background-image: url("/wp-content/themes/academyAfrica/assets/images/background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  flex: 1;
+  min-width: calc(33.33% - 5px);
+  box-sizing: border-box;
+  padding: 50px;
+}
+@media (max-width: 768px) {
+  .feedback .content .card {
+    min-width: 100%;
+  }
+}
+.feedback .content .content-card {
+  background: var(--shades-white, #fff);
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.feedback .content .content-card .user {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.feedback .content .content-card .user .name-role {
+  flex: 1;
+}
+.feedback .content .content-card .user .name-role .name {
+  color: var(--primary-700, #0c1a81);
+  margin: 0;
+  /* Card/Heading */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 133.333% */
+}
+.feedback .content .content-card .user .name-role .role {
+  margin: 0;
+  color: #000;
+  /* Card/ Organisation name */
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px; /* 128.571% */
+  text-transform: uppercase;
+}
+.feedback .content .content-card .description {
+  color: #000;
+  margin-top: 40px;
+  text-align: center;
+  /* Testimonial/Text */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 155.556% */
+}
+.feedback .content .content-card .description a {
+  text-decoration-line: underline;
+}
+
+/*# sourceMappingURL=feedback.css.map */
