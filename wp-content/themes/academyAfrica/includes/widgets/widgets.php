@@ -44,11 +44,13 @@ final class Widget
         require_once(__DIR__ . '/all_courses.php');
         require_once(__DIR__ . '/faq.php');
         require_once(__DIR__ . '/slider.php');
+        require_once(__DIR__ . '/connect_and_collaborate.php');
 
         $widgets_manager->register_widget_type(new \Academy_Africa_Hero());
         $widgets_manager->register_widget_type(new \Academy_Africa_All_Courses());
         $widgets_manager->register_widget_type(new \Academy_Africa_FAQ());
         $widgets_manager->register_widget_type(new \Academy_Africa_Slider());
+        $widgets_manager->register_widget_type(new \Academy_Africa_Connect_and_Collaborate());
     }
 
     function register_styles()
@@ -60,6 +62,7 @@ final class Widget
             'academy-africa-learning-pathways' => 'learning_pathways.css',
             'academy-africa-faq' => 'faq.css',
             'academy-africa-slider' => 'slider.css',
+            'academy-africa-connect' => 'connect.css',
         ];
 
         foreach ($styles as $handle => $file) {
