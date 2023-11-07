@@ -216,6 +216,38 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 </h4>
                 <div class="filters">
                     <div class="accordion-parent">
+                        <?
+                        if (!empty($filter_options)) {
+                            foreach ($filter_options as $item) {
+                        ?>
+                                <button class="accordion"><? echo $title ?></button>
+                                <?
+                                $title = $item["title"];
+                                $options = $item["options"];
+                                if (!empty($options)) {
+                                ?>
+                                    <div class="panel">
+                                        <ul>
+                                            <?
+                                            foreach ($options as $option) {
+                                            ?>
+                                                <li>
+                                                    <label class="mui-checkbox">
+                                                        <input type="checkbox">
+                                                        <span class="checkmark"></span>
+                                                        <? echo $option ?>
+                                                    </label>
+                                                </li>
+                                            <?
+                                            }
+                                            ?>
+                                        </ul>
+                                    </div>
+                        <?
+                                }
+                            }
+                        }
+                        ?>
                         <button class="accordion">Section 1</button>
                         <div class="panel">
                             <ul>
