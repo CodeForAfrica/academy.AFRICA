@@ -35,11 +35,19 @@
     }
 
     .headline {
+        margin: 10px 0;
         .cfa-headline {
             color: $color-shades-black;
             font-size: 32px;
             font-weight: 600;
             line-height: 48px;
+        }
+    }
+
+    .share-menu {
+        .social-icons {
+            display: flex;
+            gap: 16px;
         }
     }
 

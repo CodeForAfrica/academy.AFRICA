@@ -135,7 +135,7 @@ class Academy_Africa_About_Section extends \Elementor\Widget_Base
                         foreach ($social_media_links as $item) {
                             $link = esc_url($item['link']['url']);
                             $type = esc_html($item['type']);
-                            $icon = get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=CurrentColor.svg');
+                            $icon = get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
                             $image = "<img src='" . $icon . "' alt='" . $type . "' />";
                             echo '<a style="color: #000" href="' . $link . '" class="icon">' . $image . '</a>';
                         }
