@@ -1,0 +1,73 @@
+@use '../abstracts/' as *;
+
+$font-family: Open Sans;
+
+.join-our-slack {
+    padding: 20px;
+
+    .title {
+        display: flex;
+        align-items: start;
+
+        .cfa-title {
+            font-size: 40px;
+            line-height: 48px;
+            text-align: left;
+
+            &::after {
+                left: unset;
+                transform: unset;
+            }
+        }
+    }
+
+    .content {
+        font-size: 18px;
+        color: $color-shades-black;
+        font-weight: 400;
+        line-height: 28px;
+        font-family: $font-family;
+    }
+
+    .form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .input-group {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+
+                label {
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 28px;
+                    font-family: $font-family;
+                    color: $color-shades-black;
+                    flex: 0.5;
+                }
+
+                input {
+                    border: 1px solid $color-neutral-300;
+                    border-radius: 0;
+                    flex: 1;
+                    &::placeholder {
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 26px;
+                        font-family: $font-family;
+                        color: $color-neutral-400;
+                    }
+                }
+            }
+        }
+
+    }
+}
