@@ -176,5 +176,17 @@ table {
   font-family: Open Sans;
   color: #A1A5B7;
 }
+@media (min-width: 768px) {
+  .join-our-slack .form form .input-group {
+    justify-content: start;
+  }
+  .join-our-slack .form form .input-group label {
+    flex: 0.2;
+  }
+  .join-our-slack .form form .input-group input {
+    flex: 0.8;
+    max-width: 320px;
+  }
+}
 
 /*# sourceMappingURL=join_our_slack.css.map */
