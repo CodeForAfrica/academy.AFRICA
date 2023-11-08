@@ -250,6 +250,12 @@ table {
   align-items: center;
   gap: 6px;
 }
+.header .desktop .nav .menu .items .item.parent .collapsible .icons {
+  display: flex;
+}
+.header .desktop .nav .menu .items .item.parent .collapsible .icons .icon {
+  margin: 0;
+}
 .header .desktop .nav .menu .items .item.parent .children {
   display: none;
   position: absolute;
