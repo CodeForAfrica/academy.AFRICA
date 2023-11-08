@@ -49,6 +49,7 @@ final class Widget
         require_once(__DIR__ . '/connect_and_collaborate.php');
         require_once(__DIR__ . '/featured_courses.php');
         require_once(__DIR__ . '/partners.php');
+        require_once(__DIR__ . '/my_courses.php');
 
         $widgets_manager->register_widget_type(new \Academy_Africa_Hero());
         $widgets_manager->register_widget_type(new \Academy_Africa_All_Courses());
@@ -58,6 +59,7 @@ final class Widget
         $widgets_manager->register(new \Academy_Africa_User_Feedback());
         $widgets_manager->register(new \Academy_Africa_Featured_Courses());
         $widgets_manager->register(new \Academy_Africa_Partners());
+        $widgets_manager->register(new \Academy_Africa_My_Courses());
     }
 
     function register_styles()
@@ -73,6 +75,7 @@ final class Widget
             'academy-africa-featured-courses' => 'featured_courses.css',
             'academy-africa-partners' => 'partners.css',
             'academy-africa-feedback' => 'feedback.css',
+            'academy-africa-my-courses' => 'my_courses.css',
         ];
 
         foreach ($styles as $handle => $file) {

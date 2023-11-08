@@ -1,0 +1,410 @@
+@use "../abstracts/" as *;
+
+
+$font-family_1: Open Sans;
+
+.body {
+	display: flex;
+	margin: 0;
+	padding: 0;
+	position: relatve;
+	max-width: 1440px;
+	margin: 0 auto;
+	.sidebar {
+		padding: 100px 60px;
+		box-sizing: border-box;
+		background: $color-shades-white;
+		width: 340px;
+		height: auto;
+		border-right: 1px solid $color-neutral-100;
+		top: 0;
+		transition: left 0.3s;
+		overflow-y: auto;
+		.filter-by {
+			color: $color-shades-black;
+			font-family: $font-family_1;
+			font-size: 18px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 28px;
+		}
+		.filter-by-title {
+			color: $color-shades-black;
+			font-family: $font-family_1;
+			font-size: 18px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: 24px;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+		}
+		li {
+			margin: 0;
+		}
+	}
+	.content {
+		flex: 1;
+		padding: 20px;
+	}
+}
+li {
+	margin: 0;
+}
+.mui-checkbox {
+	display: block;
+	position: relative;
+	padding-left: 30px;
+	margin-bottom: 8px;
+	cursor: pointer;
+	font-size: 16px;
+	color: $color-shades-black;
+	font-family: $font-family_1;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 28px;
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		&:checked {
+			~ {
+				.checkmark {
+					background-color: $color-primary-700;
+					&:after {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+	.checkmark {
+		&:after {
+			left: 6px;
+			top: 2px;
+			width: 5px;
+			height: 10px;
+			border: solid white;
+			border-width: 0 2px 2px 0;
+			transform: rotate(45deg);
+		}
+	}
+}
+.checkmark {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	height: 20px;
+	width: 20px;
+	background-color: $color-shades-white;
+	border: 2px solid $color-primary-700;
+	border-radius: 3px;
+	&:after {
+		content: "";
+		position: absolute;
+		display: none;
+	}
+}
+.main {
+	flex: 1;
+	.incomplete-courses {
+		padding: 80px 60px 40px;
+		.cfa-title {
+			color: $color-primary-700;
+			color: $color-shades-black;
+			font-family: $font-family_1;
+			font-size: 48px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: 60px;
+			margin: 0 0 24px;
+			strong {
+				color: $color-primary-700;
+			}
+			&::after {
+				content: "";
+				display: block;
+				height: 6px;
+				width: 60px;
+				background: $color-secondary-500;
+				margin-top: 32px;
+			}
+		}
+		.description {
+			color: $color-primary-700;
+			font-family: $font-family_1;
+			font-size: 40px;
+			font-style: normal;
+			font-weight: 600;
+			line-height: 48px;
+		}
+		.content {
+			box-sizing: border-box;
+			justify-content: space-between;
+			padding: 0;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 30px;
+			.card {
+				flex: 1;
+				max-width: 280px;
+				min-width: 280px;
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				flex-shrink: 0;
+				display: flex;
+				border: 0.5px solid $color-neutral-200;
+				background: $color-shades-white;
+				.logo {
+					width: 100%;
+				}
+				.card-content {
+					padding: 20px;
+					.card-title {
+						color: $color-primary-700;
+						font-family: $font-family_1;
+						font-size: 18px;
+						font-style: normal;
+						font-weight: 700;
+						line-height: 24px;
+						height: 71px;
+						overflow: hidden;
+						p {
+							text-overflow: ellipsis;
+							height: 71px;
+							margin: 0;
+						}
+					}
+					.lessons-count {
+						color: $color-shades-black;
+						font-family: $font-family_1;
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 21px;
+					}
+					.progress-bar {
+						background-color: $color-neutral-100;
+						height: 10px;
+						border-radius: 5px;
+						div {
+							border-radius: 5px;
+							height: 100%;
+							background-image: linear-gradient( to right, #ec1e27, #d6004d, #ad006b, #73007e, #0c1a81 );
+						}
+					}
+					.card-footer {
+						display: flex;
+						align-items: flex-end;
+						justify-content: space-between;
+						margin-top: 4px;
+						p {
+							color: $color-shades-black;
+							text-align: center;
+							margin: 0;
+							font-family: $font-family_1;
+							font-size: 16px;
+							font-style: normal;
+							font-weight: 400;
+							line-height: 21px;
+						}
+					}
+				}
+				.provider {
+					color: $color-secondary-500;
+					font-family: $font-family_1;
+					font-size: 14px;
+					font-style: normal;
+					font-weight: 600;
+					line-height: 18px;
+					text-transform: uppercase;
+					margin-top: 40px;
+					height: 18px;
+					overflow: hidden;
+				}
+			}
+		}
+	}
+}
+.your-certificates {
+	padding: 80px 60px;
+	background: $color-neutral-50;
+	.your-certificates-title {
+		margin: 0;
+		color: $color-primary-700;
+		font-family: $font-family_1;
+		font-size: 32px;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 48px;
+	}
+	.content {
+		box-sizing: border-box;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		.card {
+			flex: 1;
+			max-width: 280px;
+			min-width: 280px;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			flex-shrink: 0;
+			display: flex;
+			border: 0.5px solid $color-neutral-200;
+			background: $color-shades-white;
+			margin-top: 40px;
+			.logo {
+				width: 100%;
+			}
+			.card-content {
+				padding: 20px;
+				.card-title {
+					color: $color-primary-700;
+					font-family: $font-family_1;
+					font-size: 18px;
+					font-style: normal;
+					font-weight: 700;
+					line-height: 24px;
+					height: 71px;
+					overflow: hidden;
+					p {
+						text-overflow: ellipsis;
+						height: 71px;
+						margin: 0;
+					}
+				}
+				.lessons-count {
+					color: $color-shades-black;
+					font-family: $font-family_1;
+					font-size: 16px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 21px;
+				}
+				.completed-progress-bar {
+					height: 10px;
+					border-radius: 5px;
+					background: #0c1a81;
+				}
+				.card-footer {
+					display: flex;
+					align-items: flex-end;
+					justify-content: space-between;
+					margin-top: 4px;
+					p {
+						color: $color-shades-black;
+						text-align: center;
+						margin: 0;
+						font-family: $font-family_1;
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 21px;
+					}
+					.icons {
+						display: flex;
+						justify-content: space-between;
+						gap: 10px;
+					}
+				}
+			}
+			.provider {
+				color: $color-secondary-500;
+				font-family: $font-family_1;
+				font-size: 14px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 18px;
+				text-transform: uppercase;
+				margin-top: 40px;
+				height: 18px;
+				overflow: hidden;
+			}
+		}
+	}
+}
+@media screen and (min-width: 512px) and (max-width: 768px) {
+	.body {
+		.sidebar {
+			display: none;
+		}
+	}
+	.mui-checkbox {
+		font-size: 14px;
+	}
+	.main {
+		.incomplete-courses {
+			.cfa-title {
+				text-align: center;
+				&::after {
+					text-align: center;
+					position: relative;
+					font-size: 20px;
+					left: 50%;
+					transform: translateX(-50%);
+					margin-top: 10px;
+				}
+			}
+			.content {
+				.card {
+					min-width: calc(50% - 30px);
+					&:last-child {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+	.your-certificates {
+		.content {
+			.card {
+				min-width: calc(50% - 30px);
+				&:last-child {
+					display: none;
+				}
+			}
+		}
+	}
+}
+@media only screen and (max-width: 512px) {
+	.body {
+		.sidebar {
+			display: none;
+		}
+	}
+	.mui-checkbox {
+		font-size: 14px;
+	}
+	.main {
+		.incomplete-courses {
+			.cfa-title {
+				font-size: 20px;
+				&::after {
+					margin-top: 10px;
+				}
+			}
+			.content {
+				.card {
+					min-width: calc(100% - 30px);
+				}
+			}
+		}
+	}
+	.your-certificates {
+		.content {
+			.card {
+				min-width: calc(100% - 30px);
+			}
+		}
+	}
+}
