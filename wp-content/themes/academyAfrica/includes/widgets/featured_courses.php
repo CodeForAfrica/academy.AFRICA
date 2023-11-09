@@ -249,7 +249,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
             </div>
             <div>
                 <!-- course list -->
-                <?php echo do_shortcode('[ld_course_list course_tag="featured"  id="featured" button="false" col="3" per_page="3" filter="false" progress_bar="" pagination=""  num="3"]'); ?>
+                <?php echo do_shortcode('[learndash_course_grid taxonomies="ld_course_tag:featured"  id="featured" columns="3" skin="grid" card="grid-1" per_page="3" filter="false" progress_bar="" pagination="" button=""  ]'); ?>
 
             </div>
             <!-- Fetch from Learndash -->
