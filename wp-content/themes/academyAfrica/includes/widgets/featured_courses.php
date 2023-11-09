@@ -16,6 +16,11 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
         return ['academy-africa-featured-courses','academy-africa-learndash-course-grid'];
     }
 
+    public function get_script_depends()
+    {
+        return ['academy-africa_learndash_course_grid'];
+    }
+
     public function get_title()
     {
         return esc_html__('Featured Courses', 'elementor-featured-courses-widget');

@@ -128,7 +128,8 @@ table {
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
-  line-height: 120%; /* 120% */
+  line-height: 120%;
+  /* 120% */
 }
 @media (max-width: 768px) {
   .cfa-title {
@@ -151,9 +152,11 @@ table {
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
-  line-height: 36px; /* 150% */
+  line-height: 36px;
+  /* 150% */
 }
 .featured-courses .featured-course-list {
+  margin: 100px 0;
   padding: 0 72px;
 }
 .featured-courses .content {
@@ -193,7 +196,8 @@ table {
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 133.333% */
+  line-height: 24px;
+  /* 133.333% */
   height: 71px;
   overflow: hidden;
 }
@@ -230,7 +234,8 @@ table {
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
+  /* 128.571% */
 }
 .featured-courses .content .card .card-content .card-footer .free {
   display: flex;
@@ -299,7 +304,8 @@ table {
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
-  line-height: 32px; /* 125% */
+  line-height: 32px;
+  /* 125% */
   margin: 0;
 }
 .certificate-showcase .certificate .certificate-content .certificate-type {
@@ -308,7 +314,8 @@ table {
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
-  line-height: 32px; /* 125% */
+  line-height: 32px;
+  /* 125% */
   margin: 0;
 }
 .certificate-showcase .certificate .course-details {
@@ -323,7 +330,8 @@ table {
   font-size: 8.62px;
   font-style: normal;
   font-weight: 400;
-  line-height: 13.408px; /* 155.556% */
+  line-height: 13.408px;
+  /* 155.556% */
 }
 .certificate-showcase .certificate .course-details .first-name {
   color: var(--shades-black, #000);
@@ -331,7 +339,8 @@ table {
   font-size: 15.324px;
   font-style: normal;
   font-weight: 400;
-  line-height: 22.986px; /* 150% */
+  line-height: 22.986px;
+  /* 150% */
 }
 .certificate-showcase .certificate .course-details .last-name {
   color: var(--shades-black, #000);
@@ -339,7 +348,8 @@ table {
   font-size: 15.324px;
   font-style: normal;
   font-weight: 700;
-  line-height: 22.986px; /* 150% */
+  line-height: 22.986px;
+  /* 150% */
 }
 .certificate-showcase .certificate .course-details p {
   margin: 0;
@@ -355,7 +365,8 @@ table {
   font-size: 8.62px;
   font-style: normal;
   font-weight: 400;
-  line-height: 13.408px; /* 155.556% */
+  line-height: 13.408px;
+  /* 155.556% */
 }
 .certificate-showcase .certificate .course-details .course .course-name {
   color: var(--shades-black, #000);
@@ -364,7 +375,8 @@ table {
   font-size: 15.324px;
   font-style: normal;
   font-weight: 700;
-  line-height: 22.986px; /* 150% */
+  line-height: 22.986px;
+  /* 150% */
 }
 .certificate-showcase .certificate .course-details .student {
   text-align: left;
@@ -391,7 +403,8 @@ table {
   font-size: 6.704px;
   font-style: normal;
   font-weight: 400;
-  line-height: 8.62px; /* 128.571% */
+  line-height: 8.62px;
+  /* 128.571% */
 }
 .certificate-showcase .certificate .certificate-footer .signature .signee-role {
   color: var(--shades-white, #fff);
@@ -400,7 +413,8 @@ table {
   font-size: 6.704px;
   font-style: normal;
   font-weight: 700;
-  line-height: 8.62px; /* 128.571% */
+  line-height: 8.62px;
+  /* 128.571% */
 }
 .certificate-showcase .certificate .certificate-footer .signature .sign-date {
   color: var(--shades-white, #fff);
@@ -409,7 +423,8 @@ table {
   font-size: 6.704px;
   font-style: normal;
   font-weight: 400;
-  line-height: 8.62px; /* 128.571% */
+  line-height: 8.62px;
+  /* 128.571% */
 }
 .certificate-showcase .certificate .certificate-footer .company-name {
   color: var(--neutral-50, #f7f9fd);
@@ -418,7 +433,8 @@ table {
   font-style: normal;
   font-weight: 600;
   margin-left: -20px;
-  line-height: 14px; /* 155.556% */
+  line-height: 14px;
+  /* 155.556% */
 }
 .certificate-showcase .certificate-showcase-content {
   flex: 1;
@@ -435,7 +451,8 @@ table {
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
-  line-height: 36px; /* 150% */
+  line-height: 36px;
+  /* 150% */
 }
 .certificate-showcase .certificate-showcase-content .course-text {
   color: var(--primary-700, #0c1a81);
@@ -444,7 +461,8 @@ table {
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
   margin-bottom: 0;
 }
 .certificate-showcase .certificate-showcase-content .all-courses {
@@ -456,13 +474,15 @@ table {
   align-items: center;
   gap: 8px;
   font-family: Open Sans;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
   color: var(--primary-50, #eff0fd);
   /* Buttons */
   font-size: 16px;
   font-style: normal;
   font-weight: 800;
-  line-height: 19px; /* 118.75% */
+  line-height: 19px;
+  /* 118.75% */
   letter-spacing: 1.6px;
   text-transform: uppercase;
   text-decoration: none;

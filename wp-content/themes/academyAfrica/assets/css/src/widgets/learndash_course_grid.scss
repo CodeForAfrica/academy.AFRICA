@@ -73,6 +73,9 @@
                     }
 
                     .bottom-meta {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
 
                         .total-lessons,
                         .total-quizzes {
@@ -111,6 +114,21 @@
                                     line-height: 18px;
                                 }
                             }
+                        }
+
+                        .price-tag {
+                            background: $color-success-500;
+                            color: $color-shades-white;
+                            height: 25px;
+                            text-transform: uppercase;
+                            font-size: 14px;
+                            font-weight: 700;
+                            line-height: 18px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 4px 10px ;
+                            min-width: 54px;
                         }
                     }
                 }
