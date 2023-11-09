@@ -118,43 +118,7 @@ table {
 }
 
 .about-section {
-  margin: 100px 20px;
-}
-.about-section .about-hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
-}
-.about-section .about-hero img {
-  width: 150px;
-  height: 150px;
-}
-.about-section .title {
-  display: flex;
-  align-items: start;
-}
-.about-section .title .cfa-title {
-  font-size: 40px;
-  line-height: 60px;
-  text-align: left;
-}
-.about-section .title .cfa-title::after {
-  left: unset;
-  transform: unset;
-}
-.about-section .headline {
-  margin: 10px 0;
-}
-.about-section .headline .cfa-headline {
-  color: #000000;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 48px;
-}
-.about-section .share-menu .social-icons {
-  display: flex;
-  gap: 16px;
+  margin: 80px 20px;
 }
 .about-section .content {
   margin-top: 50px;
