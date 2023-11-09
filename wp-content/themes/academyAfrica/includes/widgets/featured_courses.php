@@ -13,7 +13,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-featured-courses'];
+        return ['academy-africa-featured-courses','academy-africa-learndash-course-grid'];
     }
 
     public function get_title()
@@ -247,7 +247,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     <?php echo $description; ?>
                 </div>
             </div>
-            <div>
+            <div class="featured-course-list">
                 <!-- course list -->
                 <?php echo do_shortcode('[learndash_course_grid taxonomies="ld_course_tag:featured"  id="featured" columns="3" skin="grid" card="grid-1" per_page="3" filter="false" progress_bar="" pagination="" button=""  ]'); ?>
 

@@ -85,6 +85,7 @@ final class Widget
             'academy-africa-join-our-slack' => 'join_our_slack.css',
             'academy-africa-about-section' => 'about_section.css',
             'academy-africa-header-section' => 'header_section.css',
+            'academy-africa-learndash-course-grid' => 'learndash_course_grid.css',
         ];
 
         foreach ($styles as $handle => $file) {
