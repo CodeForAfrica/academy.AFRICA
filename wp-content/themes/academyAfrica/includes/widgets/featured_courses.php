@@ -213,8 +213,12 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
         ];
     }
 
+
     protected function render()
     {
+        // $course_list = do_shortcode('[ld_course_list array=true]');
+        // print_r($course_list);
+
         $settings = $this->get_settings_for_display();
         $courses = $this->get_courses();
         $title = $settings['title'];
@@ -243,8 +247,13 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     <?php echo $description; ?>
                 </div>
             </div>
+            <div>
+                <!-- course list -->
+                <?php echo do_shortcode('[ld_course_list course_tag="featured"  id="featured" button="false" col="3" per_page="3" filter="false" progress_bar="" pagination=""  num="3"]'); ?>
+
+            </div>
             <!-- Fetch from Learndash -->
-            <div class="neutral-bg">
+            <!-- <div class="neutral-bg">
                 <div class="content">
                     <?
                     if (!empty($courses)) {
@@ -281,10 +290,10 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     }
                     ?>
                 </div>
-            </div>
+            </div> -->
             <!-- Fetch from Learndash -->
         </div>
-        <div class="neutral-bg">
+        <!-- <div class="neutral-bg">
             <div class="certificate-showcase">
                 <div class="certificate">
                     <div class="certificate-content">
@@ -358,7 +367,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
 <?
     }
 }
