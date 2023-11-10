@@ -121,243 +121,133 @@ table {
   display: flex;
 }
 
-.certificate {
+.certificate-root {
   background-color: #FFFFFF;
-  padding: 40px 20px;
+  padding: 40px 16px;
 }
-.certificate .certificate-header {
+.certificate-root p {
   color: #000000;
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
+}
+.certificate-root .certificate-header {
   text-align: center;
 }
-.certificate .certificate-showcase {
+.certificate-root .certificate-showcase {
   display: flex;
+  flex-direction: column;
   background-color: #FFFFFF;
   padding: 16px;
   gap: 72px;
-  flex-wrap: wrap;
 }
-.certificate .certificate-showcase .certificate {
+.certificate-root .certificate-showcase .certificate {
   background: #FFFFFF;
   box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
   width: 100%;
-  flex: 1;
 }
-.certificate .certificate-showcase .certificate .cert-logo {
-  margin-top: 40px;
+.certificate-root .certificate-showcase .certificate .certificate-content {
+  padding: 15px 18px 0;
 }
-.certificate .certificate-showcase .certificate .flex-items {
-  display: flex;
-  align-items: flex-start;
-  gap: 30px;
+.certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header p {
+  font-size: 15px;
 }
-.certificate .certificate-showcase .certificate::after {
-  content: "";
-  display: block;
-  height: 10px;
-  background-color: #ED1C24;
-}
-.certificate .certificate-showcase .certificate .certificate-content {
-  padding: 30px;
-}
-.certificate .certificate-showcase .certificate .certificate-content hr {
+.certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header hr {
   background: #0C1A81;
   height: 3px;
   flex: 1;
 }
-.certificate .certificate-showcase .certificate .certificate-content .certificate-of {
-  color: #000000;
-  font-family: Lora;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 32px;
-  /* 125% */
-  margin: 0;
+.certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header .certificate-type {
+  font-weight: bold;
 }
-.certificate .certificate-showcase .certificate .certificate-content .certificate-type {
-  color: #000000;
-  font-family: Lora;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 32px;
-  /* 125% */
-  margin: 0;
+.certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header .certificate-header-logo {
+  display: flex;
+  gap: 10px;
 }
-.certificate .certificate-showcase .certificate .course-details {
+.certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header .certificate-header-logo .logo {
+  width: 54px;
+  height: 54px;
+  margin-top: -20px;
+}
+.certificate-root .certificate-showcase .certificate .certificate-footer {
+  background: #0C1A81;
   display: flex;
   justify-content: space-between;
-  gap: 40px;
-  align-items: flex-end;
+  padding: 18px;
 }
-.certificate .certificate-showcase .certificate .course-details .title {
-  color: #000000;
-  font-family: Open Sans;
-  font-size: 8.62px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 13.408px;
-  /* 155.556% */
-}
-.certificate .certificate-showcase .certificate .course-details .first-name {
-  color: #000000;
-  font-family: Open Sans;
-  font-size: 15.324px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22.986px;
-  /* 150% */
-}
-.certificate .certificate-showcase .certificate .course-details .last-name {
-  color: #000000;
-  font-family: Open Sans;
-  font-size: 15.324px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22.986px;
-  /* 150% */
-}
-.certificate .certificate-showcase .certificate .course-details p {
-  margin: 0;
-}
-.certificate .certificate-showcase .certificate .course-details .course {
-  text-align: right;
-  flex: 1;
-}
-.certificate .certificate-showcase .certificate .course-details .course .course-description {
-  color: #000000;
-  text-align: right;
-  font-family: Open Sans;
-  font-size: 8.62px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 13.408px;
-  /* 155.556% */
-}
-.certificate .certificate-showcase .certificate .course-details .course .course-name {
-  color: #000000;
-  text-align: right;
-  font-family: Open Sans;
-  font-size: 15.324px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22.986px;
-  /* 150% */
-}
-.certificate .certificate-showcase .certificate .course-details .student {
-  text-align: left;
-  flex: 1;
-}
-.certificate .certificate-showcase .certificate .certificate-footer {
-  width: 100%;
-  background: #0C1A81;
-  min-height: 82px;
+.certificate-root .certificate-showcase .certificate .certificate-footer .company-details {
   display: flex;
-  padding: 30px;
-  align-items: center;
-  gap: 40px;
-  box-sizing: border-box;
+  gap: 10px;
 }
-.certificate .certificate-showcase .certificate .certificate-footer .logo {
-  height: 16px;
+.certificate-root .certificate-showcase .certificate .certificate-footer .company-details .brand-details {
+  display: flex;
+  gap: 5px;
+}
+.certificate-root .certificate-showcase .certificate .certificate-footer .company-details .brand-details .logo {
   width: 16px;
-}
-.certificate .certificate-showcase .certificate .certificate-footer .company-name {
-  color: #F7F9FD;
-  font-size: 5px;
-  font-weight: 600;
-  line-height: 8.736px;
-}
-.certificate .certificate-showcase .certificate .certificate-footer .artwork {
-  width: 25px;
   height: 16px;
 }
-.certificate .certificate-showcase .certificate .certificate-footer .signature {
-  flex: 1;
-  text-align: right;
-}
-.certificate .certificate-showcase .certificate .certificate-footer .signature p {
-  color: #FFFFFF;
-  text-align: right;
-  font-family: Open Sans;
-  font-size: 4.368px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 5.616px;
-}
-.certificate .certificate-showcase .certificate .certificate-footer .signature .signature-img {
-  width: 47px;
-  height: 11px;
-}
-.certificate .certificate-showcase .certificate .certificate-footer .signature .signee-role {
-  text-transform: uppercase;
-}
-.certificate .certificate-showcase .certificate .certificate-footer .company-name {
-  color: var(--neutral-50, #f7f9fd);
-  font-family: Open Sans;
-  font-size: 8px;
-  font-style: normal;
+.certificate-root .certificate-showcase .certificate .certificate-footer .company-details .brand-details .company-name {
+  font-size: 5.616px;
+  color: #F7F9FD;
   font-weight: 600;
-  margin-left: -20px;
-  line-height: 14px;
-  /* 155.556% */
 }
-.certificate .certificate-showcase .certificate-showcase-content {
-  flex: 1;
-  text-align: center;
-  justify-content: center;
+.certificate-root .certificate-showcase .certificate .certificate-footer .company-details .artwork {
+  width: 28.364px;
+  height: 16.456px;
+}
+.certificate-root .certificate-showcase .certificate .certificate-footer .signature {
+  align-items: flex-end;
   display: flex;
   flex-direction: column;
 }
-.certificate .certificate-showcase .certificate-showcase-content .showcase-text {
-  color: #000;
-  text-align: center;
-  /* Page/Text */
-  font-family: Open Sans;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 36px;
-  /* 150% */
+.certificate-root .certificate-showcase .certificate .certificate-footer .signature .signature-img {
+  width: 47px;
+  height: 11px;
 }
-.certificate .certificate-showcase .certificate-showcase-content .course-text {
-  color: #0C1A81;
-  /* Paragraph/P3/Regular */
-  font-family: Open Sans;
-  font-size: 18px;
-  font-style: normal;
+.certificate-root .certificate-showcase .certificate .certificate-footer .signature p {
+  color: #FFFFFF;
+  font-size: 4.368px;
   font-weight: 400;
-  line-height: 28px;
-  /* 155.556% */
-  margin-bottom: 0;
+  line-height: 5.616px;
 }
-.certificate .certificate-showcase .certificate-showcase-content .all-courses {
-  color: #0C1A81;
-  background: #0C1A81;
+.certificate-root .certificate-showcase .certificate .certificate-footer .signature .signee-role {
+  text-transform: uppercase;
+}
+.certificate-root .certificate-showcase .certificate .certificate-site-name {
+  background: #ED1C24;
+  text-align: right;
+  padding: 0px 18px;
+}
+.certificate-root .certificate-showcase .certificate .certificate-site-name p {
+  color: #FFFFFF;
+  font-size: 3.12px;
+  font-weight: 400;
+  line-height: 5.616px;
+}
+.certificate-root .certificate-showcase .certificate .course-details {
   display: flex;
-  padding: 24px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-family: Open Sans;
-  line-height: 28px;
-  /* 155.556% */
-  color: #EFF0FD;
-  /* Buttons */
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 19px;
-  /* 118.75% */
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-  text-decoration: none;
-  text-transform: uppercase;
-  width: max-content;
-  align-self: center;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.certificate-root .certificate-showcase .certificate .course-details .title {
+  font-size: 5.616px;
+  font-weight: 400;
+  line-height: 8.736px;
+}
+.certificate-root .certificate-showcase .certificate .course-details .name {
+  font-size: 9.98px;
+  line-height: 14.976px;
+  font-weight: 400;
+}
+.certificate-root .certificate-showcase .certificate .course-details .bold-text {
+  font-weight: 700;
+}
+.certificate-root .certificate-showcase .certificate .course-details .student {
+  text-align: left;
+}
+.certificate-root .certificate-showcase .certificate .course-details .course {
+  text-align: right;
 }
 
 /*# sourceMappingURL=certificate.css.map */
