@@ -158,9 +158,6 @@ table {
   justify-content: space-between;
   background: #FFFFFF;
 }
-.learndash-course-grid .grid .item article .content .top-meta .entry-title {
-  height: 100%;
-}
 .learndash-course-grid .grid .item article .content .top-meta .entry-title a {
   color: #0C1A81;
   font-size: 18px;
