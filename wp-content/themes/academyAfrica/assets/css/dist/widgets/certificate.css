@@ -140,6 +140,7 @@ table {
   background-color: #FFFFFF;
   padding: 16px;
   gap: 40px;
+  margin-top: 16px;
 }
 .certificate-root .certificate-showcase .certificate {
   background: #FFFFFF;
