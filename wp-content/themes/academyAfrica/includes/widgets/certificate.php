@@ -241,10 +241,12 @@ class Academy_Africa_Certificate extends \Elementor\Widget_Base
                 </div>
                 <div class="certificate-showcase-content">
                     <p class="showcase-text">
-                        <? echo $certificate_cta_description ?>
+                        <? echo $certificate_cta_description ?> 
                     </p>
-                    <a class="buton primary large all-courses" href="<?php echo $courses_link['url']; ?>">
+                    <a class="button primary large all-courses" href="<?php echo $courses_link['url']; ?>">
                         <? echo $courses_link_label; ?>
+                        <!-- forward icon -->
+                        <i class="fa-solid fa-chevron-right icon"></i>
                     </a>
                 </div>
             </div>
