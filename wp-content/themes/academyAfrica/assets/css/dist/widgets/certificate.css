@@ -1,0 +1,363 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.flex {
+  display: flex;
+}
+
+.certificate {
+  background-color: #FFFFFF;
+  padding: 40px 20px;
+}
+.certificate .certificate-header {
+  color: #000000;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  text-align: center;
+}
+.certificate .certificate-showcase {
+  display: flex;
+  background-color: #FFFFFF;
+  padding: 16px;
+  gap: 72px;
+  flex-wrap: wrap;
+}
+.certificate .certificate-showcase .certificate {
+  background: #FFFFFF;
+  box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  flex: 1;
+}
+.certificate .certificate-showcase .certificate .cert-logo {
+  margin-top: 40px;
+}
+.certificate .certificate-showcase .certificate .flex-items {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+.certificate .certificate-showcase .certificate::after {
+  content: "";
+  display: block;
+  height: 10px;
+  background-color: #ED1C24;
+}
+.certificate .certificate-showcase .certificate .certificate-content {
+  padding: 30px;
+}
+.certificate .certificate-showcase .certificate .certificate-content hr {
+  background: #0C1A81;
+  height: 3px;
+  flex: 1;
+}
+.certificate .certificate-showcase .certificate .certificate-content .certificate-of {
+  color: #000000;
+  font-family: Lora;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  /* 125% */
+  margin: 0;
+}
+.certificate .certificate-showcase .certificate .certificate-content .certificate-type {
+  color: #000000;
+  font-family: Lora;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  /* 125% */
+  margin: 0;
+}
+.certificate .certificate-showcase .certificate .course-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: flex-end;
+}
+.certificate .certificate-showcase .certificate .course-details .title {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 8.62px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 13.408px;
+  /* 155.556% */
+}
+.certificate .certificate-showcase .certificate .course-details .first-name {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 15.324px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22.986px;
+  /* 150% */
+}
+.certificate .certificate-showcase .certificate .course-details .last-name {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 15.324px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22.986px;
+  /* 150% */
+}
+.certificate .certificate-showcase .certificate .course-details p {
+  margin: 0;
+}
+.certificate .certificate-showcase .certificate .course-details .course {
+  text-align: right;
+  flex: 1;
+}
+.certificate .certificate-showcase .certificate .course-details .course .course-description {
+  color: #000000;
+  text-align: right;
+  font-family: Open Sans;
+  font-size: 8.62px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 13.408px;
+  /* 155.556% */
+}
+.certificate .certificate-showcase .certificate .course-details .course .course-name {
+  color: #000000;
+  text-align: right;
+  font-family: Open Sans;
+  font-size: 15.324px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22.986px;
+  /* 150% */
+}
+.certificate .certificate-showcase .certificate .course-details .student {
+  text-align: left;
+  flex: 1;
+}
+.certificate .certificate-showcase .certificate .certificate-footer {
+  width: 100%;
+  background: #0C1A81;
+  min-height: 82px;
+  display: flex;
+  padding: 30px;
+  align-items: center;
+  gap: 40px;
+  box-sizing: border-box;
+}
+.certificate .certificate-showcase .certificate .certificate-footer .logo {
+  height: 16px;
+  width: 16px;
+}
+.certificate .certificate-showcase .certificate .certificate-footer .company-name {
+  color: #F7F9FD;
+  font-size: 5px;
+  font-weight: 600;
+  line-height: 8.736px;
+}
+.certificate .certificate-showcase .certificate .certificate-footer .artwork {
+  width: 25px;
+  height: 16px;
+}
+.certificate .certificate-showcase .certificate .certificate-footer .signature {
+  flex: 1;
+  text-align: right;
+}
+.certificate .certificate-showcase .certificate .certificate-footer .signature p {
+  color: #FFFFFF;
+  text-align: right;
+  font-family: Open Sans;
+  font-size: 4.368px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 5.616px;
+}
+.certificate .certificate-showcase .certificate .certificate-footer .signature .signature-img {
+  width: 47px;
+  height: 11px;
+}
+.certificate .certificate-showcase .certificate .certificate-footer .signature .signee-role {
+  text-transform: uppercase;
+}
+.certificate .certificate-showcase .certificate .certificate-footer .company-name {
+  color: var(--neutral-50, #f7f9fd);
+  font-family: Open Sans;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 600;
+  margin-left: -20px;
+  line-height: 14px;
+  /* 155.556% */
+}
+.certificate .certificate-showcase .certificate-showcase-content {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.certificate .certificate-showcase .certificate-showcase-content .showcase-text {
+  color: #000;
+  text-align: center;
+  /* Page/Text */
+  font-family: Open Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 36px;
+  /* 150% */
+}
+.certificate .certificate-showcase .certificate-showcase-content .course-text {
+  color: #0C1A81;
+  /* Paragraph/P3/Regular */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  /* 155.556% */
+  margin-bottom: 0;
+}
+.certificate .certificate-showcase .certificate-showcase-content .all-courses {
+  color: #0C1A81;
+  background: #0C1A81;
+  display: flex;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-family: Open Sans;
+  line-height: 28px;
+  /* 155.556% */
+  color: #EFF0FD;
+  /* Buttons */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  /* 118.75% */
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: max-content;
+  align-self: center;
+}
+
+/*# sourceMappingURL=certificate.css.map */

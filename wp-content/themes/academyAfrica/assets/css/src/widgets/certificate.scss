@@ -1,0 +1,281 @@
+@use "../abstracts/" as *;
+
+.flex {
+  display: flex;
+}
+
+.certificate {
+  background-color: $color-shades-white;
+  padding: 40px 20px;
+
+  .certificate-header {
+    color: $color-shades-black;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .certificate-showcase {
+    display: flex;
+    background-color: $color-shades-white;
+    padding: 16px;
+    gap: 72px;
+    flex-wrap: wrap;
+
+    .certificate {
+      background: $color-shades-white;
+      box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      flex: 1;
+
+      .cert-logo {
+        margin-top: 40px;
+      }
+
+      .flex-items {
+        display: flex;
+        align-items: flex-start;
+        gap: 30px;
+      }
+
+      &::after {
+        content: "";
+        display: block;
+        height: 10px;
+        background-color: $color-secondary-500;
+        ;
+      }
+
+      .certificate-content {
+        padding: 30px;
+
+        hr {
+          background: $color-primary-700;
+          height: 3px;
+          flex: 1;
+        }
+
+        .certificate-of {
+          color: $color-shades-black;
+          font-family: Lora;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 32px;
+          /* 125% */
+          margin: 0;
+        }
+
+        .certificate-type {
+          color: $color-shades-black;
+          font-family: Lora;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 32px;
+          /* 125% */
+          margin: 0;
+        }
+      }
+
+      .course-details {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        align-items: flex-end;
+
+        .title {
+          color: $color-shades-black;
+          font-family: Open Sans;
+          font-size: 8.62px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 13.408px;
+          /* 155.556% */
+        }
+
+        .first-name {
+          color: $color-shades-black;
+          font-family: Open Sans;
+          font-size: 15.324px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 22.986px;
+          /* 150% */
+        }
+
+        .last-name {
+          color: $color-shades-black;
+          font-family: Open Sans;
+          font-size: 15.324px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 22.986px;
+          /* 150% */
+        }
+
+        p {
+          margin: 0;
+        }
+
+        .course {
+          text-align: right;
+          flex: 1;
+
+          .course-description {
+            color: $color-shades-black;
+            text-align: right;
+            font-family: Open Sans;
+            font-size: 8.62px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 13.408px;
+            /* 155.556% */
+          }
+
+          .course-name {
+            color: $color-shades-black;
+            text-align: right;
+            font-family: Open Sans;
+            font-size: 15.324px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 22.986px;
+            /* 150% */
+          }
+        }
+
+        .student {
+          text-align: left;
+          flex: 1;
+        }
+      }
+
+      .certificate-footer {
+        width: 100%;
+        background: $color-primary-700;
+        min-height: 82px;
+        display: flex;
+        padding: 30px;
+        align-items: center;
+        gap: 40px;
+        box-sizing: border-box;
+
+        .logo {
+          height: 16px;
+          width: 16px;
+        }
+
+        .company-name {
+          color: $color-neutral-50;
+          font-size: 5px;
+          font-weight: 600;
+          line-height: 8.736px;
+        }
+
+        .artwork {
+          width: 25px;
+          height: 16px;
+        }
+
+        .signature {
+          flex: 1;
+          text-align: right;
+
+          p {
+            color: $color-shades-white;
+            text-align: right;
+            font-family: Open Sans;
+            font-size: 4.368px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 5.616px;
+          }
+
+
+          .signature-img {
+            width: 47px;
+            height: 11px;
+          }
+
+          .signee-role {
+            text-transform: uppercase;
+          }
+        }
+
+        .company-name {
+          color: var(--neutral-50, #f7f9fd);
+          font-family: Open Sans;
+          font-size: 8px;
+          font-style: normal;
+          font-weight: 600;
+          margin-left: -20px;
+          line-height: 14px;
+          /* 155.556% */
+        }
+      }
+    }
+
+    .certificate-showcase-content {
+      flex: 1;
+      text-align: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+
+      .showcase-text {
+        color: #000;
+        text-align: center;
+
+        /* Page/Text */
+        font-family: Open Sans;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 36px;
+        /* 150% */
+      }
+
+      .course-text {
+        color: $color-primary-700;
+
+        /* Paragraph/P3/Regular */
+        font-family: Open Sans;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        /* 155.556% */
+        margin-bottom: 0;
+      }
+
+      .all-courses {
+        color: $color-primary-700;
+        background: $color-primary-700;
+        display: flex;
+        padding: 24px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-family: Open Sans;
+        line-height: 28px;
+        /* 155.556% */
+        color: $color-primary-50;
+
+        /* Buttons */
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 19px;
+        /* 118.75% */
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-transform: uppercase;
+        width: max-content;
+        align-self: center;
+      }
+    }
+  }
+}
