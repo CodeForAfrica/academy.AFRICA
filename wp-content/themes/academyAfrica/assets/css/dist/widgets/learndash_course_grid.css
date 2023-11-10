@@ -120,12 +120,20 @@ table {
 .learndash-course-grid .grid {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 80px;
 }
 .learndash-course-grid .grid .item {
   width: 280px;
   max-width: 280px;
   border: 0.5px solid #CCCFDA;
   background-color: #FFFFFF;
+  align-self: stretch;
+}
+.learndash-course-grid .grid .item article {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .learndash-course-grid .grid .item article .thumbnail .ribbon {
   display: none;
@@ -146,8 +154,12 @@ table {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  flex: 1 0 0;
+  height: 100%;
+  justify-content: space-between;
   background: #FFFFFF;
+}
+.learndash-course-grid .grid .item article .content .top-meta .entry-title {
+  height: 100%;
 }
 .learndash-course-grid .grid .item article .content .top-meta .entry-title a {
   color: #0C1A81;
@@ -217,6 +229,25 @@ table {
   justify-content: center;
   padding: 4px 10px;
   min-width: 54px;
+}
+@media (max-width: 768px) {
+  .learndash-course-grid .grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .learndash-course-grid .grid .item {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media (max-width: 1152px) {
+  .learndash-course-grid .grid {
+    gap: 20px;
+  }
+  .learndash-course-grid .grid .item {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 /*# sourceMappingURL=learndash_course_grid.css.map */
