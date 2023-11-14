@@ -133,6 +133,13 @@ li {
   margin: 0;
 }
 
+.course-grid {
+  padding: 80px 60px 40px;
+}
+.course-grid .learndash-course-grid .grid {
+  flex-wrap: wrap;
+}
+
 .all-courses {
   padding: 40px 60px;
 }

@@ -14,12 +14,12 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-all-courses', 'academy-africa', 'academy-africa-pathways'];
+        return ['academy-africa-all-courses', 'academy-africa', 'academy-africa-pathways', "'academy-africa-learndash-course-grid'"];
     }
 
     public function get_script_depends()
     {
-        return ['academy-africa-filters'];
+        return ['academy-africa-filters', "academy-africa_learndash_course_grid"];
     }
 
     public function get_title()
@@ -346,7 +346,10 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                         </ul>
                     </div>
                 </section>
-                <section class="all-courses">
+                <section class="course-grid">
+                    <?php echo do_shortcode('[learndash_course_grid id="course-list" columns="3" skin="grid" card="grid-1" per_page="9" filter="false" progress_bar="" button="" pagination="button"  ]'); ?>
+                </section>
+                <!-- <section class="all-courses">
                     <h4 class="cfa-title">
                         <? echo $courses_title ?>
                     </h4>
@@ -429,7 +432,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 </a></li>
                         </ul>
                     </div>
-                </section>
+                </section> -->
             </div>
         </main>
 <?
