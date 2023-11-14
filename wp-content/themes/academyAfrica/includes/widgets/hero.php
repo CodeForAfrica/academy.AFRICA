@@ -111,7 +111,6 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
 ?>
         <div class="hero">
             <div class="content-parent">
-                <div class="mobile-hidden"></div>
                 <div class="content">
                     <div class="title">
                         <div class="cfa-title" <?php echo $this->get_render_attribute_string('title'); ?>>
@@ -122,7 +121,8 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                         <? echo $sign_up_label ?>
                     </a>
                 </div>
-                <img height="217" alt="mask" class="mask" src="/wp-content/plugins/academy-africa/includes/assets/images/mask.png" />
+                <img height="217" alt="mask" class="mask" 
+                src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.png' ?>">
             </div>
             <div class="content-parent">
                 <div class="metrics-content">

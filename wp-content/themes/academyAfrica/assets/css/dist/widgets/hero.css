@@ -130,6 +130,7 @@ table {
   padding: 360px 0 0;
   flex-wrap: wrap;
   align-items: flex-end;
+  padding-bottom: 20px;
 }
 .hero .content {
   margin-right: 150px;
@@ -241,6 +242,7 @@ table {
   }
   .metrics {
     margin: 0;
+    box-shadow: none;
   }
   .metrics .metric .numbers {
     font-size: 20px;
@@ -271,9 +273,6 @@ table {
     font-style: normal;
     font-weight: 700;
     line-height: 40px;
-  }
-  .mobile-hidden {
-    display: none;
   }
   .metrics {
     padding: 0;
