@@ -156,6 +156,7 @@ table {
   justify-content: center;
   flex-direction: column;
   margin: 50px 0;
+  gap: 10px;
 }
 .connect .join-slack .share-text {
   display: none;

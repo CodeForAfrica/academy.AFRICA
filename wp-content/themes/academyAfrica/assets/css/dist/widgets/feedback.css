@@ -119,11 +119,10 @@ table {
 
 .feedback {
   padding: 80px 0;
-  background: var(--neutral-50, #f7f9fd);
+  background: #F7F9FD;
 }
 .feedback .cfa-title {
-  color: var(--primary-700, #0c1a81);
-  /* Page/Section_Title */
+  color: #0C1A81;
   font-family: Lora;
   font-size: 40px;
   font-style: normal;
@@ -140,7 +139,7 @@ table {
   }
 }
 .feedback .content {
-  background: var(--neutral-50, #f7f9fd);
+  background: #F7F9FD;
   box-sizing: border-box;
   padding: 72px 20px;
   display: flex;
@@ -162,7 +161,7 @@ table {
   }
 }
 .feedback .content .content-card {
-  background: var(--shades-white, #fff);
+  background: #FFFFFF;
   display: flex;
   padding: 20px;
   flex-direction: column;
@@ -173,43 +172,64 @@ table {
   justify-content: space-between;
   gap: 20px;
 }
+.feedback .content .content-card .user .avatar {
+  width: 70px;
+  height: 70px;
+}
 .feedback .content .content-card .user .name-role {
   flex: 1;
 }
 .feedback .content .content-card .user .name-role .name {
-  color: var(--primary-700, #0c1a81);
+  color: #0C1A81;
   margin: 0;
-  /* Card/Heading */
   font-family: Open Sans;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 133.333% */
+  line-height: 24px;
 }
 .feedback .content .content-card .user .name-role .role {
   margin: 0;
-  color: #000;
-  /* Card/ Organisation name */
+  color: #000000;
   font-family: Open Sans;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   text-transform: uppercase;
 }
 .feedback .content .content-card .description {
-  color: #000;
+  color: #000000;
   margin-top: 40px;
   text-align: center;
-  /* Testimonial/Text */
   font-family: Open Sans;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
 }
 .feedback .content .content-card .description a {
   text-decoration-line: underline;
+}
+@media (max-width: 768px) {
+  .feedback .content .card {
+    padding: 20px;
+  }
+  .feedback .content .card .content-card .card .user .avatar {
+    width: 60px;
+    height: 60px;
+  }
+  .feedback .content .card .content-card .card .user .name-role {
+    flex: 1;
+  }
+  .feedback .content .card .content-card .card .user .name-role .name {
+    font-size: 16px;
+    line-height: 21px;
+  }
+  .feedback .content .card .content-card .card .user .name-role .role {
+    font-size: 12px;
+    line-height: 14px;
+  }
 }
 
 /*# sourceMappingURL=feedback.css.map */

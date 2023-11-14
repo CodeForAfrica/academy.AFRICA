@@ -96,7 +96,7 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
                         <div class="card">
                             <div class="content-card">
                                 <div class="user">
-                                    <img height="70px" width="70px" src="/wp-content/plugins/academy-africa/includes/assets/images/avatar.png" alt="user" class="avatar">
+                                    <img src="<? echo get_stylesheet_directory_uri() . '/assets/images/avatar.png' ?>" alt="user" class="avatar">
                                     <div class="name-role">
                                         <p class="name">
                                             <? echo $name ?>

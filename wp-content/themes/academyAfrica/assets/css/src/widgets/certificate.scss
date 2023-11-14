@@ -28,6 +28,7 @@
     margin-top: 16px;
 
     .certificate {
+      flex: 1;
       background: $color-shades-white;
       box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
       width: 100%;
@@ -171,6 +172,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex: 1;
+
 
       .showcase-header {
         display: none;
@@ -213,7 +216,6 @@
     .certificate-showcase {
       .certificate {
         width: 478px;
-        flex: 1;
 
         .certificate-content {
           padding: 26px 29px 0;
@@ -297,7 +299,6 @@
       }
 
       .certificate-showcase-content {
-        flex: 1;
 
         .showcase-header {
           display: block;
