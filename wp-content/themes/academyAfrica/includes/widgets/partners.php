@@ -33,27 +33,35 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
 
     public function get_our_partners()
     {
-        return [[
-            "name" => "Google News Initiative",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/gni.png"
-        ], [
-            "name" => "Dw",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/dw.png"
-        ], [
-            "name" => "gni",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/gni.png"
-        ], [
-            "name" => "icfj",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/icfj.png"
-        ], [
-            "name" => "nor_cap",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/nor_cap.png"
-        ]];
+        return [
+            [
+                "name" => "Google News Initiative",
+                "url" => "/",
+                "icon" => get_stylesheet_directory_uri() . '/assets/images/gni.png'
+            ],
+            [
+                "name" => "World Bank",
+                "url" => "/",
+                "icon" => get_stylesheet_directory_uri() . '/assets/images/world_bank.png'
+            ],
+            [
+                "name" => "Dw",
+                "url" => "/",
+                "icon" => get_stylesheet_directory_uri() . '/assets/images/dw.png'
+            ], [
+                "name" => "bbc",
+                "url" => "/",
+                "icon" => get_stylesheet_directory_uri() . '/assets/images/bbc.png'
+            ], [
+                "name" => "icfj",
+                "url" => "/",
+                "icon" => get_stylesheet_directory_uri() . '/assets/images/icfj.png'
+            ], [
+                "name" => "nor_cap",
+                "url" => "/",
+                "icon" => get_stylesheet_directory_uri() . '/assets/images/nor_cap.png'
+            ]
+        ];
     }
 
     public function get_other_partners()
@@ -137,7 +145,8 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
                 ?>
                         <div class="partner">
                             <a href="<? echo $url ?>">
-                                <img src="<? echo $icon ?>" alt="<? echo $name ?>">
+                                <div class="partner-image" style="background: url(<? echo $icon ?>), #ffff 21.124px 41.241px / 85.714% 51.337% no-repeat;">
+                                </div>
                             </a>
                         </div>
                 <?

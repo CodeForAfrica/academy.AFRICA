@@ -118,7 +118,7 @@ table {
 }
 
 .partners {
-  padding: 80px 20px;
+  padding: 40px 20px;
 }
 .partners .cfa-title {
   color: var(--primary-700, #0c1a81);
@@ -129,35 +129,40 @@ table {
 .partners .partner-content {
   display: flex;
   padding: 20px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
-  gap: 36px;
+  row-gap: 40px;
   flex-wrap: wrap;
 }
 .partners .partner-content .partner {
   display: flex;
   flex: 1;
-  height: 100px;
   width: 100%;
   flex-basis: calc(33.333333% - 36px);
   justify-content: center;
   align-items: center;
   align-content: center;
 }
+.partners .partner-content .partner .partner-image {
+  width: 295px;
+  height: 170px;
+  background-repeat: no-repeat;
+  background-blend-mode: luminosity;
+}
 
 .other-partners {
-  margin-bottom: 32px;
+  padding: 40px 20px;
 }
 .other-partners .other-partners-title {
-  color: var(--shades-black, #000);
+  color: #000000;
   text-align: center;
-  /* Section + Topic Headings */
   font-family: Open Sans;
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
-  line-height: 48px; /* 150% */
+  line-height: 48px;
+  margin-bottom: 32px;
 }
 @media (max-width: 768px) {
   .other-partners .other-partners-title {
@@ -183,7 +188,7 @@ table {
 }
 .other-partners .partner-tag .partner-tag-content {
   border: 0.2px solid #eeeeee;
-  background: var(--neutral-50, #f7f9fd);
+  background: #F7F9FD;
   padding: 5px 16px;
   font-family: Open Sans;
 }
