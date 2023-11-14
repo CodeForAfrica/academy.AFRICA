@@ -113,8 +113,10 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
             <div class="content-parent">
                 <div class="mobile-hidden"></div>
                 <div class="content">
-                    <div class="title" <?php echo $this->get_render_attribute_string('title'); ?>>
-                        <? echo $title ?>
+                    <div class="title">
+                        <div class="cfa-title" <?php echo $this->get_render_attribute_string('title'); ?>>
+                            <? echo $title ?>
+                        </div>
                     </div>
                     <a class="button cta large signup-button" href="<?php echo $sign_up_url; ?>">
                         <? echo $sign_up_label ?>

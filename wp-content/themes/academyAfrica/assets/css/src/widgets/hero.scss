@@ -20,25 +20,12 @@ $font-family_3: Open Sans;
     justify-content: flex-end;
 
     .title {
-      color: $color-shades-black;
-      font-family: $font-family_1;
-      font-size: 48px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 54px;
-
-      &::after {
-        content: "";
-        width: 60px;
-        height: 6px;
-        background: var(--primary-700, #0c1a81);
-        margin-top: 32px;
-        display: block;
-        margin-bottom: 32px;
-      }
-
-      a {
-        color: $color-primary-700;
+      .cfa-title {
+        text-align: left;
+        &::after{
+          left: unset;
+          transform: unset;
+        }
       }
     }
   }
@@ -125,7 +112,7 @@ $font-family_3: Open Sans;
 @media screen and (min-width: 768px) and (max-width: 1152px) {
   .hero {
     background: none;
-    padding: 10px;
+    padding: 16px;
     align-items: center;
 
     .mask {
@@ -182,7 +169,7 @@ $font-family_3: Open Sans;
 @media only screen and (max-width: 768px) {
   .hero {
     background: none;
-    padding: 10px;
+    padding: 16px;
 
     .content {
       padding-top: 32px;
@@ -211,6 +198,7 @@ $font-family_3: Open Sans;
   .metrics {
     padding: 0;
     margin: 0;
+    box-shadow: none;
 
     .metric {
       padding: 0;

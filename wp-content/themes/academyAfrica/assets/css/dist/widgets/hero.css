@@ -143,25 +143,12 @@ table {
 .hero .content .signup-button {
   width: 100%;
 }
-.hero .content .title {
-  color: #000000;
-  font-family: Ibarra Real Nova;
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 54px;
+.hero .content .title .cfa-title {
+  text-align: left;
 }
-.hero .content .title::after {
-  content: "";
-  width: 60px;
-  height: 6px;
-  background: var(--primary-700, #0c1a81);
-  margin-top: 32px;
-  display: block;
-  margin-bottom: 32px;
-}
-.hero .content .title a {
-  color: #0C1A81;
+.hero .content .title .cfa-title::after {
+  left: unset;
+  transform: unset;
 }
 .hero .mask {
   display: none;
@@ -226,7 +213,7 @@ table {
 @media screen and (min-width: 768px) and (max-width: 1152px) {
   .hero {
     background: none;
-    padding: 10px;
+    padding: 16px;
     align-items: center;
   }
   .hero .mask {
@@ -268,7 +255,7 @@ table {
 @media only screen and (max-width: 768px) {
   .hero {
     background: none;
-    padding: 10px;
+    padding: 16px;
   }
   .hero .content {
     padding-top: 32px;
@@ -291,6 +278,7 @@ table {
   .metrics {
     padding: 0;
     margin: 0;
+    box-shadow: none;
   }
   .metrics .metric {
     padding: 0;
