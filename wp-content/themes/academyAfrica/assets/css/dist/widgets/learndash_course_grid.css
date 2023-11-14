@@ -121,7 +121,7 @@ table {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 80px;
+  row-gap: 40px;
 }
 .learndash-course-grid .grid .item {
   width: 280px;
