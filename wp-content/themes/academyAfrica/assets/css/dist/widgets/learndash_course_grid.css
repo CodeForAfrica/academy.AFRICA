@@ -233,17 +233,12 @@ table {
     gap: 20px;
   }
   .learndash-course-grid .grid .item {
-    width: 100%;
-    max-width: 100%;
+    align-self: center;
   }
 }
 @media (max-width: 1152px) {
   .learndash-course-grid .grid {
     gap: 20px;
-  }
-  .learndash-course-grid .grid .item {
-    width: 100%;
-    max-width: 100%;
   }
 }
 

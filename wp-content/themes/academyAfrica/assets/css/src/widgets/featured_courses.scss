@@ -13,15 +13,20 @@
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
+  text-align: left;
 
   /* 120% */
   @include media-breakpoint-down(tablet) {
     font-size: 20px;
   }
+
+  &::after {
+    left: unset;
+    transform: unset;
+  }
 }
 
 .featured-courses {
-  padding: 20px;
 
   .title-description {
     padding: 20px;
@@ -29,21 +34,21 @@
 
   .description {
     margin-top: 8px;
-    color: #000;
+    color: $color-shades-black;
     max-width: 800px;
 
-    /* Page/Text */
     font-family: Open Sans;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
     line-height: 36px;
-    /* 150% */
+
   }
 
   .featured-course-list {
+    background: $color-neutral-50;
     margin: 100px 0;
-    padding: 0 72px;
+    padding: 72px 20px;
   }
 
   .content {
@@ -156,6 +161,14 @@
         height: 18px;
         overflow: hidden;
       }
+    }
+  }
+
+  @include media-breakpoint-down(tablet) {
+    .description {
+      font-size: 14px;
+      line-height: 18px;
+
     }
   }
 }

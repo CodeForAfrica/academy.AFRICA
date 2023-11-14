@@ -129,6 +129,7 @@ table {
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
+  text-align: left;
   /* 120% */
 }
 @media (max-width: 768px) {
@@ -136,28 +137,28 @@ table {
     font-size: 20px;
   }
 }
-
-.featured-courses {
-  padding: 20px;
+.cfa-title::after {
+  left: unset;
+  transform: unset;
 }
+
 .featured-courses .title-description {
   padding: 20px;
 }
 .featured-courses .description {
   margin-top: 8px;
-  color: #000;
+  color: #000000;
   max-width: 800px;
-  /* Page/Text */
   font-family: Open Sans;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: 36px;
-  /* 150% */
 }
 .featured-courses .featured-course-list {
+  background: #F7F9FD;
   margin: 100px 0;
-  padding: 0 72px;
+  padding: 72px 20px;
 }
 .featured-courses .content {
   background: var(--neutral-50, #f7f9fd);
@@ -260,6 +261,12 @@ table {
   margin-top: 40px;
   height: 18px;
   overflow: hidden;
+}
+@media (max-width: 768px) {
+  .featured-courses .description {
+    font-size: 14px;
+    line-height: 18px;
+  }
 }
 
 /*# sourceMappingURL=featured_courses.css.map */
