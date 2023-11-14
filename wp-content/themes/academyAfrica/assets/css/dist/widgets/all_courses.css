@@ -126,8 +126,21 @@ table {
   flex: 1;
   width: 100%;
 }
+@media (max-width: 768px) {
+  .all-courses .filter-sidebar {
+    display: none;
+  }
+}
 .all-courses .filter-sidebar .mobile-filter {
   display: none;
+}
+@media (max-width: 768px) {
+  .all-courses .filter-sidebar .mobile-filter {
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
 }
 .all-courses .courses-main {
   flex: 3;
