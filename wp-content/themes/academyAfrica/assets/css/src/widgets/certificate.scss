@@ -31,6 +31,8 @@
       background: $color-shades-white;
       box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
       width: 100%;
+      width: 312px;
+      align-self: center;
 
       .certificate-content {
         padding: 15px 18px 0;
@@ -170,6 +172,10 @@
       flex-direction: column;
       align-items: center;
 
+      .showcase-header {
+        display: none;
+      }
+
       .showcase-text {
         color: $color-primary-700;
         font-size: 14px;
@@ -177,8 +183,137 @@
         line-height: 18px;
       }
 
-      .all-courses{
+      .all-courses {
         margin-top: 10px;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(tablet) {
+    .certificate-header {
+      width: 50%;
+    }
+
+    .certificate-showcase {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  @include media-breakpoint-up(desktop) {
+    p {
+      font-size: 24px;
+      line-height: 36px;
+    }
+
+    .certificate-header {
+      display: none;
+    }
+
+    .certificate-showcase {
+      .certificate {
+        width: 478px;
+        flex: 1;
+
+        .certificate-content {
+          padding: 26px 29px 0;
+
+          .certificate-content-header {
+            p {
+              font-size: 22.986px;
+            }
+
+            .certificate-header-logo {
+              display: flex;
+              gap: 14px;
+
+              .logo {
+                width: 90px;
+                height: 90px;
+                margin-top: -40px;
+              }
+            }
+          }
+        }
+
+        .certificate-footer {
+          padding: 29px;
+
+          .company-details {
+
+            .brand-details {
+              .logo {
+                width: 24px;
+                height: 24px;
+
+              }
+
+              .company-name {
+                font-size: 8.62px;
+              }
+            }
+
+            .artwork {
+              width: 43.534px;
+              height: 25.257px;
+            }
+          }
+
+          .signature {
+            .signature-img {
+              width: 72.557px;
+              height: 17.486px;
+            }
+
+            p {
+              color: $color-shades-white;
+              font-size: 6.704px;
+              line-height: 8.62px;
+            }
+          }
+        }
+
+        .certificate-site-name {
+
+          p {
+            font-size: 4.789px;
+            line-height: 8.62px;
+          }
+
+        }
+
+        .course-details {
+          .title {
+            font-size: 8.63px;
+            line-height: 13.408px;
+          }
+
+          .name {
+            font-size: 15.324px;
+            line-height: 22.986px;
+          }
+
+        }
+      }
+
+      .certificate-showcase-content {
+        flex: 1;
+
+        .showcase-header {
+          display: block;
+
+          .certificate-header {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 50px;
+          }
+        }
+
+        .showcase-text {
+          font-size: 18px;
+          line-height: 28px;
+        }
       }
     }
   }
