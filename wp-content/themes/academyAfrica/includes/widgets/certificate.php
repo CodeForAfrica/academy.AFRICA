@@ -164,8 +164,6 @@ class Academy_Africa_Certificate extends \Elementor\Widget_Base
         $presented_to = $settings['presented_to'];
         $certificate_type = $settings['certificate_type'];
         $certificate_title = $settings['certificate_title'];
-        $art_board = get_stylesheet_directory_uri() . '/assets/images/academy-logo.svg';
-        $company_image = get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg';
         $company_name = "academy.Africa";
         $certificate_cta_description = $settings['certificate_cta_description'];
         $academy_head = array(

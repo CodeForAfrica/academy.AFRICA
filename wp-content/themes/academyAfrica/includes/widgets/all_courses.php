@@ -159,21 +159,43 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
     protected function register_controls()
     {
+        $this->start_controls_section(
+            'learning_pathways',
+            [
+                'label' => __('Learning Pathways', 'academy-africa'),
+            ]
+        );
+
+        $this->add_control(
+            'pathway_title',
+            [
+                'label' => __('Learning Pathways Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Learning Pathways', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'pathway_description',
+            [
+                'label' => __('Learning Pathways Description', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Find out how you can enhance your skills and achieve mastery in specific disciplines within data science and technology.', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        $pathway_title = $settings['pathway_title'];
+        $pathway_description = $settings['pathway_description'];
         $filter_by = "Filter by:";
-        $learning_pathways_title = "Learning Pathways";
-        $learning_pathways_description = "Find out how you can enhance your skills and achieve mastery in specific disciplines within data science and technology.";
         $filter_options = $this->get_filter_by();
         $learning_pathways = $this->get_learning_pathways();
-        $courses = $this->get_courses();
-        $free_tag_key = "Download the certificate for free after completing the course";
-        $paid_tag_key = "Download the certificate for free after completing the course";
-        $courses_title = "All Courses";
-        $courses_description = "we are happy to say All courses are free to complete";
 ?>
         <main class="all-courses">
             <aside class="filter-sidebar">
@@ -291,10 +313,10 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             <div class="courses-main">
                 <section class="learning-pathways">
                     <h4 class="cfa-title">
-                        <? echo $learning_pathways_title ?>
+                        <? echo $pathway_title ?>
                     </h4>
                     <p class="description">
-                        <? echo $learning_pathways_description ?>
+                        <? echo $pathway_description ?>
                     </p>
                     <div class="content">
                         <?
