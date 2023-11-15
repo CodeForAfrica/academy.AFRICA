@@ -68,94 +68,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         ];
     }
 
-    public function concatenate_with_count($array)
-    {
-        $count = count($array);
-        return $count === 0 ? '' : ($count === 1 ? $array[0] : $array[0] . ' + ' . ($count - 1) . ' more');
-    }
-    public function get_courses()
-    {
-        return [
-            [
-                'title' => 'Introduction to Data Visualisation with Flourish',
-                'providers' => ['code for africa'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ],
-            [
-                'title' => 'Fact-checking for Social Media',
-                'providers' => ['pesacheck'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ],
-            [
-                'title' => 'Drone Journalism',
-                'providers' => ['Sensors Africa', 'pesacheck', 'code for africa'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ], [
-                'title' => 'Introduction to Data Visualisation with Flourish',
-                'providers' => ['code for africa'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ],
-            [
-                'title' => 'Fact-checking for Social Media',
-                'providers' => ['pesacheck'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ],
-            [
-                'title' => 'Drone Journalism',
-                'providers' => ['Sensors Africa', 'pesacheck', 'code for africa'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ], [
-                'title' => 'Introduction to Data Visualisation with Flourish',
-                'providers' => ['code for africa'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ],
-            [
-                'title' => 'Fact-checking for Social Media',
-                'providers' => ['pesacheck'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ],
-            [
-                'title' => 'Drone Journalism',
-                'providers' => ['Sensors Africa', 'pesacheck', 'code for africa'],
-                'students_count' => 75,
-                'price' => 'Free',
-                'image' => '/wp-content/plugins/academy-africa/includes/assets/images/course-image.png',
-            ],
-        ];
-    }
-
-    public function get_learning_pathways()
-    {
-        return [[
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/sample-icon.svg",
-            "title" => "Investigative Journalism",
-            "courses" => "4 Courses"
-        ], [
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/sample-icon.svg",
-            "title" => "Investigative Journalism",
-            "courses" => "4 Courses"
-        ], [
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/sample-icon.svg",
-            "title" => "Investigative Journalism",
-            "courses" => "4 Courses"
-        ]];
-    }
 
     protected function register_controls()
     {
@@ -185,6 +97,47 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             ]
         );
 
+        $pathways_list = new \Elementor\Repeater();
+        $pathways_list->add_control(
+            'title',
+            [
+                'label' => __('Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('Pathway Title', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $pathways_list->add_control(
+            'icon',
+            [
+                'label' => __('Icon', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => get_stylesheet_uri() . '/assets/images/sample-icon.svg',
+                ],
+                'label_block' => true,
+            ]
+        );
+        $pathways_list->add_control(
+            'courses',
+            [
+                'label' => __('Courses', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('4 Courses', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'pathways',
+            [
+                'label' => __('Learning Pathways', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $pathways_list->get_controls(),
+                'title_field' => '{{{ title }}}',
+            ]
+        );
+
+
         $this->end_controls_section();
     }
 
@@ -193,9 +146,9 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         $pathway_title = $settings['pathway_title'];
         $pathway_description = $settings['pathway_description'];
+        $pathways = $settings['pathways'];
         $filter_by = "Filter by:";
         $filter_options = $this->get_filter_by();
-        $learning_pathways = $this->get_learning_pathways();
 ?>
         <main class="all-courses">
             <aside class="filter-sidebar">
@@ -320,10 +273,10 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     </p>
                     <div class="content">
                         <?
-                        if (!empty($learning_pathways)) {
-                            foreach ($learning_pathways as $pathway) {
+                        if (!empty($pathways)) {
+                            foreach ($pathways as $pathway) {
                                 $name = $pathway["title"];
-                                $icon = $pathway["icon"];
+                                $icon = $pathway["icon"]["url"];
                         ?>
                                 <div class="card">
                                     <div class="course-card-pattern">
