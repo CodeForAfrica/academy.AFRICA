@@ -8,14 +8,15 @@
   color: var(--primary-700, #0c1a81);
 
   font-family: Lora;
-  font-size: 40px;
+  font-size: 20px;
+
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
   text-align: left;
 
-  @include media-breakpoint-down(desktop) {
-    font-size: 20px;
+  @include media-breakpoint-up(desktop) {
+    font-size: 40px;
   }
 
   &::after {
@@ -39,11 +40,11 @@
       color: $color-shades-black;
 
       font-family: Open Sans;
-      font-size: 24px;
       font-style: normal;
       font-weight: 400;
-      line-height: 36px;
 
+      font-size: 14px;
+      line-height: 18px;
     }
 
     .featured-course-list {
@@ -52,12 +53,11 @@
     }
   }
 
-  @include media-breakpoint-down(desktop) {
+  @include media-breakpoint-up(desktop) {
     .featured-content {
       .description {
-        font-size: 14px;
-        line-height: 18px;
-
+        font-size: 24px;
+        line-height: 36px;
       }
     }
   }
@@ -77,6 +77,37 @@
         }
       }
     }
+
+  }
+
+  @include media-breakpoint-up(desktop) {
+    padding: 72px 0;
+
+    .featured-content {
+      width: 100%;
+
+      .title-description {
+        width: 800px;
+        margin-left: 40px;
+      }
+
+      .featured-course-list {
+        padding: 72px 72px 84px;
+        background: $color-neutral-50;
+        width: 1144px;
+        align-self: center;
+      }
+
+
+      #featured {
+        .grid {
+          .item:last-of-type {
+            display: block;
+          }
+        }
+      }
+    }
+
 
   }
 }
