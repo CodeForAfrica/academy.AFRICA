@@ -144,6 +144,7 @@ table {
   padding: 16px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 .featured-courses .featured-content {
   display: flex;
@@ -163,6 +164,277 @@ table {
   background: #FFFFFF;
   padding: 16px 0;
 }
+.featured-courses .featured-certificate {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.featured-courses .featured-certificate .certificate-root {
+  background-color: #FFFFFF;
+}
+.featured-courses .featured-certificate .certificate-root p {
+  color: #000000;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-header {
+  text-align: center;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  gap: 40px;
+  margin-top: 16px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate {
+  flex: 1;
+  background: #FFFFFF;
+  box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  width: 312px;
+  align-self: center;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content {
+  padding: 15px 18px 0;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header p {
+  font-size: 15px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header hr {
+  background: #0C1A81;
+  height: 3px;
+  flex: 1;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header .certificate-type {
+  font-weight: bold;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header .certificate-header-logo {
+  display: flex;
+  gap: 10px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header .certificate-header-logo .logo {
+  width: 54px;
+  height: 54px;
+  margin-top: -20px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer {
+  background: #0C1A81;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .company-details {
+  display: flex;
+  gap: 10px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .company-details .brand-details {
+  display: flex;
+  gap: 5px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .company-details .brand-details .logo {
+  width: 16px;
+  height: 16px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .company-details .brand-details .company-name {
+  font-size: 5.616px;
+  color: #F7F9FD;
+  font-weight: 600;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .company-details .artwork {
+  width: 28.364px;
+  height: 16.456px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .signature {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .signature .signature-img {
+  width: 47px;
+  height: 11px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .signature p {
+  color: #FFFFFF;
+  font-size: 4.368px;
+  font-weight: 400;
+  line-height: 5.616px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .signature .signee-role {
+  text-transform: uppercase;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-site-name {
+  background: #ED1C24;
+  text-align: right;
+  padding: 0px 18px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-site-name p {
+  color: #FFFFFF;
+  font-size: 3.12px;
+  font-weight: 400;
+  line-height: 5.616px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .course-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .course-details .title {
+  font-size: 5.616px;
+  font-weight: 400;
+  line-height: 8.736px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .course-details .name {
+  font-size: 9.98px;
+  line-height: 14.976px;
+  font-weight: 400;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .course-details .bold-text {
+  font-weight: 700;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .course-details .student {
+  text-align: left;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .course-details .course {
+  text-align: right;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .showcase-header {
+  display: none;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .showcase-text {
+  color: #0C1A81;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .all-courses {
+  margin-top: 10px;
+}
+@media (min-width: 768px) {
+  .featured-courses .featured-certificate .certificate-root {
+    padding: 30px 16px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-header {
+    width: 50%;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+@media (min-width: 1152px) {
+  .featured-courses .featured-certificate .certificate-root {
+    padding: 0;
+  }
+  .featured-courses .featured-certificate .certificate-root p {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-header {
+    display: none;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase {
+    background: #F7F9FD;
+    width: 1144px;
+    padding: 0 72px 72px;
+    margin: 0;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate {
+    width: 478px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content {
+    padding: 26px 29px 0;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header p {
+    font-size: 22.986px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header .certificate-header-logo {
+    display: flex;
+    gap: 14px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-content .certificate-content-header .certificate-header-logo .logo {
+    width: 90px;
+    height: 90px;
+    margin-top: -40px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer {
+    padding: 29px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .company-details .brand-details .logo {
+    width: 24px;
+    height: 24px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .company-details .brand-details .company-name {
+    font-size: 8.62px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .company-details .artwork {
+    width: 43.534px;
+    height: 25.257px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .signature .signature-img {
+    width: 72.557px;
+    height: 17.486px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .signature p {
+    color: #FFFFFF;
+    font-size: 6.704px;
+    line-height: 8.62px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-site-name p {
+    font-size: 4.789px;
+    line-height: 8.62px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .course-details .title {
+    font-size: 8.63px;
+    line-height: 13.408px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .course-details .name {
+    font-size: 15.324px;
+    line-height: 22.986px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .showcase-header {
+    display: block;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .showcase-header .certificate-header {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .showcase-text {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+@media (min-width: 1440px) {
+  .featured-courses .featured-certificate .certificate-root {
+    padding: 0 148px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase {
+    background: #FFFFFF;
+  }
+}
+@media (min-width: 1920px) {
+  .featured-courses .featured-certificate .certificate-root {
+    padding: 0 388px 72px;
+  }
+  .featured-courses .featured-certificate .certificate-root .certificate-showcase {
+    background: #F7F9FD;
+  }
+}
+@media (min-width: 1152px) {
+  .featured-courses .featured-certificate {
+    margin: 0;
+  }
+}
 @media (min-width: 1152px) {
   .featured-courses .featured-content .description {
     font-size: 24px;
@@ -174,6 +446,7 @@ table {
     padding: 30px 16px;
   }
   .featured-courses .featured-content {
+    align-self: center;
     width: 580px;
   }
   .featured-courses .featured-content #featured .grid .item:last-of-type {

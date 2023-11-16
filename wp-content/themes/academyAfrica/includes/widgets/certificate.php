@@ -252,6 +252,6 @@ class Academy_Africa_Certificate extends \Elementor\Widget_Base
                 </div>
             </div>
         </div>
-<?
+<? 
     }
 }
