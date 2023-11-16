@@ -49,11 +49,26 @@
     padding: 16px 0;
   }
 
-  @include media-breakpoint-down(tablet) {
+  @include media-breakpoint-down(desktop) {
     .description {
       font-size: 14px;
       line-height: 18px;
 
     }
+  }
+
+
+  @include media-breakpoint-up(tablet) {
+    padding: 30px 16px;
+    width: 580px;
+
+    #featured {
+      .grid {
+        .item:last-of-type {
+          display: none;
+        }
+      }
+    }
+
   }
 }

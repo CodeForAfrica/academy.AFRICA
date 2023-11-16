@@ -161,10 +161,19 @@ table {
   background: #FFFFFF;
   padding: 16px 0;
 }
-@media (max-width: 768px) {
+@media (max-width: 1152px) {
   .featured-courses .description {
     font-size: 14px;
     line-height: 18px;
+  }
+}
+@media (min-width: 768px) {
+  .featured-courses {
+    padding: 30px 16px;
+    width: 580px;
+  }
+  .featured-courses #featured .grid .item:last-of-type {
+    display: none;
   }
 }
 
