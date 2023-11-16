@@ -119,11 +119,15 @@ table {
 
 .hero {
   padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .hero .content-parent {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1;
 }
 .hero .content-parent .content {
   display: flex;
@@ -171,6 +175,21 @@ table {
   font-size: 14px;
   line-height: 24px;
   font-weight: 400;
+}
+.hero .mask-image {
+  display: none;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.hero .mask-image .mask {
+  width: 217px;
+  height: 217px;
+}
+@media (min-width: 768px) {
+  .hero .mask-image {
+    display: flex;
+  }
 }
 
 /*# sourceMappingURL=hero.css.map */

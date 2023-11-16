@@ -6,6 +6,10 @@ $font-family_3: Open Sans;
 
 .hero {
   padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
 
   // display: flex;
   // box-sizing: border-box;
@@ -26,6 +30,7 @@ $font-family_3: Open Sans;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    flex: 1;
 
 
 
@@ -106,6 +111,22 @@ $font-family_3: Open Sans;
 
 
 
+  }
+
+  .mask-image {
+    display: none;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+
+    .mask {
+      width: 217px;
+      height: 217px;
+    }
+
+    @include media-breakpoint-up(tablet) {
+      display: flex;
+    }
   }
 
   // .mask {

@@ -107,7 +107,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         $title = $settings['title'];
         $sign_up_label = $settings['sign_up_label'];
-        $sign_up_url = $settings['sign_up_link']['url'];
+        $sign_up_url = $settings['sign_up_link']['url']; 
 ?>
         <div class="hero">
             <div class="content-parent">
@@ -144,6 +144,9 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                     </div>
                 </div>
                 <!-- <img height="217" alt="mask" class="mask" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.png' ?>"> -->
+            </div>
+            <div class="mask-image">
+                <img alt="mask" class="mask" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.svg' ?>">
             </div>
             <!-- <div class="content-parent">
                 <div class="metrics-content">
