@@ -57,8 +57,9 @@
     }
 
     .desktop {
-        @include media-breakpoint-down(desktop) {
-            display: none;
+        display: none;
+        @include media-breakpoint-up(desktop) {
+            display: block;
         }
 
         .nav {
