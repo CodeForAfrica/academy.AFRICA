@@ -7,13 +7,14 @@
         justify-content: space-between;
         align-items: center;
         row-gap: 40px;
+        flex-direction: column;
 
         .item {
             width: 280px;
             max-width: 280px;
             border: 0.5px solid $color-neutral-200;
             background-color: $color-shades-white;
-            align-self: stretch;
+            align-self: center;
 
             article {
                 height: 100%;
@@ -152,9 +153,9 @@
         }
     }
 
-    @include media-breakpoint-down(tablet) {
+    @include media-breakpoint-up(tablet) {
         .grid {
-            flex-direction: column;
+            flex-direction: row;
             gap: 20px;
 
             .item {

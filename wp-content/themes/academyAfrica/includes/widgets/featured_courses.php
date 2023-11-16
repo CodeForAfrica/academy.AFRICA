@@ -187,6 +187,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                 <?php echo do_shortcode('[learndash_course_grid taxonomies="ld_course_tag:featured"  id="featured" columns="3" skin="grid" card="grid-1" per_page="3" filter="false" progress_bar="" pagination="" button=""  ]'); ?>
 
             </div>
-    <?
+        </div>
+<?
     }
 }
