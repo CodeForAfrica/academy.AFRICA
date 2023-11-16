@@ -174,18 +174,20 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
         $description = $settings['description'];
 ?>
         <div class="featured-courses">
-            <div class="title-description">
-                <p class="cfa-title">
-                    <?php echo $title; ?>
-                </p>
-                <div class="description">
-                    <?php echo $description; ?>
+            <div class="featured-content">
+                <div class="title-description">
+                    <p class="cfa-title">
+                        <?php echo $title; ?>
+                    </p>
+                    <div class="description">
+                        <?php echo $description; ?>
+                    </div>
                 </div>
-            </div>
-            <div class="featured-course-list">
-                <!-- course list -->
-                <?php echo do_shortcode('[learndash_course_grid taxonomies="ld_course_tag:featured"  id="featured" columns="3" skin="grid" card="grid-1" per_page="3" filter="false" progress_bar="" pagination="" button=""  ]'); ?>
+                <div class="featured-course-list">
+                    <!-- course list -->
+                    <?php echo do_shortcode('[learndash_course_grid taxonomies="ld_course_tag:featured"  id="featured" columns="3" skin="grid" card="grid-1" per_page="3" filter="false" progress_bar="" pagination="" button=""  ]'); ?>
 
+                </div>
             </div>
         </div>
 <?

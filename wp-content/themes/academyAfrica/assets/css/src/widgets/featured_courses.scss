@@ -7,7 +7,6 @@
 .cfa-title {
   color: var(--primary-700, #0c1a81);
 
-  /* Mobile Headings */
   font-family: Lora;
   font-size: 40px;
   font-style: normal;
@@ -15,8 +14,7 @@
   line-height: 120%;
   text-align: left;
 
-  /* 120% */
-  @include media-breakpoint-down(tablet) {
+  @include media-breakpoint-down(desktop) {
     font-size: 20px;
   }
 
@@ -29,43 +27,53 @@
 .featured-courses {
   padding: 16px;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  justify-content: center;
 
-  .description {
-    margin-top: 8px;
-    color: $color-shades-black;
+  .featured-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
-    font-family: Open Sans;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 36px;
+    .description {
+      margin-top: 8px;
+      color: $color-shades-black;
 
-  }
+      font-family: Open Sans;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 36px;
 
-  .featured-course-list {
-    background: $color-shades-white;
-    padding: 16px 0;
+    }
+
+    .featured-course-list {
+      background: $color-shades-white;
+      padding: 16px 0;
+    }
   }
 
   @include media-breakpoint-down(desktop) {
-    .description {
-      font-size: 14px;
-      line-height: 18px;
+    .featured-content {
+      .description {
+        font-size: 14px;
+        line-height: 18px;
 
+      }
     }
   }
 
 
   @include media-breakpoint-up(tablet) {
     padding: 30px 16px;
-    width: 580px;
 
-    #featured {
-      .grid {
-        .item:last-of-type {
-          display: none;
+    .featured-content {
+      width: 580px;
+
+      #featured {
+        .grid {
+          .item:last-of-type {
+            display: none;
+          }
         }
       }
     }
