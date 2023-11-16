@@ -201,5 +201,13 @@ table {
     display: block;
   }
 }
+@media (min-width: 1440px) {
+  .featured-courses {
+    padding: 105px 148px 0;
+  }
+  .featured-courses .featured-content .featured-course-list {
+    background: #FFFFFF;
+  }
+}
 
 /*# sourceMappingURL=featured_courses.css.map */

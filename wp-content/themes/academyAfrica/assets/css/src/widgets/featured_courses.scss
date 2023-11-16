@@ -107,7 +107,16 @@
         }
       }
     }
+  }
 
+  @include media-breakpoint-up(large){
+    padding: 105px 148px 0;
+
+    .featured-content {
+      .featured-course-list {
+        background: $color-shades-white;
+      }
+    }
 
   }
 }
