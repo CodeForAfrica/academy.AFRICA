@@ -18,8 +18,15 @@ $font-family_3: Open Sans;
       height: 475.2px;
       width: 100%;
       background-image: url("../../../images/hero.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    @include media-breakpoint-up(large) {
+      height: 792px
     }
   }
+
   .content-parent {
     display: flex;
     flex-direction: column;
@@ -46,7 +53,7 @@ $font-family_3: Open Sans;
             margin: 16px 0;
           }
 
-          @include media-breakpoint-up(desktop){
+          @include media-breakpoint-up(desktop) {
             font-size: 48px;
             line-height: 54px;
 
@@ -69,6 +76,7 @@ $font-family_3: Open Sans;
         padding: 16px;
         background: $color-shades-white;
         width: 100%;
+        gap: 10px;
 
         .metric {
           border-right: 1px solid $color-neutral-500;
@@ -94,7 +102,7 @@ $font-family_3: Open Sans;
             font-weight: 400;
           }
 
-          @include media-breakpoint-up(desktop){
+          @include media-breakpoint-up(desktop) {
             .numbers {
               font-size: 39px;
               line-height: 47px;
@@ -124,11 +132,21 @@ $font-family_3: Open Sans;
       .metrics-content {
         margin: 0 -16px;
         box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+
+        .metrics {
+          gap: 80px;
+        }
       }
     }
 
+    @include media-breakpoint-up(large) {
+      margin-top: -488px;
+      max-width: 1144px;
 
-
+      .metrics-content {
+        margin: unset;
+      }
+    }
   }
 
   .mask-image {
