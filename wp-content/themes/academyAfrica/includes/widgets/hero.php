@@ -128,9 +128,6 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                     }
                     ?>
                 </div>
-                <img height="217" alt="mask" class="mask" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.png' ?>">
-            </div>
-            <div class="content-parent">
                 <div class="metrics-content">
                     <div class="metrics">
                         <?
