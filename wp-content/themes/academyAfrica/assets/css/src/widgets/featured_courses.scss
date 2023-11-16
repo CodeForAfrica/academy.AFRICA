@@ -27,10 +27,10 @@
 }
 
 .featured-courses {
-
-  .title-description {
-    padding: 20px;
-  }
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
   .description {
     margin-top: 8px;
@@ -46,122 +46,8 @@
   }
 
   .featured-course-list {
-    background: $color-neutral-50;
-    margin: 100px 0;
-    padding: 72px 20px;
-  }
-
-  .content {
-    background: var(--neutral-50, #f7f9fd);
-    box-sizing: border-box;
-    padding: 72px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 45px;
-
-    .card {
-      flex: 1;
-      width: calc(33.33% - 30px);
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-      display: flex;
-      border: 0.5px solid var(--neutral-200, #cccfda);
-      background: var(--shades-white, #fff);
-
-      @include media-breakpoint-down(tablet) {
-        width: 100%;
-      }
-
-      .logo {
-        width: 100%;
-      }
-
-      .card-content {
-        padding: 20px;
-
-        .card-title {
-          color: var(--primary-700, #0c1a81);
-          font-family: Open Sans;
-          font-size: 18px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: 24px;
-          /* 133.333% */
-          height: 71px;
-          overflow: hidden;
-
-          p {
-            text-overflow: ellipsis;
-            height: 71px;
-          }
-        }
-
-        .card-footer {
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          margin-top: 20px;
-
-          .student-count {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--shades-black, #000);
-            align-items: flex-end;
-            /* Card/ Recommendations */
-            font-family: Open Sans;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 18px;
-          }
-
-          .tag {
-            width: 54px;
-            height: 25px;
-            color: var(--shades-white, #fff);
-            text-align: center;
-
-            /* Card/PayTab */
-            font-family: Open Sans;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 18px;
-            /* 128.571% */
-          }
-
-          .free {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--green-500, #10b981);
-          }
-        }
-      }
-
-      @include media-breakpoint-down(tablet) {
-        min-width: calc(100% - 30px);
-      }
-
-      .provider {
-        color: var(--secondary-500, #ed1c24);
-
-        /* Card/ Organisation name */
-        font-family: Open Sans;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 18px;
-        text-transform: uppercase;
-        margin-top: 40px;
-        height: 18px;
-        overflow: hidden;
-      }
-    }
+    background: $color-shades-white;
+    padding: 16px 0;
   }
 
   @include media-breakpoint-down(tablet) {

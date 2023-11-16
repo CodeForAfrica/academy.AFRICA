@@ -157,6 +157,16 @@ table {
   height: 100%;
   justify-content: space-between;
   background: #FFFFFF;
+  min-height: 200px;
+}
+.learndash-course-grid .grid .item article .content .top-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 2;
+}
+.learndash-course-grid .grid .item article .content .top-meta .entry-title {
+  flex: 1;
 }
 .learndash-course-grid .grid .item article .content .top-meta .entry-title a {
   color: #0C1A81;
@@ -165,7 +175,7 @@ table {
   line-height: 24px;
 }
 .learndash-course-grid .grid .item article .content .top-meta .author {
-  margin-top: 40px;
+  flex: 1;
   color: #ED1C24;
   text-transform: uppercase;
   font-size: 14px;
@@ -179,6 +189,7 @@ table {
   display: none;
 }
 .learndash-course-grid .grid .item article .content .bottom-meta {
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
