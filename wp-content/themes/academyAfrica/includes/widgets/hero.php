@@ -121,10 +121,31 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                         <? echo $sign_up_label ?>
                     </a>
                 </div>
-                <img height="217" alt="mask" class="mask" 
-                src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.png' ?>">
+                <div class="metrics-content">
+                    <div class="metrics">
+                        <?
+                        if (!empty($settings['metrics'])) {
+                            foreach ($settings['metrics'] as $item) {
+                                $metric = esc_html($item['metric']);
+                                $label = esc_html($item['label']);
+                        ?>
+                                <div class="metric">
+                                    <h2 class="numbers">
+                                        <? echo $metric ?>
+                                    </h2>
+                                    <p class="label">
+                                        <? echo $label ?>
+                                    </p>
+                                </div>
+                        <?
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+                <!-- <img height="217" alt="mask" class="mask" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.png' ?>"> -->
             </div>
-            <div class="content-parent">
+            <!-- <div class="content-parent">
                 <div class="metrics-content">
                     <div class="metrics">
                         <?
@@ -148,7 +169,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                     </div>
                 </div>
                 <div class="mask"></div>
-            </div>
+            </div> -->
         </div>
 <?
     }
