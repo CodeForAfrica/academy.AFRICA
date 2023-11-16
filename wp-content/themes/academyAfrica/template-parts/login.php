@@ -13,13 +13,9 @@
         <p class="subtitle">
             Sign up to access all the features on academy.AFRICA
         </p>
-        <!-- <div class="google">
-            <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="">
-            <button class="sign-in-with-google">
-                Sign in with Google
-            </button>
-        </div> -->
-        <? echo do_shortcode('[TheChamp-Login]') ?>
+        <div class="social-login">
+            <?php echo do_shortcode('[TheChamp-Login show_username="ON" style="height:40px; width: 100%"]') ?>
+        </div>
         <div class="content-divider">
             <div></div><span>or</span>
             <div></div>

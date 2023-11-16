@@ -86,7 +86,7 @@ label {
     font-size: 18px;
     transition: transform $base-duration ease;
     z-index: 11;
-    top: -30px;
+    top: -15px;
   }
 
   header {
@@ -152,6 +152,12 @@ label {
       font-style: normal;
       font-weight: 700;
       line-height: 24px;
+    }
+  }
+  .social-login {
+    margin-top: 22px;
+    ul {
+      margin: 0;
     }
   }
   .content-divider {

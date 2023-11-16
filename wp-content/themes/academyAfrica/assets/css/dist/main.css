@@ -1013,7 +1013,7 @@ label {
   font-size: 18px;
   transition: transform 200ms ease;
   z-index: 11;
-  top: -30px;
+  top: -15px;
 }
 .modal-content header {
   position: relative;
@@ -1072,6 +1072,12 @@ label {
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
+}
+.modal-content .social-login {
+  margin-top: 22px;
+}
+.modal-content .social-login ul {
+  margin: 0;
 }
 .modal-content .content-divider {
   display: flex;
