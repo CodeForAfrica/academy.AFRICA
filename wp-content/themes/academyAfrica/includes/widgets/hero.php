@@ -117,12 +117,17 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                             <? echo $title ?>
                         </div>
                     </div>
-                    <a class="button cta large signup-button" href="<?php echo $sign_up_url; ?>">
-                        <? echo $sign_up_label ?>
-                    </a>
+                    <?
+                    if (!is_user_logged_in()) {
+                    ?>
+                        <button class="button cta large signup-button" onclick="openModal('register')">
+                            <? echo $sign_up_label ?>
+                        </button>
+                    <?
+                    }
+                    ?>
                 </div>
-                <img height="217" alt="mask" class="mask" 
-                src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.png' ?>">
+                <img height="217" alt="mask" class="mask" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.png' ?>">
             </div>
             <div class="content-parent">
                 <div class="metrics-content">

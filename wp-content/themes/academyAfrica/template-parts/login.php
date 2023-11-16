@@ -13,12 +13,13 @@
         <p class="subtitle">
             Sign up to access all the features on academy.AFRICA
         </p>
-        <div class="google">
+        <!-- <div class="google">
             <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="">
             <button class="sign-in-with-google">
                 Sign in with Google
             </button>
-        </div>
+        </div> -->
+        <? echo do_shortcode('[TheChamp-Login]') ?>
         <div class="content-divider">
             <div></div><span>or</span>
             <div></div>
