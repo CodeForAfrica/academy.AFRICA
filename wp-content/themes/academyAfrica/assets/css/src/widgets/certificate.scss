@@ -193,6 +193,8 @@
   }
 
   @include media-breakpoint-up(tablet) {
+    padding: 30px 16px;
+
     .certificate-header {
       width: 50%;
     }
@@ -204,6 +206,7 @@
   }
 
   @include media-breakpoint-up(desktop) {
+
     p {
       font-size: 24px;
       line-height: 36px;
@@ -214,6 +217,10 @@
     }
 
     .certificate-showcase {
+      background: $color-neutral-50;
+      width: 1144px;
+      padding: 0 72px;
+
       .certificate {
         width: 478px;
 
@@ -316,6 +323,24 @@
           line-height: 28px;
         }
       }
+    }
+  }
+
+  @include media-breakpoint-up(large) {
+    padding: 0 148px;
+    background: $color-shades-white;
+
+    .certificate-showcase {
+      padding: 0 72px;
+    }
+  }
+
+  @include media-breakpoint-up(xlarge) {
+    padding: 0 388px 72px;
+
+    .certificate-showcase {
+      padding: 0 72px;
+      background: $color-neutral-50;
     }
   }
 }

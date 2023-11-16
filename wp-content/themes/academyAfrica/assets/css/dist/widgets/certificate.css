@@ -272,6 +272,9 @@ table {
   margin-top: 10px;
 }
 @media (min-width: 768px) {
+  .certificate-root {
+    padding: 30px 16px;
+  }
   .certificate-root .certificate-header {
     width: 50%;
   }
@@ -287,6 +290,11 @@ table {
   }
   .certificate-root .certificate-header {
     display: none;
+  }
+  .certificate-root .certificate-showcase {
+    background: #F7F9FD;
+    width: 1144px;
+    padding: 0 72px;
   }
   .certificate-root .certificate-showcase .certificate {
     width: 478px;
@@ -353,6 +361,24 @@ table {
   .certificate-root .certificate-showcase .certificate-showcase-content .showcase-text {
     font-size: 18px;
     line-height: 28px;
+  }
+}
+@media (min-width: 1440px) {
+  .certificate-root {
+    padding: 0 148px;
+    background: #FFFFFF;
+  }
+  .certificate-root .certificate-showcase {
+    padding: 0 72px;
+  }
+}
+@media (min-width: 1920px) {
+  .certificate-root {
+    padding: 0 388px 72px;
+  }
+  .certificate-root .certificate-showcase {
+    padding: 0 72px;
+    background: #F7F9FD;
   }
 }
 

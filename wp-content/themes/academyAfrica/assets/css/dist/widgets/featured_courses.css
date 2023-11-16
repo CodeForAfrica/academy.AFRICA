@@ -182,7 +182,7 @@ table {
 }
 @media (min-width: 1152px) {
   .featured-courses {
-    padding: 72px 0;
+    padding: 72px 0 0;
   }
   .featured-courses .featured-content {
     width: 100%;
