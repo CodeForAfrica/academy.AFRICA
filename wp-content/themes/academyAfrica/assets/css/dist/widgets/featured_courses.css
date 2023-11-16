@@ -117,29 +117,6 @@ table {
   cursor: not-allowed;
 }
 
-.flex {
-  display: flex;
-}
-
-.cfa-title {
-  color: var(--primary-700, #0c1a81);
-  font-family: Lora;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 120%;
-  text-align: left;
-}
-@media (min-width: 1152px) {
-  .cfa-title {
-    font-size: 40px;
-  }
-}
-.cfa-title::after {
-  left: unset;
-  transform: unset;
-}
-
 .featured-courses {
   padding: 16px;
   display: flex;
@@ -150,6 +127,23 @@ table {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.featured-courses .featured-content .title-description .cfa-title {
+  color: #0C1A81;
+  font-family: Lora;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: left;
+}
+@media (min-width: 1152px) {
+  .featured-courses .featured-content .title-description .cfa-title {
+    font-size: 40px;
+  }
+}
+.featured-courses .featured-content .title-description .cfa-title::after {
+  left: unset;
+  transform: unset;
 }
 .featured-courses .featured-content .description {
   margin-top: 8px;

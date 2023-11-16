@@ -1,29 +1,5 @@
 @use "../abstracts/" as *;
 
-.flex {
-  display: flex;
-}
-
-.cfa-title {
-  color: var(--primary-700, #0c1a81);
-
-  font-family: Lora;
-  font-size: 20px;
-
-  font-style: normal;
-  font-weight: 700;
-  line-height: 120%;
-  text-align: left;
-
-  @include media-breakpoint-up(desktop) {
-    font-size: 40px;
-  }
-
-  &::after {
-    left: unset;
-    transform: unset;
-  }
-}
 
 .featured-courses {
   padding: 16px;
@@ -35,6 +11,27 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    .title-description {
+      .cfa-title {
+        color: $color-primary-700;
+
+        font-family: Lora;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        text-align: left;
+
+        @include media-breakpoint-up(desktop) {
+          font-size: 40px;
+        }
+
+        &::after {
+          left: unset;
+          transform: unset;
+        }
+      }
+    }
 
     .description {
       margin-top: 8px;
@@ -62,7 +59,6 @@
 
     .certificate-root {
       background-color: $color-shades-white;
-      // padding: 40px 16px;
 
       p {
         color: $color-shades-black;
@@ -79,7 +75,6 @@
         display: flex;
         flex-direction: column;
         background-color: $color-shades-white;
-        // padding: 16px;
         gap: 40px;
         margin-top: 16px;
 
