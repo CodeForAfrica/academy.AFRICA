@@ -472,6 +472,9 @@ table {
   .featured-courses {
     padding: 80px 148px 0;
   }
+  .featured-courses .featured-content .title-description {
+    margin-left: 0;
+  }
   .featured-courses .featured-content .featured-course-list {
     background: #FFFFFF;
   }
@@ -479,9 +482,6 @@ table {
 @media (min-width: 1920px) {
   .featured-courses {
     padding: 80px 388px 0;
-  }
-  .featured-courses .featured-content .title-description {
-    margin-left: 0;
   }
   .featured-courses .featured-content .featured-course-list {
     background: #F7F9FD;

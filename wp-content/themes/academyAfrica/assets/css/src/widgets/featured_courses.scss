@@ -463,6 +463,10 @@
     padding: 80px 148px 0;
 
     .featured-content {
+      .title-description {
+        margin-left: 0;
+      }
+
       .featured-course-list {
         background: $color-shades-white;
       }
@@ -474,9 +478,6 @@
     padding: 80px 388px 0;
 
     .featured-content {
-      .title-description {
-        margin-left: 0;
-      }
 
       .featured-course-list {
         background: $color-neutral-50

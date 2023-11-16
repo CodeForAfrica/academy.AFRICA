@@ -4,12 +4,13 @@ $font-family_1: Lora;
 $font-family_2: Open Sans;
 
 .connect {
-    padding: 20px;
+    padding: 16px;
 
     .title-wrapper {
         display: flex;
         justify-content: start;
         left: unset;
+
         .cfa-title {
             h4 {
                 font-size: 20px;
@@ -23,63 +24,103 @@ $font-family_2: Open Sans;
         }
     }
 
-
-    .share-text {
-        .share {
-            color: $color-shades-black;
-            text-align: center;
-            font-family: $font-family_2;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 18px;
-            margin: 0;
-        }
-    }
-
-    .africa {
-        width: 100%;
+    .content {
         display: flex;
-        justify-content: center;
-
-        .africa-img {
-            width: 300px;
-        }
-    }
-
-    .join-slack {
-        display: flex;
-        justify-content: center;
         flex-direction: column;
-        margin: 50px 0;
-        gap: 10px;
+        justify-content: center;
 
         .share-text {
-            display: none;
+            .share {
+                color: $color-shades-black;
+                text-align: center;
+                font-family: $font-family_2;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 18px;
+                margin: 0;
+            }
         }
 
-        .become-a-member {
-            color: $color-primary-700;
-            font-family: $font-family_2;
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 28px;
-            text-align: center;
+        .africa {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            .africa-img {
+                width: 300px;
+            }
         }
 
-        .button {
-            width: fit-content;
-            align-self: center;
+        .join-slack {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 50px 0;
+            gap: 10px;
+
+            .share-text {
+                display: none;
+            }
+
+            .become-a-member {
+                color: $color-primary-700;
+                font-family: $font-family_2;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 28px;
+                text-align: center;
+            }
+
+            .button {
+                width: fit-content;
+                align-self: center;
+            }
+        }
+    }
+
+
+    @include media-breakpoint-up(tablet) {
+        .title-wrapper {
+            justify-content: center;
+
+            .cfa-title {
+                h4 {
+                    font-size: 20px;
+                }
+
+                &::after {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
         }
     }
 
     @include media-breakpoint-up(desktop) {
+        padding: 134px 40px;
+
+        .title-wrapper {
+            justify-content: start;
+
+            .cfa-title {
+                h4 {
+                    font-size: 40px;
+                    line-height: 48px;
+                }
+
+                &::after {
+                    left: unset;
+                    transform: unset;
+                }
+            }
+        }
 
 
         .content {
-            display: flex;
             justify-content: start;
+            flex-direction: row;
 
             .share-text {
                 display: none;
@@ -88,27 +129,36 @@ $font-family_2: Open Sans;
             .africa {
                 flex: 1;
 
-                .africa-img{
+                .africa-img {
                     width: 500px;
                 }
             }
 
             .join-slack {
                 flex: 1;
+
                 .share-text {
                     display: block;
 
-                    .share{
+                    .share {
                         font-size: 24px;
                         line-height: 36px;
                         margin-bottom: 50px;
                     }
-                  
+
                 }
 
             }
         }
 
+    }
+
+    @include media-breakpoint-up(large) {
+        padding: 148px 120px;
+    }
+
+    @include media-breakpoint-up(large) {
+        padding: 134px 388px;
     }
 
 }
