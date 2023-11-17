@@ -310,5 +310,10 @@ table {
     gap: 40px 120px;
   }
 }
+@media (min-width: 1440px) {
+  .patners-root {
+    padding: 120px 388px;
+  }
+}
 
 /*# sourceMappingURL=partners.css.map */
