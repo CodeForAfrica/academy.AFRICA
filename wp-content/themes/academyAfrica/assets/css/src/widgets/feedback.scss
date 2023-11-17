@@ -101,7 +101,7 @@
   }
 
   @include media-breakpoint-up(tablet) {
-    padding: 80px 162px 0;
+    padding: 50px 147px 50px;
 
     .title {
       justify-content: center;
@@ -115,7 +115,11 @@
     }
 
     .content {
-      padding: 20px 48px;
+      align-items: center;
+
+      .card {
+        width: 350px;
+      }
     }
   }
 
@@ -129,6 +133,7 @@
       .cfa-title {
         font-size: 40px;
         line-height: 48px;
+
         &::after {
           left: unset;
           transform: unset;
@@ -180,12 +185,15 @@
 
   @include media-breakpoint-up(large) {
     .title {
-      padding: 80px 148px;
+      padding: 0 148px;
     }
   }
+
   @include media-breakpoint-up(xlarge) {
+    padding: 97px 0;
+
     .title {
-      padding: 97px 388px;
+      padding: 0 388px;
     }
   }
 }

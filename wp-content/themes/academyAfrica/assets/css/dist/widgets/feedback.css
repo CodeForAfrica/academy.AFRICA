@@ -204,7 +204,7 @@ table {
 }
 @media (min-width: 768px) {
   .feedback {
-    padding: 80px 162px 0;
+    padding: 50px 147px 50px;
   }
   .feedback .title {
     justify-content: center;
@@ -214,7 +214,10 @@ table {
     transform: translateX(-50%);
   }
   .feedback .content {
-    padding: 20px 48px;
+    align-items: center;
+  }
+  .feedback .content .card {
+    width: 350px;
   }
 }
 @media (min-width: 1152px) {
@@ -265,12 +268,15 @@ table {
 }
 @media (min-width: 1440px) {
   .feedback .title {
-    padding: 80px 148px;
+    padding: 0 148px;
   }
 }
 @media (min-width: 1920px) {
+  .feedback {
+    padding: 97px 0;
+  }
   .feedback .title {
-    padding: 97px 388px;
+    padding: 0 388px;
   }
 }
 
