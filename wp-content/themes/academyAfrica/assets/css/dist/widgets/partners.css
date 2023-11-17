@@ -192,7 +192,7 @@ table {
   line-height: 24px;
   font-weight: 800;
 }
-@media (min-width: 768px) {
+@media (min-width: 1152px) {
   .patners-root .other-partners .other-partners-title {
     font-size: 32px;
     font-weight: 600;
@@ -217,6 +217,44 @@ table {
 .patners-root .other-partners .partner-tag .partner-tag-content {
   padding: 5px 0;
   font-family: Open Sans;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+@media (min-width: 768px) {
+  .patners-root {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  .patners-root .partners {
+    gap: 20px;
+  }
+  .patners-root .partners .title {
+    justify-content: center;
+  }
+  .patners-root .partners .title .cfa-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .patners-root .partners .partner-content {
+    justify-content: center;
+    padding: 0;
+  }
+  .patners-root .partners .partner-content .partner {
+    width: 170px;
+    height: 97px;
+    flex-basis: calc(33.33% - 36px);
+  }
+  .patners-root .other-partners {
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .patners-root .other-partners .other-partners-content {
+    justify-content: center;
+  }
 }
 
 /*# sourceMappingURL=partners.css.map */

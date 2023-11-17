@@ -85,7 +85,7 @@
       line-height: 24px;
       font-weight: 800;
 
-      @include media-breakpoint-up(tablet) {
+      @include media-breakpoint-up(desktop) {
         font-size: 32px;
         font-weight: 600;
         line-height: 48px;
@@ -111,6 +111,52 @@
       .partner-tag-content {
         padding: 5px 0;
         font-family: Open Sans;
+        font-size: 18px;
+        line-height: 28px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(tablet) {
+    padding: 20px 16px;
+    gap: 20px;
+
+    .partners {
+      gap: 20px;
+
+      .title {
+        justify-content: center;
+
+        .cfa-title {
+          &::after {
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+      }
+
+      .partner-content {
+        justify-content: center;
+        padding: 0;
+
+        .partner {
+          width: 170px;
+          height: 97px;
+          flex-basis: calc(33.33% - 36px);
+        }
+      }
+    }
+
+    .other-partners {
+      width: 100%;
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .other-partners-content {
+        justify-content: center;
       }
     }
   }
