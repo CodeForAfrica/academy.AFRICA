@@ -64,7 +64,6 @@ final class Widget
         require_once(__DIR__ . '/join_our_slack.php');
         require_once(__DIR__ . '/about.php');
         require_once(__DIR__ . '/header.php');
-        require_once(__DIR__ . '/certificate.php');
 
         $widgets_manager->register_widget_type(new \Academy_Africa_Hero());
         $widgets_manager->register_widget_type(new \Academy_Africa_All_Courses());
@@ -78,7 +77,6 @@ final class Widget
         $widgets_manager->register(new \Academy_Africa_Join_Our_Slack());
         $widgets_manager->register(new \Academy_Africa_About_Section());
         $widgets_manager->register(new \Academy_Africa_Header_Section());
-        $widgets_manager->register(new \Academy_Africa_Certificate());
     }
 
     function register_styles()
@@ -98,7 +96,6 @@ final class Widget
             'academy-africa-join-our-slack' => 'join_our_slack.css',
             'academy-africa-about-section' => 'about_section.css',
             'academy-africa-header-section' => 'header_section.css',
-            'academy-africa-certificate' => 'certificate.css',
             'academy-africa-learndash-course-grid' => 'learndash_course_grid.css',
         ];
 

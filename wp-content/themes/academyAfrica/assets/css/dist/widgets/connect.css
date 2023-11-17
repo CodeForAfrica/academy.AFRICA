@@ -118,7 +118,7 @@ table {
 }
 
 .connect {
-  padding: 20px;
+  padding: 16px;
 }
 .connect .title-wrapper {
   display: flex;
@@ -133,7 +133,12 @@ table {
   left: unset;
   transform: unset;
 }
-.connect .share-text .share {
+.connect .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.connect .content .share-text .share {
   color: #000000;
   text-align: center;
   font-family: Open Sans;
@@ -143,25 +148,25 @@ table {
   line-height: 18px;
   margin: 0;
 }
-.connect .africa {
+.connect .content .africa {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.connect .africa .africa-img {
+.connect .content .africa .africa-img {
   width: 300px;
 }
-.connect .join-slack {
+.connect .content .join-slack {
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: 50px 0;
   gap: 10px;
 }
-.connect .join-slack .share-text {
+.connect .content .join-slack .share-text {
   display: none;
 }
-.connect .join-slack .become-a-member {
+.connect .content .join-slack .become-a-member {
   color: #0C1A81;
   font-family: Open Sans;
   font-size: 18px;
@@ -170,14 +175,40 @@ table {
   line-height: 28px;
   text-align: center;
 }
-.connect .join-slack .button {
+.connect .content .join-slack .button {
   width: fit-content;
   align-self: center;
 }
+@media (min-width: 768px) {
+  .connect .title-wrapper {
+    justify-content: center;
+  }
+  .connect .title-wrapper .cfa-title h4 {
+    font-size: 20px;
+  }
+  .connect .title-wrapper .cfa-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 @media (min-width: 1152px) {
-  .connect .content {
-    display: flex;
+  .connect {
+    padding: 134px 40px;
+  }
+  .connect .title-wrapper {
     justify-content: start;
+  }
+  .connect .title-wrapper .cfa-title h4 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .connect .title-wrapper .cfa-title::after {
+    left: unset;
+    transform: unset;
+  }
+  .connect .content {
+    justify-content: start;
+    flex-direction: row;
   }
   .connect .content .share-text {
     display: none;
@@ -198,6 +229,16 @@ table {
     font-size: 24px;
     line-height: 36px;
     margin-bottom: 50px;
+  }
+}
+@media (min-width: 1440px) {
+  .connect {
+    padding: 148px 120px;
+  }
+}
+@media (min-width: 1920px) {
+  .connect {
+    padding: 134px 388px;
   }
 }
 

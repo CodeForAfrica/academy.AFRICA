@@ -1,174 +1,488 @@
 @use "../abstracts/" as *;
 
-.flex {
-  display: flex;
-}
-
-.cfa-title {
-  color: var(--primary-700, #0c1a81);
-
-  /* Mobile Headings */
-  font-family: Lora;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 120%;
-  text-align: left;
-
-  /* 120% */
-  @include media-breakpoint-down(tablet) {
-    font-size: 20px;
-  }
-
-  &::after {
-    left: unset;
-    transform: unset;
-  }
-}
 
 .featured-courses {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 
-  .title-description {
-    padding: 20px;
-  }
-
-  .description {
-    margin-top: 8px;
-    color: $color-shades-black;
-    max-width: 800px;
-
-    font-family: Open Sans;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 36px;
-
-  }
-
-  .featured-course-list {
-    background: $color-neutral-50;
-    margin: 100px 0;
-    padding: 72px 20px;
-  }
-
-  .content {
-    background: var(--neutral-50, #f7f9fd);
-    box-sizing: border-box;
-    padding: 72px 20px;
+  .featured-content {
     display: flex;
-    flex-wrap: wrap;
-    gap: 45px;
+    flex-direction: column;
+    gap: 16px;
 
-    .card {
-      flex: 1;
-      width: calc(33.33% - 30px);
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-      display: flex;
-      border: 0.5px solid var(--neutral-200, #cccfda);
-      background: var(--shades-white, #fff);
+    .title-description {
+      .cfa-title {
+        color: $color-primary-700;
 
-      @include media-breakpoint-down(tablet) {
-        width: 100%;
+        font-family: Lora;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        text-align: left;
+
+        @include media-breakpoint-up(desktop) {
+          font-size: 40px;
+        }
+
+        &::after {
+          left: unset;
+          transform: unset;
+        }
+      }
+    }
+
+    .description {
+      margin-top: 8px;
+      color: $color-shades-black;
+
+      font-family: Open Sans;
+      font-style: normal;
+      font-weight: 400;
+
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .featured-course-list {
+      background: $color-shades-white;
+      padding: 16px 0;
+    }
+  }
+
+  .featured-certificate {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .certificate-root {
+      background-color: $color-shades-white;
+
+      p {
+        color: $color-shades-black;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 400;
       }
 
-      .logo {
-        width: 100%;
+      .certificate-header {
+        text-align: center;
       }
 
-      .card-content {
-        padding: 20px;
+      .certificate-showcase {
+        display: flex;
+        flex-direction: column;
+        background-color: $color-shades-white;
+        gap: 40px;
+        margin-top: 16px;
 
-        .card-title {
-          color: var(--primary-700, #0c1a81);
-          font-family: Open Sans;
-          font-size: 18px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: 24px;
-          /* 133.333% */
-          height: 71px;
-          overflow: hidden;
+        .certificate {
+          flex: 1;
+          background: $color-shades-white;
+          box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          width: 312px;
+          align-self: center;
 
-          p {
-            text-overflow: ellipsis;
-            height: 71px;
+          .certificate-content {
+            padding: 15px 18px 0;
+
+            .certificate-content-header {
+              p {
+                font-size: 15px;
+              }
+
+              hr {
+                background: $color-primary-700;
+                height: 3px;
+                flex: 1;
+              }
+
+              .certificate-type {
+                font-weight: bold;
+              }
+
+              .certificate-header-logo {
+                display: flex;
+                gap: 10px;
+
+                .logo {
+                  width: 54px;
+                  height: 54px;
+                  margin-top: -20px;
+                }
+              }
+            }
+          }
+
+          .certificate-footer {
+            background: $color-primary-700;
+            display: flex;
+            justify-content: space-between;
+            padding: 18px;
+
+            .company-details {
+              display: flex;
+              gap: 10px;
+
+              .brand-details {
+                display: flex;
+                gap: 5px;
+
+                .logo {
+                  width: 16px;
+                  height: 16px;
+
+                }
+
+                .company-name {
+                  font-size: 5.616px;
+                  color: $color-neutral-50;
+                  font-weight: 600;
+                }
+              }
+
+              .artwork {
+                width: 28.364px;
+                height: 16.456px;
+              }
+            }
+
+            .signature {
+              align-items: flex-end;
+              display: flex;
+              flex-direction: column;
+
+              .signature-img {
+                width: 47px;
+                height: 11px;
+              }
+
+              p {
+                color: $color-shades-white;
+                font-size: 4.368px;
+                font-weight: 400;
+                line-height: 5.616px;
+              }
+
+              .signee-role {
+                text-transform: uppercase;
+              }
+            }
+          }
+
+          .certificate-site-name {
+            background: $color-secondary-500;
+            text-align: right;
+            padding: 0px 18px;
+
+            p {
+              color: $color-shades-white;
+              font-size: 3.12px;
+              font-weight: 400;
+              line-height: 5.616px;
+            }
+
+          }
+
+          .course-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            .title {
+              font-size: 5.616px;
+              font-weight: 400;
+              line-height: 8.736px;
+            }
+
+            .name {
+              font-size: 9.98px;
+              line-height: 14.976px;
+              font-weight: 400;
+            }
+
+            .bold-text {
+              font-weight: 700;
+            }
+
+            .student {
+              text-align: left;
+            }
+
+            .course {
+              text-align: right;
+            }
+
           }
         }
 
-        .card-footer {
+        .certificate-showcase-content {
           display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          margin-top: 20px;
+          flex-direction: column;
+          align-items: center;
+          flex: 1;
 
-          .student-count {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--shades-black, #000);
-            align-items: flex-end;
-            /* Card/ Recommendations */
-            font-family: Open Sans;
+
+          .showcase-header {
+            display: none;
+          }
+
+          .showcase-text {
+            color: $color-primary-700;
             font-size: 14px;
-            font-style: normal;
             font-weight: 400;
             line-height: 18px;
           }
 
-          .tag {
-            width: 54px;
-            height: 25px;
-            color: var(--shades-white, #fff);
-            text-align: center;
-
-            /* Card/PayTab */
-            font-family: Open Sans;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 18px;
-            /* 128.571% */
-          }
-
-          .free {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--green-500, #10b981);
+          .all-courses {
+            margin-top: 10px;
           }
         }
       }
 
-      @include media-breakpoint-down(tablet) {
-        min-width: calc(100% - 30px);
+      @include media-breakpoint-up(tablet) {
+        padding: 30px 16px;
+
+        .certificate-header {
+          width: 50%;
+        }
+
+        .certificate-showcase {
+          flex-direction: row;
+          align-items: center;
+        }
       }
 
-      .provider {
-        color: var(--secondary-500, #ed1c24);
+      @include media-breakpoint-up(desktop) {
+        padding: 0;
 
-        /* Card/ Organisation name */
-        font-family: Open Sans;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 18px;
-        text-transform: uppercase;
-        margin-top: 40px;
-        height: 18px;
-        overflow: hidden;
+        p {
+          font-size: 24px;
+          line-height: 36px;
+        }
+
+        .certificate-header {
+          display: none;
+        }
+
+        .certificate-showcase {
+          background: $color-neutral-50;
+          width: 1144px;
+          padding: 0 72px 72px;
+          margin: 0;
+
+          .certificate {
+            width: 478px;
+
+            .certificate-content {
+              padding: 26px 29px 0;
+
+              .certificate-content-header {
+                p {
+                  font-size: 22.986px;
+                }
+
+                .certificate-header-logo {
+                  display: flex;
+                  gap: 14px;
+
+                  .logo {
+                    width: 90px;
+                    height: 90px;
+                    margin-top: -40px;
+                  }
+                }
+              }
+            }
+
+            .certificate-footer {
+              padding: 29px;
+
+              .company-details {
+
+                .brand-details {
+                  .logo {
+                    width: 24px;
+                    height: 24px;
+
+                  }
+
+                  .company-name {
+                    font-size: 8.62px;
+                  }
+                }
+
+                .artwork {
+                  width: 43.534px;
+                  height: 25.257px;
+                }
+              }
+
+              .signature {
+                .signature-img {
+                  width: 72.557px;
+                  height: 17.486px;
+                }
+
+                p {
+                  color: $color-shades-white;
+                  font-size: 6.704px;
+                  line-height: 8.62px;
+                }
+              }
+            }
+
+            .certificate-site-name {
+
+              p {
+                font-size: 4.789px;
+                line-height: 8.62px;
+              }
+
+            }
+
+            .course-details {
+              .title {
+                font-size: 8.63px;
+                line-height: 13.408px;
+              }
+
+              .name {
+                font-size: 15.324px;
+                line-height: 22.986px;
+              }
+
+            }
+          }
+
+          .certificate-showcase-content {
+
+            .showcase-header {
+              display: block;
+
+              .certificate-header {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 50px;
+              }
+            }
+
+            .showcase-text {
+              font-size: 18px;
+              line-height: 28px;
+            }
+          }
+        }
+      }
+
+      @include media-breakpoint-up(large) {
+        padding: 0 148px;
+
+        .certificate-showcase {
+          background: $color-shades-white;
+
+        }
+      }
+
+      @include media-breakpoint-up(xlarge) {
+        padding: 0 388px 72px;
+
+        .certificate-showcase {
+          background: $color-neutral-50;
+        }
+      }
+    }
+
+    @include media-breakpoint-up(desktop) {
+      margin: 0;
+    }
+  }
+
+  @include media-breakpoint-up(desktop) {
+    .featured-content {
+      .description {
+        font-size: 24px;
+        line-height: 36px;
       }
     }
   }
 
-  @include media-breakpoint-down(tablet) {
-    .description {
-      font-size: 14px;
-      line-height: 18px;
 
+  @include media-breakpoint-up(tablet) {
+    padding: 30px 16px;
+
+    .featured-content {
+      align-self: center;
+      width: 580px;
+
+      #featured {
+        .grid {
+          .item:last-of-type {
+            display: none;
+          }
+        }
+      }
     }
+
+  }
+
+  @include media-breakpoint-up(desktop) {
+    padding: 72px 0 0;
+
+    .featured-content {
+      width: 100%;
+
+      .title-description {
+        width: 800px;
+        margin-left: 40px;
+      }
+
+      .featured-course-list {
+        padding: 72px 72px 84px;
+        background: $color-neutral-50;
+        width: 1144px;
+        align-self: center;
+      }
+
+
+      #featured {
+        .grid {
+          .item:last-of-type {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-up(large) {
+    padding: 80px 148px 0;
+
+    .featured-content {
+      .title-description {
+        margin-left: 0;
+      }
+
+      .featured-course-list {
+        background: $color-shades-white;
+      }
+    }
+
+  }
+
+  @include media-breakpoint-up(xlarge) {
+    padding: 80px 388px 0;
+
+    .featured-content {
+
+      .featured-course-list {
+        background: $color-neutral-50
+      }
+    }
+
   }
 }
