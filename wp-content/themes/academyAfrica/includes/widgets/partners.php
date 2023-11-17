@@ -129,53 +129,54 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
         $our_partners = $this->get_our_partners();
         $other_partners = $this->get_other_partners();
 ?>
-        <div class="partners">
-            <div class="cfa-title">
-                <h4>
-                    <? echo $title ?>
-                </h4>
-            </div>
-            <div class="partner-content">
-                <?
-                if (!empty($our_partners)) {
-                    foreach ($our_partners as $partner) {
-                        $icon = $partner["icon"];
-                        $name = $partner["name"];
-                        $url = $partner["url"];
-                ?>
-                        <div class="partner">
+        <div class="patners-root">
+            <div class="partners">
+                <div class="title">
+                    <h4 class="cfa-title">
+                        <? echo $title ?>
+                    </h4>
+                </div>
+                <div class="partner-content">
+                    <?
+                    if (!empty($our_partners)) {
+                        foreach ($our_partners as $partner) {
+                            $icon = $partner["icon"];
+                            $name = $partner["name"];
+                            $url = $partner["url"];
+                    ?>
                             <a href="<? echo $url ?>">
-                                <div class="partner-image" style="background: url(<? echo $icon ?>), #ffff 21.124px 41.241px / 85.714% 51.337% no-repeat;">
-                                </div>
+                                <div class="partner" style="background: url(<? echo $icon ?>); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: lightgray;"></div>
                             </a>
-                        </div>
-                <?
+                    <?
+                        }
                     }
-                }
-                ?>
+                    ?>
+                </div>
             </div>
-        </div>
-        <div class="other-partners">
-            <h1 class="other-partners-title"><? echo $other_partners_title ?></h1>
-            <div class="other-partners-content">
-                <?
-                if (!empty($other_partners)) {
-                    foreach ($other_partners as $partner) {
-                        $icon = $partner["icon"];
-                        $name = $partner["name"];
-                        $url = $partner["url"];
-                ?>
-                        <div class="partner-tag">
-                            <div class="partner-tag-content">
-                                <? echo $name ?>
+            <hr />
+            <div class="other-partners">
+                <h1 class="other-partners-title"><? echo $other_partners_title ?></h1>
+                <div class="other-partners-content">
+                    <?
+                    if (!empty($other_partners)) {
+                        foreach ($other_partners as $partner) {
+                            $icon = $partner["icon"];
+                            $name = $partner["name"];
+                            $url = $partner["url"];
+                    ?>
+                            <div class="partner-tag">
+                                <div class="partner-tag-content">
+                                    <? echo $name ?>
+                                </div>
                             </div>
-                        </div>
-                <?
+                    <?
+                        }
                     }
-                }
-                ?>
+                    ?>
+                </div>
             </div>
         </div>
+
 <?
     }
 }
