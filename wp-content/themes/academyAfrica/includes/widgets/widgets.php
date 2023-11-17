@@ -25,7 +25,7 @@ final class Widget
             "academy-africa-modal" => "modal.js"
         ];
         foreach ($scripts as $handle => $file) {
-            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa'], "1.0.2");
+            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa'], "1.0.3");
         }
     }
 
