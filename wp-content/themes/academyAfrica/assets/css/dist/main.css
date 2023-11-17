@@ -1116,6 +1116,14 @@ label {
   font-weight: 400;
   line-height: 26px; /* 162.5% */
 }
+.modal-content .error-message {
+  border-left: 5px solid red;
+  margin-top: 16px;
+}
+.modal-content .error-message p {
+  line-height: 32px;
+  padding: 0 8px;
+}
 .modal-content .modal-footer {
   color: var(--Black, #000);
   display: flex;

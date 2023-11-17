@@ -16,7 +16,6 @@ final class Widget
         // add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
         add_action('elementor/frontend/after_register_scripts', [$this, 'register_scripts']);
         add_action('elementor/frontend/after_register_scripts', [$this, 'register_widget_scripts']);
-        
     }
 
     function register_scripts()
@@ -26,7 +25,7 @@ final class Widget
             "academy-africa-modal" => "modal.js"
         ];
         foreach ($scripts as $handle => $file) {
-            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa']);
+            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa'], "1.0.2");
         }
     }
 
@@ -36,7 +35,7 @@ final class Widget
         foreach ($js_files as $js_file) {
             $js_file_name = basename($js_file, '.js');
             $script_name = 'academy-africa_' . $js_file_name;
-            wp_register_script($script_name, get_stylesheet_directory_uri() . '/assets/js/widgets/' . $js_file_name . '.js');
+            wp_register_script($script_name, get_stylesheet_directory_uri() . '/assets/js/widgets/' . $js_file_name . '.js', array(), "1.0.0");
         }
     }
 

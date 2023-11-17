@@ -199,6 +199,14 @@ label {
     font-weight: 400;
     line-height: 26px; /* 162.5% */
   }
+  .error-message {
+    border-left: 5px solid red;
+    margin-top: 16px;
+    p {
+      line-height: 32px;
+      padding: 0 8px;
+    }
+  }
   .modal-footer {
     color: var(--Black, #000);
     display: flex;

@@ -28,6 +28,7 @@
             <input placeholder="Email" name="email" type="email">
             <label for="password">Password</label>
             <input placeholder="Password" name="password" type="password">
+            <input type="hidden" name="action" value="register">
             <label class="mui-checkbox">
                 <input type="checkbox">
                 <span class="checkmark"></span>
@@ -44,7 +45,7 @@
 </div>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['action'] === 'register')) {
     $user = array(
         'first_name' => $_POST['firstName'],
         'last_name' => $_POST['lastName'],

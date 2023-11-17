@@ -32,4 +32,21 @@ function closeModal(type) {
     content.style.transform = "scale(0)";
     content.style.top = 0;
   }
+  window.location.hash = "";
 }
+
+window.onload = function () {
+  const { hash } = window.location;
+  const loginParams = new URLSearchParams(window.location.search).get("login");
+  if (hash === "#sign-in" || !!loginParams) {
+    openModal("login");
+    if (loginParams) {
+      document.getElementById("login_error").innerText =
+        "Error: The password you entered or the email is incorrect";
+    }
+    return;
+  }
+  if (hash === "#register") {
+    openModal("register");
+  }
+};
