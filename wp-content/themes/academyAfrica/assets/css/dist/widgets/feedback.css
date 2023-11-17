@@ -140,13 +140,13 @@ table {
   background: #F7F9FD;
   box-sizing: border-box;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex-direction: column;
-  padding: 68px 50px 80px;
+  padding: 68px 46px 80px;
   background-image: url("../../../images/feedback_bg_pattern.svg");
   background-repeat: no-repeat;
-  background-size: cover;
   background-position: center;
+  background-size: cover;
   gap: 32px;
 }
 .feedback .content .card {
@@ -201,6 +201,77 @@ table {
 }
 .feedback .content .card .content-card .description a {
   text-decoration-line: underline;
+}
+@media (min-width: 768px) {
+  .feedback {
+    padding: 80px 162px 0;
+  }
+  .feedback .title {
+    justify-content: center;
+  }
+  .feedback .title .cfa-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .feedback .content {
+    padding: 20px 48px;
+  }
+}
+@media (min-width: 1152px) {
+  .feedback {
+    padding: 80px 0;
+  }
+  .feedback .title {
+    padding: 0 40px;
+    justify-content: flex-start;
+  }
+  .feedback .title .cfa-title {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .feedback .title .cfa-title::after {
+    left: unset;
+    transform: unset;
+  }
+  .feedback .content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    background-size: unset;
+  }
+  .feedback .content .card {
+    width: 360px;
+  }
+  .feedback .content .card .content-card .user .avatar {
+    width: 70px;
+    height: 70px;
+  }
+  .feedback .content .card .content-card .user .name-role {
+    flex: 1;
+  }
+  .feedback .content .card .content-card .user .name-role .name {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .feedback .content .card .content-card .user .name-role .role {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .feedback .content .card .content-card .description {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+@media (min-width: 1440px) {
+  .feedback .title {
+    padding: 80px 148px;
+  }
+}
+@media (min-width: 1920px) {
+  .feedback .title {
+    padding: 97px 388px;
+  }
 }
 
 /*# sourceMappingURL=feedback.css.map */

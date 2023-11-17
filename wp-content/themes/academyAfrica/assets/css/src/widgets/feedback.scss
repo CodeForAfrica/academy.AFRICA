@@ -26,17 +26,19 @@
     background: $color-neutral-50;
     box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: column;
-    padding: 68px 50px 80px;
+    padding: 68px 46px 80px;
     background-image: url("../../../images/feedback_bg_pattern.svg");
     background-repeat: no-repeat;
-    background-size: cover;
+    // background-size: cover;
     background-position: center;
+    background-size: cover;
     gap: 32px;
 
     .card {
       background: $color-shades-white;
+
       .content-card {
         display: flex;
         padding: 20px;
@@ -98,145 +100,92 @@
     }
   }
 
-  // .cfa-title {
-  //   color: $color-primary-700;
-  //   font-family: Lora;
-  //   font-size: 40px;
-  //   font-style: normal;
-  //   font-weight: 700;
-  //   line-height: 48px;
-  //   padding-left: 40px;
+  @include media-breakpoint-up(tablet) {
+    padding: 80px 162px 0;
 
-  //   h4 {
-  //     margin: 0;
+    .title {
+      justify-content: center;
 
-  //     @include media-breakpoint-down(tablet) {
-  //       font-size: 20px;
-  //     }
-  //   }
-  // }
+      .cfa-title {
+        &::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
 
-  // .content {
-  //   background: $color-neutral-50;
-  //   box-sizing: border-box;
-  //   padding: 72px 20px;
-  //   display: flex;
-  //   flex-wrap: wrap;
+    .content {
+      padding: 20px 48px;
+    }
+  }
 
-  //   .card {
-  //     background-image: url("/wp-content/themes/academyAfrica/assets/images/background.svg");
-  //     background-repeat: no-repeat;
-  //     background-size: cover;
-  //     background-position: center;
-  //     flex: 1;
-  //     min-width: calc(33.33% - 5px);
-  //     box-sizing: border-box;
-  //     padding: 50px;
+  @include media-breakpoint-up(desktop) {
+    padding: 80px 0;
 
-  //     @include media-breakpoint-down(tablet) {
-  //       min-width: 100%;
-  //     }
-  //   }
+    .title {
+      padding: 0 40px;
+      justify-content: flex-start;
 
-  //   .content-card {
-  //     background: $color-shades-white;
-  //     display: flex;
-  //     padding: 20px;
-  //     flex-direction: column;
-  //     align-items: flex-start;
+      .cfa-title {
+        font-size: 40px;
+        line-height: 48px;
+        &::after {
+          left: unset;
+          transform: unset;
+        }
+      }
+    }
 
-  //     .user {
-  //       display: flex;
-  //       justify-content: space-between;
-  //       gap: 20px;
+    .content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 0;
+      background-size: unset;
 
-  //       .avatar {
-  //         width: 70px;
-  //         height: 70px;
-  //       }
+      .card {
+        width: 360px;
 
-  //       .name-role {
-  //         flex: 1;
+        .content-card {
+          .user {
 
-  //         .name {
-  //           color: $color-primary-700;
-  //           margin: 0;
-  //           font-family: Open Sans;
-  //           font-size: 18px;
-  //           font-style: normal;
-  //           font-weight: 700;
-  //           line-height: 24px;
-  //         }
+            .avatar {
+              width: 70px;
+              height: 70px;
+            }
 
-  //         .role {
-  //           margin: 0;
-  //           color: $color-shades-black;
-  //           font-family: Open Sans;
-  //           font-size: 14px;
-  //           font-style: normal;
-  //           font-weight: 600;
-  //           line-height: 18px;
-  //           text-transform: uppercase;
-  //         }
-  //       }
-  //     }
+            .name-role {
+              flex: 1;
 
-  //     .description {
-  //       color: $color-shades-black;
-  //       margin-top: 40px;
-  //       text-align: center;
-  //       font-family: Open Sans;
-  //       font-size: 18px;
-  //       font-style: normal;
-  //       font-weight: 400;
-  //       line-height: 28px;
+              .name {
+                font-size: 18px;
+                line-height: 24px;
+              }
 
-  //       a {
-  //         text-decoration-line: underline;
-  //       }
-  //     }
-  //   }
-  // }
+              .role {
+                font-size: 14px;
+                line-height: 18px;
+              }
+            }
+          }
 
-  // @include media-breakpoint-down(tablet) {
-  //   padding: 40px 0;
+          .description {
+            font-size: 18px;
+            line-height: 28px;
+          }
+        }
+      }
+    }
+  }
 
-  //   .content {
-
-  //     .card {
-  //       padding: 20px;
-
-  //       .content-card {
-
-  //         .card {
-  //           .user {
-  //             .avatar {
-  //               width: 60px;
-  //               height: 60px;
-  //             }
-
-  //             .name-role {
-  //               flex: 1;
-
-  //               .name {
-  //                 font-size: 16px;
-  //                 line-height: 21px;
-  //               }
-
-  //               .role {
-  //                 font-size: 12px;
-  //                 line-height: 14px;
-  //               }
-  //             }
-  //           }
-  //         }
-
-  //       }
-  //     }
-  //   }
-  // }
-
-  // @include media-breakpoint-up(tablet) {
-  //   padding: 80px 0;
-  // }
+  @include media-breakpoint-up(large) {
+    .title {
+      padding: 80px 148px;
+    }
+  }
+  @include media-breakpoint-up(xlarge) {
+    .title {
+      padding: 97px 388px;
+    }
+  }
 }
