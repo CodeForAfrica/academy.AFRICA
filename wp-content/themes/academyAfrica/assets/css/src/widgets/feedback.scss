@@ -1,23 +1,23 @@
 @use "../abstracts/" as *;
 
 .feedback {
-  padding: 80px 0;
+  padding: 40px 0 0;
   background: $color-neutral-50;
 
-  .cfa-title {
-    color: $color-primary-700;
-    font-family: Lora;
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 48px;
-    padding-left: 40px;
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 20px;
 
-    h4 {
-      margin: 0;
+    .cfa-title {
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 700;
 
-      @include media-breakpoint-down(tablet) {
-        font-size: 20px;
+      &::after {
+        left: unset;
+        transform: unset;
       }
     }
   }
@@ -25,118 +25,218 @@
   .content {
     background: $color-neutral-50;
     box-sizing: border-box;
-    padding: 72px 20px;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    padding: 68px 50px 80px;
+    background-image: url("../../../images/feedback_bg_pattern.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    gap: 32px;
 
     .card {
-      background-image: url("/wp-content/themes/academyAfrica/assets/images/background.svg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      flex: 1;
-      min-width: calc(33.33% - 5px);
-      box-sizing: border-box;
-      padding: 50px;
-
-      @include media-breakpoint-down(tablet) {
-        min-width: 100%;
-      }
-    }
-
-    .content-card {
       background: $color-shades-white;
-      display: flex;
-      padding: 20px;
-      flex-direction: column;
-      align-items: flex-start;
-
-      .user {
+      .content-card {
         display: flex;
-        justify-content: space-between;
-        gap: 20px;
-
-        .avatar {
-          width: 70px;
-          height: 70px;
-        }
-
-        .name-role {
-          flex: 1;
-
-          .name {
-            color: $color-primary-700;
-            margin: 0;
-            font-family: Open Sans;
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 24px;
-          }
-
-          .role {
-            margin: 0;
-            color: $color-shades-black;
-            font-family: Open Sans;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 18px;
-            text-transform: uppercase;
-          }
-        }
-      }
-
-      .description {
-        color: $color-shades-black;
-        margin-top: 40px;
-        text-align: center;
-        font-family: Open Sans;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 28px;
-
-        a {
-          text-decoration-line: underline;
-        }
-      }
-    }
-  }
-
-  @include media-breakpoint-down(tablet) {
-    .content {
-
-      .card {
         padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
 
-        .content-card {
+        .user {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
 
-          .card {
-            .user {
-              .avatar {
-                width: 60px;
-                height: 60px;
-              }
+          .avatar {
+            width: 60px;
+            height: 60px;
+          }
 
-              .name-role {
-                flex: 1;
+          .name-role {
+            flex: 1;
 
-                .name {
-                  font-size: 16px;
-                  line-height: 21px;
-                }
+            .name {
+              color: $color-primary-700;
+              margin: 0;
+              font-family: Open Sans;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 21px;
+            }
 
-                .role {
-                  font-size: 12px;
-                  line-height: 14px;
-                }
-              }
+            .role {
+              margin: 0;
+              color: $color-shades-black;
+              font-family: Open Sans;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 14px;
+              text-transform: uppercase;
             }
           }
+        }
 
+        .description {
+          color: $color-shades-black;
+          margin-top: 30px;
+          text-align: center;
+          font-family: Open Sans;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 18px;
+
+          a {
+            text-decoration-line: underline;
+          }
         }
       }
+
     }
   }
+
+  // .cfa-title {
+  //   color: $color-primary-700;
+  //   font-family: Lora;
+  //   font-size: 40px;
+  //   font-style: normal;
+  //   font-weight: 700;
+  //   line-height: 48px;
+  //   padding-left: 40px;
+
+  //   h4 {
+  //     margin: 0;
+
+  //     @include media-breakpoint-down(tablet) {
+  //       font-size: 20px;
+  //     }
+  //   }
+  // }
+
+  // .content {
+  //   background: $color-neutral-50;
+  //   box-sizing: border-box;
+  //   padding: 72px 20px;
+  //   display: flex;
+  //   flex-wrap: wrap;
+
+  //   .card {
+  //     background-image: url("/wp-content/themes/academyAfrica/assets/images/background.svg");
+  //     background-repeat: no-repeat;
+  //     background-size: cover;
+  //     background-position: center;
+  //     flex: 1;
+  //     min-width: calc(33.33% - 5px);
+  //     box-sizing: border-box;
+  //     padding: 50px;
+
+  //     @include media-breakpoint-down(tablet) {
+  //       min-width: 100%;
+  //     }
+  //   }
+
+  //   .content-card {
+  //     background: $color-shades-white;
+  //     display: flex;
+  //     padding: 20px;
+  //     flex-direction: column;
+  //     align-items: flex-start;
+
+  //     .user {
+  //       display: flex;
+  //       justify-content: space-between;
+  //       gap: 20px;
+
+  //       .avatar {
+  //         width: 70px;
+  //         height: 70px;
+  //       }
+
+  //       .name-role {
+  //         flex: 1;
+
+  //         .name {
+  //           color: $color-primary-700;
+  //           margin: 0;
+  //           font-family: Open Sans;
+  //           font-size: 18px;
+  //           font-style: normal;
+  //           font-weight: 700;
+  //           line-height: 24px;
+  //         }
+
+  //         .role {
+  //           margin: 0;
+  //           color: $color-shades-black;
+  //           font-family: Open Sans;
+  //           font-size: 14px;
+  //           font-style: normal;
+  //           font-weight: 600;
+  //           line-height: 18px;
+  //           text-transform: uppercase;
+  //         }
+  //       }
+  //     }
+
+  //     .description {
+  //       color: $color-shades-black;
+  //       margin-top: 40px;
+  //       text-align: center;
+  //       font-family: Open Sans;
+  //       font-size: 18px;
+  //       font-style: normal;
+  //       font-weight: 400;
+  //       line-height: 28px;
+
+  //       a {
+  //         text-decoration-line: underline;
+  //       }
+  //     }
+  //   }
+  // }
+
+  // @include media-breakpoint-down(tablet) {
+  //   padding: 40px 0;
+
+  //   .content {
+
+  //     .card {
+  //       padding: 20px;
+
+  //       .content-card {
+
+  //         .card {
+  //           .user {
+  //             .avatar {
+  //               width: 60px;
+  //               height: 60px;
+  //             }
+
+  //             .name-role {
+  //               flex: 1;
+
+  //               .name {
+  //                 font-size: 16px;
+  //                 line-height: 21px;
+  //               }
+
+  //               .role {
+  //                 font-size: 12px;
+  //                 line-height: 14px;
+  //               }
+  //             }
+  //           }
+  //         }
+
+  //       }
+  //     }
+  //   }
+  // }
+
+  // @include media-breakpoint-up(tablet) {
+  //   padding: 80px 0;
+  // }
 }
