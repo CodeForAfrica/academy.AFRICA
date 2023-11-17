@@ -37,10 +37,10 @@ function closeModal(type) {
 
 window.onload = function () {
   const { hash } = window.location;
-  const loginParams = new URLSearchParams(window.location.search).get("login");
-  if (hash === "#sign-in" || !!loginParams) {
+  const isLogin = hash === "#sign-in" || hash === "#login";
+  if (isLogin) {
     openModal("login");
-    if (loginParams) {
+    if (hash === "#login") {
       document.getElementById("login_error").innerText =
         "Error: The password you entered or the email is incorrect";
     }

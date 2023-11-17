@@ -20,11 +20,11 @@
             <div></div><span>or</span>
             <div></div>
         </div>
-        <?php wp_login_form(); ?>
         <div class="error-message">
             <p id="login_error">
             </p>
         </div>
+        <?php wp_login_form(); ?>
         <footer class="modal-footer">
             <div>
                 <span>New to academy.Africa?</span><span onclick="closeModal('login'); openModal('register');">Register now</span>
