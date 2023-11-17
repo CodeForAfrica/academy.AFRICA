@@ -187,7 +187,6 @@ table {
   text-align: center;
   font-family: Open Sans;
   font-style: normal;
-  margin-bottom: 16px;
   font-size: 18px;
   line-height: 24px;
   font-weight: 800;
@@ -254,6 +253,49 @@ table {
   }
   .patners-root .other-partners .other-partners-content {
     justify-content: center;
+  }
+}
+@media (min-width: 1152px) {
+  .patners-root {
+    padding: 80px 40px;
+    gap: 40px;
+  }
+  .patners-root .partners {
+    gap: 20px;
+  }
+  .patners-root .partners .title {
+    justify-content: flex-start;
+  }
+  .patners-root .partners .title .cfa-title::after {
+    left: unset;
+    transform: unset;
+  }
+  .patners-root .partners .partner-content {
+    justify-content: space-between;
+  }
+  .patners-root .partners .partner-content .partner {
+    width: 295px;
+    height: 169px;
+    flex-basis: calc(33.33% - 36px);
+  }
+  .patners-root .other-partners {
+    gap: 32px;
+  }
+  .patners-root .other-partners .other-partners-content {
+    justify-content: center;
+    gap: 20px;
+  }
+  .patners-root .other-partners .partner-tag {
+    border: 0.2px solid #727272;
+    background: #F7F9FD;
+    padding: 5px 16px;
+  }
+  .patners-root .other-partners .partner-tag .partner-tag-content {
+    font-family: Open Sans;
+    font-size: 19px;
+    line-height: 23px;
+    font-weight: 600;
+    letter-spacing: -0.38px;
   }
 }
 
