@@ -266,6 +266,10 @@ table {
   .patners-root .partners .title {
     justify-content: flex-start;
   }
+  .patners-root .partners .title .cfa-title {
+    font-size: 40px;
+    line-height: 48px;
+  }
   .patners-root .partners .title .cfa-title::after {
     left: unset;
     transform: unset;
@@ -296,6 +300,14 @@ table {
     line-height: 23px;
     font-weight: 600;
     letter-spacing: -0.38px;
+  }
+}
+@media (min-width: 1440px) {
+  .patners-root {
+    padding: 80px 148px;
+  }
+  .patners-root .partners {
+    gap: 40px 120px;
   }
 }
 
