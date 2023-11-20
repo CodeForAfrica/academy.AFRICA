@@ -197,7 +197,7 @@ table {
 @media (min-width: 1152px) {
   .header-section {
     flex-direction: row;
-    margin: 80px 20px;
+    margin: 120px 60px;
     gap: 50px;
   }
   .header-section .header-image {
@@ -208,8 +208,8 @@ table {
     margin-bottom: 0;
   }
   .header-section .header-image img {
-    width: 300px;
-    height: 300px;
+    width: 315px;
+    height: 315px;
     object-fit: cover;
   }
   .header-section .header-content {
