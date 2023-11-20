@@ -119,7 +119,7 @@ table {
 }
 
 .header-section {
-  margin: 100px 16px;
+  margin: 100px 16px 0;
   display: flex;
   flex-direction: column;
 }
@@ -170,7 +170,7 @@ table {
 @media (min-width: 768px) {
   .header-section {
     flex-direction: row-reverse;
-    margin: 100px 40px;
+    margin: 100px 40px 0;
   }
   .header-section .header-image {
     flex: 1;
@@ -197,7 +197,7 @@ table {
 @media (min-width: 1152px) {
   .header-section {
     flex-direction: row;
-    margin: 120px 60px;
+    margin: 120px 60px 0;
     gap: 50px;
   }
   .header-section .header-image {
@@ -219,12 +219,12 @@ table {
 }
 @media (min-width: 1440px) {
   .header-section {
-    margin: 120px 148px;
+    margin: 120px 148px 0;
   }
 }
 @media (min-width: 1920px) {
   .header-section {
-    margin: 120px 388px;
+    margin: 120px 388px 0;
   }
 }
 

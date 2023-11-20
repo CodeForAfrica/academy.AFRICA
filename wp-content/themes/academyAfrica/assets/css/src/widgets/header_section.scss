@@ -3,7 +3,7 @@
 
 
 .header-section {
-    margin: 100px 16px;
+    margin: 100px 16px 0;
     display: flex;
     flex-direction: column;
 
@@ -68,7 +68,7 @@
 
     @include media-breakpoint-up(tablet) {
         flex-direction: row-reverse;
-        margin: 100px 40px;
+        margin: 100px 40px 0;
 
         .header-image {
             flex: 1;
@@ -105,7 +105,7 @@
 
     @include media-breakpoint-up(desktop) {
         flex-direction: row;
-        margin: 120px 60px;
+        margin: 120px 60px 0;
         gap: 50px;
 
         .header-image {
@@ -129,9 +129,9 @@
     }
 
     @include media-breakpoint-up(large) {
-        margin: 120px 148px;
+        margin: 120px 148px 0;
     }
     @include media-breakpoint-up(xlarge) {
-        margin: 120px 388px;
+        margin: 120px 388px 0;
     }
 }

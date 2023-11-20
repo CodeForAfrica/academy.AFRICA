@@ -119,10 +119,9 @@ table {
 }
 
 .about-section {
-  margin: 80px 20px;
+  padding: 50px 16px;
 }
 .about-section .content {
-  margin-top: 50px;
   color: #000000;
   font-size: 18px;
   font-weight: 400;
@@ -131,6 +130,26 @@ table {
 .about-section .content a {
   color: #0C1A81;
   text-decoration: none;
+}
+@media (min-width: 768px) {
+  .about-section {
+    padding: 50px 40px;
+  }
+}
+@media (min-width: 1152px) {
+  .about-section {
+    padding: 80px 60px;
+  }
+}
+@media (min-width: 1440px) {
+  .about-section {
+    padding: 80px 148px;
+  }
+}
+@media (min-width: 1920px) {
+  .about-section {
+    padding: 80px 388px;
+  }
 }
 
 /*# sourceMappingURL=about_section.css.map */
