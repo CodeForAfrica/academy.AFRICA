@@ -1,9 +1,37 @@
-.faq-list {
-    padding: 20px;
+@use "../abstracts/" as *;
 
+
+.faq-list {
+    padding: 80px 16px;
     .title {
         display: flex;
         justify-content: start;
+
+        .cfa-title {
+            font-size: 40px;
+            line-height: 48px;
+
+            &::after {
+                left: unset;
+                transform: unset;
+            }
+        }
+    }
+
+    @include media-breakpoint-up(tablet) {
+        padding: 80px 24px;
+    } 
+
+    @include media-breakpoint-up(desktop) {
+        padding: 80px 60px;
+    }
+
+    @include media-breakpoint-up(large) {
+        padding: 80px 148px;
+    }
+
+    @include media-breakpoint-up(xlarge) {
+        padding: 80px 388px;
     }
 
 }
