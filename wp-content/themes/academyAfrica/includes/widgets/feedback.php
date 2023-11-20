@@ -79,8 +79,8 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
         $feedback = $this->get_user_feedback();
 ?>
         <div class="feedback">
-            <div class="cfa-title">
-                <h4>
+            <div class="title">
+                <h4 class="cfa-title">
                     <? echo $title ?>
                 </h4>
             </div>

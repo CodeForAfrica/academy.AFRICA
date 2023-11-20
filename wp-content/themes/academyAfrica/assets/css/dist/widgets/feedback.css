@@ -118,117 +118,165 @@ table {
 }
 
 .feedback {
-  padding: 80px 0;
+  padding: 40px 0 0;
   background: #F7F9FD;
 }
-.feedback .cfa-title {
-  color: #0C1A81;
-  font-family: Lora;
-  font-size: 40px;
-  font-style: normal;
+.feedback .title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+}
+.feedback .title .cfa-title {
+  font-size: 20px;
+  line-height: 24px;
   font-weight: 700;
-  line-height: 48px;
-  padding-left: 40px;
 }
-.feedback .cfa-title h4 {
-  margin: 0;
-}
-@media (max-width: 768px) {
-  .feedback .cfa-title h4 {
-    font-size: 20px;
-  }
+.feedback .title .cfa-title::after {
+  left: unset;
+  transform: unset;
 }
 .feedback .content {
   background: #F7F9FD;
   box-sizing: border-box;
-  padding: 72px 20px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  padding: 68px 46px 80px;
+  background-image: url("../../../images/feedback_bg_pattern.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  gap: 32px;
 }
 .feedback .content .card {
-  background-image: url("/wp-content/themes/academyAfrica/assets/images/background.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  flex: 1;
-  min-width: calc(33.33% - 5px);
-  box-sizing: border-box;
-  padding: 50px;
-}
-@media (max-width: 768px) {
-  .feedback .content .card {
-    min-width: 100%;
-  }
-}
-.feedback .content .content-card {
   background: #FFFFFF;
+}
+.feedback .content .card .content-card {
   display: flex;
   padding: 20px;
   flex-direction: column;
   align-items: flex-start;
 }
-.feedback .content .content-card .user {
+.feedback .content .card .content-card .user {
   display: flex;
   justify-content: space-between;
   gap: 20px;
 }
-.feedback .content .content-card .user .avatar {
-  width: 70px;
-  height: 70px;
+.feedback .content .card .content-card .user .avatar {
+  width: 60px;
+  height: 60px;
 }
-.feedback .content .content-card .user .name-role {
+.feedback .content .card .content-card .user .name-role {
   flex: 1;
 }
-.feedback .content .content-card .user .name-role .name {
+.feedback .content .card .content-card .user .name-role .name {
   color: #0C1A81;
   margin: 0;
   font-family: Open Sans;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
+  line-height: 21px;
 }
-.feedback .content .content-card .user .name-role .role {
+.feedback .content .card .content-card .user .name-role .role {
   margin: 0;
   color: #000000;
   font-family: Open Sans;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 18px;
-  text-transform: uppercase;
-}
-.feedback .content .content-card .description {
-  color: #000000;
-  margin-top: 40px;
-  text-align: center;
-  font-family: Open Sans;
-  font-size: 18px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 14px;
+  text-transform: uppercase;
 }
-.feedback .content .content-card .description a {
+.feedback .content .card .content-card .description {
+  color: #000000;
+  margin-top: 30px;
+  text-align: center;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+.feedback .content .card .content-card .description a {
   text-decoration-line: underline;
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .feedback {
+    padding: 50px 147px 50px;
+  }
+  .feedback .title {
+    justify-content: center;
+  }
+  .feedback .title .cfa-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .feedback .content {
+    align-items: center;
+  }
   .feedback .content .card {
-    padding: 20px;
+    width: 350px;
   }
-  .feedback .content .card .content-card .card .user .avatar {
-    width: 60px;
-    height: 60px;
+}
+@media (min-width: 1152px) {
+  .feedback {
+    padding: 80px 0;
   }
-  .feedback .content .card .content-card .card .user .name-role {
+  .feedback .title {
+    padding: 0 40px;
+    justify-content: flex-start;
+  }
+  .feedback .title .cfa-title {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .feedback .title .cfa-title::after {
+    left: unset;
+    transform: unset;
+  }
+  .feedback .content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    background-size: unset;
+  }
+  .feedback .content .card {
+    width: 360px;
+  }
+  .feedback .content .card .content-card .user .avatar {
+    width: 70px;
+    height: 70px;
+  }
+  .feedback .content .card .content-card .user .name-role {
     flex: 1;
   }
-  .feedback .content .card .content-card .card .user .name-role .name {
-    font-size: 16px;
-    line-height: 21px;
+  .feedback .content .card .content-card .user .name-role .name {
+    font-size: 18px;
+    line-height: 24px;
   }
-  .feedback .content .card .content-card .card .user .name-role .role {
-    font-size: 12px;
-    line-height: 14px;
+  .feedback .content .card .content-card .user .name-role .role {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .feedback .content .card .content-card .description {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+@media (min-width: 1440px) {
+  .feedback .title {
+    padding: 0 148px;
+  }
+}
+@media (min-width: 1920px) {
+  .feedback {
+    padding: 97px 0;
+  }
+  .feedback .title {
+    padding: 0 388px;
   }
 }
 
