@@ -339,6 +339,18 @@ table {
   color: #FFFFFF;
   margin-left: 10px;
 }
+.header .desktop .nav .menu .items .item.language-link.open {
+  border-bottom: none;
+}
+.header .desktop .nav .menu .items .item.user-profile::after {
+  content: "";
+}
+.header .desktop .nav .menu .items .item.user-profile.open {
+  border-bottom: none;
+}
+.header .desktop .nav .menu .items .item.user-profile.open::after {
+  content: "";
+}
 @media (min-width: 1440px) {
   .header .desktop {
     padding: 20px 148px;
@@ -348,6 +360,22 @@ table {
   .header .desktop {
     padding: 20px 388px;
   }
+}
+.header .user-avatar {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: #EFF0FD;
+}
+.header .user-avatar .usernames {
+  font-size: xx-large;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #0C1A81;
+  text-transform: uppercase;
 }
 
 .drawer {

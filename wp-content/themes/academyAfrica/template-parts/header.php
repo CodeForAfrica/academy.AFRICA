@@ -80,10 +80,10 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                     foreach ($menu_items as $menu_item) {
                         $class = 'item';
                         $class .= ' ' . $menu_item["class"];
-                        if (count($menu_item['children']) > 0) { 
+                        if (count($menu_item['children']) > 0) {
                             $class .= ' parent';
                             echo "<div class='" . $class . "'>";
-                            echo 
+                            echo
                             "<span class='collapsible'>" . $menu_item['title'] . "
                             </span>";
                             echo "<div class='children'>";
@@ -102,6 +102,30 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                 </div>
             </div>
         </div>
+
+    </div>
+
+
+    <div style="display: none;">
+        <!-- add user avatar if it exists -->
+        <?php
+        if (is_user_logged_in()) {
+            $user = wp_get_current_user();
+            $avatar = get_avatar_url($user->ID);
+            if ($avatar) {
+                echo "<img class='user-avatar' src='" . $avatar . "' alt='user avatar' />";
+            } else {
+                echo "<div class='user-avatar'>";
+                $user = wp_get_current_user();
+                $first_name = $user->first_name;
+                $last_name = $user->last_name;
+                $first_letter = substr($first_name, 0, 1);
+                $second_letter = substr($last_name, 0, 1);
+                echo "<span class='usernames'>" . $first_letter . $second_letter . "</span>";
+                echo "</div>";
+            }
+        }
+        ?>
 
     </div>
 </nav>

@@ -10,6 +10,7 @@
 
     .mobile {
         padding: 20px 24px;
+
         @include media-breakpoint-up(desktop) {
             display: none;
         }
@@ -223,8 +224,10 @@
                                 color: $color-shades-white;
                                 margin-left: 10px;
                             }
+
                             &.open {
                                 border-bottom: 1px solid $color-shades-white;
+
                                 &::after {
                                     content: '\f106';
                                 }
@@ -253,6 +256,24 @@
                                 color: $color-shades-white;
                                 margin-left: 10px;
                             }
+
+                            &.open {
+                                border-bottom: none;
+                            }
+                        }
+
+                        &.user-profile {
+                            &::after {
+                                content: '';
+                            }
+
+                            &.open {
+                                border-bottom: none;
+
+                                &::after {
+                                    content: '';
+                                }
+                            }
                         }
                     }
                 }
@@ -268,6 +289,24 @@
             padding: 20px 388px;
         }
 
+    }
+
+    .user-avatar {
+        display: flex;
+        justify-content: center;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        background: $color-primary-50;
+
+        .usernames {
+            font-size: xx-large;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: $color-primary-700;
+            text-transform: uppercase;
+        }
     }
 }
 

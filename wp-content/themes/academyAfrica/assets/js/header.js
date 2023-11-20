@@ -56,4 +56,18 @@ document.addEventListener("DOMContentLoaded", () => {
       openModal("login");
     });
   });
+
+
+  const userProfileMenu = document.querySelectorAll(".item.user-profile");
+  Array.from(userProfileMenu).forEach((element) => {
+
+    const navText = element.querySelector(".collapsible");
+    // replace innertext with user icon
+
+    const user_avatar = document.querySelector(".user-avatar");
+    if (user_avatar) {
+      console.log({user_avatar});
+      navText.innerHTML = user_avatar.outerHTML;
+    } 
+  });
 });
