@@ -29,8 +29,8 @@ function openFilters() {
   }
 }
 
-function onLoad() {
-  addAccordion();
-}
+document.addEventListener("DOMContentLoaded", () => {
 
-window.onload = onLoad;
+  addAccordion();
+});
+
