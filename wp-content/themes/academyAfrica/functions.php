@@ -59,6 +59,7 @@ function home_page()
 }
 
 add_filter('login_redirect', 'home_page');
+add_action('wp_logout', 'home_page');
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
 
