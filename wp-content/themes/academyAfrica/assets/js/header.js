@@ -60,9 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const userProfileMenu = document.querySelectorAll(".item.user-profile");
   Array.from(userProfileMenu).forEach((element) => {
+    if (element.classList.contains("mobile")) return;
 
     const navText = element.querySelector(".collapsible");
-    // replace innertext with user icon
 
     const user_avatar = document.querySelector(".user-avatar");
     if (user_avatar) {

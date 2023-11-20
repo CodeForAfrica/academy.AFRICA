@@ -137,7 +137,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
             foreach ($menu_items as $menu_item) {
                 $class = 'item' . ' ' . $menu_item["class"];
                 if (count($menu_item['children']) > 0) {
-                    $class .= ' parent';
+                    $class .= ' parent mobile';
                     echo "<div class='" . $class . "'>";
                     echo "<span class='collapsible'>" . $menu_item['title'] . "
                     </span>";

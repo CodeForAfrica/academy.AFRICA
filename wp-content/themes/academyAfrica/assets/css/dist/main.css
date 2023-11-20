@@ -217,6 +217,7 @@ table {
 .header .desktop .nav .search .input button {
   background: #EFF0FD;
   color: #FFFFFF;
+  border: none;
 }
 .header .desktop .nav .search .input button .icon {
   color: #0C1A81;
@@ -410,6 +411,10 @@ table {
   cursor: pointer;
   color: #FFFFFF;
   font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
 }
 .drawer .menu .items .item.parent {
   padding: 0;
@@ -451,6 +456,10 @@ table {
   border: none;
   border-bottom: 1px solid #0C1A81;
   color: #0C1A81;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  text-transform: capitalize;
 }
 .drawer .menu .items .item.parent .children .item:last-child {
   border-bottom: none;
@@ -472,6 +481,9 @@ table {
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 1.6px;
+  order: -1;
+}
+.drawer .menu .items .item.user-profile {
   order: -1;
 }
 

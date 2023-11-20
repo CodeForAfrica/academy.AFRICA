@@ -115,6 +115,7 @@
                     button {
                         background: $color-primary-50;
                         color: $color-shades-white;
+                        border: none;
 
                         .icon {
                             color: $color-primary-700;
@@ -344,6 +345,10 @@
                 cursor: pointer;
                 color: $color-shades-white;
                 font-family: Open Sans;
+                font-size: 16px;
+                font-weight: 800;
+                line-height: 19px;
+                letter-spacing: 1.6px;
 
                 &.parent {
                     padding: 0;
@@ -362,6 +367,7 @@
                             font-size: 24px;
                             color: $color-shades-white;
                         }
+
                         &::after {
                             content: '\f107';
                             font-family: 'Font Awesome 5 Free';
@@ -388,6 +394,10 @@
                             border: none;
                             border-bottom: 1px solid $color-primary-700;
                             color: $color-primary-700;
+                            font-size: 18px;
+                            line-height: 28px;
+                            font-weight: 400;
+                            text-transform: capitalize;
 
                             &:last-child {
                                 border-bottom: none;
@@ -405,6 +415,7 @@
                                 content: '\f106';
                             }
                         }
+
                         .children {
                             display: flex;
                         }
@@ -419,6 +430,10 @@
                     font-size: 16px;
                     line-height: 19px;
                     letter-spacing: 1.6px;
+                    order: -1;
+                }
+
+                &.user-profile {
                     order: -1;
                 }
             }
