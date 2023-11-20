@@ -88,22 +88,23 @@ table {
 }
 .button.cta {
   background: #ED1C24;
+  border: 1px solid #ED1C24;
 }
 .button.cta:hover {
   background: #FEECED;
   color: #ED1C24;
-  border: 1px solid #ED1C24;
 }
 .button.primary {
   background: #0C1A81;
+  border: 1px solid #0C1A81;
 }
 .button.primary:hover {
   background: #EFF0FD;
   color: #0C1A81;
-  border: 1px solid #0C1A81;
 }
 .button.secondary {
   background: #FEECED;
+  border: 1px solid #FEECED;
 }
 .button.secondary:hover {
   background: #ED1C24;

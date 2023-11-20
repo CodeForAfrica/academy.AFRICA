@@ -14,7 +14,7 @@ $font-family_1: Open Sans;
 .root {
   background: var(--primary-700, #0c1a81);
   row-gap: 60px;
-  padding: 100px 20px;
+  padding: 100px 40px;
   width: 100%;
   .links {
     display: flex;
@@ -303,5 +303,17 @@ $font-family_1: Open Sans;
       max-width: 100%;
       text-align: center;
     }
+  }
+}
+
+@include media-breakpoint-up(large) {
+  .root {
+    padding: 100px 148px;
+  }
+}
+
+@include media-breakpoint-up(xlarge) {
+  .root {
+    padding: 100px 388px;
   }
 }

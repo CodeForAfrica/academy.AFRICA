@@ -1,78 +1,76 @@
-@use 'colors' as *;
+@use "colors" as *;
 
 .button {
-    text-transform: uppercase;
-    font-weight: 800;
-    line-height: 19px;
-    letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: $color-shades-white;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+
+  .icon {
     font-size: 16px;
-    display: inline-flex;
+    color: $color-shades-white;
+  }
+
+  &-icon {
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: $color-shades-white;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
+  }
 
-    .icon {
-        font-size: 16px;
-        color: $color-shades-white;
+  &.small {
+    padding: 8px 16px;
+  }
+
+  &.medium {
+    padding: 12px 16px;
+  }
+
+  &.large {
+    padding: 24px;
+  }
+
+  &.cta {
+    background: $color-secondary-500;
+    border: 1px solid $color-secondary-500;
+    &:hover {
+      background: $color-secondary-50;
+      color: $color-secondary-500;
     }
+  }
 
-    &-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
+  &.primary {
+    background: $color-primary-700;
+    border: 1px solid $color-primary-700;
+    &:hover {
+      background: $color-primary-50;
+      color: $color-primary-700;
     }
+  }
 
-    &.small {
-        padding: 8px 16px;
+  &.secondary {
+    background: $color-secondary-50;
+    border: 1px solid $color-secondary-50;
+    &:hover {
+      background: $color-secondary-500;
+      color: $color-shades-white;
+      border: 1px solid $color-secondary-500;
     }
+  }
 
-    &.medium {
-        padding: 12px 16px;
-    }
-
-    &.large {
-        padding: 24px;
-    }
-
-    &.cta {
-        background: $color-secondary-500;
-
-        &:hover {
-            background: $color-secondary-50;
-            color: $color-secondary-500;
-            border: 1px solid $color-secondary-500;
-        }
-    }
-
-    &.primary {
-        background: $color-primary-700;
-
-        &:hover {
-            background: $color-primary-50;
-            color: $color-primary-700;
-            border: 1px solid $color-primary-700;
-        }
-    }
-
-    &.secondary {
-        background: $color-secondary-50;
-
-        &:hover {
-            background: $color-secondary-500;
-            color: $color-shades-white;
-            border: 1px solid $color-secondary-500;
-        }
-    }
-
-    &.disabled {
-        background: $color-neutral-200;
-        color: $color-neutral-700;
-        border: 1px solid $color-neutral-200;
-        cursor: not-allowed;
-    }
+  &.disabled {
+    background: $color-neutral-200;
+    color: $color-neutral-700;
+    border: 1px solid $color-neutral-200;
+    cursor: not-allowed;
+  }
 }

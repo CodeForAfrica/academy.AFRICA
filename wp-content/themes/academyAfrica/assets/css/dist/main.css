@@ -89,22 +89,23 @@ table {
 }
 .button.cta {
   background: #ED1C24;
+  border: 1px solid #ED1C24;
 }
 .button.cta:hover {
   background: #FEECED;
   color: #ED1C24;
-  border: 1px solid #ED1C24;
 }
 .button.primary, .modal-content input.button[type=submit] {
   background: #0C1A81;
+  border: 1px solid #0C1A81;
 }
 .button.primary:hover, .modal-content input.button[type=submit]:hover {
   background: #EFF0FD;
   color: #0C1A81;
-  border: 1px solid #0C1A81;
 }
 .button.secondary {
   background: #FEECED;
+  border: 1px solid #FEECED;
 }
 .button.secondary:hover {
   background: #ED1C24;
@@ -419,7 +420,7 @@ table {
 .root {
   background: var(--primary-700, #0c1a81);
   row-gap: 60px;
-  padding: 100px 20px;
+  padding: 100px 40px;
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -668,6 +669,16 @@ table {
   .root .embed {
     max-width: 100%;
     text-align: center;
+  }
+}
+@media (min-width: 1440px) {
+  .root {
+    padding: 100px 148px;
+  }
+}
+@media (min-width: 1920px) {
+  .root {
+    padding: 100px 388px;
   }
 }
 .mui-checkbox {
