@@ -53,6 +53,13 @@ function my_theme_enqueue_scripts()
     }
 }
 
+function home_page()
+{
+    return '/';
+}
+
+add_filter('login_redirect', 'home_page');
+
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
 
 require_once __DIR__ . '/includes/widgets/widgets.php';
