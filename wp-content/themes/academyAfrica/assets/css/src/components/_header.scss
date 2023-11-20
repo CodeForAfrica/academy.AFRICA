@@ -140,6 +140,7 @@
                     align-items: center;
                     justify-content: center;
                     gap: 20px;
+                    height: 100%;
 
                     .item {
                         font-size: 18px;
@@ -147,9 +148,16 @@
                         text-transform: capitalize;
                         color: $color-shades-white;
                         cursor: pointer;
+                        font-family: Open Sans;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
 
                         &.parent {
                             position: relative;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
 
                             .collapsible {
                                 display: flex;
@@ -179,16 +187,22 @@
                                 &.open {
                                     display: flex;
                                     flex-direction: column;
+                                    margin-top: 10px;
                                 }
 
                                 .item {
                                     display: flex;
                                     flex-direction: column;
                                     align-items: start;
-                                    padding: 20px 0;
+                                    padding: 10px;
                                     border: 1px solid $color-primary-700;
                                     color: $color-primary-700;
                                     background: $color-shades-white;
+                                    font-size: 14px;
+                                    line-height: 14px;
+                                    font-weight: 400;
+                                    padding: 10px;
+                                    width: 120px;
 
                                     &:last-child {
                                         border-top: none;
@@ -198,6 +212,46 @@
                                         background: $color-primary-50;
                                     }
                                 }
+                            }
+
+                            // after has down arrow
+                            &::after {
+                                content: '\f107';
+                                font-family: 'Font Awesome 5 Free';
+                                font-weight: 900;
+                                font-size: 16px;
+                                color: $color-shades-white;
+                                margin-left: 10px;
+                            }
+                            &.open {
+                                border-bottom: 1px solid $color-shades-white;
+                                &::after {
+                                    content: '\f106';
+                                }
+                            }
+                        }
+
+                        &.sign-in {
+                            color: $color-primary-700;
+                            background: $color-shades-white;
+                            padding: 12px 16px;
+                            text-transform: uppercase;
+                            font-weight: 800;
+                            font-size: 16px;
+                            line-height: 19px;
+                            letter-spacing: 1.6px;
+                        }
+
+                        &.language-link {
+                            font-size: 0;
+
+                            &::before {
+                                content: '\f0ac';
+                                font-family: 'Font Awesome 5 Free';
+                                font-weight: 900;
+                                font-size: 32px;
+                                color: $color-shades-white;
+                                margin-left: 10px;
                             }
                         }
                     }

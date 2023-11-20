@@ -16,14 +16,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   parentNavs.forEach((parentNav) => {
     const childNav = parentNav.querySelector(".children");
-    const chevronOpen = parentNav.querySelector(".icon.open");
-    const chevronClose = parentNav.querySelector(".icon.close");
     parentNav.addEventListener("click", () => {
+      parentNav.classList.toggle("open");
       childNav.classList.toggle("open");
-      chevronOpen.style.display =
-        chevronOpen.style.display === "none" ? "block" : "none";
-      chevronClose.style.display =
-        chevronClose.style.display === "none" ? "block" : "none";
+
+      // close other open navs
+      parentNavs.forEach((nav) => {
+        if (nav !== parentNav) {
+          nav.classList.remove("open");
+          nav.querySelector(".children").classList.remove("open");
+        }
+      });
+
+      // close if clicked outside
+      document.addEventListener("click", (e) => {
+        if (!parentNav.contains(e.target)) {
+          parentNav.classList.remove("open");
+          childNav.classList.remove("open");
+        }
+      });
     });
   });
 

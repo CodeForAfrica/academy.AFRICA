@@ -26,7 +26,7 @@ class MenuFunctions
                     'title' => $item->title,
                     'url' => $item->url,
                     'children' => self::build_menu_structure($menu_items, $item->ID),
-                    'class' => $item->classes
+                    'class' => implode(' ', $item->classes) 
                 );
 
                 $formatted_menu_items[] = $formatted_menu_item;

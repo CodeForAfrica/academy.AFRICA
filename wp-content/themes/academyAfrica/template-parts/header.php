@@ -79,15 +79,12 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                     <?php
                     foreach ($menu_items as $menu_item) {
                         $class = 'item';
-                        if (count($menu_item['children']) > 0) {
+                        $class .= ' ' . $menu_item["class"];
+                        if (count($menu_item['children']) > 0) { 
                             $class .= ' parent';
                             echo "<div class='" . $class . "'>";
                             echo 
                             "<span class='collapsible'>" . $menu_item['title'] . "
-                                <div class='icons'>
-                                    <i class='fa fa-chevron-down icon close'></i>
-                                    <i class='fa fa-chevron-up icon open' style='display: none;'></i>
-                                </div>
                             </span>";
                             echo "<div class='children'>";
                             foreach ($menu_item['children'] as $child) {
