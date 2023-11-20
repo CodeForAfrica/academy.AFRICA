@@ -114,6 +114,7 @@
             width: 100%;
             align-items: center;
             margin-bottom: 0;
+            justify-content: flex-end;
 
             img {
                 width: 315px;
@@ -125,5 +126,12 @@
         .header-content {
             flex: unset;
         }
+    }
+
+    @include media-breakpoint-up(large) {
+        margin: 120px 148px;
+    }
+    @include media-breakpoint-up(xlarge) {
+        margin: 120px 388px;
     }
 }

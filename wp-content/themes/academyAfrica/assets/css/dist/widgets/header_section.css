@@ -206,6 +206,7 @@ table {
     width: 100%;
     align-items: center;
     margin-bottom: 0;
+    justify-content: flex-end;
   }
   .header-section .header-image img {
     width: 315px;
@@ -214,6 +215,16 @@ table {
   }
   .header-section .header-content {
     flex: unset;
+  }
+}
+@media (min-width: 1440px) {
+  .header-section {
+    margin: 120px 148px;
+  }
+}
+@media (min-width: 1920px) {
+  .header-section {
+    margin: 120px 388px;
   }
 }
 
