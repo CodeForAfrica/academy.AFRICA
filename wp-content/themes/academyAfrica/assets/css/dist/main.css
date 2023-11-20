@@ -383,6 +383,8 @@ table {
   width: 100vw;
   background-color: #0C1A81;
   color: #FFFFFF;
+  position: fixed;
+  z-index: 99;
 }
 .drawer.open {
   display: flex;
@@ -407,6 +409,7 @@ table {
   text-transform: uppercase;
   cursor: pointer;
   color: #FFFFFF;
+  font-family: Open Sans;
 }
 .drawer .menu .items .item.parent {
   padding: 0;
@@ -424,6 +427,14 @@ table {
 .drawer .menu .items .item.parent .collapsible .icon {
   font-size: 24px;
   color: #FFFFFF;
+}
+.drawer .menu .items .item.parent .collapsible::after {
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 16px;
+  color: #FFFFFF;
+  margin-left: 10px;
 }
 .drawer .menu .items .item.parent .children {
   display: none;
@@ -446,6 +457,22 @@ table {
 }
 .drawer .menu .items .item.parent .children .item:hover {
   background: #EFF0FD;
+}
+.drawer .menu .items .item.parent.open .collapsible::after {
+  content: "\f106";
+}
+.drawer .menu .items .item.parent.open .children {
+  display: flex;
+}
+.drawer .menu .items .item.sign-in {
+  color: #0C1A81;
+  background: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  order: -1;
 }
 
 .mobile-search {

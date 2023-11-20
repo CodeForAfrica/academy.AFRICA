@@ -316,6 +316,8 @@
     width: 100vw;
     background-color: $color-primary-700;
     color: $color-shades-white;
+    position: fixed;
+    z-index: 99;
 
     &.open {
         display: flex;
@@ -341,6 +343,7 @@
                 text-transform: uppercase;
                 cursor: pointer;
                 color: $color-shades-white;
+                font-family: Open Sans;
 
                 &.parent {
                     padding: 0;
@@ -358,6 +361,14 @@
                         .icon {
                             font-size: 24px;
                             color: $color-shades-white;
+                        }
+                        &::after {
+                            content: '\f107';
+                            font-family: 'Font Awesome 5 Free';
+                            font-weight: 900;
+                            font-size: 16px;
+                            color: $color-shades-white;
+                            margin-left: 10px;
                         }
                     }
 
@@ -387,6 +398,28 @@
                             }
                         }
                     }
+
+                    &.open {
+                        .collapsible {
+                            &::after {
+                                content: '\f106';
+                            }
+                        }
+                        .children {
+                            display: flex;
+                        }
+                    }
+                }
+
+                &.sign-in {
+                    color: $color-primary-700;
+                    background: $color-shades-white;
+                    text-transform: uppercase;
+                    font-weight: 800;
+                    font-size: 16px;
+                    line-height: 19px;
+                    letter-spacing: 1.6px;
+                    order: -1;
                 }
             }
         }
