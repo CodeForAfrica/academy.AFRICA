@@ -3,13 +3,13 @@
 .header {
     width: 100vw;
     background-color: $color-primary-700;
-    padding: 20px;
     color: $color-shades-white;
     position: sticky;
     z-index: 9999;
     top: 0;
 
     .mobile {
+        padding: 20px 24px;
         @include media-breakpoint-up(desktop) {
             display: none;
         }
@@ -58,6 +58,8 @@
 
     .desktop {
         display: none;
+        padding: 20px 60px;
+
         @include media-breakpoint-up(desktop) {
             display: block;
         }
@@ -65,7 +67,6 @@
         .nav {
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
             flex-direction: row;
 
             .logo {
@@ -113,6 +114,7 @@
                     button {
                         background: $color-primary-50;
                         color: $color-shades-white;
+
                         .icon {
                             color: $color-primary-700;
                         }
@@ -148,6 +150,7 @@
 
                         &.parent {
                             position: relative;
+
                             .collapsible {
                                 display: flex;
                                 flex-direction: row;
@@ -157,6 +160,7 @@
 
                                 .icons {
                                     display: flex;
+
                                     .icon {
                                         margin: 0;
                                     }
@@ -201,6 +205,15 @@
             }
 
         }
+
+        @include media-breakpoint-up(large) {
+            padding: 20px 148px;
+        }
+
+        @include media-breakpoint-up(xlarge) {
+            padding: 20px 388px;
+        }
+
     }
 }
 

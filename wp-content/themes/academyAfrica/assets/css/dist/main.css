@@ -122,11 +122,13 @@ table {
 .header {
   width: 100vw;
   background-color: #0C1A81;
-  padding: 20px;
   color: #FFFFFF;
   position: sticky;
   z-index: 9999;
   top: 0;
+}
+.header .mobile {
+  padding: 20px 24px;
 }
 @media (min-width: 1152px) {
   .header .mobile {
@@ -165,6 +167,7 @@ table {
 }
 .header .desktop {
   display: none;
+  padding: 20px 60px;
 }
 @media (min-width: 1152px) {
   .header .desktop {
@@ -174,7 +177,6 @@ table {
 .header .desktop .nav {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
   flex-direction: row;
 }
 .header .desktop .nav .logo {
@@ -287,6 +289,16 @@ table {
 }
 .header .desktop .nav .menu .items .item.parent .children .item:hover {
   background: #EFF0FD;
+}
+@media (min-width: 1440px) {
+  .header .desktop {
+    padding: 20px 148px;
+  }
+}
+@media (min-width: 1920px) {
+  .header .desktop {
+    padding: 20px 388px;
+  }
 }
 
 .drawer {
