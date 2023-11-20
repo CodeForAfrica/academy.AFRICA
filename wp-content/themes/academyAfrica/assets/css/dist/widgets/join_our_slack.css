@@ -119,7 +119,7 @@ table {
 }
 
 .join-our-slack {
-  padding: 20px;
+  padding: 50px 16px 0;
 }
 .join-our-slack .title {
   display: flex;
@@ -187,6 +187,26 @@ table {
   .join-our-slack .form form .input-group input {
     flex: 0.8;
     max-width: 320px;
+  }
+}
+@media (min-width: 768px) {
+  .join-our-slack {
+    padding: 50px 40px 0;
+  }
+}
+@media (min-width: 1152px) {
+  .join-our-slack {
+    padding: 80px 60px 0;
+  }
+}
+@media (min-width: 1440px) {
+  .join-our-slack {
+    padding: 80px 148px 0;
+  }
+}
+@media (min-width: 1920px) {
+  .join-our-slack {
+    padding: 80px 388px 0;
   }
 }
 

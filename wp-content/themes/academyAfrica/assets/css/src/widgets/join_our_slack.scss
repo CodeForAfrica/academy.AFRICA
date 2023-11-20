@@ -3,7 +3,7 @@
 $font-family: Open Sans;
 
 .join-our-slack {
-    padding: 20px;
+    padding: 50px 16px 0;
 
     .title {
         display: flex;
@@ -58,6 +58,7 @@ $font-family: Open Sans;
                     border: 1px solid $color-neutral-300;
                     border-radius: 0;
                     flex: 1;
+
                     &::placeholder {
                         font-size: 16px;
                         font-weight: 400;
@@ -67,7 +68,7 @@ $font-family: Open Sans;
                     }
                 }
 
-                @include media-breakpoint-up(tablet){
+                @include media-breakpoint-up(tablet) {
                     justify-content: start;
 
                     label {
@@ -83,5 +84,21 @@ $font-family: Open Sans;
 
         }
 
+    }
+
+    @include media-breakpoint-up(tablet) {
+        padding: 50px 40px 0;
+    }
+
+    @include media-breakpoint-up(desktop) {
+        padding: 80px 60px 0;
+    }
+
+    @include media-breakpoint-up(large) {
+        padding: 80px 148px 0;
+    }
+
+    @include media-breakpoint-up(xlarge) {
+        padding: 80px 388px 0;
     }
 }

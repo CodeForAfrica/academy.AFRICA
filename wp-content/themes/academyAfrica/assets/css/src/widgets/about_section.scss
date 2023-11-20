@@ -3,7 +3,7 @@
 
 
 .about-section {
-    padding: 50px 16px;
+    padding: 50px 16px 0;
 
     .content {
         color: $color-shades-black;
@@ -19,18 +19,18 @@
     }
 
     @include media-breakpoint-up(tablet) {
-        padding: 50px 40px;
+        padding: 50px 40px 0;
     }
 
     @include media-breakpoint-up(desktop) {
-        padding: 80px 60px;
+        padding: 80px 60px 0;
     }
 
     @include media-breakpoint-up(large) {
-        padding: 80px 148px;
+        padding: 80px 148px 0;
     }
 
     @include media-breakpoint-up(xlarge) {
-        padding: 80px 388px;
+        padding: 80px 388px 0;
     }
 }
