@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const user_avatar = document.querySelector(".user-avatar");
     if (user_avatar) {
-      console.log({user_avatar});
       navText.innerHTML = user_avatar.outerHTML;
     } 
   });
