@@ -1,0 +1,135 @@
+@use "../abstracts/" as *;
+
+.events {
+  display: flex;
+  justify-content: space-between;
+  .section-title {
+    color: var(--primary-700, #0c1a81);
+    margin: 40px 0;
+    /* Heading / H3 / Bold */
+    font-family: Open Sans;
+    font-size: 33px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px; /* 121.212% */
+    letter-spacing: -0.66px;
+  }
+  .events-content {
+    flex: 1;
+    padding: 80px 60px;
+    .cfa-title {
+      font-size: 48px;
+    }
+    .content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .card {
+      border: 0.5px solid var(--neutral-200, #cccfda);
+      background: var(--shades-white, #fff);
+      padding: 20px;
+      max-width: 300px;
+      .flex-between {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+      .event-title {
+        color: var(--primary-700, #0c1a81);
+        margin-top: 20px;
+        font-family: Open Sans;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px; /* 133.333% */
+        height: 48px;
+        overflow: hidden;
+      }
+      .speaker-name {
+        color: #000;
+        font-family: Open Sans;
+        text-transform: capitalize;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 19px; /* 118.75% */
+        overflow: hidden;
+        white-space: nowrap;
+        margin-top: 10px;
+      }
+      .date,
+      .time,
+      .country,
+      .language,
+      .date {
+        color: #000;
+
+        overflow: hidden;
+        white-space: nowrap;
+        font-family: Open Sans;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 14px; /* 116.667% */
+        letter-spacing: 0.96px;
+        text-transform: uppercase;
+      }
+      .country {
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+  }
+
+  .filter-sidebar {
+    display: flex;
+    // flex: 1;
+    // width: 100%;
+
+    @include media-breakpoint-down(tablet) {
+      display: none;
+    }
+
+    .mobile-filter {
+      display: none;
+
+      @include media-breakpoint-down(tablet) {
+        display: block;
+        width: 100%;
+        padding: 0 20px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(large) {
+  .events {
+    padding: 0 88px;
+    .events-content {
+      .content {
+        justify-content: space-between;
+        .card {
+          flex-basis: calc(33.333% - 20px);
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(xlarge) {
+  .events {
+    padding: 0 328px;
+  }
+}
+@include media-breakpoint-down(tablet) {
+  .events {
+    .events-content {
+      .content {
+        justify-content: center;
+      }
+    }
+  }
+}

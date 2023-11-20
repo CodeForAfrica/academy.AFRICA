@@ -62,7 +62,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             ], [
                 "title" => "Price",
                 "options" => [
-                    "Free", "$2 to $4.99", "$5 to $7.99", "$7 to $9.99"
+                    "Free",
                 ]
             ]
         ];
