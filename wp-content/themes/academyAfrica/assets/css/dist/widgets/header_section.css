@@ -119,7 +119,7 @@ table {
 }
 
 .header-section {
-  margin: 100px 50px;
+  margin: 100px 16px;
   display: flex;
   flex-direction: column;
 }
@@ -130,8 +130,8 @@ table {
   margin-bottom: 50px;
 }
 .header-section .header-image img {
-  width: 150px;
-  height: 150px;
+  width: 156px;
+  height: 156px;
   object-fit: cover;
 }
 .header-section .header-content {
@@ -147,13 +147,11 @@ table {
   font-size: 40px;
   line-height: 60px;
   text-align: left;
+  margin: 0;
 }
 .header-section .header-content .title .cfa-title::after {
   left: unset;
   transform: unset;
-}
-.header-section .header-content .headline {
-  margin: 10px 0;
 }
 .header-section .header-content .headline .cfa-headline {
   color: #000000;
@@ -165,10 +163,14 @@ table {
   display: flex;
   gap: 16px;
 }
+.header-section .header-content .share-menu .social-icons .icon-image {
+  width: 32px;
+  height: 32px;
+}
 @media (min-width: 768px) {
   .header-section {
     flex-direction: row-reverse;
-    margin: 100px 20px;
+    margin: 100px 40px;
   }
   .header-section .header-image {
     flex: 1;
@@ -176,6 +178,20 @@ table {
   }
   .header-section .header-content {
     flex: 3;
+  }
+  .header-section .header-content .title .cfa-title {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  .header-section .header-content .headline .cfa-headline {
+    color: #000000;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+  }
+  .header-section .header-content .share-menu .social-icons {
+    display: flex;
+    gap: 16px;
   }
 }
 @media (min-width: 1152px) {

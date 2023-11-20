@@ -109,7 +109,7 @@ class Academy_Africa_Header_Section extends \Elementor\Widget_Base
                 'type' => 'instagram',
             ],
             [
-                'link' => [
+                'link' => [ 
                     'url' => 'https://www.linkedin.com/company/code-for-africa/',
                 ],
                 'type' => 'linkedin',
@@ -135,7 +135,7 @@ class Academy_Africa_Header_Section extends \Elementor\Widget_Base
                                 $link = esc_url($item['link']['url']);
                                 $type = esc_html($item['type']);
                                 $icon = get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
-                                $image = "<img src='" . $icon . "' alt='" . $type . "' />";
+                                $image = "<img class='icon-image' src='" . $icon . "' alt='" . $type . "' />";
                                 echo '<a style="color: #000" href="' . $link . '" class="icon">' . $image . '</a>';
                             }
                         }
