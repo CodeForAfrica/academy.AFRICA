@@ -141,7 +141,7 @@ table {
   display: none;
 }
 .learndash-course-grid .grid .item article .thumbnail .image {
-  background-image: url("/wp-content/themes/academyAfrica/assets/images/CourseCardPattern.svg");
+  background-image: url("/wp-content/themes/academyAfrica/assets/images/CourseCardPatternDark.svg");
   height: 141px;
   display: flex;
   align-items: center;
