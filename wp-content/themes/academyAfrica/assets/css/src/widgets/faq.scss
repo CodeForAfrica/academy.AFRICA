@@ -18,6 +18,17 @@
         }
     }
 
+    .accordion-parent {
+        .panel {
+            background: $color-neutral-50;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            font-family: Open Sans;
+            color: $color-shades-black;
+        }
+    }
+
     @include media-breakpoint-up(tablet) {
         padding: 80px 24px;
     } 
