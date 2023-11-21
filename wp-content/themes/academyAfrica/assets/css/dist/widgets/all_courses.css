@@ -122,6 +122,9 @@ table {
   display: flex;
   justify-content: space-between;
 }
+.all-courses .title-section {
+  padding: 0 60px;
+}
 .all-courses .filter-sidebar {
   display: flex;
   flex: 1;
@@ -149,6 +152,9 @@ table {
 .all-courses .courses-main .course-grid {
   padding: 80px 60px 40px;
   width: 100%;
+}
+.all-courses .courses-main .course-grid .cfa-title {
+  margin: 0 0 32px;
 }
 .all-courses .courses-main .course-grid .learndash-course-grid .grid {
   flex-wrap: wrap;

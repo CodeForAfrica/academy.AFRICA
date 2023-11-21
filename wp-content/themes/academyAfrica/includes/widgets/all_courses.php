@@ -149,6 +149,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $pathways = $settings['pathways'];
         $filter_by = "Filter by:";
         $filter_options = $this->get_filter_by();
+        $courses_title = "All Courses";
 ?>
         <main class="all-courses">
             <aside class="filter-sidebar">
@@ -323,6 +324,9 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     </div>
                 </section>
                 <section class="course-grid">
+                    <h4 class="cfa-title">
+                        <? echo $courses_title ?>
+                    </h4>
                     <?php echo do_shortcode('[learndash_course_grid id="course-list" columns="3" skin="grid" card="grid-1" per_page="9" filter="false" progress_bar="" button="" pagination="button"  ]'); ?>
                 </section>
             </div>

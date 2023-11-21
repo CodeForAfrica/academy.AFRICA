@@ -4,6 +4,10 @@
   display: flex;
   justify-content: space-between;
 
+  .title-section {
+    padding: 0 60px;
+  }
+
   .filter-sidebar {
     display: flex;
     flex: 1;
@@ -23,7 +27,6 @@
         margin-bottom: 20px;
       }
     }
-
   }
 
   .courses-main {
@@ -32,7 +35,9 @@
     .course-grid {
       padding: 80px 60px 40px;
       width: 100%;
-
+      .cfa-title {
+        margin: 0 0 32px;
+      }
       .learndash-course-grid {
         .grid {
           flex-wrap: wrap;

@@ -5,10 +5,7 @@
   height: 1px;
 }
 
-.learning-pathways {
-  padding: 80px 60px 40px;
-}
-.learning-pathways .cfa-title {
+.cfa-title {
   color: var(--primary-700, #0c1a81);
   font-family: Lora;
   font-size: 40px;
@@ -17,13 +14,9 @@
   line-height: 48px;
   margin: 0;
 }
-.learning-pathways .cfa-title::after {
-  content: "";
-  display: block;
-  height: 6px;
-  width: 60px;
-  background: #ed1c24;
-  margin-top: 32px;
+
+.learning-pathways {
+  padding: 80px 60px 40px;
 }
 .learning-pathways .description {
   color: var(--shades-black, #000);
@@ -70,7 +63,7 @@
 }
 .learning-pathways .content .card .pathway-card-content {
   padding: 20px;
-  height: 100px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -104,10 +97,10 @@
   .pagination-container .see-all {
     display: block;
   }
-  .learning-pathways .cfa-title {
+  .cfa-title {
     font-size: 20px;
   }
-  .learning-pathways .cfa-title::after {
+  .cfa-title::after {
     margin-top: 10px;
   }
   .learning-pathways .content {
@@ -115,10 +108,10 @@
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  .learning-pathways .cfa-title {
+  .cfa-title {
     text-align: center;
   }
-  .learning-pathways .cfa-title::after {
+  .cfa-title::after {
     text-align: center;
     position: relative;
     font-size: 20px;
