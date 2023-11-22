@@ -37,6 +37,36 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         return ['academy-africa'];
     }
 
+    public function get_events($args)
+    {
+        $query = new WP_Query($args);
+        $result = array();
+
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $user_data = get_userdata(get_post_meta(get_the_ID(), 'speaker', true));
+                $post_data = array(
+                    'title' => get_the_title(),
+                    'speaker' => $user_data->display_name,
+                    'organisation' => get_post_meta(get_the_ID(), 'organisation', true),
+                    'is_virtual' => get_post_meta(get_the_ID(), 'is_virtual', true) ? 1 : 0,
+                    'date' => get_post_meta(get_the_ID(), 'date_time', true),
+                    'time' => get_post_meta(get_the_ID(), 'date_time', true),
+                    'image' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'),
+                    'country_code' => get_post_meta(get_the_ID(), 'country', true)[0],
+                    'language' => get_post_meta(get_the_ID(), 'language', true),
+                );
+
+                $result[] = $post_data;
+            }
+
+            wp_reset_postdata(); // Restore global post data
+        }
+
+        return $result;
+    }
+
     public function get_filter_by()
     {
         return [
@@ -64,44 +94,11 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
     }
     public function get_upcoming_events()
     {
-        return [
-            array(
-                "image" => "/wp-content/themes/academyAfrica/assets/images/events-sample.png",
-                "title" => "Introduction to Data Visualisation with Flourish",
-                "speaker" => "SPEAKER NAME",
-                "date" => "dd/mm/yyyy",
-                "language" => "English",
-                "country_code" => "🇳🇬",
-                "time" => "00:00 EAT",
-            ),
-            array(
-                "image" => "/wp-content/themes/academyAfrica/assets/images/events-sample.png",
-                "title" => "Introduction to Data Visualisation with Flourish",
-                "speaker" => "SPEAKER NAME",
-                "date" => "dd/mm/yyyy",
-                "language" => "English",
-                "country_code" => "🇰🇪",
-                "time" => "00:00 EAT",
-            ),
-            array(
-                "image" => "/wp-content/themes/academyAfrica/assets/images/events-sample.png",
-                "title" => "Introduction to Data Visualisation with Flourish",
-                "speaker" => "SPEAKER NAME",
-                "date" => "dd/mm/yyyy",
-                "language" => "English",
-                "country_code" => "🇿🇦",
-                "time" => "00:00 EAT",
-            ),
-            array(
-                "image" => "/wp-content/themes/academyAfrica/assets/images/events-sample.png",
-                "title" => "Introduction to Data Visualisation with Flourish",
-                "speaker" => "SPEAKER NAME",
-                "date" => "dd/mm/yyyy",
-                "language" => "English",
-                "country_code" => "🇨🇲",
-                "time" => "00:00 EAT",
-            )
-        ];
+        $args = array(
+            'post_type' => 'event',
+            'posts_per_page' => 10,
+        );
+        return $this->get_events($args);
     }
     protected function render()
     {
@@ -114,6 +111,9 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $filter_options = $this->get_filter_by();
 ?>
         <main class="events">
+            <script>
+                console.log(<?php echo json_encode($previous_events) ?>)
+            </script>
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <p class="filter-by">
@@ -245,9 +245,10 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $language = $event["language"];
                             $country = $event["country_code"];
                             $time = $event["time"];
+                            $is_virtual = $event["is_virtual"];
                     ?>
                             <div class="card">
-                                <img src="<? echo $image ?>" alt="<? echo $title ?>">
+                                <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
 
                                 <p class="event-title">
                                     <? echo $title ?>
@@ -270,6 +271,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                     </p>
                                     <p class="country">
                                         <? echo $country ?>
+                                        <? echo $is_virtual ?>
                                     </p>
                                 </div>
                             </div>
@@ -315,9 +317,10 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $language = $event["language"];
                             $country = $event["country_code"];
                             $time = $event["time"];
+                            $is_virtual = $event["is_virtual"];
                     ?>
                             <div class="card">
-                                <img src="<? echo $image ?>" alt="<? echo $title ?>">
+                                <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
 
                                 <p class="event-title">
                                     <? echo $title ?>
@@ -340,6 +343,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                     </p>
                                     <p class="country">
                                         <? echo $country ?>
+                                        <? echo $is_virtual ?>
                                     </p>
                                 </div>
                             </div>

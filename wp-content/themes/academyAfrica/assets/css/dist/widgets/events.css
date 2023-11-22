@@ -171,7 +171,7 @@ table {
 .events .events-content .card .speaker-name {
   color: #000;
   font-family: Open Sans;
-  text-transform: capitalize;
+  text-transform: uppercase;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;

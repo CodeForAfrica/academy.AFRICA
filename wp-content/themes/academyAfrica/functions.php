@@ -66,3 +66,6 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
 require_once __DIR__ . '/includes/widgets/widgets.php';
 $widget = new \AcademyAfrica\Theme\Widget\Widget();
 $widget->init();
+
+require_once __DIR__  . '/events.php';
+add_action('init', 'event_post_type');
