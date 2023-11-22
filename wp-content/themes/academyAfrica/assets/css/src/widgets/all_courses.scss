@@ -1,13 +1,7 @@
 @use "../abstracts/" as *;
 
 .all-courses {
-  display: flex;
-  justify-content: space-between;
-
-  .title-section {
-    padding: 0 60px;
-  }
-
+  padding: 60px 0;
   .filter-sidebar {
     display: flex;
     flex: 1;
@@ -30,19 +24,171 @@
   }
 
   .courses-main {
-    flex: 3;
 
     .course-grid {
-      padding: 80px 60px 40px;
       width: 100%;
+      padding: 40px 55px;
+
       .cfa-title {
-        margin: 0 0 32px;
+        text-align: left;
+        margin-bottom: 50px;
+
+        &::after {
+          left: unset;
+          transform: unset;
+        }
       }
+
       .learndash-course-grid {
         .grid {
           flex-wrap: wrap;
         }
       }
     }
+
+    .course-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        width: 280px;
+        border: 0.5px solid $color-neutral-200;
+        background-color: $color-shades-white;
+        align-self: stretch;
+
+        .course-card-pattern {
+          height: 200px;
+          background: url('../../../images/CourseCardPatternDark.svg') no-repeat center center;
+          background-size: cover;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+          }
+        }
+
+        .course-card-content {
+          padding: 20px;
+          gap: 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          .course-title {
+            color: $color-primary-700;
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 24px;
+          }
+
+          .course-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            .course-author {
+              color: $color-secondary-500;
+              text-transform: uppercase;
+              font-size: 14px;
+              font-weight: 600;
+              line-height: 18px;
+            }
+
+            .course-details {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              .course-students {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .icon {
+                  display: flex;
+                  align-self: center;
+                  justify-content: center;
+
+                  &::before {
+                    // outlined user icon
+                    content: "\f007";
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    font-size: 16px;
+                    color: $color-shades-black;
+                  }
+                }
+
+                .value {
+                  color: $color-shades-black;
+                  font-size: 14px;
+                  font-weight: 400;
+                  line-height: 18px;
+                }
+              }
+
+              .course-price {
+                background: $color-success-500;
+                color: $color-shades-white;
+                height: 25px;
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 4px 10px;
+                min-width: 54px;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
   }
+
+  @include media-breakpoint-up(tablet) {
+    .courses-main {
+
+      .course-list {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        gap: 36px;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(desktop) {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    .courses-main {
+
+      .course-grid {
+        padding: 40px 60px 80px;
+      }
+
+      .course-list {
+        gap: 40;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  // @include media-breakpoint-up(xlarge) {
+  //   padding: 0;
+  // }
 }
