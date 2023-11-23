@@ -629,19 +629,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                     <div class="course-card-pattern">
                                         <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
                                     </div>
-                                    <div>
-                                        <?
-                                        if ($organizations) {
-                                            $organization = $organizations[0];
-                                            // echo '<pre>';
-                                            // print_r($organizations);
-                                            // echo '</pre>';
-                                            echo 'Org:::' . $organization->post_title;
-                                        } else {
-                                            echo 'No organization';
-                                        }
-                                        ?>
-                                    </div>
                                     <div class="course-card-content">
                                         <p class="course-title">
                                             <? echo $course_title ?>
@@ -669,6 +656,29 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             }
                         }
                         ?>
+                    </div>
+                    <hr class="divider">
+                    <div class="pagination-container">
+                        <a href="/" class="see-all">
+                            View All
+                        </a>
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a></li>
+                        </ul>
                     </div>
                 </section>
             </div>

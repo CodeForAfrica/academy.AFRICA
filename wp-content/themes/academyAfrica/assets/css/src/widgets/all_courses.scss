@@ -13,13 +13,13 @@
     .mobile-filter {
       display: none;
 
-      @include media-breakpoint-down(tablet) { 
+      @include media-breakpoint-down(tablet) {
         display: block;
         width: 100%;
         padding: 0 20px;
         margin-bottom: 20px;
       }
-    } 
+    }
   }
 
   .courses-main {
@@ -27,7 +27,7 @@
 
     .course-grid {
       width: 100%;
-      padding: 40px 55px;
+      padding: 40px 24px;
 
       .cfa-title {
         text-align: left;
@@ -48,10 +48,11 @@
 
     .course-list {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 30px;
+      justify-content: center;
+      gap: 30px 0;
       flex-wrap: wrap;
+      margin-bottom: 30px;
 
       .card {
         display: flex;
@@ -157,6 +158,25 @@
       }
 
     }
+
+    .divider {
+      display: none;
+      background: #A9A9A9;
+      border: none;
+      height: 1px;
+    }
+
+    .pagination-container {
+      justify-content: center;
+
+      .see-all {
+        display: block;
+      }
+
+      .pagination {
+        display: none;
+      }
+    }
   }
 
   @include media-breakpoint-up(tablet) {
@@ -175,6 +195,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0;
+
     .courses-main {
 
       .course-grid {
