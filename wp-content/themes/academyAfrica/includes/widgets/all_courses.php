@@ -3,6 +3,11 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+require_once __DIR__ . '/../utils/courses.php';
+
+
+use AcademyAfrica\Theme\Courses\CoursesFunctions;
+
 class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 {
 
@@ -38,33 +43,36 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
     public function get_filter_by()
     {
-        return [
+        $allOrganizations = CoursesFunctions::getOrganizations();
+        $allInstructors = CoursesFunctions::getAllInstructors();
+        $filter_by = [
             [
-                "title" => "Organization",
-                "options" => [
-                    "Swathmore University",
-                    "DW Akademie",
-                    "Institut Supérieur Des Sciences De L'information Et De La Communication (ISSIC)",
-                    "Code for Africa",
-
-                ]
+                'title' => 'Organizations',
+                'options' => []
             ],
             [
-                "title" => "Instructors",
-                "options" => [
-                    "Swathmore University",
-                    "DW Akademie",
-                    "Institut Supérieur Des Sciences De L'information Et De La Communication (ISSIC)",
-                    "Code for Africa",
-
-                ]
-            ], [
-                "title" => "Price",
-                "options" => [
-                    "Free",
-                ]
+                'title' => 'Instructors',
+                'options' => []
             ]
         ];
+
+        foreach ($allOrganizations as $organization) {
+            $formatedOrganization = (object)[
+                'id' => $organization['id'],
+                'name' => $organization['title'],
+            ];
+            array_push($filter_by[0]['options'], $formatedOrganization);
+        }
+
+        foreach ($allInstructors as $instructor) {
+            $formatedInstructor = (object)[
+                'id' => $instructor['id'],
+                'name' => $instructor['name'],
+            ];
+            array_push($filter_by[1]['options'], $formatedInstructor);
+        }
+
+        return $filter_by;
     }
 
 
@@ -449,7 +457,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                             <label class="mui-checkbox">
                                                 <input type="checkbox">
                                                 <span class="checkmark"></span>
-                                                <? echo $option ?>
+                                                <? echo $option->name ?>
                                             </label>
                                         </li>
                                     </ul>
@@ -486,7 +494,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                                         <label class="mui-checkbox">
                                                             <input type="checkbox">
                                                             <span class="checkmark"></span>
-                                                            <? echo $option ?>
+                                                            <? echo $option->name ?>
                                                         </label>
                                                     </li>
                                                 <?
