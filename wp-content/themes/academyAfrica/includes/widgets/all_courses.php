@@ -540,9 +540,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             </aside>
             <div class="courses-main">
                 <section class="learning-pathways">
-                    <h4 class="cfa-title">
-                        <? echo $pathway_title ?>
-                    </h4>
+                    <div class="title">
+                        <h4 class="cfa-title">
+                            <? echo $pathway_title ?>
+                        </h4>
+                    </div>
                     <p class="description">
                         <? echo $pathway_description ?>
                     </p>
@@ -615,12 +617,30 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 $course_price = $course_meta['sfwd-courses_course_price'];
                                 $course_price = $course_price == 0 ? "Free" : $course_price;
 
+
+                                $course_id = $course->ID;
+                                $organizations = get_field('organization', $course_id);
+
+
                                 $course_attrs = $this->get_post_attr($course, $atts);
                                 extract($course_attrs);
                         ?>
                                 <div class="card">
                                     <div class="course-card-pattern">
                                         <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
+                                    </div>
+                                    <div>
+                                        <?
+                                        if ($organizations) {
+                                            $organization = $organizations[0];
+                                            // echo '<pre>';
+                                            // print_r($organizations);
+                                            // echo '</pre>';
+                                            echo 'Org:::' . $organization->post_title;
+                                        } else {
+                                            echo 'No organization';
+                                        }
+                                        ?>
                                     </div>
                                     <div class="course-card-content">
                                         <p class="course-title">

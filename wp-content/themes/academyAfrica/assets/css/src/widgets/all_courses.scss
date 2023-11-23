@@ -1,7 +1,6 @@
 @use "../abstracts/" as *;
 
 .all-courses {
-  padding: 60px 0;
   .filter-sidebar {
     display: flex;
     flex: 1;
@@ -14,16 +13,17 @@
     .mobile-filter {
       display: none;
 
-      @include media-breakpoint-down(tablet) {
+      @include media-breakpoint-down(tablet) { 
         display: block;
         width: 100%;
         padding: 0 20px;
         margin-bottom: 20px;
       }
-    }
+    } 
   }
 
   .courses-main {
+    // padding: 60px 0;
 
     .course-grid {
       width: 100%;
