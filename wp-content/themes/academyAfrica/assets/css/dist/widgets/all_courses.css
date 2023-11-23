@@ -118,11 +118,6 @@ table {
   cursor: not-allowed;
 }
 
-.all-courses .filter-sidebar {
-  display: flex;
-  flex: 1;
-  width: 100%;
-}
 @media (max-width: 768px) {
   .all-courses .filter-sidebar {
     display: none;
@@ -276,7 +271,7 @@ table {
 @media (min-width: 1152px) {
   .all-courses {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 0;
   }
   .all-courses .courses-main .course-grid {
