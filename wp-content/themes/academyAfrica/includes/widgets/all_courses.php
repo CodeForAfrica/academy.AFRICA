@@ -18,7 +18,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-all-courses', 'academy-africa', 'academy-africa-pathways'];
+        return ['academy-africa-all-courses', 'academy-africa-pathways', 'academy-africa'];
     }
 
     public function get_script_depends()
