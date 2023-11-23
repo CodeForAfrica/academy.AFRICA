@@ -164,243 +164,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
         $this->end_controls_section();
     }
-    public function get_default_atts()
-    {
-        return apply_filters('academy-africa_course_grid_default_shortcode_attributes', [
-            // Query
-            'post_type' => defined('LEARNDASH_VERSION') ? 'sfwd-courses' : 'post',
-            'per_page'  => 9,
-            'orderby'   => 'ID',
-            'order'     => 'DESC',
-            'taxonomies' => '',
-            'enrollment_status' => '',
-            'progress_status' => '',
-            // Elements
-            'thumbnail' => true,
-            'thumbnail_size' => 'thumbnail',
-            'ribbon' => true,
-            'video' => false,
-            /**
-             * Content includes title, description and button
-             */
-            'content' => true,
-            'title' => true,
-            'title_clickable' => true,
-            'description' => true,
-            'description_char_max' => 120,
-            'button' => true,
-            'filter' => true,
-            /**
-             * Accepts:
-             * 
-             * 'button'   : Load more button
-             * 'infinite' : Infinite scrolling 
-             * 'pages'    : Normal AJAX pagination with number 1, 2, 3, and so on
-             * 'false'    : Doesn't have pagination
-             */
-            'pagination' => 'button',
-            'grid_height_equal' => false,
-            'progress_bar' => false,
-            'post_meta' => true,
-            // Template
-            /**
-             * Accepts: 
-             * 
-             * All values available in templates/skins 
-             */
-            'skin' => 'grid',
-            'card' => 'grid-1',
-            /**
-             * Only used in certain skin such as 'grid' and 'masonry'
-             */
-            'columns' => 3,
-            'min_column_width' => 250,
-            /**
-             * Only used in certain skin such as 'carousel'
-             */
-            'items_per_row' => 3,
-            // Styles
-            'font_family_title' => '',
-            'font_family_description' => '',
-            'font_size_title' => '',
-            'font_size_description' => '',
-            'font_color_title' => '',
-            'font_color_description' => '',
-            'background_color_title' => '',
-            'background_color_description' => '',
-            'background_color_ribbon' => '',
-            'font_color_ribbon' => '',
-            'background_color_icon' => '',
-            'font_color_icon' => '',
-            'background_color_button' => '',
-            'font_color_button' => '',
-            // Misc
-            'class_name' => '',
-            /**
-             * Random unique ID for CSS styling purpose
-             */
-            'id' => '',
-            // Filter
-            'filter_search' => true,
-            'filter_taxonomies' => '',
-            'filter_price' => true,
-            'filter_price_min' => 0,
-            'filter_price_max' => 1000,
-        ]);
-    }
 
-
-    public function build_query($atts = [])
-    {
-        if (empty($atts['per_page'])) {
-            $atts['per_page'] = -1;
-        }
-
-        $tax_query = [];
-
-        $taxonomies = !empty($atts['taxonomies']) ? array_filter(explode(';', sanitize_text_field(str_replace('"', '', wp_unslash($atts['taxonomies']))))) : [];
-
-        foreach ($taxonomies as $taxonomy_entry) {
-            $taxonomy_parts = explode(':', $taxonomy_entry);
-
-            if (empty($taxonomy_parts[0]) || empty($taxonomy_parts[1])) {
-                continue;
-            }
-
-            $taxonomy = trim($taxonomy_parts[0]);
-            $terms = array_map('trim', explode(',', $taxonomy_parts[1]));
-
-            if (!empty($taxonomy) && !empty($terms)) {
-                $tax_query[] = [
-                    'taxonomy' => $taxonomy,
-                    'field' => 'slug',
-                    'terms' => $terms,
-                ];
-            }
-        }
-
-        $tax_query['relation'] = 'OR';
-        $post__in = null;
-        $query_args = apply_filters('academy-africa_course_grid_query_args', [
-            'post_type' => sanitize_text_field($atts['post_type']),
-            'posts_per_page' => intval($atts['per_page']),
-            'post_status' => 'publish',
-            'orderby' => sanitize_text_field($atts['orderby']),
-            'order' => sanitize_text_field($atts['order']),
-            'tax_query' => $tax_query,
-            'post__in' => $post__in,
-        ], $atts, $filter = null);
-
-        return $query_args;
-    }
-
-    public static function format_price($price, $format = 'plain')
-    {
-        if ($format == 'output') {
-            preg_match('/(((\d+)[,\.]?)*(\d+)([\.,]?\d+)?)/', $price, $matches);
-
-            $price = $matches[1];
-
-            if (!empty($price)) {
-                $match_comma_decimal = preg_match('/(?:\d+\.?)*\d+(,\d{1,2})$/', $price, $comma_matches);
-
-                $match_dot_decimal = preg_match('/(?:\d+,?)*\d+(\.\d{1,2})$/', $price, $dot_matches);
-
-                if ($match_comma_decimal) {
-                    $has_decimal = !empty($comma_matches[1]) ? true : false;
-                    $thousands_separator = '.';
-                    $decimal_separator = ',';
-                    $price = str_replace('.', '', $price);
-                    $price = str_replace(',', '.', $price);
-                } else {
-                    $has_decimal = !empty($dot_matches[1]) ? true : false;
-                    $thousands_separator = ',';
-                    $decimal_separator = '.';
-                    $price = str_replace(',', '', $price);
-                }
-
-                $price = floatval($price);
-
-                if ($has_decimal) {
-                    $price = number_format($price, 2, $decimal_separator, $thousands_separator);
-                } else {
-                    $price = number_format($price, 0, $decimal_separator, $thousands_separator);
-                }
-            }
-
-            return $price;
-        }
-
-        return $price;
-    }
-
-    public function get_post_attr($post, $atts = [], $args = [])
-    {
-        if (is_numeric($post)) {
-            $post = get_post($post);
-        }
-        $user_id = get_current_user_id();
-
-        // $course_options = null;
-        $price = '';
-        $price_type = '';
-        $price_text = '';
-        if ($post->post_type == 'sfwd-courses') {
-            // $course_options = get_post_meta($post->ID, '_sfwd-courses', true);
-            $students_count = learndash_course_grid_count_students($post->ID);
-            $price_args = learndash_get_course_price($post->ID);
-        }
-        $currency = learndash_get_currency_symbol();
-
-
-        if (!empty($price_args)) {
-            $price = $price_args['price'];
-            $price_type = $price_args['type'];
-            $price_format = apply_filters('academy-africa_course_grid_price_format', '{currency}{price}');
-
-            if (is_numeric($price) && !empty($price)) {
-                $price = self::format_price($price, 'output');
-                $price_text = str_replace(['{currency}', '{price}'], [$currency, $price], $price_format);
-            } elseif (is_string($price) && !empty($price)) {
-                if (preg_match('/(((\d+),?)*(\d+)(\.?\d+)?)/', $price)) {
-                    $price = self::format_price($price, 'output');
-                    $price_text = str_replace(['{currency}', '{price}'], [$currency, $price], $price_format);
-                } else {
-                    $price_text = $price;
-                }
-            } elseif (empty($price)) {
-                if ('closed' === $price_type || 'open' === $price_type) {
-                    $price_text = '';
-                } else {
-                    $price_text = __('Free', 'learndash-course-grid');
-                }
-            }
-        }
-
-        if (empty($price)) {
-            $price = __('Free', 'academy-africa-course-grid');
-        }
-
-        $user_object = get_user_by('ID', $post->post_author);
-        $author = apply_filters('academy-africa_course_grid_author', [
-            'name' => $user_object->display_name,
-            'avatar' => get_avatar_url($post->post_author),
-        ], $post->ID, $post->post_author);
-        $course_link = get_permalink($post->ID);
-
-
-        $post_attr = [
-            'user_id' => $user_id,
-            'post_type' => $post->post_type,
-            'title' => $post->post_title,
-            'price' => $price,
-            'students' => $students_count,
-            'author' => $author,
-            'link' => $course_link,
-        ];
-
-        return apply_filters('academy-africa_course_grid_post_attr', $post_attr, $post->ID, $atts, $args);
-    }
 
 
     protected function render()
@@ -412,19 +176,21 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $filter_by = "Filter by:";
         $filter_options = $this->get_filter_by();
         $courses_title = "All Courses";
-
+        $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
 
         $atts = [
-            'per_page' => '4',
+            'per_page' => '9',
+            'paged' => $current_page,
             // "taxonomies" => "ld_course_category:featured"
         ];
-        $atts = shortcode_atts($this->get_default_atts(), $atts, 'academy-africa_course_grid');
+        $default_atts = CoursesFunctions::get_default_atts();
+        $atts = shortcode_atts($default_atts, $atts, 'academy-africa_course_grid');
 
-        $query = $this->build_query($atts);
+        $query = CoursesFunctions::build_query($atts);
         $query = new WP_Query($query);
-        $max_num_pages = $query->max_num_pages;
+        $no_of_pages = $query->max_num_pages;
 
-        if ($max_num_pages > 1) {
+        if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
             $has_pagination = true;
         } else {
             $has_pagination = false;
@@ -616,77 +382,99 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                         if (!empty($courses)) {
                             foreach ($courses as $course) {
                                 $course_title = get_the_title($course);
-                                $course_excerpt = get_the_excerpt($course);
                                 $course_author = get_the_author_meta('display_name', $course->post_author);
-
                                 $course_thumbnail = get_the_post_thumbnail_url($course);
                                 $course_link = get_permalink($course);
                                 $course_meta = get_post_meta($course, 'sfwd-courses', true);
                                 $course_price = $course_meta['sfwd-courses_course_price'];
                                 $course_price = $course_price == 0 ? "Free" : $course_price;
 
-
-                                $course_id = $course->ID;
-                                $organizations = get_field('organization', $course_id);
-
-
-                                $course_attrs = $this->get_post_attr($course, $atts);
+                                $course_attrs = CoursesFunctions::get_post_attr($course, $atts);
                                 extract($course_attrs);
                         ?>
-                                <div class="card">
-                                    <div class="course-card-pattern">
-                                        <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
-                                    </div>
-                                    <div class="course-card-content">
-                                        <p class="course-title">
-                                            <? echo $course_title ?>
-                                        </p>
-                                        <div class="course-meta">
-                                            <p class="course-author">
-                                                By <? echo $course_author ?>
+                                <a href="<? echo $course_link ?>" class="course-card">
+                                    <div class="card">
+                                        <div class="course-card-pattern">
+                                            <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
+                                        </div>
+                                        <div class="course-card-content">
+                                            <p class="course-title">
+                                                <? echo $course_title ?>
                                             </p>
-                                            <div class="course-details">
-                                                <div class="course-students">
-                                                    <div class="icon"></div>
-                                                    <p class="value"><? echo $students ?></p>
-
-                                                </div>
-                                                <p class="course-price">
-                                                    <? echo $course_price ?>
+                                            <div class="course-meta">
+                                                <p class="course-author">
+                                                    By <? echo $course_author ?>
                                                 </p>
-                                            </div>
+                                                <div class="course-details">
+                                                    <div class="course-students">
+                                                        <div class="icon"></div>
+                                                        <p class="value"><? echo $students ?></p>
 
+                                                    </div>
+                                                    <p class="course-price">
+                                                        <? echo $course_price ?>
+                                                    </p>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                         <?
                             }
                         }
                         ?>
                     </div>
-                    <hr class="divider">
-                    <div class="pagination-container">
-                        <a href="/" class="see-all">
-                            View All
-                        </a>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </a></li>
-                        </ul>
-                    </div>
+                    <?
+                    if ($has_pagination) {
+                    ?>
+                        <hr class="divider">
+                        <div class="pagination-container">
+                            <a href="/" class="see-all">
+                                View All
+                            </a>
+                            <ul class="pagination">
+                                <!-- list pagination. Only first 3 should be shown and last -->
+                                <!-- like 1 2 3 ... 5 -->
+
+                                <?
+                                if ($current_page > 1) {
+                                ?>
+                                    <li class="page-item"><a class="page-link" href="<? echo get_pagenum_link($current_page - 1) ?>">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a></li>
+                                    <?
+                                }
+                                for ($i = 1; $i <= $no_of_pages; $i++) {
+                                    if ($i == $current_page) {
+                                    ?>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="<? echo get_pagenum_link($i) ?>"><? echo $i ?></a>
+                                        </li>
+                                    <?
+                                    } else {
+                                    ?>
+                                        <li class="page-item"><a class="page-link" href="<? echo get_pagenum_link($i) ?>"><? echo $i ?></a></li>
+                                    <?
+                                    }
+                                }
+                                if ($current_page < $no_of_pages) {
+                                    ?>
+                                    <li class="page-item"><a class="page-link" href="<? echo get_pagenum_link($current_page + 1) ?>">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a></li>
+                                <?
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    <?
+                    }
+                    ?>
                 </section>
             </div>
         </main>
