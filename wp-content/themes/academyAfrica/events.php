@@ -35,6 +35,25 @@ function event_post_type()
     register_post_type('event', $args);
 }
 
+function get_timezones()
+{
+    $timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL_WITH_BC);
+
+    $timezonesArray = array();
+
+    foreach ($timezones as $timezone) {
+        $dateTimeZone = new DateTimeZone($timezone);
+        $offset = $dateTimeZone->getOffset(new DateTime('now', $dateTimeZone));
+        $offsetHours = floor(abs($offset) / 3600);
+        $offsetMinutes = floor((abs($offset) % 3600) / 60);
+        $offsetSign = ($offset < 0) ? '-' : '+';
+        $gmtOffset = $offsetSign . sprintf('%02d:%02d', $offsetHours, $offsetMinutes);
+
+        $timezonesArray[$timezone] = $gmtOffset;
+    }
+    return $timezonesArray;
+}
+
 function get_post_options($post_type)
 {
     $args = array(
@@ -100,127 +119,103 @@ function custom_fields()
     $speaker = $custom["speaker"][0];
     $organisation = $custom["organisation"][0];
     $country = $custom["country"][0];
-    $date_time = $custom["date_time"][0];
+    $date = $custom["date"][0];
+    $time = $custom["time"][0];
+    $timezone = $custom["timezone"][0];
     $options = get_post_options("post");
     $users = get_user_options();
     $is_virtual = $custom["is_virtual"][0];
+    $timezones = get_timezones();
 ?>
-    <script>
-        console.log(<?php echo json_encode($custom) ?>)
-    </script>
     <div class="form-container">
-        <style>
-            .form-container {
-                max-width: 400px;
-                margin: 0 auto;
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
 
-            label {
-                display: block;
-                margin-bottom: 8px;
-                font-weight: bold;
-                color: #333;
-            }
+        <div class="form-group">
+            <label for="speaker">Speaker</label>
+            <select name="speaker" id="speaker" value="<?php echo $speaker; ?>">
+                <?php
+                foreach ($users as $user) {
+                    $label = $user["display_name"];
+                    $selected = $user["ID"] === $speaker ? 'selected="selected"' : null;
+                ?>
+                    <option <? echo $selected ?> value="<?php echo $user["ID"] ?>">
+                        <?php echo $label ?>
+                    </option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>
 
-            input,
-            select {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 16px;
-                box-sizing: border-box;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
+        <div class="form-group">
+            <label for="organisation">Organisation</label>
+            <input name="organisation" class="large-text" value="<?php echo $organisation; ?>" />
+        </div>
 
-            select {
-                appearance: none;
-            }
+        <div class="form-group">
+            <label for="country">Country</label>
+            <select value="<?php echo $country; ?>" name="country" id="country">
+                <?php
+                require_once __DIR__ . '/includes/utils/african_countries.php';
+                foreach ($african_countries as $name => $flag) {
+                    $label = $name;
+                    $selected = $label === $country ? 'selected="selected"' : null;
+                ?>
+                    <option <? echo $selected ?> value="<?php echo $label ?>">
+                        <?php echo $label ?>
+                    </option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>
 
-            select::after {
-                content: '\25BC';
-                position: absolute;
-                top: 50%;
-                right: 10px;
-                transform: translateY(-50%);
-            }
+        <div class="form-group">
+            <label for="language">Language</label>
+            <select name="language" id="language">
+                <option value="ENGLISH">ENGLISH</option>
+                <option value="FRENCH">FRENCH</option>
+                <option value="PORTUGUESE">PORTUGUESE</option>
+            </select>
+        </div>
 
-            input[type="datetime-local"] {
-                width: calc(100% - 22px);
-                /* Adjust for the datetime-local arrow */
-            }
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input value="<?php echo $date; ?>" type="date" class="large-text" id="date" name="date">
+        </div>
 
-            input[type="submit"] {
-                background-color: #3498db;
-                color: #fff;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            label.checkbox-label {
-                display: flex;
-                align-items: center;
-                margin-bottom: 16px;
-            }
-
-            input[type="checkbox"] {
-                margin-right: 8px;
-            }
-
-            input[type="submit"]:hover {
-                background-color: #007bb5;
-            }
-        </style>
-        <label for="speaker">Speaker</label>
-        <select name="speaker" id="speaker" value="<?php echo $speaker; ?>">
-
-            <?php
-            foreach ($users as $user) {
-                $label = $user["display_name"];
-                $selected = $user["ID"] === $speaker ? 'selected="selected"' : null;
-            ?>
-                <option <? echo $selected ?> value="<?php echo $user["ID"] ?>">
-                    <?php echo $label ?>
-                </option>
-            <?php
-            }
-            ?>
-        </select>
-        <!-- <input name="speaker" class="large-text" value="<?php echo $speaker; ?>" /> -->
-
-        <label for="organisation">Organisation</label>
-        <input name="organisation" class="large-text" value="<?php echo $organisation; ?>" />
-
-        <label for="country">Country</label>
-        <select value="<?php echo $country; ?>" name="country" id="country">
-            <?php
-            require_once __DIR__ . '/includes/utils/african_countries.php';
-            foreach ($african_countries as $name => $flag) {
-                $label = $flag . ' ' . $name;
-                $selected = $label === $country ? 'selected="selected"' : null;
-            ?>
-                <option <? echo $selected ?> value="<?php echo $label ?>">
-                    <?php echo $label ?>
-                </option>
-            <?php
-            }
-            ?>
-        </select>
-
-        <label for="date_time">Date and Time</label>
-        <input value="<?php echo $date_time; ?>" type="datetime-local" class="large-text" id="date_time" name="date_time">
-        <label class="checkbox-label">
-            <?
-            $checked = $is_virtual ? 'checked' : "";
-            ?><input <? echo $checked ?> type="checkbox" name="is_virtual">
-            Is Virtual
-        </label>
+        <div class="form-group">
+            <label for="date">Time</label>
+            <input value="<?php echo $time; ?>" type="time" class="large-text" id="time" name="time">
+        </div>
+        <div class="form-group">
+            <label for="timezone">
+                Timezone
+            </label>
+            <select value="<?php echo $timezone; ?>" name="timezone" id="timezone">
+                <?php
+                foreach ($timezones as $name => $offset) {
+                    $label = $name . ' ' . $offset;
+                    $selected = $label === $timezone ? 'selected="selected"' : null;
+                ?>
+                    <option <? echo $selected ?> value="<?php echo $label ?>">
+                        <?php echo $label ?>
+                    </option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group checkbox-label">
+            <label>
+                <?php
+                $checked = $is_virtual ? 'checked' : "";
+                ?>
+                <input <?php echo $checked ?> type="checkbox" name="is_virtual">
+                Is Virtual
+            </label>
+        </div>
     </div>
+
 <?php
 }
 
@@ -235,9 +230,12 @@ function save_details()
     global $post;
     update_post_meta($post->ID, "speaker", $_POST["speaker"]);
     update_post_meta($post->ID, "organisation", $_POST["organisation"]);
-    update_post_meta($post->ID, "date_time", $_POST["date_time"]);
+    update_post_meta($post->ID, "date", $_POST["date"]);
+    update_post_meta($post->ID, "time", $_POST["time"]);
     update_post_meta($post->ID, "country", $_POST["country"]);
     update_post_meta($post->ID, "is_virtual", $_POST["is_virtual"]);
+    update_post_meta($post->ID, "language", $_POST["language"]);
+    update_post_meta($post->ID, "timezone", $_POST["timezone"]);
 }
 
 add_action("admin_init", "admin_init");

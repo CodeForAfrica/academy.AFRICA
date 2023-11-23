@@ -133,6 +133,27 @@ table {
   line-height: 40px; /* 121.212% */
   letter-spacing: -0.66px;
 }
+.events .selected-filters {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 40px 0;
+}
+.events .selected-filters .chip {
+  border: 0.2px solid var(--primary-700, #0c1a81);
+  background: var(--primary-50, #eff0fd);
+  padding: 12px 16px;
+  color: var(--primary-700, #0c1a81);
+  display: flex;
+  /* Buttons */
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px; /* 118.75% */
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
 .events .events-content {
   flex: 1;
   padding: 80px 60px;
@@ -186,6 +207,7 @@ table {
 .events .events-content .card .language,
 .events .events-content .card .date {
   color: #000;
+  margin-top: 12px;
   overflow: hidden;
   white-space: nowrap;
   font-family: Open Sans;
@@ -218,6 +240,18 @@ table {
     padding: 0 20px;
     margin-bottom: 20px;
   }
+}
+.events .clear-filters {
+  color: var(--secondary-600, #b6131e);
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  background: transparent;
+  line-height: 28px; /* 155.556% */
+  margin-top: 40px;
+  text-transform: none;
+  outline: none;
 }
 
 @media (min-width: 1440px) {
