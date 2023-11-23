@@ -651,7 +651,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                         </div>
                                     </div>
                                 </div>
-                                <br>
                         <?
                             }
                         }

@@ -151,10 +151,7 @@ table {
   left: unset;
   transform: unset;
 }
-.all-courses .courses-main .course-grid .learndash-course-grid .grid {
-  flex-wrap: wrap;
-}
-.all-courses .courses-main .course-list {
+.all-courses .courses-main .course-grid .course-list {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +159,7 @@ table {
   flex-wrap: wrap;
   margin-bottom: 30px;
 }
-.all-courses .courses-main .course-list .card {
+.all-courses .courses-main .course-grid .course-list .card {
   display: flex;
   flex-direction: column;
   width: 280px;
@@ -170,7 +167,7 @@ table {
   background-color: #FFFFFF;
   align-self: stretch;
 }
-.all-courses .courses-main .course-list .card .course-card-pattern {
+.all-courses .courses-main .course-grid .course-list .card .course-card-pattern {
   height: 200px;
   background: url("../../../images/CourseCardPatternDark.svg") no-repeat center center;
   background-size: cover;
@@ -178,65 +175,65 @@ table {
   align-items: center;
   justify-content: center;
 }
-.all-courses .courses-main .course-list .card .course-card-pattern img {
+.all-courses .courses-main .course-grid .course-list .card .course-card-pattern img {
   width: 90px;
   height: 90px;
   border-radius: 50%;
 }
-.all-courses .courses-main .course-list .card .course-card-content {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content {
   padding: 20px;
-  gap: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 200px;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-title {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-title {
   color: #0C1A81;
   font-size: 18px;
   font-weight: 800;
   line-height: 24px;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-meta {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-meta {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-meta .course-author {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-meta .course-author {
   color: #ED1C24;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-meta .course-details {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-meta .course-details {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-meta .course-details .course-students {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-meta .course-details .course-students {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-meta .course-details .course-students .icon {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-meta .course-details .course-students .icon {
   display: flex;
   align-self: center;
   justify-content: center;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-meta .course-details .course-students .icon::before {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-meta .course-details .course-students .icon::before {
   content: "\f007";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 16px;
   color: #000000;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-meta .course-details .course-students .value {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-meta .course-details .course-students .value {
   color: #000000;
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
 }
-.all-courses .courses-main .course-list .card .course-card-content .course-meta .course-details .course-price {
+.all-courses .courses-main .course-grid .course-list .card .course-card-content .course-meta .course-details .course-price {
   background: #10B981;
   color: #FFFFFF;
   height: 25px;
@@ -250,25 +247,28 @@ table {
   padding: 4px 10px;
   min-width: 54px;
 }
-.all-courses .courses-main .divider {
+.all-courses .courses-main .course-grid .divider {
   display: none;
   background: #A9A9A9;
   border: none;
   height: 1px;
 }
-.all-courses .courses-main .pagination-container {
+.all-courses .courses-main .course-grid .pagination-container {
   justify-content: center;
 }
-.all-courses .courses-main .pagination-container .see-all {
+.all-courses .courses-main .course-grid .pagination-container .see-all {
   display: block;
 }
-.all-courses .courses-main .pagination-container .pagination {
+.all-courses .courses-main .course-grid .pagination-container .pagination {
   display: none;
 }
 @media (min-width: 768px) {
-  .all-courses .courses-main .course-list {
+  .all-courses .courses-main .course-grid {
+    padding: 40px 55px;
+  }
+  .all-courses .courses-main .course-grid .course-list {
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: flex-start;
     gap: 36px;
   }
@@ -281,10 +281,32 @@ table {
   }
   .all-courses .courses-main .course-grid {
     padding: 40px 60px 80px;
+    width: 812px;
   }
-  .all-courses .courses-main .course-list {
-    gap: 40;
+  .all-courses .courses-main .course-grid .cfa-title {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  .all-courses .courses-main .course-grid .course-list {
+    gap: 40px 70px;
     justify-content: space-between;
+  }
+  .all-courses .courses-main .course-grid .divider {
+    display: block;
+  }
+  .all-courses .courses-main .course-grid .pagination-container {
+    justify-content: flex-end;
+  }
+  .all-courses .courses-main .course-grid .pagination-container .see-all {
+    display: none;
+  }
+  .all-courses .courses-main .course-grid .pagination-container .pagination {
+    display: flex;
+  }
+}
+@media (min-width: 1440px) {
+  .all-courses .courses-main .course-grid {
+    width: 1100px;
   }
 }
 
