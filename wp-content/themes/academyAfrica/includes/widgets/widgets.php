@@ -35,7 +35,7 @@ final class Widget
         foreach ($js_files as $js_file) {
             $js_file_name = basename($js_file, '.js');
             $script_name = 'academy-africa_' . $js_file_name;
-            wp_register_script($script_name, get_stylesheet_directory_uri() . '/assets/js/widgets/' . $js_file_name . '.js', array(), "1.0.0");
+            wp_register_script($script_name, get_stylesheet_directory_uri() . '/assets/js/widgets/' . $js_file_name . '.js', array(), "1.0.1");
         }
     }
 
@@ -107,7 +107,7 @@ final class Widget
                 $handle,
                 get_stylesheet_directory_uri() . '/assets/css/dist/widgets/' . $file,
                 [],
-                "1.0.2"
+                "1.0.6"
             );
         }
     }

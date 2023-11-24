@@ -31,11 +31,16 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 function my_theme_enqueue_styles()
 {
-    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), '6.3.9');
+    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), '6.3.10');
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
+function load_admin_styles()
+{
+    wp_enqueue_style('event-style', get_stylesheet_directory_uri() . '/assets/css/dist/admin/events.css', false, '6.3.9');
+}
+add_action('admin_enqueue_scripts', 'load_admin_styles');
 
 function load_fa()
 {
@@ -84,10 +89,11 @@ function create_organization_post_type()
 }
 add_action('init', 'create_organization_post_type');
 
-function create_organization_taxonomy() {
+function create_organization_taxonomy()
+{
     $labels = array(
-        'name' => _x( 'Organizations', 'taxonomy general name' ),
-        'singular_name' => _x( 'Organization', 'taxonomy singular name' ),
+        'name' => _x('Organizations', 'taxonomy general name'),
+        'singular_name' => _x('Organization', 'taxonomy singular name'),
         // other labels
     );
 
@@ -97,12 +103,15 @@ function create_organization_taxonomy() {
         'show_ui' => true,
         'show_admin_column' => true,
         'query_var' => true,
-        'rewrite' => array( 'slug' => 'organization' ),
+        'rewrite' => array('slug' => 'organization'),
     ));
 }
 
-add_action( 'init', 'create_organization_taxonomy', 0 );
+add_action('init', 'create_organization_taxonomy', 0);
 
 require_once __DIR__ . '/includes/widgets/widgets.php';
 $widget = new \AcademyAfrica\Theme\Widget\Widget();
 $widget->init();
+
+require_once __DIR__  . '/events.php';
+add_action('init', 'event_post_type');
