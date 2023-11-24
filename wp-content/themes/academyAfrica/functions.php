@@ -110,6 +110,26 @@ function create_organization_taxonomy()
 
 add_action('init', 'create_organization_taxonomy', 0);
 
+function create_learning_path_post_type()
+{
+    register_post_type(
+        'ac-learning-path',
+        array(
+            'labels' => array(
+                'name' => __('Learning Paths'),
+                'singular_name' => __('Learning Path')
+            ),
+            'public' => true,
+            'has_archive' => false,
+            "heirarchical" => true,
+            'rewrite' => array('slug' => 'academy-africa-learning-paths'),
+            'show_in_rest' => true,
+            'supports' => array('title', 'thumbnail', 'excerpt', 'custom-fields', 'revisions', 'page-attributes')
+        )
+    );
+}
+add_action('init', 'create_learning_path_post_type');
+
 require_once __DIR__ . '/includes/widgets/widgets.php';
 $widget = new \AcademyAfrica\Theme\Widget\Widget();
 $widget->init();

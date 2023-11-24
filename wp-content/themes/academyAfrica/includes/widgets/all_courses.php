@@ -235,7 +235,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     ?>
 
                 </div>
-                <div id="filters" class="mobile-filter">
+                <!-- <div id="filters" class="mobile-filter">
                     <h4 class="filter-title">
                         Filter By:
                     </h4>
@@ -311,6 +311,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             Close
                         </button>
                     </div>
+                </div> -->
             </aside>
             <div class="courses-main">
                 <section class="learning-pathways">
@@ -377,6 +378,33 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     <h4 class="cfa-title">
                         <? echo $courses_title ?>
                     </h4>
+                    <div class="filter-section">
+                        <div class="sort">
+                            <div class="label">
+                                Sort by:
+                            </div>
+                            <select name="sort" id="sort" class="select">
+                                <option value="newest">Newest</option>
+                                <option value="oldest">Oldest</option>
+                                <option value="price">Price</option>
+                            </select>
+                        </div>
+                        <div class="filter">
+                            <button onclick="openFilters()" class="button primary large filter-btn">
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_11905_79908)">
+                                        <path d="M15.1693 2H1.83594L7.16927 8.30667V12.6667L9.83594 14V8.30667L15.1693 2Z" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_11905_79908">
+                                            <rect width="16" height="16" fill="white" transform="translate(0.5)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                Filter
+                            </button>
+                        </div>
+                    </div>
                     <div class="course-list">
                         <?
                         if (!empty($courses)) {
@@ -478,6 +506,91 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 </section>
             </div>
         </main>
+        <!-- Mobile filter modal -->
+        <div class="filter-modal">
+            <div class="filter-options">
+                <div id="filters" class="mobile-filter">
+                    <h4 class="filter-title">
+                        Filter By:
+                    </h4>
+                    <div class="filters">
+                        <div class="accordion-parent">
+                            <?
+                            if (!empty($filter_options)) {
+                                foreach ($filter_options as $item) {
+                                    $title = $item["title"];
+                                    $options = $item["options"];
+                            ?>
+                                    <button class="accordion"><? echo $title ?></button>
+                                    <?
+                                    if (!empty($options)) {
+                                    ?>
+                                        <div class="panel">
+                                            <ul>
+                                                <?
+                                                foreach ($options as $option) {
+                                                ?>
+                                                    <li>
+                                                        <label class="mui-checkbox">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>
+                                                            <? echo $option->name ?>
+                                                        </label>
+                                                    </li>
+                                                <?
+                                                }
+                                                ?>
+                                            </ul>
+                                        </div>
+                            <?
+                                    }
+                                }
+                            }
+                            ?>
+                        </div>
+                        <hr class="divider">
+                        <div class="actions">
+                            <button href="" class="button primary medium">Apply</button>
+                            <!-- clear filter button with X icon -->
+                            <button class="clear-filters">
+                                <div class="icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_11905_80119)">
+                                            <path d="M8.0026 14.6654C11.6845 14.6654 14.6693 11.6806 14.6693 7.9987C14.6693 4.3168 11.6845 1.33203 8.0026 1.33203C4.32071 1.33203 1.33594 4.3168 1.33594 7.9987C1.33594 11.6806 4.32071 14.6654 8.0026 14.6654Z" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M10 6L6 10" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M6 6L10 10" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_11905_80119">
+                                                <rect width="16" height="16" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                Clear all filters
+                        </div>
+                    </div>
+                    <div class="close">
+                        <button onclick="closeFilters()" class="buttons">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_11905_80128)">
+                                    <path d="M8.0026 14.6654C11.6845 14.6654 14.6693 11.6806 14.6693 7.9987C14.6693 4.3168 11.6845 1.33203 8.0026 1.33203C4.32071 1.33203 1.33594 4.3168 1.33594 7.9987C1.33594 11.6806 4.32071 14.6654 8.0026 14.6654Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M10 6L6 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M6 6L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_11905_80128">
+                                        <rect width="16" height="16" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 <?
     }
 }

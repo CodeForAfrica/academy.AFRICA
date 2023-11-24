@@ -149,6 +149,49 @@ table {
   left: unset;
   transform: unset;
 }
+.all-courses .courses-main .course-grid .filter-section {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+@media (min-width: 1152px) {
+  .all-courses .courses-main .course-grid .filter-section {
+    display: none;
+  }
+}
+.all-courses .courses-main .course-grid .filter-section .sort {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+.all-courses .courses-main .course-grid .filter-section .sort .label {
+  color: #000000;
+  flex: 1;
+}
+.all-courses .courses-main .course-grid .filter-section .sort .select {
+  flex: 1;
+  height: 50px;
+  border: none;
+  border-radius: 4px;
+  background: #FFF;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+}
+.all-courses .courses-main .course-grid .filter-section .filter .filter-btn {
+  width: 100%;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
 .all-courses .courses-main .course-grid .course-list {
   display: flex;
   align-items: center;
@@ -306,6 +349,67 @@ table {
   .all-courses .courses-main .course-grid {
     width: 1100px;
   }
+}
+
+.filter-modal {
+  display: none;
+}
+.filter-modal .filter-options {
+  padding: 80px 60px;
+}
+.filter-modal .filter-options .mobile-filter .filter-title {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 34px;
+  letter-spacing: -0.56px;
+  margin-bottom: 40px;
+}
+.filter-modal .filter-options .mobile-filter .filters .actions {
+  display: flex;
+  justify-content: space-between;
+  margin: 36px 0 40px;
+}
+.filter-modal .filter-options .mobile-filter .filters .actions .clear-filters {
+  border: none;
+  color: #ED1C24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.filter-modal .filter-options .mobile-filter .filters .actions .clear-filters .icon {
+  display: flex;
+  justify-content: center;
+}
+.filter-modal .filter-options .mobile-filter .filters .actions .clear-filters:hover {
+  color: #ED1C24;
+  background: #FEECED;
+}
+.filter-modal .filter-options .mobile-filter .divider {
+  border: none;
+  height: 1px;
+  background: #CCCFDA;
+}
+.filter-modal .filter-options .mobile-filter .close {
+  display: flex;
+  justify-content: flex-end;
+}
+.filter-modal .filter-options .mobile-filter .close .buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border: none;
+  color: #000000;
+}
+.filter-modal .filter-options .mobile-filter .close .buttons svg {
+  align-self: center;
+}
+.filter-modal .filter-options .mobile-filter .close .buttons:hover {
+  color: #000000;
+  background: #FFFFFF;
 }
 
 /*# sourceMappingURL=all_courses.css.map */
