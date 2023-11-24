@@ -122,6 +122,9 @@ table {
   display: flex;
   justify-content: space-between;
 }
+.events .events-mobile-filters {
+  padding: 60px 0 20px;
+}
 .events .section-title {
   color: var(--primary-700, #0c1a81);
   margin: 40px 0;
@@ -273,6 +276,24 @@ table {
 @media (max-width: 768px) {
   .events .events-content .content {
     justify-content: center;
+  }
+  .events .cfa-title {
+    text-align: left;
+  }
+  .events .cfa-title::after {
+    left: 0;
+    transform: translateX(0%);
+    font-family: Ibarra Real Nova;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 60px;
+  }
+}
+@media (min-width: 768px) {
+  .events .events-mobile-filters {
+    display: none;
+    padding: 60px 0 20px;
   }
 }
 

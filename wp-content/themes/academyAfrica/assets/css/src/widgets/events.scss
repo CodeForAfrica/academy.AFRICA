@@ -3,6 +3,9 @@
 .events {
   display: flex;
   justify-content: space-between;
+  .events-mobile-filters {
+    padding: 60px 0 20px;
+  }
   .section-title {
     color: var(--primary-700, #0c1a81);
     margin: 40px 0;
@@ -164,6 +167,27 @@
       .content {
         justify-content: center;
       }
+    }
+    .cfa-title {
+      text-align: left;
+      &::after {
+        left: 0;
+        transform: translateX(0%);
+        font-family: Ibarra Real Nova;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 60px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(tablet) {
+  .events {
+    .events-mobile-filters {
+      display: none;
+      padding: 60px 0 20px;
     }
   }
 }

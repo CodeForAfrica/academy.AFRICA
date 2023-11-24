@@ -88,15 +88,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .pagination-container {
-    justify-content: center;
-  }
-  .pagination-container .pagination {
-    display: none;
-  }
-  .pagination-container .see-all {
-    display: block;
-  }
   .cfa-title {
     font-size: 20px;
   }

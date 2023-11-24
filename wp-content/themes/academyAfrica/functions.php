@@ -31,7 +31,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 function my_theme_enqueue_styles()
 {
-    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), '6.3.9');
+    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), '6.3.10');
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');

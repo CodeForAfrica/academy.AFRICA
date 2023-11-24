@@ -953,8 +953,10 @@ table {
 }
 
 .accordion-parent {
-  background: #FFFFFF;
-  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #fff;
+  margin-bottom: 16px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 }
 .accordion-parent .accordion {
   background-color: #FFFFFF;
@@ -969,12 +971,11 @@ table {
   font-style: normal;
   font-weight: 700;
   color: #000000;
-  /* Paragraph/P3/Semi Bold */
   font-family: Open Sans;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
+  font-weight: 400;
+  line-height: 26px;
 }
 .accordion-parent .accordion:after {
   content: "‹";

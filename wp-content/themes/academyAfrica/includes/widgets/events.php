@@ -257,17 +257,22 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                         Clear all filters
                     </button>
                 </div>
-                <div id="filters" class="mobile-filter">
-                    <h4 class="filter-title">
-                        Filter By:
-                    </h4>
+
+            </aside>
+
+            <section class="events-content">
+                <div class="cfa-title" <?php echo $this->get_render_attribute_string('page_title'); ?>>
+                    <? echo $page_title ?>
+                </div>
+                <div id="filters" class="events-mobile-filters">
                     <div class="filters">
-                        <div class="accordion-parent">
-                            <?
-                            if (!empty($filter_options)) {
-                                foreach ($filter_options as $item) {
-                                    $title = $item["title"];
-                            ?>
+
+                        <?
+                        if (!empty($filter_options)) {
+                            foreach ($filter_options as $item) {
+                                $title = $item["title"];
+                        ?>
+                                <div class="accordion-parent">
                                     <button class="accordion"><? echo $title ?></button>
                                     <?
                                     $options = $item["options"];
@@ -291,53 +296,30 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                                 ?>
                                             </ul>
                                         </div>
-                            <?
+                                    <?
+                                    }
+                                    ?>
+                                </div><?
                                     }
                                 }
-                            }
-                            ?>
-                        </div>
-                        <hr class="divider">
-                        <div class="actions">
-                            <button href="" class="button primary">Apply</button>
-                            <button class="clear-filters">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <g clip-path="url(#clip0_11179_27069)">
-                                        <path d="M8.0026 14.6693C11.6845 14.6693 14.6693 11.6845 14.6693 8.0026C14.6693 4.32071 11.6845 1.33594 8.0026 1.33594C4.32071 1.33594 1.33594 4.32071 1.33594 8.0026C1.33594 11.6845 4.32071 14.6693 8.0026 14.6693Z" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M10 6L6 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M6 6L10 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_11179_27069">
-                                            <rect width="16" height="16" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                Clear all filters
-                            </button>
-                        </div>
+                                        ?>
+
                     </div>
-                    <div class="close">
-                        <button onclick="closeFilters()" class="buttons">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <g clip-path="url(#clip0_11179_27069)">
-                                    <path d="M8.0026 14.6693C11.6845 14.6693 14.6693 11.6845 14.6693 8.0026C14.6693 4.32071 11.6845 1.33594 8.0026 1.33594C4.32071 1.33594 1.33594 4.32071 1.33594 8.0026C1.33594 11.6845 4.32071 14.6693 8.0026 14.6693Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10 6L6 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M6 6L10 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_11179_27069">
-                                        <rect width="16" height="16" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            Close
-                        </button>
-                    </div>
-            </aside>
-            <section class="events-content">
-                <div class="cfa-title" <?php echo $this->get_render_attribute_string('page_title'); ?>>
-                    <? echo $page_title ?>
+                    <button class="button clear-filters" style="margin-top: 0; padding: 0" onclick="clearFilters()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <g clip-path="url(#clip0_11179_27069)">
+                                <path d="M8.0026 14.6693C11.6845 14.6693 14.6693 11.6845 14.6693 8.0026C14.6693 4.32071 11.6845 1.33594 8.0026 1.33594C4.32071 1.33594 1.33594 4.32071 1.33594 8.0026C1.33594 11.6845 4.32071 14.6693 8.0026 14.6693Z" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M10 6L6 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6 6L10 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_11179_27069">
+                                    <rect width="16" height="16" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        Clear all filters
+                    </button>
                 </div>
                 <div class="selected-filters" id="selected-filters"></div>
                 <div class="section-title" <?php echo $this->get_render_attribute_string('upcoming_events_title'); ?>>
@@ -391,9 +373,6 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                 </div>
                 <hr class="divider">
                 <div class="pagination-container">
-                    <a href="/" class="see-all">
-                        View All
-                    </a>
                     <ul class="pagination">
 
                         <!-- Previous page link -->
@@ -480,9 +459,6 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     </div>
                     <hr class="divider">
                     <div class="pagination-container">
-                        <a href="/" class="see-all">
-                            View All
-                        </a>
                         <ul class="pagination">
 
                             <!-- Previous page link -->
