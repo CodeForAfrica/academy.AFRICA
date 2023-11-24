@@ -105,6 +105,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     'image' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'),
                     'country_code' => $african_countries[get_post_meta(get_the_ID(), 'country', true)],
                     'language' => get_post_meta(get_the_ID(), 'language', true),
+                    'post_url' => get_permalink(get_the_ID()),
                 );
 
                 $result[] = $post_data;
@@ -375,34 +376,37 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $time = $event["time"];
                             $is_virtual = $event["is_virtual"];
                     ?>
-                            <div class="card">
-                                <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
+                            <a href="<? echo $event["post_url"] ?>">
+                                <div class="card">
+                                    <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
 
-                                <p class="event-title">
-                                    <? echo $title ?>
-                                </p>
-                                <p class="speaker-name">
-                                    <? echo $speaker ?>
-                                </p>
-                                <div class="flex-between date-and-language">
-                                    <p class="date">
-                                        <? echo $date ?>
+                                    <p class="event-title">
+                                        <? echo $title ?>
                                     </p>
-                                    <p class="language">
-                                        <? echo $language ?>
+                                    <p class="speaker-name">
+                                        <? echo $speaker ?>
                                     </p>
+                                    <div class="flex-between date-and-language">
+                                        <p class="date">
+                                            <? echo $date ?>
+                                        </p>
+                                        <p class="language">
+                                            <? echo $language ?>
+                                        </p>
 
+                                    </div>
+                                    <div class="flex-between time-and-country">
+                                        <p class="time">
+                                            <? echo $time ?>
+                                        </p>
+                                        <p class="country">
+                                            <? echo $country ?>
+                                            <? echo $is_virtual ?>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="flex-between time-and-country">
-                                    <p class="time">
-                                        <? echo $time ?>
-                                    </p>
-                                    <p class="country">
-                                        <? echo $country ?>
-                                        <? echo $is_virtual ?>
-                                    </p>
-                                </div>
-                            </div>
+                            </a>
+
                     <?
                         }
                     }
@@ -461,34 +465,36 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $time = $event["time"];
                             $is_virtual = $event["is_virtual"];
                         ?>
-                            <div class="card">
-                                <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
+                            <a href="<? echo $event["post_url"] ?>">
+                                <div class="card">
+                                    <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
 
-                                <p class="event-title">
-                                    <? echo $title ?>
-                                </p>
-                                <p class="speaker-name">
-                                    <? echo $speaker ?>
-                                </p>
-                                <div class="flex-between date-and-language">
-                                    <p class="date">
-                                        <? echo $date ?>
+                                    <p class="event-title">
+                                        <? echo $title ?>
                                     </p>
-                                    <p class="language">
-                                        <? echo $language ?>
+                                    <p class="speaker-name">
+                                        <? echo $speaker ?>
                                     </p>
+                                    <div class="flex-between date-and-language">
+                                        <p class="date">
+                                            <? echo $date ?>
+                                        </p>
+                                        <p class="language">
+                                            <? echo $language ?>
+                                        </p>
 
+                                    </div>
+                                    <div class="flex-between time-and-country">
+                                        <p class="time">
+                                            <? echo $time ?>
+                                        </p>
+                                        <p class="country">
+                                            <? echo $country ?>
+                                            <? echo $is_virtual ?>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="flex-between time-and-country">
-                                    <p class="time">
-                                        <? echo $time ?>
-                                    </p>
-                                    <p class="country">
-                                        <? echo $country ?>
-                                        <? echo $is_virtual ?>
-                                    </p>
-                                </div>
-                            </div>
+                            </a>
                         <?
                         }
 
