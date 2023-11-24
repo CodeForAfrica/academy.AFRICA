@@ -1,25 +1,139 @@
-.divider {
-  margin: 20px 0;
-  border: none;
-  background: #e2e4eb;
-  height: 1px;
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
-.cfa-title {
-  color: var(--primary-700, #0c1a81);
-  font-family: Lora;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 48px;
-  margin: 0;
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+  border: 1px solid #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
 }
 
 .learning-pathways {
-  padding: 80px 60px 40px;
+  padding: 60px 30px;
+  background: #F7F9FD;
+}
+.learning-pathways .title .cfa-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+}
+.learning-pathways .title .cfa-title::after {
+  left: unset;
+  transform: unset;
 }
 .learning-pathways .description {
-  color: var(--shades-black, #000);
+  color: #000000;
   font-family: Open Sans;
   font-size: 18px;
   font-style: normal;
@@ -29,20 +143,20 @@
   margin: 32px 0;
 }
 .learning-pathways .content {
-  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 30px;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 .learning-pathways .content .card {
-  border: 0.5px solid var(--neutral-200, #cccfda);
-  background-color: var(--primary-700, #0c1a81);
+  border: 0.5px solid #CCCFDA;
+  background-color: #0C1A81;
   min-width: 280px;
   width: 280px;
 }
 .learning-pathways .content .card .course-card-pattern {
-  background-image: url("/wp-content/themes/academyAfrica/assets/images/CourseCardPatterns.svg");
+  background-image: url("../../../images/CourseCardPatterns.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -55,7 +169,7 @@
 .learning-pathways .content .card .course-card-pattern .icon {
   width: 90px;
   height: 90px;
-  background: var(--shades-white, #fff);
+  background: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,7 +183,7 @@
   justify-content: space-between;
 }
 .learning-pathways .content .card .pathway-card-content .pathway-name {
-  color: var(--shades-white, #fff);
+  color: #FFFFFF;
   margin: 0;
   font-family: Open Sans;
   font-size: 18px;
@@ -79,36 +193,63 @@
 }
 .learning-pathways .content .card .pathway-card-content .course-count {
   margin: 0;
-  color: var(--shades-white, #fff);
+  color: #FFFFFF;
   font-family: Open Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 21px;
 }
-
-@media only screen and (max-width: 768px) {
-  .cfa-title {
-    font-size: 20px;
-  }
-  .cfa-title::after {
-    margin-top: 10px;
-  }
+.learning-pathways .divider {
+  display: none;
+  background: #a9a9a9;
+  border: none;
+  height: 1px;
+}
+.learning-pathways .pagination-container {
+  justify-content: center;
+}
+.learning-pathways .pagination-container .see-all {
+  display: block;
+}
+.learning-pathways .pagination-container .pagination {
+  display: none;
+}
+@media (min-width: 768px) {
   .learning-pathways .content {
-    justify-content: center;
+    gap: 30px;
   }
 }
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .cfa-title {
-    text-align: center;
+@media (min-width: 1152px) {
+  .learning-pathways {
+    padding: 80px 60px 40px;
+    background: #FFFFFF;
+    width: 812px;
   }
-  .cfa-title::after {
-    text-align: center;
-    position: relative;
-    font-size: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 10px;
+  .learning-pathways .title .cfa-title {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  .learning-pathways .content {
+    justify-content: flex-start;
+    gap: 40px 70px;
+  }
+  .learning-pathways .divider {
+    display: block;
+  }
+  .learning-pathways .pagination-container {
+    justify-content: flex-end;
+  }
+  .learning-pathways .pagination-container .see-all {
+    display: none;
+  }
+  .learning-pathways .pagination-container .pagination {
+    display: flex;
+  }
+}
+@media (min-width: 1440px) {
+  .learning-pathways {
+    width: 1100px;
   }
 }
 

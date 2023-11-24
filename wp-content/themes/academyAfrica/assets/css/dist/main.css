@@ -874,6 +874,13 @@ table {
 .pagination-container .page-item {
   margin: 0 5px;
 }
+.pagination-container .page-item.active {
+  border: 1px solid #0C1A81;
+}
+.pagination-container .page-item.active:hover a {
+  cursor: pointer;
+  text-decoration: none;
+}
 .pagination-container .page-link {
   color: var(--primary-700, #0c1a81);
   font-size: 16px;

@@ -1,31 +1,28 @@
-$color_1: var(--primary-700, #0c1a81);
-$color_2: var(--shades-black, #000);
-$color_3: var(--shades-white, #fff);
+@use "../abstracts/" as *;
+
 $font-family_1: Open Sans;
 $font-family_2: Lora;
-$background-color_1: var(--primary-700, #0c1a81);
-
-.divider {
-  margin: 20px 0;
-  border: none;
-  background: #e2e4eb;
-  height: 1px;
-}
-
-.cfa-title {
-  color: $color_1;
-  font-family: $font-family_2;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 48px;
-  margin: 0;
-}
 
 .learning-pathways {
-  padding: 80px 60px 40px;
+  padding: 60px 30px;
+  background: $color-neutral-50;
+
+  .title {
+    .cfa-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 24px;
+      text-align: left;
+
+      &::after {
+        left: unset;
+        transform: unset;
+      }
+    }
+  }
+
   .description {
-    color: $color_2;
+    color: $color-shades-black;
     font-family: $font-family_1;
     font-size: 18px;
     font-style: normal;
@@ -34,19 +31,22 @@ $background-color_1: var(--primary-700, #0c1a81);
     max-width: 554px;
     margin: 32px 0;
   }
+
   .content {
-    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 30px;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+
     .card {
-      border: 0.5px solid var(--neutral-200, #cccfda);
-      background-color: $background-color_1;
+      border: 0.5px solid $color-neutral-200;
+      background-color: $color-primary-700;
       min-width: 280px;
       width: 280px;
+
       .course-card-pattern {
-        background-image: url("/wp-content/themes/academyAfrica/assets/images/CourseCardPatterns.svg");
+        background-image: url("../../../images/CourseCardPatterns.svg");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -55,24 +55,27 @@ $background-color_1: var(--primary-700, #0c1a81);
         display: flex;
         align-items: center;
         justify-content: center;
+
         .icon {
           width: 90px;
           height: 90px;
-          background: var(--shades-white, #fff);
+          background: $color-shades-white;
           display: flex;
           align-items: center;
           justify-content: center;
           border-radius: 50%;
         }
       }
+
       .pathway-card-content {
         padding: 20px;
         height: 200px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
         .pathway-name {
-          color: $color_3;
+          color: $color-shades-white;
           margin: 0;
           font-family: $font-family_1;
           font-size: 18px;
@@ -80,9 +83,10 @@ $background-color_1: var(--primary-700, #0c1a81);
           font-weight: 700;
           line-height: 24px;
         }
+
         .course-count {
           margin: 0;
-          color: $color_3;
+          color: $color-shades-white;
           font-family: $font-family_1;
           font-size: 16px;
           font-style: normal;
@@ -92,30 +96,67 @@ $background-color_1: var(--primary-700, #0c1a81);
       }
     }
   }
-}
-@media only screen and (max-width: 768px) {
-  .cfa-title {
-    font-size: 20px;
-    &::after {
-      margin-top: 10px;
+
+  .divider {
+    display: none;
+    background: #a9a9a9;
+    border: none;
+    height: 1px;
+  }
+
+  .pagination-container {
+    justify-content: center;
+
+    .see-all {
+      display: block;
+    }
+
+    .pagination {
+      display: none;
     }
   }
-  .learning-pathways {
+
+  @include media-breakpoint-up(tablet) {
     .content {
-      justify-content: center;
+      gap: 30px;
     }
   }
-}
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .cfa-title {
-    text-align: center;
-    &::after {
-      text-align: center;
-      position: relative;
-      font-size: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-top: 10px;
+
+  @include media-breakpoint-up(desktop) {
+    padding: 80px 60px 40px;
+    background: $color-shades-white;
+    width: 812px;
+
+    .title {
+      .cfa-title {
+        font-size: 48px;
+        line-height: 60px;
+      }
     }
+
+    .content {
+      justify-content: flex-start;
+      gap: 40px 70px;
+    }
+
+    .divider {
+      display: block;
+    }
+
+    .pagination-container {
+      justify-content: flex-end;
+
+      .see-all {
+        display: none;
+      }
+
+      .pagination {
+        display: flex;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(large) {
+    width: 1100px;
   }
 }
