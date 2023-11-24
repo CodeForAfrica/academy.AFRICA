@@ -75,7 +75,7 @@ function buildQueryString(object) {
   return queryParts.join("&");
 }
 
-function onChangeCheckBox(input, category, value) {
+function onChangeCheckBox(input, category, value, apply) {
   let selectedFilters = filters[category] || [];
   if (input.checked) {
     selectedFilters.push(value);
@@ -83,7 +83,7 @@ function onChangeCheckBox(input, category, value) {
     selectedFilters = selectedFilters.filter((item) => item !== value);
   }
   filters[category] = [...new Set(selectedFilters)];
-  applyFilters();
+  if (apply) applyFilters();
 }
 
 window.onload = function onLoad() {
@@ -92,10 +92,12 @@ window.onload = function onLoad() {
   Object.keys(filters).forEach((key) => {
     if (!["previous_events_page", "upcoming_page"].includes(key)) {
       filters[key].forEach((selected) => {
-        const element = document.getElementById(`${key}-${selected}`);
-        if (element) {
-          element.checked = true;
-        }
+        const elements = document.getElementsByName(`${key}-${selected}`);
+        [...elements].forEach((element) => {
+          if (element) {
+            element.checked = true;
+          }
+        });
       });
     }
   });
@@ -105,4 +107,20 @@ window.onload = function onLoad() {
 function clearFilters() {
   filters = {};
   applyFilters();
+}
+
+function closeFilters() {
+  const filters = document.getElementById("filters");
+  if (filters) {
+    filters.style.width = 0;
+    filters.style.overflowX = "hidden";
+    filters.style.padding = 0;
+  }
+}
+
+function openFilters() {
+  const filters = document.getElementById("filters");
+  if (filters) {
+    filters.style.width = "100%";
+  }
 }
