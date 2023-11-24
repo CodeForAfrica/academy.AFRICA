@@ -118,6 +118,9 @@ table {
   cursor: not-allowed;
 }
 
+.all-courses.d-none {
+  display: none;
+}
 .all-courses .filter-sidebar .sidebar {
   height: 100%;
 }
@@ -172,11 +175,10 @@ table {
 }
 .all-courses .courses-main .course-grid .filter-section .sort .label {
   color: #000000;
-  flex: 1;
 }
 .all-courses .courses-main .course-grid .filter-section .sort .select {
-  flex: 1;
   height: 50px;
+  width: 200px;
   border: none;
   border-radius: 4px;
   background: #FFF;
@@ -307,6 +309,13 @@ table {
   .all-courses .courses-main .course-grid {
     padding: 40px 55px;
   }
+  .all-courses .courses-main .course-grid .filter-section {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .all-courses .courses-main .course-grid .filter-section .sort {
+    gap: 20px;
+  }
   .all-courses .courses-main .course-grid .course-list {
     flex-direction: row;
     justify-content: center;
@@ -351,11 +360,14 @@ table {
   }
 }
 
-.filter-modal {
+.filter-modal.d-none {
   display: none;
 }
 .filter-modal .filter-options {
   padding: 80px 60px;
+}
+.filter-modal .filter-options .mobile-filter {
+  width: 100% !important;
 }
 .filter-modal .filter-options .mobile-filter .filter-title {
   color: #000000;
@@ -366,6 +378,18 @@ table {
   line-height: 34px;
   letter-spacing: -0.56px;
   margin-bottom: 40px;
+}
+.filter-modal .filter-options .mobile-filter .filters .accordion-parent {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  box-shadow: none;
+}
+.filter-modal .filter-options .mobile-filter .filters .accordion-parent .accordion {
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+}
+.filter-modal .filter-options .mobile-filter .filters .accordion-parent .panel.open {
+  margin-top: -40px;
 }
 .filter-modal .filter-options .mobile-filter .filters .actions {
   display: flex;
@@ -385,6 +409,11 @@ table {
   justify-content: center;
 }
 .filter-modal .filter-options .mobile-filter .filters .actions .clear-filters:hover {
+  color: #ED1C24;
+  background: #FEECED;
+}
+.filter-modal .filter-options .mobile-filter .filters .actions .clear-filters:focus {
+  outline: none;
   color: #ED1C24;
   background: #FEECED;
 }

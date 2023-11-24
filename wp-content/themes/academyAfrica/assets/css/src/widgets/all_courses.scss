@@ -1,6 +1,11 @@
 @use "../abstracts/" as *;
 
 .all-courses {
+
+  &.d-none {
+    display: none;
+  }
+
   .filter-sidebar {
     .sidebar {
       height: 100%;
@@ -60,12 +65,11 @@
 
           .label {
             color: $color-shades-black;
-            flex: 1;
           }
 
           .select {
-            flex: 1;
             height: 50px;
+            width: 200px;
             border: none;
             border-radius: 4px;
             background: #FFF;
@@ -230,6 +234,16 @@
       .course-grid {
         padding: 40px 55px;
 
+        .filter-section {
+          flex-direction: row;
+          justify-content: space-between;
+
+          .sort {
+            gap: 20px;
+          }
+
+        }
+
         .course-list {
           flex-direction: row;
           justify-content: center;
@@ -291,12 +305,17 @@
 }
 
 .filter-modal {
-  display: none;
+
+  &.d-none {
+    display: none;
+  }
 
   .filter-options {
     padding: 80px 60px;
 
     .mobile-filter {
+      width: 100% !important;
+
       .filter-title {
         color: $color-shades-black;
         font-family: Open Sans;
@@ -309,6 +328,23 @@
       }
 
       .filters {
+        .accordion-parent {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          box-shadow: none;
+
+          .accordion {
+            box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+          }
+
+          .panel {
+            &.open {
+              margin-top: -40px;
+            }
+          }
+        }
+
         .actions {
           display: flex;
           justify-content: space-between;
@@ -328,6 +364,12 @@
             }
 
             &:hover {
+              color: $color-secondary-500;
+              background: $color-secondary-50;
+            }
+
+            &:focus {
+              outline: none;
               color: $color-secondary-500;
               background: $color-secondary-50;
             }
@@ -365,4 +407,6 @@
       }
     }
   }
+
+  @include media-breakpoint-up(tablet) {}
 }
