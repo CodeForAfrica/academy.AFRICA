@@ -4,7 +4,7 @@ namespace AcademyAfrica\Theme\Courses;
 
 
 class CoursesFunctions
-{ 
+{
 
     public static function getOrganizations()
     {
@@ -27,7 +27,8 @@ class CoursesFunctions
     }
 
 
-    public static function getAllInstructors(){
+    public static function getAllInstructors()
+    {
         $all_courses = get_posts(array(
             'post_type' => 'sfwd-courses',
             'post_status' => 'publish',
@@ -36,7 +37,7 @@ class CoursesFunctions
         ));
         $instructors = array();
         foreach ($all_courses as $course_id) {
-            $course = get_post($course_id); 
+            $course = get_post($course_id);
             $instructor_id = $course->post_author;
             $instructor = get_user_by('id', $instructor_id);
             // trim instructor name $instructor->first_name . ' ' . $instructor->last_name;
@@ -82,35 +83,28 @@ class CoursesFunctions
             'description_char_max' => 120,
             'button' => true,
             'filter' => true,
-            /**
-             * Accepts:
-             * 
-             * 'button'   : Load more button
-             * 'infinite' : Infinite scrolling 
-             * 'pages'    : Normal AJAX pagination with number 1, 2, 3, and so on
-             * 'false'    : Doesn't have pagination
-             */
-            'pagination' => 'button',
-            'grid_height_equal' => false,
-            'progress_bar' => false,
-            'post_meta' => true,
-            // Template
-            /**
-             * Accepts: 
-             * 
-             * All values available in templates/skins 
-             */
-            'skin' => 'grid',
-            'card' => 'grid-1',
-            /**
-             * Only used in certain skin such as 'grid' and 'masonry'
-             */
-            'columns' => 3,
-            'min_column_width' => 250,
-            /**
-             * Only used in certain skin such as 'carousel'
-             */
+            "organization" => [],
+            "instructor" => [],
+
         ]);
+    }
+
+    public static function get_author_by_name($name)
+    {
+        $user = get_user_by('slug', $name);
+        if (!$user) {
+            $user = get_user_by('login', $name);
+        }
+        if (!$user) {
+            $users = get_users(array('search' => $name));
+            foreach ($users as $u) {
+                if ($u->display_name == $name) {
+                    $user = $u;
+                    break;
+                }
+            }
+        }
+        return $user;
     }
 
     public static function build_query($atts = [])
@@ -119,7 +113,7 @@ class CoursesFunctions
             $atts['per_page'] = -1;
         }
 
-        if(empty($atts['paged'])){
+        if (empty($atts['paged'])) {
             $atts['paged'] = 1;
         }
 
@@ -146,7 +140,42 @@ class CoursesFunctions
             }
         }
 
+        $meta_query = [];
+        $organization = !empty($atts['organization']) ? $atts['organization'] : [];
+        if (!empty($organization)) {
+            $orgs = self::getOrganizations();
+            $org_ids = array();
+            foreach ($orgs as $org) {
+                if (in_array($org['title'], $organization)) {
+                    array_push($org_ids, $org['id']);
+                }
+            }
+            $org_query = array();
+            foreach ($org_ids as $org_id) {
+                $org_query[] = array(
+                    'key' => 'organization',
+                    'value' => $org_id,
+                    'compare' => 'LIKE'
+                );
+            }
+
+            $meta_query[] = array(
+                'relation' => 'OR',
+                $org_query
+            );
+        }
+
         $tax_query['relation'] = 'OR';
+
+        $author_query = [];
+        $instructors = !empty($atts['instructor']) ? $atts['instructor'] : [];
+        foreach ($instructors as $instructor) {
+            $author = self::get_author_by_name($instructor);
+            if ($author) {
+                $author_query[] = $author->ID;
+            }
+        }
+
         $post__in = null;
         $query_args = apply_filters('academy-africa_course_grid_query_args', [
             'post_type' => sanitize_text_field($atts['post_type']),
@@ -157,6 +186,8 @@ class CoursesFunctions
             'order' => sanitize_text_field($atts['order']),
             'tax_query' => $tax_query,
             'post__in' => $post__in,
+            'author__in' => $author_query,
+            'meta_query' => $meta_query,
         ], $atts, $filter = null);
 
         return $query_args;

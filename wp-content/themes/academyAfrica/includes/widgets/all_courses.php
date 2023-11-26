@@ -48,10 +48,12 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $filter_by = [
             [
                 'title' => 'Organizations',
+                'name' => 'organization',
                 'options' => []
             ],
             [
                 'title' => 'Instructors',
+                'name' => 'instructor',
                 'options' => []
             ]
         ];
@@ -73,6 +75,15 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         }
 
         return $filter_by;
+    }
+
+    public function get_query_param($param)
+    {
+        if (isset($_GET[$param])) {
+            if ($_GET[$param]) {
+                return explode(",", $_GET[$param]);
+            }
+        }
     }
 
 
@@ -177,11 +188,16 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $filter_options = $this->get_filter_by();
         $courses_title = "All Courses";
         $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
+        $orgs = $this->get_query_param('organization');
+        $instructors = $this->get_query_param('instructor');
+        $sort = $this->get_query_param('sort');
 
         $atts = [
             'per_page' => '9',
             'paged' => $current_page,
-            // "taxonomies" => "ld_course_category:featured"
+            'organization' => $orgs,
+            'instructor' => $instructors,
+            'sort' => $sort
         ];
         $default_atts = CoursesFunctions::get_default_atts();
         $atts = shortcode_atts($default_atts, $atts, 'academy-africa_course_grid');
@@ -221,7 +237,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                     <ul>
                                         <li>
                                             <label class="mui-checkbox">
-                                                <input type="checkbox">
+                                                <input type="checkbox" onclick="filterCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
                                                 <span class="checkmark"></span>
                                                 <? echo $option->name ?>
                                             </label>
@@ -514,6 +530,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 </div>
             </div>
         </div>
-<? 
+<?
     }
 }
