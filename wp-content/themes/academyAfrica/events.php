@@ -200,12 +200,8 @@ function admin_init()
 function save_details()
 {
     global $post;
-    // update_post_meta($post->ID, "speaker", $_POST["speaker"]);
-    // update_post_meta($post->ID, "date", $_POST["date"]);
-    // update_post_meta($post->ID, "time", $_POST["time"]);
     update_post_meta($post->ID, "country", $_POST["country"]);
     update_post_meta($post->ID, "is_virtual", $_POST["is_virtual"]);
-    // update_post_meta($post->ID, "language", $_POST["language"]);
     update_post_meta($post->ID, "timezone", $_POST["timezone"]);
 }
 
