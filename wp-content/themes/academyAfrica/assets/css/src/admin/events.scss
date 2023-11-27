@@ -9,10 +9,31 @@
   flex-wrap: wrap;
   gap: 20px;
   .form-group {
-    width: 400px;
     width: calc(50% - 20px);
     &.checkbox-label {
       width: 100%;
+    }
+  }
+  .organisations {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 20px;
+    .check-group {
+      width: calc(50% - 20px);
+    }
+    .label {
+      width: 100%;
+      margin: 0;
+      margin-left: -10px;
+    }
+    hr {
+      width: 100%;
+      border: none;
+      height: 0.5px;
+      background: #ccc;
+      margin-left: -10px;
     }
   }
   label {

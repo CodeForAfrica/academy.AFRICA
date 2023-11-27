@@ -120,7 +120,21 @@ table {
 
 .single-page-event {
   max-width: 1920px;
-  padding: 20px;
+  padding: 60px 40px;
+}
+.single-page-event .cfa-title {
+  text-align: left;
+  font-size: 20px;
+  line-height: 28px;
+}
+.single-page-event .cfa-title::after {
+  left: 0;
+  transform: none;
+}
+.single-page-event .resources {
+  background: var(--primary-50, #eff0fd);
+  padding: 24px;
+  color: var(--primary-700, #0c1a81);
 }
 .single-page-event .image-container {
   position: relative;
@@ -195,15 +209,39 @@ table {
 .single-page-event .linked-post * {
   margin-top: 32px;
 }
+.single-page-event .back {
+  margin-top: 50px;
+}
+.single-page-event .back a {
+  color: var(--shades-black, #000);
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+@media (min-width: 768px) {
+  .single-page-event .cfa-title {
+    color: var(--primary-700, #0c1a81);
+    font-family: Ibarra Real Nova;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 60px;
+  }
+}
 @media (min-width: 1440px) {
   .single-page-event {
-    padding: 20px 148px;
+    padding: 60px 148px;
   }
 }
 @media (min-width: 1920px) {
   .single-page-event {
-    padding: 20px 388px;
+    padding: 60px 388px;
   }
 }
 

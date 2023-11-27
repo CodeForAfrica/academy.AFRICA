@@ -70,9 +70,9 @@ function get_post_options($post_type)
     foreach ($posts as $post) {
         $post_array = array(
             'ID' => $post->ID,
-            'post_title' => $post->post_title,
-            'post_content' => $post->post_content,
-            'post_date' => $post->post_date,
+            'title' => $post->post_title,
+            'content' => $post->post_content,
+            'date' => $post->post_date,
             // Add more fields as needed
         );
 
@@ -117,43 +117,23 @@ function custom_fields()
     global $post;
     $custom = get_post_custom($post->ID);
     $speaker = $custom["speaker"][0];
-    $organisation = $custom["organisation"][0];
     $country = $custom["country"][0];
     $date = $custom["date"][0];
     $time = $custom["time"][0];
     $timezone = $custom["timezone"][0];
-    $options = get_post_options("post");
     $users = get_user_options();
     $is_virtual = $custom["is_virtual"][0];
     $timezones = get_timezones();
 ?>
     <div class="form-container">
-
-        <div class="form-group">
-            <label for="speaker">Speaker</label>
-            <select name="speaker" id="speaker" value="<?php echo $speaker; ?>">
-                <?php
-                foreach ($users as $user) {
-                    $label = $user["display_name"];
-                    $selected = $user["ID"] === $speaker ? 'selected="selected"' : null;
-                ?>
-                    <option <? echo $selected ?> value="<?php echo $user["ID"] ?>">
-                        <?php echo $label ?>
-                    </option>
-                <?php
-                }
-                ?>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="organisation">Organisation</label>
-            <input name="organisation" class="large-text" value="<?php echo $organisation; ?>" />
-        </div>
+        <script>
+            console.log(<?php echo json_encode($custom) ?>);
+        </script>
 
         <div class="form-group">
             <label for="country">Country</label>
             <select value="<?php echo $country; ?>" name="country" id="country">
+                <option value=""></option>
                 <?php
                 require_once __DIR__ . '/includes/utils/african_countries.php';
                 foreach ($african_countries as $name => $flag) {
@@ -170,21 +150,12 @@ function custom_fields()
         </div>
 
         <div class="form-group">
-            <label for="language">Language</label>
-            <select name="language" id="language">
-                <option value="ENGLISH">ENGLISH</option>
-                <option value="FRENCH">FRENCH</option>
-                <option value="PORTUGUESE">PORTUGUESE</option>
-            </select>
-        </div>
-
-        <div class="form-group">
             <label for="date">Date</label>
             <input value="<?php echo $date; ?>" type="date" class="large-text" id="date" name="date">
         </div>
 
         <div class="form-group">
-            <label for="date">Time</label>
+            <label for="tite">Time</label>
             <input value="<?php echo $time; ?>" type="time" class="large-text" id="time" name="time">
         </div>
         <div class="form-group">
@@ -192,12 +163,13 @@ function custom_fields()
                 Timezone
             </label>
             <select value="<?php echo $timezone; ?>" name="timezone" id="timezone">
+                <option value=""></option>
                 <?php
                 foreach ($timezones as $name => $offset) {
                     $label = $name . ' ' . $offset;
-                    $selected = $label === $timezone ? 'selected="selected"' : null;
+                    $selected = $name === $timezone ? 'selected="selected"' : null;
                 ?>
-                    <option <? echo $selected ?> value="<?php echo $label ?>">
+                    <option <? echo $selected ?> value="<?php echo $name ?>">
                         <?php echo $label ?>
                     </option>
                 <?php
@@ -228,13 +200,12 @@ function admin_init()
 function save_details()
 {
     global $post;
-    update_post_meta($post->ID, "speaker", $_POST["speaker"]);
-    update_post_meta($post->ID, "organisation", $_POST["organisation"]);
-    update_post_meta($post->ID, "date", $_POST["date"]);
-    update_post_meta($post->ID, "time", $_POST["time"]);
+    // update_post_meta($post->ID, "speaker", $_POST["speaker"]);
+    // update_post_meta($post->ID, "date", $_POST["date"]);
+    // update_post_meta($post->ID, "time", $_POST["time"]);
     update_post_meta($post->ID, "country", $_POST["country"]);
     update_post_meta($post->ID, "is_virtual", $_POST["is_virtual"]);
-    update_post_meta($post->ID, "language", $_POST["language"]);
+    // update_post_meta($post->ID, "language", $_POST["language"]);
     update_post_meta($post->ID, "timezone", $_POST["timezone"]);
 }
 

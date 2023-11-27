@@ -177,6 +177,7 @@ table {
   text-align: center;
 }
 .connect .content .join-slack .button {
+  width: -moz-fit-content;
   width: fit-content;
   align-self: center;
 }
