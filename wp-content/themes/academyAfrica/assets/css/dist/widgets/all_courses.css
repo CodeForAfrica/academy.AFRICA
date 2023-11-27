@@ -417,6 +417,9 @@ table {
   color: #ED1C24;
   background: #FEECED;
 }
+.filter-modal .filter-options .mobile-filter .filters .actions .clear-filters.d-none {
+  display: none;
+}
 .filter-modal .filter-options .mobile-filter .divider {
   border: none;
   height: 1px;

@@ -1,3 +1,6 @@
+let filters = {};
+
+
 document.addEventListener("DOMContentLoaded", () => {
    const mobileFilterBtn = document.querySelector("#courses-mobile-filter");
    const allCourses = document.querySelector("#all-courses");
@@ -16,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-const filters = {};
 
  
 function filterCourses(input, field, value){
@@ -38,7 +40,6 @@ function filterCourses(input, field, value){
         }
     }).filter(Boolean).map(item => encodeURI(item)).join("&");
     window.location.search = newParams;
-    
 }
 
 function parseQueryString(queryString) {
@@ -60,6 +61,21 @@ function parseQueryString(queryString) {
     return params;
 }
 
+function applyFilters(){
+    const filterModal = document.querySelector("#filter-modal");
+
+    // get all checked inputs
+    const checkedInputs = filterModal.querySelectorAll("input:checked");
+    checkedInputs.forEach(input => {
+        const { name, value } = input;
+        const [field, fieldValue] = name.split("-");
+        filterCourses(input, field, fieldValue);
+    });
+
+
+
+}
+
 
 window.addEventListener("DOMContentLoaded", () => {
     const { search } = window.location;
@@ -67,10 +83,12 @@ window.addEventListener("DOMContentLoaded", () => {
     Object.keys(params).forEach(key => {
         const values = params[key];
         values.forEach(value => {
-            const input = document.getElementsByName(`${key}-${value}`)[0];
-            if(input){
-                input.checked = true;
-            }
+            const input = document.getElementsByName(`${key}-${value}`);
+            input.forEach(element => {
+                if(element){
+                    element.checked = true;
+                }
+            });
         });
         if(filters[key]){
             filters[key].push(...values);
@@ -80,3 +98,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+function clearFilters(){
+    filters = {};
+    window.location.search = "";
+}

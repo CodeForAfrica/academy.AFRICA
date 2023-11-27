@@ -448,7 +448,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         <!-- Mobile filter modal -->
         <div class="filter-modal d-none" id="filter-modal">
             <div class="filter-options">
-                <div id="filters" class="mobile-filter">
+                <div id="mobile-filters" class="mobile-filter">
                     <h4 class="filter-title">
                         Filter By:
                     </h4>
@@ -466,12 +466,12 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                     ?>
                                         <div class="panel">
                                             <ul>
-                                                <?
+                                                <? 
                                                 foreach ($options as $option) {
                                                 ?>
                                                     <li>
                                                         <label class="mui-checkbox">
-                                                            <input type="checkbox">
+                                                            <input type="checkbox" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
                                                             <span class="checkmark"></span>
                                                             <? echo $option->name ?>
                                                         </label>
@@ -489,9 +489,9 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                         </div>
                         <hr class="divider">
                         <div class="actions">
-                            <button href="" class="button primary medium">Apply</button>
+                            <button href="" class="button primary medium" onclick="applyFilters()">Apply</button>
                             <!-- clear filter button with X icon -->
-                            <button class="clear-filters">
+                            <button class="clear-filters" onclick="clearFilters()" id="clear-filters-btn">
                                 <div class="icon">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_11905_80119)">

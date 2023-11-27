@@ -373,6 +373,10 @@
               color: $color-secondary-500;
               background: $color-secondary-50;
             }
+
+            &.d-none {
+              display: none;
+            }
           }
         }
       }
