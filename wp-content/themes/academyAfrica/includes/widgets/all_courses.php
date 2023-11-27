@@ -114,65 +114,15 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 'label_block' => true,
             ]
         );
-
-        $pathways_list = new \Elementor\Repeater();
-        $pathways_list->add_control(
-            'title',
-            [
-                'label' => __('Title', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Pathway Title', 'academy-africa'),
-                'label_block' => true,
-            ]
-        );
-        $pathways_list->add_control(
-            'icon',
-            [
-                'label' => __('Icon', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::MEDIA,
-                'default' => [
-                    'url' => get_stylesheet_uri() . '/assets/images/sample-icon.svg',
-                ],
-                'label_block' => true,
-            ]
-        );
-        $pathways_list->add_control(
-            'courses',
-            [
-                'label' => __('Courses', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('4 Courses', 'academy-africa'),
-                'label_block' => true,
-            ]
-        );
         $this->add_control(
-            'pathways',
+            'pathway_courses_count_text',
             [
-                'label' => __('Learning Pathways', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::REPEATER,
-                'fields' => $pathways_list->get_controls(),
-                'title_field' => '{{{ title }}}',
+                'label' => __('Learning Pathways Courses Count', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('Courses', 'academy-africa'),
+                'label_block' => true,
             ]
         );
-        $this->end_controls_section();
-
-        // courses section controls
-        $this->start_controls_section(
-            'courses_grid',
-            [
-                'label' => __('Courses', 'academy-africa'),
-            ]
-        );
-        $this->add_control(
-            'per_page',
-            array(
-                'label'       => esc_html__('Courses Per Page', 'academy-africa'),
-                'type'        => \Elementor\Controls_Manager::NUMBER,
-                'default'     => 9,
-                'description' => esc_html__('Leave empty for default or 0 to show all items.', 'academy-africa'),
-            )
-        );
-
         $this->end_controls_section();
     }
 
@@ -183,7 +133,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         $pathway_title = $settings['pathway_title'];
         $pathway_description = $settings['pathway_description'];
-        $pathways = $settings['pathways'];
+        $courses_count = $settings['pathway_courses_count_text'];
         $filter_by = "Filter by:";
         $filter_options = $this->get_filter_by();
         $courses_title = "All Courses";
@@ -286,7 +236,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                             <? echo $pathway_name ?>
                                         </p>
                                         <p class="course-count">
-                                            <? echo count($pathway_courses) ?> Courses
+                                            <? echo count($pathway_courses) . ' ' . $courses_count ?>
                                         </p>
                                     </div>
                                 </div>
@@ -407,9 +357,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 View All
                             </a>
                             <ul class="pagination">
-                                <!-- list pagination. Only first 3 should be shown and last -->
-                                <!-- like 1 2 3 ... 5 -->
-
                                 <?
                                 if ($current_page > 1) {
                                 ?>
