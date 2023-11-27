@@ -140,7 +140,9 @@ class CoursesFunctions
             }
         }
 
-        $meta_query = [];
+        $meta_query = array(
+            'relation' => 'OR',
+        );
         $organization = !empty($atts['organization']) ? $atts['organization'] : [];
         if (!empty($organization)) {
             $orgs = self::getOrganizations();
@@ -150,19 +152,14 @@ class CoursesFunctions
                     array_push($org_ids, $org['id']);
                 }
             }
-            $org_query = array();
             foreach ($org_ids as $org_id) {
-                $org_query[] = array(
+                $org_q = array(
                     'key' => 'organization',
-                    'value' => $org_id,
+                    'value' => '"' . $org_id . '"',
                     'compare' => 'LIKE'
                 );
+                array_push($meta_query, $org_q);
             }
-
-            $meta_query[] = array(
-                'relation' => 'OR',
-                $org_query
-            );
         }
 
         $tax_query['relation'] = 'OR';
