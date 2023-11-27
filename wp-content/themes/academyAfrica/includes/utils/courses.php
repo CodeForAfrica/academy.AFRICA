@@ -26,6 +26,46 @@ class CoursesFunctions
         return $organizations;
     }
 
+    public static function getLearningPaths($attr = [])
+    {
+        if (empty($attr['per_page'])) {
+            $attr['per_page'] = 3;
+        }
+
+        $args = array(
+            'post_type' => 'ac-learning-path',
+            'post_status' => 'publish',
+            'numberposts' => $attr['per_page']
+        );
+        $learning_path_posts = get_posts($args);
+        $learning_paths = array();
+        foreach ($learning_path_posts as $learning_path_post) {
+            $course_ids = get_field('courses', $learning_path_post->ID);
+            $courses = array();
+            foreach ($course_ids as $course_id) {
+                $course = get_post($course_id);
+                $course_title = $course->post_title;
+                $course_thumbnail = get_the_post_thumbnail_url($course);
+                $course_excerpt = $course->post_excerpt;
+                $course = array(
+                    'id' => $course_id,
+                    'title' => $course_title,
+                    'thumbnail' => $course_thumbnail,
+                    'excerpt' => $course_excerpt
+                );
+                array_push($courses, $course);
+            }
+            $learning_path = array(
+                'id' => $learning_path_post->ID,
+                'title' => $learning_path_post->post_title,
+                'excerpt' => $learning_path_post->post_excerpt,
+                'thumbnail' => get_the_post_thumbnail_url($learning_path_post),
+                'courses' => $courses
+            );
+            array_push($learning_paths, $learning_path);
+        }
+        return $learning_paths;
+    }
 
     public static function getAllInstructors()
     {

@@ -18,5 +18,4 @@ document.addEventListener("DOMContentLoaded", () => {
         price_tag.textContent = price;
         course.appendChild(price_tag);
     }
-    
 });

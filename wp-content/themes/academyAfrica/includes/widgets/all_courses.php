@@ -214,6 +214,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
         $posts = $query->get_posts();
         $courses = $posts;
+
+        $leaning_attr = [
+            'per_page' => '3',
+        ];
+        $learning_pathways = CoursesFunctions::getLearningPaths($leaning_attr);
 ?>
         <main class="all-courses" id="all-courses">
             <aside class="filter-sidebar">
@@ -264,23 +269,24 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     </p>
                     <div class="content">
                         <?
-                        if (!empty($pathways)) {
-                            foreach ($pathways as $pathway) {
-                                $name = $pathway["title"];
-                                $icon = $pathway["icon"]["url"];
+                        if (!empty($learning_pathways)) {
+                            foreach ($learning_pathways as $pathway) {
+                                $pathway_name = $pathway["title"];
+                                $pathway_icon = $pathway["thumbnail"];
+                                $pathway_courses = $pathway["courses"]
                         ?>
                                 <div class="card">
                                     <div class="course-card-pattern">
                                         <div class="icon">
-                                            <img src="<? echo $icon ?>" alt="sample-icon">
+                                            <img src="<? echo $pathway_icon ?>" alt="sample-icon">
                                         </div>
                                     </div>
                                     <div class="pathway-card-content">
                                         <p class="pathway-name">
-                                            <? echo $name ?>
+                                            <? echo $pathway_name ?>
                                         </p>
                                         <p class="course-count">
-                                            <? echo $pathway["courses"] ?>
+                                            <? echo count($pathway_courses) ?> Courses
                                         </p>
                                     </div>
                                 </div>
@@ -466,7 +472,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                     ?>
                                         <div class="panel">
                                             <ul>
-                                                <? 
+                                                <?
                                                 foreach ($options as $option) {
                                                 ?>
                                                     <li>
