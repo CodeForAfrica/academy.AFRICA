@@ -1221,6 +1221,7 @@ label {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  text-transform: none;
 }
 .modal-content .social-login button.facebook {
   gap: 15px;
@@ -1230,6 +1231,7 @@ label {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  text-transform: none;
 }
 .modal-content .social-login button.twitter {
   color: var(--shades-black, #000);
@@ -1238,6 +1240,7 @@ label {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  text-transform: none;
 }
 .modal-content .content-divider {
   display: flex;
