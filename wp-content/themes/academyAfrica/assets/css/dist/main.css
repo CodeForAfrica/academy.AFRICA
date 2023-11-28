@@ -1212,6 +1212,7 @@ label {
   width: 100%;
   border: none;
   gap: 15px;
+  text-transform: none;
 }
 .modal-content .social-login button.google {
   color: rgba(0, 0, 0, 0.54);
