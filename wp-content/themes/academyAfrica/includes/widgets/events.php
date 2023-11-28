@@ -81,6 +81,14 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     'compare' => 'BETWEEN',
                 );
             }
+            if ($date_filter == "closed") {
+                $meta_query[] = array(
+                    'key'     => 'date',
+                    'value'   => $current_date,
+                    'type'    => 'DATE',
+                    'compare' => '<',
+                );
+            }
         }
         if (!empty($meta_query)) {
             $args['meta_query'] = $meta_query;
@@ -122,31 +130,135 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         return array($result, $pagination);
     }
 
-    public function get_filter_by()
+    public function filter_labels()
     {
         return [
-            [
-                "title" => "Country",
-                "name" => "country",
-                "options" => [
-                    "Nigeria" => "Nigeria",
-                    "Kenya" => "Kenya",
-                    "South Africa" => "South Africa",
-                    "Tanzania" => "Tanzania",
-                ]
-            ],
-            [
-                "title" => "Date",
-                "name" => "date",
-                "options" => [
-                    "All" => "all",
-                    "This Week" => "week",
-                    "This Month" => "month",
-                    "Closed" => "closed",
-
-                ]
-            ]
+            'country'  => esc_html__('Country', 'academy-africa'),
+            'date' => esc_html__('Date', 'academy-africa'),
+            'speaker' => esc_html__('Speaker', 'academy-africa'),
+            'status' => esc_html__('Status', 'academy-africa'),
+            'organisation' => esc_html__('Organisation', 'academy-africa'),
         ];
+    }
+
+    protected function register_controls()
+    {
+        $this->start_controls_section(
+            'labels',
+            [
+                'label' => __('Labels', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'filter_by',
+            [
+                'label' => __('Filter By', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Filter by:', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'page_title',
+            [
+                'label' => __('Pages Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Events', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'upcoming_title',
+            [
+                'label' => __('Upcoming Events Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Upcoming', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'previous_events_title',
+            [
+                'label' => __('Previous Events Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Previous Events', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->end_controls_section();
+        $this->start_controls_section(
+            'Filter',
+            [
+                'label' => __('Labels', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'sort_by',
+            [
+                'label' => __('Sort by label', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Sort by:', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'filter_options',
+            [
+                'label' => esc_html__('Filter options', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::SELECT2,
+                'label_block' => true,
+                'multiple' => true,
+                'options' => $this->filter_labels(),
+                'default' => ['country', 'date'],
+            ]
+        );
+        $this->end_controls_section();
+    }
+    public function get_filter_by()
+    {
+        $settings = $this->get_settings_for_display();
+        $filter_options = $settings['filter_options'];
+        $output = array();
+        if (!empty($filter_options)) {
+            foreach ($filter_options as $option) {
+                if ($option == "date") {
+                    $output[] = array(
+                        "title" => "Date",
+                        "name" => "date",
+                        "options" => array(
+                            "All" => "all",
+                            "This Week" => "week",
+                            "This Month" => "month",
+                            "Closed" => "closed"
+                        )
+                    );
+                } else {
+                    $args = array(
+                        'post_type' => 'event',
+                        'posts_per_page' => -1,
+                    );
+                    $query = new WP_Query($args);
+                    $options = array();
+                    if ($query->have_posts()) {
+                        while ($query->have_posts()) {
+                            $query->the_post();
+                            $post_id = get_the_ID();
+                            $field_name = get_post_meta($post_id, $option, true);
+                            if ($field_name) {
+                                $options[$field_name] = $field_name;
+                            }
+                        }
+                        wp_reset_postdata();
+                    }
+                    $output[] = array(
+                        "title" => $this->filter_labels()[$option] ?? $option,
+                        "name" => $option,
+                        "options" => $options
+                    );
+                }
+            }
+        }
+        return $output;
     }
     public function get_upcoming_events()
     {
@@ -185,23 +297,21 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
     }
     protected function render()
     {
-        $filter_by = "Filter by:";
-        $page_title = "Events";
+        $settings = $this->get_settings_for_display();
+        $filter_by = $settings["filter_by"];
+        $page_title = $settings["page_title"];
         $upcoming = $this->get_upcoming_events();
         $upcoming_events = $upcoming[0];
         $upcoming_pagination = $upcoming[1];
         $previous = $this->get_previous_events();
         $previous_events = $previous[0];
         $previous_pagination = $previous[1];
-        $upcoming_events_title = "Upcoming";
-        $previous_events_title = "Previous Events";
+        $upcoming_events_title = $settings["upcoming_title"];
+        $previous_events_title = $settings["previous_events_title"];
         $filter_options = $this->get_filter_by();
 ?>
         <main class="events">
-            <script>
-                console.log(<?php echo json_encode($previous_events) ?>);
-                console.log(<?php echo json_encode($upcoming_events) ?>);
-            </script>
+
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <p class="filter-by">
@@ -360,12 +470,13 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                         </defs>
                     </svg>Filter</button>
                 <div class="selected-filters" id="selected-filters"></div>
-                <div class="section-title" <?php echo $this->get_render_attribute_string('upcoming_events_title'); ?>>
-                    <? echo $upcoming_events_title ?>
-                </div>
-                <div class="content">
-                    <?
-                    if (!empty($upcoming_events)) {
+                <? if (!empty($upcoming_events)) { ?>
+                    <div class="section-title" <?php echo $this->get_render_attribute_string('upcoming_events_title'); ?>>
+                        <? echo $upcoming_events_title ?>
+                    </div>
+                    <div class="content">
+                        <?
+
                         foreach ($upcoming_events as $event) {
                             $image = $event["image"];
                             $title = $event["title"];
@@ -375,7 +486,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $country = $event["country_code"];
                             $time = $event["time"];
                             $is_virtual = $event["is_virtual"];
-                    ?>
+                        ?>
                             <a href="<? echo $event["post_url"] ?>">
                                 <div class="card">
                                     <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
@@ -407,46 +518,46 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                 </div>
                             </a>
 
-                    <?
+                        <?
                         }
-                    }
-                    ?>
-                </div>
-                <hr class="divider">
-                <div class="pagination-container">
-                    <ul class="pagination">
+                        ?>
+                    </div>
+                    <hr class="divider">
+                    <div class="pagination-container">
+                        <ul class="pagination">
 
-                        <!-- Previous page link -->
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </li>
+                            <!-- Previous page link -->
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
 
-                        <!-- Page links -->
-                        <?php for ($i = 1; $i <= $upcoming_pagination['total_pages']; $i++) : ?>
-                            <?
-                            $current_url_params = $_GET;
-                            $current_url_params["upcoming_page"] = $i;
-                            $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
-                            ?>
-                            <li class="page-item"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
-                        <?php endfor; ?>
+                            <!-- Page links -->
+                            <?php for ($i = 1; $i <= $upcoming_pagination['total_pages']; $i++) : ?>
+                                <?
+                                $current_url_params = $_GET;
+                                $current_url_params["upcoming_page"] = $i;
+                                $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
+                                ?>
+                                <li class="page-item"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
+                            <?php endfor; ?>
 
-                        <!-- Next page link -->
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </li>
+                            <!-- Next page link -->
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
 
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
                 <?
+                }
                 if (!empty($previous_events)) {
 
                 ?>
