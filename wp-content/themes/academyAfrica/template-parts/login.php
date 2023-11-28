@@ -14,7 +14,18 @@
             Sign up to access all the features on academy.AFRICA
         </p>
         <div class="social-login">
-            <?php echo do_shortcode('[TheChamp-Login show_username="ON" style="height:40px; width: 100%"]') ?>
+            <button class="google" onclick="theChampInitiateLogin(this, 'google')">
+                <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="Google">
+                Sign in with Google
+            </button>
+            <button onclick="theChampInitiateLogin(this, 'facebook')" class="facebook">
+                <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Google">
+                Sign In with Facebook
+            </button>
+            <button onclick="theChampInitiateLogin(this, 'twitter')" class="twitter">
+                <img src="/wp-content/themes/academyAfrica/assets/images/icons/twitter.svg" alt="Google">
+                Sign In with X (formerly Twitter)
+            </button>
         </div>
         <div class="content-divider">
             <div></div><span>or</span>

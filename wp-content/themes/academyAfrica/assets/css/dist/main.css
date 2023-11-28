@@ -1194,36 +1194,49 @@ label {
   font-weight: 700;
   line-height: 17px; /* 121.429% */
 }
-.modal-content .google {
-  display: flex;
-  width: 250px;
-  padding-left: 10px;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--White, #fff);
-  box-shadow: 1.38889px 1.38889px 3.47222px 0px rgba(0, 0, 0, 0.25);
-  height: 40px;
-  margin-top: 22px;
-  cursor: pointer;
-}
-.modal-content .google .sign-in-with-google {
-  flex: 1;
-  height: 100%;
-  border: none;
-  background: transparent;
-  color: var(--primary-700, #0c1a81);
-  text-align: center;
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
-}
 .modal-content .social-login {
   margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
-.modal-content .social-login ul {
-  margin: 0;
+.modal-content .social-login button {
+  border-radius: 10px;
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 54px;
+  width: 100%;
+  border: none;
+  gap: 15px;
+}
+.modal-content .social-login button.google {
+  color: rgba(0, 0, 0, 0.54);
+  font-family: Open Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.modal-content .social-login button.facebook {
+  gap: 15px;
+  color: #1877f2;
+  font-family: Open Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.modal-content .social-login button.twitter {
+  color: var(--shades-black, #000);
+  font-family: Open Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 .modal-content .content-divider {
   display: flex;
