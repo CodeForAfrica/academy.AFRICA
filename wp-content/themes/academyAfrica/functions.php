@@ -33,6 +33,7 @@ function my_theme_enqueue_styles()
 {
     wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), '6.3.13');
     wp_enqueue_style('single-event', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single_event.css', array(), '6.3.12');
+    wp_enqueue_style('profile', get_stylesheet_directory_uri() . '/assets/css/dist/pages/profile.css', array(), '6.3.13');
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -136,3 +137,14 @@ $widget->init();
 
 require_once __DIR__  . '/events.php';
 add_action('init', 'event_post_type');
+
+function redirect_to_custom_profile_edit()
+{
+    if (is_user_logged_in() && is_admin() && basename($_SERVER['PHP_SELF']) == 'profile.php') {
+        $custom_profile_edit_url = home_url('/profile');
+        wp_redirect($custom_profile_edit_url);
+        exit();
+    }
+}
+
+add_action('template_redirect', 'redirect_to_custom_profile_edit');
