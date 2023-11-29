@@ -122,6 +122,18 @@ table {
   max-width: 1920px;
   padding: 60px 40px;
 }
+.profile .cfa-title {
+  text-align: left;
+  font-family: Lora;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+}
+.profile .cfa-title::after {
+  left: 0;
+  transform: none;
+}
 .profile form {
   margin-top: 40px;
 }
