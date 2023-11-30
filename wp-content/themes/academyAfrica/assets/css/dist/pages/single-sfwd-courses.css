@@ -118,17 +118,22 @@ table {
   cursor: not-allowed;
 }
 
-.single-courses {
+.single-courses .wrapper {
   padding: 60px 30px;
   display: flex;
   flex-direction: column;
   gap: 50px;
 }
-.single-courses .title-section .title {
+.single-courses .wrapper .title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.single-courses .wrapper .title-section .title {
   display: flex;
   justify-content: start;
 }
-.single-courses .title-section .title .cfa-title {
+.single-courses .wrapper .title-section .title .cfa-title {
   text-align: left;
   font-family: Open Sans;
   font-size: 20px;
@@ -136,11 +141,19 @@ table {
   font-weight: 700;
   line-height: 24px;
 }
-.single-courses .title-section .title .cfa-title::after {
+.single-courses .wrapper .title-section .title .cfa-title::after {
   left: unset;
   transform: unset;
 }
-.single-courses .description {
+.single-courses .wrapper .title-section .avatar {
+  display: none;
+}
+.single-courses .wrapper .title-section .avatar img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+.single-courses .wrapper .description {
   color: #000000;
   font-size: 14px;
   font-style: normal;
@@ -148,7 +161,7 @@ table {
   line-height: 18px;
   font-family: Open Sans;
 }
-.single-courses .price .cfa-price {
+.single-courses .wrapper .price .cfa-price {
   color: #0C1A81;
   font-size: 33px;
   font-style: normal;
@@ -156,31 +169,31 @@ table {
   line-height: 40px;
   letter-spacing: -0.66px;
 }
-.single-courses .certificate-text {
+.single-courses .wrapper .certificate-text {
   color: #000000;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
 }
-.single-courses .share .social-icons {
+.single-courses .wrapper .share .social-icons {
   display: flex;
   gap: 16px;
 }
-.single-courses .share .social-icons .icon-image {
+.single-courses .wrapper .share .social-icons .icon-image {
   width: 24px;
   height: 24px;
 }
-.single-courses .enroll .enroll-button {
+.single-courses .wrapper .enroll .enroll-button {
   background: #ED1C24;
 }
-.single-courses .divider {
+.single-courses .wrapper .divider {
   width: 100%;
   border: none;
   height: 1px;
   background: #A9A9A9;
 }
-.single-courses .inroduction .cfa-introduction-title {
+.single-courses .wrapper .inroduction .cfa-introduction-title {
   color: #0C1A81;
   font-size: 18px;
   font-style: normal;
@@ -188,21 +201,21 @@ table {
   line-height: 24px;
   margin-bottom: 20px;
 }
-.single-courses .inroduction .cfa-introduction {
+.single-courses .wrapper .inroduction .cfa-introduction {
   color: #000000;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
 }
-.single-courses .inroduction .cfa-introduction a {
+.single-courses .wrapper .inroduction .cfa-introduction a {
   color: #0C1A81;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
 }
-.single-courses .carriculum {
+.single-courses .wrapper .carriculum {
   color: #000000;
   font-size: 18px;
   font-weight: 400;
@@ -211,7 +224,7 @@ table {
   flex-direction: column;
   gap: 30px;
 }
-.single-courses .carriculum .title .cfa-introduction-title {
+.single-courses .wrapper .carriculum .title .cfa-introduction-title {
   color: #0C1A81;
   font-size: 18px;
   font-style: normal;
@@ -219,57 +232,64 @@ table {
   line-height: 24px;
   margin-bottom: 20px;
 }
-.single-courses .carriculum .ld-item-list {
+.single-courses .wrapper .carriculum .ld-item-list {
   margin: 0;
   padding: 0;
 }
-.single-courses .carriculum .ld-item-list .ld-section-heading {
+.single-courses .wrapper .carriculum .ld-item-list .ld-section-heading {
   display: none;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item {
   border: 1px solid #CCCFDA;
   border-radius: 0;
   margin: 0;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-status-icon {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-status-icon {
   display: none;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-item-title {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-item-title {
   color: #000000;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-item-title .ld-item-components {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-item-title .ld-item-components {
   display: none;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button .ld-icon {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button .ld-icon {
   color: #000000;
   background: #FFFFFF;
   border: none;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button .ld-text {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button .ld-text {
   display: none;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded {
   background: #F7F9FD;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-header {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-header {
   display: none;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-topic-title {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items {
+  padding: 0;
+}
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item {
+  margin: 0;
+  padding: 0 20px;
+}
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-topic-title {
   color: #000000;
   font-size: 18px;
   font-style: normal;
@@ -277,10 +297,10 @@ table {
   line-height: 28px;
   font-family: Open Sans;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-status-icon {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-status-icon {
   display: none;
 }
-.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-item-title {
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-item-title {
   color: #000000;
   font-size: 18px;
   font-style: normal;
@@ -288,19 +308,19 @@ table {
   line-height: 28px;
   font-family: Open Sans;
 }
-.single-courses .instructor {
+.single-courses .wrapper .instructor {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.single-courses .instructor .title .cfa-introduction-title {
+.single-courses .wrapper .instructor .title .cfa-introduction-title {
   color: #0C1A81;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
 }
-.single-courses .instructor .name {
+.single-courses .wrapper .instructor .name {
   color: #000000;
   font-size: 18px;
   font-style: normal;
@@ -309,19 +329,19 @@ table {
   letter-spacing: -0.36px;
   text-transform: capitalize;
 }
-.single-courses .instructor .avatar img {
+.single-courses .wrapper .instructor .avatar img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
-.single-courses .instructor .description {
+.single-courses .wrapper .instructor .description {
   color: #000000;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
 }
-.single-courses .organization .title .cfa-introduction-title {
+.single-courses .wrapper .organization .title .cfa-introduction-title {
   color: #0C1A81;
   font-size: 18px;
   font-style: normal;
@@ -329,11 +349,11 @@ table {
   line-height: 24px;
   margin-bottom: 20px;
 }
-.single-courses .organization .list {
+.single-courses .wrapper .organization .list {
   display: flex;
   flex-direction: column;
 }
-.single-courses .organization .list .item .name {
+.single-courses .wrapper .organization .list .item .name {
   color: #000000;
   font-size: 18px;
   font-style: normal;
@@ -343,29 +363,84 @@ table {
   margin-bottom: 20px;
   text-transform: capitalize;
 }
-.single-courses .organization .list .item .avatar {
+.single-courses .wrapper .organization .list .item .avatar {
   margin-bottom: 20px;
 }
-.single-courses .organization .list .item .avatar img {
+.single-courses .wrapper .organization .list .item .avatar img {
   width: 225pxpx;
   height: 100px;
 }
-.single-courses .organization .list .item .description {
+.single-courses .wrapper .organization .list .item .description {
   color: #000000;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
 }
-.single-courses .enroll {
+.single-courses .wrapper .enroll {
   text-align: center;
 }
-.single-courses .enroll.left {
+.single-courses .wrapper .enroll.left {
   text-align: left;
 }
 @media (min-width: 768px) {
-  .single-courses .enroll {
+  .single-courses .wrapper .enroll {
     text-align: left;
+  }
+}
+@media (min-width: 1152px) {
+  .single-courses {
+    display: flex;
+    justify-content: center;
+  }
+  .single-courses .wrapper {
+    padding: 80px 0;
+    max-width: 1120px;
+    gap: 40px;
+    width: 960px;
+  }
+  .single-courses .wrapper .title-section .title {
+    display: flex;
+    justify-content: start;
+  }
+  .single-courses .wrapper .title-section .title .cfa-title {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  .single-courses .wrapper .title-section .title .cfa-title::after {
+    left: unset;
+    transform: unset;
+  }
+  .single-courses .wrapper .title-section .avatar {
+    display: block;
+  }
+  .single-courses .wrapper .description {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .single-courses .wrapper .certificate-text {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .single-courses .wrapper .inroduction .cfa-introduction-title {
+    font-size: 33px;
+    line-height: 40px;
+    letter-spacing: -0.66px;
+  }
+  .single-courses .wrapper .carriculum .title .cfa-introduction-title {
+    font-size: 33px;
+    line-height: 40px;
+    letter-spacing: -0.66px;
+  }
+  .single-courses .wrapper .instructor .title .cfa-introduction-title {
+    font-size: 33px;
+    line-height: 40px;
+    letter-spacing: -0.66px;
+  }
+  .single-courses .wrapper .organization .title .cfa-introduction-title {
+    font-size: 33px;
+    line-height: 40px;
+    letter-spacing: -0.66px;
   }
 }
 

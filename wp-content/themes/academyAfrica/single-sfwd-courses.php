@@ -58,88 +58,95 @@ $organizations = [
 get_header();
 ?>
 <div class="single-courses">
-    <div class="title-section">
-        <div class="title">
-            <p class="cfa-title">
-                <?php the_title(); ?>
-            </p>
-        </div>
-    </div>
-    <div class="description">
-        <?php the_excerpt(); ?>
-    </div>
-    <div class="price">
-        <p class="cfa-price">
-            <?php echo $price  ?>
-        </p>
-    </div>
-    <div class="certificate-text">
-        <p>The certificate for this course can be downloaded for a small fee when the course is completed</p>
-    </div>
-    <div class="share">
-        <div class="social-icons">
-            <?
-            if (!empty($social_media_links)) {
-                foreach ($social_media_links as $item) {
-                    $link = esc_url($item['link']['url']);
-                    $type = esc_html($item['type']);
-                    $icon = get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
-                    $image = "<img class='icon-image' src='" . $icon . "' alt='" . $type . "' />";
-                    echo '<a style="color: #000" href="' . $link . '" class="icon">' . $image . '</a>';
-                }
-            }
-            ?>
-        </div>
-    </div>
-    <div class="enroll left">
-        <button class="button secondary large enroll-button">Enroll Now</button>
-    </div>
-    <hr class="divider">
-    <div class="inroduction">
-        <p class="cfa-introduction-title">
-            Introduction
-        </p>
-        <div class="cfa-introduction">
-            <?php echo the_content(); ?>
-        </div>
-    </div>
-    <div class="carriculum"> 
-        <div class="title">
-            <p class="cfa-introduction-title">Course Carriculum</p>
-        </div>
-        <?php echo do_shortcode('[course_content]'); ?>
-    </div>
-    <div class="instructor">
-        <div class="title">
-            <p class="cfa-introduction-title">The Instructor</p>
-        </div>
-        <div class="name">
-            <p>
+    <div class="wrapper">
+        <div class="title-section">
+            <div class="title">
+                <p class="cfa-title">
+                    <?php the_title(); ?>
+                </p>
+            </div>
+            <div class="avatar">
                 <?php
-                $author = get_post_field('post_author', $course_id);
-                $name = get_the_author_meta('display_name', $author);
-                $avatar = get_avatar($email);
-                echo $name;
+                $course_thumbnail = get_the_post_thumbnail_url($course_id);
+                echo '<img src="' . $course_thumbnail . '" alt="">';
                 ?>
-            </p>
-        </div>
-        <div class="avatar">
-            <?php
-            echo '<img src="' . $avatar . '" alt="">';
-            ?>
+            </div>
         </div>
         <div class="description">
-            <?php echo get_the_author_meta('description'); ?>
+            <?php the_excerpt(); ?>
         </div>
-    </div>
-    <div class="organization">
-        <div class="title">
-            <p class="cfa-introduction-title">The Organization</p>
+        <div class="price">
+            <p class="cfa-price">
+                <?php echo $price  ?>
+            </p>
         </div>
-        <div class="list">
-            <?php
-            foreach ($organizations as $organization) {
-                echo "
+        <div class="certificate-text">
+            <p>The certificate for this course can be downloaded for a small fee when the course is completed</p>
+        </div>
+        <div class="share">
+            <div class="social-icons">
+                <?
+                if (!empty($social_media_links)) {
+                    foreach ($social_media_links as $item) {
+                        $link = esc_url($item['link']['url']);
+                        $type = esc_html($item['type']);
+                        $icon = get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
+                        $image = "<img class='icon-image' src='" . $icon . "' alt='" . $type . "' />";
+                        echo '<a style="color: #000" href="' . $link . '" class="icon">' . $image . '</a>';
+                    }
+                }
+                ?>
+            </div>
+        </div>
+        <div class="enroll left">
+            <button class="button secondary large enroll-button">Enroll Now</button>
+        </div>
+        <hr class="divider">
+        <div class="inroduction">
+            <p class="cfa-introduction-title">
+                Introduction
+            </p>
+            <div class="cfa-introduction">
+                <?php echo the_content(); ?>
+            </div>
+        </div>
+        <div class="carriculum">
+            <div class="title">
+                <p class="cfa-introduction-title">Course Carriculum</p>
+            </div>
+            <?php echo do_shortcode('[course_content]'); ?>
+        </div>
+        <div class="instructor">
+            <div class="title">
+                <p class="cfa-introduction-title">The Instructor</p>
+            </div>
+            <div class="name">
+                <p>
+                    <?php
+                    $author = get_post_field('post_author', $course_id);
+                    $name = get_the_author_meta('display_name', $author);
+                    $avatar = get_avatar($email);
+                    echo $name;
+                    ?>
+                </p>
+            </div>
+            <div class="avatar">
+                <?php
+                echo '<img src="' . $avatar . '" alt="">';
+                ?>
+            </div>
+            <div class="description">
+                <?php echo get_the_author_meta('description'); ?>
+            </div>
+        </div>
+        <div class="organization">
+            <div class="title">
+                <p class="cfa-introduction-title">The Organization</p>
+            </div>
+            <div class="list">
+                <?php
+                foreach ($organizations as $organization) {
+                    echo "
                 <div class='item'>
                     <div class='name'>
                         <p>" . $organization['name'] . "</p>
@@ -152,14 +159,15 @@ get_header();
                     </div>
                 </div>
                 ";
-            }
-            ?>
+                }
+                ?>
+            </div>
         </div>
+        <div class="enroll">
+            <button class="button secondary large enroll-button">Enroll Now</button>
+        </div>
+        <!-- TODO: ADD Related -->
     </div>
-    <div class="enroll">
-        <button class="button secondary large enroll-button">Enroll Now</button>
-    </div>
-    <!-- TODO: ADD Related -->
 </div>
 
 <?
