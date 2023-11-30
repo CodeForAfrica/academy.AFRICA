@@ -204,6 +204,7 @@ function save_details()
     update_post_meta($post->ID, "is_virtual", $_POST["is_virtual"]);
     update_post_meta($post->ID, "timezone", $_POST["timezone"]);
     update_post_meta($post->ID, "date", $_POST["date"]);
+    update_post_meta($post->ID, "time", $_POST["time"]);
 }
 
 add_action("admin_init", "admin_init");

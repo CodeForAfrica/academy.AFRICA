@@ -33,7 +33,7 @@ function my_theme_enqueue_styles()
 {
     wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), '6.3.13');
     wp_enqueue_style('single-event', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single_event.css', array(), '6.3.12');
-    wp_enqueue_style('profile', get_stylesheet_directory_uri() . '/assets/css/dist/pages/profile.css', array(), '6.3.14');
+    wp_enqueue_style('profile', get_stylesheet_directory_uri() . '/assets/css/dist/pages/profile.css', array(), '6.4');
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -135,8 +135,10 @@ require_once __DIR__ . '/includes/widgets/widgets.php';
 $widget = new \AcademyAfrica\Theme\Widget\Widget();
 $widget->init();
 
-require_once __DIR__  . '/events.php';
+require_once __DIR__  . '/posts/events.php';
+require_once __DIR__  . '/posts/networks.php';
 add_action('init', 'event_post_type');
+add_action('init', 'create_networks_post_type');
 
 function redirect_to_custom_profile_edit()
 {
@@ -148,3 +150,14 @@ function redirect_to_custom_profile_edit()
 }
 
 add_action('template_redirect', 'redirect_to_custom_profile_edit');
+
+add_filter('get_avatar_data', 'change_avatar', 100, 2);
+
+function change_avatar($args, $id_or_email)
+{
+    $avatar_url = get_user_meta($id_or_email, 'avatar', true);
+
+    $args['url'] = $avatar_url;
+
+    return $args;
+}

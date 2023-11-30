@@ -3,6 +3,9 @@
 .profile {
   max-width: 1920px;
   padding: 60px 40px;
+  * {
+    font-family: Open Sans;
+  }
   .cfa-title {
     text-align: left;
     font-family: Lora;
@@ -106,6 +109,9 @@
         border: 1px solid var(--neutral-300, #b7bac8);
         background: var(--shades-white, #fff);
         height: 44px;
+        &:disabled {
+          background: var(--neutral-50, #f7f9fd);
+        }
       }
     }
     .prefix {
@@ -152,6 +158,63 @@
   .submit-area {
     display: flex;
     justify-content: flex-end;
+    margin-top: 40px;
+  }
+  .setting-title {
+    color: var(--primary-700, #0c1a81);
+
+    font-family: Open Sans;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 48px; /* 150% */
+  }
+  .setting-description {
+    color: var(--shades-black, #000);
+    margin: 40px 0;
+    /* Paragraph/P3/Regular */
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 155.556% */
+  }
+  .network {
+    display: flex;
+    padding: 24px 0;
+    gap: 15px;
+    margin-bottom: 40px;
+    .img {
+      height: 100px;
+    }
+    .button {
+      width: max-content;
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      .title {
+        color: var(--shades-black, #000);
+        font-family: Open Sans;
+        font-size: 23px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 28px; /* 121.739% */
+        letter-spacing: -0.46px;
+      }
+      .description {
+        color: var(--shades-black, #000);
+
+        /* Paragraph/P3/Regular */
+        font-family: Open Sans;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px; /* 155.556% */
+      }
+    }
   }
 }
 
@@ -173,6 +236,16 @@
         max-width: 450px;
         width: 100%;
       }
+    }
+    .network {
+      display: block;
+      .content {
+        margin-top: 40px;
+      }
+    }
+    .submit-area {
+      display: flex;
+      justify-content: center;
     }
   }
 }

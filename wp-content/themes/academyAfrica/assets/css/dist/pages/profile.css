@@ -122,6 +122,9 @@ table {
   max-width: 1920px;
   padding: 60px 40px;
 }
+.profile * {
+  font-family: Open Sans;
+}
 .profile .cfa-title {
   text-align: left;
   font-family: Lora;
@@ -224,6 +227,11 @@ table {
   background: var(--shades-white, #fff);
   height: 44px;
 }
+.profile .user-form .input input[type=text]:disabled,
+.profile .user-form .input input[type=tel]:disabled,
+.profile .user-form .input input[type=email]:disabled {
+  background: var(--neutral-50, #f7f9fd);
+}
 .profile .user-form .prefix {
   border: none;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
@@ -265,6 +273,61 @@ table {
 .profile .submit-area {
   display: flex;
   justify-content: flex-end;
+  margin-top: 40px;
+}
+.profile .setting-title {
+  color: var(--primary-700, #0c1a81);
+  font-family: Open Sans;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px; /* 150% */
+}
+.profile .setting-description {
+  color: var(--shades-black, #000);
+  margin: 40px 0;
+  /* Paragraph/P3/Regular */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 155.556% */
+}
+.profile .network {
+  display: flex;
+  padding: 24px 0;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+.profile .network .img {
+  height: 100px;
+}
+.profile .network .button {
+  width: max-content;
+}
+.profile .network .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.profile .network .content .title {
+  color: var(--shades-black, #000);
+  font-family: Open Sans;
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 121.739% */
+  letter-spacing: -0.46px;
+}
+.profile .network .content .description {
+  color: var(--shades-black, #000);
+  /* Paragraph/P3/Regular */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 155.556% */
 }
 
 @media (min-width: 1440px) {
@@ -281,6 +344,16 @@ table {
   .profile .user-form .input {
     max-width: 450px;
     width: 100%;
+  }
+  .profile .network {
+    display: block;
+  }
+  .profile .network .content {
+    margin-top: 40px;
+  }
+  .profile .submit-area {
+    display: flex;
+    justify-content: center;
   }
 }
 
