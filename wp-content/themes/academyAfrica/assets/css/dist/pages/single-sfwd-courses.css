@@ -1,0 +1,364 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+  border: 1px solid #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.single-courses {
+  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.single-courses .title-section .title {
+  display: flex;
+  justify-content: start;
+}
+.single-courses .title-section .title .cfa-title {
+  text-align: left;
+  font-family: Open Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+.single-courses .title-section .title .cfa-title::after {
+  left: unset;
+  transform: unset;
+}
+.single-courses .description {
+  color: #000000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  font-family: Open Sans;
+}
+.single-courses .price .cfa-price {
+  color: #0C1A81;
+  font-size: 33px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.66px;
+}
+.single-courses .certificate-text {
+  color: #000000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+.single-courses .share .social-icons {
+  display: flex;
+  gap: 16px;
+}
+.single-courses .share .social-icons .icon-image {
+  width: 24px;
+  height: 24px;
+}
+.single-courses .enroll .enroll-button {
+  background: #ED1C24;
+}
+.single-courses .divider {
+  width: 100%;
+  border: none;
+  height: 1px;
+  background: #A9A9A9;
+}
+.single-courses .inroduction .cfa-introduction-title {
+  color: #0C1A81;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+.single-courses .inroduction .cfa-introduction {
+  color: #000000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+.single-courses .inroduction .cfa-introduction a {
+  color: #0C1A81;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+.single-courses .carriculum {
+  color: #000000;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.single-courses .carriculum .title .cfa-introduction-title {
+  color: #0C1A81;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+.single-courses .carriculum .ld-item-list {
+  margin: 0;
+  padding: 0;
+}
+.single-courses .carriculum .ld-item-list .ld-section-heading {
+  display: none;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item {
+  border: 1px solid #CCCFDA;
+  border-radius: 0;
+  margin: 0;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-status-icon {
+  display: none;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-item-title {
+  color: #000000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-name .ld-item-title .ld-item-components {
+  display: none;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button .ld-icon {
+  color: #000000;
+  background: #FFFFFF;
+  border: none;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button .ld-text {
+  display: none;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded {
+  background: #F7F9FD;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-header {
+  display: none;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-topic-title {
+  color: #000000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  font-family: Open Sans;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-status-icon {
+  display: none;
+}
+.single-courses .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-item-title {
+  color: #000000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  font-family: Open Sans;
+}
+.single-courses .instructor {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.single-courses .instructor .title .cfa-introduction-title {
+  color: #0C1A81;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+.single-courses .instructor .name {
+  color: #000000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+  text-transform: capitalize;
+}
+.single-courses .instructor .avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.single-courses .instructor .description {
+  color: #000000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+.single-courses .organization .title .cfa-introduction-title {
+  color: #0C1A81;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+.single-courses .organization .list {
+  display: flex;
+  flex-direction: column;
+}
+.single-courses .organization .list .item .name {
+  color: #000000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+.single-courses .organization .list .item .avatar {
+  margin-bottom: 20px;
+}
+.single-courses .organization .list .item .avatar img {
+  width: 225pxpx;
+  height: 100px;
+}
+.single-courses .organization .list .item .description {
+  color: #000000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+.single-courses .enroll {
+  text-align: center;
+}
+
+/*# sourceMappingURL=single-sfwd-courses.css.map */

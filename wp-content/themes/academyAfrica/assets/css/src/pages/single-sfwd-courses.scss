@@ -1,0 +1,333 @@
+@use "../abstracts/" as *;
+
+
+.single-courses {
+    padding: 60px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    .title-section {
+
+
+        .title {
+            display: flex;
+            justify-content: start;
+
+            .cfa-title {
+                text-align: left;
+                font-family: Open Sans;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+
+                &::after {
+                    left: unset;
+                    transform: unset;
+                }
+            }
+        }
+    }
+
+    .description {
+        color: $color-shades-black;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+
+        font-family: Open Sans;
+    }
+
+
+    .price {
+        .cfa-price {
+            color: $color-primary-700;
+            font-size: 33px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 40px;
+            letter-spacing: -0.66px;
+        }
+    }
+
+    .certificate-text {
+        color: $color-shades-black;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+    }
+
+    .share {
+        .social-icons {
+            display: flex;
+            gap: 16px;
+
+            .icon-image {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+
+    .enroll {
+
+
+        .enroll-button {
+            background: $color-secondary-500;
+
+        }
+    }
+
+    .divider {
+        width: 100%;
+        border: none;
+        height: 1px;
+        background: #A9A9A9;
+    }
+
+    .inroduction {
+
+
+        .cfa-introduction-title {
+            color: $color-primary-700;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px;
+            margin-bottom: 20px;
+        }
+
+        .cfa-introduction {
+            color: $color-shades-black;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px;
+
+            a {
+                color: $color-primary-700;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 28px;
+            }
+        }
+    }
+
+
+    .carriculum {
+        color: $color-shades-black;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .title {
+            .cfa-introduction-title {
+                color: $color-primary-700;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .ld-item-list {
+            margin: 0;
+            padding: 0;
+
+            .ld-section-heading {
+                display: none;
+            }
+
+            .ld-item-list-items {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .ld-item-list-item {
+                    border: 1px solid $color-neutral-200;
+                    border-radius: 0;
+                    margin: 0;
+
+                    .ld-item-list-item-preview {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        .ld-item-name {
+                            .ld-status-icon {
+                                display: none;
+                            }
+
+                            .ld-item-title {
+                                color: $color-shades-black;
+                                font-size: 18px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: 24px;
+
+                                .ld-item-components {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        .ld-item-details {
+                            .ld-expand-button {
+                                .ld-icon {
+                                    color: $color-shades-black;
+                                    background: $color-shades-white;
+                                    border: none;
+                                }
+
+                                .ld-text {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                    }
+
+                    .ld-item-list-item-expanded {
+                        background: $color-neutral-50;
+
+                        .ld-table-list-header {
+                            display: none;
+                        }
+
+                        .ld-table-list-items {
+                            .ld-table-list-item {
+                                .ld-table-list-item-preview {
+                                    .ld-topic-title {
+                                        color: $color-shades-black;
+                                        font-size: 18px;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: 28px;
+                                        font-family: Open Sans;
+                                    }
+
+                                    .ld-status-icon {
+                                        display: none;
+                                    }
+
+                                    .ld-item-title {
+                                        color: $color-shades-black;
+                                        font-size: 18px;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: 28px;
+                                        font-family: Open Sans;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .instructor {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .title {
+            .cfa-introduction-title {
+                color: $color-primary-700;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+            }
+        }
+
+        .name {
+            color: $color-shades-black;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px;
+            letter-spacing: -0.36px;
+            text-transform: capitalize;
+        }
+
+        .avatar {
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+        }
+
+        .description {
+            color: $color-shades-black;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px;
+        }
+    }
+
+    .organization {
+        .title {
+            .cfa-introduction-title {
+                color: $color-primary-700;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+
+            .item {
+                .name {
+                    color: $color-shades-black;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 24px;
+                    letter-spacing: -0.36px;
+                    margin-bottom: 20px;
+                    text-transform: capitalize;
+                }
+
+                .avatar {
+                    margin-bottom: 20px;
+
+                    img {
+                        width: 225pxpx;
+                        height: 100px;
+                    }
+                }
+
+                .description {
+                    color: $color-shades-black;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+
+    .enroll {
+        text-align: center
+    }
+
+}
