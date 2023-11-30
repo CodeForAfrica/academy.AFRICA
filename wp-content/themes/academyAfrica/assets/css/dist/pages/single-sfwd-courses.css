@@ -443,5 +443,10 @@ table {
     letter-spacing: -0.66px;
   }
 }
+@media (min-width: 1152px) {
+  .single-courses .wrapper {
+    width: 1120px;
+  }
+}
 
 /*# sourceMappingURL=single-sfwd-courses.css.map */

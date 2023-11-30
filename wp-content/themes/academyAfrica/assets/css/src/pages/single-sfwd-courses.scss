@@ -442,4 +442,11 @@
         }
     }
 
+
+    @include media-breakpoint-up(desktop) {
+        .wrapper {
+            width: 1120px;
+        }
+    }
+
 }
