@@ -41,7 +41,7 @@
     }
 
 
-    .price {
+    .price { 
         .cfa-price {
             color: $color-primary-700;
             font-size: 33px;
@@ -327,7 +327,17 @@
     }
 
     .enroll {
-        text-align: center
+        text-align: center;
+
+        &.left {
+            text-align: left;
+        }
+    }
+
+    @include media-breakpoint-up(tablet){
+        .enroll {
+            text-align: left;
+        }
     }
 
 }

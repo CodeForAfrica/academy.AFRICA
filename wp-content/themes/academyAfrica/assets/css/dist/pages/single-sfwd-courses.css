@@ -360,5 +360,13 @@ table {
 .single-courses .enroll {
   text-align: center;
 }
+.single-courses .enroll.left {
+  text-align: left;
+}
+@media (min-width: 768px) {
+  .single-courses .enroll {
+    text-align: left;
+  }
+}
 
 /*# sourceMappingURL=single-sfwd-courses.css.map */

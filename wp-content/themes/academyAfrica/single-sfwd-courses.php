@@ -91,7 +91,7 @@ get_header();
             ?>
         </div>
     </div>
-    <div class="enroll">
+    <div class="enroll left">
         <button class="button secondary large enroll-button">Enroll Now</button>
     </div>
     <hr class="divider">
@@ -103,7 +103,7 @@ get_header();
             <?php echo the_content(); ?>
         </div>
     </div>
-    <div class="carriculum">
+    <div class="carriculum"> 
         <div class="title">
             <p class="cfa-introduction-title">Course Carriculum</p>
         </div>
@@ -159,6 +159,7 @@ get_header();
     <div class="enroll">
         <button class="button secondary large enroll-button">Enroll Now</button>
     </div>
+    <!-- TODO: ADD Related -->
 </div>
 
 <?
