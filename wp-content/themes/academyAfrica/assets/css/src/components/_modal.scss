@@ -146,6 +146,11 @@ label {
       border: none;
       gap: 15px;
       text-transform: none;
+      border: 1px solid transparent;
+      &:hover {
+        border: 1px solid #0c1a81;
+        background-color: #eff0fd;
+      }
       &.google {
         color: rgba(0, 0, 0, 0.54);
         font-family: Open Sans;

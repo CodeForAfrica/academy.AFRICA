@@ -1213,6 +1213,11 @@ label {
   border: none;
   gap: 15px;
   text-transform: none;
+  border: 1px solid transparent;
+}
+.modal-content .social-login button:hover {
+  border: 1px solid #0c1a81;
+  background-color: #eff0fd;
 }
 .modal-content .social-login button.google {
   color: rgba(0, 0, 0, 0.54);
