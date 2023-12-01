@@ -81,7 +81,7 @@ get_header();
             </p>
         </div>
         <div class="certificate-text">
-            <p>The certificate for this course can be downloaded for a small fee when the course is completed</p>
+            The certificate for this course can be downloaded for a small fee when the course is completed
         </div>
         <div class="share">
             <div class="social-icons">
