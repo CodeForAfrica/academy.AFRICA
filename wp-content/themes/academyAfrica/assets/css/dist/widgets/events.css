@@ -207,7 +207,7 @@ table {
   border: 0.5px solid var(--neutral-200, #cccfda);
   background: var(--shades-white, #fff);
   padding: 20px;
-  max-width: 300px;
+  width: 300px;
 }
 .events .events-content .card .flex-between {
   display: flex;

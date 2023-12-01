@@ -135,7 +135,7 @@ function custom_fields()
             <select value="<?php echo $country; ?>" name="country" id="country">
                 <option value=""></option>
                 <?php
-                require_once __DIR__ . '/includes/utils/african_countries.php';
+                require_once __DIR__ . '/../includes/utils/african_countries.php';
                 foreach ($african_countries as $name => $flag) {
                     $label = $name;
                     $selected = $label === $country ? 'selected="selected"' : null;

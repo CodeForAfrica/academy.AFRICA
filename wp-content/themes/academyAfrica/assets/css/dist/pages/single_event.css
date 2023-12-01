@@ -154,7 +154,12 @@ table {
   margin: 40px 0;
   border: none;
 }
-.single-page-event .custom-data p {
+.single-page-event .details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.single-page-event .details .custom-data p {
   color: #000;
   font-family: Open Sans;
   font-size: 18px;
@@ -164,7 +169,7 @@ table {
   text-transform: uppercase;
   margin-bottom: 20px;
 }
-.single-page-event .custom-data p .speaker {
+.single-page-event .details .custom-data p .speaker {
   color: var(--shades-black, #000);
   font-family: Open Sans;
   font-size: 18px;
@@ -172,6 +177,18 @@ table {
   font-weight: 700;
   line-height: 24px; /* 133.333% */
   letter-spacing: -0.36px;
+}
+.single-page-event .details .share {
+  text-align: right;
+}
+@media (max-width: 768px) {
+  .single-page-event .details {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .single-page-event .details .share {
+    text-align: left;
+  }
 }
 .single-page-event .content {
   color: var(--shades-black, #000);
