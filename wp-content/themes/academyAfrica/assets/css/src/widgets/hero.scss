@@ -1,4 +1,4 @@
-@use '../abstracts/' as *;
+@use "../abstracts/" as *;
 
 $font-family_1: Ibarra Real Nova;
 $font-family_2: Lora;
@@ -9,6 +9,7 @@ $font-family_3: Open Sans;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  overflow-x: hidden;
 
   .background-image {
     display: none;
@@ -16,18 +17,18 @@ $font-family_3: Open Sans;
     @include media-breakpoint-up(desktop) {
       display: block;
       height: 475.2px;
-      width: 100%;
+      width: 102%;
       background-image: url("../../../images/hero.png");
       background-repeat: no-repeat;
       background-size: cover;
     }
 
     @include media-breakpoint-up(large) {
-      height: 594px
+      height: 594px;
     }
 
     @include media-breakpoint-up(xlarge) {
-      height: 792px
+      height: 792px;
     }
   }
 
@@ -36,8 +37,6 @@ $font-family_3: Open Sans;
     flex-direction: column;
     gap: 16px;
     flex: 1;
-
-
 
     .content {
       display: flex;
@@ -49,7 +48,11 @@ $font-family_3: Open Sans;
           font-size: 32px;
           line-height: 40px;
           color: $color-shades-black;
+          font-family: Ibarra Real Nova;
 
+          a {
+            color: var(--primary-700, #0c1a81);
+          }
 
           &::after {
             left: unset;
@@ -186,5 +189,4 @@ $font-family_3: Open Sans;
     padding: 0;
     flex-direction: column;
   }
-
 }
