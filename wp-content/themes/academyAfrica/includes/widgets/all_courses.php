@@ -41,42 +41,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         return ['academy-africa'];
     }
 
-    public function get_filter_by()
-    {
-        $allOrganizations = CoursesFunctions::getOrganizations();
-        $allInstructors = CoursesFunctions::getAllInstructors();
-        $filter_by = [
-            [
-                'title' => 'Organizations',
-                'name' => 'organization',
-                'options' => []
-            ],
-            [
-                'title' => 'Instructors',
-                'name' => 'instructor',
-                'options' => []
-            ]
-        ];
-
-        foreach ($allOrganizations as $organization) {
-            $formatedOrganization = (object)[
-                'id' => $organization['id'],
-                'name' => $organization['title'],
-            ];
-            array_push($filter_by[0]['options'], $formatedOrganization);
-        }
-
-        foreach ($allInstructors as $instructor) {
-            $formatedInstructor = (object)[
-                'id' => $instructor['id'],
-                'name' => $instructor['name'],
-            ];
-            array_push($filter_by[1]['options'], $formatedInstructor);
-        }
-
-        return $filter_by;
-    }
-
     public function get_query_param($param)
     {
         if (isset($_GET[$param])) {
@@ -135,7 +99,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $pathway_description = $settings['pathway_description'];
         $courses_count = $settings['pathway_courses_count_text'];
         $filter_by = "Filter by:";
-        $filter_options = $this->get_filter_by();
+        $filter_options = CoursesFunctions::get_filter_by();
         $courses_title = "All Courses";
         $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
         $orgs = $this->get_query_param('organization');

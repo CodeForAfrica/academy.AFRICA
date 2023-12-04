@@ -170,60 +170,50 @@ li {
   margin: 0;
 }
 
-.mui-checkbox {
-  display: block;
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  color: #000000;
+.main {
+  flex: 1;
+}
+.main .filter-section {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+@media (min-width: 1152px) {
+  .main .filter-section {
+    display: none;
+  }
+}
+.main .filter-section .sort {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-family: Open Sans;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
 }
-.mui-checkbox input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
+.main .filter-section .sort .label {
+  color: #000000;
 }
-.mui-checkbox input:checked ~ .checkmark {
-  background-color: #0C1A81;
+.main .filter-section .sort .select {
+  height: 50px;
+  width: 200px;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 }
-.mui-checkbox input:checked ~ .checkmark:after {
-  display: block;
-}
-.mui-checkbox .checkmark:after {
-  left: 6px;
-  top: 2px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.checkmark {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  height: 20px;
-  width: 20px;
-  background-color: #FFFFFF;
-  border: 2px solid #0C1A81;
-  border-radius: 3px;
-}
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.main {
-  flex: 1;
+.main .filter-section .filter .filter-btn {
+  width: 100%;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
 }
 .main .incomplete-courses {
   padding: 80px 60px 40px;
@@ -283,6 +273,7 @@ li {
 }
 .main .incomplete-courses .content .card .card-content {
   padding: 20px;
+  width: 100%;
 }
 .main .incomplete-courses .content .card .card-content .card-title {
   color: #0C1A81;
@@ -385,6 +376,7 @@ li {
 }
 .your-certificates .content .card .card-content {
   padding: 20px;
+  width: 100%;
 }
 .your-certificates .content .card .card-content .card-title {
   color: #0C1A81;

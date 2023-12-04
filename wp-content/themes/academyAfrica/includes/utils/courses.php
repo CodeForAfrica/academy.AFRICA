@@ -337,4 +337,40 @@ class CoursesFunctions
 
         return apply_filters('academy-africa_course_grid_post_attr', $post_attr, $post->ID, $atts, $args);
     }
+
+    public static function get_filter_by()
+    {
+        $allOrganizations = CoursesFunctions::getOrganizations();
+        $allInstructors = CoursesFunctions::getAllInstructors();
+        $filter_by = [
+            [
+                'title' => 'Organizations',
+                'name' => 'organization',
+                'options' => []
+            ],
+            [
+                'title' => 'Instructors',
+                'name' => 'instructor',
+                'options' => []
+            ]
+        ];
+
+        foreach ($allOrganizations as $organization) {
+            $formatedOrganization = (object)[
+                'id' => $organization['id'],
+                'name' => $organization['title'],
+            ];
+            array_push($filter_by[0]['options'], $formatedOrganization);
+        }
+
+        foreach ($allInstructors as $instructor) {
+            $formatedInstructor = (object)[
+                'id' => $instructor['id'],
+                'name' => $instructor['name'],
+            ];
+            array_push($filter_by[1]['options'], $formatedInstructor);
+        }
+
+        return $filter_by;
+    }
 }
