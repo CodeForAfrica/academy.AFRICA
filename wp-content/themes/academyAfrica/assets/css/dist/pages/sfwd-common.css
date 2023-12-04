@@ -325,5 +325,29 @@ table {
   font-weight: 400;
   line-height: 28px;
 }
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__navigation .nav-link {
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #08125C;
+  background: #EFF0FD;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__navigation .nav-link .link {
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
 
 /*# sourceMappingURL=sfwd-common.css.map */

@@ -273,6 +273,33 @@
                         line-height: 28px;
                     }
                 }
+
+                &__navigation {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    .nav-link {
+                        display: flex;
+                        padding: 8px 16px;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 8px;
+                        border: 1px solid $color-primary-800;
+                        background: $color-primary-50;
+
+                        .link {
+                            color: $color-primary-700;
+                            font-family: Open Sans;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 800;
+                            line-height: 19px;
+                            letter-spacing: 1.6px;
+                            text-transform: uppercase;
+                        }
+                    }
+                }
             }
         }
     }
