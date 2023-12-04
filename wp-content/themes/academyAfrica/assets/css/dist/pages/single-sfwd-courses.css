@@ -185,6 +185,46 @@ table {
   width: 24px;
   height: 24px;
 }
+.single-courses .wrapper .progress {
+  width: 260px;
+}
+.single-courses .wrapper .progress .lesson-count {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+.single-courses .wrapper .progress .ld-progress .ld-progress-stats .ld-progress-percentage {
+  color: #000000;
+  text-align: center;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+.single-courses .wrapper .progress .ld-progress .ld-progress-stats .ld-progress-steps {
+  display: none;
+}
+.single-courses .wrapper .progress .ld-progress .ld-progress-bar .ld-progress-bar-percentage {
+  background-image: linear-gradient(to right, #ec1e27, #d6004d, #ad006b, #73007e, #0c1a81);
+  background-color: transparent;
+}
+.single-courses .wrapper .continue .learndash-wrapper .ld-course-resume {
+  background: #EFF0FD;
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  border-radius: 0;
+  width: fit-content;
+}
 .single-courses .wrapper .enroll .enroll-button {
   background: #ED1C24;
 }
@@ -194,7 +234,7 @@ table {
   height: 1px;
   background: #A9A9A9;
 }
-.single-courses .wrapper .inroduction .cfa-introduction-title {
+.single-courses .wrapper .introduction .cfa-introduction-title {
   color: #0C1A81;
   font-size: 18px;
   font-style: normal;
@@ -202,14 +242,14 @@ table {
   line-height: 24px;
   margin-bottom: 20px;
 }
-.single-courses .wrapper .inroduction .cfa-introduction {
+.single-courses .wrapper .introduction .cfa-introduction {
   color: #000000;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
 }
-.single-courses .wrapper .inroduction .cfa-introduction a {
+.single-courses .wrapper .introduction .cfa-introduction a {
   color: #0C1A81;
   font-size: 18px;
   font-style: normal;
@@ -353,6 +393,7 @@ table {
 .single-courses .wrapper .organization .list {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 .single-courses .wrapper .organization .list .item .name {
   color: #000000;
@@ -423,7 +464,7 @@ table {
     font-size: 18px;
     line-height: 28px;
   }
-  .single-courses .wrapper .inroduction .cfa-introduction-title {
+  .single-courses .wrapper .introduction .cfa-introduction-title {
     font-size: 33px;
     line-height: 40px;
     letter-spacing: -0.66px;

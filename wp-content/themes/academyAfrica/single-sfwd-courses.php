@@ -14,6 +14,11 @@ $course_id = get_the_ID();
 
 $course_price = learndash_get_course_price($course_id);
 $price = $course_price['price'] ? $course_price['price'] : 'Free';
+$user_id = get_current_user_id();
+$user_courses = learndash_user_get_enrolled_courses($user_id);
+$is_enrolled = in_array($course_id, $user_courses);
+$organizations = get_field('organization', $course_id);
+
 
 $social_media_links = [
     [
@@ -41,17 +46,6 @@ $social_media_links = [
         'type' => 'linkedin',
     ],
 ];
-
-$organizations = [
-    [
-        'name' => 'Strathmore University',
-        'description' => 'Strathmore University is a chartered university based in Nairobi, Kenya. Strathmore College was started in 1961, as the first multi-racial, multi-religious Advanced-level Sixth Form College offering science and arts subjects, by a group of professionals who formed a charitable educational trust.',
-        'avatar' => 'Strathmore_Uni 1.png',
-    ],
-]
-
-
-
 ?>
 
 <?
@@ -98,11 +92,27 @@ get_header();
                 ?>
             </div>
         </div>
-        <div class="enroll left">
-            <button class="button secondary large enroll-button">Enroll Now</button>
-        </div>
+        <?
+        if ($is_enrolled) {
+        ?>
+            <div class='progress'>
+                <?php echo do_shortcode('[learndash_course_progress]'); ?>
+            </div>
+            <div class="continue">
+                <?php echo do_shortcode('[ld_course_resume label="Continue the Course"]'); ?>
+            </div>
+        <?
+        } else {
+        ?>
+            <div class="enroll">
+                <button class="button secondary large enroll-button">Enroll Now</button>
+            </div>
+        <?
+        }
+        ?>
+
         <hr class="divider">
-        <div class="inroduction">
+        <div class="introduction">
             <p class="cfa-introduction-title">
                 Introduction
             </p>
@@ -125,7 +135,7 @@ get_header();
                     <?php
                     $author = get_post_field('post_author', $course_id);
                     $name = get_the_author_meta('display_name', $author);
-                    $avatar = get_avatar($email);
+                    $avatar = get_avatar_url($author);
                     echo $name;
                     ?>
                 </p>
@@ -136,36 +146,48 @@ get_header();
                 ?>
             </div>
             <div class="description">
-                <?php echo get_the_author_meta('description'); ?>
+                <?php echo get_the_author_meta('description', $author); ?>
             </div>
         </div>
-        <div class="organization">
-            <div class="title">
-                <p class="cfa-introduction-title">The Organization</p>
-            </div>
-            <div class="list">
-                <?php
-                foreach ($organizations as $organization) {
-                    echo "
+        <?php
+        if ($organizations) {
+        ?>
+            <div class="organization">
+                <div class="title">
+                    <p class="cfa-introduction-title">The Organization</p>
+                </div>
+                <div class="list">
+                    <?php
+                    foreach ($organizations as $organization) {
+                        echo "
                 <div class='item'>
                     <div class='name'>
-                        <p>" . $organization['name'] . "</p>
+                        <p>" . $organization->post_title . "</p>
                     </div>
                     <div class='avatar'>
-                        <img src='" . get_stylesheet_directory_uri() . "/assets/images/" . $organization['avatar'] . "' alt=''>
+                        <img src='" . get_the_post_thumbnail_url($organization->ID) . "' alt=''>
                     </div>
                     <div class='description'>
-                        <div>" . $organization['description'] . "</div>
+                        <div>" . $organization->post_excerpt . "</div>
                     </div>
                 </div>
                 ";
-                }
-                ?>
+                    }
+                    ?>
+                </div>
             </div>
-        </div>
-        <div class="enroll">
-            <button class="button secondary large enroll-button">Enroll Now</button>
-        </div>
+        <?php
+        }
+        ?>
+        <?
+        if (!$is_enrolled) {
+        ?>
+            <div class="enroll">
+                <button class="button secondary large enroll-button">Enroll Now</button>
+            </div>
+        <?
+        }
+        ?>
         <!-- TODO: ADD Related -->
     </div>
 </div>

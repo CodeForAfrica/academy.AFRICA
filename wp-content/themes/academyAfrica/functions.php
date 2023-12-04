@@ -35,6 +35,10 @@ function my_theme_enqueue_styles()
     wp_enqueue_style('single-event', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single_event.css', array(), '6.4');
     wp_enqueue_style('profile', get_stylesheet_directory_uri() . '/assets/css/dist/pages/profile.css', array(), '6.4');
     wp_enqueue_style('single-courses', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-courses.css', array(), '6.3.12');
+    wp_enqueue_style('single-lesson', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-lessons.css', array(), '6.3.12');
+    wp_enqueue_style('single-quiz', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-quiz.css', array(), '6.3.12');
+    wp_enqueue_style('single-topic', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-topic.css', array(), '6.3.12');
+    wp_enqueue_style(('sfwd-common'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/sfwd-common.css', array(), '6.3.12');
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -126,7 +130,7 @@ function create_learning_path_post_type()
             "heirarchical" => true,
             'rewrite' => array('slug' => 'academy-africa-learning-paths'),
             'show_in_rest' => true,
-            'supports' => array('title', 'thumbnail', 'excerpt', 'custom-fields', 'revisions', 'page-attributes')
+            'supports' => array('title', 'thumbnail', 'editor', 'excerpt', 'custom-fields', 'revisions', 'page-attributes')
         )
     );
 }

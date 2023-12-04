@@ -184,6 +184,7 @@ table {
   align-items: center;
   justify-content: center;
   gap: 20px;
+  min-width: 220px;
 }
 .header .desktop .nav .logo .image img {
   width: 52px;
@@ -192,86 +193,93 @@ table {
 .header .desktop .nav .logo .site_name {
   font-size: 18px;
   font-weight: 600;
+  font-family: Open Sans;
+  font-style: normal;
+  line-height: 28px;
 }
 .header .desktop .nav .logo .site_name a {
   color: #FFFFFF;
 }
-.header .desktop .nav .search {
+.header .desktop .nav .nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 800px;
+  max-width: 1032px;
+}
+.header .desktop .nav .nav-actions .search {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
-.header .desktop .nav .search .input {
+.header .desktop .nav .nav-actions .search .input {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
-.header .desktop .nav .search .input input {
-  width: 330px;
+.header .desktop .nav .nav-actions .search .input input {
   height: 40px;
   border: none;
   border-radius: 0;
   padding: 0 20px;
   outline: none;
 }
-.header .desktop .nav .search .input button {
+.header .desktop .nav .nav-actions .search .input button {
   background: #EFF0FD;
   color: #FFFFFF;
   border: none;
 }
-.header .desktop .nav .search .input button .icon {
+.header .desktop .nav .nav-actions .search .input button .icon {
   color: #0C1A81;
 }
-.header .desktop .nav .search .input button:hover {
+.header .desktop .nav .nav-actions .search .input button:hover {
   background: #EFF0FD;
   color: #FFFFFF;
   border: none;
 }
-.header .desktop .nav .menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-.header .desktop .nav .menu .items {
+.header .desktop .nav .nav-actions .menu .items {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   height: 100%;
 }
-.header .desktop .nav .menu .items .item {
+.header .desktop .nav .nav-actions .menu .items .item {
   font-size: 18px;
   font-weight: 600;
   text-transform: capitalize;
   color: #FFFFFF;
   cursor: pointer;
   font-family: Open Sans;
-  height: 100%;
+  line-height: 21.6px;
   display: flex;
   align-items: center;
+  padding: 10px;
 }
-.header .desktop .nav .menu .items .item.parent {
+.header .desktop .nav .nav-actions .menu .items .item.parent {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.header .desktop .nav .menu .items .item.parent .collapsible {
+.header .desktop .nav .nav-actions .menu .items .item.parent .collapsible {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 6px;
 }
-.header .desktop .nav .menu .items .item.parent .collapsible .icons {
+.header .desktop .nav .nav-actions .menu .items .item.parent .collapsible .icons {
   display: flex;
 }
-.header .desktop .nav .menu .items .item.parent .collapsible .icons .icon {
+.header .desktop .nav .nav-actions .menu .items .item.parent .collapsible .icons .icon {
   margin: 0;
 }
-.header .desktop .nav .menu .items .item.parent .children {
+.header .desktop .nav .nav-actions .menu .items .item.parent .children {
   display: none;
   position: absolute;
   top: 100%;
@@ -280,12 +288,12 @@ table {
   background: #0C1A81;
   color: #FFFFFF;
 }
-.header .desktop .nav .menu .items .item.parent .children.open {
+.header .desktop .nav .nav-actions .menu .items .item.parent .children.open {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
 }
-.header .desktop .nav .menu .items .item.parent .children .item {
+.header .desktop .nav .nav-actions .menu .items .item.parent .children .item {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -299,27 +307,27 @@ table {
   padding: 10px;
   width: 120px;
 }
-.header .desktop .nav .menu .items .item.parent .children .item:last-child {
+.header .desktop .nav .nav-actions .menu .items .item.parent .children .item:last-child {
   border-top: none;
 }
-.header .desktop .nav .menu .items .item.parent .children .item:hover {
+.header .desktop .nav .nav-actions .menu .items .item.parent .children .item:hover {
   background: #EFF0FD;
 }
-.header .desktop .nav .menu .items .item.parent::after {
+.header .desktop .nav .nav-actions .menu .items .item.parent::after {
   content: "\f107";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 16px;
   color: #FFFFFF;
-  margin-left: 10px;
+  margin-left: 6px;
 }
-.header .desktop .nav .menu .items .item.parent.open {
+.header .desktop .nav .nav-actions .menu .items .item.parent.open {
   border-bottom: 1px solid #FFFFFF;
 }
-.header .desktop .nav .menu .items .item.parent.open::after {
+.header .desktop .nav .nav-actions .menu .items .item.parent.open::after {
   content: "\f106";
 }
-.header .desktop .nav .menu .items .item.sign-in {
+.header .desktop .nav .nav-actions .menu .items .item.sign-in {
   color: #0C1A81;
   background: #FFFFFF;
   padding: 12px 16px;
@@ -328,38 +336,57 @@ table {
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 1.6px;
+  white-space: nowrap;
 }
-.header .desktop .nav .menu .items .item.language-link {
+.header .desktop .nav .nav-actions .menu .items .item.language-link {
   font-size: 0;
 }
-.header .desktop .nav .menu .items .item.language-link::before {
+.header .desktop .nav .nav-actions .menu .items .item.language-link::before {
   content: "\f0ac";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  font-size: 32px;
+  font-size: 24px;
   color: #FFFFFF;
-  margin-left: 10px;
 }
-.header .desktop .nav .menu .items .item.language-link.open {
+.header .desktop .nav .nav-actions .menu .items .item.language-link.open {
   border-bottom: none;
 }
-.header .desktop .nav .menu .items .item.user-profile::after {
+.header .desktop .nav .nav-actions .menu .items .item.user-profile::after {
   content: "";
 }
-.header .desktop .nav .menu .items .item.user-profile.open {
+.header .desktop .nav .nav-actions .menu .items .item.user-profile.open {
   border-bottom: none;
 }
-.header .desktop .nav .menu .items .item.user-profile.open::after {
+.header .desktop .nav .nav-actions .menu .items .item.user-profile.open::after {
   content: "";
 }
 @media (min-width: 1440px) {
   .header .desktop {
-    padding: 20px 148px;
+    padding: 20px 40px;
+  }
+  .header .desktop .nav {
+    gap: 58px;
+  }
+  .header .desktop .nav .nav-actions {
+    width: 1032px;
+    min-width: 880px;
+    max-width: 1032px;
+    justify-content: flex-end;
+    gap: 100px;
   }
 }
 @media (min-width: 1920px) {
   .header .desktop {
-    padding: 20px 388px;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: center;
+  }
+  .header .desktop .nav {
+    gap: 40px;
+    width: 1440px;
+  }
+  .header .desktop .nav .nav-actions {
+    gap: 32px;
   }
 }
 .header .user-avatar {
