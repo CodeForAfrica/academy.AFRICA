@@ -49,9 +49,6 @@ $organizations = [
         'avatar' => 'Strathmore_Uni 1.png',
     ],
 ]
-
-
-
 ?>
 
 <?

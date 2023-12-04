@@ -36,5 +36,212 @@
         @include media-breakpoint-up(desktop) {
             display: block;
         }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+
+            .progress {
+                width: 340px;
+                padding: 100px 60px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                .back-to-course {
+                    .link {
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+                        color: $color-shades-black;
+                        font-family: Open Sans;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 26px;
+                    }
+                }
+
+                .course-details {
+                    .course-title {
+                        color: $color-shades-black;
+                        font-family: Open Sans;
+                        font-size: 24px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 36px;
+                        margin-bottom: 10px;
+                    }
+
+                    .progress-bar {
+                        .lesson-count {
+                            color: $color-shades-black;
+                            font-family: Open Sans;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 21px;
+                        }
+
+
+                        .ld-progress {
+                            .ld-progress-stats {
+                                .ld-progress-percentage {
+                                    color: $color-shades-black;
+                                    text-align: center;
+                                    font-family: Open Sans;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 21px;
+                                }
+
+                                .ld-progress-steps {
+                                    display: none;
+                                }
+                            }
+
+                            .ld-progress-bar {
+                                .ld-progress-bar-percentage {
+                                    background-image: linear-gradient(to right,
+                                            #ec1e27,
+                                            #d6004d,
+                                            #ad006b,
+                                            #73007e,
+                                            #0c1a81,
+                                        );
+                                    background-color: transparent;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .course-carriculum {
+                    .ld-item-list {
+                        margin: 0;
+
+                        .ld-section-heading {
+                            display: none;
+                        }
+
+                        .ld-item-list-items {
+                            display: flex;
+                            flex-direction: column;
+
+                            .ld-item-list-item {
+                                border: 1px solid $color-neutral-200;
+                                border-radius: 0;
+                                margin: 0;
+                                border-bottom: none;
+                                &:last-child {
+                                    border-bottom: 1px solid $color-neutral-200;
+                                }
+
+                                .ld-item-list-item-preview {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    justify-content: space-between;
+
+                                    .ld-item-name {
+                                        .ld-status-icon {
+                                            display: none;
+                                        }
+
+                                        .ld-item-title {
+                                            color: $color-shades-black;
+                                            font-size: 16px;
+                                            font-style: normal;
+                                            font-weight: 700;
+                                            line-height: 19px;
+
+                                            .ld-item-components {
+                                                display: none;
+                                            }
+                                        }
+                                    }
+
+                                    .ld-item-details {
+                                        .ld-expand-button {
+                                            .ld-icon {
+                                                color: $color-shades-black;
+                                                background: $color-shades-white;
+                                                border: none;
+                                            }
+
+                                            .ld-text {
+                                                display: none;
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                                .ld-item-list-item-expanded {
+                                    background: $color-neutral-50;
+
+                                    .ld-table-list-header {
+                                        display: none;
+                                    }
+
+                                    .ld-table-list-items {
+                                        padding: 0;
+
+                                        .ld-table-list-item {
+                                            margin: 0;
+                                            padding: 0 20px;
+
+                                            .ld-table-list-item-preview {
+                                                align-items: center;
+                                                gap: 10px;
+                                                .ld-topic-title {
+                                                    color: $color-shades-black;
+                                                    font-size: 16px;
+                                                    font-style: normal;
+                                                    font-weight: 400;
+                                                    line-height: 26px;
+                                                    font-family: Open Sans;
+                                                }
+
+                                                .ld-status-icon {
+                                                    margin: 0;
+                                                    &.ld-status-complete {
+                                                        color: $color-shades-white;
+                                                        background-color: $color-primary-700;
+                                                    }
+
+                                                    &.ld-status-incomplete {
+                                                        border-color: $color-secondary-500;
+                                                    }
+                                                }
+
+                                                .ld-item-title {
+                                                    color: $color-shades-black;
+                                                    font-size: 16px;
+                                                    font-style: normal;
+                                                    font-weight: 400;
+                                                    line-height: 26px;
+                                                    font-family: Open Sans;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .sfwd-lessons {
+                width: 812px;
+                padding: 80px 60px;
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                align-items: flex-start;
+            }
+        }
     }
 }
