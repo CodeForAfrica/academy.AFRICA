@@ -135,7 +135,7 @@ get_header();
                     <?php
                     $author = get_post_field('post_author', $course_id);
                     $name = get_the_author_meta('display_name', $author);
-                    $avatar = get_avatar($email);
+                    $avatar = get_avatar_url($author);
                     echo $name;
                     ?>
                 </p>
@@ -146,7 +146,7 @@ get_header();
                 ?>
             </div>
             <div class="description">
-                <?php echo get_the_author_meta('description'); ?>
+                <?php echo get_the_author_meta('description', $author); ?>
             </div>
         </div>
         <?php
