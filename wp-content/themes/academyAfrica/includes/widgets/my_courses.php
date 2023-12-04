@@ -59,7 +59,7 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
         $args = array(
             'post_types'      => 'sfwd-courses',
             'activity_types'  => 'course',
-            'activity_status' => 'IN_PROGRESS',
+            'activity_status' => 'COMPLETED',
             'per_page' => '9',
             'paged' => $current_page,
             'organization' => $orgs,
