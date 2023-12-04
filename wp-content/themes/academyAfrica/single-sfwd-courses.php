@@ -17,6 +17,8 @@ $price = $course_price['price'] ? $course_price['price'] : 'Free';
 $user_id = get_current_user_id();
 $user_courses = learndash_user_get_enrolled_courses($user_id);
 $is_enrolled = in_array($course_id, $user_courses);
+$organizations = get_field('organization', $course_id);
+
 
 $social_media_links = [
     [
@@ -44,14 +46,6 @@ $social_media_links = [
         'type' => 'linkedin',
     ],
 ];
-
-$organizations = [
-    [
-        'name' => 'Strathmore University',
-        'description' => 'Strathmore University is a chartered university based in Nairobi, Kenya. Strathmore College was started in 1961, as the first multi-racial, multi-religious Advanced-level Sixth Form College offering science and arts subjects, by a group of professionals who formed a charitable educational trust.',
-        'avatar' => 'Strathmore_Uni 1.png',
-    ],
-]
 ?>
 
 <?
@@ -155,30 +149,36 @@ get_header();
                 <?php echo get_the_author_meta('description'); ?>
             </div>
         </div>
-        <div class="organization">
-            <div class="title">
-                <p class="cfa-introduction-title">The Organization</p>
-            </div>
-            <div class="list">
-                <?php
-                foreach ($organizations as $organization) {
-                    echo "
+        <?php
+        if ($organizations) {
+        ?>
+            <div class="organization">
+                <div class="title">
+                    <p class="cfa-introduction-title">The Organization</p>
+                </div>
+                <div class="list">
+                    <?php
+                    foreach ($organizations as $organization) {
+                        echo "
                 <div class='item'>
                     <div class='name'>
-                        <p>" . $organization['name'] . "</p>
+                        <p>" . $organization->post_title . "</p>
                     </div>
                     <div class='avatar'>
-                        <img src='" . get_stylesheet_directory_uri() . "/assets/images/" . $organization['avatar'] . "' alt=''>
+                        <img src='" . get_the_post_thumbnail_url($organization->ID) . "' alt=''>
                     </div>
                     <div class='description'>
-                        <div>" . $organization['description'] . "</div>
+                        <div>" . $organization->post_excerpt . "</div>
                     </div>
                 </div>
                 ";
-                }
-                ?>
+                    }
+                    ?>
+                </div>
             </div>
-        </div>
+        <?php
+        }
+        ?>
         <?
         if (!$is_enrolled) {
         ?>

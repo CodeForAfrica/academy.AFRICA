@@ -393,6 +393,7 @@ table {
 .single-courses .wrapper .organization .list {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 .single-courses .wrapper .organization .list .item .name {
   color: #000000;
