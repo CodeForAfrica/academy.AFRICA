@@ -14,6 +14,9 @@ $course_id = get_the_ID();
 
 $course_price = learndash_get_course_price($course_id);
 $price = $course_price['price'] ? $course_price['price'] : 'Free';
+$user_id = get_current_user_id();
+$user_courses = learndash_user_get_enrolled_courses($user_id);
+$is_enrolled = in_array($course_id, $user_courses);
 
 $social_media_links = [
     [
@@ -95,11 +98,27 @@ get_header();
                 ?>
             </div>
         </div>
-        <div class="enroll left">
-            <button class="button secondary large enroll-button">Enroll Now</button>
-        </div>
+        <?
+        if ($is_enrolled) {
+        ?>
+            <div class='progress'>
+                <?php echo do_shortcode('[learndash_course_progress]'); ?>
+            </div>
+            <div class="continue">
+                <?php echo do_shortcode('[ld_course_resume label="Continue the Course"]'); ?>
+            </div>
+        <?
+        } else {
+        ?>
+            <div class="enroll">
+                <button class="button secondary large enroll-button">Enroll Now</button>
+            </div>
+        <?
+        }
+        ?>
+
         <hr class="divider">
-        <div class="inroduction">
+        <div class="introduction">
             <p class="cfa-introduction-title">
                 Introduction
             </p>

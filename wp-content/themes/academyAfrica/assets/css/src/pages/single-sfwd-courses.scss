@@ -88,6 +88,70 @@
             }
         }
 
+        .progress {
+            width: 260px;
+
+            .lesson-count {
+                color: $color-shades-black;
+                font-family: Open Sans;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 21px;
+            }
+
+
+            .ld-progress {
+                .ld-progress-stats {
+                    .ld-progress-percentage {
+                        color: $color-shades-black;
+                        text-align: center;
+                        font-family: Open Sans;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 21px;
+                    }
+
+                    .ld-progress-steps {
+                        display: none;
+                    }
+                }
+
+                .ld-progress-bar {
+                    .ld-progress-bar-percentage {
+                        background-image: linear-gradient(to right,
+                                #ec1e27,
+                                #d6004d,
+                                #ad006b,
+                                #73007e,
+                                #0c1a81,
+                            );
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+
+        .continue {
+            .learndash-wrapper {
+                .ld-course-resume {
+                    background: $color-primary-50;
+                    color: $color-primary-700;
+                    font-family: Open Sans;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: 19px;
+                    letter-spacing: 1.6px;
+                    text-transform: uppercase;
+                    border-radius: 0;
+                    width: fit-content;
+                }
+            }
+
+        }
+
         .enroll {
 
 
@@ -104,7 +168,7 @@
             background: #A9A9A9;
         }
 
-        .inroduction {
+        .introduction {
 
 
             .cfa-introduction-title {
@@ -221,9 +285,11 @@
 
                             .ld-table-list-items {
                                 padding: 0;
+
                                 .ld-table-list-item {
                                     margin: 0;
                                     padding: 0 20px;
+
                                     .ld-table-list-item-preview {
                                         .ld-topic-title {
                                             color: $color-shades-black;
@@ -366,6 +432,7 @@
     @include media-breakpoint-up(desktop) {
         display: flex;
         justify-content: center;
+
         .wrapper {
             padding: 80px 0;
             max-width: 1120px;
@@ -403,7 +470,7 @@
                 line-height: 28px;
             }
 
-            .inroduction {
+            .introduction {
                 .cfa-introduction-title {
                     font-size: 33px;
                     line-height: 40px;
