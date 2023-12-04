@@ -258,6 +258,7 @@ table {
   line-height: 21.6px;
   display: flex;
   align-items: center;
+  padding: 10px;
 }
 .header .desktop .nav .nav-actions .menu .items .item.parent {
   position: relative;
@@ -361,12 +362,31 @@ table {
 }
 @media (min-width: 1440px) {
   .header .desktop {
-    padding: 20px 148px;
+    padding: 20px 40px;
+  }
+  .header .desktop .nav {
+    gap: 58px;
+  }
+  .header .desktop .nav .nav-actions {
+    width: 1032px;
+    min-width: 880px;
+    max-width: 1032px;
+    justify-content: flex-end;
+    gap: 100px;
   }
 }
 @media (min-width: 1920px) {
   .header .desktop {
-    padding: 20px 388px;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: center;
+  }
+  .header .desktop .nav {
+    gap: 40px;
+    width: 1440px;
+  }
+  .header .desktop .nav .nav-actions {
+    gap: 32px;
   }
 }
 .header .user-avatar {

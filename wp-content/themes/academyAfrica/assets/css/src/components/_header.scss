@@ -163,6 +163,7 @@
                             line-height: 21.6px;
                             display: flex;
                             align-items: center;
+                            padding: 10px;
 
                             &.parent {
                                 position: relative;
@@ -293,11 +294,34 @@
         }
 
         @include media-breakpoint-up(large) {
-            padding: 20px 148px;
+            padding: 20px 40px;
+
+            .nav {
+                gap: 58px;
+
+                .nav-actions {
+                    width: 1032px;
+                    min-width: 880px;
+                    max-width: 1032px;
+                    justify-content: flex-end;
+                    gap: 100px;
+                }
+            }
         }
 
         @include media-breakpoint-up(xlarge) {
-            padding: 20px 388px;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: center;
+
+            .nav {
+                gap: 40px;
+                width: 1440px;
+
+                .nav-actions {
+                    gap: 32px;
+                }
+            }
         }
 
     }
