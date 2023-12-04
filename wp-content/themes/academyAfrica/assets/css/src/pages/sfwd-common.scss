@@ -1,0 +1,40 @@
+@use "../abstracts/" as *;
+
+.sfwd-container {
+    .sfwd-small-screen {
+        padding: 60px 30px 140px;
+
+        .title {
+            .cfa-title {
+                font-size: 20px;
+                line-height: 24px;
+                text-align: left;
+
+                &::after {
+                    left: unset;
+                    transform: unset;
+                }
+            }
+        }
+
+        .helper {
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 400;
+            font-family: Open Sans;
+        }
+
+        @include media-breakpoint-up(desktop) {
+            display: none;
+        }
+
+    }
+
+    .sfwd-large-screen {
+        display: none;
+
+        @include media-breakpoint-up(desktop) {
+            display: block;
+        }
+    }
+}
