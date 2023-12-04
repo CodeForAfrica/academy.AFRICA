@@ -255,6 +255,7 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                         </ul>
                     </div>
                 </section>
+                <? if (!empty($completed_courses['results'])) { ?>
                 <section class="your-certificates">
                     <h4 class="your-certificates-title">
                         Your Certificates
@@ -333,6 +334,10 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                         </ul>
                     </div>
                 </section>
+                <?
+                            
+                        }
+                        ?>
             </div>
         </main>
 <?
