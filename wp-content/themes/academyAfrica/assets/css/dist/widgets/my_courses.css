@@ -271,6 +271,20 @@ li {
 .main .incomplete-courses .content .card .logo {
   width: 100%;
 }
+.main .incomplete-courses .content .card .course-card-pattern {
+  height: 200px;
+  background: url("../../../images/CourseCardPatternDark.svg") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.main .incomplete-courses .content .card .course-card-pattern img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
 .main .incomplete-courses .content .card .card-content {
   padding: 20px;
   width: 100%;
@@ -371,8 +385,19 @@ li {
   background: #FFFFFF;
   margin-top: 40px;
 }
-.your-certificates .content .card .logo {
+.your-certificates .content .card .course-card-pattern {
+  height: 200px;
+  background: url("../../../images/CourseCardPatternDark.svg") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+}
+.your-certificates .content .card .course-card-pattern img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
 }
 .your-certificates .content .card .card-content {
   padding: 20px;

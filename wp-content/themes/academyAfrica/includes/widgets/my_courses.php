@@ -202,7 +202,9 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                                 // extract($course_attrs);
                         ?>
                                 <div id="<? echo $course_id ?>" class="card">
-                                    <img alt="course-logo" class="logo" src="<? echo $image ?>" />
+                                <div class="course-card-pattern">
+                                            <img src="<? echo $image ?>" alt="course-thumbnail">
+                                        </div>
                                     <div class="card-content">
                                         <div class="card-title">
                                             <p>
@@ -274,7 +276,9 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                         
                                 <a href="<? echo $course_link ?>" class="course-card">
                                     <div class="card">                        
-                                        <img alt="course-logo" class="logo" src="<? echo $image ?>" />
+                                    <div class="course-card-pattern">
+                                            <img src="<? echo $image ?>" alt="course-thumbnail">
+                                        </div>
                                         <div class="card-content">
                                             <div class="card-title">
                                                 <p>

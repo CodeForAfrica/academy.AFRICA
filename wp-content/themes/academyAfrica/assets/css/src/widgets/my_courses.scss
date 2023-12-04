@@ -155,6 +155,22 @@ li {
         .logo {
           width: 100%;
         }
+        .course-card-pattern {
+          height: 200px;
+          background: url("../../../images/CourseCardPatternDark.svg") no-repeat
+            center center;
+          background-size: cover;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+
+          img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+          }
+        }
         .card-content {
           padding: 20px;
           width: 100%;
@@ -262,8 +278,21 @@ li {
       border: 0.5px solid $color-neutral-200;
       background: $color-shades-white;
       margin-top: 40px;
-      .logo {
+      .course-card-pattern {
+        height: 200px;
+        background: url("../../../images/CourseCardPatternDark.svg") no-repeat
+          center center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
+
+        img {
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+        }
       }
       .card-content {
         padding: 20px;

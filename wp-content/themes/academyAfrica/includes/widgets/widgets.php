@@ -107,7 +107,7 @@ final class Widget
                 $handle,
                 get_stylesheet_directory_uri() . '/assets/css/dist/widgets/' . $file,
                 [],
-                "1.0.12"
+                "1.0.14"
             );
         }
     }
