@@ -238,7 +238,6 @@
             }
 
             .sfwd-lessons {
-                width: 812px;
                 padding: 80px 60px;
                 display: flex;
                 flex-direction: column;
@@ -263,6 +262,11 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: 28px;
+                    width: 812px;
+
+                    @include media-breakpoint-up(large) {
+                        width: 1040px;
+                    }
 
                     a {
                         color: $color-primary-700;
@@ -271,6 +275,140 @@
                         font-style: normal;
                         font-weight: 400;
                         line-height: 28px;
+                    }
+
+                    .learndash {
+                        .learndash-wrapper {
+                            .ld-quiz-status {
+                                display: none;
+                            }
+
+                            .wpProQuiz_content {
+                                .wpProQuiz_text {
+                                    .wpProQuiz_button {
+                                        border-radius: 0;
+                                        display: flex;
+                                        padding: 8px 16px;
+                                        justify-content: center;
+                                        align-items: center;
+                                        gap: 8px;
+                                        border: 1px solid $color-primary-800;
+                                        background: $color-primary-50;
+                                        color: $color-primary-700;
+                                        font-family: Open Sans;
+                                        font-size: 16px;
+                                        font-style: normal;
+                                        font-weight: 800;
+                                        line-height: 19px;
+                                        letter-spacing: 1.6px;
+                                        text-transform: uppercase;
+                                    }
+                                }
+
+                                .wpProQuiz_quiz {
+                                    .wpProQuiz_list {
+                                        .wpProQuiz_listItem {
+                                            .wpProQuiz_question {
+                                                .wpProQuiz_question_text {
+                                                    color: $color-neutral-900;
+                                                    font-family: Open Sans;
+                                                    font-size: 18px;
+                                                    font-style: normal;
+                                                    font-weight: 700;
+                                                    line-height: 24px;
+                                                }
+
+                                                .wpProQuiz_questionList {
+                                                    .wpProQuiz_questionListItem {
+                                                        label {
+                                                            border-radius: 0;
+                                                            border: 1px solid var($color-neutral-200, #CCCFDA);
+                                                            background: $color-shades-white;
+                                                            box-shadow: 0px 1px 0px 0px #E2E8F0;
+
+                                                            &.is-selected {
+                                                                border-color: $color-primary-700;
+                                                            }
+                                                        }
+
+                                                        &.wpProQuiz_answerIncorrect{
+                                                            label {
+                                                                border-color: $color-secondary-500;
+                                                            }
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+
+                                            .wpProQuiz_response {
+                                                background: $color-primary-50;
+                                                color: $color-primary-700;
+                                            }
+
+                                            .wpProQuiz_button {
+                                                &.wpProQuiz_QuestionButton {
+                                                    border-radius: 0;
+                                                    display: flex;
+                                                    padding: 8px 16px;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    gap: 8px;
+                                                    border: 1px solid $color-primary-800;
+                                                    background: $color-primary-50;
+                                                    color: $color-primary-700;
+                                                    font-family: Open Sans;
+                                                    font-size: 16px;
+                                                    font-style: normal;
+                                                    font-weight: 800;
+                                                    line-height: 19px;
+                                                    letter-spacing: 1.6px;
+                                                    text-transform: uppercase;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .wpProQuiz_results {
+                                    .wpProQuiz_header {
+                                        color: $color-primary-700;
+                                        font-family: Open Sans;
+                                        font-size: 32px;
+                                        font-style: normal;
+                                        font-weight: 600;
+                                        line-height: 48px;
+                                    }
+
+                                    .wpProQuiz_points {
+                                        background: $color-primary-50;
+                                        color: $color-primary-700;
+                                    }
+
+                                    .ld-quiz-actions {
+                                        .wpProQuiz_button {
+                                            border-radius: 0;
+                                            display: flex;
+                                            padding: 8px 16px;
+                                            justify-content: center;
+                                            align-items: center;
+                                            gap: 8px;
+                                            border: 1px solid $color-primary-800;
+                                            background: $color-primary-50;
+                                            color: $color-primary-700;
+                                            font-family: Open Sans;
+                                            font-size: 16px;
+                                            font-style: normal;
+                                            font-weight: 800;
+                                            line-height: 19px;
+                                            letter-spacing: 1.6px;
+                                            text-transform: uppercase;
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
                     }
                 }
 

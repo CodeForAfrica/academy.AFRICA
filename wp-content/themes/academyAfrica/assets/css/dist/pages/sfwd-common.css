@@ -294,7 +294,6 @@ table {
   font-family: Open Sans;
 }
 .sfwd-container .sfwd-large-screen .content .sfwd-lessons {
-  width: 812px;
   padding: 80px 60px;
   display: flex;
   flex-direction: column;
@@ -316,6 +315,12 @@ table {
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
+  width: 812px;
+}
+@media (min-width: 1440px) {
+  .sfwd-container .sfwd-large-screen .content .sfwd-lessons__content {
+    width: 1040px;
+  }
 }
 .sfwd-container .sfwd-large-screen .content .sfwd-lessons__content a {
   color: #0C1A81;
@@ -324,6 +329,99 @@ table {
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .ld-quiz-status {
+  display: none;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_text .wpProQuiz_button {
+  border-radius: 0;
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #08125C;
+  background: #EFF0FD;
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_quiz .wpProQuiz_list .wpProQuiz_listItem .wpProQuiz_question .wpProQuiz_question_text {
+  color: #4B5071;
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_quiz .wpProQuiz_list .wpProQuiz_listItem .wpProQuiz_question .wpProQuiz_questionList .wpProQuiz_questionListItem label {
+  border-radius: 0;
+  border: 1px solid var(#CCCFDA, #CCCFDA);
+  background: #FFFFFF;
+  box-shadow: 0px 1px 0px 0px #E2E8F0;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_quiz .wpProQuiz_list .wpProQuiz_listItem .wpProQuiz_question .wpProQuiz_questionList .wpProQuiz_questionListItem label.is-selected {
+  border-color: #0C1A81;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_quiz .wpProQuiz_list .wpProQuiz_listItem .wpProQuiz_question .wpProQuiz_questionList .wpProQuiz_questionListItem.wpProQuiz_answerIncorrect label {
+  border-color: #ED1C24;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_quiz .wpProQuiz_list .wpProQuiz_listItem .wpProQuiz_response {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_quiz .wpProQuiz_list .wpProQuiz_listItem .wpProQuiz_button.wpProQuiz_QuestionButton {
+  border-radius: 0;
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #08125C;
+  background: #EFF0FD;
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_results .wpProQuiz_header {
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_results .wpProQuiz_points {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content .learndash .learndash-wrapper .wpProQuiz_content .wpProQuiz_results .ld-quiz-actions .wpProQuiz_button {
+  border-radius: 0;
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #08125C;
+  background: #EFF0FD;
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
 }
 .sfwd-container .sfwd-large-screen .content .sfwd-lessons__navigation {
   display: flex;

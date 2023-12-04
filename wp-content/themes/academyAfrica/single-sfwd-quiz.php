@@ -52,7 +52,12 @@ $lessons = learndash_get_course_lessons_list($course_id);
                 </div>
                 <div class="sfwd-lessons__content">
                     <?php
-                    the_content();
+                    if (have_posts()) {
+                        while (have_posts()) {
+                            the_post();
+                            the_content();
+                        }
+                    }
                     ?>
                 </div>
                 <div class="sfwd-lessons__navigation">
