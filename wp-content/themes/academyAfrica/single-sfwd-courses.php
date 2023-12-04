@@ -179,9 +179,15 @@ get_header();
                 ?>
             </div>
         </div>
-        <div class="enroll">
-            <button class="button secondary large enroll-button">Enroll Now</button>
-        </div>
+        <?
+        if (!$is_enrolled) {
+        ?>
+            <div class="enroll">
+                <button class="button secondary large enroll-button">Enroll Now</button>
+            </div>
+        <?
+        }
+        ?>
         <!-- TODO: ADD Related -->
     </div>
 </div>
