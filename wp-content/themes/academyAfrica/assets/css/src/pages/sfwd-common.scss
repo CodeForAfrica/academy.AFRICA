@@ -134,6 +134,7 @@
                                 border-radius: 0;
                                 margin: 0;
                                 border-bottom: none;
+
                                 &:last-child {
                                     border-bottom: 1px solid $color-neutral-200;
                                 }
@@ -195,6 +196,7 @@
                                             .ld-table-list-item-preview {
                                                 align-items: center;
                                                 gap: 10px;
+
                                                 .ld-topic-title {
                                                     color: $color-shades-black;
                                                     font-size: 16px;
@@ -206,6 +208,7 @@
 
                                                 .ld-status-icon {
                                                     margin: 0;
+
                                                     &.ld-status-complete {
                                                         color: $color-shades-white;
                                                         background-color: $color-primary-700;
@@ -241,6 +244,35 @@
                 flex-direction: column;
                 gap: 24px;
                 align-items: flex-start;
+
+                &__title {
+                    &__text {
+                        color: $color-primary-700;
+                        font-family: Open Sans;
+                        font-size: 32px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 48px;
+                    }
+                }
+
+                &__content {
+                    color: $color-shades-black;
+                    font-family: Open Sans;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 28px;
+
+                    a {
+                        color: $color-primary-700;
+                        font-family: Open Sans;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 28px;
+                    }
+                }
             }
         }
     }

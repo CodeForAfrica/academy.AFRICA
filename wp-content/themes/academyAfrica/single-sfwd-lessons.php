@@ -48,15 +48,11 @@ $lessons = learndash_get_course_lessons_list($course_id);
             </div>
             <div class="sfwd-lessons">
                 <div class="sfwd-lessons__title">
-                    <div class="sfwd-lessons__title__text"><?php the_title(); ?></div>
+                    <div class="sfwd-lessons__title__text"><?php the_title(); ?></div> 
                 </div>
                 <div class="sfwd-lessons__content">
                     <?php
-                    if (have_posts()) :
-                        while (have_posts()) : the_post();
-                            the_content();
-                        endwhile;
-                    endif;
+                    the_content();
                     ?>
                 </div>
             </div>

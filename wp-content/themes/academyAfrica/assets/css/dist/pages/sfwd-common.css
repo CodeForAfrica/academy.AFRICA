@@ -301,5 +301,29 @@ table {
   gap: 24px;
   align-items: flex-start;
 }
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__title__text {
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__content a {
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
 
 /*# sourceMappingURL=sfwd-common.css.map */
