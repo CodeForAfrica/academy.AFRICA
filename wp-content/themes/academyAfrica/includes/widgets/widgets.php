@@ -65,6 +65,7 @@ final class Widget
         require_once(__DIR__ . '/about.php');
         require_once(__DIR__ . '/header.php');
         require_once(__DIR__ . '/events.php');
+        require_once(__DIR__ . '/learning_pathways.php');
 
         $widgets_manager->register_widget_type(new \Academy_Africa_Hero());
         $widgets_manager->register_widget_type(new \Academy_Africa_All_Courses());
@@ -79,6 +80,7 @@ final class Widget
         $widgets_manager->register(new \Academy_Africa_About_Section());
         $widgets_manager->register(new \Academy_Africa_Header_Section());
         $widgets_manager->register(new \Academy_Africa_Events());
+        $widgets_manager->register(new \Academy_Africa_Learning_Pathways());
     }
 
     function register_styles()
