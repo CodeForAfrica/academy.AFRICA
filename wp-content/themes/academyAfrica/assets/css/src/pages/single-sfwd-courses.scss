@@ -430,6 +430,177 @@
                 text-align: left;
             }
         }
+
+        .related {
+            border: 1px solid $color-neutral-200;
+
+            @include media-breakpoint-down(mobile) {
+                border: none;
+                margin: 0 -30px;
+            }
+
+            .accordion-parent {
+                background: $color-shades-white;
+                margin: 0;
+
+                .accordion {
+                    color: $color-primary-700;
+                    font-family: Open Sans;
+                    font-size: 33px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 40px;
+                    letter-spacing: -0.66px;
+
+
+                    @include media-breakpoint-down(mobile) {
+                        border-top: 1px solid $color-neutral-200;
+                    }
+                }
+
+                .panel {
+                    background: $color-shades-white;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 48px;
+
+                    &.open {
+                        padding: 24px;
+                        max-height: unset;
+                    }
+
+                    .related-courses {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 24px;
+
+                        .title {
+                            color: $color-primary-700;
+                            font-family: Open Sans;
+                            font-size: 33px;
+                            font-style: normal;
+                            font-weight: 700;
+                            line-height: 40px;
+                            letter-spacing: -0.66px;
+                        }
+
+                        .list {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 64px;
+                            flex-wrap: wrap;
+
+                            .course-card {
+                                .card {
+                                    display: flex;
+                                    flex-direction: column;
+                                    width: 280px;
+                                    border: 0.5px solid $color-neutral-200;
+                                    background-color: $color-shades-white;
+                                    align-self: stretch;
+
+                                    .course-card-pattern {
+                                        height: 200px;
+                                        background: url('../../../images/CourseCardPatternDark.svg') no-repeat center center;
+                                        background-size: cover;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+
+                                        img {
+                                            width: 90px;
+                                            height: 90px;
+                                            border-radius: 50%;
+                                        }
+                                    }
+
+                                    .course-card-content {
+                                        padding: 20px;
+                                        // gap: 40px;
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: space-between;
+                                        height: 200px;
+
+                                        .course-title {
+                                            color: $color-primary-700;
+                                            font-size: 18px;
+                                            font-weight: 800;
+                                            line-height: 24px;
+                                        }
+
+                                        .course-meta {
+                                            display: flex;
+                                            flex-direction: column;
+                                            gap: 30px;
+
+                                            .course-author {
+                                                color: $color-secondary-500;
+                                                text-transform: uppercase;
+                                                font-size: 14px;
+                                                font-weight: 600;
+                                                line-height: 18px;
+                                            }
+
+                                            .course-details {
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: space-between;
+
+                                                .course-students {
+                                                    display: flex;
+                                                    align-items: center;
+                                                    gap: 10px;
+
+                                                    .icon {
+                                                        display: flex;
+                                                        align-self: center;
+                                                        justify-content: center;
+
+                                                        &::before {
+                                                            // outlined user icon
+                                                            content: "\f007";
+                                                            font-family: "Font Awesome 5 Free";
+                                                            font-weight: 900;
+                                                            font-size: 16px;
+                                                            color: $color-shades-black;
+                                                        }
+                                                    }
+
+                                                    .value {
+                                                        color: $color-shades-black;
+                                                        font-size: 14px;
+                                                        font-weight: 400;
+                                                        line-height: 18px;
+                                                    }
+                                                }
+
+                                                .course-price {
+                                                    background: $color-success-500;
+                                                    color: $color-shades-white;
+                                                    height: 25px;
+                                                    text-transform: uppercase;
+                                                    font-size: 14px;
+                                                    font-weight: 700;
+                                                    line-height: 18px;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    justify-content: center;
+                                                    padding: 4px 10px;
+                                                    min-width: 54px;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @include media-breakpoint-up(tablet) {

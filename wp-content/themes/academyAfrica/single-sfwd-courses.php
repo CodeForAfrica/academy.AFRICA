@@ -18,6 +18,7 @@ $user_id = get_current_user_id();
 $user_courses = learndash_user_get_enrolled_courses($user_id);
 $is_enrolled = in_array($course_id, $user_courses);
 $organizations = get_field('organization', $course_id);
+$related_courses = get_field('related_courses', $course_id);
 
 
 $social_media_links = [
@@ -194,7 +195,66 @@ get_header();
         <?
         }
         ?>
-        <!-- TODO: ADD Related -->
+        <div class="related">
+            <div class="accordion-parent">
+                <div class="accordion">
+                    Related
+                </div>
+                <div class="panel">
+                    <div class="related-courses">
+                        <div class="title"> Related Courses </div>
+                        <div class="list">
+                            <?php
+                            if ($related_courses) {
+                                $related_courses = array_slice($related_courses, 0, 3);
+                                foreach ($related_courses as $course) {
+                                    $course_thumbnail = get_the_post_thumbnail_url($course);
+                                    $course_title = $course->post_title;
+                                    $course_link = get_permalink($course->ID);
+                                    $course_author = get_the_author_meta('display_name', $course->post_author);
+                                    $course_meta = get_post_meta($course->ID);
+                                    $course_price = $course_meta['sfwd-courses_course_price'];
+                                    $course_price = $course_price == 0 ? "Free" : $course_price;
+                                    $students_count = learndash_course_grid_count_students($course->ID);
+
+
+                            ?>
+                                    <a href="<? echo $course_link ?>" class="course-card">
+                                        <div class="card">
+                                            <div class="course-card-pattern">
+                                                <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
+                                            </div>
+                                            <div class="course-card-content">
+                                                <p class="course-title">
+                                                    <? echo $course_title ?>
+                                                </p>
+                                                <div class="course-meta">
+                                                    <p class="course-author">
+                                                        By <? echo $course_author ?>
+                                                    </p>
+                                                    <div class="course-details">
+                                                        <div class="course-students">
+                                                            <div class="icon"></div>
+                                                            <p class="value"><? echo $students_count ?></p>
+                                                        </div>
+                                                        <p class="course-price">
+                                                            <? echo $course_price ?>
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                            <?
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
