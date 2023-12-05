@@ -35,7 +35,8 @@ class CoursesFunctions
         $args = array(
             'post_type' => 'ac-learning-path',
             'post_status' => 'publish',
-            'numberposts' => $attr['per_page']
+            'numberposts' => $attr['per_page'],
+            'paged' => $attr['paged'],
         );
         $learning_path_posts = get_posts($args);
         $learning_paths = array();
@@ -64,7 +65,11 @@ class CoursesFunctions
             );
             array_push($learning_paths, $learning_path);
         }
-        return $learning_paths;
+        return array(
+            'learning_paths' => $learning_paths,
+            'count' => wp_count_posts('ac-learning-path')->publish,
+            'per_page' => $attr['per_page'],
+        );
     }
 
     public static function getAllInstructors()
