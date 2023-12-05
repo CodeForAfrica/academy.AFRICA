@@ -69,14 +69,20 @@ get_header();
         <div class="description">
             <?php the_excerpt(); ?>
         </div>
-        <div class="price">
-            <p class="cfa-price">
-                <?php echo $price  ?>
-            </p>
-        </div>
-        <div class="certificate-text">
-            The certificate for this course can be downloaded for a small fee when the course is completed
-        </div>
+        <?
+        if (!$is_enrolled) {
+        ?>
+            <div class="price">
+                <p class="cfa-price">
+                    <?php echo $price  ?>
+                </p>
+            </div>
+            <div class="certificate-text">
+                The certificate for this course can be downloaded for a small fee when the course is completed
+            </div>
+        <?
+        }
+        ?>
         <div class="share">
             <div class="social-icons">
                 <?

@@ -28,7 +28,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define( 'ACADEMY_AFRICA_VERSION', '1.0.1' );
+define( 'ACADEMY_AFRICA_VERSION', '1.0.2' );
 
 
 function my_theme_enqueue_styles()
