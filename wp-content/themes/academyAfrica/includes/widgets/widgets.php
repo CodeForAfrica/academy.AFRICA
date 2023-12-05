@@ -25,7 +25,7 @@ final class Widget
             "academy-africa-modal" => "modal.js"
         ];
         foreach ($scripts as $handle => $file) {
-            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa'], "1.0.3");
+            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa'], ACADEMY_AFRICA_VERSION);
         }
     }
 
@@ -35,7 +35,7 @@ final class Widget
         foreach ($js_files as $js_file) {
             $js_file_name = basename($js_file, '.js');
             $script_name = 'academy-africa_' . $js_file_name;
-            wp_register_script($script_name, get_stylesheet_directory_uri() . '/assets/js/widgets/' . $js_file_name . '.js', array(), "1.0.1");
+            wp_register_script($script_name, get_stylesheet_directory_uri() . '/assets/js/widgets/' . $js_file_name . '.js', array(), ACADEMY_AFRICA_VERSION);
         }
     }
 
@@ -107,7 +107,7 @@ final class Widget
                 $handle,
                 get_stylesheet_directory_uri() . '/assets/css/dist/widgets/' . $file,
                 [],
-                "1.0.14"
+                "ACADEMY_AFRICA_VERSION"
             );
         }
     }
