@@ -107,7 +107,7 @@ final class Widget
                 $handle,
                 get_stylesheet_directory_uri() . '/assets/css/dist/widgets/' . $file,
                 [],
-                "ACADEMY_AFRICA_VERSION"
+                ACADEMY_AFRICA_VERSION
             );
         }
     }

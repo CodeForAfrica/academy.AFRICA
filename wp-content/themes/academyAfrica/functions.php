@@ -3,12 +3,13 @@
 // namespace AcademyAfrica\Theme;
 
 // Exit if accessed directly
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH'))
+    exit;
 
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
 
-if (!function_exists('chld_thm_cfg_locale_css')) :
+if (!function_exists('chld_thm_cfg_locale_css')):
     function chld_thm_cfg_locale_css($uri)
     {
         if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
@@ -18,7 +19,7 @@ if (!function_exists('chld_thm_cfg_locale_css')) :
 endif;
 add_filter('locale_stylesheet_uri', 'chld_thm_cfg_locale_css');
 
-if (!function_exists('child_theme_configurator_css')) :
+if (!function_exists('child_theme_configurator_css')):
     function child_theme_configurator_css()
     {
         wp_enqueue_style('chld_thm_cfg_separate', trailingslashit(get_stylesheet_directory_uri()) . 'ctc-style.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'));
@@ -28,8 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.0.3');
-
+define('ACADEMY_AFRICA_VERSION', '1.0.5');
 
 function my_theme_enqueue_styles()
 {
@@ -106,14 +106,18 @@ function create_organization_taxonomy()
         // other labels
     );
 
-    register_taxonomy('organization', array('post', 'sfwd-courses'), array(
-        'hierarchical' => true,
-        'labels' => $labels,
-        'show_ui' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'rewrite' => array('slug' => 'organization'),
-    ));
+    register_taxonomy(
+        'organization',
+        array('post', 'sfwd-courses'),
+        array(
+            'hierarchical' => true,
+            'labels' => $labels,
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'query_var' => true,
+            'rewrite' => array('slug' => 'organization'),
+        )
+    );
 }
 
 add_action('init', 'create_organization_taxonomy', 0);
@@ -142,8 +146,8 @@ require_once __DIR__ . '/includes/widgets/widgets.php';
 $widget = new \AcademyAfrica\Theme\Widget\Widget();
 $widget->init();
 
-require_once __DIR__  . '/posts/events.php';
-require_once __DIR__  . '/posts/networks.php';
+require_once __DIR__ . '/posts/events.php';
+require_once __DIR__ . '/posts/networks.php';
 add_action('init', 'event_post_type');
 add_action('init', 'create_networks_post_type');
 

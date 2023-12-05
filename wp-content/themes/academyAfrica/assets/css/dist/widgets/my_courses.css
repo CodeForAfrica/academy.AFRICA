@@ -122,9 +122,15 @@ table {
   display: flex;
   margin: 0;
   padding: 0;
-  position: relatve;
+  position: relative;
   max-width: 1440px;
   margin: 0 auto;
+}
+.body .divider {
+  background: #a9a9a9;
+  border: none;
+  height: 1px;
+  margin: 40px 0;
 }
 .body .sidebar {
   padding: 100px 60px;
@@ -136,6 +142,32 @@ table {
   top: 0;
   transition: left 0.3s;
   overflow-y: auto;
+}
+.body .sidebar .sort {
+  margin-bottom: 40px;
+}
+.body .sidebar .sort .label {
+  color: var(--shades-black, #000);
+  /* Paragraph/P3/Regular */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 155.556% */
+}
+.body .sidebar .sort .select {
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 15px;
+  height: 50px;
+  color: #000;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
 }
 .body .sidebar .filter-by {
   color: #000000;
@@ -217,6 +249,7 @@ li {
 }
 .main .incomplete-courses {
   padding: 80px 60px 40px;
+  position: relative;
 }
 .main .incomplete-courses .cfa-title {
   color: #0C1A81;
@@ -254,6 +287,7 @@ li {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  margin: 40px 0;
 }
 .main .incomplete-courses .content .card {
   flex: 1;
@@ -465,29 +499,17 @@ li {
   overflow: hidden;
 }
 
-@media screen and (min-width: 512px) and (max-width: 768px) {
+@media (max-width: 768px) {
   .body .sidebar {
     display: none;
   }
-  .mui-checkbox {
-    font-size: 14px;
-  }
-  .main .incomplete-courses .cfa-title {
-    text-align: center;
-  }
-  .main .incomplete-courses .cfa-title::after {
-    text-align: center;
-    position: relative;
-    font-size: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 10px;
+  .main .incomplete-courses a {
+    flex: 1;
   }
   .main .incomplete-courses .content .card {
     min-width: calc(50% - 30px);
-  }
-  .main .incomplete-courses .content .card:last-child {
-    display: none;
+    width: 100%;
+    max-width: 100%;
   }
   .your-certificates .content .card {
     min-width: calc(50% - 30px);
@@ -496,24 +518,58 @@ li {
     display: none;
   }
 }
-@media only screen and (max-width: 512px) {
-  .body .sidebar {
+.mobile-filters {
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 100%;
+  left: 0;
+  background: #fff;
+  overflow: hidden;
+  z-index: 9;
+  transition: all 0.35s ease-in-out;
+}
+
+.open-filter {
+  width: 100%;
+}
+
+.actions,
+.close-filters {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 36px;
+}
+.actions .clear-filters,
+.close-filters .clear-filters {
+  color: var(--secondary-600, #b6131e);
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  background: transparent;
+  line-height: 28px; /* 155.556% */
+  margin-top: 40px;
+  text-transform: none;
+  outline: none;
+}
+.actions .filter-by,
+.close-filters .filter-by {
+  color: var(--shades-black, #000);
+  /* Heading/H4 / Bold */
+  font-family: Open Sans;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 34px; /* 121.429% */
+  letter-spacing: -0.56px;
+}
+
+@media (min-width: 768px) {
+  .mobile-filters {
     display: none;
-  }
-  .mui-checkbox {
-    font-size: 14px;
-  }
-  .main .incomplete-courses .cfa-title {
-    font-size: 20px;
-  }
-  .main .incomplete-courses .cfa-title::after {
-    margin-top: 10px;
-  }
-  .main .incomplete-courses .content .card {
-    min-width: calc(100% - 30px);
-  }
-  .your-certificates .content .card {
-    min-width: calc(100% - 30px);
+    padding: 60px 0 20px;
   }
 }
 
