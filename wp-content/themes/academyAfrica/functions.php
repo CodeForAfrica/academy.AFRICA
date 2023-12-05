@@ -28,7 +28,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define( 'ACADEMY_AFRICA_VERSION', '1.0.2' );
+define('ACADEMY_AFRICA_VERSION', '1.0.3');
 
 
 function my_theme_enqueue_styles()
@@ -167,4 +167,12 @@ function change_avatar($args, $id_or_email)
     $args['url'] = $avatar_url;
 
     return $args;
+}
+
+add_filter('acf/settings/show_admin', 'my_acf_show_admin');
+
+function my_acf_show_admin($show)
+{
+
+    return current_user_can('manage_options');
 }
