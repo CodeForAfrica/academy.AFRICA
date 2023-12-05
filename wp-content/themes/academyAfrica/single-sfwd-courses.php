@@ -201,11 +201,13 @@ get_header();
                     Related
                 </div>
                 <div class="panel">
-                    <div class="related-courses">
-                        <div class="title"> Related Courses </div>
-                        <div class="list">
-                            <?php
-                            if ($related_courses) {
+                    <?
+                    if ($related_courses) {
+                    ?>
+                        <div class="related-courses">
+                            <div class="title"> Related Courses </div>
+                            <div class="list">
+                                <?php
                                 $related_courses = array_slice($related_courses, 0, 3);
                                 foreach ($related_courses as $course) {
                                     $course_thumbnail = get_the_post_thumbnail_url($course);
@@ -218,7 +220,7 @@ get_header();
                                     $students_count = learndash_course_grid_count_students($course->ID);
 
 
-                            ?>
+                                ?>
                                     <a href="<? echo $course_link ?>" class="course-card">
                                         <div class="card">
                                             <div class="course-card-pattern">
@@ -246,12 +248,14 @@ get_header();
                                             </div>
                                         </div>
                                     </a>
-                            <?
+                                <?
                                 }
-                            }
-                            ?>
+                                ?>
+                            </div>
                         </div>
-                    </div>
+                    <?
+                    }
+                    ?>
                 </div>
             </div>
         </div>
