@@ -89,7 +89,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
         $args = array(
             'post_types' => 'sfwd-courses',
             'activity_types' => 'course',
-            'activity_status' => '',
+            'activity_status' => 'IN_PROGRESS',
             'organization' => $orgs,
             'instructor' => $instructors,
             "orderby_order" => $order_by,
@@ -123,8 +123,6 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
         $sort = $this->get_query_param('sort')[0];
         ?>
         <main class="body">
-            <script>         let p = <? echo json_encode($enrolled_courses) ?>; console.log(<? echo json_encode($enrolled_courses) ?>, "<? echo $sort ?>")
-            </script>
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <div class="sort">
@@ -326,7 +324,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
                                 $completed = ($progress["completed"] / $progress["total"]) * 100 . "%";
                                 $lessons_count = $progress["total"];
-                                $certificate = learndash_get_course_certificate_link($course_id, get_current_user_id());
+
                                 ?>
                                 <a href="<? echo $course_link ?>">
                                     <div id="<? echo $course_id ?>" class="card">
@@ -432,47 +430,54 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                     $course_id = $course->post_id;
                                     $title = get_the_title($course);
                                     $provider = get_the_author_meta('display_name', $course->post_author);
-                                    $course_link = get_permalink($course);
+                                    $course_link = get_permalink($course_id);
                                     $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
                                     $completed = ($progress["completed"] / $progress["total"]) * 100 . "%";
                                     $lessons_count = $progress["total"];
                                     $image = get_the_post_thumbnail_url($course);
-                                    $cert = learndash_certificate_details($course_id, get_current_user_id())
-                                        ?>
-
-                                    <a href="<? echo $course_link ?>" class="course-card">
-                                        <div class="card">
-                                            <div class="course-card-pattern">
-                                                <img src="<? echo $image ?>" alt="course-thumbnail">
-                                            </div>
-                                            <div class="card-content">
+                                    $certificate_link = learndash_get_course_certificate_link($course_id, get_current_user_id());
+                                    $cert_details = learndash_certificate_details($course_id, get_current_user_id());
+                                    ?>
+                                    <script>
+                                        let t = <? echo json_encode($course_link) ?>;
+                                        console.error(<? echo json_encode($cert_details) ?>)
+                                    </script>
+                                    <div class="card">
+                                        <div class="course-card-pattern">
+                                            <img src="<? echo $image ?>" alt="course-thumbnail">
+                                        </div>
+                                        <div class="card-content">
+                                            <a href="<? echo $course_link ?>">
                                                 <div class="card-title">
                                                     <p>
                                                         <? echo $title ?>
                                                     </p>
                                                 </div>
-                                                <p class="provider">
-                                                    by
-                                                    <? echo $provider ?>
-                                                </p>
-                                                <p class="lessons-count">
-                                                    <? echo $lessons_count ?> lessons
-                                                </p>
-                                                <div class="completed-progress-bar">
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p>Certificate Achieved</p>
-                                                    <div class="icons">
+                                            </a>
+                                            <p class="provider">
+                                                by
+                                                <? echo $provider ?>
+                                            </p>
+                                            <p class="lessons-count">
+                                                <? echo $lessons_count ?> lessons
+                                            </p>
+                                            <div class="completed-progress-bar">
+                                            </div>
+                                            <div class="card-footer">
+                                                <p>Certificate Achieved</p>
+                                                <div class="icons">
+                                                    <a href="<? echo $certificate_link ?>" download>
                                                         <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg"
                                                             alt="download" />
-                                                        <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg"
-                                                            alt="share" />
-                                                    </div>
+                                                    </a>
+
+                                                    <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg"
+                                                        alt="share" />
                                                 </div>
                                             </div>
-
                                         </div>
-                                    </a>
+
+                                    </div>
                                     <?
                                 }
                             }

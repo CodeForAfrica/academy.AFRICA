@@ -1,0 +1,263 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+  border: 1px solid #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.course-completed {
+  padding: 80px 40px;
+}
+.course-completed .cfa-title {
+  color: var(--primary-700, #0c1a81);
+  /* Display */
+  font-family: Ibarra Real Nova;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px; /* 125% */
+}
+.course-completed .content {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 912px;
+  margin: auto;
+}
+.course-completed .certificate {
+  min-width: 450px;
+}
+.course-completed .certificate .certificate-content {
+  padding: 20px;
+}
+.course-completed .certificate .certificate-content .certificate-content-header hr {
+  border: none;
+}
+.course-completed .certificate .certificate-content .certificate-content-header .certificate-of,
+.course-completed .certificate .certificate-content .certificate-content-header .certificate-type {
+  color: var(--shades-black, #000);
+  font-family: Lora;
+  font-size: 27.854px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 34.817px; /* 125% */
+}
+.course-completed .certificate .course-details .name {
+  color: var(--shades-black, #000);
+  font-family: Open Sans;
+  font-size: 18.569px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27.854px; /* 150% */
+}
+.course-completed .certificate .course-details .title {
+  color: var(--shades-black, #000);
+  font-family: Open Sans;
+  font-size: 10.445px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16.248px;
+  text-align: left;
+}
+.course-completed .certificate .course-details .bold-text {
+  font-weight: 700;
+}
+.course-completed .share-section {
+  width: 263px;
+  text-align: center;
+}
+.course-completed .share-section .title {
+  color: var(--primary-700, #0c1a81);
+  text-align: center;
+  /* Paragraph/P3/Semi Bold */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 133.333% */
+}
+.course-completed .share-section .share {
+  margin-bottom: 50px;
+}
+.course-completed .share-section .share .social-icons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+.course-completed .share-section .share .social-icons .icon-image {
+  width: 24px;
+  height: 24px;
+}
+.course-completed .certificate .certificate-footer .company-details .brand-details .logo {
+  height: 30px;
+  width: 30px;
+}
+.course-completed .certificate .certificate-footer .company-details {
+  align-items: center;
+}
+.course-completed .certificate .certificate-footer .company-details .brand-details .company-name {
+  line-height: 30px;
+}
+
+@media (max-width: 768px) {
+  .course-completed {
+    color: var(--primary-700, #0c1a81);
+    /* Mobile Headings */
+    font-family: Lora;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+  }
+  .course-completed .content {
+    flex-wrap: wrap-reverse;
+  }
+  .course-completed .cfa-title {
+    color: var(--primary-700, #0c1a81);
+    /* Mobile Headings */
+    font-family: Lora;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 120% */
+    text-align: left;
+  }
+  .course-completed .cfa-title::after {
+    left: 0;
+    transform: none;
+  }
+  .course-completed .share-section {
+    text-align: left;
+  }
+  .course-completed .share-section .title {
+    text-align: left;
+  }
+  .course-completed .share-section .share .social-icons {
+    justify-content: flex-start;
+  }
+}
+@media (min-width: 1440px) {
+  .course-completed {
+    padding: 80px 148px;
+  }
+}
+@media (min-width: 1920px) {
+  .course-completed {
+    padding: 80px 388px;
+  }
+}
+
+/*# sourceMappingURL=course-completed.css.map */
