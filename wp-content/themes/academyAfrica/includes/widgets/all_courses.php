@@ -54,36 +54,36 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
     protected function register_controls()
     {
         $this->start_controls_section(
-            'learning_pathways',
+            'courses_settings',
             [
-                'label' => __('Learning Pathways', 'academy-africa'),
+                'label' => __('Courses Settings', 'academy-africa'),
             ]
         );
 
         $this->add_control(
-            'pathway_title',
+            'courses_title',
             [
-                'label' => __('Learning Pathways Title', 'academy-africa'),
+                'label' => __('Courses  Title', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __('Learning Pathways', 'academy-africa'),
+                'default' => __('All Courses', 'academy-africa'),
                 'label_block' => true,
             ]
         );
         $this->add_control(
-            'pathway_description',
+            'filter_by_text',
             [
-                'label' => __('Learning Pathways Description', 'academy-africa'),
+                'label' => __('Filter By Text', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __('Find out how you can enhance your skills and achieve mastery in specific disciplines within data science and technology.', 'academy-africa'),
+                'default' => __('Filter by', 'academy-africa'),
                 'label_block' => true,
             ]
         );
         $this->add_control(
-            'pathway_courses_count_text',
+            'sort_by_text',
             [
-                'label' => __('Learning Pathways Courses Count', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Courses', 'academy-africa'),
+                'label' => __('Sort BY Text', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Sort by', 'academy-africa'),
                 'label_block' => true,
             ]
         );
@@ -95,16 +95,14 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $pathway_title = $settings['pathway_title'];
-        $pathway_description = $settings['pathway_description'];
-        $courses_count = $settings['pathway_courses_count_text'];
-        $filter_by = "Filter by:";
+        $filter_by = $settings['filter_by_text'];
         $filter_options = CoursesFunctions::get_filter_by();
-        $courses_title = "All Courses";
+        $courses_title = $settings['courses_title'];
         $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
         $sort = $this->get_query_param('sort');
+        $sort_by = $settings['sort_by_text'];
 
         $atts = [
             'per_page' => '9',
@@ -129,110 +127,83 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $posts = $query->get_posts();
         $courses = $posts;
 
-        $leaning_attr = [
-            'per_page' => '3',
+        $sort_options = [
+            "newest" => [
+                "orderby" => "date",
+                "order" => "DESC",
+                "name" => "Newest"
+            ],
+            "oldest" => [
+                "orderby" => "date",
+                "order" => "ASC",
+                "name" => "Oldest"
+            ],
+            "name-asc" => [
+                "orderby" => "title",
+                "order" => "ASC",
+                "name" => "Name (A-Z)"
+            ],
+            "name-desc" => [
+                "orderby" => "title",
+                "order" => "DESC",
+                "name" => "Name (Z-A)"
+            ]
         ];
-        $learning_pathways = CoursesFunctions::getLearningPaths($leaning_attr);
 ?>
         <main class="all-courses" id="all-courses">
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
-                    <p class="filter-by">
-                        <? echo $filter_by ?>
-                    </p>
-                    <?
-                    if (!empty($filter_options)) {
-                        foreach ($filter_options as $item) {
-                            $title = $item["title"];
-                            $options = $item["options"];
-                    ?>
-                            <p style="margin-top: 40px" class="filter-by-title">
-                                <? echo $title ?>
-                            </p>
+                    <div class="sort">
+                        <p class="filter-by">
+                            <? echo $sort_by ?>
+                        </p>
+                        <select name="sort" id="sort" class="select">
                             <?
-                            if (!empty($options)) {
-                                foreach ($options as $option) {
+                            foreach ($sort_options as $key => $option) {
+                                $selected = $sort == $key ? "selected" : "";
                             ?>
-                                    <ul>
-                                        <li>
-                                            <label class="mui-checkbox">
-                                                <input type="checkbox" onclick="filterCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
-                                                <span class="checkmark"></span>
-                                                <? echo $option->name ?>
-                                            </label>
-                                        </li>
-                                    </ul>
-                    <?
+                                <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
+                            <?
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="filter">
+                        <p class="filter-by">
+                            <? echo $filter_by ?>
+                        </p>
+                        <?
+                        if (!empty($filter_options)) {
+                            foreach ($filter_options as $item) {
+                                $title = $item["title"];
+                                $options = $item["options"];
+                        ?>
+                                <p style="margin-top: 40px" class="filter-by-title">
+                                    <? echo $title ?>
+                                </p>
+                                <?
+                                if (!empty($options)) {
+                                    foreach ($options as $option) {
+                                ?>
+                                        <ul>
+                                            <li>
+                                                <label class="mui-checkbox">
+                                                    <input type="checkbox" onclick="filterCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                    <span class="checkmark"></span>
+                                                    <? echo $option->name ?>
+                                                </label>
+                                            </li>
+                                        </ul>
+                        <?
+                                    }
                                 }
                             }
                         }
-                    }
-                    ?>
-
+                        ?>
+                    </div>
                 </div>
             </aside>
             <div class="courses-main">
-                <section class="learning-pathways">
-                    <div class="title">
-                        <h4 class="cfa-title">
-                            <? echo $pathway_title ?>
-                        </h4>
-                    </div>
-                    <p class="description">
-                        <? echo $pathway_description ?>
-                    </p>
-                    <div class="content">
-                        <?
-                        if (!empty($learning_pathways)) {
-                            foreach ($learning_pathways as $pathway) {
-                                $pathway_name = $pathway["title"];
-                                $pathway_icon = $pathway["thumbnail"];
-                                $pathway_courses = $pathway["courses"]
-                        ?>
-                                <div class="card">
-                                    <div class="course-card-pattern">
-                                        <div class="icon">
-                                            <img src="<? echo $pathway_icon ?>" alt="sample-icon">
-                                        </div>
-                                    </div>
-                                    <div class="pathway-card-content">
-                                        <p class="pathway-name">
-                                            <? echo $pathway_name ?>
-                                        </p>
-                                        <p class="course-count">
-                                            <? echo count($pathway_courses) . ' ' . $courses_count ?>
-                                        </p>
-                                    </div>
-                                </div>
-                        <?
-                            }
-                        }
-                        ?>
-                    </div>
-                    <hr class="divider">
-                    <div class="pagination-container">
-                        <a href="/" class="see-all">
-                            View All
-                        </a>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </a></li>
-                        </ul>
-                    </div>
-                </section>
                 <section class="course-grid">
                     <h4 class="cfa-title">
                         <? echo $courses_title ?>
@@ -240,12 +211,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     <div class="filter-section">
                         <div class="sort">
                             <div class="label">
-                                Sort by:
+                                <? echo $sort_by ?>
                             </div>
                             <select name="sort" id="sort" class="select">
                                 <option value="newest">Newest</option>
                                 <option value="oldest">Oldest</option>
-                                <option value="price">Price</option>
                             </select>
                         </div>
                         <div class="filter">
