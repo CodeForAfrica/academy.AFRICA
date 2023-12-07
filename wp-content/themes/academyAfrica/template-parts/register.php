@@ -25,7 +25,7 @@ $user = get_user_by('ID', get_current_user_id());
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Google">
                 Sign In with Facebook
             </button>
-            <button onclick="theChampInitiateLogin(this, 'twitter')" class="twitter">
+            <button onclick="theChampInitiateLogin(this, 'x')" class="twitter">
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/twitter.svg" alt="Google">
                 Sign In with X (formerly Twitter)
             </button>
