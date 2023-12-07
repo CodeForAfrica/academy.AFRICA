@@ -129,6 +129,7 @@ table {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  width: 340px;
 }
 .all-courses .filter-sidebar .sidebar .sort {
   display: flex;

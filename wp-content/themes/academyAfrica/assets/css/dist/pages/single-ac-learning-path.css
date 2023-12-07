@@ -1,0 +1,272 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+  border: 1px solid #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.ac-learning-path-container__title {
+  padding: 40px 55px;
+}
+.ac-learning-path-container__title__text .cfa-title {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  text-align: left;
+}
+.ac-learning-path-container__title__text .cfa-title::after {
+  left: 0;
+  transform: none;
+}
+.ac-learning-path-container__title__text .cfa-excerpt {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+.ac-learning-path-container__content {
+  padding: 40px 55px;
+  background: #F7F9FD;
+}
+.ac-learning-path-container__content .courses {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.ac-learning-path-container__content .courses .title {
+  color: #0C1A81;
+  font-family: Lora;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+.ac-learning-path-container__content .courses .content {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+.ac-learning-path-container__content .courses .list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+.ac-learning-path-container__content .courses .list .course-card .card {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  border: 0.5px solid #CCCFDA;
+  background-color: #FFFFFF;
+  align-self: stretch;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-pattern {
+  height: 200px;
+  background: url("../../../images/CourseCardPatternDark.svg") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-pattern img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-title {
+  color: #0C1A81;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 24px;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-meta .course-author {
+  color: #ED1C24;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-meta .course-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-meta .course-details .course-students {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-meta .course-details .course-students .icon {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-meta .course-details .course-students .icon::before {
+  content: "\f007";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 16px;
+  color: #000000;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-meta .course-details .course-students .value {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.ac-learning-path-container__content .courses .list .course-card .card .course-card-content .course-meta .course-details .course-price {
+  background: #10B981;
+  color: #FFFFFF;
+  height: 25px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  min-width: 54px;
+}
+.ac-learning-path-container__download {
+  display: flex;
+  width: 390px;
+  padding: 40px 55px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+/*# sourceMappingURL=single-ac-learning-path.css.map */
