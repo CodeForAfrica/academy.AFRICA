@@ -1,5 +1,9 @@
 <?php
+$user = get_user_by('ID', get_current_user_id());
 ?>
+<script>
+    console.log(<? echo json_encode($user) ?>)
+</script>
 <div class="modal-anchor" id="register-modal">
     <label for="modal" class="modal-bg" id="register-modal-bg"></label>
     <div class="modal-content" id="register-modal-content">
@@ -71,17 +75,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['
     if(is_wp_error($new_user)) {
         echo $new_user->get_error_message();
     } else {
-        $code = sha1($new_user.time());
-        $user_id = $new_user;
-        global $wpdb;
-        $wpdb->update(
-            'wp_users',
-            array('user_activation_key' => $code, ),
-            array('ID' => $user_id),
-        );
-        $sign_in_url = home_url().'#sign-in';
-        $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $code, 'user_id' => $user_id), $sign_in_url);
-        wp_mail($user['user_email'], '[academy.AFRICA] Login Details', 'Activation link : '.$activation_link);
         echo "<br>You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.";
     }
 }

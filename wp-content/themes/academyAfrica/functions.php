@@ -40,7 +40,7 @@ function my_theme_enqueue_styles() {
     wp_enqueue_style(('sfwd-common'), get_stylesheet_directory_uri().'/assets/css/dist/pages/sfwd-common.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('course-completed'), get_stylesheet_directory_uri().'/assets/css/dist/pages/course-completed.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('single-ac-learning-path'), get_stylesheet_directory_uri().'/assets/css/dist/pages/single-ac-learning-path.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('search'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_style(('search'), get_stylesheet_directory_uri().'/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -181,4 +181,26 @@ function restrict_user_status($user, $username, $password) {
         }
     }
     return $user;
+}
+
+add_action('user_register', 'send_activation_link', 10, 1);
+
+function send_activation_link($user_id) {
+    if($user_id) {
+        $user = get_user_by('ID', $user_id);
+        $sign_in_url = home_url().'#sign-in';
+        $code = $user->data->user_activation_key;
+        if(!$code) {
+            $code = sha1($user_id.time());
+            global $wpdb;
+            $wpdb->update(
+                'wp_users',
+                array('user_activation_key' => $code, 'user_status' => 1, ),
+                array('ID' => $user_id),
+            );
+        }
+        $email = $user->data->user_email;
+        $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $code, 'user_id' => $user_id), $sign_in_url);
+        wp_mail($email, '[academy.AFRICA] Login Details', 'Activation link : '.$activation_link);
+    }
 }
