@@ -42,7 +42,7 @@ window.onload = function () {
     openModal("login");
     if (hash === "#login") {
       document.getElementById("login_error").innerText =
-        "Error: The password you entered or the email is incorrect";
+        "Error: An error occurred, either the password you entered is incorrect, the email is incorrect or your account is not activated";
     }
     return;
   }
