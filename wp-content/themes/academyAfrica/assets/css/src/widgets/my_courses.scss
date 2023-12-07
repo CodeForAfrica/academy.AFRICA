@@ -169,7 +169,7 @@ li {
     }
     .content {
       box-sizing: border-box;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 0;
       display: flex;
       flex-wrap: wrap;

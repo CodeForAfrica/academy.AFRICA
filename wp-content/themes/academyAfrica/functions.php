@@ -176,7 +176,8 @@ add_filter('authenticate', 'restrict_user_status', 20, 3);
 
 function restrict_user_status($user, $username, $password) {
     if($user instanceof WP_User) {
-        if($user->data->user_status == 1) {
+        $account_status = get_user_meta($user->data->ID, 'account_status', true);
+        if($user->data->user_status == 1 || $account_status != 0) {
             return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
         }
     }
@@ -199,6 +200,11 @@ function send_activation_link($user_id) {
         );
         $email = $user->data->user_email;
         $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $valid_code, 'user_id' => $user_id), $sign_in_url);
+        ?>
+        <script>
+                    console.log(<? echo json_encode($user) ?>, <? echo json_encode($activation_link) ?>);
+        </script>
+        <?
         wp_mail($email, '[academy.AFRICA] Login Details', 'Activation link : '.$activation_link);
     }
 }

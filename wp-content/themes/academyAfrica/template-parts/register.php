@@ -1,8 +1,9 @@
 <?php
 $user = get_user_by('ID', get_current_user_id());
+$account_status = get_user_meta(get_current_user_id(), 'account_status', true);
 ?>
 <script>
-    console.log(<? echo json_encode($user) ?>)
+    console.log(<? echo json_encode($account_status) ?>)
 </script>
 <div class="modal-anchor" id="register-modal">
     <label for="modal" class="modal-bg" id="register-modal-bg"></label>
@@ -67,7 +68,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['
         'last_name' => $_POST['lastName'],
         'user_email' => $_POST['email'],
         'user_pass' => $_POST['password'],
-        'nick_name' => $_POST['firstName'].$_POST['lastName'],
+        'user_nicename' => $_POST['firstName'].$_POST['lastName'],
         'user_login' => $_POST['email'],
         'user_status' => 1,
     );
@@ -84,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && ($_GET['action'] === 'account_activat
     $code = $_GET['key'];
     global $wpdb;
     $user = get_user_by('ID', $user_id);
-
+    update_user_meta($user_id, 'account_status', 0);
     $wpdb->update(
         'wp_users',
         array('user_status' => 0),
