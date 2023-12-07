@@ -179,7 +179,7 @@ function send_activation_link($user_id) {
         $user = get_user_by('ID', $user_id);
         $sign_in_url = home_url().'#sign-in';
         $code = $user->data->user_activation_key;
-        $valid_code = $code ? $code : sha1($user_id.time());
+        $valid_code = isset($code) ? $code : sha1($user_id.time());
         global $wpdb;
         $wpdb->update(
             'wp_users',
@@ -203,7 +203,9 @@ function restrict_user_status($user, $username, $password) {
     if($user instanceof WP_User) {
         $account_status = get_user_meta($user->data->ID, 'account_status', true);
         if($user->data->user_status == 1 || $account_status !== "active") {
-            send_activation_link($user->data->ID);
+            if(!isset($user->data->user_activation_key)) {
+                send_activation_link($user->data->ID);
+            }
             return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
         } else {
             return $user;
