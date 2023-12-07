@@ -3,7 +3,7 @@ $user = get_user_by('ID', get_current_user_id());
 $account_status = get_user_meta(get_current_user_id(), 'account_status', true);
 ?>
 <script>
-    console.log(<? echo json_encode($account_status) ?>)
+    console.log("==============>",<? echo json_encode($account_status) ?>)
 </script>
 <div class="modal-anchor" id="register-modal">
     <label for="modal" class="modal-bg" id="register-modal-bg"></label>
