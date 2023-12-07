@@ -66,12 +66,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
             </div>
             <div class='nav-actions'>
                 <div class="search">
-                    <div class="input">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-                        <button class="button primary medium" type="button" id="button-addon2">
-                            <i class="fa-solid fa-magnifying-glass icon"></i>
-                        </button>
-                    </div>
+                    <?php get_search_form(); ?>
                 </div>
                 <div class="menu">
                     <div class="items">

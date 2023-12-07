@@ -113,6 +113,7 @@ class CoursesFunctions
             'taxonomies' => '',
             'enrollment_status' => '',
             'progress_status' => '',
+            'search' => '',
             // Elements
             'thumbnail' => true,
             'thumbnail_size' => 'thumbnail',
@@ -223,6 +224,7 @@ class CoursesFunctions
             'post_type' => sanitize_text_field($atts['post_type']),
             'posts_per_page' => intval($atts['per_page']),
             'paged' => intval($atts['paged']),
+            's' => sanitize_text_field($atts['search']),
             'post_status' => 'publish',
             'orderby' => sanitize_text_field($atts['orderby']),
             'order' => sanitize_text_field($atts['order']),
