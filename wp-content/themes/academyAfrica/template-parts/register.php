@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['
         'user_pass' => $_POST['password'],
         'nick_name' => $_POST['firstName'].$_POST['lastName'],
         'user_login' => $_POST['email'],
-        'user_status' => 0,
+        'user_status' => 1,
     );
     $new_user = wp_insert_user($user);
     if(is_wp_error($new_user)) {
@@ -94,7 +94,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && ($_GET['action'] === 'account_activat
 
     $wpdb->update(
         'wp_users',
-        array('user_status' => 1),
+        array('user_status' => 0),
         array('ID' => $user_id,
             'user_activation_key' => $code
         ),

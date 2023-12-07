@@ -175,7 +175,7 @@ add_filter('authenticate', 'restrict_user_status', 20, 3);
 
 function restrict_user_status($user, $username, $password) {
     if($user instanceof WP_User) {
-        if($user->data->user_status == 0) {
+        if($user->data->user_status == 1) {
             return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
         }
     }
