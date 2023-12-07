@@ -108,7 +108,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             'per_page' => '9',
             'paged' => $current_page,
             'organization' => $orgs,
-            'instructor' => $instructors,
+            'instructor' => $instructors, 
             'sort' => $sort
         ];
         $default_atts = CoursesFunctions::get_default_atts();
