@@ -202,7 +202,7 @@ add_filter('authenticate', 'restrict_user_status', 20, 3);
 function restrict_user_status($user, $username, $password) {
     if($user instanceof WP_User) {
         $account_status = get_user_meta($user->data->ID, 'account_status', true);
-        if($user->data->user_status == 1 || $account_status != "active") {
+        if($user->data->user_status == 1 || $account_status !== "active") {
             send_activation_link($user->data->ID);
             return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
         } else {
