@@ -85,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && ($_GET['action'] === 'account_activat
     $code = $_GET['key'];
     global $wpdb;
     $user = get_user_by('ID', $user_id);
-    update_user_meta($user_id, 'account_status', 0);
+    update_user_meta($user_id, 'account_status', "active");
     $wpdb->update(
         'wp_users',
         array('user_status' => 0),
