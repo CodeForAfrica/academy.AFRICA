@@ -144,23 +144,26 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
                             foreach ($learning_pathways as $pathway) {
                                 $pathway_name = $pathway["title"];
                                 $pathway_icon = $pathway["thumbnail"];
-                                $pathway_courses = $pathway["courses"]
+                                $pathway_courses = $pathway["courses"];
+                                $pathway_link = get_permalink($pathway["id"]);
                         ?>
-                                <div class="card">
-                                    <div class="course-card-pattern">
-                                        <div class="icon">
-                                            <img src="<? echo $pathway_icon ?>" alt="sample-icon">
+                                <a href="<? echo $pathway_link ?>" class="pathway-link">
+                                    <div class="card">
+                                        <div class="course-card-pattern">
+                                            <div class="icon">
+                                                <img src="<? echo $pathway_icon ?>" alt="sample-icon">
+                                            </div>
+                                        </div>
+                                        <div class="pathway-card-content">
+                                            <p class="pathway-name">
+                                                <? echo $pathway_name ?>
+                                            </p>
+                                            <p class="course-count">
+                                                <? echo count($pathway_courses) . ' ' . $courses_count ?>
+                                            </p>
                                         </div>
                                     </div>
-                                    <div class="pathway-card-content">
-                                        <p class="pathway-name">
-                                            <? echo $pathway_name ?>
-                                        </p>
-                                        <p class="course-count">
-                                            <? echo count($pathway_courses) . ' ' . $courses_count ?>
-                                        </p>
-                                    </div>
-                                </div>
+                                </a>
                         <?
                             }
                         }
