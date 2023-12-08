@@ -47,6 +47,16 @@
     .featured-course-list {
       background: $color-shades-white;
       padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+
+      @include media-breakpoint-up(tablet) {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
     }
   }
 
@@ -77,8 +87,7 @@
         gap: 40px;
         margin-top: 16px;
 
-        .certificate {
-        }
+        .certificate {}
 
         .certificate-showcase-content {
           display: flex;

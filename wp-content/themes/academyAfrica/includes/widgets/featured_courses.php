@@ -3,6 +3,10 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+require_once __DIR__ . '/../utils/courses.php';
+
+use AcademyAfrica\Theme\Courses\CoursesFunctions;
+
 class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
 {
 
@@ -13,7 +17,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-featured-courses', 'academy-africa-learndash-course-grid'];
+        return ['academy-africa-featured-courses'];
     }
 
     public function get_script_depends()
@@ -245,6 +249,20 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
             'signature' => get_stylesheet_directory_uri() . '/assets/images/signature.png',
             'date' => date("d/m/Y")
         );
+
+        $atts = [
+            'per_page' => '3',
+            'paged' => 1,
+            'taxonomies' => 'ld_course_tag:featured',
+        ];
+        $default_atts = CoursesFunctions::get_default_atts();
+        $atts = shortcode_atts($default_atts, $atts, 'academy-africa_course_grid');
+
+        $query = CoursesFunctions::build_query($atts);
+        $query = new WP_Query($query);
+
+        $posts = $query->get_posts();
+        $courses = $posts;
 ?>
         <div class="featured-courses">
             <div class="featured-content">
@@ -257,9 +275,36 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     </div>
                 </div>
                 <div class="featured-course-list">
-                    <!-- course list -->
-                    <?php echo do_shortcode('[learndash_course_grid taxonomies="ld_course_tag:featured"  id="featured" columns="3" skin="grid" card="grid-1" per_page="3" filter="false" progress_bar="" pagination="" button=""  ]'); ?>
+                    <?
+                    if (!empty($courses)) {
+                        foreach ($courses as $course) {
+                            $course_title = get_the_title($course);
+                            $course_author = get_the_author_meta('display_name', $course->post_author);
+                            $course_thumbnail = get_the_post_thumbnail_url($course);
+                            $course_link = get_permalink($course);
+                            $course_meta = get_post_meta($course, 'sfwd-courses', true);
+                            $course_price = $course_meta['sfwd-courses_course_price'];
+                            $course_price = $course_price == 0 ? "Free" : $course_price;
 
+                            $course_attrs = CoursesFunctions::get_post_attr($course, $atts);
+                            extract($course_attrs);
+                    ?>
+                            <?php get_template_part(
+                                'template-parts/course_card',
+                                'template',
+                                [
+                                    'course_title' => $course_title,
+                                    'course_author' => $course_author,
+                                    'course_thumbnail' => $course_thumbnail,
+                                    'course_link' => $course_link,
+                                    'course_price' => $course_price,
+                                    'students' => $students
+                                ]
+                            ); ?>
+                    <?
+                        }
+                    }
+                    ?>
                 </div>
             </div>
             <div class="featured-certificate">

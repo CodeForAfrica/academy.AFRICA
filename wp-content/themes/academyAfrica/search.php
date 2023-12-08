@@ -113,7 +113,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                                 <?
                                 if (!empty($options)) {
                                 ?>
-                                    <ul class="filter-list"> 
+                                    <ul class="filter-list">
                                         <?
                                         foreach ($options as $options_index => $option) {
                                         ?>
@@ -198,34 +198,18 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                         $course_attrs = CoursesFunctions::get_post_attr($post, $atts);
                         extract($course_attrs);
                     ?>
-                        <a href="<? echo $course_link ?>" class="course-card">
-                            <div class="card">
-                                <div class="course-card-pattern">
-                                    <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
-                                </div>
-                                <div class="course-card-content">
-                                    <p class="course-title">
-                                        <? echo $course_title ?>
-                                    </p>
-                                    <div class="course-meta">
-                                        <p class="course-author">
-                                            By <? echo $course_author ?>
-                                        </p>
-                                        <div class="course-details">
-                                            <div class="course-students">
-                                                <div class="icon"></div>
-                                                <p class="value"><? echo $students ?></p>
-
-                                            </div>
-                                            <p class="course-price">
-                                                <? echo $course_price ?>
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        <?php get_template_part(
+                            'template-parts/course_card',
+                            'template',
+                            [
+                                'course_title' => $course_title,
+                                'course_author' => $course_author,
+                                'course_thumbnail' => $course_thumbnail,
+                                'course_link' => $course_link,
+                                'course_price' => $course_price,
+                                'students' => $students
+                            ]
+                        ); ?>
                     <?
                     }
                     ?>

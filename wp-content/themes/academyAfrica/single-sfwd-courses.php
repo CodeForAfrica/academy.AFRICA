@@ -52,13 +52,14 @@ $social_media_links = [
 <?
 get_header();
 ?>
-<script>         let p = <? echo json_encode($course_status) ?>;
+<script>
+    let p = <? echo json_encode($course_status) ?>;
 </script>
 <?
 if ($course_status == "Completed") {
     get_template_part('template-parts/course_completed', null, array('course_id' => $course_id));
 } else {
-    ?>
+?>
     <div class="single-courses">
         <div class="wrapper">
             <div class="title-section">
@@ -79,7 +80,7 @@ if ($course_status == "Completed") {
             </div>
             <?
             if (!$is_enrolled) {
-                ?>
+            ?>
                 <div class="price">
                     <p class="cfa-price">
                         <?php echo $price ?>
@@ -88,7 +89,7 @@ if ($course_status == "Completed") {
                 <div class="certificate-text">
                     The certificate for this course can be downloaded for a small fee when the course is completed
                 </div>
-                <?
+            <?
             }
             ?>
             <div class="share">
@@ -108,20 +109,20 @@ if ($course_status == "Completed") {
             </div>
             <?
             if ($is_enrolled) {
-                ?>
+            ?>
                 <div class='progress'>
                     <?php echo do_shortcode('[learndash_course_progress]'); ?>
                 </div>
                 <div class="continue">
                     <?php echo do_shortcode('[ld_course_resume label="Continue the Course"]'); ?>
                 </div>
-                <?
+            <?
             } else {
-                ?>
+            ?>
                 <div class="enroll">
                     <button class="button secondary large enroll-button">Enroll Now</button>
                 </div>
-                <?
+            <?
             }
             ?>
 
@@ -165,7 +166,7 @@ if ($course_status == "Completed") {
             </div>
             <?php
             if ($organizations) {
-                ?>
+            ?>
                 <div class="organization">
                     <div class="title">
                         <p class="cfa-introduction-title">The Organization</p>
@@ -190,16 +191,16 @@ if ($course_status == "Completed") {
                         ?>
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
             <?
             if (!$is_enrolled) {
-                ?>
+            ?>
                 <div class="enroll">
                     <button class="button secondary large enroll-button">Enroll Now</button>
                 </div>
-                <?
+            <?
             }
             ?>
             <div class="related">
@@ -210,7 +211,7 @@ if ($course_status == "Completed") {
                     <div class="panel">
                         <?
                         if ($related_courses) {
-                            ?>
+                        ?>
                             <div class="related-courses">
                                 <div class="title"> Related Courses </div>
                                 <div class="list">
@@ -226,44 +227,25 @@ if ($course_status == "Completed") {
                                         $course_price = $course_price == 0 ? "Free" : $course_price;
                                         $students_count = learndash_course_grid_count_students($course->ID);
 
-
-                                        ?>
-                                        <a href="<? echo $course_link ?>" class="course-card">
-                                            <div class="card">
-                                                <div class="course-card-pattern">
-                                                    <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
-                                                </div>
-                                                <div class="course-card-content">
-                                                    <p class="course-title">
-                                                        <? echo $course_title ?>
-                                                    </p>
-                                                    <div class="course-meta">
-                                                        <p class="course-author">
-                                                            By
-                                                            <? echo $course_author ?>
-                                                        </p>
-                                                        <div class="course-details">
-                                                            <div class="course-students">
-                                                                <div class="icon"></div>
-                                                                <p class="value">
-                                                                    <? echo $students_count ?>
-                                                                </p>
-                                                            </div>
-                                                            <p class="course-price">
-                                                                <? echo $course_price ?>
-                                                            </p>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <?
+                                    ?>
+                                        <?php get_template_part(
+                                            'template-parts/course_card',
+                                            'template',
+                                            [
+                                                'course_title' => $course_title,
+                                                'course_author' => $course_author,
+                                                'course_thumbnail' => $course_thumbnail,
+                                                'course_link' => $course_link,
+                                                'course_price' => $course_price,
+                                                'students' => $students_count 
+                                            ]
+                                        ); ?>
+                                    <?
                                     }
                                     ?>
                                 </div>
                             </div>
-                            <?
+                        <?
                         }
                         ?>
                     </div>
@@ -271,7 +253,7 @@ if ($course_status == "Completed") {
             </div>
         </div>
     </div>
-    <?
+<?
 }
 get_footer();
 ?>

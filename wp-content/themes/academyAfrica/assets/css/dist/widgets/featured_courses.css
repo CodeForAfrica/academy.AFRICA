@@ -158,6 +158,17 @@ table {
 .featured-courses .featured-content .featured-course-list {
   background: #FFFFFF;
   padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .featured-courses .featured-content .featured-course-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 .featured-courses .featured-certificate {
   margin: 40px 0;

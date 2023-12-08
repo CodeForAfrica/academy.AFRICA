@@ -177,95 +177,7 @@ table {
 .ac-learning-path-container__content .courses .list .individual-course .course-index {
   display: none;
 }
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card {
-  display: flex;
-  flex-direction: column;
-  width: 280px;
-  border: 0.5px solid #CCCFDA;
-  background-color: #FFFFFF;
-  align-self: stretch;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-pattern {
-  height: 200px;
-  background: url("../../../images/CourseCardPatternDark.svg") no-repeat center center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-pattern img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 200px;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-title {
-  color: #0C1A81;
-  font-size: 18px;
-  font-weight: 800;
-  line-height: 24px;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-author {
-  color: #ED1C24;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 18px;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-students {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-students .icon {
-  display: flex;
-  align-self: center;
-  justify-content: center;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-students .icon::before {
-  content: "\f007";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-size: 16px;
-  color: #000000;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-students .value {
-  color: #000000;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-price {
-  background: #10B981;
-  color: #FFFFFF;
-  height: 25px;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 10px;
-  min-width: 54px;
-}
-.ac-learning-path-container__content .courses .list .individual-course .course .course-details {
+.ac-learning-path-container__content .courses .list .individual-course .course .extra-course-details {
   display: none;
 }
 .ac-learning-path-container__content .courses .list .divider {
@@ -344,7 +256,7 @@ table {
     display: flex;
     gap: 50px;
   }
-  .ac-learning-path-container__content .courses .list .individual-course .course .course-details {
+  .ac-learning-path-container__content .courses .list .individual-course .course .extra-course-details {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -353,7 +265,7 @@ table {
     flex: 1 0 0;
     text-align: left;
   }
-  .ac-learning-path-container__content .courses .list .individual-course .course .course-details .course-title {
+  .ac-learning-path-container__content .courses .list .individual-course .course .extra-course-details .course-title {
     color: #0C1A81;
     font-family: Open Sans;
     font-size: 28px;
@@ -364,7 +276,7 @@ table {
     width: 100%;
     text-align: left;
   }
-  .ac-learning-path-container__content .courses .list .individual-course .course .course-details .course-excerpt {
+  .ac-learning-path-container__content .courses .list .individual-course .course .extra-course-details .course-excerpt {
     color: #000000;
     font-family: Open Sans;
     font-size: 24px;

@@ -48,37 +48,19 @@ $courses = get_field('courses', $learning_path_id);
                             <? echo $course_index + 1 ?>
                         </div>
                         <div class="course">
-                            <a href="<? echo $course_link ?>" class="course-card">
-                                <div class="card">
-                                    <div class="course-card-pattern">
-                                        <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
-                                    </div>
-                                    <div class="course-card-content">
-                                        <p class="course-title">
-                                            <? echo $course_title ?>
-                                        </p>
-                                        <div class="course-meta">
-                                            <p class="course-author">
-                                                By
-                                                <? echo $course_author ?>
-                                            </p>
-                                            <div class="course-details">
-                                                <div class="course-students">
-                                                    <div class="icon"></div>
-                                                    <p class="value">
-                                                        <? echo $students_count ?>
-                                                    </p>
-                                                </div>
-                                                <p class="course-price">
-                                                    <? echo $course_price ?>
-                                                </p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="course-details">
+                            <?php get_template_part(
+                                'template-parts/course_card',
+                                'template',
+                                [
+                                    'course_title' => $course_title,
+                                    'course_author' => $course_author,
+                                    'course_thumbnail' => $course_thumbnail,
+                                    'course_link' => $course_link,
+                                    'course_price' => $course_price,
+                                    'students' => $students_count
+                                ]
+                            ); ?>
+                            <div class="extra-course-details"> 
                                 <a href="<? echo $course_link ?>" class="course-title">
                                     <? echo $course_title ?>
                                 </a>

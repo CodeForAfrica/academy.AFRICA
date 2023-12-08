@@ -294,36 +294,18 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 $course_attrs = CoursesFunctions::get_post_attr($course, $atts);
                                 extract($course_attrs);
                         ?>
-                                <a href="<? echo $course_link ?>" class="course-card">
-                                    <div class="card">
-                                        <div class="course-card-pattern">
-                                            <img src="<? echo $course_thumbnail ?>" alt="course-thumbnail">
-                                        </div>
-                                        <div class="course-card-content">
-                                            <p class="course-title">
-                                                <? echo $course_title ?>
-                                            </p>
-                                            <div class="course-meta">
-                                                <p class="course-author">
-                                                    By <? echo $course_author ?>
-                                                </p>
-                                                <div class="course-details">
-                                                    <div class="course-students">
-                                                        <div class="icon">
-                                                            <img src="<? echo get_stylesheet_directory_uri() ?>/assets/images/user.svg" alt="students">
-                                                        </div>
-                                                        <p class="value"><? echo $students ?></p>
-
-                                                    </div>
-                                                    <p class="course-price">
-                                                        <? echo $course_price ?>
-                                                    </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                                <?php get_template_part(
+                                    'template-parts/course_card',
+                                    'template',
+                                    [
+                                        'course_title' => $course_title,
+                                        'course_author' => $course_author,
+                                        'course_thumbnail' => $course_thumbnail,
+                                        'course_link' => $course_link,
+                                        'course_price' => $course_price,
+                                        'students' => $students
+                                    ]
+                                ); ?>
                         <?
                             }
                         }
