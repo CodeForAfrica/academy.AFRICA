@@ -197,8 +197,6 @@ function send_activation_link($user_id) {
     }
 }
 
-add_filter('authenticate', 'restrict_user_status', 20, 3);
-
 function restrict_user_status($user, $username, $password) {
     if($user instanceof WP_User) {
         $account_status = get_user_meta($user->data->ID, 'account_status', true);
@@ -214,3 +212,21 @@ function restrict_user_status($user, $username, $password) {
         return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
     }
 }
+
+function after_login($user_login, $user) {
+    if($user instanceof WP_User) {
+        $account_status = get_user_meta($user->data->ID, 'account_status', true);
+        if($user->data->user_status == 1 || $account_status !== "active") {
+            if(!isset($user->data->user_activation_key)) {
+                send_activation_link($user->data->ID);
+                wp_logout();
+            }
+        }
+    } else {
+        wp_logout();
+    }
+}
+
+do_action("wp_login", "after_login", 10, 2);
+
+add_filter('authenticate', 'restrict_user_status', 20, 3);
