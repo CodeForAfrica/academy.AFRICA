@@ -214,28 +214,31 @@ table {
   justify-content: center;
   width: 100%;
 }
-.header .desktop .nav .nav-actions .search .input {
+.header .desktop .nav .nav-actions .search form {
+  width: 100%;
+}
+.header .desktop .nav .nav-actions .search form .input {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
-.header .desktop .nav .nav-actions .search .input input {
+.header .desktop .nav .nav-actions .search form .input input {
   height: 40px;
   border: none;
   border-radius: 0;
   padding: 0 20px;
   outline: none;
 }
-.header .desktop .nav .nav-actions .search .input button {
+.header .desktop .nav .nav-actions .search form .input button {
   background: #EFF0FD;
   color: #FFFFFF;
   border: none;
 }
-.header .desktop .nav .nav-actions .search .input button .icon {
+.header .desktop .nav .nav-actions .search form .input button .icon {
   color: #0C1A81;
 }
-.header .desktop .nav .nav-actions .search .input button:hover {
+.header .desktop .nav .nav-actions .search form .input button:hover {
   background: #EFF0FD;
   color: #FFFFFF;
   border: none;

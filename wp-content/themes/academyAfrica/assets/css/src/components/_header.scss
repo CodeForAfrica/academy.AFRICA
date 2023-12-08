@@ -105,39 +105,43 @@
                 min-width: 800px;
                 max-width: 1032px;
 
-                .search { 
+                .search {
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     width: 100%;
 
-                    .input {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
+                    form {
                         width: 100%;
 
-                        input {
-                            height: 40px;
-                            border: none;
-                            border-radius: 0;
-                            padding: 0 20px;
-                            outline: none;
-                        }
+                        .input {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 100%;
 
-                        button {
-                            background: $color-primary-50;
-                            color: $color-shades-white;
-                            border: none;
-
-                            .icon {
-                                color: $color-primary-700;
+                            input {
+                                height: 40px;
+                                border: none;
+                                border-radius: 0;
+                                padding: 0 20px;
+                                outline: none;
                             }
 
-                            &:hover {
+                            button {
                                 background: $color-primary-50;
                                 color: $color-shades-white;
                                 border: none;
+
+                                .icon {
+                                    color: $color-primary-700;
+                                }
+
+                                &:hover {
+                                    background: $color-primary-50;
+                                    color: $color-shades-white;
+                                    border: none;
+                                }
                             }
                         }
                     }
