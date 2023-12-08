@@ -1,19 +1,19 @@
-let filters = {};
+let searchFilters = {};
 
 function filterSearchCourses(input, field, value){
     if(input.checked){
-        if(filters[field]){
-            filters[field].push(value);
+        if(searchFilters[field]){
+            searchFilters[field].push(value);
         } else {
-            filters[field] = [value]; 
+            searchFilters[field] = [value]; 
         }
     } else {
-        if(filters[field]){
-            filters[field] = filters[field].filter(item => item !== value);
+        if(searchFilters[field]){
+            searchFilters[field] = searchFilters[field].filter(item => item !== value);
         }
     }
-    const newParams = Object.keys(filters).map(key => {
-        const values = filters[key];
+    const newParams = Object.keys(searchFilters).map(key => {
+        const values = searchFilters[key];
         if(values.length){
             return `${key}=${values.join(",")}`;
         }
@@ -69,16 +69,42 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             });
         });
-        if(filters[key]){
-            filters[key].push(...values);
+        if(searchFilters[key]){
+            searchFilters[key].push(...values);
         } else {
-            filters[key] = values;
+            searchFilters[key] = values;
         }
     });
 
 });
 
 function clearFilters(){
-    filters = {};
+    searchFilters = {};
     window.location.search = "";
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    const filters= document.querySelectorAll("#side-filter-bar");
+
+    filters.forEach(filter => {
+        const filterItems = filter.querySelectorAll(".filter-item");
+        filterItems.forEach(item => {
+            const filterList = item.querySelector(".filter-list");
+            const filterListItems = filterList.querySelectorAll("li");
+            const filterToggle = item.querySelector(".show-more-btn");
+
+            filterToggle.addEventListener("click", () => {
+                filterListItems.forEach(listItem => {
+                    if(listItem.classList.contains("hidden")){
+                        listItem.classList.replace("hidden", "show");
+                        filterToggle.innerHTML = "Show Less";
+                    } else {
+                        listItem.classList.replace("show", "hidden");
+                        filterToggle.innerHTML = "Show More";
+                    }
+                });  
+
+            });
+        });
+    });
+});

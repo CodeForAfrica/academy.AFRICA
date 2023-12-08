@@ -81,8 +81,8 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
     <aside class="filter-sidebar">
         <div class="sidebar" id="sidebar">
             <div class="sort">
-                <p class="filter-by">
-                    Filter by
+                <p class="sort-by">
+                    Sort by
                 </p>
                 <select name="sort" id="sort" class="select">
                     <?
@@ -95,38 +95,72 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                     ?>
                 </select>
             </div>
-            <div class="filter">
+            <div class="filter" id="side-filter-bar">
                 <p class="filter-by">
-                    <? echo $filter_by ?>
+                    Filter by
                 </p>
-                <?
-                if (!empty($filter_options)) {
-                    foreach ($filter_options as $item) {
-                        $title = $item["title"];
-                        $options = $item["options"];
-                ?>
-                        <p style="margin-top: 40px" class="filter-by-title">
-                            <? echo $title ?>
-                        </p>
-                        <?
-                        if (!empty($options)) {
-                            foreach ($options as $option) {
-                        ?>
-                                <ul>
-                                    <li>
-                                        <label class="mui-checkbox">
-                                            <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
-                                            <span class="checkmark"></span>
-                                            <? echo $option->name ?>
-                                        </label>
-                                    </li>
-                                </ul>
-                <?
-                            }
+                <div class="filter-body">
+                    <?
+                    if (!empty($filter_options)) {
+                        foreach ($filter_options as $item) {
+                            $title = $item["title"];
+                            $options = $item["options"];
+                    ?>
+                            <div class="filter-item">
+                                <p class="filter-by-title">
+                                    <? echo $title ?>
+                                </p>
+                                <?
+                                if (!empty($options)) {
+                                ?>
+                                    <ul class="filter-list"> 
+                                        <?
+                                        foreach ($options as $options_index => $option) {
+                                        ?>
+                                            <? if ($options_index >= 3) {
+                                            ?>
+                                                <li class="hidden">
+                                                    <label class="mui-checkbox">
+                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                        <span class="checkmark"></span>
+                                                        <? echo $option->name ?>
+                                                    </label>
+                                                </li>
+                                            <?
+                                            } else {
+                                            ?>
+                                                <li>
+                                                    <label class="mui-checkbox">
+                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                        <span class="checkmark"></span>
+                                                        <? echo $option->name ?>
+                                                    </label>
+                                                </li>
+                                            <?
+                                            }
+                                            ?>
+                                        <?
+                                        }
+                                        ?>
+                                    </ul>
+                                    <? if (count($options) > 3) {
+                                    ?>
+                                        <div class="show-more">
+                                            <button class="show-more-btn">
+                                                Show More
+                                            </button>
+                                        </div>
+                                    <?
+                                    } ?>
+                                <?
+                                }
+                                ?>
+                            </div>
+                    <?
                         }
                     }
-                }
-                ?>
+                    ?>
+                </div>
             </div>
         </div>
     </aside>

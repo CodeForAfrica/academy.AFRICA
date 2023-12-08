@@ -1,5 +1,5 @@
 let filters = {};
-
+let sortParams = {};
 
 document.addEventListener("DOMContentLoaded", () => {
    const mobileFilterBtn = document.querySelector("#courses-mobile-filter");
@@ -71,9 +71,27 @@ function applyFilters(){
         const [field, fieldValue] = name.split("-");
         filterCourses(input, field, fieldValue);
     });
+}
+
+function sortCourses(){
+    const sort = document.getElementById('courses-sort');
+    const value = sort.value;
 
 
+    if(value){
+        if(value === 'date-desc'){
+        sortParams = {};
+        } else {
+            sortParams["sort"] = value;
 
+        }
+    }
+
+    const newParams = Object.keys(sortParams).map(key => {
+        const value = sortParams[key];
+        return `${key}=${value}`;
+    }).map(item => encodeURI(item)).join("&");
+    window.location.search = newParams;
 }
 
 

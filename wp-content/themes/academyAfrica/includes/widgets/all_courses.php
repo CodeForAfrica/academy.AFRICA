@@ -101,15 +101,47 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
-        $sort = $this->get_query_param('sort');
-        $sort_by = $settings['sort_by_text'];
 
+        $sort_options = [
+            "date-desc" => [
+                "orderby" => "date",
+                "order" => "DESC",
+                "name" => "Newest"
+            ],
+            "date-asc" => [
+                "orderby" => "date",
+                "order" => "ASC",
+                "name" => "Oldest"
+            ],
+            "name-asc" => [
+                "orderby" => "title",
+                "order" => "ASC",
+                "name" => "Name (A-Z)"
+            ],
+            "name-desc" => [
+                "orderby" => "title",
+                "order" => "DESC",
+                "name" => "Name (Z-A)"
+            ]
+        ];
+
+        $sort_by = $settings['sort_by_text'];
+        $sort = $this->get_query_param('sort');
+        if ($sort) {
+            $sort = $sort[0];
+            $order_by = $sort_options[$sort]["orderby"];
+            $order = $sort_options[$sort]["order"];
+        } else {
+            $order_by = "date";
+            $order = "DESC";
+        }
         $atts = [
             'per_page' => '9',
             'paged' => $current_page,
             'organization' => $orgs,
-            'instructor' => $instructors, 
-            'sort' => $sort
+            'instructor' => $instructors,
+            'orderby' => $order_by,
+            'order' => $order
         ];
         $default_atts = CoursesFunctions::get_default_atts();
         $atts = shortcode_atts($default_atts, $atts, 'academy-africa_course_grid');
@@ -127,37 +159,16 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $posts = $query->get_posts();
         $courses = $posts;
 
-        $sort_options = [
-            "newest" => [
-                "orderby" => "date",
-                "order" => "DESC",
-                "name" => "Newest"
-            ],
-            "oldest" => [
-                "orderby" => "date",
-                "order" => "ASC",
-                "name" => "Oldest"
-            ],
-            "name-asc" => [
-                "orderby" => "title",
-                "order" => "ASC",
-                "name" => "Name (A-Z)"
-            ],
-            "name-desc" => [
-                "orderby" => "title",
-                "order" => "DESC",
-                "name" => "Name (Z-A)"
-            ]
-        ];
+
 ?>
         <main class="all-courses" id="all-courses">
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <div class="sort">
-                        <p class="filter-by">
-                            <? echo $sort_by ?>
+                        <p class="sort-by">
+                        <? echo $sort_by ?>
                         </p>
-                        <select name="sort" id="sort" class="select">
+                        <select name="sort" id="courses-sort" class="select" onchange="sortCourses()">
                             <?
                             foreach ($sort_options as $key => $option) {
                                 $selected = $sort == $key ? "selected" : "";
@@ -168,38 +179,72 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             ?>
                         </select>
                     </div>
-                    <div class="filter">
+                    <div class="filter" id="side-filter-bar">
                         <p class="filter-by">
                             <? echo $filter_by ?>
                         </p>
-                        <?
-                        if (!empty($filter_options)) {
-                            foreach ($filter_options as $item) {
-                                $title = $item["title"];
-                                $options = $item["options"];
-                        ?>
-                                <p style="margin-top: 40px" class="filter-by-title">
-                                    <? echo $title ?>
-                                </p>
-                                <?
-                                if (!empty($options)) {
-                                    foreach ($options as $option) {
-                                ?>
-                                        <ul>
-                                            <li>
-                                                <label class="mui-checkbox">
-                                                    <input type="checkbox" onclick="filterCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
-                                                    <span class="checkmark"></span>
-                                                    <? echo $option->name ?>
-                                                </label>
-                                            </li>
-                                        </ul>
-                        <?
-                                    }
+                        <div class="filter-body">
+                            <?
+                            if (!empty($filter_options)) {
+                                foreach ($filter_options as $item) {
+                                    $title = $item["title"];
+                                    $options = $item["options"];
+                            ?>
+                                    <div class="filter-item">
+                                        <p class="filter-by-title">
+                                            <? echo $title ?>
+                                        </p>
+                                        <?
+                                        if (!empty($options)) {
+                                        ?>
+                                            <ul class="filter-list">
+                                                <?
+                                                foreach ($options as $options_index => $option) {
+                                                ?>
+                                                    <? if ($options_index >= 3) {
+                                                    ?>
+                                                        <li class="hidden">
+                                                            <label class="mui-checkbox">
+                                                                <input type="checkbox" onclick="filterCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                                <span class="checkmark"></span>
+                                                                <? echo $option->name ?>
+                                                            </label>
+                                                        </li>
+                                                    <?
+                                                    } else {
+                                                    ?>
+                                                        <li>
+                                                            <label class="mui-checkbox">
+                                                                <input type="checkbox" onclick="filterCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                                <span class="checkmark"></span>
+                                                                <? echo $option->name ?>
+                                                            </label>
+                                                        </li>
+                                                    <?
+                                                    }
+                                                    ?>
+                                                <?
+                                                }
+                                                ?>
+                                            </ul>
+                                            <? if (count($options) > 3) {
+                                            ?>
+                                                <div class="show-more">
+                                                    <button class="show-more-btn">
+                                                        Show More
+                                                    </button>
+                                                </div>
+                                            <?
+                                            } ?>
+                                        <?
+                                        }
+                                        ?>
+                                    </div>
+                            <?
                                 }
                             }
-                        }
-                        ?>
+                            ?>
+                        </div>
                     </div>
                 </div>
             </aside>
