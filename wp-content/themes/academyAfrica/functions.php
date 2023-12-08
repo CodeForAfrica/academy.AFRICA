@@ -27,7 +27,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.0.8');
+define('ACADEMY_AFRICA_VERSION', '1.0.9');
 
 function my_theme_enqueue_styles() {
     wp_enqueue_style('child-style', get_stylesheet_directory_uri().'/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), ACADEMY_AFRICA_VERSION);
@@ -197,38 +197,57 @@ function send_activation_link($user_id) {
     }
 }
 
+function whitelist_address() {
+    return array(
+        '127.0.0.1',
+        '::1',
+        'localhost'
+    );
+}
+
 function restrict_user_status($user, $username, $password) {
-    if($user instanceof WP_User) {
-        $account_status = get_user_meta($user->data->ID, 'account_status', true);
-        if($user->data->user_status == 1 || $account_status !== "active") {
-            if(!isset($user->data->user_activation_key)) {
-                send_activation_link($user->data->ID);
-            }
-            return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
-        } else {
-            return $user;
-        }
+    if(!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+        return $user;
     } else {
-        return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
+        if($user instanceof WP_User) {
+            $account_status = get_user_meta($user->data->ID, 'account_status', true);
+            if($user->data->user_status == 1 || $account_status !== "active") {
+                if(!isset($user->data->user_activation_key)) {
+                    send_activation_link($user->data->ID);
+                }
+                return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
+            } else {
+                return $user;
+            }
+        } else {
+            return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
+        }
     }
 }
 
 function authenticate_user() {
     $user_id = get_current_user_id();
     $user = get_user_by('ID', $user_id);
-    if($user instanceof WP_User) {
-        $account_status = get_user_meta($user->data->ID, 'account_status', true);
-        if($user->data->user_status == 1 || $account_status !== "active") {
-            send_activation_link($user->data->ID);
-            wp_logout();
-            ?>
-            <script>
-                window.location.reload();
-            </script>
-            <?
-        }
+    if(!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+        return $user;
     } else {
-        wp_logout();
+        if($user instanceof WP_User) {
+            $account_status = get_user_meta($user->data->ID, 'account_status', true);
+            global $whitelist;
+            if(!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+                if($user->data->user_status == 1 || $account_status !== "active") {
+                    send_activation_link($user->data->ID);
+                    wp_logout();
+                    ?>
+                    <script>
+                        window.location.reload();
+                    </script>
+                    <?
+                }
+            }
+        } else {
+            wp_logout();
+        }
     }
 }
 

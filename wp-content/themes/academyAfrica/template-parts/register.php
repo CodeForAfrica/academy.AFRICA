@@ -80,7 +80,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['
     }
 }
 
-if($_SERVER['REQUEST_METHOD'] === 'GET' && ($_GET['action'] === 'account_activation') && (isset($_GET['key'])) && (isset($_GET['user_id']))) {
+if($_SERVER['REQUEST_METHOD'] === 'GET' && ((isset($_GET['action'])) && $_GET['action'] === 'account_activation') && (isset($_GET['key'])) && (isset($_GET['user_id']))) {
     $user_id = $_GET['user_id'];
     $code = $_GET['key'];
     global $wpdb;

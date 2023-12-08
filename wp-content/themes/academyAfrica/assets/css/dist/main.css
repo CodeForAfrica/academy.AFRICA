@@ -1069,14 +1069,10 @@ table {
 .cfa-title strong {
   color: #0C1A81;
 }
-@media (min-width: 390px) {
-  .cfa-title {
-    font-size: 20px;
-  }
-}
 @media (max-width: 768px) {
   .cfa-title {
-    text-align: center;
+    font-size: 20px;
+    line-height: 25px;
   }
 }
 .cfa-title::after {
@@ -1089,16 +1085,6 @@ table {
 }
 @media (min-width: 390px) {
   .cfa-title::after {
-    margin-top: 10px;
-  }
-}
-@media (max-width: 768px) {
-  .cfa-title::after {
-    text-align: center;
-    position: relative;
-    font-size: 20px;
-    left: 50%;
-    transform: translateX(-50%);
     margin-top: 10px;
   }
 }
