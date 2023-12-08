@@ -225,7 +225,7 @@ function authenticate_user() {
             wp_logout();
             ?>
             <script>
-                console.log("------INIT--user id logged out-->",<? echo json_encode($user) ?>);
+                window.location.reload();
             </script>
             <?
         }
