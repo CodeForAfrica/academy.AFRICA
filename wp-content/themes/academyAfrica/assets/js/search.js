@@ -75,9 +75,6 @@ function sortCourses(){
         const value = sortParams[key];
         return `${key}=${value}`;
     }).map(item => encodeURI(item)).join("&");
-    // instead of window.location.search = newParams;
-    // keep other params in the url and just add the sort param
-    // if the sort param is already in the url, replace it
     const url = window.location.href;
     const urlParts = url.split("?");
     const baseUrl = urlParts[0];
@@ -146,3 +143,22 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const mobileFilterBtn = document.querySelector("#courses-mobile-filter");
+    const allCourses = document.querySelector("#all-courses");
+    const filterModal = document.querySelector("#filter-modal");
+    const closeFilterModal = document.querySelector("#close-filter-modal");
+    
+     mobileFilterBtn.addEventListener("click", () => {
+         allCourses.classList.toggle("d-none"); 
+         filterModal.classList.toggle("d-none");
+         window.scrollTo(0, 0);
+     });
+ 
+     closeFilterModal.addEventListener("click", () => {
+         allCourses.classList.toggle("d-none"); 
+         filterModal.classList.toggle("d-none");
+     });
+ });

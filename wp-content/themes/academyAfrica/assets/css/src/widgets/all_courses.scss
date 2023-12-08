@@ -179,113 +179,113 @@
   }
 }
 
-.filter-modal {
+// .filter-modal {
 
-  &.d-none {
-    display: none;
-  }
+//   &.d-none {
+//     display: none;
+//   }
 
-  .filter-options {
-    padding: 80px 60px;
+//   .filter-options {
+//     padding: 80px 60px;
 
-    .mobile-filter {
-      width: 100% !important;
+//     .mobile-filter {
+//       width: 100% !important;
 
-      .filter-title {
-        color: $color-shades-black;
-        font-family: Open Sans;
-        font-size: 28px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 34px;
-        letter-spacing: -0.56px;
-        margin-bottom: 40px;
-      }
+//       .filter-title {
+//         color: $color-shades-black;
+//         font-family: Open Sans;
+//         font-size: 28px;
+//         font-style: normal;
+//         font-weight: 700;
+//         line-height: 34px;
+//         letter-spacing: -0.56px;
+//         margin-bottom: 40px;
+//       }
 
-      .filters {
-        .accordion-parent {
-          display: flex;
-          flex-direction: column;
-          gap: 40px;
-          box-shadow: none;
+//       .filters {
+//         .accordion-parent {
+//           display: flex;
+//           flex-direction: column;
+//           gap: 40px;
+//           box-shadow: none;
 
-          .accordion {
-            box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
-          }
+//           .accordion {
+//             box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+//           }
 
-          .panel {
-            &.open {
-              margin-top: -40px;
-            }
-          }
-        }
+//           .panel {
+//             &.open {
+//               margin-top: -40px;
+//             }
+//           }
+//         }
 
-        .actions {
-          display: flex;
-          justify-content: space-between;
-          margin: 36px 0 40px;
+//         .actions {
+//           display: flex;
+//           justify-content: space-between;
+//           margin: 36px 0 40px;
 
-          .clear-filters {
-            border: none;
-            color: $color-secondary-500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+//           .clear-filters {
+//             border: none;
+//             color: $color-secondary-500;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             gap: 10px;
 
-            .icon {
-              display: flex;
-              justify-content: center;
-            }
+//             .icon {
+//               display: flex;
+//               justify-content: center;
+//             }
 
-            &:hover {
-              color: $color-secondary-500;
-              background: $color-secondary-50;
-            }
+//             &:hover {
+//               color: $color-secondary-500;
+//               background: $color-secondary-50;
+//             }
 
-            &:focus {
-              outline: none;
-              color: $color-secondary-500;
-              background: $color-secondary-50;
-            }
+//             &:focus {
+//               outline: none;
+//               color: $color-secondary-500;
+//               background: $color-secondary-50;
+//             }
 
-            &.d-none {
-              display: none;
-            }
-          }
-        }
-      }
+//             &.d-none {
+//               display: none;
+//             }
+//           }
+//         }
+//       }
 
-      .divider {
-        border: none;
-        height: 1px;
-        background: $color-neutral-200;
-      }
+//       .divider {
+//         border: none;
+//         height: 1px;
+//         background: $color-neutral-200;
+//       }
 
-      .close {
-        display: flex;
-        justify-content: flex-end;
+//       .close {
+//         display: flex;
+//         justify-content: flex-end;
 
-        .buttons {
-          display: flex;
-          justify-content: space-between;
-          gap: 20px;
-          border: none;
-          color: $color-shades-black;
+//         .buttons {
+//           display: flex;
+//           justify-content: space-between;
+//           gap: 20px;
+//           border: none;
+//           color: $color-shades-black;
 
-          svg {
-            align-self: center;
-          }
+//           svg {
+//             align-self: center;
+//           }
 
-          &:hover {
-            color: $color-shades-black;
-            background: $color-shades-white;
-          }
+//           &:hover {
+//             color: $color-shades-black;
+//             background: $color-shades-white;
+//           }
 
-        }
-      }
-    }
-  }
+//         }
+//       }
+//     }
+//   }
 
-  @include media-breakpoint-up(tablet) {}
-}
+//   @include media-breakpoint-up(tablet) {}
+// }
