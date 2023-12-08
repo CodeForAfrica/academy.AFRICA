@@ -41,6 +41,7 @@ function my_theme_enqueue_styles() {
     wp_enqueue_style(('course-completed'), get_stylesheet_directory_uri().'/assets/css/dist/pages/course-completed.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('single-ac-learning-path'), get_stylesheet_directory_uri().'/assets/css/dist/pages/single-ac-learning-path.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('search'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_style(('filter_bar'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/filter_bar.css', array(), ACADEMY_AFRICA_VERSION);
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
