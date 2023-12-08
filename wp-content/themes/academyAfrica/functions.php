@@ -219,9 +219,7 @@ function authenticate_user() {
     if($user instanceof WP_User) {
         $account_status = get_user_meta($user->data->ID, 'account_status', true);
         if($user->data->user_status == 1 || $account_status !== "active") {
-            if(!isset($user->data->user_activation_key)) {
-                send_activation_link($user->data->ID);
-            }
+            send_activation_link($user->data->ID);
             wp_logout();
             ?>
             <script>
