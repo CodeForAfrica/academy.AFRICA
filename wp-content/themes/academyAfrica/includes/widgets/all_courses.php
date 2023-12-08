@@ -166,7 +166,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 <div class="sidebar" id="sidebar">
                     <div class="sort">
                         <p class="sort-by">
-                        <? echo $sort_by ?>
+                            <? echo $sort_by ?>
                         </p>
                         <select name="sort" id="courses-sort" class="select" onchange="sortCourses()">
                             <?
@@ -309,7 +309,9 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                                 </p>
                                                 <div class="course-details">
                                                     <div class="course-students">
-                                                        <div class="icon"></div>
+                                                        <div class="icon">
+                                                            <img src="<? echo get_stylesheet_directory_uri() ?>/assets/images/user.svg" alt="students">
+                                                        </div>
                                                         <p class="value"><? echo $students ?></p>
 
                                                     </div>
