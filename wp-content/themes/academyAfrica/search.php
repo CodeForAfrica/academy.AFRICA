@@ -24,6 +24,14 @@ function get_query_param($param)
 $orgs = get_query_param('organization');
 $instructors = get_query_param('instructor');
 $sort = get_query_param('sort');
+if ($sort) {
+    $sort = $sort[0];
+    $order_by = $sort_options[$sort]["orderby"];
+    $order = $sort_options[$sort]["order"];
+} else {
+    $order_by = "date";
+    $order = "DESC";
+}
 $s = get_search_query();
 $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
 
@@ -31,12 +39,12 @@ $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
 $filter_options = CoursesFunctions::get_filter_by();
 
 $sort_options = [
-    "newest" => [
+    "date-desc" => [
         "orderby" => "date",
         "order" => "DESC",
         "name" => "Newest"
     ],
-    "oldest" => [
+    "date-asc" => [
         "orderby" => "date",
         "order" => "ASC",
         "name" => "Oldest"
@@ -58,8 +66,9 @@ $atts = [
     'paged' => $current_page,
     'organization' => $orgs,
     'instructor' => $instructors,
-    'sort' => $sort,
-    'search' => $s
+    'search' => $s,
+    'orderby' => $order_by,
+    'order' => $order
 ];
 
 $default_atts = CoursesFunctions::get_default_atts();
@@ -78,92 +87,13 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
 
 <?php get_header(); ?>
 <div class="search-page">
-    <aside class="filter-sidebar">
-        <div class="sidebar" id="sidebar">
-            <div class="sort">
-                <p class="sort-by">
-                    Sort by
-                </p>
-                <select name="sort" id="sort" class="select">
-                    <?
-                    foreach ($sort_options as $key => $option) {
-                        $selected = $sort == $key ? "selected" : "";
-                    ?>
-                        <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
-                    <?
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="filter" id="side-filter-bar">
-                <p class="filter-by">
-                    Filter by
-                </p>
-                <div class="filter-body">
-                    <?
-                    if (!empty($filter_options)) {
-                        foreach ($filter_options as $item) {
-                            $title = $item["title"];
-                            $options = $item["options"];
-                    ?>
-                            <div class="filter-item">
-                                <p class="filter-by-title">
-                                    <? echo $title ?>
-                                </p>
-                                <?
-                                if (!empty($options)) {
-                                ?>
-                                    <ul class="filter-list">
-                                        <?
-                                        foreach ($options as $options_index => $option) {
-                                        ?>
-                                            <? if ($options_index >= 3) {
-                                            ?>
-                                                <li class="hidden">
-                                                    <label class="mui-checkbox">
-                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
-                                                        <span class="checkmark"></span>
-                                                        <? echo $option->name ?>
-                                                    </label>
-                                                </li>
-                                            <?
-                                            } else {
-                                            ?>
-                                                <li>
-                                                    <label class="mui-checkbox">
-                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
-                                                        <span class="checkmark"></span>
-                                                        <? echo $option->name ?>
-                                                    </label>
-                                                </li>
-                                            <?
-                                            }
-                                            ?>
-                                        <?
-                                        }
-                                        ?>
-                                    </ul>
-                                    <? if (count($options) > 3) {
-                                    ?>
-                                        <div class="show-more">
-                                            <button class="show-more-btn">
-                                                Show More
-                                            </button>
-                                        </div>
-                                    <?
-                                    } ?>
-                                <?
-                                }
-                                ?>
-                            </div>
-                    <?
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-    </aside>
+    <?php get_template_part('template-parts/filter_bar', 'template', [
+        'filter_by' => $filter_by,
+        'filter_options' => $filter_options,
+        'sort_by' => $sort_by,
+        'sort_options' => $sort_options,
+        'sort' => $sort
+    ]); ?>
     <div class="search-page-main">
         <div class="search-page-header">
             <? if (!empty($s)) {

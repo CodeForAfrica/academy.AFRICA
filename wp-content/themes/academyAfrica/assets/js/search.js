@@ -1,4 +1,6 @@
 let searchFilters = {};
+let sortParams = {};
+
 
 function filterSearchCourses(input, field, value){
     if(input.checked){
@@ -55,6 +57,41 @@ function applyFilters(){
 
 }
 
+function sortCourses(){
+    const sort = document.getElementById('courses-sort');
+    const value = sort.value;
+
+
+    if(value){
+        if(value === 'date-desc'){
+        sortParams = {};
+        } else {
+            sortParams["sort"] = value;
+
+        }
+    }
+
+    const newParams = Object.keys(sortParams).map(key => {
+        const value = sortParams[key];
+        return `${key}=${value}`;
+    }).map(item => encodeURI(item)).join("&");
+    // instead of window.location.search = newParams;
+    // keep other params in the url and just add the sort param
+    // if the sort param is already in the url, replace it
+    const url = window.location.href;
+    const urlParts = url.split("?");
+    const baseUrl = urlParts[0];
+    const params = urlParts[1];
+    if(params){
+        const paramsParts = params.split("&");
+        const newParamsParts = paramsParts.filter(item => !item.includes("sort"));
+        newParamsParts.push(newParams);
+        window.location.href = `${baseUrl}?${newParamsParts.join("&")}`;
+    } else {
+        window.location.href = `${baseUrl}?${newParams}`;
+    }
+}
+
 
 window.addEventListener("DOMContentLoaded", () => {
     const { search } = window.location;
@@ -93,18 +130,19 @@ window.addEventListener("DOMContentLoaded", () => {
             const filterListItems = filterList.querySelectorAll("li");
             const filterToggle = item.querySelector(".show-more-btn");
 
-            filterToggle.addEventListener("click", () => {
-                filterListItems.forEach(listItem => {
-                    if(listItem.classList.contains("hidden")){
-                        listItem.classList.replace("hidden", "show");
-                        filterToggle.innerHTML = "Show Less";
-                    } else {
-                        listItem.classList.replace("show", "hidden");
-                        filterToggle.innerHTML = "Show More";
-                    }
-                });  
-
-            });
+            if(filterToggle){
+                filterToggle.addEventListener("click", () => {
+                    filterListItems.forEach(listItem => {
+                        if(listItem.classList.contains("hidden")){
+                            listItem.classList.replace("hidden", "show");
+                            filterToggle.innerHTML = "Show Less";
+                        } else {
+                            listItem.classList.replace("show", "hidden");
+                            filterToggle.innerHTML = "Show More";
+                        }
+                    });  
+                });
+            }
         });
     });
 });
