@@ -434,9 +434,9 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                             <?
                             if(!empty($completed_courses['results'])) {
                                 foreach($completed_courses['results'] as $course) {
+                                    $course_id = $course->post_id;
                                     $certificate_id = learndash_get_setting($course_id, 'certificate');
                                     $cert_post = get_post($certificate_id);
-                                    $course_id = $course->post_id;
                                     $title = get_the_title($course);
                                     $provider = get_the_author_meta('display_name', $course->post_author);
                                     $course_link = get_permalink($course_id);
