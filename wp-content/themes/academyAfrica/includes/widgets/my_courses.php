@@ -447,8 +447,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                                     // $certificate_link = learndash_get_course_certificate_link($course_id, get_current_user_id());
                                     ?>
                                     <div class="cert-pdf" id="<? echo $course_id ?>">
-                                        <? $content = $this->replace_course_info(get_post_field('post_content', $certificate_id), $course_id) ?>
-                                        <? echo do_shortcode($content) ?>
+                                        <? $cert_content = $this->replace_course_info(get_post_field('post_content', $certificate_id), $course_id) ?>
+                                        <? echo do_shortcode($cert_content) ?>
                                     </div>
                                     <div class="card">
                                         <div class="course-card-pattern">
