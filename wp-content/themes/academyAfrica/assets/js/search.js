@@ -44,30 +44,40 @@ function parseQueryString(queryString) {
 
 function applyFilters(){
     const filterModal = document.querySelector("#filter-modal");
+    searchFilters = {};
 
     // get all checked inputs
     const checkedInputs = filterModal.querySelectorAll("input:checked");
     checkedInputs.forEach(input => {
         const { name, value } = input;
         const [field, fieldValue] = name.split("-");
-        filterCourses(input, field, fieldValue);
+
+        if(searchFilters[field]){
+            searchFilters[field].push(fieldValue);
+        } else {
+            searchFilters[field] = [fieldValue];
+        }
     });
 
+    const newParams = Object.keys(searchFilters).map(key => {
+        const values = searchFilters[key];
+        if(values.length){
+            return `${key}=${values.join(",")}`;
+        }
+    })
+    .filter(Boolean).map(item => encodeURI(item)).join("&");
 
-
+    openUrl(newParams);
 }
 
-function sortCourses(){
-    const sort = document.getElementById('courses-sort');
-    const value = sort.value;
-
+function sortCourses(el){
+    const value = el.value;
 
     if(value){
         if(value === 'date-desc'){
         sortParams = {};
         } else {
             sortParams["sort"] = value;
-
         }
     }
 
@@ -75,6 +85,11 @@ function sortCourses(){
         const value = sortParams[key];
         return `${key}=${value}`;
     }).map(item => encodeURI(item)).join("&");
+
+    openUrl(newParams);
+}
+
+function openUrl(newParams){
     const url = window.location.href;
     const urlParts = url.split("?");
     const baseUrl = urlParts[0];
@@ -83,14 +98,13 @@ function sortCourses(){
         const paramsParts = params.split("&");
         const newParamsParts = paramsParts.filter(item => !item.includes("sort"));
         newParamsParts.push(newParams);
-        window.location.href = `${baseUrl}?${newParamsParts.join("&")}`;
+        window.location.search  = newParamsParts.join("&");
     } else {
-        window.location.href = `${baseUrl}?${newParams}`;
+        window.location.search = newParams;
     }
 }
 
-
-window.addEventListener("DOMContentLoaded", () => {
+function toggleFilterModal(){
     const { search } = window.location;
     const params = parseQueryString(search);
     Object.keys(params).forEach(key => {
@@ -109,15 +123,9 @@ window.addEventListener("DOMContentLoaded", () => {
             searchFilters[key] = values;
         }
     });
-
-});
-
-function clearFilters(){
-    searchFilters = {};
-    window.location.search = "";
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+function filterPagination(){
     const filters= document.querySelectorAll("#side-filter-bar");
 
     filters.forEach(filter => {
@@ -142,10 +150,14 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-});
+}
 
+function clearFilters(){
+    searchFilters = {};
+    window.location.search = "";
+}
 
-document.addEventListener("DOMContentLoaded", () => {
+function mobileFilter(){
     const mobileFilterBtn = document.querySelector("#courses-mobile-filter");
     const allCourses = document.querySelector("#all-courses");
     const filterModal = document.querySelector("#filter-modal");
@@ -161,4 +173,15 @@ document.addEventListener("DOMContentLoaded", () => {
          allCourses.classList.toggle("d-none"); 
          filterModal.classList.toggle("d-none");
      });
+}
+
+function viewAll(){
+    const encodeURIParams = encodeURI(`view=all`);
+    openUrl(encodeURIParams);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    toggleFilterModal();
+    filterPagination();
+     mobileFilter();
  });

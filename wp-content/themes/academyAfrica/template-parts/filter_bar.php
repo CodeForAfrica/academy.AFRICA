@@ -14,7 +14,7 @@ $sort_options = $args["sort_options"];
             <p class="sort-by">
                 <? echo $sort_by ?>
             </p>
-            <select name="sort" id="courses-sort" class="select" onchange="sortCourses()">
+            <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
                 <?
                 foreach ($sort_options as $key => $option) {
                     $selected = $sort == $key ? "selected" : "";

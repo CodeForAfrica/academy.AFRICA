@@ -101,6 +101,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
+        $view = $this->get_query_param('view');
 
         $sort_options = [
             "date-desc" => [
@@ -136,7 +137,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             $order = "DESC";
         }
         $atts = [
-            'per_page' => '9',
+            'per_page' => $view[0] == 'all' ? -1 : 9,
             'paged' => $current_page,
             'organization' => $orgs,
             'instructor' => $instructors,
@@ -178,10 +179,16 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             <div class="label">
                                 <? echo $sort_by ?>
                             </div>
-                            <select name="sort" id="sort" class="select">
-                                <option value="newest">Newest</option>
-                                <option value="oldest">Oldest</option>
-                            </select> 
+                            <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
+                                <?
+                                foreach ($sort_options as $key => $option) {
+                                    $selected = $sort == $key ? "selected" : "";
+                                ?>
+                                    <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="filter">
                             <button id="courses-mobile-filter" class="button primary medium filter-btn">
@@ -236,9 +243,9 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     ?>
                         <hr class="divider">
                         <div class="pagination-container">
-                            <a href="/" class="see-all">
+                            <button class="see-all" onclick="viewAll()">
                                 View All
-                            </a>
+                            </button>
                             <ul class="pagination">
                                 <?
                                 if ($current_page > 1) {
