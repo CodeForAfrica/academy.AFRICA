@@ -228,6 +228,16 @@ table {
   text-transform: uppercase;
   border-radius: 0;
   width: fit-content;
+  display: flex;
+  gap: 8px;
+}
+.single-courses .wrapper .continue .learndash-wrapper .ld-course-resume.ld-button span::after {
+  content: "\f061";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 14px;
+  color: #0C1A81;
 }
 .single-courses .wrapper .enroll .enroll-button {
   background: #ED1C24;
@@ -327,6 +337,9 @@ table {
 .single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded {
   background: #F7F9FD;
 }
+.single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded:before {
+  display: none;
+}
 .single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-header {
   display: none;
 }
@@ -336,6 +349,8 @@ table {
 .single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item {
   margin: 0;
   padding: 0 20px;
+  border-top: 1px solid #E2E4EB;
+  border-bottom: none;
 }
 .single-courses .wrapper .carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-expanded .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-topic-title {
   color: #000000;

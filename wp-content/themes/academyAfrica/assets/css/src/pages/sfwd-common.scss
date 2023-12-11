@@ -55,10 +55,14 @@
                         align-items: center;
                         color: $color-shades-black;
                         font-family: Open Sans;
-                        font-size: 16px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 26px;
+
+                        .back-to-course__text {
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 26px;
+                            white-space: nowrap;
+                        }
                     }
                 }
 
@@ -102,6 +106,7 @@
                             }
 
                             .ld-progress-bar {
+                                width: 260px;
                                 .ld-progress-bar-percentage {
                                     background-image: linear-gradient(to right,
                                             #ec1e27,

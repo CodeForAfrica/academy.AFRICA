@@ -149,7 +149,20 @@
                         letter-spacing: 1.6px;
                         text-transform: uppercase;
                         border-radius: 0;
-                        width: fit-content;
+                        width: fit-content; 
+                        display: flex;
+                        gap: 8px;
+
+                        span {
+                            &::after {
+                                content: '\f061';
+                                font-family: 'Font Awesome 5 Free';
+                                font-weight: 900;
+                                font-size: 16px;
+                                line-height: 14px;
+                                color: $color-primary-700;
+                            }
+                        }
                     }
                 }
             }
@@ -286,6 +299,10 @@
                         .ld-item-list-item-expanded {
                             background: $color-neutral-50;
 
+                            &:before {
+                                display: none;
+                            }
+
                             .ld-table-list-header {
                                 display: none;
                             }
@@ -296,6 +313,8 @@
                                 .ld-table-list-item {
                                     margin: 0;
                                     padding: 0 20px;
+                                    border-top: 1px solid $color-neutral-100;
+                                    border-bottom: none;
 
                                     .ld-table-list-item-preview {
                                         .ld-topic-title {

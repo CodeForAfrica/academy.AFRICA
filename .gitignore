@@ -114,3 +114,4 @@ yarn.lock
 !/wp-content/themes/hello-elementor
 !/wp-content/plugins/index.php
 !/wp-content/plugins/academy-africa
+/vendor/

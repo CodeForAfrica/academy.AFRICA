@@ -6,7 +6,6 @@ $course_id = learndash_get_course_id($lesson_id);
 $course_url = get_permalink($course_id);
 $course = get_post($course_id);
 $lessons = learndash_get_course_lessons_list($course_id);
-
 ?>
 
 <?php get_header(); ?>

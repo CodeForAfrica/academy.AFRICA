@@ -75,9 +75,15 @@ if ($course_status == "Completed") {
                     ?>
                 </div>
             </div>
-            <div class="description">
-                <?php the_excerpt(); ?>
-            </div>
+            <?php
+            if (get_the_excerpt()) {
+            ?>
+                <div class="description">
+                    <?php the_excerpt(); ?>
+                </div>
+            <?php
+            }
+            ?>
             <?
             if (!$is_enrolled) {
             ?>
@@ -114,7 +120,7 @@ if ($course_status == "Completed") {
                     <?php echo do_shortcode('[learndash_course_progress]'); ?>
                 </div>
                 <div class="continue">
-                    <?php echo do_shortcode('[ld_course_resume label="Continue the Course"]'); ?>
+                    <?php echo do_shortcode('[ld_course_resume label="Continue the Course <span></span>"]'); ?>
                 </div>
             <?
             } else {
@@ -237,7 +243,7 @@ if ($course_status == "Completed") {
                                                 'course_thumbnail' => $course_thumbnail,
                                                 'course_link' => $course_link,
                                                 'course_price' => $course_price,
-                                                'students' => $students_count 
+                                                'students' => $students_count
                                             ]
                                         ); ?>
                                     <?
