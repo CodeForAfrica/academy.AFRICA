@@ -41,7 +41,7 @@ function my_theme_enqueue_styles() {
     wp_enqueue_style(('course-completed'), get_stylesheet_directory_uri().'/assets/css/dist/pages/course-completed.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('single-ac-learning-path'), get_stylesheet_directory_uri().'/assets/css/dist/pages/single-ac-learning-path.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('search'), get_stylesheet_directory_uri().'/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('filter_bar'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/filter_bar.css', array(), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_style(('filter_bar'), get_stylesheet_directory_uri().'/assets/css/dist/pages/filter_bar.css', array(), ACADEMY_AFRICA_VERSION);
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -64,6 +64,8 @@ function my_theme_enqueue_scripts() {
         $js_file_name = basename($js_file, '.js');
         wp_enqueue_script($js_file_name, get_stylesheet_directory_uri().'/assets/js/'.$js_file_name.'.js', [], ACADEMY_AFRICA_VERSION);
     }
+    wp_enqueue_script("canvas", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js", array(), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_script("jsPDF", "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js", array(), ACADEMY_AFRICA_VERSION);
 }
 
 function home_page() {

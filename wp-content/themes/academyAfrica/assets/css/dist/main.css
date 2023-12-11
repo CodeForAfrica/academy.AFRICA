@@ -1339,10 +1339,11 @@ label {
 .certificate .certificate-content .certificate-content-header p {
   font-size: 15px;
 }
-.certificate .certificate-content .certificate-content-header hr {
+.certificate .certificate-content .certificate-content-header .divider {
   background: #0C1A81;
   height: 3px;
   flex: 1;
+  margin: 5px 0;
 }
 .certificate .certificate-content .certificate-content-header .certificate-type {
   font-weight: bold;
@@ -1405,6 +1406,13 @@ label {
   background: #ED1C24;
   text-align: right;
   padding: 0px 18px;
+  color: var(--shades-white, #fff);
+  text-align: right;
+  font-family: Open Sans;
+  font-size: 4.789px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 8.62px; /* 180% */
 }
 .certificate .certificate-site-name p {
   color: #FFFFFF;
@@ -1435,6 +1443,22 @@ label {
 }
 .certificate .course-details .course {
   text-align: right;
+}
+
+.cert-pdf {
+  display: none;
+}
+.cert-pdf .certificate .certificate-content {
+  padding: 5px;
+}
+.cert-pdf .certificate .certificate-footer {
+  padding: 5px;
+}
+.cert-pdf .certificate .certificate-footer .company-details .brand-details .company-name {
+  line-height: 17px;
+}
+.cert-pdf .certificate-site-name {
+  padding: 0px 5px;
 }
 
 /*# sourceMappingURL=main.css.map */

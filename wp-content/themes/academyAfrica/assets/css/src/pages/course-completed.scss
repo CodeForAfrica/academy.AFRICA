@@ -60,6 +60,25 @@
       }
     }
   }
+  .cert-pdf {
+    display: none;
+    box-sizing: border-box;
+    * {
+      box-sizing: border-box;
+    }
+    .certificate {
+      hr {
+        border: none !important;
+        height: 0.5mm;
+        margin: 0;
+      }
+      @extend .certificate;
+      .certificate-content {
+        padding: 0;
+      }
+    }
+  }
+
   .share-section {
     width: 263px;
     text-align: center;

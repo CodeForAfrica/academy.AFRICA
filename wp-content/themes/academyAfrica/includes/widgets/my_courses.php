@@ -43,6 +43,18 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
         }
         return [];
     }
+    public function replace_course_info($input, $course_id) {
+        $pattern = '/\[courseinfo\b/';
+        ?>
+        <script>
+            console.log(<? echo json_encode($input) ?>);
+        </script>
+        <?
+        $replacement = '[courseinfo course_id=".'.$course_id.'"';
+        $output = preg_replace($pattern, $replacement, $input);
+
+        return $output;
+    }
     public function get_completed_courses() {
         $user_id = get_current_user_id();
         $courses = learndash_user_get_enrolled_courses($user_id);
@@ -96,6 +108,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
+        $user_id = get_current_user_id();
         $filter_by = "Filter by:";
         $filter_options = CoursesFunctions::get_filter_by();
         $completed_courses = $this->get_completed_courses();
@@ -109,6 +122,10 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
         $certificate_pagination = $completed_courses["pager"] ?? [];
         $my_courses_pagination = $enrolled_courses["pager"] ?? [];
         $sort = $this->get_query_param('sort')[0];
+        $user = array(
+            "first_name" => get_user_meta($user_id, 'first_name', true),
+            "last_name" => get_user_meta($user_id, 'last_name', true),
+        );
         ?>
         <main class="body">
             <aside class="filter-sidebar">
@@ -417,6 +434,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                             <?
                             if(!empty($completed_courses['results'])) {
                                 foreach($completed_courses['results'] as $course) {
+                                    $certificate_id = learndash_get_setting($course_id, 'certificate');
+                                    $cert_post = get_post($certificate_id);
                                     $course_id = $course->post_id;
                                     $title = get_the_title($course);
                                     $provider = get_the_author_meta('display_name', $course->post_author);
@@ -425,13 +444,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                                     $completed = floor(($progress["completed"] / $progress["total"]) * 100);
                                     $lessons_count = $progress["total"];
                                     $image = get_the_post_thumbnail_url($course);
-                                    $certificate_link = learndash_get_course_certificate_link($course_id, get_current_user_id());
-                                    $cert_details = learndash_certificate_details($course_id, get_current_user_id());
+                                    // $certificate_link = learndash_get_course_certificate_link($course_id, get_current_user_id());
                                     ?>
-                                    <script>
-                                        let t = <? echo json_encode($course_link) ?>;
-                                        console.error(<? echo json_encode($cert_details) ?>)
-                                    </script>
+                                    <div class="cert-pdf" id="<? echo $course_id ?>">
+                                        <? $content = $this->replace_course_info(get_post_field('post_content', $certificate_id), $course_id) ?>
+                                        <? echo do_shortcode($content) ?>
+                                    </div>
                                     <div class="card">
                                         <div class="course-card-pattern">
                                             <img src="<? echo $image ?>" alt="course-thumbnail">
@@ -456,10 +474,9 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                                             <div class="card-footer">
                                                 <p>Certificate Achieved</p>
                                                 <div class="icons">
-                                                    <a href="<? echo $certificate_link ?>" download>
-                                                        <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg"
-                                                            alt="download" />
-                                                    </a>
+                                                    <img onclick="convertHTMLtoPDF('<? echo $course_id ?>', '<? echo $title ?>')"
+                                                        src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg"
+                                                        style="cursor: pointer;" alt="download" />
 
                                                     <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg"
                                                         alt="share" />
@@ -519,6 +536,28 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                 }
                 ?>
             </div>
+            <script type="text/javascript">
+                function convertHTMLtoPDF(id, courseTitle) {
+                    const { jsPDF } = window.jspdf;
+                    const element = document.getElementById(id);
+                    if (element) {
+                        let doc = new jsPDF('l', 'mm');
+                        const pdfjs = element.querySelector("#certificate");
+                        const width = doc.internal.pageSize.getWidth();
+                        const height = doc.internal.pageSize.getHeight();
+                        console.log({ width, height })
+                        doc.html(pdfjs, {
+                            callback: function (doc) {
+                                doc.save(`<? echo $user['first_name'].' '.$user['first_name'] ?> | ${courseTitle}.pdf`);
+                            },
+                            width: width,
+                            height,
+                            windowWidth: 891,
+                            html2canvas: { scale: 0.954 },
+                        });
+                    }
+                }            
+            </script>
         </main>
         <?
     }

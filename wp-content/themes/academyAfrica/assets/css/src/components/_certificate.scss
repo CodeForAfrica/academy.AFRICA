@@ -16,10 +16,11 @@
         font-size: 15px;
       }
 
-      hr {
+      .divider {
         background: $color-primary-700;
         height: 3px;
         flex: 1;
+        margin: 5px 0;
       }
 
       .certificate-type {
@@ -98,7 +99,13 @@
     background: $color-secondary-500;
     text-align: right;
     padding: 0px 18px;
-
+    color: var(--shades-white, #fff);
+    text-align: right;
+    font-family: Open Sans;
+    font-size: 4.789px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 8.62px; /* 180% */
     p {
       color: $color-shades-white;
       font-size: 3.12px;
@@ -135,5 +142,23 @@
     .course {
       text-align: right;
     }
+  }
+}
+
+.cert-pdf {
+  display: none;
+  .certificate {
+    .certificate-content {
+      padding: 5px;
+    }
+    .certificate-footer {
+      padding: 5px;
+      .company-details .brand-details .company-name {
+        line-height: 17px;
+      }
+    }
+  }
+  .certificate-site-name {
+    padding: 0px 5px;
   }
 }

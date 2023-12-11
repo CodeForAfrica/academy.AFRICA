@@ -1,15 +1,19 @@
 <?php
+
 $congratulations = "Congratulations";
 $certificate_title = "CERTIFICATE OF";
 $certificate_type = "COMPLETION";
 $share_title = "Share the good news!";
 $presented_to = "PRESENTED TO";
 $certificate_description = "For completing the academy.AFRICA course";
+$course_id = $args["course_id"] ?? null;
 $course = get_post($course_id);
 $certificate_course = get_the_title($course);
 $company_name = "academy.Africa";
 $user_id = get_current_user_id();
 $certificate_link = learndash_get_course_certificate_link($args["course_id"], $user_id);
+$certificate_id = learndash_get_setting($course_id, 'certificate');
+$cert_post = get_post($certificate_id);
 $user = array(
     "first_name" => get_user_meta($user_id, 'first_name', true),
     "last_name" => get_user_meta($user_id, 'last_name', true),
@@ -48,14 +52,18 @@ $academy_head = array(
     'signature' => get_stylesheet_directory_uri().'/assets/images/signature.png',
     'date' => date("d/m/Y")
 );
+global $shortcode_tags;
 ?>
 <script>
-    console.log(<? echo json_encode($args) ?>)
+    console.log(<? echo json_encode($shortcode_tags) ?>)
 </script>
 <div class="course-completed">
     <h4 class="cfa-title">
         <? echo $congratulations ?>
     </h4>
+    <div class="cert-pdf">
+        <? echo do_shortcode($cert_post->post_content) ?>
+    </div>
     <div class="content">
         <div class="certificate">
             <div class="certificate-content">
@@ -72,7 +80,7 @@ $academy_head = array(
                     <div class="certificate-header-logo">
                         <hr />
                         <img class="logo" alt="logo"
-                            src="<? echo get_stylesheet_directory_uri().'/assets/images/mooc-logo-black.svg' ?>" />
+                            src="<? echo get_stylesheet_directory_uri().'/assets/images/mooc-logo-black.png' ?>" />
                     </div>
 
                 </div>
@@ -125,7 +133,7 @@ $academy_head = array(
                 </div>
             </div>
             <div class="certificate-site-name">
-                <p>
+                <p style="color: #fff; margin: 0;">
                     www.academy.africa
                 </p>
             </div>
@@ -149,22 +157,41 @@ $academy_head = array(
                     ?>
                 </div>
             </div>
-            <a href="<? echo $certificate_link ?>" download>
-                <button class="button primary">
-                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g id="Icon">
-                            <path id="Vector"
-                                d="M14.5 10.5V13.1667C14.5 13.5203 14.3595 13.8594 14.1095 14.1095C13.8594 14.3595 13.5203 14.5 13.1667 14.5H3.83333C3.47971 14.5 3.14057 14.3595 2.89052 14.1095C2.64048 13.8594 2.5 13.5203 2.5 13.1667V10.5"
-                                stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path id="Vector_2" d="M5.16797 7.16797L8.5013 10.5013L11.8346 7.16797" stroke="#EFF0FD"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </g>
-                    </svg>
-                    Download
-                </button>
-            </a>
+            <!-- <a href="<? echo $certificate_link ?>" download> -->
+            <button onclick="convertHTMLtoPDF()" class="button primary">
+                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="Icon">
+                        <path id="Vector"
+                            d="M14.5 10.5V13.1667C14.5 13.5203 14.3595 13.8594 14.1095 14.1095C13.8594 14.3595 13.5203 14.5 13.1667 14.5H3.83333C3.47971 14.5 3.14057 14.3595 2.89052 14.1095C2.64048 13.8594 2.5 13.5203 2.5 13.1667V10.5"
+                            stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path id="Vector_2" d="M5.16797 7.16797L8.5013 10.5013L11.8346 7.16797" stroke="#EFF0FD"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </g>
+                </svg>
+                Download
+            </button>
+            <!-- </a> -->
         </div>
     </div>
+    <script type="text/javascript">
+        function convertHTMLtoPDF() {
+            const { jsPDF } = window.jspdf;
+
+            let doc = new jsPDF('l', 'mm', [210, 297]);
+            let pdfjs = document.getElementById('certificate');
+            const width = doc.internal.pageSize.getWidth();
+            const height = doc.internal.pageSize.getHeight();
+            doc.html(pdfjs, {
+                callback: function (doc) {
+                    doc.save(`<? echo $user['first_name'].' '.$user['first_name'] ?> | <? echo $certificate_course ?>.pdf`);
+                },
+                width: width,
+                height,
+                windowWidth: 891,
+                html2canvas: { scale: 0.954 },
+            });
+        }            
+    </script>
 </div>
