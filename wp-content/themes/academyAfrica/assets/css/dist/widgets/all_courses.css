@@ -215,6 +215,15 @@ table {
 }
 .all-courses .courses-main .course-grid .pagination-container .see-all {
   display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.all-courses .courses-main .course-grid .pagination-container .see-all:hover {
+  background: none;
+}
+.all-courses .courses-main .course-grid .pagination-container .see-all:focus {
+  outline: none;
 }
 .all-courses .courses-main .course-grid .pagination-container .pagination {
   display: none;

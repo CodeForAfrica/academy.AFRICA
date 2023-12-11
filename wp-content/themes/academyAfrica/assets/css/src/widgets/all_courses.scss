@@ -112,6 +112,17 @@
 
         .see-all {
           display: block;
+          margin: 0;
+          padding: 0;
+          border: none;
+
+          &:hover {
+            background: none;
+          }
+
+          &:focus {
+            outline: none;
+          }
         }
 
         .pagination {
