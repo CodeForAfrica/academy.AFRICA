@@ -131,6 +131,120 @@
       }
     }
 
+    .career-dev {
+      display: flex;
+      padding: 40px 24px 80px;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+
+      .title {
+        color: $color-primary-700;
+        font-family: Open Sans;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 48px;
+      }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 64px;
+        align-self: stretch;
+
+        @include media-breakpoint-up(tablet) {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 48px;
+          flex: 1;
+
+          .text {
+            color: $color-shades-black;
+            font-family: Open Sans;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px;
+          }
+
+          .cta {
+            align-self: center;
+          }
+        }
+
+        .sample-course {
+          flex: 1;
+
+          .pathway-link {
+            .card {
+              border: 0.5px solid $color-neutral-200;
+              background-color: $color-primary-700;
+              min-width: 280px;
+              width: 280px;
+
+              .course-card-pattern {
+                background-image: url("../../../images/CourseCardPatterns.svg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                height: 145px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .icon {
+                  width: 90px;
+                  height: 90px;
+                  background: $color-shades-white;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border-radius: 50%;
+                }
+              }
+
+              .pathway-card-content {
+                padding: 20px;
+                height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .pathway-name {
+                  color: $color-shades-white;
+                  margin: 0;
+                  font-family: Open Sans;
+                  font-size: 18px;
+                  font-style: normal;
+                  font-weight: 700;
+                  line-height: 24px;
+                }
+
+                .course-count {
+                  margin: 0;
+                  color: $color-shades-white;
+                  font-family: Open Sans;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 21px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
   }
 
   @include media-breakpoint-up(tablet) {

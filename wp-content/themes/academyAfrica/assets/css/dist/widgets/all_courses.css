@@ -228,6 +228,106 @@ table {
 .all-courses .courses-main .course-grid .pagination-container .pagination {
   display: none;
 }
+.all-courses .courses-main .career-dev {
+  display: flex;
+  padding: 40px 24px 80px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+.all-courses .courses-main .career-dev .title {
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+}
+.all-courses .courses-main .career-dev .body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+}
+@media (min-width: 768px) {
+  .all-courses .courses-main .career-dev .body {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.all-courses .courses-main .career-dev .body .content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+  flex: 1;
+}
+.all-courses .courses-main .career-dev .body .content .text {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+.all-courses .courses-main .career-dev .body .content .cta {
+  align-self: center;
+}
+.all-courses .courses-main .career-dev .body .sample-course {
+  flex: 1;
+}
+.all-courses .courses-main .career-dev .body .sample-course .pathway-link .card {
+  border: 0.5px solid #CCCFDA;
+  background-color: #0C1A81;
+  min-width: 280px;
+  width: 280px;
+}
+.all-courses .courses-main .career-dev .body .sample-course .pathway-link .card .course-card-pattern {
+  background-image: url("../../../images/CourseCardPatterns.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 145px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.all-courses .courses-main .career-dev .body .sample-course .pathway-link .card .course-card-pattern .icon {
+  width: 90px;
+  height: 90px;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.all-courses .courses-main .career-dev .body .sample-course .pathway-link .card .pathway-card-content {
+  padding: 20px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.all-courses .courses-main .career-dev .body .sample-course .pathway-link .card .pathway-card-content .pathway-name {
+  color: #FFFFFF;
+  margin: 0;
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+.all-courses .courses-main .career-dev .body .sample-course .pathway-link .card .pathway-card-content .course-count {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
 @media (min-width: 768px) {
   .all-courses .courses-main .course-grid {
     padding: 40px 55px;

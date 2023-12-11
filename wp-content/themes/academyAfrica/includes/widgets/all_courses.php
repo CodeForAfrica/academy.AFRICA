@@ -53,6 +53,20 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
     protected function register_controls()
     {
+
+        $leaning_attr = [
+            'per_page' => '-1',
+            'paged' => '1',
+            'orderby' => 'title',
+            'order' => 'ASC'
+        ];
+        $pathways = CoursesFunctions::getLearningPaths($leaning_attr);
+        $learning_paths = $pathways["learning_paths"];
+        $learning_paths = array_reduce($learning_paths, function ($carry, $pathway) {
+            $carry[$pathway["id"]] = esc_html__($pathway["title"], 'textdomain');
+            return $carry;
+        }, []);
+
         $this->start_controls_section(
             'courses_settings',
             [
@@ -88,6 +102,63 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             ]
         );
         $this->end_controls_section();
+        $this->start_controls_section(
+            'learning_settings',
+            [
+                'label' => __('Career Development Settings', 'academy-africa'),
+            ]
+        );
+        $this->add_control(
+            'learning_title',
+            [
+                'label' => __('Career Development  Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Career Development', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'learning_description',
+            [
+                'label' => __('Career Development Description', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Learn how you can boost your career in your chosen field by taking a collection of academy.africa courses and being part of our communities. Click on the button to see all the different career paths that ca be boosted with academy.africa courses.', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'learning_button_text',
+            [
+                'label' => __('Career Development Button Text', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Explore Pathways', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'learning_button_link',
+            [
+                'label' => __('Career Development Button Link', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('https://academy.africa/pathways', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'learning_sample_course',
+            [
+                'label' => __('Sample Learning Pathways', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::SELECT2,
+                'multiple' => false,
+                'options' => $learning_paths,
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
 
@@ -102,6 +173,13 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
         $view = $this->get_query_param('view');
+        $pathway_title = $settings['learning_title'];
+        $pathway_description = $settings['learning_description'];
+        $pathway_button_text = $settings['learning_button_text'];
+        $pathway_button_link = $settings['learning_button_link'];
+        $pathway_sample_course = $settings['learning_sample_course'];
+        $pathway = get_post($pathway_sample_course);
+        $pathway_courses = get_field('courses', $pathway);
 
         $sort_options = [
             "date-desc" => [
@@ -159,6 +237,8 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
         $posts = $query->get_posts();
         $courses = $posts;
+
+
 
 ?>
         <main class="all-courses">
@@ -286,7 +366,43 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     }
                     ?>
                 </section>
-            </div>
+                <div class="career-dev">
+                    <div class="title">
+                        <? echo $pathway_title ?>
+                    </div>
+                    <div class="body">
+                        <div class="content">
+                            <div class="text">
+                                <? echo $pathway_description ?>
+                            </div>
+                            <div class="cta">
+                                <a href="<? echo $pathway_button_link ?>" class="button primary medium">
+                                    <? echo $pathway_button_text ?>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="sample-course">
+                            <a href="/" class="pathway-link">
+                                <div class="card">
+                                    <div class="course-card-pattern">
+                                        <div class="icon">
+                                            <img src="<?php echo get_the_post_thumbnail_url($pathway); ?>" alt="<? echo $pathway->post_title ?>" />
+                                        </div>
+                                    </div>
+                                    <div class="pathway-card-content">
+                                        <p class="pathway-name">
+                                            <? echo $pathway->post_title ?>
+                                        </p>
+                                        <p class="course-count">
+                                            <? echo count($pathway_courses) . ' Courses' ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
         </main>
 <?
     }
