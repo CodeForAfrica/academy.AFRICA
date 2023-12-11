@@ -251,27 +251,6 @@ li {
   padding: 80px 60px 40px;
   position: relative;
 }
-.main .incomplete-courses .cfa-title {
-  color: #0C1A81;
-  color: #000000;
-  font-family: Open Sans;
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 60px;
-  margin: 0 0 24px;
-}
-.main .incomplete-courses .cfa-title strong {
-  color: #0C1A81;
-}
-.main .incomplete-courses .cfa-title::after {
-  content: "";
-  display: block;
-  height: 6px;
-  width: 60px;
-  background: #ED1C24;
-  margin-top: 32px;
-}
 .main .incomplete-courses .description {
   color: #0C1A81;
   font-family: Open Sans;
@@ -280,9 +259,19 @@ li {
   font-weight: 600;
   line-height: 48px;
 }
+@media (max-width: 768px) {
+  .main .incomplete-courses .description {
+    color: var(--primary-700, #0c1a81);
+    /* Mobile Headings */
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 120% */
+  }
+}
 .main .incomplete-courses .content {
   box-sizing: border-box;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
@@ -345,6 +334,7 @@ li {
   font-style: normal;
   font-weight: 400;
   line-height: 21px;
+  margin: 20px 0;
 }
 .main .incomplete-courses .content .card .card-content .progress-bar {
   background-color: #E2E4EB;
@@ -380,7 +370,6 @@ li {
   font-weight: 600;
   line-height: 18px;
   text-transform: uppercase;
-  margin-top: 40px;
   height: 18px;
   overflow: hidden;
 }
@@ -459,6 +448,7 @@ li {
   font-style: normal;
   font-weight: 400;
   line-height: 21px;
+  margin: 20px 0;
 }
 .your-certificates .content .card .card-content .completed-progress-bar {
   height: 10px;
@@ -494,7 +484,6 @@ li {
   font-weight: 600;
   line-height: 18px;
   text-transform: uppercase;
-  margin-top: 40px;
   height: 18px;
   overflow: hidden;
 }

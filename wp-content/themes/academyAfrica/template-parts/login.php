@@ -22,7 +22,7 @@
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Google">
                 Sign In with Facebook
             </button>
-            <button onclick="theChampInitiateLogin(this, 'twitter')" class="twitter">
+            <button onclick="theChampInitiateLogin(this, 'x')" class="twitter">
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/twitter.svg" alt="Google">
                 Sign In with X (formerly Twitter)
             </button>
@@ -38,7 +38,8 @@
         <?php wp_login_form(); ?>
         <footer class="modal-footer">
             <div>
-                <span>New to academy.Africa?</span><span onclick="closeModal('login'); openModal('register');">Register now</span>
+                <span>New to academy.Africa?</span><span onclick="closeModal('login'); openModal('register');">Register
+                    now</span>
             </div>
             <!-- <button class="button primary" type="submit">Login</button> -->
         </footer>

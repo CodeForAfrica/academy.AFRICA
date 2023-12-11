@@ -27,7 +27,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.0.8');
+define('ACADEMY_AFRICA_VERSION', '1.0.9');
 
 function my_theme_enqueue_styles() {
     wp_enqueue_style('child-style', get_stylesheet_directory_uri().'/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), ACADEMY_AFRICA_VERSION);
@@ -40,7 +40,7 @@ function my_theme_enqueue_styles() {
     wp_enqueue_style(('sfwd-common'), get_stylesheet_directory_uri().'/assets/css/dist/pages/sfwd-common.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('course-completed'), get_stylesheet_directory_uri().'/assets/css/dist/pages/course-completed.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('single-ac-learning-path'), get_stylesheet_directory_uri().'/assets/css/dist/pages/single-ac-learning-path.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('search'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_style(('search'), get_stylesheet_directory_uri().'/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('filter_bar'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/filter_bar.css', array(), ACADEMY_AFRICA_VERSION);
 }
 
@@ -173,13 +173,84 @@ function my_acf_show_admin($show) {
     return current_user_can('manage_options');
 }
 
-add_filter('authenticate', 'restrict_user_status', 20, 3);
+add_action('user_register', 'send_activation_link', 10, 1);
+
+function send_activation_link($user_id) {
+    if($user_id) {
+        $user = get_user_by('ID', $user_id);
+        $sign_in_url = home_url().'#sign-in';
+        $code = $user->data->user_activation_key;
+        $valid_code = isset($code) ? $code : sha1($user_id.time());
+        global $wpdb;
+        $wpdb->update(
+            'wp_users',
+            array('user_activation_key' => $valid_code, 'user_status' => 1, ),
+            array('ID' => $user_id),
+        );
+        $email = $user->data->user_email;
+        $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $valid_code, 'user_id' => $user_id), $sign_in_url);
+        ?>
+        <script>
+            console.log(<? echo json_encode($user) ?>, <? echo json_encode($activation_link) ?>);
+        </script>
+        <?
+        wp_mail($email, '[academy.AFRICA] Login Details', 'Activation link : '.$activation_link);
+    }
+}
+
+function whitelist_address() {
+    return array(
+        '127.0.0.1',
+        '::1',
+        'localhost'
+    );
+}
 
 function restrict_user_status($user, $username, $password) {
-    if($user instanceof WP_User) {
-        if($user->data->user_status == 0) {
+    if(!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+        return $user;
+    } else {
+        if($user instanceof WP_User) {
+            $account_status = get_user_meta($user->data->ID, 'account_status', true);
+            if($user->data->user_status == 1 || $account_status !== "active") {
+                if(!isset($user->data->user_activation_key)) {
+                    send_activation_link($user->data->ID);
+                }
+                return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
+            } else {
+                return $user;
+            }
+        } else {
             return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
         }
     }
-    return $user;
 }
+
+function authenticate_user() {
+    $user_id = get_current_user_id();
+    $user = get_user_by('ID', $user_id);
+    if(!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+        return $user;
+    } else {
+        if($user instanceof WP_User) {
+            $account_status = get_user_meta($user->data->ID, 'account_status', true);
+            global $whitelist;
+            if(!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+                if($user->data->user_status == 1 || $account_status !== "active") {
+                    send_activation_link($user->data->ID);
+                    wp_logout();
+                    ?>
+                    <script>
+                        window.location.reload();
+                    </script>
+                    <?
+                }
+            }
+        } else {
+            wp_logout();
+        }
+    }
+}
+
+add_action('init', 'authenticate_user');
+add_filter('authenticate', 'restrict_user_status', 20, 3);
