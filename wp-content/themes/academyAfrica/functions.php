@@ -27,7 +27,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.2');
+define('ACADEMY_AFRICA_VERSION', '1.1.3');
 
 function my_theme_enqueue_styles() {
     wp_enqueue_style('child-style', get_stylesheet_directory_uri().'/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), ACADEMY_AFRICA_VERSION);
