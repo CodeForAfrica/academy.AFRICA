@@ -212,6 +212,7 @@ table {
 }
 .all-courses .courses-main .course-grid .pagination-container {
   justify-content: center;
+  margin-top: 24px;
 }
 .all-courses .courses-main .course-grid .pagination-container .see-all {
   display: block;
