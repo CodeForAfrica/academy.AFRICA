@@ -366,43 +366,48 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     }
                     ?>
                 </section>
-                <div class="career-dev">
-                    <div class="title">
-                        <? echo $pathway_title ?>
-                    </div>
-                    <div class="body">
-                        <div class="content">
-                            <div class="text">
-                                <? echo $pathway_description ?>
+                <?php if (!empty($pathway)) {
+                ?>
+                    <div class="career-dev">
+                        <div class="title">
+                            <? echo $pathway_title ?>
+                        </div>
+                        <div class="body">
+                            <div class="content">
+                                <div class="text">
+                                    <? echo $pathway_description ?>
+                                </div>
+                                <div class="cta">
+                                    <a href="<? echo $pathway_button_link ?>" class="button primary medium">
+                                        <? echo $pathway_button_text ?>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="cta">
-                                <a href="<? echo $pathway_button_link ?>" class="button primary medium">
-                                    <? echo $pathway_button_text ?>
-                                    <i class="fas fa-arrow-right"></i>
+                            <div class="sample-course">
+                                <a href="/" class="pathway-link">
+                                    <div class="card">
+                                        <div class="course-card-pattern">
+                                            <div class="icon">
+                                                <img src="<?php echo get_the_post_thumbnail_url($pathway); ?>" alt="<? echo $pathway->post_title ?>" />
+                                            </div>
+                                        </div>
+                                        <div class="pathway-card-content">
+                                            <p class="pathway-name">
+                                                <? echo $pathway->post_title ?>
+                                            </p>
+                                            <p class="course-count">
+                                                <? echo count($pathway_courses) . ' Courses' ?>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="sample-course">
-                            <a href="/" class="pathway-link">
-                                <div class="card">
-                                    <div class="course-card-pattern">
-                                        <div class="icon">
-                                            <img src="<?php echo get_the_post_thumbnail_url($pathway); ?>" alt="<? echo $pathway->post_title ?>" />
-                                        </div>
-                                    </div>
-                                    <div class="pathway-card-content">
-                                        <p class="pathway-name">
-                                            <? echo $pathway->post_title ?>
-                                        </p>
-                                        <p class="course-count">
-                                            <? echo count($pathway_courses) . ' Courses' ?>
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
                     </div>
-                </div>
+                <?
+                }
+                ?>
         </main>
 <?
     }
