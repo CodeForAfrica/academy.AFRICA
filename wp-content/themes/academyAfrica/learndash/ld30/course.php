@@ -1,11 +1,5 @@
 <?php
 
-/**
- *Template Name: Single Course
- *Template Post Type: sfwd-courses
- */
-
-
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -20,6 +14,8 @@ $is_enrolled = in_array($course_id, $user_courses);
 $organizations = get_field('organization', $course_id);
 $related_courses = get_field('related_courses', $course_id);
 $course_status = learndash_course_status($course_id);
+$post_data = get_post($course_id);
+$course_intro    = $post_data->post_content;
 
 $social_media_links = [
     [
@@ -47,14 +43,14 @@ $social_media_links = [
         'type' => 'linkedin',
     ],
 ];
+
 ?>
 
-<?
-get_header();
-?>
-<script>
-    let p = <? echo json_encode($course_status) ?>;
-</script>
+<style>
+    .entry-title {
+        display: none;
+    }
+</style>
 <?
 if ($course_status == "Completed") {
     get_template_part('template-parts/course_completed', null, array('course_id' => $course_id));
@@ -76,10 +72,10 @@ if ($course_status == "Completed") {
                 </div>
             </div>
             <?php
-            if (get_the_excerpt()) {
+            if (!empty($course_intro)) {
             ?>
                 <div class="description">
-                    <?php the_excerpt(); ?>
+                    <?php echo $course_intro; ?>
                 </div>
             <?php
             }
@@ -132,14 +128,13 @@ if ($course_status == "Completed") {
             <?
             }
             ?>
-
             <hr class="divider">
             <div class="introduction">
                 <p class="cfa-introduction-title">
                     Introduction
                 </p>
                 <div class="cfa-introduction">
-                    <?php echo the_content(); ?>
+                    <?php echo $course_intro; ?>
                 </div>
             </div>
             <div class="carriculum">
@@ -158,13 +153,14 @@ if ($course_status == "Completed") {
                         $author = get_post_field('post_author', $course_id);
                         $name = get_the_author_meta('display_name', $author);
                         $avatar = get_avatar_url($author);
+                        $avatar_url = $avatar ? $avatar : get_stylesheet_directory_uri() . ('/assets/images/default_user.svg');
                         echo $name;
                         ?>
                     </p>
                 </div>
                 <div class="avatar">
                     <?php
-                    echo '<img src="' . $avatar . '" alt="">';
+                    echo '<img src="' . $avatar_url . '" alt="">';
                     ?>
                 </div>
                 <div class="description">
@@ -262,5 +258,4 @@ if ($course_status == "Completed") {
     </div>
 <?
 }
-get_footer();
 ?>

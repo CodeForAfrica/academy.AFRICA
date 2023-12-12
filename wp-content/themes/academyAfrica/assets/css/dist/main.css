@@ -1461,4 +1461,8 @@ label {
   padding: 0px 5px;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 /*# sourceMappingURL=main.css.map */

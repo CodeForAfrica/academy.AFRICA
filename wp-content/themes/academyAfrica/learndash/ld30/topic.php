@@ -1,10 +1,5 @@
 <?php
 
-/*
-* Template Name: Single Lesson
-* Template Post Type: sfwd-lessons
-*/
-
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -15,9 +10,17 @@ $course_id = learndash_get_course_id($lesson_id);
 $course_url = get_permalink($course_id);
 $course = get_post($course_id);
 $lessons = learndash_get_course_lessons_list($course_id);
+$topic = get_post($lesson_id);
+
 ?>
 
-<?php get_header(); ?>
+
+<style>
+    .entry-title {
+        display: none;
+    }
+</style>
+
 
 <div class="sfwd-container">
     <div class='sfwd-small-screen'>
@@ -60,7 +63,7 @@ $lessons = learndash_get_course_lessons_list($course_id);
                 </div>
                 <div class="sfwd-lessons__content">
                     <?php
-                    the_content();
+                    echo $topic->post_content;
                     ?>
                 </div>
                 <div class="sfwd-lessons__navigation">
@@ -86,12 +89,17 @@ $lessons = learndash_get_course_lessons_list($course_id);
                     ?>
                 </div>
                 <div class="sfwd-lessons__footer">
-                    <hr class="sfwd-lessons__navigation__divider" />
-
+                    <hr class="sfwd-lessons__footer__divider" />
+                    <?
+                    $complete_button = learndash_mark_complete($topic);
+                    if ($complete_button) {
+                        echo "<div class='sfwd-lessons__footer__complete'>";
+                        echo $complete_button;
+                        echo "</div>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<?php get_footer(); ?>

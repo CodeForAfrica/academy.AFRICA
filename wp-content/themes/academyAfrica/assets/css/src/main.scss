@@ -7,3 +7,8 @@
 @use "./components/title";
 @use "./components/modal";
 @use "./components/certificate";
+
+
+a {
+    text-decoration: none !important;
+}
