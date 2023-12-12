@@ -126,6 +126,7 @@ if ($course_status == "Completed") {
             } else {
             ?>
                 <div class="enroll">
+                    <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
                     <button class="button secondary large enroll-button">Enroll Now</button>
                 </div>
             <?

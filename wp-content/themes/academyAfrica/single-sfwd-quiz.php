@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Template Name: Single Quiz
+ * Template Post Type: sfwd-quiz
+ */
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
+
 $lesson_id = get_the_ID();
 $course_id = learndash_get_course_id($lesson_id);
 

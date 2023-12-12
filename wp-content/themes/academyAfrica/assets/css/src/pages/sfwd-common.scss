@@ -107,6 +107,7 @@
 
                             .ld-progress-bar {
                                 width: 260px;
+
                                 .ld-progress-bar-percentage {
                                     background-image: linear-gradient(to right,
                                             #ec1e27,
@@ -248,6 +249,11 @@
                 flex-direction: column;
                 gap: 24px;
                 align-items: flex-start;
+                width: 812px;
+
+                @include media-breakpoint-up(large) {
+                    width: 1040px;
+                }
 
                 &__title {
                     &__text {
@@ -267,11 +273,6 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: 28px;
-                    width: 812px;
-
-                    @include media-breakpoint-up(large) {
-                        width: 1040px;
-                    }
 
                     a {
                         color: $color-primary-700;
