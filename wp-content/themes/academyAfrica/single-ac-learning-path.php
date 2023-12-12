@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Template Name: Learning Path
+ * Template Post Type: ac-learning-path
+ */
+
 $learning_path_id = get_the_ID();
 $learning_path_title = get_the_title();
 $learning_path_excerpt = get_the_excerpt();
