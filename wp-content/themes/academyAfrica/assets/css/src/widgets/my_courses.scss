@@ -9,73 +9,20 @@ $font-family_1: Open Sans;
   position: relative;
   max-width: 1440px;
   margin: 0 auto;
+
+  .d-none {
+    display: none;
+  }
+  @include media-breakpoint-down(tablet) {
+    #mobile-filter {
+      flex: 1;
+    }
+  }
   .divider {
     background: #a9a9a9;
     border: none;
     height: 1px;
     margin: 40px 0;
-  }
-  .sidebar {
-    padding: 100px 60px;
-    box-sizing: border-box;
-    background: $color-shades-white;
-    width: 340px;
-    height: auto;
-    border-right: 1px solid $color-neutral-100;
-    top: 0;
-    transition: left 0.3s;
-    overflow-y: auto;
-    .sort {
-      margin-bottom: 40px;
-      .label {
-        color: var(--shades-black, #000);
-
-        /* Paragraph/P3/Regular */
-        font-family: Open Sans;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 28px; /* 155.556% */
-      }
-      .select {
-        border-radius: 4px;
-        background: #fff;
-        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
-        border: none;
-        padding: 15px;
-        height: 50px;
-        color: #000;
-        font-family: Open Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 26px; /* 162.5% */
-      }
-    }
-    .filter-by {
-      color: $color-shades-black;
-      font-family: $font-family_1;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 28px;
-    }
-    .filter-by-title {
-      color: $color-shades-black;
-      font-family: $font-family_1;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 24px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-    li {
-      margin: 0;
-    }
   }
   .content {
     flex: 1;
@@ -386,11 +333,6 @@ li {
   }
 }
 @include media-breakpoint-down(tablet) {
-  .body {
-    .sidebar {
-      display: none;
-    }
-  }
   .main {
     .incomplete-courses {
       a {

@@ -158,54 +158,6 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
         );
         ?>
         <main class="body">
-            <!-- <aside class="filter-sidebar">
-                <div class="sidebar" id="sidebar">
-                    <div class="sort">
-                        <div class="label">
-                            Sort by:
-                        </div>
-                        <select name="sort" id="sort" class="select" onchange="changeSort(this)">
-                            <? $selected = $sort === "oldest" ? 'selected="selected"' : "" ?>
-                            <option value="recent">Most Recent</option>
-                            <option <? echo $selected ?> value="oldest">Oldest</option>
-                        </select>
-                    </div>
-                    <p class="filter-by">
-                        <? echo $filter_by ?>
-                    </p>
-                    <?
-                    if(!empty($filter_options)) {
-                        foreach($filter_options as $item) {
-                            $title = $item["title"];
-                            $options = $item["options"];
-                            ?>
-                            <p style="margin-top: 40px" class="filter-by-title">
-                                <? echo $title ?>
-                            </p>
-                            <?
-                            if(!empty($options)) {
-                                foreach($options as $option) {
-                                    ?>
-                                    <ul>
-                                        <li>
-                                            <label class="mui-checkbox">
-                                                <input type="checkbox"
-                                                    onclick="filterCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')"
-                                                    value="<? echo $option->id ?>" name="<? echo $item["name"].'-'.$option->name ?>">
-                                                <span class="checkmark"></span>
-                                                <? echo $option->name ?>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                    <?
-                                }
-                            }
-                        }
-                    }
-                    ?>
-
-                </div>
-            </aside> -->
             <?php get_template_part('template-parts/filter_bar', 'template', [
                 'filter_by' => $filter_by,
                 'filter_options' => $filter_options,
@@ -213,108 +165,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                 'sort_options' => $sort_options,
                 'sort' => $sort
             ]); ?>
-            <div class="main">
-                <div id="filters" class="mobile-filters">
-                    <div>
-                        <div class="filters">
-                            <div style="display:flex; justify-content: space-between; margin: 0 0 40px; align-items: center;"
-                                class="close-filters">
-                                <h1 class="filter-by">
-                                    <? echo $filter_by ?>
-                                </h1>
-                                <button onclick="closeFilters()" style="margin: 0" class="button clear-filters">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_11179_27069)">
-                                            <path
-                                                d="M8.0026 14.6693C11.6845 14.6693 14.6693 11.6845 14.6693 8.0026C14.6693 4.32071 11.6845 1.33594 8.0026 1.33594C4.32071 1.33594 1.33594 4.32071 1.33594 8.0026C1.33594 11.6845 4.32071 14.6693 8.0026 14.6693Z"
-                                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M10 6L6 10" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M6 6L10 10" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_11179_27069">
-                                                <rect width="16" height="16" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    Close
-                                </button>
-                            </div>
-                            <?
-                            if(!empty($filter_options)) {
-                                foreach($filter_options as $item) {
-                                    $title = $item["title"];
-                                    ?>
-                                    <div class="accordion-parent">
-                                        <button class="accordion">
-                                            <? echo $title ?>
-                                        </button>
-                                        <?
-                                        $options = $item["options"];
-                                        $option_name = $item["name"];
-                                        if(!empty($options)) {
-                                            ?>
-                                            <div class="panel">
-                                                <ul>
-                                                    <?
-                                                    foreach($options as $option) {
-                                                        ?>
-
-                                                        <li>
-                                                            <label class="mui-checkbox">
-                                                                <input type="checkbox"
-                                                                    onclick="onChangeCheckBox(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')"
-                                                                    value="<? echo $option->id ?>"
-                                                                    name="<? echo $item["name"].'-'.$option->name ?>">
-                                                                <span class="checkmark"></span>
-                                                                <? echo $option->name ?>
-                                                            </label>
-                                                        </li>
-
-                                                        <?
-                                                    }
-                                                    ?>
-                                                </ul>
-                                            </div>
-                                            <?
-                                        }
-                                        ?>
-                                    </div>
-                                    <?
-                                }
-                            }
-                            ?>
-
-                        </div>
-                        <div class="actions">
-                            <button onclick="applyFilters()" class="button primary">
-                                Apply
-                            </button>
-                            <button class="button clear-filters" style="margin-top: 0; padding: 0" onclick="clearFilters()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <g clip-path="url(#clip0_11179_27069)">
-                                        <path
-                                            d="M8.0026 14.6693C11.6845 14.6693 14.6693 11.6845 14.6693 8.0026C14.6693 4.32071 11.6845 1.33594 8.0026 1.33594C4.32071 1.33594 1.33594 4.32071 1.33594 8.0026C1.33594 11.6845 4.32071 14.6693 8.0026 14.6693Z"
-                                            stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M10 6L6 10" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M6 6L10 10" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_11179_27069">
-                                            <rect width="16" height="16" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                Clear all filters
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="main" id="all-courses">
                 <section class="incomplete-courses">
                     <h4 class="cfa-title">
                         Welcome <strong>
@@ -328,11 +179,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                             </div>
                             <select name="sort" id="sort" class="select" onchange="changeSort(this)">
                                 <option value="newest">Most Recent</option>
+                                <? $selected = $sort === "oldest" ? 'selected="selected"' : "" ?>
                                 <option <? echo $selected ?> value="oldest">Oldest</option>
                             </select>
                         </div>
                         <div class="filter">
-                            <button id="courses-mobile-filter" class="button primary filter-btn" onclick="openFilters()">
+                            <button id="courses-mobile-filter" class="button primary filter-btn">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_11905_79908)">
                                         <path d="M15.1693 2H1.83594L7.16927 8.30667V12.6667L9.83594 14V8.30667L15.1693 2Z"
