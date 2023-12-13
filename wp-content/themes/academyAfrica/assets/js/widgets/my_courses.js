@@ -23,6 +23,7 @@ function openFilters() {
   const filters = document.getElementById("filters");
   if (filters) {
     filters.style.width = "100%";
+    filters.style.padding = "40px";
   }
 }
 
