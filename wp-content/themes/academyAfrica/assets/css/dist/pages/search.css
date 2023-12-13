@@ -130,7 +130,7 @@ table {
   flex-direction: column;
   gap: 40px;
 }
-.search-page .search-page-main .d-none {
+.search-page .search-page-main.d-none {
   display: none;
 }
 .search-page .search-page-main .search-page-header {

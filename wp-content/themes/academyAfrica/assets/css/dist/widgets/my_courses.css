@@ -129,11 +129,6 @@ table {
 .body .d-none {
   display: none;
 }
-@media (max-width: 768px) {
-  .body #mobile-filter {
-    flex: 1;
-  }
-}
 .body .divider {
   background: #a9a9a9;
   border: none;

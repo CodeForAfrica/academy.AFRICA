@@ -5,4 +5,7 @@
             <i class="fa-solid fa-magnifying-glass icon"></i>
         </button>
     </div>
+    <button class="close-btn" id="search-close-btn" type="button">
+        <i class="fa-solid fa-xmark" id="close"></i>
+    </button>
 </form>

@@ -13,11 +13,11 @@ $font-family_1: Open Sans;
   .d-none {
     display: none;
   }
-  @include media-breakpoint-down(tablet) {
-    #mobile-filter {
-      flex: 1;
-    }
-  }
+  // @include media-breakpoint-down(tablet) {
+  //   #mobile-filter {
+  //     flex: 1;
+  //   }
+  // }
   .divider {
     background: #a9a9a9;
     border: none;

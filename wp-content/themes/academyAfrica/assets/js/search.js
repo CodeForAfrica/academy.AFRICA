@@ -163,6 +163,10 @@ function mobileFilter(){
     const filterModal = document.querySelector("#filter-modal");
     const closeFilterModal = document.querySelectorAll("#close-filter-modal");
     
+    if(!mobileFilterBtn || !allCourses || !filterModal || !closeFilterModal){
+        return;
+    }
+
      mobileFilterBtn.addEventListener("click", () => {
          allCourses.classList.toggle("d-none"); 
          filterModal.classList.toggle("d-none");

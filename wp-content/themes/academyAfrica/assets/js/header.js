@@ -40,15 +40,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const searchIcon = document.querySelector(".search-icon");
   const searchForm = document.querySelector(".mobile-search");
-  const searchClose = document.querySelector(".search-close-btn");
+  const searchClose = document.querySelectorAll("#search-close-btn");
+  const mobileNav = document.querySelector("#mobile-nav");
+
 
   searchIcon.addEventListener("click", () => {
     searchForm.classList.toggle("open");
+    mobileNav.classList.toggle("d-none");
   });
 
-  searchClose.addEventListener("click", () => {
+  searchClose.forEach((element) => {
+    element.addEventListener("click", () => {
     searchForm.classList.toggle("open");
+    mobileNav.classList.toggle("d-none");
+  })
   });
+
 
   const signInMenu = document.querySelectorAll("a[href='#sign-in']");
   Array.from(signInMenu).forEach((element) => {

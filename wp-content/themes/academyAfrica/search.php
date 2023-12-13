@@ -99,52 +99,56 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
         'sort' => $sort
     ]); ?>
     <div class="search-page-main" id="all-courses">
-        <div class="search-page-header">
-            <? if (!empty($s)) {
-            ?>
+        <? if (!empty($s)) {
+        ?>
+            <div class="search-page-header">
+
                 <p class="search-page-subtitle">
                     <? echo $the_query->found_posts ?> results for:
                 </p>
                 <h1 class="search-page-title">
                     "<? echo $s ?>"
                 </h1>
-            <?
-            }
-            ?>
-        </div>
-        <div class="filters">
-            <div class="filter-section">
-                <div class="sort">
-                    <div class="label">
-                        Sort By:
-                    </div>
-                    <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
-                        <?
-                        foreach ($sort_options as $key => $option) {
-                            $selected = $sort == $key ? "selected" : "";
-                        ?>
-                            <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
-                        <?
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="filter">
-                    <button id="courses-mobile-filter" class="button primary medium filter-btn">
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_11905_79908)">
-                                <path d="M15.1693 2H1.83594L7.16927 8.30667V12.6667L9.83594 14V8.30667L15.1693 2Z" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_11905_79908">
-                                    <rect width="16" height="16" fill="white" transform="translate(0.5)" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-                        Filter
-                    </button>
-                </div>
+
             </div>
+        <?
+        }
+        ?>
+        <div class="filters">
+            <? if (empty($allFilters)) { ?>
+                <div class="filter-section">
+                    <div class="sort">
+                        <div class="label">
+                            Sort By:
+                        </div>
+                        <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
+                            <?
+                            foreach ($sort_options as $key => $option) {
+                                $selected = $sort == $key ? "selected" : "";
+                            ?>
+                                <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
+                            <?
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="filter">
+                        <button id="courses-mobile-filter" class="button primary medium filter-btn">
+                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_11905_79908)">
+                                    <path d="M15.1693 2H1.83594L7.16927 8.30667V12.6667L9.83594 14V8.30667L15.1693 2Z" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_11905_79908">
+                                        <rect width="16" height="16" fill="white" transform="translate(0.5)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            Filter
+                        </button>
+                    </div>
+                </div>
+            <? } ?>
             <? if (!empty($allFilters)) { ?>
                 <div class="selected-filters">
                     <div class="filters-list">

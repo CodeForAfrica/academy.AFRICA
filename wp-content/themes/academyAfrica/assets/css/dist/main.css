@@ -130,6 +130,9 @@ table {
 .header .mobile {
   padding: 20px 24px;
 }
+.header .mobile.d-none {
+  display: none;
+}
 @media (min-width: 1152px) {
   .header .mobile {
     display: none;
@@ -162,7 +165,10 @@ table {
 .header .mobile .nav .logo .site_name a {
   color: #FFFFFF;
 }
-.header .mobile .nav .search .icon {
+.header .mobile .nav .search .button:hover {
+  background: #0C1A81;
+}
+.header .mobile .nav .search .button .icon {
   font-size: 24px;
 }
 .header .desktop {
@@ -242,6 +248,9 @@ table {
   background: #EFF0FD;
   color: #FFFFFF;
   border: none;
+}
+.header .desktop .nav .nav-actions .search form .close-btn {
+  display: none;
 }
 .header .desktop .nav .nav-actions .menu .items {
   display: flex;
@@ -526,12 +535,17 @@ table {
 .mobile-search.open {
   display: block;
 }
-.mobile-search .input {
+.mobile-search .search form {
+  display: flex;
+  align-items: center;
+}
+.mobile-search .search form .input {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
-.mobile-search .input .search-btn {
+.mobile-search .search form .input .search-btn {
   border: none;
   background: #0C1A81;
   color: #FFFFFF;
@@ -540,7 +554,7 @@ table {
   cursor: pointer;
   width: 44px;
 }
-.mobile-search .input input {
+.mobile-search .search form .input input {
   width: 100%;
   height: 40px;
   border: none;
@@ -552,7 +566,7 @@ table {
   font-weight: 400;
   font-size: 14px;
 }
-.mobile-search .input .search-close-btn {
+.mobile-search .search form .input .search-close-btn {
   border: none;
   background: #EFF0FD;
   color: #0C1A81;
@@ -561,7 +575,30 @@ table {
   cursor: pointer;
   width: 44px;
 }
-.mobile-search .input .search-close-btn i {
+.mobile-search .search form .input .search-close-btn i {
+  font-size: 24px;
+  color: #0C1A81;
+}
+.mobile-search .search form .close-btn {
+  border: none;
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+@media (min-width: 1152px) {
+  .mobile-search .search form .close-btn {
+    display: none;
+  }
+}
+.mobile-search .search form .close-btn:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.mobile-search .search form .close-btn:focus {
+  background: #EFF0FD;
+  color: #0C1A81;
+  outline: none;
+}
+.mobile-search .search form .close-btn i {
   font-size: 24px;
   color: #0C1A81;
 }

@@ -11,6 +11,10 @@
     .mobile {
         padding: 20px 24px;
 
+        &.d-none {
+            display: none;
+        }
+
         @include media-breakpoint-up(desktop) {
             display: none;
         }
@@ -50,9 +54,16 @@
             }
 
             .search {
-                .icon {
-                    font-size: 24px;
+                .button {
+                    &:hover {
+                        background: $color-primary-700;
+                    }
+
+                    .icon {
+                        font-size: 24px;
+                    }
                 }
+
             }
         }
     }
@@ -143,6 +154,10 @@
                                     border: none;
                                 }
                             }
+                        }
+
+                        .close-btn {
+                            display: none;
                         }
                     }
                 }
@@ -489,49 +504,87 @@
         display: block;
     }
 
-    .input {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .search-btn {
-            border: none;
-            background: $color-primary-700;
-            color: $color-shades-white;
-            padding: 10px;
-            border-radius: 0;
-            cursor: pointer;
-            width: 44px;
-        }
-
-        input {
-            width: 100%;
-            height: 40px;
-            border: none;
-            border-radius: 0;
-            padding: 0 20px;
-            outline: none;
-            color: $color-neutral-700;
-            font-style: italic;
-            font-weight: 400;
-            font-size: 14px;
-        }
-
-        .search-close-btn {
-            border: none;
-            background: $color-primary-50;
-            color: $color-primary-700;
-            padding: 10px;
-            border-radius: 0;
-            cursor: pointer;
-            width: 44px;
+    .search {
 
 
-            i {
-                font-size: 24px;
+        form {
+            display: flex;
+            align-items: center;
+
+            .input {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+
+                .search-btn {
+                    border: none;
+                    background: $color-primary-700;
+                    color: $color-shades-white;
+                    padding: 10px;
+                    border-radius: 0;
+                    cursor: pointer;
+                    width: 44px;
+                }
+
+                input {
+                    width: 100%;
+                    height: 40px;
+                    border: none;
+                    border-radius: 0;
+                    padding: 0 20px;
+                    outline: none;
+                    color: $color-neutral-700;
+                    font-style: italic;
+                    font-weight: 400;
+                    font-size: 14px;
+                }
+
+                .search-close-btn {
+                    border: none;
+                    background: $color-primary-50;
+                    color: $color-primary-700;
+                    padding: 10px;
+                    border-radius: 0;
+                    cursor: pointer;
+                    width: 44px;
+
+
+                    i {
+                        font-size: 24px;
+                        color: $color-primary-700;
+                    }
+                }
+
+            }
+
+            .close-btn{
+
+                @include media-breakpoint-up(desktop) {
+                    display: none;
+                }
+                border: none;
+                background: $color-primary-50;
                 color: $color-primary-700;
+
+                &:hover {
+                    background: $color-primary-50;
+                    color: $color-primary-700;
+                }
+
+                &:focus {
+                    background: $color-primary-50;
+                    color: $color-primary-700;
+                    outline: none;
+                }
+
+                i {
+                    font-size: 24px;
+                    color: $color-primary-700;
+                }
             }
         }
-
     }
+
+
 }

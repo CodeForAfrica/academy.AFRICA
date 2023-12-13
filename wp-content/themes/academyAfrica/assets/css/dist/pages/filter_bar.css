@@ -220,13 +220,13 @@ table {
   }
 }
 
-.mobile-sidebar {
-  display: block;
-}
 @media (min-width: 1152px) {
   .mobile-sidebar {
     display: none;
   }
+}
+.mobile-sidebar .filter-modal {
+  min-width: 100vw;
 }
 .mobile-sidebar .filter-modal.d-none {
   display: none;

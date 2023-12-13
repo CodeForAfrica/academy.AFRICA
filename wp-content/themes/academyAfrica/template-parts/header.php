@@ -22,7 +22,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
 ?>
 <nav class="header">
     <!-- Mobile Nav -->
-    <div class="mobile">
+    <div class="mobile" id="mobile-nav">
         <div class="nav">
             <div class="hamburger">
                 <div class="icon open">
@@ -45,7 +45,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
             <div class="search">
                 <div class="button primary search-icon">
                     <i class="fa-solid fa-magnifying-glass icon"></i>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
@@ -156,13 +156,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
 
 <!-- Mobile Search -->
 <div class="mobile-search">
-    <div class="input">
-        <button class="btn search-btn" type="button" id="button-search">
-            <i class="fa-solid fa-magnifying-glass icon"></i>
-        </button>
-        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
-        <div class="button primary search-close-btn">
-            <i class="fa-solid fa-xmark"></i>
-        </div>
+    <div class="search">
+        <?php get_search_form(); ?>
     </div>
 </div>
