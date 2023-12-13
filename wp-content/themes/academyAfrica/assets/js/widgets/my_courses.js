@@ -98,6 +98,17 @@ function buildQueryString(object) {
   return queryParts.join("&");
 }
 
+function onChangeCheckBox(input, category, value, apply) {
+  let selectedFilters = filters[category] || [];
+  if (input.checked) {
+    selectedFilters.push(value);
+  } else {
+    selectedFilters = selectedFilters.filter((item) => item !== value);
+  }
+  filters[category] = [...new Set(selectedFilters)];
+  if (apply) applyFilters();
+}
+
 window.onload = function onLoad() {
   const { search } = window.location;
   filters = parseQueryString(search);

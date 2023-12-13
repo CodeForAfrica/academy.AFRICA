@@ -55,16 +55,24 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
 
         return $output;
     }
+
+
+    public function sort_params() {
+        return array(
+            "date-asc" => "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) ASC",
+            "" => "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) DESC"
+        );
+    }
+
     public function get_completed_courses() {
         $user_id = get_current_user_id();
         $courses = learndash_user_get_enrolled_courses($user_id);
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
-        $sort = $this->get_query_param('sort');
+        $sort = $this->get_query_param('sort')[0];
         $current_page = $this->get_query_param("page") ? $this->get_query_param("page") : 1;
         $user_id = get_current_user_id();
-        $order_by = $sort === "oldest" ? "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) ASC" : "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) DESC";
-
+        $order_by = $this->sort_params()[$sort ?? 'date-desc'];
         $args = array(
             'post_types' => 'sfwd-courses',
             'activity_types' => 'course',
@@ -86,8 +94,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
         $sort = $this->get_query_param('sort')[0];
         $current_page = $this->get_query_param("courses_page") ? $this->get_query_param("courses_page") : 1;
         $course_ids = learndash_user_get_enrolled_courses(get_current_user_id());
-        $order_by = $sort === "oldest" ? "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) ASC" : "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) DESC";
-
+        $order_by = $this->sort_params()[$sort ?? 'date-desc'];
         $args = array(
             'post_types' => 'sfwd-courses',
             'activity_types' => 'course',
@@ -121,14 +128,37 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
         $current_user = wp_get_current_user();
         $certificate_pagination = $completed_courses["pager"] ?? [];
         $my_courses_pagination = $enrolled_courses["pager"] ?? [];
-        $sort = $this->get_query_param('sort')[0];
+        $sort = $this->get_query_param('sort');
+        $sort_by = "Sort By";
+        $sort_options = [
+            "date-desc" => [
+                "orderby" => "date",
+                "order" => "DESC",
+                "name" => "Newest"
+            ],
+            "date-asc" => [
+                "orderby" => "date",
+                "order" => "ASC",
+                "name" => "Oldest"
+            ],
+            "name-asc" => [
+                "orderby" => "title",
+                "order" => "ASC",
+                "name" => "Name (A-Z)"
+            ],
+            "name-desc" => [
+                "orderby" => "title",
+                "order" => "DESC",
+                "name" => "Name (Z-A)"
+            ]
+        ];
         $user = array(
             "first_name" => get_user_meta($user_id, 'first_name', true),
             "last_name" => get_user_meta($user_id, 'last_name', true),
         );
         ?>
         <main class="body">
-            <aside class="filter-sidebar">
+            <!-- <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <div class="sort">
                         <div class="label">
@@ -175,7 +205,14 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                     ?>
 
                 </div>
-            </aside>
+            </aside> -->
+            <?php get_template_part('template-parts/filter_bar', 'template', [
+                'filter_by' => $filter_by,
+                'filter_options' => $filter_options,
+                'sort_by' => $sort_by,
+                'sort_options' => $sort_options,
+                'sort' => $sort
+            ]); ?>
             <div class="main">
                 <div id="filters" class="mobile-filters">
                     <div>
@@ -328,7 +365,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                                 $image = get_the_post_thumbnail_url($course);
                                 $atts = ['per_page' => '9',];
                                 $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
-                                $completed = ((string)(($progress["completed"] / $progress["total"]) * 100))."%";
+                                $completed = ((string)floor(($progress["completed"] / $progress["total"]) * 100))."%";
                                 $lessons_count = $progress["total"];
 
                                 ?>
