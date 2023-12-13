@@ -118,6 +118,9 @@ table {
   cursor: not-allowed;
 }
 
+.filter-sidebar {
+  display: none;
+}
 .filter-sidebar .sidebar {
   height: 100%;
   display: flex;
@@ -211,18 +214,18 @@ table {
 .filter-sidebar .sidebar .filter .filter-body .filter-item .show-more .show-more-btn:focus {
   outline: none;
 }
-@media (max-width: 1152px) {
+@media (min-width: 1152px) {
   .filter-sidebar {
-    display: none;
+    display: block;
   }
 }
 
 .mobile-sidebar {
-  display: none;
+  display: block;
 }
-@media (max-width: 1152px) {
+@media (min-width: 1152px) {
   .mobile-sidebar {
-    display: block;
+    display: none;
   }
 }
 .mobile-sidebar .filter-modal.d-none {

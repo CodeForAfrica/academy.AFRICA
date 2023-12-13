@@ -248,7 +248,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 'sort_by' => $sort_by,
                 'sort_options' => $sort_options,
                 'sort' => $sort
-            ]); ?>
+            ]); ?> 
             <div class="courses-main" id="all-courses">
                 <section class="course-grid">
                     <h4 class="cfa-title">

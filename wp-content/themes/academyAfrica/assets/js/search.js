@@ -182,6 +182,15 @@ function viewAll(){
     openUrl(encodeURIParams);
 }
 
+function removeFilter(field, value){
+    const filter = document.querySelector(`input[name="${field}-${value}"]`);
+    if(filter){
+        filter.checked = false;
+        filterSearchCourses(filter, field, value);
+    }
+
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     toggleFilterModal();
     filterPagination();

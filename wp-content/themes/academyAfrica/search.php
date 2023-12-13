@@ -19,25 +19,11 @@ function get_query_param($param)
             return explode(",", $_GET[$param]);
         }
     }
+    return array();
 }
 
 $orgs = get_query_param('organization');
 $instructors = get_query_param('instructor');
-$sort = get_query_param('sort');
-if ($sort) {
-    $sort = $sort[0];
-    $order_by = $sort_options[$sort]["orderby"];
-    $order = $sort_options[$sort]["order"];
-} else {
-    $order_by = "date";
-    $order = "DESC";
-}
-$s = get_search_query();
-$current_page = get_query_var('paged') ? get_query_var('paged') : 1;
-
-
-$filter_options = CoursesFunctions::get_filter_by();
-
 $sort_options = [
     "date-desc" => [
         "orderby" => "date",
@@ -60,6 +46,24 @@ $sort_options = [
         "name" => "Name (Z-A)"
     ]
 ];
+// merge $orgs and $instructors into one array
+$allFilters  = array_merge($orgs, $instructors);
+$sort = get_query_param('sort');
+if ($sort) {
+    $sort = $sort[0];
+    $order_by = $sort_options[$sort]["orderby"];
+    $order = $sort_options[$sort]["order"];
+} else {
+    $order_by = "date";
+    $order = "DESC";
+}
+$s = get_search_query();
+$current_page = get_query_var('paged') ? get_query_var('paged') : 1;
+
+
+$filter_options = CoursesFunctions::get_filter_by();
+
+
 
 $atts = [
     'per_page' => '9',
@@ -107,7 +111,81 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
             <?
             }
             ?>
-
+        </div>
+        <div class="filters">
+            <div class="filter-section">
+                <div class="sort">
+                    <div class="label">
+                        Sort By:
+                    </div>
+                    <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
+                        <?
+                        foreach ($sort_options as $key => $option) {
+                            $selected = $sort == $key ? "selected" : "";
+                        ?>
+                            <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
+                        <?
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="filter">
+                    <button id="courses-mobile-filter" class="button primary medium filter-btn">
+                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_11905_79908)">
+                                <path d="M15.1693 2H1.83594L7.16927 8.30667V12.6667L9.83594 14V8.30667L15.1693 2Z" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_11905_79908">
+                                    <rect width="16" height="16" fill="white" transform="translate(0.5)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        Filter
+                    </button>
+                </div>
+            </div>
+            <? if (!empty($allFilters)) { ?>
+                <div class="selected-filters">
+                    <div class="filters-list">
+                        <?
+                        foreach ($orgs as $org) {
+                        ?>
+                            <div class="filter">
+                                <div class="filter-name">
+                                    <? echo $org ?>
+                                </div>
+                                <button class="filter-remove" onclick="removeFilter('organization', '<? echo $org ?>')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                        <path d="M8.0026 15.1693C11.6845 15.1693 14.6693 12.1845 14.6693 8.5026C14.6693 4.82071 11.6845 1.83594 8.0026 1.83594C4.32071 1.83594 1.33594 4.82071 1.33594 8.5026C1.33594 12.1845 4.32071 15.1693 8.0026 15.1693Z" stroke="#0C1A81" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M10 6.5L6 10.5" stroke="#0C1A81" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M6 6.5L10 10.5" stroke="#0C1A81" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        <?
+                        }
+                        ?>
+                    </div>
+                    <div class="clear-section">
+                        <button class="clear" onclick="clearFilters()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_11905_80119)">
+                                    <path d="M8.0026 14.6654C11.6845 14.6654 14.6693 11.6806 14.6693 7.9987C14.6693 4.3168 11.6845 1.33203 8.0026 1.33203C4.32071 1.33203 1.33594 4.3168 1.33594 7.9987C1.33594 11.6806 4.32071 14.6654 8.0026 14.6654Z" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M10 6L6 10" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M6 6L10 10" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_11905_80119">
+                                        <rect width="16" height="16" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            Clear all filters
+                        </button>
+                    </div>
+                </div>
+            <? } ?>
         </div>
         <div class="search-page-results">
             <?php

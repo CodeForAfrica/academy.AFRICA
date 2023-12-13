@@ -1,6 +1,7 @@
 @use "../abstracts/" as *;
 
 .filter-sidebar {
+    display: none;
     .sidebar {
         height: 100%;
         display: flex;
@@ -111,16 +112,16 @@
         }
     }
 
-    @include media-breakpoint-down(desktop) {
-        display: none;
+    @include media-breakpoint-up(desktop) {
+        display: block;
     }
 }
 
 .mobile-sidebar {
-    display: none;
+    display: block;
 
-    @include media-breakpoint-down(desktop) {
-        display: block;
+    @include media-breakpoint-up(desktop) {
+        display: none;
     }
 
     .filter-modal {
