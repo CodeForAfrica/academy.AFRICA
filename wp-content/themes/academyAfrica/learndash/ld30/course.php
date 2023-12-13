@@ -121,9 +121,8 @@ if ($course_status == "Completed") {
             <?
             } else {
             ?>
-                <div class="enroll">
+                <div class="enroll" id="enroll-button">
                     <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
-                    <button class="button secondary large enroll-button">Enroll Now</button>
                 </div>
             <?
             }
@@ -200,8 +199,8 @@ if ($course_status == "Completed") {
             <?
             if (!$is_enrolled) {
             ?>
-                <div class="enroll">
-                    <button class="button secondary large enroll-button">Enroll Now</button>
+                <div class="enroll" id="enroll-button">
+                    <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
                 </div>
             <?
             }

@@ -149,7 +149,7 @@
                         letter-spacing: 1.6px;
                         text-transform: uppercase;
                         border-radius: 0;
-                        width: fit-content; 
+                        width: fit-content;
                         display: flex;
                         gap: 8px;
 
@@ -171,6 +171,33 @@
 
         .enroll {
 
+            .learndash-wrapper {
+                form {
+                    #btn-join {
+                        &.btn-join {
+
+                            &.learndash-button-free {
+                                background-color: $color-secondary-500;
+                                width: fit-content;
+                                padding: 24px;
+                                text-transform: uppercase;
+                                font-weight: 800;
+                                line-height: 19px;
+                                letter-spacing: 1.6px;
+                                font-size: 16px;
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 8px;
+                                color: $color-shades-white;
+                                border: none;
+                                border-radius: 0;
+                            }
+                        }
+                    }
+
+                }
+            }
 
             .enroll-button {
                 background: $color-secondary-500;
