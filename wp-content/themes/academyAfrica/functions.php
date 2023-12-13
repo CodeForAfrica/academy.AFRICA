@@ -97,29 +97,6 @@ function create_organization_post_type() {
 }
 add_action('init', 'create_organization_post_type');
 
-function create_organization_taxonomy() {
-    $labels = array(
-        'name' => _x('Organizations', 'taxonomy general name'),
-        'singular_name' => _x('Organization', 'taxonomy singular name'),
-        // other labels
-    );
-
-    register_taxonomy(
-        'organization',
-        array('post', 'sfwd-courses'),
-        array(
-            'hierarchical' => true,
-            'labels' => $labels,
-            'show_ui' => true,
-            'show_admin_column' => true,
-            'query_var' => true,
-            'rewrite' => array('slug' => 'organization'),
-        )
-    );
-}
-
-add_action('init', 'create_organization_taxonomy', 0);
-
 function create_learning_path_post_type() {
     register_post_type(
         'ac-learning-path',
@@ -131,7 +108,7 @@ function create_learning_path_post_type() {
             'public' => true,
             'has_archive' => false,
             "heirarchical" => true,
-            'rewrite' => array('slug' => 'academy-africa-learning-paths'),
+            'rewrite' => array('slug' => 'learning-pathways'),
             'show_in_rest' => true,
             'supports' => array('title', 'thumbnail', 'editor', 'excerpt', 'custom-fields', 'revisions', 'page-attributes')
         )

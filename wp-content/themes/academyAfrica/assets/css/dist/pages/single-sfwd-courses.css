@@ -240,7 +240,7 @@ table {
   color: #0C1A81;
 }
 .single-courses .wrapper .enroll .learndash-wrapper form #btn-join.btn-join.learndash-button-free {
-  background-color: #ED1C24;
+  background-color: #ED1C24 !important;
   width: fit-content;
   padding: 24px;
   text-transform: uppercase;

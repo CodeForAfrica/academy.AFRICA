@@ -177,7 +177,7 @@
                         &.btn-join {
 
                             &.learndash-button-free {
-                                background-color: $color-secondary-500;
+                                background-color: $color-secondary-500 !important;
                                 width: fit-content;
                                 padding: 24px;
                                 text-transform: uppercase;

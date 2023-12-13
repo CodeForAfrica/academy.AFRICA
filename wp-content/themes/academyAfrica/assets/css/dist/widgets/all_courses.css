@@ -121,7 +121,7 @@ table {
 .all-courses {
   font-family: Open Sans;
 }
-.all-courses.d-none {
+.all-courses .d-none {
   display: none;
 }
 .all-courses .courses-main .course-grid {
@@ -151,7 +151,7 @@ table {
 .all-courses .courses-main .course-grid .filter-section .sort {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   font-family: Open Sans;
   font-size: 18px;
   font-style: normal;
@@ -200,7 +200,7 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px 0;
+  gap: 30px;
   flex-wrap: wrap;
   margin-bottom: 30px;
 }

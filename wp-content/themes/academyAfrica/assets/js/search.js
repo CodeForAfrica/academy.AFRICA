@@ -161,7 +161,7 @@ function mobileFilter(){
     const mobileFilterBtn = document.querySelector("#courses-mobile-filter");
     const allCourses = document.querySelector("#all-courses");
     const filterModal = document.querySelector("#filter-modal");
-    const closeFilterModal = document.querySelector("#close-filter-modal");
+    const closeFilterModal = document.querySelectorAll("#close-filter-modal");
     
      mobileFilterBtn.addEventListener("click", () => {
          allCourses.classList.toggle("d-none"); 
@@ -169,9 +169,11 @@ function mobileFilter(){
          window.scrollTo(0, 0);
      });
  
-     closeFilterModal.addEventListener("click", () => {
-         allCourses.classList.toggle("d-none"); 
-         filterModal.classList.toggle("d-none");
+     closeFilterModal.forEach(item => {
+         item.addEventListener("click", () => {
+             allCourses.classList.toggle("d-none"); 
+             filterModal.classList.toggle("d-none");
+         });
      });
 }
 

@@ -104,7 +104,7 @@ $sort_options = $args["sort_options"];
                         <? echo $filter_by ?>
                     </h4>
                     <div class="close">
-                        <button onclick="closeFilters()" class="buttons" id="close-filter-modal">
+                        <button  class="buttons" id="close-filter-modal">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_11905_80119)">
                                     <path d="M8.0026 14.6654C11.6845 14.6654 14.6693 11.6806 14.6693 7.9987C14.6693 4.3168 11.6845 1.33203 8.0026 1.33203C4.32071 1.33203 1.33594 4.3168 1.33594 7.9987C1.33594 11.6806 4.32071 14.6654 8.0026 14.6654Z" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
@@ -182,7 +182,7 @@ $sort_options = $args["sort_options"];
                     </div>
                 </div>
                 <div class="mobile-close">
-                    <button onclick="closeFilters()" class="buttons" id="close-filter-modal">
+                    <button  class="buttons" id="close-filter-modal">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_11905_80119)">
                                 <path d="M8.0026 14.6654C11.6845 14.6654 14.6693 11.6806 14.6693 7.9987C14.6693 4.3168 11.6845 1.33203 8.0026 1.33203C4.32071 1.33203 1.33594 4.3168 1.33594 7.9987C1.33594 11.6806 4.32071 14.6654 8.0026 14.6654Z" stroke="#000" stroke-linecap="round" stroke-linejoin="round" />
