@@ -214,7 +214,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                 'sort' => $sort
             ]); ?>
             <div class="main">
-                <div id="filters" class="mobile-filters">
+                <div id="filters" class="mobile-filters" style="padding: 40px">
                     <div>
                         <div class="filters">
                             <div style="display:flex; justify-content: space-between; margin: 0 0 40px; align-items: center;"
