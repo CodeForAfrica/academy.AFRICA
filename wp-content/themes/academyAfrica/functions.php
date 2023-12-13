@@ -163,8 +163,9 @@ add_filter('get_avatar_data', 'change_avatar', 100, 2);
 function change_avatar($args, $id_or_email) {
     $avatar_url = get_user_meta($id_or_email, 'avatar', true);
 
-    $args['url'] = $avatar_url;
-
+    if(!empty($avatar_url)) {
+        $args['url'] = $avatar_url;
+    }
     return $args;
 }
 

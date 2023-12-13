@@ -15,6 +15,7 @@ $register_text = "Register Here";
         while(have_posts()):
             the_post();
             $post_array = get_post();
+            $post_id = $post_array->ID;
             $raw_date = get_post_meta($post_id, 'date', true);
             $date = date_format(date_create($raw_date), 'Y-m-d');
             $offset = get_timezones()[get_post_meta($post_id, 'timezone', true)] ?? "+0:00";
@@ -23,7 +24,6 @@ $register_text = "Register Here";
             $given_date_time = new DateTime($date.' '.$raw_time, new DateTimeZone($offset));
             $current_date_time = new DateTime("now", new DateTimeZone($offset));
             $is_past_event = $given_date_time < $current_date_time;
-            $post_id = $post_array->ID;
             $post_title = $post_array->post_title;
             $post_content = $post_array->post_content;
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
@@ -35,7 +35,7 @@ $register_text = "Register Here";
             $resources = get_field('resources')['url'];
             ?>
             <script>
-                console.log(<? echo json_encode($registration_link) ?>)
+                console.log(<? echo json_encode($post_array) ?>)
             </script>
             <h1 class="cfa-title">
                 <? echo $post_title ?>
@@ -113,7 +113,7 @@ $register_text = "Register Here";
                 <?
                 $user_id = get_post_meta($post_id, 'speaker', true);
                 $biography = get_the_author_meta('description', $user_id);
-                $avatar_url = get_avatar_url($user_id, array('size' => 100));
+                $avatar_url = get_avatar_url($user_id, array('size' => 100, 'default' => 'gravatar_default')).'?nocache='.time();
                 ?>
                 <img src="<? echo $avatar_url ?>" alt="<? echo $speaker->display_name ?>" class="logo">
                 <p class="name">

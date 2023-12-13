@@ -1339,7 +1339,8 @@ label {
 .certificate .certificate-content .certificate-content-header p {
   font-size: 15px;
 }
-.certificate .certificate-content .certificate-content-header .divider {
+.certificate .certificate-content .certificate-content-header .divider,
+.certificate .certificate-content .certificate-content-header hr {
   background: #0C1A81;
   height: 3px;
   flex: 1;
