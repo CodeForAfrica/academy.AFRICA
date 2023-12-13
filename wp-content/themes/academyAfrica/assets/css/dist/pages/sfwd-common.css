@@ -250,7 +250,7 @@ table {
 }
 .sfwd-container .sfwd-large-screen .content .progress .course-carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button .ld-icon {
   color: #000000;
-  background: #FFFFFF;
+  background-color: #FFFFFF !important;
   border: none;
 }
 .sfwd-container .sfwd-large-screen .content .progress .course-carriculum .ld-item-list .ld-item-list-items .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button .ld-text {
