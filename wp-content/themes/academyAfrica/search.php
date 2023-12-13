@@ -98,7 +98,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
         'sort_options' => $sort_options,
         'sort' => $sort
     ]); ?>
-    <div class="search-page-main">
+    <div class="search-page-main" id="all-courses">
         <div class="search-page-header">
             <? if (!empty($s)) {
             ?>
