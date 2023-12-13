@@ -45,11 +45,6 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
     }
     public function replace_course_info($input, $course_id) {
         $pattern = '/\[courseinfo\b/';
-        ?>
-        <script>
-            console.log(<? echo json_encode($input) ?>);
-        </script>
-        <?
         $replacement = '[courseinfo course_id=".'.$course_id.'"';
         $output = preg_replace($pattern, $replacement, $input);
 
@@ -335,9 +330,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                                     $image = get_the_post_thumbnail_url($course);
                                     // $certificate_link = learndash_get_course_certificate_link($course_id, get_current_user_id());
                                     ?>
-                                    <script>
-                                        console.log(<? echo $certificate_id ?>);
-                                    </script>
+
                                     <div class="cert-pdf" id="<? echo $course_id ?>">
                                         <? $cert_content = $this->replace_course_info($cert_post->post_content, $course_id) ?>
                                         <? echo do_shortcode($cert_content) ?>
