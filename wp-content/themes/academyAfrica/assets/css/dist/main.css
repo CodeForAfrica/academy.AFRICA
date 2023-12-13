@@ -363,6 +363,9 @@ table {
 .header .desktop .nav .nav-actions .menu .items .item.language-link.open {
   border-bottom: none;
 }
+.header .desktop .nav .nav-actions .menu .items .item.user-profile {
+  min-width: 100px;
+}
 .header .desktop .nav .nav-actions .menu .items .item.user-profile::after {
   content: "";
 }
@@ -405,8 +408,10 @@ table {
   display: flex;
   justify-content: center;
   border-radius: 50%;
-  height: 50px;
+  min-height: 50px;
+  min-width: 50px;
   width: 50px;
+  height: 50px;
   background: #EFF0FD;
 }
 .header .user-avatar .usernames {
@@ -542,8 +547,14 @@ table {
 .mobile-search .search form .input {
   display: flex;
   justify-content: space-between;
+  flex-direction: row-reverse;
   align-items: center;
   width: 100%;
+}
+@media (min-width: 1152px) {
+  .mobile-search .search form .input {
+    flex-direction: row;
+  }
 }
 .mobile-search .search form .input .search-btn {
   border: none;

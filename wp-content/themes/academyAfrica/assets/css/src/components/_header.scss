@@ -293,6 +293,8 @@
                             }
 
                             &.user-profile {
+                                min-width: 100px;
+
                                 &::after {
                                     content: '';
                                 }
@@ -349,8 +351,11 @@
         display: flex;
         justify-content: center;
         border-radius: 50%;
-        height: 50px;
+        min-height: 50px;
+        min-width: 50px;
         width: 50px;
+        height: 50px;
+
         background: $color-primary-50;
 
         .usernames {
@@ -514,8 +519,13 @@
             .input {
                 display: flex;
                 justify-content: space-between;
+                flex-direction: row-reverse;
                 align-items: center;
                 width: 100%;
+
+                @include media-breakpoint-up(desktop) {
+                    flex-direction: row;
+                }
 
                 .search-btn {
                     border: none;
@@ -558,11 +568,12 @@
 
             }
 
-            .close-btn{
+            .close-btn {
 
                 @include media-breakpoint-up(desktop) {
                     display: none;
                 }
+
                 border: none;
                 background: $color-primary-50;
                 color: $color-primary-700;
