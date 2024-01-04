@@ -32,14 +32,6 @@
       }
     }
 
-    .signature,
-    .certificate-site-name {
-      p {
-        color: $color-shades-white !important;
-        font-size: 6.704px !important;
-        line-height: 8.62px !important;
-      }
-    }
     .description {
       margin-top: 8px;
       color: $color-shades-black;
@@ -95,7 +87,13 @@
         gap: 40px;
         margin-top: 16px;
 
-        .certificate {
+        .signature,
+        .certificate-site-name {
+          p {
+            color: $color-shades-white !important;
+            font-size: 6.704px !important;
+            line-height: 8.62px !important;
+          }
         }
 
         .certificate-showcase-content {

@@ -146,12 +146,6 @@ table {
   left: unset;
   transform: unset;
 }
-.featured-courses .featured-content .signature p,
-.featured-courses .featured-content .certificate-site-name p {
-  color: #FFFFFF !important;
-  font-size: 6.704px !important;
-  line-height: 8.62px !important;
-}
 .featured-courses .featured-content .description {
   margin-top: 8px;
   color: #000000;
@@ -200,6 +194,12 @@ table {
   background-color: #FFFFFF;
   gap: 40px;
   margin-top: 16px;
+}
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .signature p,
+.featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-site-name p {
+  color: #FFFFFF !important;
+  font-size: 6.704px !important;
+  line-height: 8.62px !important;
 }
 .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content {
   display: flex;
