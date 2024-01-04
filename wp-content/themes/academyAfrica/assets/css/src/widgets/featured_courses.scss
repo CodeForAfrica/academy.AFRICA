@@ -87,7 +87,8 @@
         gap: 40px;
         margin-top: 16px;
 
-        .certificate {}
+        .certificate {
+        }
 
         .certificate-showcase-content {
           display: flex;
@@ -195,9 +196,9 @@
                 }
 
                 p {
-                  color: $color-shades-white;
-                  font-size: 6.704px;
-                  line-height: 8.62px;
+                  color: $color-shades-white !important;
+                  font-size: 6.704px !important;
+                  line-height: 8.62px !important;
                 }
               }
             }

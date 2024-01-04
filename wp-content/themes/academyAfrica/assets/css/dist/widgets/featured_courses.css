@@ -279,9 +279,9 @@ table {
     height: 17.486px;
   }
   .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-footer .signature p {
-    color: #FFFFFF;
-    font-size: 6.704px;
-    line-height: 8.62px;
+    color: #FFFFFF !important;
+    font-size: 6.704px !important;
+    line-height: 8.62px !important;
   }
   .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate .certificate-site-name p {
     font-size: 4.789px;
