@@ -134,9 +134,15 @@ require_once __DIR__ . '/posts/networks.php';
 add_action('init', 'event_post_type');
 add_action('init', 'create_networks_post_type');
 
+
+if (basename($_SERVER['PHP_SELF']) == 'profile.php') {
+    $custom_profile_edit_url = home_url('/profile');
+    wp_redirect($custom_profile_edit_url);
+    exit();
+}
 function redirect_to_custom_profile_edit()
 {
-    if (is_user_logged_in() && is_admin() && basename($_SERVER['PHP_SELF']) == 'profile.php') {
+    if (basename($_SERVER['PHP_SELF']) == 'profile.php') {
         $custom_profile_edit_url = home_url('/profile');
         wp_redirect($custom_profile_edit_url);
         exit();
