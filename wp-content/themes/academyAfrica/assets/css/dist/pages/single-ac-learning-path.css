@@ -130,10 +130,6 @@ table {
   font-weight: 700;
   text-align: left;
 }
-.ac-learning-path-container__title__text .cfa-title::after {
-  left: 0;
-  transform: none;
-}
 .ac-learning-path-container__title__text .cfa-excerpt {
   color: #000000;
   font-family: Open Sans;
@@ -195,11 +191,15 @@ table {
   align-items: center;
   gap: 50px;
 }
+.ac-learning-path-container__download:hover .large i {
+  color: #0C1A81;
+}
 @media (min-width: 1152px) {
   .ac-learning-path-container__title {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
   }
   .ac-learning-path-container__title__image {
     display: block;
@@ -266,7 +266,7 @@ table {
     text-align: left;
   }
   .ac-learning-path-container__content .courses .list .individual-course .course .extra-course-details .course-title {
-    color: #0C1A81;
+    color: #0C1A81 !important;
     font-family: Open Sans;
     font-size: 28px;
     font-style: normal;
@@ -291,6 +291,7 @@ table {
 @media (min-width: 1440px) {
   .ac-learning-path-container__title {
     padding: 40px 160px;
+    gap: 32px;
   }
   .ac-learning-path-container__title__image .image {
     width: 458px;
