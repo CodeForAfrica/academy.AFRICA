@@ -84,10 +84,10 @@
       }
 
       p {
-        color: $color-shades-white;
-        font-size: 4.368px;
-        font-weight: 400;
-        line-height: 5.616px;
+        color: $color-shades-white !important;
+        font-size: 4.368px !important;
+        font-weight: 400 !important;
+        line-height: 5.616px !important;
       }
 
       .signee-role {
@@ -108,10 +108,10 @@
     font-weight: 400;
     line-height: 8.62px; /* 180% */
     p {
-      color: $color-shades-white;
-      font-size: 3.12px;
-      font-weight: 400;
-      line-height: 5.616px;
+      color: $color-shades-white !important;
+      font-size: 3.12px !important;
+      font-weight: 400 !important;
+      line-height: 5.616px !important;
     }
   }
 

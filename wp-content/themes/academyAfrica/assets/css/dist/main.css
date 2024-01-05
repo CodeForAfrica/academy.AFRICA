@@ -1446,10 +1446,10 @@ label {
   height: 11px;
 }
 .certificate .certificate-footer .signature p {
-  color: #FFFFFF;
-  font-size: 4.368px;
-  font-weight: 400;
-  line-height: 5.616px;
+  color: #FFFFFF !important;
+  font-size: 4.368px !important;
+  font-weight: 400 !important;
+  line-height: 5.616px !important;
 }
 .certificate .certificate-footer .signature .signee-role {
   text-transform: uppercase;
@@ -1467,10 +1467,10 @@ label {
   line-height: 8.62px; /* 180% */
 }
 .certificate .certificate-site-name p {
-  color: #FFFFFF;
-  font-size: 3.12px;
-  font-weight: 400;
-  line-height: 5.616px;
+  color: #FFFFFF !important;
+  font-size: 3.12px !important;
+  font-weight: 400 !important;
+  line-height: 5.616px !important;
 }
 .certificate .course-details {
   display: flex;
