@@ -133,10 +133,6 @@ table {
   font-weight: 700;
   line-height: 48px;
 }
-.profile .cfa-title::after {
-  left: 0;
-  transform: none;
-}
 .profile form {
   margin-top: 40px;
 }
