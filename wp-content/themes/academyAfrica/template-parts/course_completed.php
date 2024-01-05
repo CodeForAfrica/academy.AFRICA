@@ -49,7 +49,7 @@ $social_media_links = [
 $academy_head = array(
     'name' => $settings['academy_head_name'],
     'role' => 'Head of Academy',
-    'signature' => get_stylesheet_directory_uri().'/assets/images/signature.png',
+    'signature' => get_stylesheet_directory_uri() . '/assets/images/signature.png',
     'date' => date("d/m/Y")
 );
 global $shortcode_tags;
@@ -79,8 +79,8 @@ global $shortcode_tags;
                     </div>
                     <div class="certificate-header-logo">
                         <hr />
-                        <img class="logo" alt="logo"
-                            src="<? echo get_stylesheet_directory_uri().'/assets/images/mooc-logo-black.png' ?>" />
+                        <img class="logo" alt="logo" style="background: transparent;"
+                            src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.png' ?>" />
                     </div>
 
                 </div>
@@ -109,18 +109,18 @@ global $shortcode_tags;
             <div class="certificate-footer">
                 <div class="company-details">
                     <div class="brand-details">
-                        <img height="30px" width="30px" class="logo" alt="logo"
-                            src="<? echo get_stylesheet_directory_uri().'/assets/images/mooc-logo-white.svg' ?>" />
+                        <img height="30px" width="30px" class="logo" alt="logo" style="background: transparent;"
+                            src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
                         <p class="company-name">
                             <? echo $company_name ?>
                         </p>
                     </div>
-                    <img class="artwork" height="30px" width="52px" alt="artwork"
-                        src="<? echo get_stylesheet_directory_uri().'/assets/images/cfa_logo.svg' ?>" />
+                    <img class="artwork" height="30px" width="52px" alt="artwork" style="background: transparent;"
+                        src="<? echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" />
                 </div>
                 <div class="signature">
                     <img class="signature-img" alt="signature" alt="<? echo $academy_head['name'] ?>"
-                        src="<? echo $academy_head['signature'] ?>" />
+                        style="background: transparent;" src="<? echo $academy_head['signature'] ?>" />
                     <p class="signee-name">
                         <? echo $academy_head['name'] ?>
                     </p>
@@ -145,13 +145,13 @@ global $shortcode_tags;
             <div class="share">
                 <div class="social-icons">
                     <?
-                    if(!empty($social_media_links)) {
-                        foreach($social_media_links as $item) {
+                    if (!empty($social_media_links)) {
+                        foreach ($social_media_links as $item) {
                             $link = esc_url($item['link']['url']);
                             $type = esc_html($item['type']);
-                            $icon = get_stylesheet_directory_uri().('/assets/images/icons/Type='.$type.', Size=24, Color=Black.svg');
-                            $image = "<img class='icon-image' src='".$icon."' alt='".$type."' />";
-                            echo '<a style="color: #000" href="'.$link.'" class="icon">'.$image.'</a>';
+                            $icon = get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
+                            $image = "<img class='icon-image' src='" . $icon . "' alt='" . $type . "' />";
+                            echo '<a style="color: #000" href="' . $link . '" class="icon">' . $image . '</a>';
                         }
                     }
                     ?>
@@ -180,12 +180,13 @@ global $shortcode_tags;
             const { jsPDF } = window.jspdf;
 
             let doc = new jsPDF('l', 'mm', [210, 297]);
+            doc.setFillColor(255, 255, 255);
             let pdfjs = document.getElementById('certificate');
             const width = doc.internal.pageSize.getWidth();
             const height = doc.internal.pageSize.getHeight();
             doc.html(pdfjs, {
                 callback: function (doc) {
-                    doc.save(`<? echo $user['first_name'].' '.$user['first_name'] ?> | <? echo $certificate_course ?>.pdf`);
+                    doc.save(`<? echo $user['first_name'] . ' ' . $user['first_name'] ?> | <? echo $certificate_course ?>.pdf`);
                 },
                 width: width,
                 height,
