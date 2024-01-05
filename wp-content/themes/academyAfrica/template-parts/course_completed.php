@@ -191,7 +191,7 @@ global $shortcode_tags;
                 width: width,
                 height,
                 windowWidth: 891,
-                html2canvas: { scale: 0.954 },
+                html2canvas: { scale: 0.954, backgroundColor: "#ffffff" },
             });
         }            
     </script>
