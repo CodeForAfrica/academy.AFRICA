@@ -1,65 +1,77 @@
 <?php
-if(!defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
 use AcademyAfrica\Theme\Courses\CoursesFunctions;
 
-class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
+class Academy_Africa_My_Courses extends \Elementor\Widget_Base
+{
 
-    public function get_name() {
+    public function get_name()
+    {
         return 'My Courses';
     }
 
-    public function get_style_depends() {
+    public function get_style_depends()
+    {
         return ['academy-africa-my-courses', 'academy-africa'];
     }
 
-    public function get_script_depends() {
+    public function get_script_depends()
+    {
         return ['academy-africa_my_courses'];
     }
 
-    public function get_title() {
+    public function get_title()
+    {
         return esc_html__('My Courses');
     }
 
-    public function get_icon() {
+    public function get_icon()
+    {
         return 'eicon-code';
     }
 
-    public function get_categories() {
+    public function get_categories()
+    {
         return ['academy-africa'];
     }
 
-    public function concatenate_with_count($array) {
+    public function concatenate_with_count($array)
+    {
         $count = count($array);
-        return $count === 0 ? '' : ($count === 1 ? $array[0] : $array[0].' + '.($count - 1).' more');
+        return $count === 0 ? '' : ($count === 1 ? $array[0] : $array[0] . ' + ' . ($count - 1) . ' more');
     }
-    public function get_query_param($param) {
-        if(isset($_GET[$param])) {
-            if($_GET[$param]) {
+    public function get_query_param($param)
+    {
+        if (isset($_GET[$param])) {
+            if ($_GET[$param]) {
                 return explode(",", $_GET[$param]);
             }
         }
         return [];
     }
-    public function replace_course_info($input, $course_id) {
+    public function replace_course_info($input, $course_id)
+    {
         $pattern = '/\[courseinfo\b/';
-        $replacement = '[courseinfo course_id=".'.$course_id.'"';
+        $replacement = '[courseinfo course_id=".' . $course_id . '"';
         $output = preg_replace($pattern, $replacement, $input);
 
         return $output;
     }
 
 
-    public function sort_params() {
+    public function sort_params()
+    {
         return array(
             "date-asc" => "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) ASC",
             "" => "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) DESC"
         );
     }
 
-    public function get_completed_courses() {
+    public function get_completed_courses()
+    {
         $user_id = get_current_user_id();
         $courses = learndash_user_get_enrolled_courses($user_id);
         $orgs = $this->get_query_param('organization');
@@ -83,7 +95,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
         return learndash_reports_get_activity($args);
     }
 
-    public function get_enrolled_courses() {
+    public function get_enrolled_courses()
+    {
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
         $sort = $this->get_query_param('sort')[0];
@@ -105,10 +118,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
         return learndash_reports_get_activity($args);
     }
 
-    protected function register_controls() {
+    protected function register_controls()
+    {
     }
 
-    protected function render() {
+    protected function render()
+    {
         $settings = $this->get_settings_for_display();
         $user_id = get_current_user_id();
         $filter_by = "Filter by:";
@@ -163,7 +178,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
             <div class="main" id="all-courses">
                 <section class="incomplete-courses">
                     <h4 class="cfa-title">
-                        Welcome <strong>
+                        Welcome <strong style="text-transform: capitalize;">
                             <? echo $current_user->display_name; ?>
                         </strong>
                     </h4>
@@ -195,14 +210,14 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                             </button>
                         </div>
                     </div>
-                    <? if(!empty($enrolled)) {
+                    <? if (!empty($enrolled)) {
                         ?>
                         <p class="description">
                             Complete your courses
                         </p>
                         <div class="content">
                             <?
-                            foreach($enrolled as $er) {
+                            foreach ($enrolled as $er) {
                                 $course_id = $er->post_id;
                                 $course = get_post($course_id);
                                 $title = get_the_title($course);
@@ -212,7 +227,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                                 $image = get_the_post_thumbnail_url($course);
                                 $atts = ['per_page' => '9',];
                                 $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
-                                $completed = ((string)floor(($progress["completed"] / $progress["total"]) * 100))."%";
+                                $completed = ((string) floor(($progress["completed"] / $progress["total"]) * 100)) . "%";
                                 $lessons_count = $progress["total"];
 
                                 ?>
@@ -269,24 +284,24 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
 
                                 <?
                                 $current_url_params = $_GET;
-                                $current_page = (int)$current_url_params["courses_page"] ?? 1;
+                                $current_page = (int) $current_url_params["courses_page"] ?? 1;
                                 $next_page = $current_page + 1;
                                 $previous_page = $current_page - 1;
                                 $pr_2 = $previous_page - 1;
                                 $next_2 = $next_page + 2;
                                 ?>
-                                <?php for($i = 1; $i <= $my_courses_pagination['total_pages']; $i++): ?>
+                                <?php for ($i = 1; $i <= $my_courses_pagination['total_pages']; $i++): ?>
                                     <?
                                     $current_url_params["courses_page"] = $i;
                                     $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
-                                    if($i === $previous_page || $i === $next_page || $i === $my_courses_pagination['total_pages'] || $i === 1 || $i === $current_page) {
+                                    if ($i === $previous_page || $i === $next_page || $i === $my_courses_pagination['total_pages'] || $i === 1 || $i === $current_page) {
                                         ?>
                                         <li class="page-item"><a class="page-link" href="<? echo $new_url ?>">
                                                 <?php echo $i; ?>
                                             </a></li>
                                         <?
                                     }
-                                    if(($i === $next_2 && $next_2 < $my_courses_pagination['total_pages']) || $i === $pr_2 && $i > 1) {
+                                    if (($i === $next_2 && $next_2 < $my_courses_pagination['total_pages']) || $i === $pr_2 && $i > 1) {
                                         ?>
                                         <li style="margin-top: 6px">...</li>
                                         <?
@@ -309,15 +324,15 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                         </div>
                     <? } ?>
                 </section>
-                <? if(!empty($completed_courses['results'])) { ?>
+                <? if (!empty($completed_courses['results'])) { ?>
                     <section class="your-certificates">
                         <h4 class="your-certificates-title">
                             Your Certificates
                         </h4>
                         <div class="content">
                             <?
-                            if(!empty($completed_courses['results'])) {
-                                foreach($completed_courses['results'] as $course) {
+                            if (!empty($completed_courses['results'])) {
+                                foreach ($completed_courses['results'] as $course) {
                                     $course_id = $course->post_id;
                                     $certificate_id = learndash_get_setting($course_id, 'certificate');
                                     $cert_post = get_post($certificate_id);
@@ -391,7 +406,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                                 </li>
 
                                 <!-- Page links -->
-                                <?php for($i = 1; $i <= $certificate_pagination['total_pages']; $i++): ?>
+                                <?php for ($i = 1; $i <= $certificate_pagination['total_pages']; $i++): ?>
                                     <?
                                     $current_url_params = $_GET;
                                     $current_url_params["courses_page"] = $i;
@@ -433,7 +448,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base {
                         console.log({ width, height })
                         doc.html(pdfjs, {
                             callback: function (doc) {
-                                doc.save(`<? echo $user['first_name'].' '.$user['first_name'] ?> | ${courseTitle}.pdf`);
+                                doc.save(`<? echo $user['first_name'] . ' ' . $user['first_name'] ?> | ${courseTitle}.pdf`);
                             },
                             width: width,
                             height,
