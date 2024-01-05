@@ -35,8 +35,10 @@ class CoursesFunctions
         $args = array(
             'post_type' => 'ac-learning-path',
             'post_status' => 'publish',
-            'numberposts' => $attr['per_page'],
+            'posts_per_page' => intval($attr['per_page']),
             'paged' => $attr['paged'],
+            'orderby' => sanitize_text_field($attr['orderby']),
+            'order' => sanitize_text_field($attr['order']),
         );
         $learning_path_posts = get_posts($args);
         $learning_paths = array();

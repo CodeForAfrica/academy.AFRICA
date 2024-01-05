@@ -25,86 +25,91 @@ $sort_options = $args["sort_options"];
                 ?>
             </select>
         </div>
-        <div class="filter" id="side-filter-bar">
-            <p class="filter-by">
-                <? echo $filter_by ?>
-            </p>
-            <div class="filter-body">
-                <?
-                if (!empty($filter_options)) {
-                    foreach ($filter_options as $item) {
-                        $title = $item["title"];
-                        $options = $item["options"];
-                ?>
-                        <div class="filter-item">
-                            <p class="filter-by-title">
-                                <? echo $title ?>
-                            </p>
-                            <?
-                            if (!empty($options)) {
-                            ?>
-                                <ul class="filter-list">
-                                    <?
-                                    foreach ($options as $options_index => $option) {
-                                    ?>
-                                        <? if ($options_index >= 3) {
-                                        ?>
-                                            <li class="hidden">
-                                                <label class="mui-checkbox">
-                                                    <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
-                                                    <span class="checkmark"></span>
-                                                    <? echo $option->name ?>
-                                                </label>
-                                            </li>
+        <? if (!empty($filter_options)) {
+        ?>
+            <div class="filter" id="side-filter-bar">
+                <p class="filter-by">
+                    <? echo $filter_by ?>
+                </p>
+                <div class="filter-body">
+                    <?
+                    if (!empty($filter_options)) {
+                        foreach ($filter_options as $item) {
+                            $title = $item["title"];
+                            $options = $item["options"];
+                    ?>
+                            <div class="filter-item">
+                                <p class="filter-by-title">
+                                    <? echo $title ?>
+                                </p>
+                                <?
+                                if (!empty($options)) {
+                                ?>
+                                    <ul class="filter-list">
                                         <?
-                                        } else {
+                                        foreach ($options as $options_index => $option) {
                                         ?>
-                                            <li>
-                                                <label class="mui-checkbox">
-                                                    <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
-                                                    <span class="checkmark"></span>
-                                                    <? echo $option->name ?>
-                                                </label>
-                                            </li>
+                                            <? if ($options_index >= 3) {
+                                            ?>
+                                                <li class="hidden">
+                                                    <label class="mui-checkbox">
+                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                        <span class="checkmark"></span>
+                                                        <? echo $option->name ?>
+                                                    </label>
+                                                </li>
+                                            <?
+                                            } else {
+                                            ?>
+                                                <li>
+                                                    <label class="mui-checkbox">
+                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                        <span class="checkmark"></span>
+                                                        <? echo $option->name ?>
+                                                    </label>
+                                                </li>
+                                            <?
+                                            }
+                                            ?>
                                         <?
                                         }
                                         ?>
-                                    <?
-                                    }
+                                    </ul>
+                                    <? if (count($options) > 3) {
                                     ?>
-                                </ul>
-                                <? if (count($options) > 3) {
-                                ?>
-                                    <div class="show-more">
-                                        <button class="show-more-btn">
-                                            Show More
-                                        </button>
-                                    </div>
+                                        <div class="show-more">
+                                            <button class="show-more-btn">
+                                                Show More
+                                            </button>
+                                        </div>
+                                    <?
+                                    } ?>
                                 <?
-                                } ?>
-                            <?
-                            }
-                            ?>
-                        </div>
-                <?
+                                }
+                                ?>
+                            </div>
+                    <?
+                        }
                     }
-                }
-                ?>
+                    ?>
+                </div>
             </div>
-        </div>
+
+        <?
+        } ?>
     </div>
 </aside>
 
 <div class="mobile-sidebar" id="mobile-filter">
     <div class="filter-modal d-none" id="filter-modal">
         <div class="filter-options">
-            <div id="mobile-filters" class="mobile-filter"> 
+            <div id="mobile-filters" class="mobile-filter">
                 <div class="filter-header">
                     <h4 class="filter-title">
                         <? echo $filter_by ?>
                     </h4>
                     <div class="close">
-                        <button  class="buttons" id="close-filter-modal">
+                        <button class="buttons" id="close-filter-modal">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_11905_80119)">
                                     <path d="M8.0026 14.6654C11.6845 14.6654 14.6693 11.6806 14.6693 7.9987C14.6693 4.3168 11.6845 1.33203 8.0026 1.33203C4.32071 1.33203 1.33594 4.3168 1.33594 7.9987C1.33594 11.6806 4.32071 14.6654 8.0026 14.6654Z" stroke="#B6131E" stroke-linecap="round" stroke-linejoin="round" />
@@ -182,7 +187,7 @@ $sort_options = $args["sort_options"];
                     </div>
                 </div>
                 <div class="mobile-close">
-                    <button  class="buttons" id="close-filter-modal">
+                    <button class="buttons" id="close-filter-modal">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_11905_80119)">
                                 <path d="M8.0026 14.6654C11.6845 14.6654 14.6693 11.6806 14.6693 7.9987C14.6693 4.3168 11.6845 1.33203 8.0026 1.33203C4.32071 1.33203 1.33594 4.3168 1.33594 7.9987C1.33594 11.6806 4.32071 14.6654 8.0026 14.6654Z" stroke="#000" stroke-linecap="round" stroke-linejoin="round" />

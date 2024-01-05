@@ -156,8 +156,6 @@ table {
   flex-wrap: wrap;
 }
 .patners-root .partners .partner-content .partner-link {
-  flex-basis: calc(50% - 36px);
-  width: 100%;
   height: 100%;
   filter: grayscale(100%) opacity(50%);
 }
@@ -238,9 +236,6 @@ table {
     justify-content: center;
     padding: 0;
   }
-  .patners-root .partners .partner-content .partner-link {
-    flex-basis: calc(33.33% - 36px);
-  }
   .patners-root .partners .partner-content .partner-link .partner {
     width: 170px;
     height: 97px;
@@ -277,9 +272,6 @@ table {
   }
   .patners-root .partners .partner-content {
     justify-content: space-between;
-  }
-  .patners-root .partners .partner-content .partner-link {
-    flex-basis: calc(33.33% - 36px);
   }
   .patners-root .partners .partner-content .partner-link .partner {
     width: 295px;

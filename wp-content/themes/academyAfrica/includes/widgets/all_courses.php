@@ -143,7 +143,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             [
                 'label' => __('Career Development Button Link', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __('https://academy.africa/pathways', 'academy-africa'),
+                'default' => __('/learning-pathways', 'academy-africa'),
                 'label_block' => true,
             ]
         );
@@ -179,7 +179,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $pathway_button_link = $settings['learning_button_link'];
         $pathway_sample_course = $settings['learning_sample_course'];
         $pathway = get_post($pathway_sample_course);
-        $pathway_courses = get_field('courses', $pathway);
+        $pathway_courses = get_field('courses', $pathway); 
 
         $sort_options = [
             "date-desc" => [
@@ -385,7 +385,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 </div>
                             </div>
                             <div class="sample-course">
-                                <a href="/" class="pathway-link">
+                                <a class="pathway-link" href="<? echo get_permalink($pathway) ?>">
                                     <div class="card">
                                         <div class="course-card-pattern">
                                             <div class="icon">

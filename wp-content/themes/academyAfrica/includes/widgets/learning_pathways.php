@@ -78,7 +78,7 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
                 'label_block' => true,
             ]
         );
-        $this->add_control(
+        $this->add_control( 
             'pathway_courses_count_text',
             [
                 'label' => __('Learning Pathways Courses Count', 'academy-africa'),
@@ -94,6 +94,28 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
 
     protected function render()
     {
+        $sort_options = [
+            "date-desc" => [
+                "orderby" => "date",
+                "order" => "DESC",
+                "name" => "Newest"
+            ],
+            "date-asc" => [
+                "orderby" => "date",
+                "order" => "ASC",
+                "name" => "Oldest"
+            ],
+            "name-asc" => [
+                "orderby" => "title",
+                "order" => "ASC",
+                "name" => "Name (A-Z)"
+            ],
+            "name-desc" => [
+                "orderby" => "title",
+                "order" => "DESC",
+                "name" => "Name (Z-A)"
+            ]
+        ];
         $settings = $this->get_settings_for_display();
         $pathway_title = $settings['pathway_title'];
         $pathway_description = $settings['pathway_description'];
@@ -101,14 +123,22 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
         $filter_by = "Filter by:";
         $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
         $sort = $this->get_query_param('sort');
-
+        if ($sort) {
+            $sort = $sort[0];
+            $order_by = $sort_options[$sort]["orderby"];
+            $order = $sort_options[$sort]["order"];
+        } else {
+            $order_by = "date";
+            $order = "DESC";
+        }
 
         $leaning_attr = [
-            'per_page' => '9',
+            'per_page' => 9,
             'paged' => $current_page,
-            'sort' => $sort
+            'orderby' => $order_by,
+            'order' => $order
         ];
-        $pathways = CoursesFunctions::getLearningPaths($leaning_attr);
+        $pathways = CoursesFunctions::getLearningPaths($leaning_attr); 
         $learning_pathways = $pathways["learning_paths"];
         $count = $pathways["count"];
         $per_page = $pathways["per_page"];
@@ -119,15 +149,14 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
             $has_pagination = false;
         }
 
+
 ?>
         <main class="all-courses" id="all-courses">
-            <aside class="filter-sidebar">
-                <div class="sidebar" id="sidebar">
-                    <p class="filter-by">
-                        <? echo $filter_by ?>
-                    </p>
-                </div>
-            </aside>
+            <?php get_template_part('template-parts/filter_bar', 'template', [
+                'filter_by' => $filter_by,
+                'sort_options' => $sort_options, 
+                'sort' => $sort
+            ]); ?>
             <div class="courses-main">
                 <section class="learning-pathways">
                     <div class="title">

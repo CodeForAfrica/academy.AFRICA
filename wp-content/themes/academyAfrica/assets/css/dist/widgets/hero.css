@@ -166,6 +166,7 @@ table {
 .hero .content-parent .content {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 .hero .content-parent .content .title .cfa-title {
   text-align: left;
@@ -246,6 +247,7 @@ table {
   .hero .content-parent .content {
     max-width: 587px;
     align-self: flex-end;
+    gap: 32px;
   }
   .hero .content-parent .metrics-content {
     margin: 0 -16px;
