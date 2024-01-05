@@ -11,6 +11,15 @@ $font-family_3: Open Sans;
   justify-content: space-evenly;
   overflow-x: hidden;
 
+  @include media-breakpoint-down(desktop) {
+    max-width: 580px;
+    margin: auto;
+    padding: 0;
+  }
+  @include media-breakpoint-down(tablet) {
+    max-width: 100%;
+    padding: 16px;
+  }
   .background-image {
     display: none;
 
@@ -21,14 +30,15 @@ $font-family_3: Open Sans;
       background-image: url("../../../images/hero.png");
       background-repeat: no-repeat;
       background-size: cover;
+      height: 40vw;
     }
 
     @include media-breakpoint-up(large) {
-      height: 594px;
+      // height: 594px;
     }
 
     @include media-breakpoint-up(xlarge) {
-      height: 792px;
+      height: 46vw;
     }
   }
 

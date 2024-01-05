@@ -7,7 +7,7 @@
   font-size: 48px;
   font-style: normal;
   font-weight: 700;
-  line-height: 60px; /* 125% */
+  // line-height: 60px; /* 125% */
   margin: 0 0 24px;
   strong {
     color: $color-primary-700;
@@ -24,6 +24,7 @@
     width: 60px;
     background: $color-secondary-500;
     margin-top: 32px;
+    position: absolute;
     @include media-breakpoint-up(mobile) {
       margin-top: 10px;
     }

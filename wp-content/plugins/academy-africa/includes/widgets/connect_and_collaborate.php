@@ -97,16 +97,17 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
         $join_us_on_slack = $settings["join_us_on_slack"];
         $title = $settings["title"];
         $about_us_url = $settings["about_us_url"];
-?>
+        ?>
         <div class="connect">
-            <div class="cfa-title">
+            <div class="cfa-title-centered">
                 <h4>
                     <? echo $title ?>
                 </h4>
             </div>
             <div class="content">
                 <div class="center africa">
-                    <img src="/wp-content/plugins/academy-africa/includes/assets/images/africa.png" alt="connect" class="africa">
+                    <img src="/wp-content/plugins/academy-africa/includes/assets/images/africa.png" alt="connect"
+                        class="africa">
                 </div>
                 <div class="banner center">
                     <p class="share">
@@ -121,6 +122,6 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
                 </div>
             </div>
         </div>
-<?
+        <?
     }
 }

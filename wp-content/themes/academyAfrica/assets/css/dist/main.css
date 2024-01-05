@@ -1117,7 +1117,6 @@ table {
   font-size: 48px;
   font-style: normal;
   font-weight: 700;
-  line-height: 60px; /* 125% */
   margin: 0 0 24px;
 }
 .cfa-title strong {
@@ -1136,6 +1135,7 @@ table {
   width: 60px;
   background: #ED1C24;
   margin-top: 32px;
+  position: absolute;
 }
 @media (min-width: 390px) {
   .cfa-title::after {

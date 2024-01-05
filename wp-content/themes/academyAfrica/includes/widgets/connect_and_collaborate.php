@@ -97,7 +97,7 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
         $join_us_on_slack = $settings["join_us_on_slack"];
         $title = $settings["title"];
         $join_us_url = $settings["join_us_url"]["url"];
-?>
+        ?>
         <div class="connect">
             <div class="title-wrapper">
                 <div class="cfa-title">
@@ -113,7 +113,8 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
                     </p>
                 </div>
                 <div class="center africa">
-                    <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/africa.png' ?>" alt="connect" class="africa-img">
+                    <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/africa.png' ?>" alt="connect"
+                        class="africa-img">
                 </div>
                 <div class="join-slack">
                     <div class="share-text">
@@ -130,6 +131,6 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
                 </div>
             </div>
         </div>
-<?
+        <?
     }
 }

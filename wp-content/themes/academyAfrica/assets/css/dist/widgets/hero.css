@@ -125,6 +125,19 @@ table {
   justify-content: space-evenly;
   overflow-x: hidden;
 }
+@media (max-width: 1152px) {
+  .hero {
+    max-width: 580px;
+    margin: auto;
+    padding: 0;
+  }
+}
+@media (max-width: 768px) {
+  .hero {
+    max-width: 100%;
+    padding: 16px;
+  }
+}
 .hero .background-image {
   display: none;
 }
@@ -136,16 +149,12 @@ table {
     background-image: url("../../../images/hero.png");
     background-repeat: no-repeat;
     background-size: cover;
-  }
-}
-@media (min-width: 1440px) {
-  .hero .background-image {
-    height: 594px;
+    height: 40vw;
   }
 }
 @media (min-width: 1920px) {
   .hero .background-image {
-    height: 792px;
+    height: 46vw;
   }
 }
 .hero .content-parent {
