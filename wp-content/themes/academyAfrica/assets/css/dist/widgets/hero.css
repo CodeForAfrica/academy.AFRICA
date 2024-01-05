@@ -241,6 +241,7 @@ table {
     margin-top: -166px;
     padding: 16px;
     width: 100%;
+    gap: 32px;
   }
   .hero .content-parent .content {
     max-width: 587px;
@@ -258,6 +259,7 @@ table {
   .hero .content-parent {
     margin-top: -190px;
     max-width: 1144px;
+    gap: 80px;
   }
   .hero .content-parent .metrics-content {
     margin: unset;

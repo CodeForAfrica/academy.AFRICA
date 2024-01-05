@@ -140,6 +140,7 @@ $font-family_3: Open Sans;
       margin-top: -166px;
       padding: 16px;
       width: 100%;
+      gap: 32px;
 
       .content {
         max-width: 587px;
@@ -159,6 +160,7 @@ $font-family_3: Open Sans;
     @include media-breakpoint-up(large) {
       margin-top: -190px;
       max-width: 1144px;
+      gap: 80px;
 
       .metrics-content {
         margin: unset;
