@@ -35,45 +35,43 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
     protected function register_controls()
     {
         $this->start_controls_section(
-            'section_header',
+            'sliders_section',
             [
-                'label' => __('Header', 'academy-africa'),
+                'label' => __('Sliders', 'academy-africa'),
             ]
         );
-
-        $this->add_control(
+        $sliders = new \Elementor\Repeater();
+        $sliders->add_control(
             'title',
             [
-                'label' => __('Title', 'academy-africa'),
+                'label' => __('Slider Title', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('FAQ\'s', 'academy-africa'),
+                'label_block' => true,
+                'placeholder' => 'Slider Title'
+            ]
+        );
+        $sliders->add_control(
+            'description',
+            [
+                'label' => __('Slider Description', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'label_block' => true,
             ]
         );
-        $faqs = new \Elementor\Repeater();
-        $faqs->add_control(
-            'title',
+        $sliders->add_control(
+            'image',
             [
-                'label' => __('Title', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'label_block' => true,
-                'placeholder' => 'FAQ Title'
-            ]
-        );
-        $faqs->add_control(
-            'content',
-            [
-                'label' => __('content', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::WYSIWYG,
+                'label' => __('Slider Image', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
                 'label_block' => true,
             ]
         );
         $this->add_control(
-            'faqs',
+            'sliders',
             [
-                'label' => esc_html__('FAQ\'s', 'academy-africa'),
+                'label' => esc_html__('Slider\'s', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::REPEATER,
-                'fields' => $faqs->get_controls(),
+                'fields' => $sliders->get_controls(),
                 'title_field' => '{{{ title }}}',
             ]
         );
@@ -84,53 +82,24 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $this->add_inline_editing_attributes('title', 'none');
-        $slides = [
-            [
-                'title' => 'Start Learning',
-                'content' => 'Want to expand your knowledge level in different topics?
-                academy.AFRICA has the resources to develop your skillset.',
-                'image' => '/wp-content/themes/academyAfrica/assets/images/mask.svg',
-                'image_position' => 'left'
-            ],
-            [
-                'title' => 'Turn learning into action',
-                'content' => 'So many courses you don’t know where to start from?
-                We have curated a learning map for you on different topics based on your current skill level.',
-                'image' => '/wp-content/themes/academyAfrica/assets/images/africa.png',
-                'image_position' => 'left'
-            ],
-            [
-                'title' => 'Use Tailored Resources',
-                'content' => 'We also have open source tools you can explore on your learning journey
-                ',
-                'image' => '/wp-content/themes/academyAfrica/assets/images/cfa_logo.svg',
-                'image_position' => 'left'
-            ],
-            [
-                'title' => 'Join the community',
-                'content' => 'What\'s better than one learner?A community of learners collaborating on projects! Join our community of over 800+ members',
-                'image' => '/wp-content/themes/academyAfrica/assets/images/mooc-logo-white.svg',
-                'image_position' => 'left'
-            ],
-        ];
+        $sliders = $settings['sliders'];
 ?>
         <div class="slider-root">
             <div class="slider-wrapper">
                 <div class="swipper mySwiper">
                     <div class="swiper-wrapper">
-                        <?php foreach ($slides as $slide) : ?>
+                        <?php foreach ($sliders as $slide) : ?>
                             <div class="swiper-slide">
                                 <div class="slide-content">
                                     <div class="slide-content__title">
                                         <h1 class="cfa-title"><?php echo $slide['title'] ?></h1>
                                     </div>
                                     <div class="slide-content__body">
-                                        <p><?php echo $slide['content'] ?></p>
+                                        <p><?php echo $slide['description'] ?></p>
                                     </div>
                                 </div>
                                 <div class="slide-image">
-                                    <img src="<?php echo $slide['image'] ?>" alt="">
+                                    <img src="<?php echo $slide['image']['url'] ?>" alt="">
                                 </div>
                             </div>
                         <?php endforeach; ?>
