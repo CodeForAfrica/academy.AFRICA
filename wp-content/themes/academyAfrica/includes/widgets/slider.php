@@ -152,13 +152,18 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
                 grabCursor: true,
                 loop: true,
                 autoplay: {
-                    delay: 2500000,
+                    delay: 2500,
                     disableOnInteraction: true,
                 },
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true,
                 },
+                breakpoints: {
+                    1920: {
+                        spaceBetween: 200,
+                    }
+                }
             });
         </script>
 <?
