@@ -85,10 +85,80 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $this->add_inline_editing_attributes('title', 'none');
+        $slides = [
+            [
+                'title' => 'Start Learning',
+                'content' => 'Want to expand your knowledge level in different topics?
+                academy.AFRICA has the resources to develop your skillset.',
+                'image' => '/wp-content/themes/academyAfrica/assets/images/mask.svg',
+                'image_position' => 'left'
+            ],
+            [
+                'title' => 'Turn learning into action',
+                'content' => 'So many courses you don’t know where to start from?
+                We have curated a learning map for you on different topics based on your current skill level.',
+                'image' => '/wp-content/themes/academyAfrica/assets/images/mask.svg',
+                'image_position' => 'left'
+            ],
+            [
+                'title' => 'Use Tailored Resources',
+                'content' => 'We also have open source tools you can explore on your learning journey
+                ',
+                'image' => '/wp-content/themes/academyAfrica/assets/images/mask.svg',
+                'image_position' => 'left'
+            ],
+            [
+                'title' => 'Join the community',
+                'content' => 'What\'s better than one learner?A community of learners collaborating on projects! Join our community of over 800+ members',
+                'image' => '/wp-content/themes/academyAfrica/assets/images/mask.svg',
+                'image_position' => 'left'
+            ],
+        ];
 ?>
         <div class="slider-root">
-            <h1>Slider</h1>
+            <div class="slider-wrapper">
+                <div class="swipper mySwiper">
+                    <div class="swiper-wrapper">
+                        <?php foreach ($slides as $slide) : ?>
+                            <div class="swiper-slide">
+                                <div class="slide-content">
+                                    <div class="slide-content__title">
+                                        <h1 class="cfa-title"><?php echo $slide['title'] ?></h1>
+                                    </div>
+                                    <div class="slide-content__body">
+                                        <p><?php echo $slide['content'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="slide-image">
+                                    <img src="<?php echo $slide['image'] ?>" alt="">
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="pagination">
+                <div class="swiper-pagination">
+                    <span class="swiper-pagination-bullet">
+                        <i class="fas fa-circle"></i>
+                    </span>
+                </div>
+            </div>
         </div>
+        <script>
+            var swiper = new Swiper(".mySwiper", {
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 500000,
+                    disableOnInteraction: true,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+            });
+        </script>
 <?
     }
 }
