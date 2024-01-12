@@ -147,6 +147,7 @@ table {
   color: #FFFFFF;
   font-family: Lora;
   line-height: 24px;
+  font-size: 20px;
 }
 .slider-root .slider-wrapper .swipper .swiper-wrapper .swiper-slide .slide-content__title .cfa-title::after {
   left: 50%;
@@ -212,6 +213,7 @@ table {
 @media (min-width: 1152px) {
   .slider-root .slider-wrapper .swipper .swiper-wrapper .swiper-slide .slide-content__title .cfa-title {
     line-height: 43.2px;
+    font-size: 38.4px;
   }
   .slider-root .slider-wrapper .swipper .swiper-wrapper .swiper-slide .slide-content__body {
     font-size: 19.2px;
