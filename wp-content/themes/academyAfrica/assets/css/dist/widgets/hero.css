@@ -124,18 +124,19 @@ table {
   align-items: center;
   justify-content: space-evenly;
   overflow-x: hidden;
+  max-width: 100%;
+  padding: 16px;
 }
-@media (max-width: 1152px) {
+@media (min-width: 768px) {
   .hero {
     max-width: 580px;
     margin: auto;
     padding: 0;
   }
 }
-@media (max-width: 768px) {
+@media (min-width: 1152px) {
   .hero {
     max-width: 100%;
-    padding: 16px;
   }
 }
 .hero .background-image {
