@@ -147,7 +147,7 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
         </div>
         <script>
             var swiper = new Swiper(".mySwiper", {
-                spaceBetween: 30,
+                spaceBetween: 100,
                 centeredSlides: true,
                 grabCursor: true,
                 loop: true,
