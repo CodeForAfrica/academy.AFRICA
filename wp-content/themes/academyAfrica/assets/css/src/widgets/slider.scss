@@ -55,6 +55,11 @@
                         height: 100%;
                         object-fit: cover;
                         text-align: center;
+                        img {
+                            max-height: 230px;
+                            min-height: 200px;
+                            object-fit: contain;
+                        }
                     }
                 }
             }
@@ -71,6 +76,43 @@
 
                 &.swiper-pagination-bullet-active {
                     background: $color-primary-700;
+                }
+            }
+        }
+    }
+
+
+
+    @include media-breakpoint-up(tablet) {
+        .slider-wrapper {
+            .swipper {
+                padding: 40px 0 40px 55px;
+
+                .swiper-wrapper {
+                    .swiper-slide {
+                        flex-direction: row;
+
+                        .slide-content {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 24px;
+
+                            &__title {
+                                text-align: left;
+
+                                .cfa-title {
+                                    &::after {
+                                        left: unset;
+                                        transform: unset;
+                                    }
+                                }
+                            }
+
+                            &__body {
+                                text-align: left;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -97,20 +97,20 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
                 'title' => 'Turn learning into action',
                 'content' => 'So many courses you don’t know where to start from?
                 We have curated a learning map for you on different topics based on your current skill level.',
-                'image' => '/wp-content/themes/academyAfrica/assets/images/mask.svg',
+                'image' => '/wp-content/themes/academyAfrica/assets/images/africa.png',
                 'image_position' => 'left'
             ],
             [
                 'title' => 'Use Tailored Resources',
                 'content' => 'We also have open source tools you can explore on your learning journey
                 ',
-                'image' => '/wp-content/themes/academyAfrica/assets/images/mask.svg',
+                'image' => '/wp-content/themes/academyAfrica/assets/images/cfa_logo.svg',
                 'image_position' => 'left'
             ],
             [
                 'title' => 'Join the community',
                 'content' => 'What\'s better than one learner?A community of learners collaborating on projects! Join our community of over 800+ members',
-                'image' => '/wp-content/themes/academyAfrica/assets/images/mask.svg',
+                'image' => '/wp-content/themes/academyAfrica/assets/images/mooc-logo-white.svg',
                 'image_position' => 'left'
             ],
         ];
@@ -149,8 +149,10 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
             var swiper = new Swiper(".mySwiper", {
                 spaceBetween: 30,
                 centeredSlides: true,
+                grabCursor: true,
+                loop: true,
                 autoplay: {
-                    delay: 500000,
+                    delay: 2500000,
                     disableOnInteraction: true,
                 },
                 pagination: {
