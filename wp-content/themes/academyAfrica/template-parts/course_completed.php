@@ -158,7 +158,7 @@ global $shortcode_tags;
                 </div>
             </div>
             <!-- <a href="<? echo $certificate_link ?>" download> -->
-            <a href="<? learndash_get_course_certificate_link($course_id) ?>" download>
+            <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
                 <button class="button primary">
                     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Icon">
