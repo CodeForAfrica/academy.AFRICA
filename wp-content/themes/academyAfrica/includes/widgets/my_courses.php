@@ -374,9 +374,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                             <div class="card-footer">
                                                 <p>Certificate Achieved</p>
                                                 <div class="icons">
-                                                    <img onclick="convertHTMLtoPDF('<? echo $course_id ?>', '<? echo $title ?>')"
-                                                        src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg"
-                                                        style="cursor: pointer;" alt="download" />
+
+                                                    <a href="<? learndash_get_course_certificate_link($course_id) ?>" download>
+                                                        <img onclick="convertHTMLtoPDF('<? echo $course_id ?>', '<? echo $title ?>')"
+                                                            src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg"
+                                                            style="cursor: pointer;" alt="download" />
+                                                    </a>
 
                                                     <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg"
                                                         alt="share" />

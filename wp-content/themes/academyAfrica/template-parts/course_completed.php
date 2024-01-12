@@ -158,21 +158,22 @@ global $shortcode_tags;
                 </div>
             </div>
             <!-- <a href="<? echo $certificate_link ?>" download> -->
-            <button onclick="convertHTMLtoPDF()" class="button primary">
-                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="Icon">
-                        <path id="Vector"
-                            d="M14.5 10.5V13.1667C14.5 13.5203 14.3595 13.8594 14.1095 14.1095C13.8594 14.3595 13.5203 14.5 13.1667 14.5H3.83333C3.47971 14.5 3.14057 14.3595 2.89052 14.1095C2.64048 13.8594 2.5 13.5203 2.5 13.1667V10.5"
-                            stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path id="Vector_2" d="M5.16797 7.16797L8.5013 10.5013L11.8346 7.16797" stroke="#EFF0FD"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </g>
-                </svg>
-                Download
-            </button>
-            <!-- </a> -->
+            <a href="<? learndash_get_course_certificate_link($course_id) ?>" download>
+                <button class="button primary">
+                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Icon">
+                            <path id="Vector"
+                                d="M14.5 10.5V13.1667C14.5 13.5203 14.3595 13.8594 14.1095 14.1095C13.8594 14.3595 13.5203 14.5 13.1667 14.5H3.83333C3.47971 14.5 3.14057 14.3595 2.89052 14.1095C2.64048 13.8594 2.5 13.5203 2.5 13.1667V10.5"
+                                stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path id="Vector_2" d="M5.16797 7.16797L8.5013 10.5013L11.8346 7.16797" stroke="#EFF0FD"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                    </svg>
+                    Download
+                </button>
+            </a>
         </div>
     </div>
     <script type="text/javascript">
