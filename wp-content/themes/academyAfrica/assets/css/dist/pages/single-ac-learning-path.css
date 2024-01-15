@@ -302,7 +302,8 @@ table {
   }
 }
 .ac-learning-path-container #learning {
-  display: none;
+  visibility: hidden;
+  height: 0;
   overflow: hidden;
 }
 

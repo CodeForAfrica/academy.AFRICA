@@ -22,7 +22,7 @@ $courses = get_field('courses', $learning_path_id);
             </div>
             <div class="ac-learning-path-container__title__text">
                 <div class="cfa-title">
-                    <?php the_title(); ?> 
+                    <?php the_title(); ?>
                 </div>
                 <div class="cfa-excerpt">
                     <?php the_excerpt(); ?>
@@ -173,15 +173,21 @@ $courses = get_field('courses', $learning_path_id);
 
 
         let pdf = document.getElementById('learning');
-        html2canvas(pdf,{
-            onclone: function (clonedDoc) {
-                clonedDoc.getElementById('learning').style.display = 'block';
+        let width, height;
+        html2canvas(pdf, {
+            onclone: function(clonedDoc) {
+                clonedDoc.getElementById('learning').style.visibility = 'visible';
+                clonedDoc.getElementById('learning').style.height = 'auto';
+                width = clonedDoc.getElementById('learning').offsetWidth;
+                height = clonedDoc.getElementById('learning').offsetHeight;
             }
         }).then((canvas) => {
             let doc = new jsPDF({
                 orientation: 'p',
+                unit: 'px',
+                format: [width, parseInt(height) + 100],
+                putOnlyUsedFonts: true,
             });
-
             let imgData = canvas.toDataURL('image/png');
             let imageProps = doc.getImageProperties(imgData);
             let pdfWidth = doc.internal.pageSize.getWidth();
