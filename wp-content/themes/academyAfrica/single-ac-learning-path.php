@@ -22,7 +22,7 @@ $courses = get_field('courses', $learning_path_id);
             </div>
             <div class="ac-learning-path-container__title__text">
                 <div class="cfa-title">
-                    <?php the_title(); ?>
+                    <?php the_title(); ?> 
                 </div>
                 <div class="cfa-excerpt">
                     <?php the_excerpt(); ?>
@@ -173,26 +173,22 @@ $courses = get_field('courses', $learning_path_id);
 
 
         let pdf = document.getElementById('learning');
-        let pdfTemplate = pdf.querySelector('.pdf-template');
+        html2canvas(pdf,{
+            onclone: function (clonedDoc) {
+                clonedDoc.getElementById('learning').style.display = 'block';
+            }
+        }).then((canvas) => {
+            let doc = new jsPDF({
+                orientation: 'p',
+            });
 
-        const width = pdfTemplate.offsetWidth;
-        const height = pdfTemplate.offsetHeight;
-
-        let doc = new jsPDF({
-            orientation: 'p',
-            unit: 'px',
-            format: [width, parseInt(height) + 100],
-            putOnlyUsedFonts: true,
-        });
-        doc.html(pdfTemplate, {
-            callback: function(doc) {
-                doc.save(`<? echo $learning_path_title . '.pdf' ?>`);
-            },
-            margin: 0,
-            html2canvas: {
-                scale: 1
-            },
-        });
+            let imgData = canvas.toDataURL('image/png');
+            let imageProps = doc.getImageProperties(imgData);
+            let pdfWidth = doc.internal.pageSize.getWidth();
+            let pdfHeight = (imageProps.height * pdfWidth) / imageProps.width;
+            doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            doc.save('<? echo $learning_path_title . '.pdf' ?>');
+        })
     }
 </script>
 
