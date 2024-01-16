@@ -9,7 +9,7 @@ if (!defined('ABSPATH'))
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
 
-if (!function_exists('chld_thm_cfg_locale_css')) :
+if (!function_exists('chld_thm_cfg_locale_css')):
     function chld_thm_cfg_locale_css($uri)
     {
         if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
@@ -19,7 +19,7 @@ if (!function_exists('chld_thm_cfg_locale_css')) :
 endif;
 add_filter('locale_stylesheet_uri', 'chld_thm_cfg_locale_css');
 
-if (!function_exists('child_theme_configurator_css')) :
+if (!function_exists('child_theme_configurator_css')):
     function child_theme_configurator_css()
     {
         wp_enqueue_style('chld_thm_cfg_separate', trailingslashit(get_stylesheet_directory_uri()) . 'ctc-style.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'));
@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.20');
+define('ACADEMY_AFRICA_VERSION', '1.1.21');
 
 function my_theme_enqueue_styles()
 {
@@ -192,12 +192,12 @@ function send_activation_link($user_id)
         global $wpdb;
         $wpdb->update(
             'wp_users',
-            array('user_activation_key' => $valid_code, 'user_status' => 1,),
+            array('user_activation_key' => $valid_code, 'user_status' => 1, ),
             array('ID' => $user_id),
         );
         $email = $user->data->user_email;
         $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $valid_code, 'user_id' => $user_id), $sign_in_url);
-?>
+        ?>
         <script>
             console.log(<? echo json_encode($user) ?>, <? echo json_encode($activation_link) ?>);
         </script>
@@ -250,11 +250,11 @@ function authenticate_user()
                 if ($user->data->user_status == 1 || $account_status !== "active") {
                     send_activation_link($user->data->ID);
                     wp_logout();
-        ?>
+                    ?>
                     <script>
                         window.location.reload();
                     </script>
-<?
+                    <?
                 }
             }
         } else {

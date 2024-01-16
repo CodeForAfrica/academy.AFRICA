@@ -1,6 +1,5 @@
 @use "../abstracts/" as *;
 
-
 .patners-root {
   padding: 40px 16px;
   display: flex;
@@ -29,7 +28,6 @@
       }
     }
 
-
     .partner-content {
       display: flex;
       padding: 16px;
@@ -54,7 +52,6 @@
       }
 
       .partner {
-
         width: 120px;
         height: 69px;
         object-fit: cover;
@@ -64,8 +61,8 @@
 
   hr {
     height: 1px;
-    background: #CCCFDA;
-    margin: 0 16px
+    background: #cccfda;
+    margin: 0 16px;
   }
 
   .other-partners {
@@ -106,7 +103,8 @@
       justify-content: center;
       align-items: center;
       gap: 20px;
-
+      text-decoration: none;
+      color: #000000;
       .partner-tag-content {
         padding: 5px 0;
         font-family: Open Sans;
@@ -226,7 +224,7 @@
     padding: 80px 148px;
 
     .partners {
-      gap: 40px 120px
+      gap: 40px 120px;
     }
   }
 

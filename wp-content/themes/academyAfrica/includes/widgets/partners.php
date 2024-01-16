@@ -33,64 +33,27 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
 
     public function get_our_partners()
     {
-        return [
-            [
-                "name" => "Google News Initiative",
-                "url" => "/",
-                "icon" => get_stylesheet_directory_uri() . '/assets/images/gni.png'
-            ],
-            [
-                "name" => "World Bank",
-                "url" => "/",
-                "icon" => get_stylesheet_directory_uri() . '/assets/images/world_bank.png'
-            ],
-            [
-                "name" => "Dw",
-                "url" => "/",
-                "icon" => get_stylesheet_directory_uri() . '/assets/images/dw.png'
-            ], [
-                "name" => "bbc",
-                "url" => "/",
-                "icon" => get_stylesheet_directory_uri() . '/assets/images/bbc.png'
-            ], [
-                "name" => "icfj",
-                "url" => "/",
-                "icon" => get_stylesheet_directory_uri() . '/assets/images/icfj.png'
-            ], [
-                "name" => "nor_cap",
-                "url" => "/",
-                "icon" => get_stylesheet_directory_uri() . '/assets/images/nor_cap.png'
-            ]
-        ];
+        $settings = $this->get_settings_for_display();
+        $other_partners = $settings['partners'];
+        $output = array();
+        foreach ($other_partners as $key) {
+            $new_array = array("name" => $key['title'], 'icon' => $key['image']['url']);
+            array_push($output, $new_array);
+        }
+
+        return $output;
     }
 
     public function get_other_partners()
     {
-        return [[
-            "name" => "🇰🇪 Aga Khan University",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/gni.png"
-        ], [
-            "name" => "🇳🇬 pan-atlantic university",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/dw.png"
-        ], [
-            "name" => "🇰🇪 Daystar University",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/gni.png"
-        ], [
-            "name" => "🇰🇪 Strathmore University",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/gni.png"
-        ], [
-            "name" => "🇿🇦 University of johannesburg",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/nor_cap.png"
-        ], [
-            "name" => "🇸🇳 Institut Supérieur Des Sciences De L'information Et De La Communication (ISSIC)",
-            "url" => "/",
-            "icon" => "/wp-content/plugins/academy-africa/includes/assets/images/icfj.png"
-        ]];
+        $settings = $this->get_settings_for_display();
+        $other_partners = $settings['other_partners'];
+        $output = array();
+        foreach ($other_partners as $key) {
+            $new_array = array("name" => $key['title'], 'icon' => $key['image']);
+            array_push($output, $new_array);
+        }
+        return $output;
     }
 
     protected function register_controls()
@@ -110,6 +73,41 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
                 'label_block' => true,
             ]
         );
+        $partner = new \Elementor\Repeater();
+        $partner->add_control(
+            'title',
+            [
+                'label' => __('Title', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => 'Title'
+            ]
+        );
+        $partner->add_control(
+            'url',
+            [
+                'label' => __('URL', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+            ]
+        );
+        $partner->add_control(
+            'image',
+            [
+                'label' => __('Slider Image', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'partners',
+            [
+                'label' => esc_html__('Partners', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $partner->get_controls(),
+                'title_field' => '{{{ title }}}',
+            ]
+        );
         $this->add_control(
             'other_partners_title',
             [
@@ -117,6 +115,15 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'default' => __('Academic Partners', 'academy-africa'),
                 'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'other_partners',
+            [
+                'label' => esc_html__('Other Partners', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $partner->get_controls(),
+                'title_field' => '{{{ title }}}',
             ]
         );
         $this->end_controls_section();
@@ -128,7 +135,7 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
         $title = $settings["title"];
         $our_partners = $this->get_our_partners();
         $other_partners = $this->get_other_partners();
-?>
+        ?>
         <div class="patners-root">
             <div class="partners">
                 <div class="title">
@@ -143,12 +150,12 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
                             $icon = $partner["icon"];
                             $name = $partner["name"];
                             $url = $partner["url"];
-                    ?>
+                            ?>
                             <a href="<? echo $url ?>" class="partner-link">
                                 <img src="<? echo $icon ?>" alt="<? echo $name ?>" class="partner" />
                                 <!-- <div class="partner" style="background: url(<? echo $icon ?>); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: lightgray;"></div> -->
                             </a>
-                    <?
+                            <?
                         }
                     }
                     ?>
@@ -156,7 +163,9 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
             </div>
             <hr />
             <div class="other-partners">
-                <h1 class="other-partners-title"><? echo $other_partners_title ?></h1>
+                <h1 class="other-partners-title">
+                    <? echo $other_partners_title ?>
+                </h1>
                 <div class="other-partners-content">
                     <?
                     if (!empty($other_partners)) {
@@ -164,13 +173,13 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
                             $icon = $partner["icon"];
                             $name = $partner["name"];
                             $url = $partner["url"];
-                    ?>
-                            <div class="partner-tag">
+                            ?>
+                            <a href="<? echo $url ?>" class="partner-tag">
                                 <div class="partner-tag-content">
                                     <? echo $name ?>
                                 </div>
-                            </div>
-                    <?
+                            </a>
+                            <?
                         }
                     }
                     ?>
@@ -178,6 +187,6 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
             </div>
         </div>
 
-<?
+        <?
     }
 }

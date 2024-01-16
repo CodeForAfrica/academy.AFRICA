@@ -169,7 +169,7 @@ table {
 }
 .patners-root hr {
   height: 1px;
-  background: #CCCFDA;
+  background: #cccfda;
   margin: 0 16px;
 }
 .patners-root .other-partners {
@@ -209,6 +209,8 @@ table {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  text-decoration: none;
+  color: #000000;
 }
 .patners-root .other-partners .partner-tag .partner-tag-content {
   padding: 5px 0;

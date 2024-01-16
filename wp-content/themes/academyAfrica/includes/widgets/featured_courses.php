@@ -87,7 +87,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
             [
                 'label' => __('Certificate Type', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('CCOMPLETION', 'academy-africa'),
+                'default' => __('COMPLETION', 'academy-africa'),
                 'label_block' => true,
             ]
         );
@@ -263,7 +263,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
 
         $posts = $query->get_posts();
         $courses = $posts;
-?>
+        ?>
         <div class="featured-courses">
             <div class="featured-content">
                 <div class="title-description">
@@ -288,7 +288,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
 
                             $course_attrs = CoursesFunctions::get_post_attr($course, $atts);
                             extract($course_attrs);
-                    ?>
+                            ?>
                             <?php get_template_part(
                                 'template-parts/course_card',
                                 'template',
@@ -301,7 +301,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                     'students' => $students
                                 ]
                             ); ?>
-                    <?
+                            <?
                         }
                     }
                     ?>
@@ -309,7 +309,9 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
             </div>
             <div class="featured-certificate">
                 <div class="certificate-root">
-                    <p class="certificate-header"> <?php echo $certificate_header; ?> </p>
+                    <p class="certificate-header">
+                        <?php echo $certificate_header; ?>
+                    </p>
                     <div class="certificate-showcase">
                         <div class="certificate">
                             <div class="certificate-content">
@@ -325,13 +327,16 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                     </div>
                                     <div class="certificate-header-logo">
                                         <hr />
-                                        <img class="logo" alt="logo" src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.svg' ?>" />
+                                        <img class="logo" alt="logo"
+                                            src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.svg' ?>" />
                                     </div>
 
                                 </div>
                                 <div class="course-details">
                                     <div class="student">
-                                        <p class="title"><? echo $presented_to ?></p>
+                                        <p class="title">
+                                            <? echo $presented_to ?>
+                                        </p>
                                         <p class="name first-name">
                                             First Name
                                         </p>
@@ -352,18 +357,27 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                             <div class="certificate-footer">
                                 <div class="company-details">
                                     <div class="brand-details">
-                                        <img class="logo" alt="logo" src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
+                                        <img class="logo" alt="logo"
+                                            src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
                                         <p class="company-name">
                                             <? echo $company_name ?>
                                         </p>
                                     </div>
-                                    <img class="artwork" alt="artwork" src="<? echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" />
+                                    <img class="artwork" alt="artwork"
+                                        src="<? echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" />
                                 </div>
                                 <div class="signature">
-                                    <img class="signature-img" alt="signature" alt="<? echo $academy_head['name'] ?>" src="<? echo $academy_head['signature'] ?>" />
-                                    <p class="signee-name"><? echo $academy_head['name'] ?></p>
-                                    <p class="signee-role"><? echo $academy_head['role'] ?></p>
-                                    <p class="sign-date"><? echo $academy_head['date'] ?></p>
+                                    <img class="signature-img" alt="signature" alt="<? echo $academy_head['name'] ?>"
+                                        src="<? echo $academy_head['signature'] ?>" />
+                                    <p class="signee-name">
+                                        <? echo $academy_head['name'] ?>
+                                    </p>
+                                    <p class="signee-role">
+                                        <? echo $academy_head['role'] ?>
+                                    </p>
+                                    <p class="sign-date">
+                                        <? echo $academy_head['date'] ?>
+                                    </p>
                                 </div>
                             </div>
                             <div class="certificate-site-name">
@@ -374,7 +388,9 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                         </div>
                         <div class="certificate-showcase-content">
                             <div class="showcase-header">
-                                <p class="certificate-header"> <?php echo $certificate_header; ?> </p>
+                                <p class="certificate-header">
+                                    <?php echo $certificate_header; ?>
+                                </p>
                             </div>
                             <p class="showcase-text">
                                 <? echo $certificate_cta_description ?>
@@ -388,6 +404,6 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                 </div>
             </div>
         </div>
-<?
+        <?
     }
 }
