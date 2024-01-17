@@ -204,10 +204,14 @@ table {
   .ac-learning-path-container__title__image {
     display: block;
     margin-right: 16px;
+    flex: 1;
   }
   .ac-learning-path-container__title__image .image {
     width: 358px;
     height: 358px;
+  }
+  .ac-learning-path-container__title__text {
+    flex: 1;
   }
   .ac-learning-path-container__title__text .cfa-title {
     font-size: 48px;
