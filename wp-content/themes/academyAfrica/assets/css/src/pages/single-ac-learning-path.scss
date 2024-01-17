@@ -269,6 +269,7 @@
             &__image {
                 display: block;
                 margin-right: 16px;
+                flex: 1;
 
                 .image {
                     width: 458px;
@@ -277,6 +278,7 @@
             }
 
             &__text {
+                flex: 1;
                 .cfa-title {
                     font-size: 48px;
                     line-height: 60px;

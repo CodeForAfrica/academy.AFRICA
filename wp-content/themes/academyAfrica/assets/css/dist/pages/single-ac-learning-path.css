@@ -327,10 +327,14 @@ table {
 .pdf-template .template__title__image {
   display: block;
   margin-right: 16px;
+  flex: 1;
 }
 .pdf-template .template__title__image .image {
   width: 458px;
   height: 458px;
+}
+.pdf-template .template__title__text {
+  flex: 1;
 }
 .pdf-template .template__title__text .cfa-title {
   font-size: 48px;
