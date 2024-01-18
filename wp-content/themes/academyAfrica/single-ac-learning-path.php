@@ -108,13 +108,10 @@ $courses = get_field('courses', $learning_path_id);
                                     'courses' => $courses,
                                     'content' => get_the_content()
                                 ]); ?>`;
-        var styles = `<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() . '/assets/css/dist/print/ac_learning_print.css'; ?>" type="text/css" media="print" />`;
-
 
         var printWindow = window.open('', '', '');
         printWindow.document.write('<html><head>');
         printWindow.document.write('<title><?php echo $learning_path_title ?></title>');
-        printWindow.document.write(styles);
         printWindow.document.write('</head><body >');
         printWindow.document.write(printTemplate);
         printWindow.document.write('</body></html>');

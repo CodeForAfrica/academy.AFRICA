@@ -223,3 +223,226 @@
         }
     }
 }
+
+@media print {
+    .pdf-template {
+        a {
+            text-decoration: none;
+        }
+    
+        .template {
+            width: 100%;
+    
+            &__title {
+                margin: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 24px;
+    
+                &__image {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    justify-content: center;
+                    flex: 1;
+    
+                    .image {
+                        width: 134px;
+                        height: 134px;
+                    }
+                }
+    
+                &__text {
+                    flex: 1;
+    
+                    .cfa-title {
+                        font-size: 14px;
+                        line-height: 16px;
+                        font-weight: 700;
+                        text-align: left;
+                        font-family: 'Ibarra Real Nova';
+                    }
+    
+                    .cfa-excerpt {
+                        color: $color-shades-black;
+                        font-family: Open Sans;
+                        font-size: 8px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 10px;
+                    }
+                }
+            }
+    
+            &__content {
+                padding: 20px 10px;
+                background: $color-neutral-50;
+    
+                .courses {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+    
+                    .title {
+                        color: $color-primary-700;
+                        font-family: Lora;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 9.6px;
+                    }
+    
+                    .content {
+                        color: $color-shades-black;
+                        font-family: Open Sans;
+                        font-size: 8px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 10px;
+                    }
+    
+    
+                    .list {
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: center;
+                        gap: 32px;
+                        flex-wrap: nowrap;
+                        flex-direction: column;
+    
+                        .pagebreak{
+                            clear: both;
+                            page-break-before: always;
+                        }
+    
+    
+                        .individual-course {
+                            display: flex;
+                            gap: 20px;
+                            text-align: center;
+                            justify-content: center;
+                            align-items: center;
+    
+                            .course-index {
+                                display: block;
+                                color: $color-primary-700;
+                                font-family: Lora;
+                                font-size: 60px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: 10.8px;
+                                opacity: 0.3;
+                            }
+    
+                            .course {
+                                display: flex;
+                                gap: 10px;
+    
+                                .course-card {
+                                    .card {
+                                        width: 84px;
+                                        height: 102px;
+    
+                                        .course-card-pattern {
+                                            height: 45px;
+    
+                                            img {
+                                                width: 30px;
+                                                height: 30px;
+                                            }
+                                        }
+    
+                                        .course-card-content {
+                                            padding: 6px;
+    
+                                            .course-title {
+                                                font-size: 5.4px;
+                                                line-height: 7.2px;
+                                            }
+    
+                                            .course-meta {
+                                                height: 22px;
+    
+                                                .course-author {
+                                                    font-size: 4.2px;
+                                                    line-height: 5.4px;
+                                                }
+    
+                                                .course-details {
+                                                    .course-students {
+                                                        gap: 2px;
+    
+                                                        .icon {
+                                                            display: flex;
+    
+                                                            img {
+                                                                width: 5px;
+                                                                height: 5px;
+                                                            }
+                                                        }
+    
+                                                        .value {
+                                                            font-size: 4.2px;
+                                                            line-height: unset;
+                                                        }
+                                                    }
+    
+                                                    .course-price {
+                                                        font-size: 4.2px;
+                                                        line-height: 5.4px;
+                                                        height: unset !important;
+                                                        min-width: unset !important;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+    
+                                .extra-course-details {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: flex-start;
+                                    align-items: center;
+                                    gap: 8px;
+                                    flex: 1 0 0;
+                                    text-align: left;
+    
+                                    .course-title {
+                                        color: $color-primary-700 !important;
+                                        font-family: Open Sans;
+                                        font-size: 10px;
+                                        font-style: normal;
+                                        font-weight: 700;
+                                        line-height: 12px;
+                                        letter-spacing: -0.2px;
+                                        width: 100%;
+                                        text-align: left;
+                                    }
+    
+                                    .course-excerpt {
+                                        color: $color-shades-black;
+                                        font-family: Open Sans;
+                                        font-size: 8px;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: 10px;
+                                    }
+                                }
+                            }
+                        }
+    
+                        .divider {
+                            display: block;
+                            width: 100%;
+                            height: 1px;
+                            background: #8C8FA5;
+                        }
+                    }
+                }
+    
+            }
+        }
+    }
+}

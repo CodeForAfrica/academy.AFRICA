@@ -781,4 +781,186 @@ table {
   background: #8C8FA5;
 }
 
+@media print {
+  .pdf-template a {
+    text-decoration: none;
+  }
+  .pdf-template .template {
+    width: 100%;
+  }
+  .pdf-template .template__title {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+  .pdf-template .template__title__image {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    flex: 1;
+  }
+  .pdf-template .template__title__image .image {
+    width: 134px;
+    height: 134px;
+  }
+  .pdf-template .template__title__text {
+    flex: 1;
+  }
+  .pdf-template .template__title__text .cfa-title {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 700;
+    text-align: left;
+    font-family: "Ibarra Real Nova";
+  }
+  .pdf-template .template__title__text .cfa-excerpt {
+    color: #000000;
+    font-family: Open Sans;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 10px;
+  }
+  .pdf-template .template__content {
+    padding: 20px 10px;
+    background: #F7F9FD;
+  }
+  .pdf-template .template__content .courses {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .pdf-template .template__content .courses .title {
+    color: #0C1A81;
+    font-family: Lora;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 9.6px;
+  }
+  .pdf-template .template__content .courses .content {
+    color: #000000;
+    font-family: Open Sans;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 10px;
+  }
+  .pdf-template .template__content .courses .list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+  .pdf-template .template__content .courses .list .pagebreak {
+    clear: both;
+    page-break-before: always;
+  }
+  .pdf-template .template__content .courses .list .individual-course {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course-index {
+    display: block;
+    color: #0C1A81;
+    font-family: Lora;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 10.8px;
+    opacity: 0.3;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course {
+    display: flex;
+    gap: 10px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card {
+    width: 84px;
+    height: 102px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-pattern {
+    height: 45px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-pattern img {
+    width: 30px;
+    height: 30px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content {
+    padding: 6px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content .course-title {
+    font-size: 5.4px;
+    line-height: 7.2px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta {
+    height: 22px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-author {
+    font-size: 4.2px;
+    line-height: 5.4px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-students {
+    gap: 2px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-students .icon {
+    display: flex;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-students .icon img {
+    width: 5px;
+    height: 5px;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-students .value {
+    font-size: 4.2px;
+    line-height: unset;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .course-card .card .course-card-content .course-meta .course-details .course-price {
+    font-size: 4.2px;
+    line-height: 5.4px;
+    height: unset !important;
+    min-width: unset !important;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .extra-course-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    text-align: left;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .extra-course-details .course-title {
+    color: #0C1A81 !important;
+    font-family: Open Sans;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    letter-spacing: -0.2px;
+    width: 100%;
+    text-align: left;
+  }
+  .pdf-template .template__content .courses .list .individual-course .course .extra-course-details .course-excerpt {
+    color: #000000;
+    font-family: Open Sans;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 10px;
+  }
+  .pdf-template .template__content .courses .list .divider {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #8C8FA5;
+  }
+}
+
 /*# sourceMappingURL=ac_learning_print.css.map */
