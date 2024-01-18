@@ -89,6 +89,11 @@
                     flex-wrap: nowrap;
                     flex-direction: column;
 
+                    .pagebreak{
+                        clear: both;
+                        page-break-before: always;
+                    }
+
 
                     .individual-course {
                         display: flex;

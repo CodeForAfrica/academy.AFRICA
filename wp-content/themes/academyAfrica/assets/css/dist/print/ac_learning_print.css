@@ -676,6 +676,10 @@ table {
   flex-wrap: nowrap;
   flex-direction: column;
 }
+.pdf-template .template__content .courses .list .pagebreak {
+  clear: both;
+  page-break-before: always;
+}
 .pdf-template .template__content .courses .list .individual-course {
   display: flex;
   gap: 20px;

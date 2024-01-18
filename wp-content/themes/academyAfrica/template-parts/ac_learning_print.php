@@ -31,7 +31,9 @@ $content = $args['content'];
                     <? echo $content ?>
                 </div>
                 <div class="list">
-                    <?php foreach ($courses as $course_index =>  $course) : ?>
+                    <?php
+                    $counter = 0;
+                    foreach ($courses as $course_index =>  $course) : ?>
                         <?
                         $course_thumbnail = get_the_post_thumbnail_url($course);
                         $course_title = $course->post_title;
@@ -42,6 +44,11 @@ $content = $args['content'];
                         $course_price = $course_meta['sfwd-courses_course_price'];
                         $course_price = $course_price == 0 ? "Free" : $course_price;
                         $students_count = learndash_course_grid_count_students($course->ID);
+                        // If counter is 4 or a multiple of 5 after the 4th, insert a page break
+                        if ($counter == 4 || ($counter > 4 && ($counter - 4) % 5 == 0)) {
+                            echo '<div class="pagebreak"></div>';
+                        }
+                        $counter++;
                         ?>
                         <div class="individual-course">
                             <div class="course-index">
