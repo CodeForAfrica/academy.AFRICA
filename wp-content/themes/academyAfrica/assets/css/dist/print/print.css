@@ -781,4 +781,8 @@ table {
   background: #8C8FA5;
 }
 
+@page {
+  margin: 0;
+}
+
 /*# sourceMappingURL=print.css.map */
