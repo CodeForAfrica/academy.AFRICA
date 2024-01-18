@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.27');
+define('ACADEMY_AFRICA_VERSION', '1.1.28');
 
 function my_theme_enqueue_styles()
 {
@@ -45,6 +45,7 @@ function my_theme_enqueue_styles()
     wp_enqueue_style(('single-ac-learning-path'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-ac-learning-path.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('search'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('filter_bar'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/filter_bar.css', array(), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_style(('learning_path_print'), get_stylesheet_directory_uri() . '/assets/css/dist/print/print.css', array(), ACADEMY_AFRICA_VERSION, 'print');
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
