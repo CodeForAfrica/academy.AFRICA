@@ -1,5 +1,6 @@
 @use "../abstracts/" as *;
 @use "../components/title" as *;
+@use '../pages/sfwd-common.scss' as *;
 
 
 .pdf-template {
@@ -22,6 +23,7 @@
                 align-items: center;
                 width: 100%;
                 justify-content: center;
+                flex: 1;
 
                 .image {
                     width: 134px;
@@ -30,7 +32,7 @@
             }
 
             &__text {
-
+                flex: 1;
 
                 .cfa-title {
                     font-size: 14px;
@@ -126,6 +128,7 @@
 
                                     .course-card-content {
                                         padding: 6px;
+
                                         .course-title {
                                             font-size: 5.4px;
                                             line-height: 7.2px;
@@ -141,9 +144,11 @@
 
                                             .course-details {
                                                 .course-students {
-                                                    gap: 0;
+                                                    gap: 2px;
+
                                                     .icon {
                                                         display: flex;
+
                                                         img {
                                                             width: 5px;
                                                             height: 5px;
