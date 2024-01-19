@@ -110,14 +110,19 @@ $courses = get_field('courses', $learning_path_id);
                                 ]); ?>`;
 
         var printWindow = window.open('', '', '');
+        printWindow.document.write('<!DOCTYPE html>');
         printWindow.document.write('<html><head>');
         printWindow.document.write('<title><?php echo $learning_path_title ?></title>');
         printWindow.document.write('</head><body >');
         printWindow.document.write(printTemplate);
         printWindow.document.write('</body></html>');
-        printWindow.print();
+        // printWindow.print();
         printWindow.document.close(); // necessary for IE >= 10
         printWindow.focus(); // necessary for IE >= 10*/
+
+        printWindow.onload = function() {
+            printWindow.print();
+        };
 
     }
 </script>
