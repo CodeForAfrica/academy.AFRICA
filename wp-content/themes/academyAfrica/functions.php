@@ -340,6 +340,13 @@ const required_plugins = array(
         'check' => 'elementor_pro_load_plugin',
         'url' => 'https://elementor.com/pro/'
     ],
+    'User Menus' => [
+        'name' => 'User Menus',
+        'min_version' => '1.3.2',
+        'path' => 'user-menus/user-menus.php',
+        'check' => 'class_exists',
+        'url' => 'https://wordpress.org/plugins/user-menus/'
+    ],
 );
 
 function check_compatibility()
@@ -366,30 +373,33 @@ add_action('init', 'check_compatibility');
 
 function admin_notice_missing_plugin($plugin_name)
 {
-    if (isset($_GET['activate'])) unset($_GET['activate']);
-    $url = required_plugins[$plugin_name]['url'];
+    if (is_admin()) {
+        if (isset($_GET['activate'])) unset($_GET['activate']);
+        $url = required_plugins[$plugin_name]['url'];
 
-    $message = sprintf(
-        /* translators: 1: Plugin name 2: Elementor */
-        esc_html__('"%1$s" requires "%2$s" to be installed and activated.', 'academy-africa'),
-        '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
-        '<strong><a href="' . $url . '" target="_blank">' . esc_html__($plugin_name, 'academy-africa') . '</a></strong>'
-    );
-
-    printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
+        $message = sprintf(
+            /* translators: 1: Plugin name 2: Elementor */
+            esc_html__('"%1$s" requires "%2$s" to be installed and activated.', 'academy-africa'),
+            '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
+            '<strong><a href="' . $url . '" target="_blank">' . esc_html__($plugin_name, 'academy-africa') . '</a></strong>'
+        );
+        printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
+    }
 }
 
 function admin_notice_minimum_plugin_version($plugin_name, $min_version)
 {
-    if (isset($_GET['activate'])) unset($_GET['activate']);
+    if (is_admin()) {
+        if (isset($_GET['activate'])) unset($_GET['activate']);
 
-    $message = sprintf(
-        /* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
-        esc_html__('"%1$s" requires "%2$s" version %3$s or greater.', 'academy-africa'),
-        '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
-        '<strong>' . esc_html__($plugin_name, 'academy-africa') . '</strong>',
-        $min_version
-    );
+        $message = sprintf(
+            /* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
+            esc_html__('"%1$s" requires "%2$s" version %3$s or greater.', 'academy-africa'),
+            '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
+            '<strong>' . esc_html__($plugin_name, 'academy-africa') . '</strong>',
+            $min_version
+        );
 
-    printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
+        printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
+    }
 }
