@@ -166,9 +166,9 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
     console.log(signOutMenu);
     Array.from(signOutMenu).forEach((element) => {
         element.addEventListener("click", function() {
-            console.log("sign out clicked");
             <?php
-            $logout_url = wp_logout_url( get_permalink());
+            $current_url = get_permalink();
+            $logout_url = wp_logout_url(get_permalink());
             echo "window.location.href = '" . $logout_url . "'";
             ?>
         });
