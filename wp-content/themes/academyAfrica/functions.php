@@ -351,18 +351,21 @@ const required_plugins = array(
 
 function check_compatibility()
 {
-    foreach (required_plugins as $plugin_name => $plugin) {
-        if (!is_plugin_active($plugin['path'])) {
-            add_action('admin_notices', function () use ($plugin_name) {
-                admin_notice_missing_plugin($plugin_name);
-            });
-        } else {
-            if (isset($plugin['min_version'])) {
-                $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin['path']);
-                if (version_compare($plugin_data['Version'], $plugin['min_version'], '<')) {
-                    add_action('admin_notices', function () use ($plugin_name, $plugin) {
-                        admin_notice_minimum_plugin_version($plugin_name, $plugin['min_version']);
-                    });
+    $is_admin = current_user_can('administrator');
+    if ($is_admin) {
+        foreach (required_plugins as $plugin_name => $plugin) {
+            if (!is_plugin_active($plugin['path'])) {
+                add_action('admin_notices', function () use ($plugin_name) {
+                    admin_notice_missing_plugin($plugin_name);
+                });
+            } else {
+                if (isset($plugin['min_version'])) {
+                    $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin['path']);
+                    if (version_compare($plugin_data['Version'], $plugin['min_version'], '<')) {
+                        add_action('admin_notices', function () use ($plugin_name, $plugin) {
+                            admin_notice_minimum_plugin_version($plugin_name, $plugin['min_version']);
+                        });
+                    }
                 }
             }
         }
@@ -373,33 +376,30 @@ add_action('init', 'check_compatibility');
 
 function admin_notice_missing_plugin($plugin_name)
 {
-    if (is_admin()) {
-        if (isset($_GET['activate'])) unset($_GET['activate']);
-        $url = required_plugins[$plugin_name]['url'];
+    if (isset($_GET['activate'])) unset($_GET['activate']);
+    $url = required_plugins[$plugin_name]['url'];
 
-        $message = sprintf(
-            /* translators: 1: Plugin name 2: Elementor */
-            esc_html__('"%1$s" requires "%2$s" to be installed and activated.', 'academy-africa'),
-            '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
-            '<strong><a href="' . $url . '" target="_blank">' . esc_html__($plugin_name, 'academy-africa') . '</a></strong>'
-        );
-        printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
-    }
+    $message = sprintf(
+        /* translators: 1: Plugin name 2: Elementor */
+        esc_html__('"%1$s" requires "%2$s" to be installed and activated.', 'academy-africa'),
+        '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
+        '<strong><a href="' . $url . '" target="_blank">' . esc_html__($plugin_name, 'academy-africa') . '</a></strong>'
+    );
+
+    printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
 }
 
 function admin_notice_minimum_plugin_version($plugin_name, $min_version)
 {
-    if (is_admin()) {
-        if (isset($_GET['activate'])) unset($_GET['activate']);
+    if (isset($_GET['activate'])) unset($_GET['activate']);
 
-        $message = sprintf(
-            /* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
-            esc_html__('"%1$s" requires "%2$s" version %3$s or greater.', 'academy-africa'),
-            '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
-            '<strong>' . esc_html__($plugin_name, 'academy-africa') . '</strong>',
-            $min_version
-        );
+    $message = sprintf(
+        /* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
+        esc_html__('"%1$s" requires "%2$s" version %3$s or greater.', 'academy-africa'),
+        '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
+        '<strong>' . esc_html__($plugin_name, 'academy-africa') . '</strong>',
+        $min_version
+    );
 
-        printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
-    }
+    printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
 }
