@@ -403,3 +403,20 @@ function admin_notice_minimum_plugin_version($plugin_name, $min_version)
 
     printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
 }
+
+function restrict_admin_access()
+{
+    if (!current_user_can('administrator') && !current_user_can('editor') && !current_user_can('author')) {
+        wp_redirect(home_url());
+        exit;
+    }
+}
+
+add_action('admin_init', 'restrict_admin_access');
+
+function hide_admin_bar()
+{
+    if (!current_user_can('administrator') && !current_user_can('editor') && !current_user_can('author')) {
+        show_admin_bar(false);
+    }
+}
