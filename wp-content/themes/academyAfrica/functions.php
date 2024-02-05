@@ -9,7 +9,7 @@ if (!defined('ABSPATH'))
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
 
-if (!function_exists('chld_thm_cfg_locale_css')):
+if (!function_exists('chld_thm_cfg_locale_css')) :
     function chld_thm_cfg_locale_css($uri)
     {
         if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
@@ -19,7 +19,7 @@ if (!function_exists('chld_thm_cfg_locale_css')):
 endif;
 add_filter('locale_stylesheet_uri', 'chld_thm_cfg_locale_css');
 
-if (!function_exists('child_theme_configurator_css')):
+if (!function_exists('child_theme_configurator_css')) :
     function child_theme_configurator_css()
     {
         wp_enqueue_style('chld_thm_cfg_separate', trailingslashit(get_stylesheet_directory_uri()) . 'ctc-style.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'));
@@ -30,6 +30,8 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 // END ENQUEUE PARENT ACTION
 
 define('ACADEMY_AFRICA_VERSION', '1.1.30');
+const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
+
 
 function my_theme_enqueue_styles()
 {
@@ -193,12 +195,12 @@ function send_activation_link($user_id)
         global $wpdb;
         $wpdb->update(
             'wp_users',
-            array('user_activation_key' => $valid_code, 'user_status' => 1, ),
+            array('user_activation_key' => $valid_code, 'user_status' => 1,),
             array('ID' => $user_id),
         );
         $email = $user->data->user_email;
         $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $valid_code, 'user_id' => $user_id), $sign_in_url);
-        ?>
+?>
         <script>
             console.log(<? echo json_encode($user) ?>, <? echo json_encode($activation_link) ?>);
         </script>
@@ -251,11 +253,11 @@ function authenticate_user()
                 if ($user->data->user_status == 1 || $account_status !== "active") {
                     send_activation_link($user->data->ID);
                     wp_logout();
-                    ?>
+        ?>
                     <script>
                         window.location.reload();
                     </script>
-                    <?
+<?
                 }
             }
         } else {
@@ -266,3 +268,127 @@ function authenticate_user()
 
 add_action('init', 'authenticate_user');
 add_filter('authenticate', 'restrict_user_status', 20, 3);
+
+const required_plugins = array(
+    'LearnDash' => [
+        'name' => 'LearnDash',
+        'min_version' => '4.9.1',
+        'path' => 'sfwd-lms/sfwd_lms.php',
+        'check' => 'class_exists',
+        'url' => 'https://www.learndash.com/'
+    ],
+    'LearnDash Certificate Builder' => [
+        'name' => 'LearnDash Certificate Builder',
+        'min_version' => '1.0.4',
+        'path' => 'learndash-certificate-builder/learndash-certificate-builder.php',
+        'check' => 'class_exists',
+        'url' => 'https://www.learndash.com/support/docs/add-ons/certificate-builder-add-on/'
+    ],
+    'LearnDash Course Grid' => [
+        'name' => 'LearnDash Course Grid',
+        'min_version' => '2.0.8',
+        'path' => 'learndash-course-grid/learndash_course_grid.php',
+        'check' => 'class_exists',
+        'url' => 'https://www.learndash.com/support/docs/add-ons/course-grid/'
+    ],
+    'LearnDash Elementor' => [
+        'name' => 'LearnDash Elementor',
+        'min_version' => '1.0.4',
+        'path' => 'learndash-elementor/learndash-elementor.php',
+        'check' => 'class_exists',
+        'url' => 'https://www.learndash.com/support/docs/add-ons/learndash-elementor-addon/'
+    ],
+    'Learndash Multilingual' => [
+        'name' => 'Learndash Multilingual',
+        'min_version' => '1.0.0',
+        'path' => 'ld-multilingual/ld-multilingual.php',
+        'check' => 'class_exists',
+        'url' => 'https://www.learndash.com/support/docs/add-ons/compatibility/'
+    ],
+    'Polylang' => [
+        'name' => 'Polylang',
+        'min_version' => '3.5.2',
+        'path' => 'polylang/polylang.php',
+        'check' => 'function_exists',
+        'url' => 'https://wordpress.org/plugins/polylang/'
+    ],
+    'WP Bakery' => [
+        'name' => 'WP Bakery',
+        'min_version' => '7.3',
+        'path' => 'js_composer/js_composer.php',
+        'check' => 'function_exists',
+        'url' => 'https://wpbakery.com/'
+    ],
+    'Advanced Custom Fields' => [
+        'name' => 'Advanced Custom Fields',
+        'min_version' => '6.2.3',
+        'path' => 'advanced-custom-fields/acf.php',
+        'check' => 'function_exists',
+        'url' => 'https://www.advancedcustomfields.com/'
+    ],
+    'Elementor' => [
+        'name' => 'Elementor',
+        'min_version' => '3.16.6',
+        'path' => 'elementor/elementor.php',
+        'check' => 'elementor/loaded',
+        'url' => 'https://wordpress.org/plugins/elementor/'
+    ],
+    'Elementor Pro' => [
+        'name' => 'Elementor Pro',
+        'min_version' => '3.14.2',
+        'path' => 'elementor-pro/elementor-pro.php',
+        'check' => 'elementor_pro_load_plugin',
+        'url' => 'https://elementor.com/pro/'
+    ],
+);
+
+function check_compatibility()
+{
+    foreach (required_plugins as $plugin_name => $plugin) {
+        if (!is_plugin_active($plugin['path'])) {
+            add_action('admin_notices', function () use ($plugin_name) {
+                admin_notice_missing_plugin($plugin_name);
+            });
+        } else {
+            if (isset($plugin['min_version'])) {
+                $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin['path']);
+                if (version_compare($plugin_data['Version'], $plugin['min_version'], '<')) {
+                    add_action('admin_notices', function () use ($plugin_name, $plugin) {
+                        admin_notice_minimum_plugin_version($plugin_name, $plugin['min_version']);
+                    });
+                }
+            }
+        }
+    }
+}
+
+add_action('init', 'check_compatibility');
+
+function admin_notice_missing_plugin($plugin_name)
+{
+    if (isset($_GET['activate'])) unset($_GET['activate']);
+
+    $message = sprintf(
+        /* translators: 1: Plugin name 2: Elementor */
+        esc_html__('"%1$s" requires "%2$s" to be installed and activated.', 'academy-africa'),
+        '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
+        '<strong>' . esc_html__($plugin_name, 'academy-africa') . '</strong>'
+    );
+
+    printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
+}
+
+function admin_notice_minimum_plugin_version($plugin_name, $min_version)
+{
+    if (isset($_GET['activate'])) unset($_GET['activate']);
+
+    $message = sprintf(
+        /* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
+        esc_html__('"%1$s" requires "%2$s" version %3$s or greater.', 'academy-africa'),
+        '<strong>' . esc_html__('academyAfrica Theme', 'academy-africa') . '</strong>',
+        '<strong>' . esc_html__($plugin_name, 'academy-africa') . '</strong>',
+        $min_version
+    );
+
+    printf('<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message);
+}
