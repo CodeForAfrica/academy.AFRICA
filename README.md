@@ -1,3 +1,6 @@
+### Documentation
+   For detailed documentation on the plugins used, check the [wiki](https://github.com/CodeForAfrica/academyAfrica/wiki)
+
 ### Repository Setup Guide
 
 1. **Add SSH Key to WP Engine**
