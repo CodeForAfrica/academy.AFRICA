@@ -45,7 +45,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
             <div class="search">
                 <div class="button primary search-icon">
                     <i class="fa-solid fa-magnifying-glass icon"></i>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -160,3 +160,17 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
         <?php get_search_form(); ?>
     </div>
 </div>
+
+<script>
+    const signOutMenu = document.querySelectorAll("a[href='#sign-out']");
+    console.log(signOutMenu);
+    Array.from(signOutMenu).forEach((element) => {
+        element.addEventListener("click", function() {
+            <?php
+            $current_url = get_permalink();
+            $logout_url = wp_logout_url(get_permalink());
+            echo "window.location.href = '" . $logout_url . "'";
+            ?>
+        });
+    });
+</script>

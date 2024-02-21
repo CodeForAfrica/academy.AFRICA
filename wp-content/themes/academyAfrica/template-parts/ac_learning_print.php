@@ -1,44 +1,39 @@
 <?php
+$learning_path_title = $args['learning_path_title'];
+$learning_path_excerpt = $args['learning_path_excerpt'];
+$courses = $args['courses'];
+$content = $args['content'];
 
-/**
- * Template Name: Learning Path
- * Template Post Type: ac-learning-path
- */
-
-$learning_path_id = get_the_ID();
-$learning_path_title = get_the_title();
-$learning_path_excerpt = get_the_excerpt();
-$courses = get_field('courses', $learning_path_id);
 ?>
 
-<?php get_header(); ?>
-
-
-<div class="ac-learning-path-container">
-    <div id='learning-path'>
-        <div class="ac-learning-path-container__title">
-            <div class="ac-learning-path-container__title__image">
+<link rel="stylesheet" href="<? echo get_stylesheet_directory_uri() ?>/assets/css/dist/print/ac_learning_print.css">
+<div class="pdf-template">
+    <div class="template">
+        <div class="template__title">
+            <div class="template__title__image">
                 <img src="/wp-content/themes/academyAfrica/assets/images/mask.svg" class="image">
             </div>
-            <div class="ac-learning-path-container__title__text">
+            <div class="template__title__text">
                 <div class="cfa-title">
-                    <?php the_title(); ?>
+                    <? echo $learning_path_title ?>
                 </div>
                 <div class="cfa-excerpt">
-                    <?php the_excerpt(); ?>
+                    <? echo $learning_path_excerpt ?>
                 </div>
             </div>
         </div>
-        <div class="ac-learning-path-container__content">
+        <div class="template__content">
             <div class="courses">
                 <div class="title">
                     Take the courses
                 </div>
                 <div class="content">
-                    <? the_content() ?>
+                    <? echo $content ?>
                 </div>
                 <div class="list">
-                    <?php foreach ($courses as $course_index =>  $course) : ?>
+                    <?php
+                    $counter = 0;
+                    foreach ($courses as $course_index =>  $course) : ?>
                         <?
                         $course_thumbnail = get_the_post_thumbnail_url($course);
                         $course_title = $course->post_title;
@@ -49,6 +44,11 @@ $courses = get_field('courses', $learning_path_id);
                         $course_price = $course_meta['sfwd-courses_course_price'];
                         $course_price = $course_price == 0 ? "Free" : $course_price;
                         $students_count = learndash_course_grid_count_students($course->ID);
+                        // If counter is 4 or a multiple of 5 after the 4th, insert a page break
+                        if ($counter == 4 || ($counter > 4 && ($counter - 4) % 5 == 0)) {
+                            echo '<div class="pagebreak"></div>';
+                        }
+                        $counter++;
                         ?>
                         <div class="individual-course">
                             <div class="course-index">
@@ -84,47 +84,5 @@ $courses = get_field('courses', $learning_path_id);
             </div>
         </div>
     </div>
-    <div id="learning">
-        <? get_template_part('template-parts/ac_learning_print', 'template', [
-            'learning_path_title' => $learning_path_title,
-            'learning_path_excerpt' => $learning_path_excerpt,
-            'courses' => $courses,
-            'content' => get_the_content()
-        ]); ?>
-    </div>
-    <div class="ac-learning-path-container__download">
-        <button class="button primary large" onclick="downloadSingleLearningPath()">
-            <i class="fa-solid fa-download icon"></i>
-            Download as PDF
-        </button>
-    </div>
+
 </div>
-
-<script type="text/javascript">
-    function downloadSingleLearningPath() {
-        var printTemplate = `<? get_template_part('template-parts/ac_learning_print', 'template', [
-                                    'learning_path_title' => $learning_path_title,
-                                    'learning_path_excerpt' => $learning_path_excerpt,
-                                    'courses' => $courses,
-                                    'content' => get_the_content()
-                                ]); ?>`;
-
-        var printWindow = window.open('', '', '');
-        printWindow.document.write('<!DOCTYPE html>');
-        printWindow.document.write('<html><head>');
-        printWindow.document.write('<title><?php echo $learning_path_title ?></title>');
-        printWindow.document.write('</head><body >');
-        printWindow.document.write(printTemplate);
-        printWindow.document.write('</body></html>');
-        // printWindow.print();
-        printWindow.document.close(); // necessary for IE >= 10
-        printWindow.focus(); // necessary for IE >= 10*/
-
-        printWindow.onload = function() {
-            printWindow.print();
-        };
-
-    }
-</script>
-
-<?php get_footer(); ?>
