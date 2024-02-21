@@ -119,7 +119,7 @@ if(is_user_logged_in()) {
             </div>
 
             <p class="my-courses">
-                <a href="/my_courses">
+                <a href="/my-courses">
                     <? echo $view_my_courses ?>
                 </a>
             </p>
