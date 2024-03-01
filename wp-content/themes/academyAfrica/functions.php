@@ -143,9 +143,10 @@ $widget->init();
 
 require_once __DIR__ . '/posts/events.php';
 require_once __DIR__ . '/posts/networks.php';
+require_once __DIR__ . '/posts/footer.php';
 add_action('init', 'event_post_type');
 add_action('init', 'create_networks_post_type');
-
+add_action('init', 'create_footer_post_type');
 
 if (basename($_SERVER['PHP_SELF']) == 'profile.php') {
     $custom_profile_edit_url = home_url('/profile');

@@ -42,14 +42,18 @@ function get_timezones()
     $timezonesArray = array();
 
     foreach ($timezones as $timezone) {
-        $dateTimeZone = new DateTimeZone($timezone);
-        $offset = $dateTimeZone->getOffset(new DateTime('now', $dateTimeZone));
-        $offsetHours = floor(abs($offset) / 3600);
-        $offsetMinutes = floor((abs($offset) % 3600) / 60);
-        $offsetSign = ($offset < 0) ? '-' : '+';
-        $gmtOffset = $offsetSign . sprintf('%02d:%02d', $offsetHours, $offsetMinutes);
+        try {
+            $dateTimeZone = new DateTimeZone($timezone);
+            $offset = $dateTimeZone->getOffset(new DateTime('now', $dateTimeZone));
+            $offsetHours = floor(abs($offset) / 3600);
+            $offsetMinutes = floor((abs($offset) % 3600) / 60);
+            $offsetSign = ($offset < 0) ? '-' : '+';
+            $gmtOffset = $offsetSign . sprintf('%02d:%02d', $offsetHours, $offsetMinutes);
 
-        $timezonesArray[$timezone] = $gmtOffset;
+            $timezonesArray[$timezone] = $gmtOffset;
+        } catch (Exception $e) {
+            continue;
+        }
     }
     return $timezonesArray;
 }

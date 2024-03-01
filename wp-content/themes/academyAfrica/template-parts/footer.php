@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 use AcademyAfrica\Theme\Utils\MenuFunctions;
 
-$menu_items = MenuFunctions::get_menu_items('menu-2');
+$menu_items = MenuFunctions::get_menu_items('menu-1');
 
 // social media links array
 $social_media_links = [
@@ -58,25 +58,40 @@ $secondary_menus = [
         'url' => 'https://codeforafrica.org/',
         'label' => 'Privacy',
     ]
-]
+    ];
 
+$search = array(
+    'post_type' => 'footer',
+    'posts_per_page' => -1,
+    'language' => 'en',
+);
+
+$custom_posts = get_posts($search);
+$footer = $custom_posts[0];
+$logo = get_post_meta($footer->ID, 'logo', true);
+$thumbnail_url = wp_get_attachment_image_src( $logo, 100 )[0];
+$site_description = get_post_meta($footer->ID, 'site_description', true);
+$stay_in_touch = get_post_meta($footer->ID, 'stay_in_touch', true);
+$secondary_links = get_post_meta($footer->ID, 'secondary_links', true);
+$newsletter = get_post_meta($footer->ID, 'newsletter', true);
+$newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
 
     ?>
-
+<script>
+    console.log(<? echo json_encode($thumbnail_url)?>)
+</script>
 <footer class="footer-wrapper">
     <div class="root">
         <div class="item">
             <div class="site-description">
                 <img height="110" width="250"
-                    src="<?php echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
+                    src="<?php echo $thumbnail_url ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
                 <p class="description">
-                    This site is a project of Code for Africa, the continent's largest network of civic technology and
-                    data journalism labs. All content is released under a Creative Commons Attribution Licence. Reuse it
-                    to help empower your own community.
+                <? echo $site_description?>
                 </p>
                 <div class="footer-connect">
                     <span style="white-space: nowrap;">
-                        Stay in touch
+                    <? echo $stay_in_touch?>
                     </span>
                     <div class="social-icons">
                         <?
@@ -118,28 +133,10 @@ $secondary_menus = [
         <div class="item">
             <div class="embed">
                 <p class="title">
-                    Subscribe to the Code for Africa newsletter
+                    <? echo $newsletter_title?>
                 </p>
                 <div>
-                    <div id="mc_embed_signup">
-                        <form
-                            action="https://twitter.us6.list-manage.com/subscribe/post?u=65e5825507b3cec760f272e79&amp;id=c2ff751541"
-                            method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-                            class="validate" target="_blank" novalidate="">
-                            <div id="mc_embed_signup_scroll">
-                                <label for="MERGE1">Name</label>
-                                <input type="text" name="MERGE1" id="MERGE1" size="25" value="" placeholder="Your name">
-                                <label for="mce-EMAIL">Email</label>
-                                <input type="email" value="" placeholder="example@email.com" name="EMAIL" class="email"
-                                    id="mce-EMAIL" required="">
-                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                                        name="b_65e5825507b3cec760f272e79_c2ff751541" tabindex="-1" value=""></div>
-                                <div class="clear"><input type="submit" value="Sign up" id="mc-embedded-subscribe"
-                                        class="button"></div>
-                            </div>
-                        </form>
-                    </div>
+                <? echo $newsletter?>
                 </div>
             </div>
         </div>

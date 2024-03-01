@@ -1,5 +1,5 @@
 # Use the official WordPress image as the base image
-FROM wordpress:6.3.2
+FROM wordpress:6.4.3
 
 # Install mPDF library
 RUN apt-get update && \

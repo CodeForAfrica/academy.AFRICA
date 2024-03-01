@@ -1,0 +1,185 @@
+{
+    "key": "group_65e1a76a563ef",
+    "title": "Footer fields",
+    "fields": [
+        {
+            "key": "field_65e1a77efdb5c",
+            "label": "Logo",
+            "name": "logo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_65e1a7d1fdb5d",
+            "label": "Site Description",
+            "name": "site_description",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_65e1a800fdb5e",
+            "label": "Language",
+            "name": "language",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "en": "English",
+                "fr": "French",
+                "pt": "Portuguese"
+            },
+            "default_value": "English",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_65e1a86bfdb5f",
+            "label": "Secondary Links",
+            "name": "secondary_links",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_65e1a96bfdb60",
+            "label": "Newsletter",
+            "name": "newsletter",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "<div id=\"mc_embed_signup\">\r\n                        <form\r\n                            action=\"https:\/\/twitter.us6.list-manage.com\/subscribe\/post?u=65e5825507b3cec760f272e79&amp;id=c2ff751541\"\r\n                            method=\"post\" id=\"mc-embedded-subscribe-form\" name=\"mc-embedded-subscribe-form\"\r\n                            class=\"validate\" target=\"_blank\" novalidate=\"\">\r\n                            <div id=\"mc_embed_signup_scroll\">\r\n                                <label for=\"MERGE1\">Name<\/label>\r\n                                <input type=\"text\" name=\"MERGE1\" id=\"MERGE1\" size=\"25\" value=\"\" placeholder=\"Your name\">\r\n                                <label for=\"mce-EMAIL\">Email<\/label>\r\n                                <input type=\"email\" value=\"\" placeholder=\"example@email.com\" name=\"EMAIL\" class=\"email\"\r\n                                    id=\"mce-EMAIL\" required=\"\">\r\n                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\r\n                                <div style=\"position: absolute; left: -5000px;\" aria-hidden=\"true\"><input type=\"text\"\r\n                                        name=\"b_65e5825507b3cec760f272e79_c2ff751541\" tabindex=\"-1\" value=\"\"><\/div>\r\n                                <div class=\"clear\"><input type=\"submit\" value=\"Sign up\" id=\"mc-embedded-subscribe\"\r\n                                        class=\"button\"><\/div>\r\n                            <\/div>\r\n                        <\/form>\r\n                    <\/div>",
+            "maxlength": "",
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_65e1ad048c0ca",
+            "label": "Newsletter Title",
+            "name": "newsletter_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Subscribe to the Code for Africa newsletter",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_65e1adea6f2b7",
+            "label": "Stay in Touch",
+            "name": "stay_in_touch",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Stay in Touch",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "footer"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1709291870
+}
