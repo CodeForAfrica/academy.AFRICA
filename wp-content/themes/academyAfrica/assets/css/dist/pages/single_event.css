@@ -126,6 +126,7 @@ table {
   text-align: left;
   font-size: 20px;
   line-height: 28px;
+  position: relative;
 }
 .single-page-event .cfa-title::after {
   left: 0;

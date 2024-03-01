@@ -10,8 +10,6 @@ $register_text = "Register Here";
 <main id="main" class="single-page-event">
     <?php
     if(have_posts()):
-
-        // The WordPress Loop
         while(have_posts()):
             the_post();
             $post_array = get_post();

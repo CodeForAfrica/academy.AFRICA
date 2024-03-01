@@ -271,6 +271,7 @@ table {
   display: flex;
   align-items: center;
   padding: 10px;
+  white-space: nowrap;
 }
 .header .desktop .nav .nav-actions .menu .items .item.parent {
   position: relative;
@@ -990,6 +991,7 @@ table {
   font-weight: 400;
   line-height: 26px;
   text-decoration-line: underline;
+  background-color: transparent;
 }
 
 .sidebar {
