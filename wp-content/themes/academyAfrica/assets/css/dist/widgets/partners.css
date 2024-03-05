@@ -165,7 +165,7 @@ table {
 .patners-root .partners .partner-content .partner {
   width: 120px;
   height: 69px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .patners-root hr {
   height: 1px;
