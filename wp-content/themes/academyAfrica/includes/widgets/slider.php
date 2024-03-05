@@ -66,6 +66,14 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
                 'label_block' => true,
             ]
         );
+        $sliders->add_control(
+            'url',
+            [
+                'label' => __('Slider URL', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::URL,
+                'label_block' => true,
+            ]
+        );
         $this->add_control(
             'sliders',
             [
@@ -78,7 +86,6 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
         $this->end_controls_section();
     }
 
-
     protected function render()
     {
         $settings = $this->get_settings_for_display();
@@ -89,19 +96,21 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
                 <div class="swipper mySwiper">
                     <div class="swiper-wrapper">
                         <?php foreach ($sliders as $slide) : ?>
-                            <div class="swiper-slide">
-                                <div class="slide-content">
-                                    <div class="slide-content__title">
-                                        <h1 class="cfa-title"><?php echo $slide['title'] ?></h1>
+                            <a href="<?php echo $slide['url']['url'] ?>" class="swiper-slide">
+                                <div class="swiper-slide">
+                                    <div class="slide-content">
+                                        <div class="slide-content__title">
+                                            <h1 class="cfa-title"><?php echo $slide['title'] ?></h1>
+                                        </div>
+                                        <div class="slide-content__body">
+                                            <p><?php echo $slide['description'] ?></p>
+                                        </div>
                                     </div>
-                                    <div class="slide-content__body">
-                                        <p><?php echo $slide['description'] ?></p>
+                                    <div class="slide-image">
+                                        <img src="<?php echo $slide['image']['url'] ?>" alt="">
                                     </div>
                                 </div>
-                                <div class="slide-image">
-                                    <img src="<?php echo $slide['image']['url'] ?>" alt="">
-                                </div>
-                            </div>
+                            </a>
                         <?php endforeach; ?>
                     </div>
                 </div>
