@@ -501,6 +501,7 @@ table {
   width: 90px;
   height: 90px;
   border-radius: 50%;
+  object-fit: contain;
 }
 .course-card .card .course-card-content {
   padding: 20px;
