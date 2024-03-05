@@ -112,7 +112,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             'learning_title',
             [
                 'label' => __('Career Development  Title', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __('Career Development', 'academy-africa'),
                 'label_block' => true,
             ]
@@ -132,7 +132,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             'learning_button_text',
             [
                 'label' => __('Career Development Button Text', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __('Explore Pathways', 'academy-africa'),
                 'label_block' => true,
             ]
@@ -142,7 +142,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             'learning_button_link',
             [
                 'label' => __('Career Development Button Link', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __('/learning-pathways', 'academy-africa'),
                 'label_block' => true,
             ]
@@ -179,7 +179,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $pathway_button_link = $settings['learning_button_link'];
         $pathway_sample_course = $settings['learning_sample_course'];
         $pathway = get_post($pathway_sample_course);
-        $pathway_courses = get_field('courses', $pathway); 
+        if($pathway->post_type == 'ac-learning-path'){
+            $pathway_courses = get_field('courses', $pathway); 
+        } else {
+            $pathway = null;
+        }
 
         $sort_options = [
             "date-desc" => [

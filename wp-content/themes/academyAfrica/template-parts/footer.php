@@ -77,9 +77,6 @@ $newsletter = get_post_meta($footer->ID, 'newsletter', true);
 $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
 
     ?>
-<script>
-    console.log(<? echo json_encode($thumbnail_url)?>)
-</script>
 <footer class="footer-wrapper">
     <div class="root">
         <div class="item">
