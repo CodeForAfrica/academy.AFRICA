@@ -26,10 +26,10 @@ function event_post_type()
     $args = array(
         'labels'        => $labels,
         'public'        => true,
-        'has_archive'   => true,
+        'has_archive'   => false,
         'menu_position' => 5,
         'supports'      => array('title', 'editor', 'thumbnail', 'excerpt', "speaker"),
-        'rewrite'       => array('slug' => 'events'),
+        'rewrite'       => array('slug' => 'events', 'feeds' => true),
     );
 
     register_post_type('event', $args);
