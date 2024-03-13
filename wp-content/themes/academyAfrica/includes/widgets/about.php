@@ -62,7 +62,7 @@ class Academy_Africa_About_Section extends \Elementor\Widget_Base
         $content = $settings['content'];
 ?>
         <div class="about-section">
-            <div class="content">
+            <div class="content wysiwyg">
                 <?php echo $content; ?>
             </div>
         </div>

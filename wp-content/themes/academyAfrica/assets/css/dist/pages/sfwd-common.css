@@ -118,6 +118,13 @@ table {
   cursor: not-allowed;
 }
 
+.wysiwyg h1 {
+  font-weight: 900;
+}
+.wysiwyg strong {
+  font-weight: 700 !important;
+}
+
 .sfwd-container .sfwd-small-screen {
   padding: 60px 30px 140px;
 }

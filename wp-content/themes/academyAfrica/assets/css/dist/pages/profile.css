@@ -118,6 +118,13 @@ table {
   cursor: not-allowed;
 }
 
+.wysiwyg h1 {
+  font-weight: 900;
+}
+.wysiwyg strong {
+  font-weight: 700 !important;
+}
+
 .profile {
   max-width: 1920px;
   padding: 60px 40px;

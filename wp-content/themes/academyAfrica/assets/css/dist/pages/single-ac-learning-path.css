@@ -118,6 +118,13 @@ table {
   cursor: not-allowed;
 }
 
+.wysiwyg h1 {
+  font-weight: 900;
+}
+.wysiwyg strong {
+  font-weight: 700 !important;
+}
+
 .ac-learning-path-container__title {
   padding: 40px 55px;
 }

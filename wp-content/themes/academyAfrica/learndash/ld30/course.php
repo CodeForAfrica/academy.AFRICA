@@ -56,7 +56,7 @@ if ($course_status == "Completed") {
     get_template_part('template-parts/course_completed', null, array('course_id' => $course_id));
 } else {
 ?>
-    <div class="single-courses">
+    <div class="single-courses wysiwyg">
         <div class="wrapper">
             <div class="title-section">
                 <div class="title">
