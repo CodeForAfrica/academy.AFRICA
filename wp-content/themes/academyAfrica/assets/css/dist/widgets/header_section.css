@@ -201,6 +201,7 @@ table {
   font-size: 32px;
   font-weight: 600;
   line-height: 48px;
+  font-family: Open Sans;
 }
 .header-section .header-content .share-menu .social-icons {
   display: flex;
@@ -227,6 +228,7 @@ table {
     line-height: 60px;
   }
   .header-section .header-content .headline .cfa-headline {
+    font-family: Open Sans;
     color: #000000;
     font-size: 32px;
     font-weight: 600;
