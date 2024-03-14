@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.34');
+define('ACADEMY_AFRICA_VERSION', '1.1.35');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
