@@ -11,6 +11,7 @@ $course_url = get_permalink($course_id);
 $course = get_post($course_id);
 $lessons = learndash_get_course_lessons_list($course_id);
 $topic = get_post($lesson_id);
+$has_assignments = learndash_lesson_hasassignments($topic);
 
 ?>
 
@@ -65,6 +66,23 @@ $topic = get_post($lesson_id);
                     <?php
                     echo $topic->post_content;
                     ?>
+                </div>
+                <div class="assignment-upload">
+                    <? if ($has_assignments) { ?>
+                        <div class="sfwd-lessons__content">
+                            <?php
+                            learndash_get_template_part(
+                                'assignment/listing.php',
+                                array(
+                                    'course_step_post' => $topic,
+                                    'user_id'          => $user_id,
+                                    'course_id'        => $course_id,
+                                ),
+                                true
+                            );
+                            ?>
+                        </div>
+                    <? } ?>
                 </div>
                 <div class="sfwd-lessons__navigation">
                     <?php

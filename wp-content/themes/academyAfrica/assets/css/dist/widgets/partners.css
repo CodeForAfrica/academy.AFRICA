@@ -160,6 +160,12 @@ table {
 .wysiwyg strong {
   font-weight: 700 !important;
 }
+.wysiwyg ol {
+  list-style: decimal;
+}
+.wysiwyg ul {
+  list-style: disc;
+}
 
 .patners-root {
   padding: 40px 16px;

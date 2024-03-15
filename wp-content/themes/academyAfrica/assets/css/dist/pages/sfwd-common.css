@@ -160,6 +160,12 @@ table {
 .wysiwyg strong {
   font-weight: 700 !important;
 }
+.wysiwyg ol {
+  list-style: decimal;
+}
+.wysiwyg ul {
+  list-style: disc;
+}
 
 .sfwd-container .sfwd-small-screen {
   padding: 60px 30px 140px;
@@ -355,6 +361,9 @@ table {
     width: 1040px;
   }
 }
+.sfwd-container .sfwd-large-screen .content .sfwd-lessons__title {
+  width: 100%;
+}
 .sfwd-container .sfwd-large-screen .content .sfwd-lessons__title__text {
   color: #0C1A81;
   font-family: Open Sans;
@@ -370,6 +379,7 @@ table {
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
+  width: 100%;
 }
 .sfwd-container .sfwd-large-screen .content .sfwd-lessons__content a {
   color: #0C1A81;
