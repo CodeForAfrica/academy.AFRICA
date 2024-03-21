@@ -33,25 +33,20 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
 
     public function get_user_feedback()
     {
-        return [
-            [
-                "name" => "Sakina Salem",
-                "role" => "Senior product Manager",
-                "company" => "Code For Africa",
-                "description" => "The Drone Journalism course enhanced my abilities to capture interesting moments. I won an award for the images used in the Sucked Dry Project by InfoNile"
-            ], [
-                "name" => "Sakina Salem",
-                "role" => "Senior product Manager",
-                "company" => "Code For Africa",
-                "description" => "The Drone Journalism course enhanced my abilities to capture interesting moments. I won an award for the images used in the Sucked Dry Project by InfoNile"
-            ],
-            [
-                "name" => "Sakina Salem",
-                "role" => "Senior product Manager",
-                "company" => "Code For Africa",
-                "description" => "The Drone Journalism course enhanced my abilities to capture interesting moments. I won an award for the images used in the Sucked Dry Project by InfoNile"
-            ]
-        ];
+        $settings = $this->get_settings_for_display();
+        $testimonials = $settings["testimonials"];
+        $output = array();
+        foreach ($testimonials as $testimonial) {
+            $item = array(
+                "name" => $testimonial["name"],
+                "role" => $testimonial["role"],
+                "company" => $testimonial["company"],
+                "description" => $testimonial["description"],
+                "logo" => $testimonial["logo"]["url"]
+            );
+            $output[] = $item;
+        }
+        return $output;
     }
     protected function register_controls()
     {
@@ -70,14 +65,73 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
                 'label_block' => true,
             ]
         );
+        $testimonial = new \Elementor\Repeater();
+        $testimonial->add_control(
+            'logo',
+            [
+                'label' => __('Logo', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
+        $testimonial->add_control(
+            'name',
+            [
+                'label' => __('Name', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => 'Name'
+            ]
+        );
+        $testimonial->add_control(
+            'role',
+            [
+                'label' => __('Role', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => 'Role'
+            ]
+        );
+        $testimonial->add_control(
+            'company',
+            [
+                'label' => __('Company', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => 'Company'
+            ]
+        );
+        $testimonial->add_control(
+            'description',
+            [
+                'label' => __('Description', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'testimonials',
+            [
+                'label' => esc_html__('Testimonials', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $testimonial->get_controls(),
+                'title_field' => '{{{ name }}}',
+            ]
+        );
         $this->end_controls_section();
     }
     protected function render()
     {
         $settings = $this->get_settings_for_display();
         $title = $settings["title"];
+        $testimonials = $settings["testimonials"];
         $feedback = $this->get_user_feedback();
 ?>
+<script>
+    console.log(<? echo json_encode($testimonials)?>)
+</script>
         <div class="feedback">
             <div class="title">
                 <h4 class="cfa-title">
@@ -92,11 +146,12 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
                         $role = $item["role"];
                         $company = $item["company"];
                         $description = $item["description"];
+                        $logo = $item["logo"]
                 ?>
                         <div class="card">
                             <div class="content-card">
                                 <div class="user">
-                                    <img src="<? echo get_stylesheet_directory_uri() . '/assets/images/avatar.png' ?>" alt="user" class="avatar">
+                                    <img src="<? echo $logo ?>" alt="user" class="avatar">
                                     <div class="name-role">
                                         <p class="name">
                                             <? echo $name ?>

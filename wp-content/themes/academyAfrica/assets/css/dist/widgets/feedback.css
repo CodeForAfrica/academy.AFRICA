@@ -217,6 +217,7 @@ table {
 .feedback .content .card .content-card .user .avatar {
   width: 60px;
   height: 60px;
+  border-radius: 50%;
 }
 .feedback .content .card .content-card .user .name-role {
   flex: 1;
