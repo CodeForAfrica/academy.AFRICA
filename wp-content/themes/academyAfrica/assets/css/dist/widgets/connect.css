@@ -66,6 +66,7 @@ table {
   border: none;
   border-radius: 0;
   cursor: pointer;
+  font-family: "Open Sans";
 }
 .button .icon {
   font-size: 16px;
@@ -229,6 +230,7 @@ table {
   width: -moz-fit-content;
   width: fit-content;
   align-self: center;
+  font-family: Open Sans;
 }
 @media (min-width: 768px) {
   .connect .title-wrapper {

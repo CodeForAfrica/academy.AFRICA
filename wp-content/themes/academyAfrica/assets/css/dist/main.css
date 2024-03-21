@@ -67,6 +67,7 @@ table {
   border: none;
   border-radius: 0;
   cursor: pointer;
+  font-family: "Open Sans";
 }
 .button .icon {
   font-size: 16px;
@@ -1434,6 +1435,7 @@ label {
   width: 100%;
   width: 312px;
   align-self: center;
+  font-family: "Open Sans";
 }
 .certificate .certificate-content {
   padding: 15px 18px 0;
@@ -1569,7 +1571,7 @@ a {
 }
 
 body {
-  font-family: Open Sans;
+  font-family: "Open Sans" !important;
 }
 
 /*# sourceMappingURL=main.css.map */
