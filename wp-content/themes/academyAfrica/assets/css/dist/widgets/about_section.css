@@ -160,6 +160,12 @@ table {
 .wysiwyg strong {
   font-weight: 700 !important;
 }
+.wysiwyg ol {
+  list-style: decimal;
+}
+.wysiwyg ul {
+  list-style: disc;
+}
 
 .about-section {
   padding: 50px 16px 0;

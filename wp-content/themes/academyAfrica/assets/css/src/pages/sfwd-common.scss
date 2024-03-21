@@ -256,6 +256,7 @@
                 }
 
                 &__title {
+                    width: 100%;
                     &__text {
                         color: $color-primary-700;
                         font-family: Open Sans;
@@ -273,6 +274,7 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: 28px;
+                    width: 100%;
 
                     a {
                         color: $color-primary-700;

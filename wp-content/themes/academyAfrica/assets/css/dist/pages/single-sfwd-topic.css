@@ -1,3 +1,234 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+}
+.button.primary {
+  background: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.primary:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+  border: 1px solid #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.wysiwyg {
+  font-family: Open Sans;
+}
+.wysiwyg h1 {
+  font-size: 36px; /* Heading 1 */
+  margin: 16px 0;
+  font-weight: 900;
+}
+.wysiwyg h2 {
+  font-size: 28px; /* Heading 2 */
+  margin: 14px 0;
+  font-weight: 900;
+}
+.wysiwyg h3 {
+  font-size: 24px; /* Heading 3 */
+  margin: 12px 0;
+  font-weight: 900;
+}
+.wysiwyg h4 {
+  font-size: 18px; /* Heading 4 */
+  margin: 10px 0;
+  font-weight: 900;
+}
+.wysiwyg h5 {
+  font-size: 16px; /* Heading 5 */
+  margin: 8px 0;
+  font-weight: 900;
+}
+.wysiwyg h6 {
+  font-size: 14px; /* Heading 6 */
+  margin: 6px 0;
+  font-weight: 900;
+}
+.wysiwyg em {
+  font-style: italic;
+}
+.wysiwyg p {
+  margin: 10px 0;
+}
+.wysiwyg strong {
+  font-weight: 700 !important;
+}
+.wysiwyg ol {
+  list-style: decimal;
+}
+.wysiwyg ul {
+  list-style: disc;
+}
+
+.assignment-upload {
+  background: #F7F9FD;
+  padding: 20px;
+  width: 100%;
+}
+.assignment-upload .sfwd-lessons__content .ld-alert {
+  margin-bottom: 20px;
+}
+.assignment-upload .sfwd-lessons__content .ld-alert-content {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 20px 10px;
+}
+.assignment-upload .sfwd-lessons__content .ld-alert.ld-alert-warning {
+  background: #FFFBEB;
+  color: #000000;
+  border: 1px solid #FEF3C7;
+}
+.assignment-upload .sfwd-lessons__content .ld-alert.ld-alert-success {
+  background: #ECFDF5;
+  color: #000000;
+  border: 1px solid #D1FAE5;
+}
+.assignment-upload .sfwd-lessons__content .ld-assignment-list .ld-table-list-header-title {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+}
+.assignment-upload .sfwd-lessons__content .ld-assignment-list .ld-table-list-header-columns {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+.assignment-upload .sfwd-lessons__content .ld-assignment-list .ld-table-list-items .ld-file-upload {
+  color: #000000;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+.assignment-upload .sfwd-lessons__content .ld-assignment-list .ld-table-list-items .ld-file-upload .ld-file-upload-form .ld-button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  padding: 12px 16px;
+  background: #0C1A81;
+}
+.assignment-upload .sfwd-lessons__content .ld-assignment-list .ld-table-list-items .ld-table-list-item .ld-table-list-item-preview .ld-table-list-columns .ld-comments-column {
+  display: none;
+}
 
 /*# sourceMappingURL=single-sfwd-topic.css.map */

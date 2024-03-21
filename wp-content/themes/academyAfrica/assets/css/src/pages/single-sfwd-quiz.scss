@@ -1,0 +1,96 @@
+@use "../abstracts/" as *;
+
+.assignment-upload {
+    background: $color-neutral-50;
+    padding: 20px;
+    width: 100%;
+
+    .sfwd-lessons {
+        &__content {
+            .ld-alert {
+                margin-bottom: 20px;
+
+                &-content {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    padding: 20px 10px;
+                }
+
+                &.ld-alert-warning {
+                    background: $color-warning-50;
+                    color: $color-shades-black;
+                    border: 1px solid $color-warning-100;
+                }
+
+                &.ld-alert-success {
+                    background: $color-success-50;
+                    color: $color-shades-black;
+                    border: 1px solid $color-success-100;
+                }
+            }
+
+            .ld-assignment-list {
+                .ld-table-list {
+                    &-header {
+                        &-title {
+                            color: $color-shades-black;
+                            font-family: Open Sans;
+                            font-size: 24px;
+                            font-style: normal;
+                            font-weight: 700;
+                            line-height: 36px;
+                        }
+
+                        &-columns {
+                            color: $color-shades-black;
+                            font-family: Open Sans;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 21px;
+                        }
+                    }
+
+                    &-items {
+                        .ld-file-upload {
+                            color: $color-shades-black;
+                            font-family: Open Sans;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 21px;
+
+                            .ld-file-upload-form {
+                                .ld-button {
+                                    text-transform: uppercase;
+                                    font-weight: 800;
+                                    line-height: 19px;
+                                    letter-spacing: 1.6px;
+                                    font-size: 16px;
+                                    color: $color-shades-white;
+                                    border: none;
+                                    border-radius: 0;
+                                    padding: 12px 16px;
+                                    background: $color-primary-700;
+                                }
+                            }
+                        }
+
+                        .ld-table-list-item {
+                            .ld-table-list-item-preview {
+                                .ld-table-list-columns {
+                                    .ld-comments-column {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+}

@@ -15,6 +15,8 @@ $course_id = learndash_get_course_id($lesson_id);
 $course_url = get_permalink($course_id);
 $course = get_post($course_id);
 $lessons = learndash_get_course_lessons_list($course_id);
+$lesson = get_post($lesson_id);
+$has_assignments = learndash_lesson_hasassignments($lesson);
 ?>
 
 <style>
@@ -68,6 +70,23 @@ $lessons = learndash_get_course_lessons_list($course_id);
                     echo $post->post_content;
                     ?>
                 </div>
+                <div class="assignment-upload">
+                    <? if ($has_assignments) { ?>
+                        <div class="sfwd-lessons__content">
+                            <?php
+                            learndash_get_template_part(
+                                'assignment/listing.php',
+                                array(
+                                    'course_step_post' => $lesson,
+                                    'user_id'          => $user_id,
+                                    'course_id'        => $course_id,
+                                ),
+                                true
+                            );
+                            ?>
+                        </div>
+                    <? } ?>
+                </div>
                 <div class="sfwd-lessons__navigation">
                     <?php
                     $previous_lesson = learndash_previous_post_link(url: true);
@@ -84,7 +103,7 @@ $lessons = learndash_get_course_lessons_list($course_id);
                     if ($next_lesson) {
                         echo "<div class='sfwd-lessons__navigation__next nav-link'>";
                         echo "<a href='$next_lesson' class='link'>";
-                        echo "<div class='sfwd-lessons__navigation__next__text'>Next</div>";
+                        echo "<div class='sfwd-lessons__navigation__next__text'>Next Lesson</div>";
                         echo "</a>";
                         echo "</div>";
                     }
