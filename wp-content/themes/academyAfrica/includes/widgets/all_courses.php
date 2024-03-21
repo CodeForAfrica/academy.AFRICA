@@ -179,8 +179,8 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $pathway_button_link = $settings['learning_button_link'];
         $pathway_sample_course = $settings['learning_sample_course'];
         $pathway = get_post($pathway_sample_course);
-        if($pathway->post_type == 'ac-learning-path'){
-            $pathway_courses = get_field('courses', $pathway); 
+        if ($pathway->post_type == 'ac-learning-path') {
+            $pathway_courses = get_field('courses', $pathway);
         } else {
             $pathway = null;
         }
@@ -252,7 +252,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 'sort_by' => $sort_by,
                 'sort_options' => $sort_options,
                 'sort' => $sort
-            ]); ?> 
+            ]); ?>
             <div class="courses-main" id="all-courses">
                 <section class="course-grid">
                     <h4 class="cfa-title">
@@ -412,6 +412,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 <?
                 }
                 ?>
+            </div>
         </main>
 <?
     }

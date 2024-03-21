@@ -122,7 +122,7 @@ if ($course_status == "Completed") {
             <?
             } else {
             ?>
-                <div class="enroll" id="enroll-button">
+                <div class="enroll enroll-btn" id="enroll-button">
                     <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
                 </div>
             <?
@@ -200,60 +200,66 @@ if ($course_status == "Completed") {
             <?
             if (!$is_enrolled) {
             ?>
-                <div class="enroll" id="enroll-button">
+                <div class="enroll enrolllled" id="enroll-button">
                     <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
                 </div>
             <?
             }
             ?>
-            <div class="related">
-                <div class="accordion-parent">
-                    <div class="accordion">
-                        Related
-                    </div>
-                    <div class="panel">
-                        <?
-                        if ($related_courses) {
-                        ?>
-                            <div class="related-courses">
-                                <div class="title"> Related Courses </div>
-                                <div class="list">
-                                    <?php
-                                    $related_courses = array_slice($related_courses, 0, 3);
-                                    foreach ($related_courses as $course) {
-                                        $course_thumbnail = get_the_post_thumbnail_url($course);
-                                        $course_title = $course->post_title;
-                                        $course_link = get_permalink($course->ID);
-                                        $course_author = get_the_author_meta('display_name', $course->post_author);
-                                        $course_meta = get_post_meta($course->ID);
-                                        $course_price = $course_meta['sfwd-courses_course_price'];
-                                        $course_price = $course_price == 0 ? "Free" : $course_price;
-                                        $students_count = learndash_course_grid_count_students($course->ID);
+            <?
+            if ($related_courses) {
+            ?>
+                <div class="related">
+                    <div class="accordion-parent">
+                        <div class="accordion">
+                            Related
+                        </div>
+                        <div class="panel">
+                            <?
+                            if ($related_courses) {
+                            ?>
+                                <div class="related-courses">
+                                    <div class="title"> Related Courses </div>
+                                    <div class="list">
+                                        <?php
+                                        $related_courses = array_slice($related_courses, 0, 3);
+                                        foreach ($related_courses as $course) {
+                                            $course_thumbnail = get_the_post_thumbnail_url($course);
+                                            $course_title = $course->post_title;
+                                            $course_link = get_permalink($course->ID);
+                                            $course_author = get_the_author_meta('display_name', $course->post_author);
+                                            $course_meta = get_post_meta($course->ID);
+                                            $course_price = $course_meta['sfwd-courses_course_price'];
+                                            $course_price = $course_price == 0 ? "Free" : $course_price;
+                                            $students_count = learndash_course_grid_count_students($course->ID);
 
-                                    ?>
-                                        <?php get_template_part(
-                                            'template-parts/course_card',
-                                            'template',
-                                            [
-                                                'course_title' => $course_title,
-                                                'course_author' => $course_author,
-                                                'course_thumbnail' => $course_thumbnail,
-                                                'course_link' => $course_link,
-                                                'course_price' => $course_price,
-                                                'students' => $students_count
-                                            ]
-                                        ); ?>
-                                    <?
-                                    }
-                                    ?>
+                                        ?>
+                                            <?php get_template_part(
+                                                'template-parts/course_card',
+                                                'template',
+                                                [
+                                                    'course_title' => $course_title,
+                                                    'course_author' => $course_author,
+                                                    'course_thumbnail' => $course_thumbnail,
+                                                    'course_link' => $course_link,
+                                                    'course_price' => $course_price,
+                                                    'students' => $students_count
+                                                ]
+                                            ); ?>
+                                        <?
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
-                            </div>
-                        <?
-                        }
-                        ?>
+                            <?
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?
+            }
+            ?>
         </div>
     </div>
 <?

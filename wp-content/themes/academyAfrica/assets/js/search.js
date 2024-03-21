@@ -132,21 +132,23 @@ function filterPagination(){
         const filterItems = filter.querySelectorAll(".filter-item");
         filterItems.forEach(item => {
             const filterList = item.querySelector(".filter-list");
-            const filterListItems = filterList.querySelectorAll("li");
-            const filterToggle = item.querySelector(".show-more-btn");
-
-            if(filterToggle){
-                filterToggle.addEventListener("click", () => {
-                    filterListItems.forEach(listItem => {
-                        if(listItem.classList.contains("hidden")){
-                            listItem.classList.replace("hidden", "show");
-                            filterToggle.innerHTML = "Show Less";
-                        } else {
-                            listItem.classList.replace("show", "hidden");
-                            filterToggle.innerHTML = "Show More";
-                        }
-                    });  
-                });
+            if(filterList){
+                const filterListItems = filterList.querySelectorAll("li");
+                const filterToggle = item.querySelector(".show-more-btn");
+    
+                if(filterToggle){
+                    filterToggle.addEventListener("click", () => {
+                        filterListItems.forEach(listItem => {
+                            if(listItem.classList.contains("hidden")){
+                                listItem.classList.replace("hidden", "show");
+                                filterToggle.innerHTML = "Show Less";
+                            } else {
+                                listItem.classList.replace("show", "hidden");
+                                filterToggle.innerHTML = "Show More";
+                            }
+                        });  
+                    });
+                }
             }
         });
     });
