@@ -297,15 +297,11 @@ table {
     margin: 0 -16px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
   }
-  .hero .content-parent .metrics-content .metrics {
-    gap: 80px;
-  }
 }
 @media (min-width: 1440px) {
   .hero .content-parent {
     margin-top: -190px;
     max-width: 1144px;
-    gap: 80px;
   }
   .hero .content-parent .metrics-content {
     margin: unset;
