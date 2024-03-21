@@ -33,7 +33,7 @@ $register_text = "Register Here";
             $resources = get_field('resources')['url'];
             ?>
             <script>
-                console.log(<? echo json_encode($post_array) ?>)
+                // console.log(<? echo json_encode($post_array) ?>)
             </script>
             <h1 class="cfa-title">
                 <? echo $post_title ?>
@@ -154,7 +154,7 @@ $register_text = "Register Here";
         </a>
     </div>
     <script>
-        console.log(<?php echo json_encode($organisations) ?>);
+        // console.log(<?php echo json_encode($organisations) ?>);
     </script>
 </main>
 

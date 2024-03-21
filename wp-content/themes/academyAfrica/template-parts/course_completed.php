@@ -55,7 +55,7 @@ $academy_head = array(
 global $shortcode_tags;
 ?>
 <script>
-    console.log(<? echo json_encode($shortcode_tags) ?>)
+    // console.log(<? echo json_encode($shortcode_tags) ?>)
 </script>
 <div class="course-completed">
     <h4 class="cfa-title">

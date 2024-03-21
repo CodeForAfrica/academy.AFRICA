@@ -163,7 +163,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
 
 <script>
     const signOutMenu = document.querySelectorAll("a[href='#sign-out']");
-    console.log(signOutMenu);
+    // console.log(signOutMenu);
     Array.from(signOutMenu).forEach((element) => {
         element.addEventListener("click", function() {
             <?php

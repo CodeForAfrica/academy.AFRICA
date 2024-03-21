@@ -447,7 +447,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                         const pdfjs = element.querySelector("#certificate");
                         const width = doc.internal.pageSize.getWidth();
                         const height = doc.internal.pageSize.getHeight();
-                        console.log({ width, height })
+                        // console.log({ width, height })
                         doc.html(pdfjs, {
                             callback: function (doc) {
                                 doc.save(`<? echo $user['first_name'] . ' ' . $user['first_name'] ?> | ${courseTitle}.pdf`);

@@ -329,7 +329,7 @@ if(is_user_logged_in()) {
             </div>
         </form>
         <script>
-            console.log(<? echo json_encode($_POST) ?>);
+            // console.log(<? echo json_encode($_POST) ?>);
 
             function displayImage(input) {
                 const preview = document.getElementById('avatar_preview');
