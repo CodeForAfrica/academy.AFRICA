@@ -66,6 +66,7 @@ table {
   border: none;
   border-radius: 0;
   cursor: pointer;
+  font-family: "Open Sans";
 }
 .button .icon {
   font-size: 16px;
@@ -224,6 +225,7 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Open Sans";
 }
 .featured-courses .featured-certificate .certificate-root {
   background-color: #FFFFFF;
@@ -233,9 +235,11 @@ table {
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
+  font-family: "Open Sans";
 }
 .featured-courses .featured-certificate .certificate-root .certificate-header {
   text-align: center;
+  font-family: "Open Sans";
 }
 .featured-courses .featured-certificate .certificate-root .certificate-showcase {
   display: flex;
