@@ -67,7 +67,7 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                 </div>
                 <div class="sfwd-lessons__content">
                     <?php
-                    echo $post->post_content;
+                    echo do_shortcode($post->post_content);
                     ?>
                 </div>
                 <div class="assignment-upload">

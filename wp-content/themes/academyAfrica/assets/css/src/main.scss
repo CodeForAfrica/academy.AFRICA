@@ -12,7 +12,12 @@
 a {
     text-decoration: none !important;
 }
+
 body {
     font-family: "Open Sans" !important;
+
+    #content {
+        margin: 0;
+        padding: 0;
+    }
 }
-  

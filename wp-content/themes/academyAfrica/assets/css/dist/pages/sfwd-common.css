@@ -168,6 +168,10 @@ table {
   list-style: disc;
 }
 
+#content .page-header .entry-title {
+  display: none;
+}
+
 .sfwd-container .sfwd-small-screen {
   padding: 60px 30px 140px;
 }

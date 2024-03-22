@@ -60,7 +60,9 @@ $lessons = learndash_get_course_lessons_list($course_id);
                     <div class="sfwd-lessons__title__text"><?php the_title(); ?></div>
                 </div>
                 <div class="sfwd-lessons__content">
-                    <h1> Content here </h1>
+                    <?php
+                    echo do_shortcode($post->post_content);
+                    ?>
                 </div>
                 <div class="sfwd-lessons__navigation">
                     <?php

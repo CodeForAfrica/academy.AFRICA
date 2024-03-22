@@ -1573,5 +1573,9 @@ a {
 body {
   font-family: "Open Sans" !important;
 }
+body #content {
+  margin: 0;
+  padding: 0;
+}
 
 /*# sourceMappingURL=main.css.map */

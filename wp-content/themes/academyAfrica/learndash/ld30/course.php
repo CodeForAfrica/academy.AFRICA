@@ -134,7 +134,7 @@ if ($course_status == "Completed") {
                     Introduction
                 </p>
                 <div class="cfa-introduction">
-                    <?php echo $course_intro; ?>
+                    <?php echo do_shortcode($course_intro); ?>
                 </div>
             </div>
             <div class="carriculum">
