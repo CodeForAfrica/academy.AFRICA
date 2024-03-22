@@ -110,24 +110,6 @@ if ($course_status == "Completed") {
                     ?>
                 </div>
             </div>
-            <?
-            if ($is_enrolled) {
-            ?>
-                <div class='progress'>
-                    <?php echo do_shortcode('[learndash_course_progress]'); ?>
-                </div>
-                <div class="continue">
-                    <?php echo do_shortcode('[ld_course_resume label="Continue the Course <span></span>"]'); ?>
-                </div>
-            <?
-            } else {
-            ?>
-                <div class="enroll enroll-btn" id="enroll-button">
-                    <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
-                </div>
-            <?
-            }
-            ?>
             <hr class="divider">
             <div class="introduction">
                 <p class="cfa-introduction-title">
@@ -200,7 +182,7 @@ if ($course_status == "Completed") {
             <?
             if (!$is_enrolled) {
             ?>
-                <div class="enroll enrolllled" id="enroll-button">
+                <div class="enroll" id="enroll-button">
                     <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
                 </div>
             <?
