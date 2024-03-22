@@ -21,7 +21,7 @@ $description = "There seems to be an error on this page. Please contact us for m
 $refresh = "Refresh";
 $home = "Home";
 ?>
-<main id="content" class="site-main">
+<main id="content" class="site-main" style="margin: 0;">
 
     <div class="error">
         <div></div>
