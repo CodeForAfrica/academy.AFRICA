@@ -70,8 +70,8 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                     echo do_shortcode($post->post_content);
                     ?>
                 </div>
-                <div class="assignment-upload">
-                    <? if ($has_assignments) { ?>
+                <? if ($has_assignments) { ?>
+                    <div class="assignment-upload">
                         <div class="sfwd-lessons__content">
                             <?php
                             learndash_get_template_part(
@@ -85,8 +85,8 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                             );
                             ?>
                         </div>
-                    <? } ?>
-                </div>
+                    </div>
+                <? } ?>
                 <div class="sfwd-lessons__navigation">
                     <?php
                     $previous_lesson = learndash_previous_post_link(url: true);
