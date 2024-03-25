@@ -1,0 +1,166 @@
+@use "../abstracts/" as *;
+
+
+body .vc_tta-panels {
+    border-color: $color-primary-700 !important;
+    border-radius: 0 !important;
+}
+
+.vc_tta-tab>a {
+    border-color: $color-primary-700 !important;
+    color: $color-primary-700 !important;
+}
+
+li {
+    &.vc_tta-tab {
+        &.vc_active {
+            background-color: $color-primary-700 !important;
+            color: $color-shades-white !important;
+
+            .vc_tta-title-text {
+                color: $color-shades-white !important;
+            }
+        }
+
+        a {
+            border-radius: 0 !important;
+        }
+    }
+}
+
+.vc_tta-title-text {
+    border-color: $color-primary-700 !important;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 800;
+    line-height: 19px;
+    letter-spacing: 1.6px;
+}
+
+.fluid-width-video-wrapper {
+    padding-top: 50% !important;
+}
+
+.entry-content h2 {
+    font-size: 18px !important;
+}
+
+.vc_btn3.vc_btn3-color-primary.vc_btn3-style-3d {
+    background-color: $color-primary-700 !important;
+}
+
+.vc_btn3.vc_btn3-color-primary.vc_btn3-style-3d.vc_btn3-size-lg .vc_btn3.vc_btn3-color-primary.vc_btn3-style-outline {
+    box-shadow: 0 5px 0 #002a66 !important;
+}
+
+.vc_btn3.vc_btn3-color-primary.vc_btn3-style-outline {
+    color: $color-primary-700 !important;
+    float: left;
+}
+
+.course a {
+    color: blue !important;
+}
+
+.topic a {
+    color: blue !important;
+}
+
+strong {
+    font-style: inherit;
+}
+
+#learndash_quizzes {
+    display: none;
+}
+
+.course-image {
+    border: 1px solid #eee;
+}
+
+.header-inner .left-col .header-navigation ul li.current-menu-item>a {
+    color: #ed1c24 !important;
+}
+
+.site-header .header-navigation ul li a {
+    color: #606060 !important;
+}
+
+.vc_btn3.vc_btn3-color-primary .vc_btn3-style-outline:hover {
+    color: #FFF !important;
+    border-color: $color-primary-700;
+    background-color: $color-primary-700;
+}
+
+.single-post a {
+    color: #0000ff;
+}
+
+.single-post .post-content a {
+    color: #0000ff;
+}
+
+.vc_btn3.vc_btn3-color-danger .vc_btn3-style-outline {
+    color: #ed1c24 !important;
+}
+
+.vc_btn3.vc_btn3-color-danger .vc_btn3-style-outline:hover {
+    color: #FFF !important;
+    border-color: #ed1c24;
+    background-color: #ed1c24;
+}
+
+.size-full,
+.size-large {
+    -moz-filter: drop-shadow(10px 10px 6px #C0C0C0) !important;
+    -webkit-filter: drop-shadow(10px 10px 6px #C0C0C0) !important;
+    -ms-filter: drop-shadow(10px 10px 6px #C0C0C0) !important;
+    filter: drop-shadow(10px 10px 6px #C0C0C0) !important;
+    padding-bottom: 17px;
+}
+
+.course-overlay {
+    display: none;
+}
+
+.price {
+    display: none;
+}
+
+.widget_course_progress .avatar {
+    display: none !important;
+}
+
+
+.sensei-course-meta .course-author {
+    display: none !important;
+}
+
+#buddypress #whats-new-options {
+    display: block;
+}
+
+.social-icons li {
+    margin-left: 0px !important;
+}
+
+.widget_course_progress footer>span {
+    display: none !important;
+}
+
+.learndash-pager-course_list {
+    display: none !important;
+}
+
+/* custom style for hyperlinks within course contents */
+
+div.vc_tta-panel-body a:link {
+    color: $color-primary-700 !important;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+div.vc_tta-panel-body a:hover {
+    color: red !important;
+    text-decoration: underline;
+}
