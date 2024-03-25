@@ -197,6 +197,16 @@ function removeFilter(field, value){
 
 }
 
+function paginateCourses(page) {
+    const url = new URL(window.location.href);
+    if (page && page !== 1) {
+        url.searchParams.set('paged', page);
+    } else {
+        url.searchParams.delete('paged');
+    }
+    window.location.href = url.toString();
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     toggleFilterModal();
     filterPagination();

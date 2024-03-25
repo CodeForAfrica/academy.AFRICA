@@ -169,10 +169,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $filter_by = $settings['filter_by_text'];
         $filter_options = CoursesFunctions::get_filter_by();
         $courses_title = $settings['courses_title'];
-        $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
         $view = $this->get_query_param('view');
+        $page = $this->get_query_param('paged');
+        $current_page = $page ? $page[0] : 1;
         $pathway_title = $settings['learning_title'];
         $pathway_description = $settings['learning_description'];
         $pathway_button_text = $settings['learning_button_text'];
@@ -334,33 +335,43 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 <?
                                 if ($current_page > 1) {
                                 ?>
-                                    <li class="page-item"><a class="page-link" href="<? echo get_pagenum_link($current_page - 1) ?>">
+                                    <li class="page-item">
+                                        <div class="page-link" onclick="paginateCourses(<? echo $current_page - 1 ?>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                        </a></li>
+                                        </div>
+                                    </li>
                                     <?
                                 }
                                 for ($i = 1; $i <= $no_of_pages; $i++) {
                                     if ($i == $current_page) {
                                     ?>
                                         <li class="page-item active">
-                                            <a class="page-link" href="<? echo get_pagenum_link($i) ?>"><? echo $i ?></a>
+                                            <div class="page-link">
+                                                <? echo $i ?>
+                                            </div>
                                         </li>
                                     <?
                                     } else {
                                     ?>
-                                        <li class="page-item"><a class="page-link" href="<? echo get_pagenum_link($i) ?>"><? echo $i ?></a></li>
+                                        <li class="page-item">
+                                            <div class="page-link" href="<? echo get_pagenum_link($i) ?>" onclick="paginateCourses(<? echo $i ?>)">
+                                                <? echo $i ?>
+                                            </div>
+                                        </li>
                                     <?
                                     }
                                 }
                                 if ($current_page < $no_of_pages) {
                                     ?>
-                                    <li class="page-item"><a class="page-link" href="<? echo get_pagenum_link($current_page + 1) ?>">
+                                    <li class="page-item">
+                                        <div class="page-link" onclick="paginateCourses(<? echo $current_page + 1 ?>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                        </a></li>
+                                        </div>
+                                    </li>
                                 <?
                                 }
                                 ?>

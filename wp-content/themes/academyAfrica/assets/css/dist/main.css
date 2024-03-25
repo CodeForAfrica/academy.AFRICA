@@ -1005,9 +1005,11 @@ table {
 }
 .pagination-container .page-item {
   margin: 0 5px;
+  cursor: pointer;
 }
 .pagination-container .page-item.active {
   border: 1px solid #0C1A81;
+  cursor: not-allowed;
 }
 .pagination-container .page-item.active:hover a {
   cursor: pointer;
