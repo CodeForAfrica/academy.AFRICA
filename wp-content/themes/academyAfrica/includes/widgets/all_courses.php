@@ -356,7 +356,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                     } else {
                                     ?>
                                         <li class="page-item">
-                                            <div class="page-link" href="<? echo get_pagenum_link($i) ?>" onclick="paginateCourses(<? echo $i ?>)">
+                                            <div class="page-link" onclick="paginateCourses(<? echo $i ?>)">
                                                 <? echo $i ?>
                                             </div>
                                         </li>
