@@ -1,7 +1,6 @@
 @use '../abstracts/' as *;
 
 .header {
-    width: 100vw;
     background-color: $color-primary-700;
     color: $color-shades-white;
     position: sticky;

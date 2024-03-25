@@ -170,7 +170,6 @@ table {
 }
 
 .header {
-  width: 100vw;
   background-color: #0C1A81;
   color: #FFFFFF;
   position: sticky;
@@ -1578,6 +1577,7 @@ body {
 body #content {
   margin: 0 auto;
   padding: 0;
+  max-width: 100%;
 }
 
 /*# sourceMappingURL=main.css.map */
