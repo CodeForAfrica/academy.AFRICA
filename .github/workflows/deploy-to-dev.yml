@@ -13,7 +13,7 @@ jobs:
         uses: wpengine/github-action-wpe-site-deploy@v3
         with:
           WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
-          WPE_ENV: academyafristg
+          WPE_ENV: academyafridev
           SRC_PATH: "wp-content/"
           REMOTE_PATH: "wp-content/"
           FLAGS: -azvr --inplace --exclude=".*"  --exclude=wp-content/mu-plugins/
