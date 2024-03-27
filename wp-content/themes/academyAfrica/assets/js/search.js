@@ -200,9 +200,9 @@ function removeFilter(field, value){
 function paginateCourses(page) {
     const url = new URL(window.location.href);
     if (page && page !== 1) {
-        url.searchParams.set('ttt', page);
+        url.searchParams.set('course_page', page);
     } else {
-        url.searchParams.delete('ttt');
+        url.searchParams.delete('course_page');
     }
     window.location.href = url.toString();
 }

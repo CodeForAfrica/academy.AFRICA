@@ -172,7 +172,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
         $view = $this->get_query_param('view');
-        $page = $this->get_query_param('ttt');
+        $page = $this->get_query_param('course_page');
         $current_page = $page ? $page[0] : 1;
         $pathway_title = $settings['learning_title'];
         $pathway_description = $settings['learning_description'];
