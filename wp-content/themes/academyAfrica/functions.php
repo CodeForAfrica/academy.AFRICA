@@ -424,7 +424,3 @@ function hide_admin_bar()
     }
 }
 
-function custom_posts_per_page( $query ) {
-        set_query_var('posts_per_page', 9);
-}
-add_action( 'pre_get_posts', 'custom_posts_per_page' );
