@@ -75,12 +75,8 @@ $stay_in_touch = get_post_meta($footer->ID, 'stay_in_touch', true);
 $secondary_links = get_post_meta($footer->ID, 'secondary_links', true);
 $newsletter = get_post_meta($footer->ID, 'newsletter', true);
 $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
-$locations = get_nav_menu_locations();
 
     ?>
-    <script>
-        console.log(<? echo json_encode($locations)?>)
-    </script>
 <footer class="footer-wrapper">
     <div class="root">
         <div class="item">
