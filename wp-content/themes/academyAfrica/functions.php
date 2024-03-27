@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.52');
+define('ACADEMY_AFRICA_VERSION', '1.1.51');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -423,3 +423,8 @@ function hide_admin_bar()
         show_admin_bar(false);
     }
 }
+
+function custom_posts_per_page( $query ) {
+        set_query_var('posts_per_page', 9);
+}
+add_action( 'pre_get_posts', 'custom_posts_per_page' );
