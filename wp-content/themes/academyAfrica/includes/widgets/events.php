@@ -266,6 +266,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $args = array(
             'post_type' => 'event',
             'posts_per_page' => 10,
+            'paged'=> $this->get_query_param( 'upcoming_page' ) ? $this->get_query_param( 'upcoming_page' )[0]: 1,
             'meta_query' => array(
                 array(
                     'key'     => 'date',
@@ -284,6 +285,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $args = array(
             'post_type' => 'event',
             'posts_per_page' => 10,
+            'paged'=> $this->get_query_param( 'previous_events_page' ) ? $this->get_query_param( 'previous_events_page' )[0] : 1,
             'meta_query' => array(
                 array(
                     'key'     => 'date',
@@ -535,14 +537,18 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                 </a>
                             </li>
 
+                            <?
+                             $current = $this->get_query_param( 'upcoming_page' ) ? $this->get_query_param( 'upcoming_page' )[0] : "1"
+                            ?>
                             <!-- Page links -->
                             <?php for ($i = 1; $i <= $upcoming_pagination['total_pages']; $i++) : ?>
                                 <?
                                 $current_url_params = $_GET;
                                 $current_url_params["upcoming_page"] = $i;
                                 $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
+                                $cls = intval($current) === $i ? "active": "";
                                 ?>
-                                <li class="page-item"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item <? echo $cls?>"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
                             <?php endfor; ?>
 
                             <!-- Next page link -->
@@ -625,13 +631,17 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             </li>
 
                             <!-- Page links -->
+                            <?
+                             $current = $this->get_query_param( 'previous_events_page' ) ? $this->get_query_param( 'previous_events_page' )[0] : "1"
+                            ?>
                             <?php for ($i = 1; $i <= $previous_pagination['total_pages']; $i++) : ?>
                                 <?
                                 $current_url_params = $_GET;
                                 $current_url_params["previous_events_page"] = $i;
                                 $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
+                                $cls = intval($current) === $i ? "active": "";
                                 ?>
-                                <li class="page-item"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item <? echo $cls?>"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
                             <?php endfor; ?>
 
                             <!-- Next page link -->
