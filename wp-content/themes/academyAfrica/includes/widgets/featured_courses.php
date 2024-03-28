@@ -370,7 +370,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                     <div class="brand-details">
                                         <img class="logo" alt="logo"
                                             src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
-                                        <p class="company-name">
+                                        <p style="line-height: 24px;" class="company-name">
                                             <? echo $company_name ?>
                                         </p>
                                     </div>
