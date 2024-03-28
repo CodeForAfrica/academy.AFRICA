@@ -54,7 +54,7 @@ $account_status = get_user_meta(get_current_user_id(), 'account_status', true);
         </form>
         <footer class="modal-footer">
             <div>
-                <span>Already a member?</span><span onclick="closeModal('register'); openModal('login');"> Login
+                <span>Already a member?</span><span style="margin-left: 4px;" onclick="closeModal('register'); openModal('login');"> Login
                     now</span>
             </div>
         </footer>

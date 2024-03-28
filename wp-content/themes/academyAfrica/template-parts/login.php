@@ -38,7 +38,7 @@
         <?php wp_login_form(); ?>
         <footer class="modal-footer">
             <div>
-                <span>New to academy.Africa?</span><span onclick="closeModal('login'); openModal('register');">Register
+                <span>New to academy.AFRICA? </span><span style="margin-left: 4px;" onclick="closeModal('login'); openModal('register');">Register
                     now</span>
             </div>
             <!-- <button class="button primary" type="submit">Login</button> -->
