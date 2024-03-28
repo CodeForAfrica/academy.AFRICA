@@ -174,7 +174,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
         $this->add_control(
             'user_last_name',
             [
-                'label' => __('Certificate User Name', 'academy-africa'),
+                'label' => __('Certificate User Last Name', 'academy-africa'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'default' => __('Last Name', 'academy-africa'),
                 'label_block' => true,
