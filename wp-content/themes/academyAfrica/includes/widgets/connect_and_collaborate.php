@@ -125,7 +125,7 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
                     <p class="become-a-member">
                         <? echo $become_a_member_text ?>
                     </p>
-                    <a href="" class="button primary large">
+                    <a href="<? echo $join_us_url ?>" class="button primary large">
                         <? echo $join_us_on_slack ?>
                     </a>
                 </div>
