@@ -1,4 +1,4 @@
-.button {
+.button, .quiz-page .wpProQuiz_content .wpProQuiz_button {
   text-transform: uppercase;
   font-weight: 800;
   line-height: 19px;
@@ -14,7 +14,7 @@
   cursor: pointer;
   font-family: "Open Sans";
 }
-.button .icon {
+.button .icon, .quiz-page .wpProQuiz_content .wpProQuiz_button .icon {
   font-size: 16px;
   color: #FFFFFF;
 }
@@ -24,41 +24,41 @@
   justify-content: center;
   gap: 8px;
 }
-.button.small {
+.button.small, .quiz-page .wpProQuiz_content .small.wpProQuiz_button {
   padding: 8px 16px;
 }
-.button.medium {
+.button.medium, .quiz-page .wpProQuiz_content .medium.wpProQuiz_button {
   padding: 12px 16px;
 }
-.button.large {
+.button.large, .quiz-page .wpProQuiz_content .large.wpProQuiz_button {
   padding: 24px;
 }
-.button.cta {
+.button.cta, .quiz-page .wpProQuiz_content .cta.wpProQuiz_button {
   background: #ED1C24;
   border: 1px solid #ED1C24;
 }
-.button.cta:hover {
+.button.cta:hover, .quiz-page .wpProQuiz_content .cta.wpProQuiz_button:hover {
   background: #FEECED;
   color: #ED1C24;
 }
-.button.primary {
+.button.primary, .quiz-page .wpProQuiz_content .wpProQuiz_button {
   background: #0C1A81;
   border: 1px solid #0C1A81;
 }
-.button.primary:hover {
+.button.primary:hover, .quiz-page .wpProQuiz_content .wpProQuiz_button:hover {
   background: #EFF0FD;
   color: #0C1A81;
 }
-.button.secondary {
+.button.secondary, .quiz-page .wpProQuiz_content .secondary.wpProQuiz_button {
   background: #FEECED;
   border: 1px solid #FEECED;
 }
-.button.secondary:hover {
+.button.secondary:hover, .quiz-page .wpProQuiz_content .secondary.wpProQuiz_button:hover {
   background: #ED1C24;
   color: #FFFFFF;
   border: 1px solid #ED1C24;
 }
-.button.disabled {
+.button.disabled, .quiz-page .wpProQuiz_content .disabled.wpProQuiz_button {
   background: #CCCFDA;
   color: #616582;
   border: 1px solid #CCCFDA;
@@ -604,6 +604,13 @@
   justify-content: center;
   padding: 4px 10px;
   min-width: 54px;
+}
+
+.quiz-page .wpProQuiz_content .wpProQuiz_questionList {
+  border: 1px solid #CCCFDA;
+  border-radius: 0;
+  margin: 0;
+  background-color: transparent;
 }
 
 .pdf-template a {

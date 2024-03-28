@@ -597,3 +597,19 @@
 
     }
 }
+
+.quiz-page {
+    .wpProQuiz_content {
+        .wpProQuiz_button {
+           @extend .button;
+           @extend .primary;
+        }
+
+        .wpProQuiz_questionList {
+            border: 1px solid $color-neutral-200;
+            border-radius: 0;
+            margin: 0;
+            background-color: transparent;
+        }
+    }
+}
