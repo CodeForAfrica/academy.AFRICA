@@ -177,6 +177,7 @@
   background-color: #FFFFFF;
 }
 .featured-courses .featured-certificate .certificate-root p {
+  margin: 0;
   font-family: "Open Sans";
 }
 .featured-courses .featured-certificate .certificate-root .certificate-header {
