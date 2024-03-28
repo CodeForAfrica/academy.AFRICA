@@ -26,7 +26,7 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
 </style>
 
 
-<div class="sfwd-container">
+<div class="sfwd-container wysiwyg">
     <div class='sfwd-small-screen'>
         <div class="title">
             <div class="cfa-title"><?php the_title(); ?></div>
