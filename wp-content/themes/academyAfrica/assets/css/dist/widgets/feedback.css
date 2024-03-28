@@ -202,6 +202,7 @@ table {
 }
 .feedback .content .card {
   background: #FFFFFF;
+  min-height: 550px;
 }
 .feedback .content .card .content-card {
   display: flex;
