@@ -325,7 +325,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     </p>
                     <div class="certificate-showcase">
                         <div class="certificate">
-                            <div class="certificate-content">
+                            <div style="padding-bottom: 24px;" class="certificate-content">
                                 <div class="certificate-content-header">
                                     <hr />
                                     <div class="certificate-header-details">
