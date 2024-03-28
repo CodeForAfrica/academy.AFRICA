@@ -139,7 +139,7 @@ if ($course_status == "Completed") {
             </div>
             <div class="carriculum">
                 <div class="title">
-                    <p class="cfa-introduction-title">Course Carriculum</p>
+                    <p class="cfa-introduction-title">Course Curriculum</p>
                 </div>
                 <?php echo do_shortcode('[course_content]'); ?>
             </div>
