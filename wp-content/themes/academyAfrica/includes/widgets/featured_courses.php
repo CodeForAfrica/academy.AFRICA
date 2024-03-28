@@ -334,13 +334,13 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                 </div>
                                 <div class="course-details">
                                     <div class="student">
-                                        <p class="title">
+                                        <p style="whitespace: nowrap;" class="title">
                                             <? echo $presented_to ?>
                                         </p>
                                         <p class="name first-name">
                                             First Name
                                         </p>
-                                        <p class="name bold-text">
+                                        <p style="font-weight: 700;" class="name bold-text">
                                             Last Name
                                         </p>
                                     </div>
@@ -348,7 +348,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                         <p class="course-description title">
                                             <? echo $certificate_description ?>
                                         </p>
-                                        <p class="name bold-text">
+                                        <p style="font-weight: 700;" class="name bold-text">
                                             <? echo $certificate_course ?>
                                         </p>
                                     </div>
