@@ -172,6 +172,15 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
+            'user_last_name',
+            [
+                'label' => __('Certificate User Name', 'academy-africa'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Last Name', 'academy-africa'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
             'certificate_description',
             [
                 'label' => __('Certificate Presented to', 'academy-africa'),
@@ -241,7 +250,9 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
         $presented_to = $settings['presented_to'];
         $certificate_type = $settings['certificate_type'];
         $certificate_title = $settings['certificate_title'];
-        $company_name = "academy.Africa";
+        $company_name = "academy.AFRICA";
+        $user_first_name = $settings['user'];
+        $user_last_name = $settings['user_last_name'];
         $certificate_cta_description = $settings['certificate_cta_description'];
         $academy_head = array(
             'name' => $settings['academy_head_name'],
@@ -338,10 +349,10 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                             <? echo $presented_to ?>
                                         </p>
                                         <p class="name first-name">
-                                            First Name
+                                        <? echo $user_first_name ?>
                                         </p>
                                         <p style="font-weight: 700;" class="name bold-text">
-                                            Last Name
+                                        <? echo $user_last_name ?>
                                         </p>
                                     </div>
                                     <div class="course">
