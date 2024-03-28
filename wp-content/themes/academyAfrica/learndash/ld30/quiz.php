@@ -19,7 +19,7 @@ $lessons = learndash_get_course_lessons_list($course_id);
     }
 </style>
 
-<div class="sfwd-container wysiwyg">
+<div class="sfwd-container quiz-page wysiwyg">
     <div class='sfwd-small-screen'>
         <div class="title">
             <div class="cfa-title"><?php the_title(); ?></div>
@@ -29,7 +29,7 @@ $lessons = learndash_get_course_lessons_list($course_id);
             <p> For best experience, please use a laptop or larger screen </p>
         </div>
     </div>
-    <div class="sfwd-large-screen">
+    <div class="sfwd-large-screen wysiwyg">
         <div class="content">
             <div class="progress">
                 <div class="back-to-course">
@@ -60,35 +60,100 @@ $lessons = learndash_get_course_lessons_list($course_id);
                     <div class="sfwd-lessons__title__text"><?php the_title(); ?></div>
                 </div>
                 <div class="sfwd-lessons__content">
-                    <?php
-                    echo do_shortcode($post->post_content);
-                    ?>
-                </div>
-                <div class="sfwd-lessons__navigation">
-                    <?php
-                    $previous_lesson = learndash_previous_post_link(url: true);
-                    if ($previous_lesson) {
-                        echo "<div class='sfwd-lessons__navigation__previous nav-link'>";
-                        echo "<a href='$previous_lesson' class='link'>";
-                        echo "<div class='sfwd-lessons__navigation__previous__text'>Previous</div>";
-                        echo "</a>";
-                        echo "</div>";
-                    }
-                    ?>
-                    <?php
-                    $next_lesson = learndash_next_post_link(url: true);
-                    if ($next_lesson) {
-                        echo "<div class='sfwd-lessons__navigation__next nav-link'>";
-                        echo "<a href='$next_lesson' class='link'>";
-                        echo "<div class='sfwd-lessons__navigation__next__text'>Next</div>";
-                        echo "</a>";
-                        echo "</div>";
-                    }
+                    <?
+                    if ($show_content) :
+
+                        /**
+                         * Content and/or tabs
+                         */
+                        learndash_get_template_part(
+                            'modules/tabs.php',
+                            array(
+                                'course_id' => $course_id,
+                                'post_id'   => $quiz_post->ID,
+                                'user_id'   => $user_id,
+                                'content'   => $content,
+                                'materials' => $materials,
+                                'context'   => 'quiz',
+                            ),
+                            true
+                        );
+
+                        if ($attempts_left) :
+
+                            /**
+                             * Fires before the actual quiz content (not WP_Editor content).
+                             *
+                             * @since 3.0.0
+                             *
+                             * @param int $quiz_id   Quiz ID.
+                             * @param int $course_id Course ID.
+                             * @param int $user_id   User ID.
+                             */
+                            do_action('learndash-quiz-actual-content-before', $quiz_post->ID, $course_id, $user_id);
+
+                            echo $quiz_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Post content
+
+                            /**
+                             * Fires after the actual quiz content (not WP_Editor content).
+                             *
+                             * @since 3.0.0
+                             *
+                             * @param int $quiz_id   Quiz ID.
+                             * @param int $course_id Course ID.
+                             * @param int $user_id   User ID.
+                             */
+                            do_action('learndash-quiz-actual-content-after', $quiz_post->ID, $course_id, $user_id);
+
+                        else :
+
+                            /**
+                             * Display an alert
+                             */
+
+                            /**
+                             * Fires before the quiz attempts alert.
+                             *
+                             * @since 3.0.0
+                             *
+                             * @param int $quiz_id   Quiz ID.
+                             * @param int $course_id Course ID.
+                             * @param int $user_id   User ID.
+                             */
+                            do_action('learndash-quiz-attempts-alert-before', $quiz_post->ID, $course_id, $user_id);
+
+                            learndash_get_template_part(
+                                'modules/alert.php',
+                                array(
+                                    'type'    => 'warning',
+                                    'icon'    => 'alert',
+                                    'message' => sprintf(
+                                        // translators: placeholders: quiz, attempts count.
+                                        esc_html_x('You have already taken this %1$s %2$d time(s) and may not take it again.', 'placeholders: quiz, attempts count', 'learndash'),
+                                        learndash_get_custom_label_lower('quiz'),
+                                        $attempts_count
+                                    ),
+                                ),
+                                true
+                            );
+
+                            /**
+                             * Fires after the quiz attempts alert.
+                             *
+                             * @since 3.0.0
+                             *
+                             * @param int $quiz_id   Quiz ID.
+                             * @param int $course_id Course ID.
+                             * @param int $user_id   User ID.
+                             */
+                            do_action('learndash-quiz-attempts-alert-after', $quiz_post->ID, $course_id, $user_id);
+
+                        endif;
+                    endif;
                     ?>
                 </div>
                 <div class="sfwd-lessons__footer">
                     <hr class="sfwd-lessons__navigation__divider" />
-
                 </div>
             </div>
         </div>
