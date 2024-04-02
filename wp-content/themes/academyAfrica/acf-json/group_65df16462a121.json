@@ -1,9 +1,9 @@
 {
-    "key": "group_6564858a5ef75",
-    "title": "Event Fields",
+    "key": "group_65df16462a121",
+    "title": "Events Fields",
     "fields": [
         {
-            "key": "field_6564858c6b6eb",
+            "key": "field_65df164d68122",
             "label": "Resources",
             "name": "resources",
             "aria-label": "",
@@ -23,7 +23,7 @@
             "mime_types": ""
         },
         {
-            "key": "field_656487210600a",
+            "key": "field_65df16a168123",
             "label": "Organisations",
             "name": "organisations",
             "aria-label": "",
@@ -51,11 +51,11 @@
             "bidirectional_target": []
         },
         {
-            "key": "field_6564954c18867",
+            "key": "field_65df16de68124",
             "label": "Speaker",
             "name": "speaker",
             "aria-label": "",
-            "type": "user",
+            "type": "post_object",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -64,17 +64,22 @@
                 "class": "",
                 "id": ""
             },
-            "role": [
-                "author"
+            "post_type": [
+                "academy_speaker"
             ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
             "return_format": "object",
-            "multiple": 0,
+            "multiple": 1,
             "allow_null": 0,
             "bidirectional": 0,
+            "ui": 1,
             "bidirectional_target": []
         },
         {
-            "key": "field_656495fc1886a",
+            "key": "field_65df170a68125",
             "label": "Language",
             "name": "language",
             "aria-label": "",
@@ -101,7 +106,7 @@
             "placeholder": ""
         },
         {
-            "key": "field_6579517c28a1b",
+            "key": "field_65df173e68126",
             "label": "Registration Link",
             "name": "registration_link",
             "aria-label": "",
@@ -136,5 +141,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1702449558
+    "modified": 1712067825
 }

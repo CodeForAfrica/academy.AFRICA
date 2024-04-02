@@ -110,7 +110,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     'is_virtual' => get_post_meta(get_the_ID(), 'is_virtual', true) ? "&#x1F5A5;" : "",
                     'date' => $date,
                     'time' => str_replace("Africa/", "", get_post_meta(get_the_ID(), 'time', true) . ' ' . get_post_meta(get_the_ID(), 'timezone', true)),
-                    'image' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'),
+                    'image' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
                     'country_code' => $african_countries[get_post_meta(get_the_ID(), 'country', true)],
                     'language' => get_post_meta(get_the_ID(), 'language', true),
                     'post_url' => get_permalink(get_the_ID()),

@@ -297,7 +297,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             foreach ($courses as $course) {
                                 $course_title = get_the_title($course);
                                 $course_author = get_the_author_meta('display_name', $course->post_author);
-                                $course_thumbnail = get_the_post_thumbnail_url($course);
+                                $course_thumbnail = get_the_post_thumbnail_url($course, 'full');
                                 $course_link = get_permalink($course);
                                 $course_meta = get_post_meta($course, 'sfwd-courses', true);
                                 $course_price = $course_meta['sfwd-courses_course_price'];

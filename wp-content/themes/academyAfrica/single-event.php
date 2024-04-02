@@ -26,14 +26,14 @@ $register_text = "Register Here";
             $post_content = $post_array->post_content;
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
             $is_virtual = get_post_meta($post_id, 'is_virtual', true) ? "&#x1F5A5;" : "";
-            $speaker = get_userdata(get_post_meta($post_id, 'speaker', true));
+            $speakers = get_field("speaker", $post_id);
             $time = str_replace("Africa/", "", $raw_time.' '.get_post_meta($post_id, 'timezone', true));
             $language = get_post_meta($post_id, 'language', true);
             $organisations = get_field("organisations", $post_id);
             $resources = get_field('resources')['url'];
             ?>
             <script>
-                // console.log(<? echo json_encode($post_array) ?>)
+                console.log(<? echo json_encode($speakers) ?>)
             </script>
             <h1 class="cfa-title">
                 <? echo $post_title ?>
@@ -108,24 +108,29 @@ $register_text = "Register Here";
             </p>
             <div class="linked-post">
                 <h4 class="title">The speaker</h4>
+                
                 <?
-                $user_id = get_post_meta($post_id, 'speaker', true);
-                $biography = get_the_author_meta('description', $user_id);
-                $avatar_url = get_avatar_url($user_id, array('size' => 100, 'default' => 'gravatar_default')).'?nocache='.time();
+                foreach($speakers as $speaker) {
+                    $sp_title = $speaker->post_title;
+                    $avatar_url = get_the_post_thumbnail_url($speaker->ID, 'full');
+                    $sp_desc = get_the_excerpt($speaker->ID);
+                    ?>
+                    <img style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0;" src="<? echo $avatar_url ?>" alt="<? echo $speaker->display_name ?>" class="logo">
+                <p style="text-transform: capitalize; margin: 0" class="name">
+                    <? echo $sp_title ?>
+                </p>
+                <p class="description" style="margin-bottom: 32px; margin-top: 16px;">
+                    <? echo $sp_desc ?>
+                </p>
+                    <?
+                }
                 ?>
-                <img src="<? echo $avatar_url ?>" alt="<? echo $speaker->display_name ?>" class="logo">
-                <p class="name">
-                    <? echo $speaker->display_name ?>
-                </p>
-                <p class="description">
-                    <? echo $biography ?>
-                </p>
             </div>
             <div class="linked-post">
                 <?
                 foreach($organisations as $organisation) {
                     $org_title = $organisation->post_title;
-                    $img = get_the_post_thumbnail_url($organisation->ID);
+                    $img = get_the_post_thumbnail_url($organisation->ID, 'full');
                     $desc = get_the_excerpt($organisation->ID);
                     ?>
                     <h4 class="title">The Organisation</h4>

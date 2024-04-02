@@ -37,7 +37,7 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
         $other_partners = $settings['partners'];
         $output = array();
         foreach ($other_partners as $key) {
-            $new_array = array("name" => $key['title'], 'icon' => $key['image']['url']);
+            $new_array = array("name" => $key['title'], 'icon' => $key['image']['url'], 'url' => $key['url']);
             array_push($output, $new_array);
         }
 
@@ -50,7 +50,7 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
         $other_partners = $settings['other_partners'];
         $output = array();
         foreach ($other_partners as $key) {
-            $new_array = array("name" => $key['title'], 'icon' => $key['image']);
+            $new_array = array("name" => $key['title'], 'icon' => $key['image'], 'url' => $key['url']);
             array_push($output, $new_array);
         }
         return $output;

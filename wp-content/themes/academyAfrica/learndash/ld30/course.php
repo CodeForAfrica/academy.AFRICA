@@ -221,7 +221,7 @@ if ($course_status == "Completed") {
                                     <?php
                                     $related_courses = array_slice($related_courses, 0, 3);
                                     foreach ($related_courses as $course) {
-                                        $course_thumbnail = get_the_post_thumbnail_url($course);
+                                        $course_thumbnail = get_the_post_thumbnail_url($course, 'full');
                                         $course_title = $course->post_title;
                                         $course_link = get_permalink($course->ID);
                                         $course_author = get_the_author_meta('display_name', $course->post_author);
