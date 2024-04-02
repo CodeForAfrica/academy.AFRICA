@@ -693,7 +693,6 @@
   text-align: left;
 }
 .root .embed #mc_embed_signup input[type=text] {
-  color: #FFFFFF;
   font-family: Open Sans;
   font-size: 14px;
   font-style: italic;
@@ -711,7 +710,6 @@
   width: 100%;
 }
 .root .embed #mc_embed_signup input[type=email] {
-  color: #FFFFFF;
   font-family: Open Sans;
   font-size: 14px;
   font-style: italic;
