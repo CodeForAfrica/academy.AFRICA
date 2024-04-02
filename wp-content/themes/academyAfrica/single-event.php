@@ -6,6 +6,8 @@ get_header();
 $back_text = "Back to All Events";
 $resources_text = "Resources";
 $register_text = "Register Here";
+$or_title = "The Organisation";
+$speaker_title = "The Speaker";
 ?>
 <main id="main" class="single-page-event">
     <?php
@@ -107,7 +109,7 @@ $register_text = "Register Here";
                 <? echo $post_content ?>
             </p>
             <div class="linked-post">
-                <h4 class="title">The speaker</h4>
+                <h4 class="title"><? echo $speaker_title?></h4>
                 
                 <?
                 foreach($speakers as $speaker) {
@@ -133,8 +135,8 @@ $register_text = "Register Here";
                     $img = get_the_post_thumbnail_url($organisation->ID, 'full');
                     $desc = get_the_excerpt($organisation->ID);
                     ?>
-                    <h4 class="title">The Organisation</h4>
-                    <img src="<? echo $img ?>" alt="<? echo $org_title ?>" class="logo">
+                    <h4 class="title"><? echo $or_title ?></h4>
+                    <img src="<? echo $img ?>" alt="<? echo $org_title ?>" style="height: 100px;" class="logo">
                     <p class="name">
                         <? echo $org_title ?>
                     </p>
