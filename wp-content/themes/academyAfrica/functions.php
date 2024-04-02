@@ -217,8 +217,7 @@ function whitelist_address()
         '::1',
         'localhost',
         'academyafridev.wpenginepowered.com',
-        'academyafristg.wpenginepowered.com',
-        'academy.africa'
+        'academyafristg.wpenginepowered.com'
     );
 }
 
