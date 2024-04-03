@@ -39,7 +39,11 @@ window.onload = function () {
   const { hash } = window.location;
   const isLogin = hash === "#sign-in" || hash === "#login";
   if (isLogin) {
-    openModal("login");
+    if(!document.body.classList.contains('logged-in')) {
+      openModal("login");
+    } else {
+      window.location.hash = '';
+    }
     if (hash === "#login") {
       document.getElementById("login_error").innerText =
         "Error: An error occurred, either the password you entered is incorrect, the email is incorrect or your account is not activated";
