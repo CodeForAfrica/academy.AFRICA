@@ -50,3 +50,11 @@ window.onload = function () {
     openModal("register");
   }
 };
+
+document.onkeydown = function (event) {
+  event = event || window.event;
+  if (event.keyCode === 27) {
+    closeModal('login');
+    closeModal('register');
+  }
+}
