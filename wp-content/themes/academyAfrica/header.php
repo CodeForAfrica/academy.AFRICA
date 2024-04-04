@@ -37,9 +37,3 @@ $skip_link_url = apply_filters('hello_elementor_skip_link_url', '#content');
 		<!-- get header template -->
 
 		<?php get_template_part('template-parts/header', 'template'); ?>
-
-		<!-- Register template -->
-		<?php get_template_part('template-parts/register', 'template'); ?>
-
-		<!-- Login template -->
-		<?php get_template_part('template-parts/login', 'template'); ?>

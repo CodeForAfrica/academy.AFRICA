@@ -1,14 +1,13 @@
-<?php
 
+<div class="login">
+<?
+if (isset($_POST['pass_reset'])) {
+        echo 'Password reset instructions have been sent to your email.';
+    } else {
 ?>
-<div class="modal-anchor" id="login-modal">
-    <label for="modal" class="modal-bg" id="login-modal-bg"></label>
-    <div class="modal-content" id="login-modal-content">
-        <label for="modal" onclick="closeModal('login')" class="close">
-            <i class="fa fa-times" aria-hidden="true"></i>
-        </label>
+    <div class="content" id="login-modal-content">
         <header>
-            <h4 class="cfa-title">Welcome Back</h4>
+            <h6 style="font-size: 20px;" class="cfa-title">Welcome Back</h6>
         </header>
         <p class="subtitle">
             Sign up to access all the features on academy.AFRICA
@@ -19,11 +18,11 @@
                 Sign in with Google
             </button>
             <button onclick="theChampInitiateLogin(this, 'facebook')" class="facebook">
-                <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Google">
+                <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Facebook">
                 Sign In with Facebook
             </button>
             <button onclick="theChampInitiateLogin(this, 'x')" class="twitter">
-                <img src="/wp-content/themes/academyAfrica/assets/images/icons/twitter.svg" alt="Google">
+                <img src="/wp-content/themes/academyAfrica/assets/images/icons/twitter.svg" alt="Twitter">
                 Sign In with X (formerly Twitter)
             </button>
         </div>
@@ -36,12 +35,19 @@
             </p>
         </div>
         <?php wp_login_form(); ?>
-        <footer class="modal-footer">
+        <footer style="display: flex; justify-content: space-between;" class="modal-footers">
             <div>
-                <span>New to academy.AFRICA? </span><span style="margin-left: 4px;" onclick="closeModal('login'); openModal('register');">Register
-                    now</span>
+                <span>New to academy.AFRICA? </span><a class="remember-me" href="/academy-africa-login?action=register" style="margin-left: 4px; font-size: 16px;">Register
+                    now</a>
             </div>
-            <!-- <button class="button primary" type="submit">Login</button> -->
+            <a style="font-size: 14px; color: var(--Black, #000);" href="javascript:history.back()">Back</a>
         </footer>
     </div>
+    <script>
+        const btn = document.getElementById("wp-submit");
+        if(btn) {
+            btn.value = "SIGN IN"
+        }
+    </script>
 </div>
+  <?  }

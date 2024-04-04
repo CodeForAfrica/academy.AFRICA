@@ -21,8 +21,7 @@ final class Widget
     function register_scripts()
     {
         $scripts = [
-            "academy-africa-filters" => "filters.js",
-            "academy-africa-modal" => "modal.js"
+            "academy-africa-filters" => "filters.js"
         ];
         foreach ($scripts as $handle => $file) {
             wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa'], ACADEMY_AFRICA_VERSION);

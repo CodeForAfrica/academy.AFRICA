@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.63');
+define('ACADEMY_AFRICA_VERSION', '1.1.65');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -48,6 +48,7 @@ function my_theme_enqueue_styles()
     wp_enqueue_style(('search'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('filter_bar'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/filter_bar.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style(('learning_path_print'), get_stylesheet_directory_uri() . '/assets/css/dist/print/print.css', array(), ACADEMY_AFRICA_VERSION, 'print');
+    wp_enqueue_style(('cfa-login'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/login.css', array(), ACADEMY_AFRICA_VERSION);
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -424,3 +425,70 @@ function hide_admin_bar()
     }
 }
 
+function check_password_reset_action(){
+    if (isset($_POST['pass_reset'])) {
+        echo "Password reset instructions have been sent to your email address.";
+    } 
+}
+
+function check_register_action(){
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['action'] === 'register')) {
+        $user = array(
+            'first_name' => $_POST['firstName'],
+            'last_name' => $_POST['lastName'],
+            'user_email' => $_POST['email'],
+            'user_pass' => $_POST['password'],
+            'user_nicename' => $_POST['firstName'].$_POST['lastName'],
+            'user_login' => $_POST['email'],
+            'user_status' => 1,
+        );
+        $new_user = wp_insert_user($user);
+        if(is_wp_error($new_user)) {
+            echo $new_user->get_error_message();
+        } else {
+            echo "<br>You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.";
+        }
+        exit;
+    }
+}
+
+function activate_new_user_action(){
+    if($_SERVER['REQUEST_METHOD'] === 'GET' && ((isset($_GET['action'])) && $_GET['action'] === 'account_activation') && (isset($_GET['key'])) && (isset($_GET['user_id']))) {
+        $user_id = $_GET['user_id'];
+        $code = $_GET['key'];
+        global $wpdb;
+        $user = get_user_by('ID', $user_id);
+        update_user_meta($user_id, 'account_status', "active");
+        $wpdb->update(
+            'wp_users',
+            array('user_status' => 0),
+            array('ID' => $user_id,
+                'user_activation_key' => $code
+            ),
+        );
+    }
+}
+
+function custom_login_page() {
+    $login_page = home_url( "/academy-africa-login" );
+    $to_redirect = array("lostpassword");
+    $reset_password_page = home_url( '/academy-africa-login?action=lostpassword' );
+    $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];
+    check_password_reset_action();
+    check_register_action();
+    activate_new_user_action();
+    if( $check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && isset( $_GET['action'] ) && $_GET['action'] == 'lostpassword') {
+        wp_redirect($reset_password_page);
+        exit;
+    }
+    if( $check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && (!isset( $_GET['action'] ) || isset($to_redirect[$_GET['action']]))) {
+        wp_redirect($login_page);
+        exit;
+    }
+}
+
+add_action('init','custom_login_page');
+add_action( 'login_form_middle', 'add_lost_password_link' );
+function add_lost_password_link() {
+	return '<a class="remember-me" href="/academy-africa-login?action=lostpassword">Lost Password?</a>';
+}

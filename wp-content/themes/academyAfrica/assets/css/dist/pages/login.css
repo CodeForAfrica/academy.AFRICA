@@ -1,0 +1,229 @@
+.button {
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-family: "Open Sans";
+}
+.button .icon {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button.small {
+  padding: 8px 16px;
+}
+.button.medium {
+  padding: 12px 16px;
+}
+.button.large {
+  padding: 24px;
+}
+.button.cta {
+  background: #ED1C24;
+  border: 1px solid #ED1C24;
+}
+.button.cta:hover {
+  background: #FEECED;
+  color: #ED1C24;
+}
+.button.primary, .login input.button[type=submit] {
+  background: #0C1A81;
+  border: 1px solid #0C1A81;
+}
+.button.primary:hover, .login input.button[type=submit]:hover {
+  background: #EFF0FD;
+  color: #0C1A81;
+}
+.button.secondary {
+  background: #FEECED;
+  border: 1px solid #FEECED;
+}
+.button.secondary:hover {
+  background: #ED1C24;
+  color: #FFFFFF;
+  border: 1px solid #ED1C24;
+}
+.button.disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
+
+.wysiwyg {
+  font-family: Open Sans;
+}
+.wysiwyg h1 {
+  font-size: 36px; /* Heading 1 */
+  margin: 16px 0;
+  font-weight: 900;
+}
+.wysiwyg h2 {
+  font-size: 28px; /* Heading 2 */
+  margin: 14px 0;
+  font-weight: 900;
+}
+.wysiwyg h3 {
+  font-size: 24px; /* Heading 3 */
+  margin: 12px 0;
+  font-weight: 900;
+}
+.wysiwyg h4 {
+  font-size: 18px; /* Heading 4 */
+  margin: 10px 0;
+  font-weight: 900;
+}
+.wysiwyg h5 {
+  font-size: 16px; /* Heading 5 */
+  margin: 8px 0;
+  font-weight: 900;
+}
+.wysiwyg h6 {
+  font-size: 14px; /* Heading 6 */
+  margin: 6px 0;
+  font-weight: 900;
+}
+.wysiwyg em {
+  font-style: italic;
+}
+.wysiwyg p {
+  margin: 10px 0;
+}
+.wysiwyg strong {
+  font-weight: 700 !important;
+}
+.wysiwyg ol {
+  list-style: decimal;
+}
+.wysiwyg ul {
+  list-style: disc;
+}
+
+.login {
+  margin: auto;
+  max-width: 478px;
+  padding: 16px;
+  margin-top: 40px;
+}
+.login .social-login {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.login .social-login button {
+  border-radius: 10px;
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 54px;
+  width: 100%;
+  border: none;
+  gap: 15px;
+  text-transform: none;
+  border: 1px solid transparent;
+}
+.login .social-login button:hover {
+  border: 1px solid #0c1a81;
+  background-color: #eff0fd;
+}
+.login .social-login button.google {
+  color: rgba(0, 0, 0, 0.54);
+  font-family: Open Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: none;
+}
+.login .social-login button.facebook {
+  gap: 15px;
+  color: #1877f2;
+  font-family: Open Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: none;
+}
+.login .social-login button.twitter {
+  color: var(--shades-black, #000);
+  font-family: Open Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: none;
+}
+.login .content-divider {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 25.379px;
+  margin: 22px 0;
+}
+.login .content-divider div {
+  height: 1px;
+  flex: 1;
+  background: #8c8fa5;
+}
+.login input[type=text],
+.login input[type=password],
+.login input[type=email],
+.login input[type=number] {
+  width: 100%;
+  border: 1px solid var(--neutral-300, #b7bac8);
+  background: var(--shades-white, #fff);
+  height: 44px;
+  margin-bottom: 10px;
+}
+.login input[type=submit] {
+  width: 100%;
+  border: 1px solid transparent;
+}
+.login label {
+  color: var(--neutral-800, #4b5071);
+  /* Paragraph/P2/Regular */
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+}
+.login .error-message {
+  border-left: 5px solid red;
+  margin-top: 16px;
+}
+.login .error-message p {
+  line-height: 32px;
+  padding: 0 8px;
+}
+.login .remember-me {
+  color: var(--Black, #000);
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 114.286% */
+}
+
+/*# sourceMappingURL=login.css.map */

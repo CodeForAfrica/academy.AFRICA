@@ -58,6 +58,7 @@ window.onload = function () {
 document.onkeydown = function (event) {
   event = event || window.event;
   if (event.keyCode === 27) {
+    event.preventDefault();
     closeModal('login');
     closeModal('register');
   }
