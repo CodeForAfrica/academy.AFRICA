@@ -68,7 +68,9 @@ if ($course_status == "Completed") {
                 <div class="avatar">
                     <?php
                     $course_thumbnail = get_the_post_thumbnail_url($course_id);
-                    echo '<img src="' . $course_thumbnail . '" alt="">';
+                    $mooc_logo = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-blue.svg';
+                    $logo_url = $course_thumbnail ? $course_thumbnail : $mooc_logo;
+                    echo '<img src="' . $logo_url . '" alt="">';
                     ?>
                 </div>
             </div>
@@ -154,7 +156,8 @@ if ($course_status == "Completed") {
                         $name = get_the_author_meta('display_name', $author);
                         $avatar = get_avatar_url($author);
                         $avatar_url = $avatar ? $avatar : get_stylesheet_directory_uri() . ('/assets/images/default_user.svg');
-                        echo $name;
+                        // echo $name;
+                        coauthors_links();
                         ?>
                     </p>
                 </div>
