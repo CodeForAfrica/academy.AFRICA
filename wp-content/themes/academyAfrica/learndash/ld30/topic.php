@@ -59,6 +59,28 @@ $has_assignments = learndash_lesson_hasassignments($topic);
                 </div>
             </div>
             <div class="sfwd-lessons">
+                <div class="sfwd-lessons__navigation">
+                    <?php
+                    $previous_lesson = learndash_previous_post_link(url: true);
+                    if ($previous_lesson) {
+                        echo "<div class='sfwd-lessons__navigation__previous nav-link'>";
+                        echo "<a href='$previous_lesson' class='link'>";
+                        echo "<div class='sfwd-lessons__navigation__previous__text'>Previous</div>";
+                        echo "</a>";
+                        echo "</div>";
+                    }
+                    ?>
+                    <?php
+                    $next_lesson = learndash_next_post_link(url: true);
+                    if ($next_lesson) {
+                        echo "<div class='sfwd-lessons__navigation__next nav-link'>";
+                        echo "<a href='$next_lesson' class='link'>";
+                        echo "<div class='sfwd-lessons__navigation__next__text'>Next</div>";
+                        echo "</a>";
+                        echo "</div>";
+                    }
+                    ?>
+                </div>
                 <div class="sfwd-lessons__title">
                     <div class="sfwd-lessons__title__text"><?php the_title(); ?></div>
                 </div>
@@ -84,28 +106,6 @@ $has_assignments = learndash_lesson_hasassignments($topic);
                         </div>
                     </div>
                 <? } ?>
-                <div class="sfwd-lessons__navigation">
-                    <?php
-                    $previous_lesson = learndash_previous_post_link(url: true);
-                    if ($previous_lesson) {
-                        echo "<div class='sfwd-lessons__navigation__previous nav-link'>";
-                        echo "<a href='$previous_lesson' class='link'>";
-                        echo "<div class='sfwd-lessons__navigation__previous__text'>Previous</div>";
-                        echo "</a>";
-                        echo "</div>";
-                    }
-                    ?>
-                    <?php
-                    $next_lesson = learndash_next_post_link(url: true);
-                    if ($next_lesson) {
-                        echo "<div class='sfwd-lessons__navigation__next nav-link'>";
-                        echo "<a href='$next_lesson' class='link'>";
-                        echo "<div class='sfwd-lessons__navigation__next__text'>Next</div>";
-                        echo "</a>";
-                        echo "</div>";
-                    }
-                    ?>
-                </div>
                 <div class="sfwd-lessons__footer">
                     <hr class="sfwd-lessons__footer__divider" />
                     <?
