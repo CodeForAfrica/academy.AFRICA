@@ -193,7 +193,7 @@ function send_activation_link($user_id)
         $user = get_user_by('ID', $user_id);
         $sign_in_url = home_url() . '#sign-in';
         $code = $user->data->user_activation_key;
-        $valid_code = isset($code) ? $code : sha1($user_id . time());
+        $valid_code = (!!$code && isset($code)) ? $code : sha1($user_id . time());
         global $wpdb;
         $wpdb->update(
             'wp_users',
@@ -203,9 +203,6 @@ function send_activation_link($user_id)
         $email = $user->data->user_email;
         $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $valid_code, 'user_id' => $user_id), $sign_in_url);
 ?>
-        <script>
-            // console.log(<? echo json_encode($user) ?>, <? echo json_encode($activation_link) ?>);
-        </script>
         <?
         wp_mail($email, '[academy.AFRICA] Login Details', 'Activation link : ' . $activation_link);
     }
