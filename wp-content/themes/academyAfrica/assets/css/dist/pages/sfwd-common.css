@@ -118,6 +118,10 @@
   display: none;
 }
 
+.sfwd-container {
+  display: flex;
+  justify-content: center;
+}
 .sfwd-container .sfwd-small-screen {
   padding: 60px 30px 140px;
 }
@@ -506,6 +510,7 @@
   height: 90px;
   border-radius: 50%;
   object-fit: contain;
+  background-color: #FFFFFF;
 }
 .course-card .card .course-card-content {
   padding: 20px;

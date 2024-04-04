@@ -150,7 +150,6 @@
 .single-courses .wrapper .title-section .avatar img {
   width: 80px;
   height: 80px;
-  object-fit: cover;
 }
 .single-courses .wrapper .description {
   color: #000000;
