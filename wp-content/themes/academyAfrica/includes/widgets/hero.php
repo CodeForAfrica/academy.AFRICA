@@ -156,7 +156,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
             </div>
             <script>
                 function register(){
-                    window.location.href = "/academy-africa-login?action=register"
+                    window.location.href = "/login?action=register"
                 }
             </script>
         </div>

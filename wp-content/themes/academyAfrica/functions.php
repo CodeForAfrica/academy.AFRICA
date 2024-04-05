@@ -467,9 +467,9 @@ function activate_new_user_action(){
 }
 
 function custom_login_page() {
-    $login_page = home_url( "/academy-africa-login" );
+    $login_page = home_url( "/login" );
     $to_redirect = array("lostpassword");
-    $reset_password_page = home_url( '/academy-africa-login?action=lostpassword' );
+    $reset_password_page = home_url( '/login?action=lostpassword' );
     $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];
     check_password_reset_action();
     check_register_action();
@@ -487,5 +487,5 @@ function custom_login_page() {
 add_action('init','custom_login_page');
 add_action( 'login_form_middle', 'add_lost_password_link' );
 function add_lost_password_link() {
-	return '<a class="remember-me" href="/academy-africa-login?action=lostpassword">Lost Password?</a>';
+	return '<a class="remember-me" href="/login?action=lostpassword">Lost Password?</a>';
 }

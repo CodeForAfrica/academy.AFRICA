@@ -37,7 +37,7 @@ if (isset($_POST['pass_reset'])) {
         <?php wp_login_form(); ?>
         <footer style="display: flex; justify-content: space-between;" class="modal-footers">
             <div>
-                <span>New to academy.AFRICA? </span><a class="remember-me" href="/academy-africa-login?action=register" style="margin-left: 4px; font-size: 16px;">Register
+                <span>New to academy.AFRICA? </span><a class="remember-me" href="/login?action=register" style="margin-left: 4px; font-size: 16px;">Register
                     now</a>
             </div>
             <a style="font-size: 14px; color: var(--Black, #000);" href="javascript:history.back()">Back</a>
