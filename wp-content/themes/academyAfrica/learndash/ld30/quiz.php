@@ -12,6 +12,7 @@ $course = get_post($course_id);
 $lessons = learndash_get_course_lessons_list($course_id);
 $parent_post = get_post_ancestors($quizId);
 $post_type = get_post_type($quizId);
+$is_quiz = $post_type == 'sfwd-quiz';
 ?>
 
 <style>
@@ -33,7 +34,7 @@ $post_type = get_post_type($quizId);
     <div class="sfwd-large-screen wysiwyg">
         <div class="content">
             <?
-            if ($post_type == 'sfwd-quiz') {
+            if ($is_quiz) {
             ?>
                 <div class="progress">
                     <div class="back-to-course">
@@ -62,7 +63,7 @@ $post_type = get_post_type($quizId);
             <?
             }
             ?>
-            <div class="sfwd-lessons">
+            <div class="sfwd-lessons <? echo !$is_quiz ? 'not-quiz' : ''; ?>">
                 <div class="sfwd-lessons__title">
                     <div class="sfwd-lessons__title__text"><?php the_title(); ?></div>
                 </div>
@@ -159,9 +160,15 @@ $post_type = get_post_type($quizId);
                     endif;
                     ?>
                 </div>
-                <div class="sfwd-lessons__footer">
-                    <hr class="sfwd-lessons__navigation__divider" />
-                </div>
+                <?
+                if ($is_quiz) {
+                ?>
+                    <div class="sfwd-lessons__footer">
+                        <hr class="sfwd-lessons__navigation__divider" />
+                    </div>
+                <?
+                }
+                ?>
             </div>
         </div>
     </div>
