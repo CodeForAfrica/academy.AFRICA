@@ -64,9 +64,15 @@ $is_quiz = $post_type == 'sfwd-quiz';
             }
             ?>
             <div class="sfwd-lessons <? echo !$is_quiz ? 'not-quiz' : ''; ?>">
-                <div class="sfwd-lessons__title">
-                    <div class="sfwd-lessons__title__text"><?php the_title(); ?></div>
-                </div>
+                <?
+                if ($is_quiz) {
+                ?>
+                    <div class="sfwd-lessons__title">
+                        <div class="sfwd-lessons__title__text"><?php the_title(); ?></div>
+                    </div>
+                <?
+                }
+                ?>
                 <div class="sfwd-lessons__content">
                     <?
                     if ($show_content) :
