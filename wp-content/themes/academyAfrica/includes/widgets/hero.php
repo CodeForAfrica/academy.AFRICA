@@ -121,7 +121,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                     <?
                     if (!is_user_logged_in()) {
                     ?>
-                        <button class="button cta large signup-button" onclick="openModal('register')">
+                        <button class="button cta large signup-button" onclick="register()">
                             <? echo $sign_up_label ?>
                         </button>
                     <?
@@ -154,6 +154,11 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
             <div class="mask-image">
                 <img alt="mask" class="mask" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.svg' ?>">
             </div>
+            <script>
+                function register(){
+                    window.location.href = "/academy-africa-login?action=register"
+                }
+            </script>
         </div>
 <?
     }
