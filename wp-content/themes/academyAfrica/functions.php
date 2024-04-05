@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.68');
+define('ACADEMY_AFRICA_VERSION', '1.1.69');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -411,6 +411,7 @@ function restrict_admin_access()
         wp_redirect(home_url());
         exit;
     }
+
 }
 
 add_action('admin_init', 'restrict_admin_access');
@@ -421,6 +422,8 @@ function hide_admin_bar()
         show_admin_bar(false);
     }
 }
+
+add_action('admin_init', 'hide_admin_bar');
 
 function check_password_reset_action(){
     if (isset($_POST['pass_reset'])) {
