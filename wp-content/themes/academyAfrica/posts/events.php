@@ -131,27 +131,8 @@ function custom_fields()
 ?>
     <div class="form-container">
         <script>
-            // console.log(<?php echo json_encode($custom) ?>);
+            console.log(<?php echo json_encode($custom) ?>);
         </script>
-
-        <div class="form-group">
-            <label for="country">Country</label>
-            <select value="<?php echo $country; ?>" name="country" id="country">
-                <option value=""></option>
-                <?php
-                require_once __DIR__ . '/../includes/utils/african_countries.php';
-                foreach ($african_countries as $name => $flag) {
-                    $label = $name;
-                    $selected = $label === $country ? 'selected="selected"' : null;
-                ?>
-                    <option <? echo $selected ?> value="<?php echo $label ?>">
-                        <?php echo $label ?>
-                    </option>
-                <?php
-                }
-                ?>
-            </select>
-        </div>
 
         <div class="form-group">
             <label for="date">Date</label>
@@ -204,7 +185,7 @@ function admin_init()
 function save_details()
 {
     global $post;
-    update_post_meta($post->ID, "country", $_POST["country"]);
+    // update_post_meta($post->ID, "country", $_POST["country"]);
     update_post_meta($post->ID, "is_virtual", $_POST["is_virtual"]);
     update_post_meta($post->ID, "timezone", $_POST["timezone"]);
     update_post_meta($post->ID, "date", $_POST["date"]);

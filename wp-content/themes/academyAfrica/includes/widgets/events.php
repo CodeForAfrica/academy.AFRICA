@@ -98,11 +98,13 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
 
         if ($query->have_posts()) {
             include dirname(__FILE__) . '/' . '../utils/african_countries.php';
+            include dirname(__FILE__) . '/' . '../utils/countries.php';
             while ($query->have_posts()) {
                 $query->the_post();
                 $user_data = get_userdata(get_post_meta(get_the_ID(), 'speaker', true));
                 $raw_date = get_post_meta(get_the_ID(), 'date', true);
                 $date = date_format(date_create($raw_date), 'd/m/Y');
+                $countries = get_post_meta(get_the_ID(), 'countries', true);
                 $post_data = array(
                     'title' => get_the_title(),
                     'speaker' => $user_data->display_name,
@@ -111,9 +113,10 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     'date' => $date,
                     'time' => str_replace("Africa/", "", get_post_meta(get_the_ID(), 'time', true) . ' ' . get_post_meta(get_the_ID(), 'timezone', true)),
                     'image' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
-                    'country_code' => $african_countries[get_post_meta(get_the_ID(), 'country', true)],
+                    'country_code' => isset($countries) ? country_flag_emoji($countries[0]): country_flag_emoji("ZA"),
                     'language' => get_post_meta(get_the_ID(), 'language', true),
                     'post_url' => get_permalink(get_the_ID()),
+                    'countries' => get_post_meta(get_the_ID(), 'countries', true)
                 );
 
                 $result[] = $post_data;
@@ -313,7 +316,9 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $filter_options = $this->get_filter_by();
 ?>
         <main class="events">
-
+<script>
+    console.log(<? echo json_encode($previous_events[0]) ?>)
+</script>
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <p class="filter-by">
