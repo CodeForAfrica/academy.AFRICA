@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.69');
+define('ACADEMY_AFRICA_VERSION', '1.1.70');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -423,7 +423,7 @@ function hide_admin_bar()
     }
 }
 
-add_action('admin_init', 'hide_admin_bar');
+add_action('after_setup_theme', 'hide_admin_bar');
 
 function check_password_reset_action(){
     if (isset($_POST['pass_reset'])) {
