@@ -1132,7 +1132,6 @@
   width: 60px;
   background: #ED1C24;
   margin-top: 32px;
-  position: absolute;
 }
 @media (min-width: 390px) {
   .cfa-title::after {

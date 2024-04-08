@@ -114,6 +114,10 @@
   list-style: disc;
 }
 
+.hide {
+  display: none !important;
+}
+
 .single-page-event {
   max-width: 1920px;
   padding: 60px 40px;
