@@ -43,7 +43,7 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
                             <path d="M7 13L1 6.93015L6.86175 1" stroke="#1F1F1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <div class="back-to-course__text">Back to Course Carriculum</div>
+                        <div class="back-to-course__text">Back to Course Curriculum</div>
                     </a>
                 </div>
                 <div class="course-details">
