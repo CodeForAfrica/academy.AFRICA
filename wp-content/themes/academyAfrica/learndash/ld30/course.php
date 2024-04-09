@@ -149,25 +149,30 @@ if ($course_status == "Completed") {
                 <div class="title">
                     <p class="cfa-introduction-title">The Instructor</p>
                 </div>
-                <div class="name">
-                    <p>
-                        <?php
-                        $author = get_post_field('post_author', $course_id);
-                        $name = get_the_author_meta('display_name', $author);
-                        $avatar = get_avatar_url($author);
-                        $avatar_url = $avatar ? $avatar : get_stylesheet_directory_uri() . ('/assets/images/default_user.svg');
-                        // echo $name;
-                        coauthors_links();
-                        ?>
-                    </p>
-                </div>
-                <div class="avatar">
+                <div class="authors">
                     <?php
-                    echo '<img src="' . $avatar_url . '" alt="">';
+                    $authors = get_coauthors();
+                    foreach ($authors as $author) {
+                        $first_name = get_the_author_meta('first_name', $author->ID);
+                        $last_name = get_the_author_meta('last_name', $author->ID);
+                        $name = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $author->display_name;
+                        $avatar_url = get_avatar_url($author->ID);
+                        $description = $author->description;
                     ?>
-                </div>
-                <div class="description">
-                    <?php echo get_the_author_meta('description', $author); ?>
+                        <div class="author">
+                            <div class="name">
+                                <p><?php echo $name; ?></p>
+                            </div>
+                            <div class="avatar">
+                                <img src="<?php echo $avatar_url; ?>" alt="">
+                            </div>
+                            <div class="description">
+                                <?php echo $description; ?>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <?php
