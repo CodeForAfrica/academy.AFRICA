@@ -58,8 +58,6 @@ $speaker_title = "The Speaker";
                     <p class="language">
                         <? echo $language ?>
                     </p>
-
-
                 </div>
                 <div class="share">
                     <div style="margin-bottom: 20px">
