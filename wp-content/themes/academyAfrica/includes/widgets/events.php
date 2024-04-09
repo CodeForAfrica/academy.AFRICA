@@ -317,7 +317,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
 ?>
         <main class="events">
 <script>
-    console.log(<? echo json_encode($previous_events[0]) ?>)
+    // console.log(<? echo json_encode($previous_events[0]) ?>)
 </script>
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">

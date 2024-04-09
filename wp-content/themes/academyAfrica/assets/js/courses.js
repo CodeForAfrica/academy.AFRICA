@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // get button with name 'reShowQuestion' and class 'wpProQuiz_button_reShowQuestion'
     const reShowQuestion = document.querySelector("button[name='reShowQuestion'].wpProQuiz_button_reShowQuestion");
     if(reShowQuestion){
-       console.log("reShowQuestion button found");
+    //    console.log("reShowQuestion button found");
     //    TODO: update inner text to View Answers
     }
  });

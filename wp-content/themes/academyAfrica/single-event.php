@@ -35,7 +35,7 @@ $speaker_title = "The Speaker";
             $resources = get_field('resources')['url'];
             ?>
             <script>
-                console.log(<? echo json_encode($speakers) ?>)
+                // console.log(<? echo json_encode($speakers) ?>)
             </script>
             <h1 class="cfa-title">
                 <? echo $post_title ?>

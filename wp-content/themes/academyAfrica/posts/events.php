@@ -131,7 +131,7 @@ function custom_fields()
 ?>
     <div class="form-container">
         <script>
-            console.log(<?php echo json_encode($custom) ?>);
+            // console.log(<?php echo json_encode($custom) ?>);
         </script>
 
         <div class="form-group">
