@@ -41,7 +41,7 @@
     }
 
     .sfwd-large-screen {
-        display: none;
+        display: block;
 
         @include media-breakpoint-up(desktop) {
             display: block;

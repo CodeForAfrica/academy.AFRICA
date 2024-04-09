@@ -27,14 +27,14 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
 
 
 <div class="sfwd-container wysiwyg">
-    <div class='sfwd-small-screen'>
+    <!-- <div class='sfwd-small-screen'>
         <div class="title">
             <div class="cfa-title"><?php the_title(); ?></div>
         </div>
         <div class='helper'>
             <p> For best experience, please use a laptop or larger screen </p>
         </div>
-    </div>
+    </div> -->
     <div class="sfwd-large-screen">
         <div class="content">
             <div class="progress">

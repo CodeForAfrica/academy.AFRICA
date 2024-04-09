@@ -146,7 +146,7 @@
   }
 }
 .sfwd-container .sfwd-large-screen {
-  display: none;
+  display: block;
 }
 @media (min-width: 1152px) {
   .sfwd-container .sfwd-large-screen {

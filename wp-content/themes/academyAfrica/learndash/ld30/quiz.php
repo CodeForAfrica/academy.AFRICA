@@ -22,7 +22,7 @@ $is_quiz = $post_type == 'sfwd-quiz';
 </style>
 
 <div class="sfwd-container quiz-page wysiwyg">
-    <div class='sfwd-small-screen'>
+    <!-- <div class='sfwd-small-screen'>
         <div class="title">
             <div class="cfa-title"><?php the_title(); ?></div>
             <h1>Quiz</h1>
@@ -30,7 +30,7 @@ $is_quiz = $post_type == 'sfwd-quiz';
         <div class='helper'>
             <p> For best experience, please use a laptop or larger screen </p>
         </div>
-    </div>
+    </div> -->
     <div class="sfwd-large-screen wysiwyg">
         <div class="content">
             <?
