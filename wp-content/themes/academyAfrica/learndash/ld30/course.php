@@ -139,12 +139,18 @@ if ($course_status == "Completed") {
                     <?php echo do_shortcode($course_intro); ?>
                 </div>
             </div>
-            <div class="carriculum">
-                <div class="title">
-                    <p class="cfa-introduction-title">Course Curriculum</p>
+            <?
+            if (count($lesson_topics) > 1) {
+            ?>
+                <div class="carriculum">
+                    <div class="title">
+                        <p class="cfa-introduction-title">Course Curriculum</p>
+                    </div>
+                    <?php echo do_shortcode('[course_content]'); ?>
                 </div>
-                <?php echo do_shortcode('[course_content]'); ?>
-            </div>
+            <?
+            }
+            ?>
             <div class="instructor">
                 <div class="title">
                     <p class="cfa-introduction-title">The Instructor</p>
