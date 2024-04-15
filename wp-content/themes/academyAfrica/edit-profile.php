@@ -2,53 +2,53 @@
 /*
 Template Name: Profile
 */
-if($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['action'] === 'profile')) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['action'] === 'profile')) {
     $user_id = get_current_user_id();
-    if(isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0) {
+    if (isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0) {
         $upload_dir = wp_upload_dir();
         $target_dir = $upload_dir['path'];
         $uploads_url = $upload_dir['url'];
         $file_name = $_FILES["avatar"]["name"];
-        $target_file = $target_dir.'/'.$file_name;
+        $target_file = $target_dir . '/' . $file_name;
         $moved = move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file);
-        if($moved) {
-            $new_avatar_url = $uploads_url.'/'.$file_name;
+        if ($moved) {
+            $new_avatar_url = $uploads_url . '/' . $file_name;
             update_user_meta($user_id, 'show_avatars', 1);
             add_user_meta($user_id, 'wp_user_avatar', $new_avatar_url);
             update_user_meta($user_id, 'avatar', $new_avatar_url);
         }
     }
     $keys = array("first_name", "last_name", "user_email", "city", "country", "position", "company", "facebook", "linked_in", "twitter", "description", "slack", "prefix", "phone");
-    foreach($keys as $key) {
-        if(isset($_POST[$key])) {
+    foreach ($keys as $key) {
+        if (isset($_POST[$key])) {
             update_user_meta($user_id, $key, $_POST[$key]);
-            if($key === "user_email") {
+            if ($key === "user_email") {
                 $user_data = get_userdata($user_id);
                 $user_data->user_email = $_POST[$key];
                 wp_update_user($user_data);
             }
         }
     }
-    if(isset($_POST["prefix"]) && isset($_POST["phone"])) {
-        $new_phone = $_POST["prefix"].$_POST["phone"];
+    if (isset($_POST["prefix"]) && isset($_POST["phone"])) {
+        $new_phone = $_POST["prefix"] . $_POST["phone"];
         update_user_meta($user_id, "phone_number", $new_phone);
     }
-    if(isset($_POST["networks"])) {
+    if (isset($_POST["networks"])) {
         $networks = join(",", $_POST["networks"]);
         update_user_meta($user_id, "networks", $networks);
     }
-    if(isset($_POST["updates"])) {
+    if (isset($_POST["updates"])) {
         $updates = join(",", $_POST["updates"]);
         update_user_meta($user_id, "updates", $updates);
     }
 }
 get_header();
-if(is_user_logged_in()) {
+if (is_user_logged_in()) {
     $current_user = wp_get_current_user();
     $page_title = "Profile Settings";
     $avatar_label = "Change your profile image";
     $user_id = get_current_user_id();
-    $avatar_url = get_avatar_url($user_id, array('size' => 100)).'?nocache='.time();
+    $avatar_url = get_avatar_url($user_id, array('size' => 100)) . '?nocache=' . time();
     $upload_text = "upload";
     $avatar_label = "Change your profile image";
     $view_my_courses = "View your courses";
@@ -91,7 +91,7 @@ if(is_user_logged_in()) {
     $phone = get_user_meta($user_id, 'phone', true);
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));
     $user_updates = explode(",", get_user_meta($user_id, 'updates', true));
-    ?>
+?>
     <main class="profile">
         <h4 class="cfa-title">
             <? echo $page_title ?>
@@ -101,18 +101,13 @@ if(is_user_logged_in()) {
                 <? echo $avatar_label ?>
             </label>
             <div class="avatar">
-                <img height="100px" width="100px" style="height: 100px;" src="<? echo $avatar_url ?>"
-                    alt="<?php echo esc_attr($current_user->user_firstname); ?>" id="avatar_preview">
+                <img height="100px" width="100px" style="height: 100px;" src="<? echo $avatar_url ?>" alt="<?php echo esc_attr($current_user->user_firstname); ?>" id="avatar_preview">
                 <button type="button" onclick="document.getElementById('avatar').click()" class="button primary">
                     <input onchange="displayImage(this)" style="display: none;" type="file" name="avatar" id="avatar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path
-                            d="M14 10V12.6667C14 13.0203 13.8595 13.3594 13.6095 13.6095C13.3594 13.8595 13.0203 14 12.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V10"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M11.3346 5.33333L8.0013 2L4.66797 5.33333" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M8 2V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                        <path d="M14 10V12.6667C14 13.0203 13.8595 13.3594 13.6095 13.6095C13.3594 13.8595 13.0203 14 12.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.3346 5.33333L8.0013 2L4.66797 5.33333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8 2V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <? echo $upload_text ?>
                 </button>
@@ -151,19 +146,20 @@ if(is_user_logged_in()) {
                     </label>
                     <select style="width:96px" class="prefix" value="<? echo $prefix ?>" name="prefix" id="prefix">
                         <?php
-                        include_once __DIR__.'/includes/utils/countries.php';
-                        function sort_by_dial_code($a, $b) {
+                        include_once __DIR__ . '/includes/utils/countries.php';
+                        function sort_by_dial_code($a, $b)
+                        {
                             return strcmp($a["dial_code"], $b["dial_code"]);
                         }
                         usort($all_countries, 'sort_by_dial_code');
-                        foreach($all_countries as $country) {
-                            $label = $country['flag'].' '.$country['dial_code'];
+                        foreach ($all_countries as $country) {
+                            $label = $country['flag'] . ' ' . $country['dial_code'];
                             $selected = $prefix === $country['dial_code'] ? 'selected="selected"' : null;
-                            ?>
+                        ?>
                             <option <? echo $selected ?> value="<?php echo $country['dial_code'] ?>">
                                 <?php echo $label ?>
                             </option>
-                            <?php
+                        <?php
                         }
                         ?>
                     </select>
@@ -224,8 +220,12 @@ if(is_user_logged_in()) {
                     <label for="description">
                         <? echo $bio_label ?>
                     </label>
-                    <textarea name="description" id="description" rows="10"
-                        value="<? echo $description ?>"><? echo $description ?></textarea>
+                    <?
+                    $content = $description;
+                    $editor_id = 'description';
+                    wp_editor($content, $editor_id);
+                    ?>
+                    <!-- <textarea name="description" id="description" rows="10" value="<? echo $description ?>"><? echo $description ?></textarea> -->
                 </div>
             </div>
 
@@ -274,15 +274,15 @@ if(is_user_logged_in()) {
                 'posts_per_page' => -1,
             );
             $query = new WP_Query($args);
-            if($query->have_posts()) {
-                while($query->have_posts()) {
+            if ($query->have_posts()) {
+                while ($query->have_posts()) {
                     $query->the_post();
                     $network_id = get_the_ID();
                     $network_title = get_the_title();
                     $image_url = get_the_post_thumbnail_url($network_id, array(100, 100));
                     $description = get_the_excerpt($network_id);
                     $join = get_post_meta($network_id, 'join', true)
-                        ?>
+            ?>
                     <div class="network">
                         <img class="img" src="<? echo $image_url ?>" alt="<? echo $network_title ?>">
                         <div class="content">
@@ -305,10 +305,9 @@ if(is_user_logged_in()) {
                                     Join
                                 </button>
                             </a>
-
                         </div>
                     </div>
-                    <?
+            <?
                 }
                 wp_reset_query();
             }
@@ -316,13 +315,9 @@ if(is_user_logged_in()) {
             <div class="submit-area">
                 <button type="submit" class="button primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                        <path
-                            d="M12.6667 14.5H3.33333C2.97971 14.5 2.64057 14.3595 2.39052 14.1095C2.14048 13.8594 2 13.5203 2 13.1667V3.83333C2 3.47971 2.14048 3.14057 2.39052 2.89052C2.64057 2.64048 2.97971 2.5 3.33333 2.5H10.6667L14 5.83333V13.1667C14 13.5203 13.8595 13.8594 13.6095 14.1095C13.3594 14.3595 13.0203 14.5 12.6667 14.5Z"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M11.3346 14.4993V9.16602H4.66797V14.4993" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M4.66797 2.5V5.83333H10.0013" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                        <path d="M12.6667 14.5H3.33333C2.97971 14.5 2.64057 14.3595 2.39052 14.1095C2.14048 13.8594 2 13.5203 2 13.1667V3.83333C2 3.47971 2.14048 3.14057 2.39052 2.89052C2.64057 2.64048 2.97971 2.5 3.33333 2.5H10.6667L14 5.83333V13.1667C14 13.5203 13.8595 13.8594 13.6095 14.1095C13.3594 14.3595 13.0203 14.5 12.6667 14.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.3346 14.4993V9.16602H4.66797V14.4993" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M4.66797 2.5V5.83333H10.0013" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <? echo $save_changes_label ?>
                 </button>
@@ -339,7 +334,7 @@ if(is_user_logged_in()) {
                 if (file) {
                     const reader = new FileReader();
 
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
                         preview.src = e.target.result;
                     };
 
@@ -348,7 +343,7 @@ if(is_user_logged_in()) {
             }
         </script>
     </main>
-    <?php
+<?php
 } else {
     echo 'Please log in to edit your profile.';
 }

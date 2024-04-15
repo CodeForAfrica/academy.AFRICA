@@ -163,7 +163,7 @@ if ($course_status == "Completed") {
                         $last_name = get_the_author_meta('last_name', $author->ID);
                         $name = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $author->display_name;
                         $avatar_url = get_avatar_url($author->ID);
-                        $description = $author->description;
+                        $description = wpautop($author->description);
                     ?>
                         <div class="author">
                             <div class="name">
@@ -172,7 +172,7 @@ if ($course_status == "Completed") {
                             <div class="avatar">
                                 <img src="<?php echo $avatar_url; ?>" alt="">
                             </div>
-                            <div class="description">
+                            <div class="description wysiwyg">
                                 <?php echo $description; ?>
                             </div>
                         </div>

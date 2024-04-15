@@ -69,32 +69,38 @@
   font-family: Open Sans;
 }
 .wysiwyg h1 {
-  font-size: 36px; /* Heading 1 */
+  font-size: 36px;
+  /* Heading 1 */
   margin: 16px 0;
   font-weight: 900;
 }
 .wysiwyg h2 {
-  font-size: 28px; /* Heading 2 */
+  font-size: 28px;
+  /* Heading 2 */
   margin: 14px 0;
   font-weight: 900;
 }
 .wysiwyg h3 {
-  font-size: 24px; /* Heading 3 */
+  font-size: 24px;
+  /* Heading 3 */
   margin: 12px 0;
   font-weight: 900;
 }
 .wysiwyg h4 {
-  font-size: 18px; /* Heading 4 */
+  font-size: 18px;
+  /* Heading 4 */
   margin: 10px 0;
   font-weight: 900;
 }
 .wysiwyg h5 {
-  font-size: 16px; /* Heading 5 */
+  font-size: 16px;
+  /* Heading 5 */
   margin: 8px 0;
   font-weight: 900;
 }
 .wysiwyg h6 {
-  font-size: 14px; /* Heading 6 */
+  font-size: 14px;
+  /* Heading 6 */
   margin: 6px 0;
   font-weight: 900;
 }
@@ -112,6 +118,9 @@
 }
 .wysiwyg ul {
   list-style: disc;
+}
+.wysiwyg a {
+  color: #0C1A81;
 }
 
 .hero {

@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.78');
+define('ACADEMY_AFRICA_VERSION', '1.1.79');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -497,3 +497,12 @@ function add_lost_password_link()
 {
     return '<a class="remember-me" href="/login?action=lostpassword">Lost Password?</a>';
 }
+
+function enqueue_my_scripts()
+{
+    if (is_page('profile')) { // Replace 'my-page' with the slug of your page
+        wp_enqueue_script('tiny_mce');
+        wp_enqueue_script('jquery');
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
