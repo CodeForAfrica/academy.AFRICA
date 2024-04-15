@@ -113,7 +113,7 @@ if ($course_status == "Completed") {
                 </div>
             </div>
             <?
-            if ($is_enrolled) {
+            if ($is_enrolled && count($lesson_topics) > 1) {
             ?>
                 <div class='progress'>
                     <?php echo do_shortcode('[learndash_course_progress]'); ?>
