@@ -208,7 +208,8 @@
   background: var(--shades-white, #fff);
   width: 100%;
 }
-.profile .user-form .bio button {
+.profile .user-form .bio button,
+.profile .user-form .bio input[type=button] {
   color: #000000 !important;
   background-color: #ffffff !important;
 }

@@ -97,7 +97,8 @@
         width: 100%;
       }
 
-      button {
+      button,
+      input[type="button"] {
         color: #000000 !important;
         background-color: #ffffff !important;
       }
