@@ -3,9 +3,11 @@
 .profile {
   max-width: 1920px;
   padding: 60px 40px;
+
   * {
     font-family: Open Sans;
   }
+
   .cfa-title {
     text-align: left;
     font-family: Lora;
@@ -14,27 +16,33 @@
     font-weight: 700;
     line-height: 48px;
   }
+
   form {
     margin-top: 40px;
   }
+
   .avatar {
     width: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 16px;
+
     img {
       border-radius: 50%;
     }
   }
+
   .avatar-label {
     color: var(--shades-black, #000);
     font-family: Open Sans;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 28px; /* 155.556% */
+    line-height: 28px;
+    /* 155.556% */
   }
+
   .my-courses {
     margin: 40px 0;
 
@@ -47,6 +55,7 @@
       line-height: 28px;
     }
   }
+
   .form-description {
     margin: 0 0 40px;
     color: var(--shades-black, #000);
@@ -56,16 +65,20 @@
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 28px; /* 155.556% */
+    line-height: 28px;
+    /* 155.556% */
   }
+
   .user-form {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 24px;
+
     .bio {
       margin: 40px 0;
       flex: 1;
+
       label {
         color: var(--shades-black, #000);
 
@@ -74,20 +87,29 @@
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
-        line-height: 28px; /* 155.556% */
+        line-height: 28px;
+        /* 155.556% */
       }
+
       textarea {
         border: 1px solid var(--neutral-300, #b7bac8);
         background: var(--shades-white, #fff);
         width: 100%;
       }
+
+      button {
+        color: #000000 !important;
+        background-color: #ffffff !important;
+      }
     }
+
     .input {
       display: flex;
       align-items: center;
       gap: 8px;
 
       width: calc(50% - 24px);
+
       label {
         min-width: 120px;
         color: var(--shades-black, #000);
@@ -97,19 +119,23 @@
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
-        line-height: 28px; /* 155.556% */
+        line-height: 28px;
+        /* 155.556% */
       }
+
       input[type="text"],
       input[type="tel"],
       input[type="email"] {
         border: 1px solid var(--neutral-300, #b7bac8);
         background: var(--shades-white, #fff);
         height: 44px;
+
         &:disabled {
           background: var(--neutral-50, #f7f9fd);
         }
       }
     }
+
     .prefix {
       border: none;
       box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
@@ -121,9 +147,11 @@
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
-      line-height: 26px; /* 162.5% */
+      line-height: 26px;
+      /* 162.5% */
     }
   }
+
   .mandatory {
     color: var(--neutral-800, #4b5071);
 
@@ -132,10 +160,13 @@
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 28px; /* 155.556% */
+    line-height: 28px;
+    /* 155.556% */
   }
+
   .updates {
     margin: 80px 0;
+
     .receive-updates {
       margin: 0;
       color: var(--shades-black, #000);
@@ -145,17 +176,21 @@
       font-size: 18px;
       font-style: normal;
       font-weight: 400;
-      line-height: 28px; /* 155.556% */
+      line-height: 28px;
+      /* 155.556% */
     }
+
     .checkbox-group {
       margin-top: 32px;
     }
   }
+
   .submit-area {
     display: flex;
     justify-content: flex-end;
     margin-top: 40px;
   }
+
   .setting-title {
     color: var(--primary-700, #0c1a81);
 
@@ -163,8 +198,10 @@
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
-    line-height: 48px; /* 150% */
+    line-height: 48px;
+    /* 150% */
   }
+
   .setting-description {
     color: var(--shades-black, #000);
     margin: 40px 0;
@@ -173,33 +210,41 @@
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 28px; /* 155.556% */
+    line-height: 28px;
+    /* 155.556% */
   }
+
   .network {
     display: flex;
     padding: 24px 0;
     gap: 15px;
     margin-bottom: 40px;
+
     .img {
       height: 100px;
     }
+
     .button {
       width: max-content;
     }
+
     .content {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 16px;
+
       .title {
         color: var(--shades-black, #000);
         font-family: Open Sans;
         font-size: 23px;
         font-style: normal;
         font-weight: 700;
-        line-height: 28px; /* 121.739% */
+        line-height: 28px;
+        /* 121.739% */
         letter-spacing: -0.46px;
       }
+
       .description {
         color: var(--shades-black, #000);
 
@@ -208,7 +253,8 @@
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
-        line-height: 28px; /* 155.556% */
+        line-height: 28px;
+        /* 155.556% */
       }
     }
   }
@@ -219,6 +265,7 @@
     padding: 60px 148px;
   }
 }
+
 @include media-breakpoint-up(xlarge) {
   .profile {
     padding: 60px 388px;
@@ -233,12 +280,15 @@
         width: 100%;
       }
     }
+
     .network {
       display: block;
+
       .content {
         margin-top: 40px;
       }
     }
+
     .submit-area {
       display: flex;
       justify-content: center;

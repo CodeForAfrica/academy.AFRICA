@@ -122,10 +122,6 @@
 .wysiwyg a {
   color: #0C1A81;
 }
-.wysiwyg .bio button {
-  color: #000000;
-  background-color: #ffffff;
-}
 
 .profile {
   max-width: 1920px;
@@ -161,7 +157,8 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
 }
 .profile .my-courses {
   margin: 40px 0;
@@ -183,7 +180,8 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
 }
 .profile .user-form {
   display: flex;
@@ -202,12 +200,17 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
 }
 .profile .user-form .bio textarea {
   border: 1px solid var(--neutral-300, #b7bac8);
   background: var(--shades-white, #fff);
   width: 100%;
+}
+.profile .user-form .bio button {
+  color: #000000 !important;
+  background-color: #ffffff !important;
 }
 .profile .user-form .input {
   display: flex;
@@ -223,7 +226,8 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
 }
 .profile .user-form .input input[type=text],
 .profile .user-form .input input[type=tel],
@@ -248,7 +252,8 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 26px; /* 162.5% */
+  line-height: 26px;
+  /* 162.5% */
 }
 .profile .mandatory {
   color: var(--neutral-800, #4b5071);
@@ -257,7 +262,8 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
 }
 .profile .updates {
   margin: 80px 0;
@@ -270,7 +276,8 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
 }
 .profile .updates .checkbox-group {
   margin-top: 32px;
@@ -286,7 +293,8 @@
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
-  line-height: 48px; /* 150% */
+  line-height: 48px;
+  /* 150% */
 }
 .profile .setting-description {
   color: var(--shades-black, #000);
@@ -296,7 +304,8 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
 }
 .profile .network {
   display: flex;
@@ -322,7 +331,8 @@
   font-size: 23px;
   font-style: normal;
   font-weight: 700;
-  line-height: 28px; /* 121.739% */
+  line-height: 28px;
+  /* 121.739% */
   letter-spacing: -0.46px;
 }
 .profile .network .content .description {
@@ -332,7 +342,8 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
 }
 
 @media (min-width: 1440px) {
