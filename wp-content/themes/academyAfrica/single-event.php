@@ -49,15 +49,24 @@ $speaker_title = "The Speaker";
                     <p class="speaker">
                         <? echo $speaker->display_name ?>
                     </p>
-                    <p class="date">
+                    <div class="with-icons">
+                    <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=calendar, Size=16, Color=Black.svg" alt="">
+                    <p style="margin: 0" class="date">
                         <? echo $date ?>
                     </p>
-                    <p class="time">
+                    </div>
+                    <div class="with-icons">
+                    <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=clock, Size=16, Color=Black.svg" alt="">
+                    <p style="margin: 0" class="time">
                         <? echo $time ?>
                     </p>
-                    <p class="language">
+                    </div>
+                    <div class="with-icons">
+                    <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=world, Size=16, Color=Black.svg" alt="">
+                    <p style="margin: 0" class="language">
                         <? echo $language ?>
                     </p>
+                    </div>
                 </div>
                 <div class="share">
                     <div style="margin-bottom: 20px">

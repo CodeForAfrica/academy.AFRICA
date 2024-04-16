@@ -135,7 +135,6 @@
   .single-page-event {
     .cfa-title {
       color: var(--primary-700, #0c1a81);
-      font-family: Ibarra Real Nova;
       font-size: 48px;
       font-style: normal;
       font-weight: 700;
@@ -152,5 +151,13 @@
 @include media-breakpoint-up(xlarge) {
   .single-page-event {
     padding: 60px 388px;
+  }
+}
+.with-icons {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 20px;
+  .date, .time, .language {
+    font-size: 14px !important;
+    font-weight: 600;
   }
 }

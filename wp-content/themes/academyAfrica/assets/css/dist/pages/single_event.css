@@ -254,7 +254,6 @@
 @media (min-width: 768px) {
   .single-page-event .cfa-title {
     color: var(--primary-700, #0c1a81);
-    font-family: Ibarra Real Nova;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -270,6 +269,16 @@
   .single-page-event {
     padding: 60px 388px;
   }
+}
+.with-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.with-icons .date, .with-icons .time, .with-icons .language {
+  font-size: 14px !important;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=single_event.css.map */
