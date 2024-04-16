@@ -98,19 +98,7 @@ if ($course_status == "Completed") {
             }
             ?>
             <div class="share">
-                <div class="social-icons">
-                    <?
-                    if (!empty($social_media_links)) {
-                        foreach ($social_media_links as $item) {
-                            $link = esc_url($item['link']['url']);
-                            $type = esc_html($item['type']);
-                            $icon = get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
-                            $image = "<img class='icon-image' src='" . $icon . "' alt='" . $type . "' />";
-                            echo '<a style="color: #000" href="' . $link . '" class="icon">' . $image . '</a>';
-                        }
-                    }
-                    ?>
-                </div>
+            <?php get_template_part('template-parts/social_share', 'template'); ?>
             </div>
             <?
             if ($is_enrolled && count($lesson_topics) > 1) {

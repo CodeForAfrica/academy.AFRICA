@@ -41,7 +41,7 @@ $speaker_title = "The Speaker";
                 <? echo $post_title ?>
             </h1>
             <div class="image-container">
-                <img width="100%" height="200px" class="featured-image" src="<? echo $featured_image_url ?>"
+                <img width="100%" class="featured-image" src="<? echo $featured_image_url ?>"
                     alt="<? echo $featured_image_url ?>">
             </div>
             <div class="details">
