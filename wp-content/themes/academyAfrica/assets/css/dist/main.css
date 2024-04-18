@@ -1522,6 +1522,26 @@ body .vc_tta-panels {
   border-color: #0C1A81 !important;
   border-radius: 0 !important;
 }
+body .vc_tta-panels .vc_tta-panel .vc_tta-panel-heading {
+  background-color: #FFFFFF !important;
+  color: #0C1A81 !important;
+}
+body .vc_tta-panels .vc_tta-panel .vc_tta-panel-heading .vc_tta-panel-title {
+  color: #0C1A81 !important;
+}
+body .vc_tta-panels .vc_tta-panel .vc_tta-panel-heading .vc_tta-panel-title a {
+  color: #0C1A81 !important;
+}
+body .vc_tta-panels .vc_tta-panel.vc_active .vc_tta-panel-heading {
+  background-color: #0C1A81 !important;
+  color: #FFFFFF !important;
+}
+body .vc_tta-panels .vc_tta-panel.vc_active .vc_tta-panel-heading .vc_tta-panel-title {
+  color: #FFFFFF !important;
+}
+body .vc_tta-panels .vc_tta-panel.vc_active .vc_tta-panel-heading .vc_tta-panel-title a {
+  color: #FFFFFF !important;
+}
 
 .vc_tta-tab > a {
   border-color: #0C1A81 !important;

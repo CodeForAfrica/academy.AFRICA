@@ -4,6 +4,36 @@
 body .vc_tta-panels {
     border-color: $color-primary-700 !important;
     border-radius: 0 !important;
+
+    .vc_tta-panel {
+        .vc_tta-panel-heading {
+            background-color: $color-shades-white !important;
+            color: $color-primary-700 !important;
+
+            .vc_tta-panel-title {
+                color: $color-primary-700 !important;
+
+                a {
+                    color: $color-primary-700 !important;
+                }
+            }
+        }
+
+        &.vc_active {
+            .vc_tta-panel-heading {
+                background-color: $color-primary-700 !important;
+                color: $color-shades-white !important;
+
+                .vc_tta-panel-title {
+                    color: $color-shades-white !important;
+
+                    a {
+                        color: $color-shades-white !important;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .vc_tta-tab>a {

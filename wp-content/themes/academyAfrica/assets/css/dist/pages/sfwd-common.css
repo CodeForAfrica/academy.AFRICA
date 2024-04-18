@@ -169,9 +169,14 @@
 .sfwd-container .sfwd-large-screen .content .progress {
   width: 340px;
   padding: 100px 60px;
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
+  display: none;
+}
+@media (min-width: 1152px) {
+  .sfwd-container .sfwd-large-screen .content .progress {
+    display: flex;
+  }
 }
 .sfwd-container .sfwd-large-screen .content .progress .back-to-course .link {
   display: flex;
@@ -318,11 +323,16 @@
   flex-direction: column;
   gap: 24px;
   align-items: flex-start;
-  width: 812px;
+  width: 100%;
 }
 .sfwd-container .sfwd-large-screen .content .sfwd-lessons.not-quiz {
   width: 100% !important;
   padding: 0;
+}
+@media (min-width: 1152px) {
+  .sfwd-container .sfwd-large-screen .content .sfwd-lessons {
+    width: 812px;
+  }
 }
 @media (min-width: 1440px) {
   .sfwd-container .sfwd-large-screen .content .sfwd-lessons {
