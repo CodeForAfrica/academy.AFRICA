@@ -116,6 +116,12 @@ $has_assignments = learndash_lesson_hasassignments($topic);
                         echo "</div>";
                     }
                     ?>
+                    <script>
+                        document.querySelector('.sfwd-mark-complete').addEventListener('submit', function(e) {
+                            var url = e.target.action.split('#')[0];
+                            e.target.action = url;
+                        });
+                    </script>
                 </div>
             </div>
         </div>
