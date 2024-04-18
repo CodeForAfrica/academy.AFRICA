@@ -296,7 +296,14 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                         if (!empty($courses)) {
                             foreach ($courses as $course) {
                                 $course_title = get_the_title($course);
-                                $course_author = get_the_author_meta('display_name', $course->post_author);
+                                $authors = get_coauthors($course->ID);
+                                $first_name = get_the_author_meta('first_name', $authors[0]->ID);
+                                $last_name = get_the_author_meta('last_name', $authors[0]->ID);
+                                $course_author = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
+
+                                if (count($authors) > 1) {
+                                    $course_author .= ' + ' . (count($authors) - 1) . ' more';
+                                }
                                 $course_thumbnail = get_the_post_thumbnail_url($course, 'full');
                                 $course_link = get_permalink($course);
                                 $course_meta = get_post_meta($course, 'sfwd-courses', true);
