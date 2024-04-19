@@ -98,7 +98,7 @@ if ($course_status == "Completed") {
             }
             ?>
             <div class="share">
-            <?php get_template_part('template-parts/social_share', 'template'); ?>
+                <?php get_template_part('template-parts/social_share', 'template'); ?>
             </div>
             <?
             if ($is_enrolled && count($lesson_topics) > 1) {
@@ -128,7 +128,7 @@ if ($course_status == "Completed") {
                 </div>
             </div>
             <?
-            if (count($lesson_topics) > 1) {
+            if (count($lesson_topics) > 0) {
             ?>
                 <div class="carriculum">
                     <div class="title">
