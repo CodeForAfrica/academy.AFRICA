@@ -148,6 +148,21 @@ function filterPagination(){
                             }
                         });  
                     });
+
+                    const checkedInputs = filterList.querySelectorAll("input:checked");
+                    if(checkedInputs.length){
+                        filterToggle.style.display = "none";
+                        filterListItems.forEach(listItem => {
+                            if(listItem.classList.contains("hidden")){
+                                listItem.classList.replace("hidden", "show");
+                                filterToggle.innerHTML = "Show Less";
+                            } else {
+                                listItem.classList.replace("show", "hidden");
+                                filterToggle.innerHTML = "Show More";
+                            }
+                        }); 
+                        
+                    }
                 }
             }
         });
