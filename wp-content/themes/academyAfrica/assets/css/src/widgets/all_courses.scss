@@ -16,7 +16,7 @@
       .cfa-title {
         text-align: left;
         margin-bottom: 50px;
-        font-family: 'Ibarra Real Nova'; 
+        font-family: 'Ibarra Real Nova';
 
         &::after {
           left: unset;
@@ -290,7 +290,7 @@
 
         .course-list {
           gap: 40px 70px;
-          justify-content: space-between;
+          justify-content: start;
         }
 
         .divider {

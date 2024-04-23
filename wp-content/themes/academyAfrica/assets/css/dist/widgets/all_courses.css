@@ -368,7 +368,7 @@
   }
   .all-courses .courses-main .course-grid .course-list {
     gap: 40px 70px;
-    justify-content: space-between;
+    justify-content: start;
   }
   .all-courses .courses-main .course-grid .divider {
     display: block;
