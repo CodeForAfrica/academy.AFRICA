@@ -112,7 +112,7 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                 <div class="sfwd-lessons__footer">
                     <hr class="sfwd-lessons__navigation__divider" />
                     <?
-                    if (is_array($topics) && count($topics) > 0) {
+                    if (!is_array($topics)) {
                         $complete_button = learndash_mark_complete($lesson);
                         if ($complete_button) {
                             echo "<div class='sfwd-lessons__footer__complete'>";
