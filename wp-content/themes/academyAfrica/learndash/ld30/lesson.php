@@ -111,9 +111,24 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                 <? } ?>
                 <div class="sfwd-lessons__footer">
                     <hr class="sfwd-lessons__navigation__divider" />
-                    <script>
-                        console.log("TOPICS::", <?php echo json_encode($topics); ?>)
-                    </script>
+                    <?
+                    if (is_array($topics) && count($topics) > 0) {
+                        $complete_button = learndash_mark_complete($lesson);
+                        if ($complete_button) {
+                            echo "<div class='sfwd-lessons__footer__complete'>";
+                            echo $complete_button;
+                            echo "</div>";
+                        }
+                    ?>
+                        <script>
+                            document.querySelector('.sfwd-mark-complete').addEventListener('submit', function(e) {
+                                var url = e.target.action.split('#')[0];
+                                e.target.action = url;
+                            });
+                        </script>
+                    <?
+                    }
+                    ?>
                 </div>
             </div>
         </div>
