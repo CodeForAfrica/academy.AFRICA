@@ -111,6 +111,9 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                 <? } ?>
                 <div class="sfwd-lessons__footer">
                     <hr class="sfwd-lessons__navigation__divider" />
+                    <script>
+                        console.log("TOPICS::", <?php echo json_encode($topics); ?>)
+                    </script>
                 </div>
             </div>
         </div>
