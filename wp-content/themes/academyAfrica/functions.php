@@ -92,7 +92,6 @@ function home_page()
     return '/';
 }
 
-add_filter('login_redirect', 'home_page');
 add_filter('logout_redirect', 'home_page');
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
@@ -474,7 +473,8 @@ function activate_new_user_action()
 
 function custom_login_page()
 {
-    $login_page = home_url("/login");
+    $path_name=$_GET['redirect_url'];
+    $login_page = home_url("/login"."?redirect_url=".$path_name);
     $to_redirect = array("lostpassword");
     $reset_password_page = home_url('/login?action=lostpassword');
     $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];

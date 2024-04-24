@@ -71,6 +71,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                 <div class="menu">
                     <div class="items">
                         <?php
+                        $path_name=$_SERVER['REQUEST_URI'];
                         foreach ($menu_items as $menu_item) {
                             $class = 'item';
                             $class .= ' ' . $menu_item["class"];
@@ -89,7 +90,8 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                                 echo "</div>";
                                 echo "</div>";
                             } else {
-                                echo "<a class='" . $class . "' href='" . $menu_item['url'] . "'>" . $menu_item['title'] . "</a>";
+                                $query_param = $menu_item['class'] == "sign-in"? '?redirect_url='.$path_name : '';
+                                echo "<a class='" . $class . "' href='" . $menu_item['url'] .$query_param. "'>" . $menu_item['title'] . "</a>";
                             }
                         }
                         ?>

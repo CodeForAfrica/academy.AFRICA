@@ -34,7 +34,10 @@ if (isset($_POST['pass_reset'])) {
             <p id="login_error">
             </p>
         </div>
-        <?php wp_login_form(); ?>
+        <script>
+            console.log(<? echo json_encode($_GET['redirect_url'])?>)
+        </script>
+        <?php wp_login_form(array('value_redirect_to' => $_GET['redirect_url'],'redirect'=> $_GET['redirect_url'])); ?>
         <footer style="display: flex; justify-content: space-between;" class="modal-footers">
             <div>
                 <span>New to academy.AFRICA? </span><a class="remember-me" href="/login?action=register" style="margin-left: 4px; font-size: 16px;">Register
