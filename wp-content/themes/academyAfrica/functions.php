@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.1.93');
+define('ACADEMY_AFRICA_VERSION', '1.1.94');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -426,7 +426,9 @@ add_action('after_setup_theme', 'hide_admin_bar');
 function check_password_reset_action()
 {
     if (isset($_POST['pass_reset'])) {
-        echo "Password reset instructions have been sent to your email address.";
+        ?>
+        <div>Password reset instructions have been sent to your email address.</div>
+        <?
     }
 }
 

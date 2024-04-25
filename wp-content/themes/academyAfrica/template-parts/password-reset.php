@@ -15,10 +15,11 @@ function get_full_url($path = '', $search = '') {
 <div style="min-height: calc(100vh - 620px);" class="login">
 <?php
 if ( isset($_POST['pass_reset'])) {
-    echo 'Password reset instructions have been sent to your email.';
+    ?>
+    <div>Password reset instructions have been sent to your email.</div>
+    <?
 } else {
     ?>
-    <? echo wp_lostpassword_url()?>
     <div class="content" id="login-modal-content">
         <header>
             <h6 style="font-size: 20px;" class="cfa-title">Change your Password</h6>
