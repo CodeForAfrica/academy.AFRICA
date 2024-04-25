@@ -480,7 +480,7 @@ function custom_login_page()
     $to_redirect = array("lostpassword");
     $reset_password_page = home_url('/login?action=lostpassword');
     $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];
-    check_password_reset_action();
+    // check_password_reset_action();
     check_register_action();
     activate_new_user_action();
     if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'lostpassword') {
