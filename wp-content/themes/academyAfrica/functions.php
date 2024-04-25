@@ -475,7 +475,7 @@ function activate_new_user_action()
 
 function custom_login_page()
 {
-    $path_name=$_GET['redirect_url'];
+    $path_name=isset($_GET['redirect_url']) ? $_GET['redirect_url'] : "/";
     $login_page = home_url("/login"."?redirect_url=".$path_name);
     $to_redirect = array("lostpassword");
     $reset_password_page = home_url('/login?action=lostpassword');
