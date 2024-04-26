@@ -510,6 +510,7 @@ function enqueue_my_scripts()
 add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
 function fix_wpelogin( $url ) {
 	$url = add_query_arg( 'wpe-login', true, $url );
+    $url = add_query_arg( 'email_sent', true, $url );
 	return $url;
 }
 add_filter( 'lostpassword_url', 'fix_wpelogin' );

@@ -1,8 +1,8 @@
 
 <div class="login">
 <?
-if (isset($_POST['pass_reset'])) {
-        echo 'Password reset instructions have been sent to your email.';
+if (isset($_GET['email_sent'])) {
+        echo 'Password reset instructions have been sent to your email. Follow the link to reset.';
     } else {
 ?>
     <div class="content" id="login-modal-content">
