@@ -56,8 +56,9 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                 'compare' => 'IN',
             );
         }
-        $date_filter = $this->get_query_param('date')[0];
-        if (!empty($date_filters) && $date_filter !== "all") {
+        $date_param = $this->get_query_param('date');
+        $date_filter = !empty($date_param) ? $date_param[0] : null;
+        if (!empty($date_filter) && $date_filter !== "all") {
             $current_date = date('Y-m-d');
 
             $first_day_of_week = date('Y-m-d', strtotime('last monday', strtotime($current_date)));
@@ -98,7 +99,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
 
         if ($query->have_posts()) {
             include dirname(__FILE__) . '/' . '../utils/african_countries.php';
-            include dirname(__FILE__) . '/' . '../utils/countries.php';
+            include_once dirname(__FILE__) . '/' . '../utils/countries.php';
             while ($query->have_posts()) {
                 $query->the_post();
                 $user_data = get_userdata(get_post_meta(get_the_ID(), 'speaker', true));
