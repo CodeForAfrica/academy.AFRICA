@@ -81,7 +81,6 @@
     }
     .content {
       display: flex;
-      justify-content: space-between;
       gap: 20px;
       flex-wrap: wrap;
     }
@@ -181,7 +180,6 @@
     padding: 0 88px;
     .events-content {
       .content {
-        justify-content: space-between;
         .card {
           flex-basis: calc(33.333% - 20px);
         }
