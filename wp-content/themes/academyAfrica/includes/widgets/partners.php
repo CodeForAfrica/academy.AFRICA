@@ -151,7 +151,7 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
                             $name = $partner["name"];
                             $url = $partner["url"];
                             ?>
-                            <a href="<? echo $url ?>" class="partner-link">
+                            <a href="<? echo $url ?>" target="_blank" class="partner-link">
                                 <img src="<? echo $icon ?>" alt="<? echo $name ?>" class="partner" />
                                 <!-- <div class="partner" style="background: url(<? echo $icon ?>); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: lightgray;"></div> -->
                             </a>
@@ -174,7 +174,7 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
                             $name = $partner["name"];
                             $url = $partner["url"];
                             ?>
-                            <a href="<? echo $url ?>" class="partner-tag">
+                            <a href="<? echo $url ?>" target="_blank" class="partner-tag">
                                 <div class="partner-tag-content">
                                     <? echo $name ?>
                                 </div>
