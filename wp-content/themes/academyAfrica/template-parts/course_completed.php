@@ -54,9 +54,6 @@ $academy_head = array(
 );
 global $shortcode_tags;
 ?>
-<script>
-    // console.log(<? echo json_encode($shortcode_tags) ?>)
-</script>
 <div class="course-completed">
     <h4 class="cfa-title">
         <? echo $congratulations ?>
@@ -143,21 +140,8 @@ global $shortcode_tags;
                 <? echo $share_title ?>
             </h4>
             <div class="share">
-                <div class="social-icons">
-                    <?
-                    if (!empty($social_media_links)) {
-                        foreach ($social_media_links as $item) {
-                            $link = esc_url($item['link']['url']);
-                            $type = esc_html($item['type']);
-                            $icon = get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
-                            $image = "<img class='icon-image' src='" . $icon . "' alt='" . $type . "' />";
-                            echo '<a style="color: #000" href="' . $link . '" class="icon">' . $image . '</a>';
-                        }
-                    }
-                    ?>
-                </div>
+            <?php get_template_part('template-parts/social_share', 'template', array()); ?>
             </div>
-            <!-- <a href="<? echo $certificate_link ?>" download> -->
             <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
                 <button class="button primary">
                     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

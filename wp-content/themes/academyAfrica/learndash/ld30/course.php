@@ -17,34 +17,6 @@ $short_description = get_field('short_description', $course_id);
 $course_status = learndash_course_status($course_id);
 $post_data = get_post($course_id);
 $course_intro    = $post_data->post_content;
-
-$social_media_links = [
-    [
-        'link' => [
-            'url' => 'https://www.facebook.com/CodeForAfrica',
-        ],
-        'type' => 'facebook',
-    ],
-    [
-        'link' => [
-            'url' => 'https://twitter.com/Code4Africa',
-        ],
-        'type' => 'twitter',
-    ],
-    [
-        'link' => [
-            'url' => 'https://www.instagram.com/code4africa/',
-        ],
-        'type' => 'instagram',
-    ],
-    [
-        'link' => [
-            'url' => 'https://www.linkedin.com/company/code-for-africa/',
-        ],
-        'type' => 'linkedin',
-    ],
-];
-
 ?>
 
 <style>
