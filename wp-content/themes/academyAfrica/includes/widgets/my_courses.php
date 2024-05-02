@@ -166,7 +166,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
             "first_name" => get_user_meta($user_id, 'first_name', true),
             "last_name" => get_user_meta($user_id, 'last_name', true),
         );
-        ?>
+?>
         <main class="body">
             <?php get_template_part('template-parts/filter_bar', 'template', [
                 'filter_by' => $filter_by,
@@ -197,8 +197,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                             <button id="courses-mobile-filter" class="button primary filter-btn">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_11905_79908)">
-                                        <path d="M15.1693 2H1.83594L7.16927 8.30667V12.6667L9.83594 14V8.30667L15.1693 2Z"
-                                            stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M15.1693 2H1.83594L7.16927 8.30667V12.6667L9.83594 14V8.30667L15.1693 2Z" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_11905_79908">
@@ -211,7 +210,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                         </div>
                     </div>
                     <? if (!empty($enrolled)) {
-                        ?>
+                    ?>
                         <p class="description">
                             Complete your courses
                         </p>
@@ -227,10 +226,10 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $image = get_the_post_thumbnail_url($course);
                                 $atts = ['per_page' => '9',];
                                 $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
-                                $completed = ((string) floor(($progress["completed"] / $progress["total"]) * 100)) . "%";
+                                $completed = ((string) floor(($progress["completed"] / max($progress["total"], 1)) * 100)) . "%";
                                 $lessons_count = $progress["total"];
 
-                                ?>
+                            ?>
                                 <a href="<? echo $course_link ?>">
                                     <div id="<? echo $course_id ?>" class="card">
                                         <div class="course-card-pattern">
@@ -262,7 +261,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                     </div>
                                 </a>
 
-                                <?
+                            <?
                             }
 
                             ?>
@@ -274,10 +273,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 <!-- Previous page link -->
                                 <li class="page-item">
                                     <a class="page-link" href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                            fill="none">
-                                            <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </a>
                                 </li>
@@ -290,21 +287,21 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $pr_2 = $previous_page - 1;
                                 $next_2 = $next_page + 2;
                                 ?>
-                                <?php for ($i = 1; $i <= $my_courses_pagination['total_pages']; $i++): ?>
+                                <?php for ($i = 1; $i <= $my_courses_pagination['total_pages']; $i++) : ?>
                                     <?
                                     $current_url_params["courses_page"] = $i;
                                     $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
                                     if ($i === $previous_page || $i === $next_page || $i === $my_courses_pagination['total_pages'] || $i === 1 || $i === $current_page) {
-                                        ?>
+                                    ?>
                                         <li class="page-item"><a class="page-link" href="<? echo $new_url ?>">
                                                 <?php echo $i; ?>
                                             </a></li>
-                                        <?
+                                    <?
                                     }
                                     if (($i === $next_2 && $next_2 < $my_courses_pagination['total_pages']) || $i === $pr_2 && $i > 1) {
-                                        ?>
+                                    ?>
                                         <li style="margin-top: 6px">...</li>
-                                        <?
+                                <?
                                     }
 
                                 endfor; ?>
@@ -312,10 +309,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 <!-- Next page link -->
                                 <li class="page-item">
                                     <a class="page-link" href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                            fill="none">
-                                            <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </a>
                                 </li>
@@ -344,7 +339,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                     $lessons_count = $progress["total"];
                                     $image = get_the_post_thumbnail_url($course);
                                     // $certificate_link = learndash_get_course_certificate_link($course_id, get_current_user_id());
-                                    ?>
+                            ?>
 
                                     <div class="cert-pdf" id="<? echo $course_id ?>">
                                         <? $cert_content = $this->replace_course_info($cert_post->post_content, $course_id) ?>
@@ -376,18 +371,16 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                                 <div class="icons">
 
                                                     <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
-                                                        <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg"
-                                                            style="cursor: pointer;" alt="download" />
+                                                        <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg" style="cursor: pointer;" alt="download" />
                                                     </a>
 
-                                                    <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg"
-                                                        alt="share" />
+                                                    <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg" alt="share" />
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <?
+                            <?
                                 }
                             }
                             ?>
@@ -399,16 +392,14 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 <!-- Previous page link -->
                                 <li class="page-item">
                                     <a class="page-link" href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                            fill="none">
-                                            <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </a>
                                 </li>
 
                                 <!-- Page links -->
-                                <?php for ($i = 1; $i <= $certificate_pagination['total_pages']; $i++): ?>
+                                <?php for ($i = 1; $i <= $certificate_pagination['total_pages']; $i++) : ?>
                                     <?
                                     $current_url_params = $_GET;
                                     $current_url_params["courses_page"] = $i;
@@ -422,10 +413,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 <!-- Next page link -->
                                 <li class="page-item">
                                     <a class="page-link" href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                            fill="none">
-                                            <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </a>
                                 </li>
@@ -433,14 +422,16 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                             </ul>
                         </div>
                     </section>
-                    <?
+                <?
 
                 }
                 ?>
             </div>
             <script type="text/javascript">
                 function convertHTMLtoPDF(id, courseTitle) {
-                    const { jsPDF } = window.jspdf;
+                    const {
+                        jsPDF
+                    } = window.jspdf;
                     const element = document.getElementById(id);
                     if (element) {
                         let doc = new jsPDF('l', 'mm');
@@ -449,18 +440,20 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                         const height = doc.internal.pageSize.getHeight();
                         // console.log({ width, height })
                         doc.html(pdfjs, {
-                            callback: function (doc) {
+                            callback: function(doc) {
                                 doc.save(`<? echo $user['first_name'] . ' ' . $user['first_name'] ?> | ${courseTitle}.pdf`);
                             },
                             width: width,
                             height,
                             windowWidth: 891,
-                            html2canvas: { scale: 0.954 },
+                            html2canvas: {
+                                scale: 0.954
+                            },
                         });
                     }
-                }            
+                }
             </script>
         </main>
-        <?
+<?
     }
 }
