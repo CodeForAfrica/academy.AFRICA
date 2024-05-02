@@ -2,9 +2,8 @@
 function get_icon($type){
     return get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
 }
-$url_to_share = isset($args["url"]) ? $args["url"] : the_permalink();
+$url_to_share = isset($args["url"]) ? $args["url"] : get_permalink(0);
 ?>
-
 <div style="display: flex;" class="share-menu">
 <div style="color: #000; cursor: pointer; margin-right: 16px;" class="share-icon" onclick="toggleShareButtons()">
         <img class='icon-image' src="<? echo get_icon('share')?>" alt="Share">
