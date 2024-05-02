@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.2.1');
+define('ACADEMY_AFRICA_VERSION', '1.2.2');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -257,7 +257,7 @@ function authenticate_user()
                     <script>
                         window.location.reload();
                     </script>
-<?
+        <?
                 }
             }
         } else {
@@ -428,7 +428,7 @@ function check_password_reset_action()
     if (isset($_POST['pass_reset'])) {
         ?>
         <div>Password reset instructions have been sent to your email address.</div>
-        <?
+<?
     }
 }
 
@@ -475,8 +475,8 @@ function activate_new_user_action()
 
 function custom_login_page()
 {
-    $path_name=isset($_GET['redirect_url']) ? $_GET['redirect_url'] : "/";
-    $login_page = home_url("/login"."?redirect_url=".$path_name);
+    $path_name = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : "/";
+    $login_page = home_url("/login" . "?redirect_url=" . $path_name);
     $to_redirect = array("lostpassword");
     $reset_password_page = home_url('/login?action=lostpassword');
     $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];
@@ -508,9 +508,10 @@ function enqueue_my_scripts()
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
-function fix_wpelogin( $url ) {
-	$url = add_query_arg( 'wpe-login', true, $url );
-    $url = add_query_arg( 'email_sent', true, $url );
-	return $url;
+function fix_wpelogin($url)
+{
+    $url = add_query_arg('wpe-login', true, $url);
+    $url = add_query_arg('email_sent', true, $url);
+    return $url;
 }
-add_filter( 'lostpassword_url', 'fix_wpelogin' );
+add_filter('lostpassword_url', 'fix_wpelogin');
