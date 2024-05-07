@@ -110,24 +110,8 @@ function onChangeCheckBox(input, category, value, apply) {
   if (apply) applyFilters();
 }
 
-function globalOnload() {
-  const { hash, pathname, search } = window.location;
-  console.log(window.location)
-  const isLoginFailed = new URLSearchParams(search).get("login")==="failed"
-  if (isLoginFailed) {
-    if (pathname === "/login/") {
-      document.getElementById("login_error").innerText =
-        "Error: An error occurred, either the password you entered is incorrect, the email is incorrect or your account is not activated";
-    } else {
-
-      window.location.href = `/login/?login=failed&redirect_url=${pathname}`
-    }
-    return;
-  }
-};
-
 window.onload = function onLoad() {
-  globalOnload();
+  // globalOnload();
   const { search } = window.location;
   filters = parseQueryString(search);
   Object.keys(filters).forEach((key) => {

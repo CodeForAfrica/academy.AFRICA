@@ -35,7 +35,7 @@ function closeModal(type) {
   window.location.hash = "";
 }
 
-window.onload = function () {
+function onload() {
   const { pathname, search } = window.location;
   const isLoginFailed = new URLSearchParams(search).get("login")==="failed"
   if (isLoginFailed) {
@@ -49,6 +49,7 @@ window.onload = function () {
     return;
   }
 };
+window.addEventListener("load", onload)
 
 document.onkeydown = function (event) {
   const logins = ["/login/", "/login", "/register/"]
