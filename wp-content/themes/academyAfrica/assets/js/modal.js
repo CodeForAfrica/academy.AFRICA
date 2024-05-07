@@ -36,22 +36,17 @@ function closeModal(type) {
 }
 
 window.onload = function () {
-  const { hash } = window.location;
-  const isLogin = hash === "#sign-in" || hash === "#login";
-  if (isLogin) {
-    if(!document.body.classList.contains('logged-in')) {
-      openModal("login");
-    } else {
-      window.location.hash = '';
-    }
-    if (hash === "#login") {
+  const { pathname, search } = window.location;
+  const isLoginFailed = new URLSearchParams(search).get("login")==="failed"
+  if (isLoginFailed) {
+    if (pathname === "/login/") {
       document.getElementById("login_error").innerText =
         "Error: An error occurred, either the password you entered is incorrect, the email is incorrect or your account is not activated";
+    } else {
+
+      window.location.href = `/login/?login=failed&redirect_url=${pathname}`
     }
     return;
-  }
-  if (hash === "#register") {
-    openModal("register");
   }
 };
 
