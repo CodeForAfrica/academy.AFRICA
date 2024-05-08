@@ -34,6 +34,30 @@ $font-family: Open Sans;
         display: flex;
         flex-direction: column;
 
+        #mc_embed_shell {
+            #mc_embed_signup {
+                #mc-embedded-subscribe-form {
+                    margin: 0;
+
+                    #mc_embed_signup_scroll {
+
+                        h2:first-of-type {
+                            display: none;
+                        }
+
+                        .clear {
+                            #mc-embedded-subscribe {
+                                @extend .button;
+                                @extend .primary;
+                                @extend .small;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         form {
             display: flex;
             flex-direction: column;
