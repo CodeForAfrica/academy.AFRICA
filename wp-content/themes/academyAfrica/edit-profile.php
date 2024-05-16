@@ -281,8 +281,11 @@ if (is_user_logged_in()) {
                     $network_title = get_the_title();
                     $image_url = get_the_post_thumbnail_url($network_id, array(100, 100));
                     $description = get_the_excerpt($network_id);
-                    $join = get_post_meta($network_id, 'join', true)
+                    $join = get_post_meta($network_id, 'join', true)["url"];
             ?>
+            <script>
+                console.log(<? echo json_encode($join)?>)
+            </script>
                     <div class="network">
                         <img class="img" src="<? echo $image_url ?>" alt="<? echo $network_title ?>">
                         <div class="content">
