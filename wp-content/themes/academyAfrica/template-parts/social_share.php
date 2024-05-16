@@ -1,7 +1,5 @@
 <?php
-function get_image($type){
-    return get_stylesheet_directory_uri() . ('/assets/images/icons/Type=' . $type . ', Size=24, Color=Black.svg');
-}
+
 $url_to_share = isset($args["url"]) ? $args["url"] : get_permalink(0);
 ?>
 <div style="display: flex;" class="share-menu">
