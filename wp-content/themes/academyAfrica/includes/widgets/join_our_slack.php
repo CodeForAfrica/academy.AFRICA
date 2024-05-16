@@ -98,7 +98,7 @@ class Academy_Africa_Join_Our_Slack extends \Elementor\Widget_Base
         $content = $settings['content'];
         $slack_url = $settings['slack_url'];
 ?>
-        <div class="join-our-slack">
+        <div class="join-our-slack" id="join-our-slack">
             <div class="title">
                 <h2 class="cfa-title"><?php echo $title; ?></h2>
             </div>

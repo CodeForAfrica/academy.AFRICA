@@ -82,7 +82,7 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::URL,
                 'options' => ['url', 'custom_attributes'],
                 'default' => [
-                    'url' => 'https://academy.africa/'
+                    'url' => '/about#join-our-slack'
                 ],
                 'label_block' => true,
             ]
