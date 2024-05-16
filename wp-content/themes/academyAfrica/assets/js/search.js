@@ -222,6 +222,16 @@ function paginateCourses(page) {
     window.location.href = url.toString();
 }
 
+function paginateLearningPath(page) {
+    const url = new URL(window.location.href);
+    if (page && page !== 1) {
+        url.searchParams.set('lp_page', page);
+    } else {
+        url.searchParams.delete('lp_page');
+    }
+    window.location.href = url.toString();
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     toggleFilterModal();
     filterPagination();
