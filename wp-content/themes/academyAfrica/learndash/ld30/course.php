@@ -64,7 +64,7 @@ if ($course_status == "Completed") {
                     </p>
                 </div>
                 <div class="certificate-text">
-                    The certificate for this course can be downloaded for a small fee when the course is completed
+                    <!-- The certificate for this course can be downloaded for a small fee when the course is completed -->
                 </div>
             <?
             }
