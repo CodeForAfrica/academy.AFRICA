@@ -133,7 +133,7 @@ class CoursesFunctions
             'filter' => true,
             "organization" => [],
             "instructor" => [],
-
+            "language" => [],
         ]);
     }
 
@@ -208,6 +208,21 @@ class CoursesFunctions
                 );
                 array_push($meta_query, $org_q);
             }
+        }
+
+        $language = !empty($atts['language']) ? $atts['language'] : [];
+        if (!empty($language)) {
+            $lang_q = array(
+                'relation' => 'OR'
+            );
+            foreach ($language as $lang) {
+                array_push($lang_q, array(
+                    'key' => 'cfa-language',
+                    'value' => $lang,
+                    'compare' => 'LIKE'
+                ));
+            }
+            array_push($meta_query, $lang_q);
         }
 
         $tax_query['relation'] = 'OR';
@@ -361,6 +376,14 @@ class CoursesFunctions
                 'title' => 'Instructors',
                 'name' => 'instructor',
                 'options' => []
+            ],
+            [
+                'title' => 'Languages',
+                'name' => 'language',
+                'options' => [
+                    (object)['id' => 'en', 'name' => 'English'],
+                    (object)['id' => 'fr', 'name' => 'French'],
+                ]
             ]
         ];
 
