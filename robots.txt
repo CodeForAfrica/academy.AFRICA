@@ -45,5 +45,6 @@ Disallow: /wp-admin/
 Disallow: /login/
 Disallow: /
 
+
 # Include Sitemap
 Sitemap: https://academy.africa/sitemap.xml
