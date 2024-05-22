@@ -1,0 +1,49 @@
+# Block AI Crawlers
+User-agent: Amazonbot
+User-agent: anthropic-ai
+User-agent: AwarioRssBot
+User-agent: AwarioSmartBot
+User-agent: Bard
+User-agent: Bloom
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: ChatGPT
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: cohere-ai
+User-agent: DataForSeoBot
+User-agent: Diffbot
+User-agent: FacebookBot
+User-agent: GPT-4
+User-agent: GPT-Neo
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: GoogleOther
+User-agent: HuggingFace-Transformers
+User-agent: LaMDA
+User-agent: Megatron-Turing-NLG
+User-agent: magpie-crawler
+User-agent: Meltwater
+User-agent: NewsNow
+User-agent: news-please
+User-agent: omgili
+User-agent: OmigiliBot
+User-agent: PaLM
+User-agent: peer39_crawler
+User-agent: peer39_crawler/1.0
+User-agent: PerplexityBot
+User-agent: TurnitinBot
+User-agent: Seekr
+User-agent: Scrapy
+User-agent: Wu-Dao-2.0
+Disallow: /
+
+# Allow Search Engines
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /login/
+Disallow: /
+
+# Include Sitemap
+Sitemap: https://academy.africa/sitemap.xml

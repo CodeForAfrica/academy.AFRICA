@@ -70,7 +70,7 @@ apple-touch-icon-precomposed.png
 apple-touch-icon.png
 favicon.ico
 wpe-deploy-status-academyafrica
-robots.txt
+!robots.txt
 wordpress
 node_modules
 yarn.lock
