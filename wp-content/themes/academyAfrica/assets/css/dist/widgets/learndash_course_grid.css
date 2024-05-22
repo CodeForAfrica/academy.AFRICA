@@ -230,6 +230,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+  margin: 0 0 5px;
 }
 .learndash-course-grid .grid .item article .content .bottom-meta .price-tag {
   background: #10B981;
