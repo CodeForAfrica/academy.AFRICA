@@ -6,7 +6,7 @@ $url_to_share = isset($args["url"]) ? $args["url"] : get_permalink(0);
 <div style="color: #000; cursor: pointer; margin-right: 16px;" class="share-icon" onclick="toggleShareButtons()">
         <img class='icon-image' src="<? echo get_stylesheet_directory_uri() ?>/assets/images/icons/Type=share, Size=24, Color=Black.svg" alt="Share">
     </div>
-    <div class="share-icons hide">
+    <div class="share-icons">
         <!-- LinkedIn -->
         <a style="color: #000; margin-right: 8px;" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url_to_share; ?>" target="_blank">
             <img class='icon-image' src="<? echo get_stylesheet_directory_uri() ?>/assets/images/icons/Type=linkedin, Size=24, Color=Black.svg" alt="LinkedIn">

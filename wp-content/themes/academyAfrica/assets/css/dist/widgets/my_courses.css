@@ -254,6 +254,7 @@ li {
   width: 90px;
   height: 90px;
   border-radius: 50%;
+  background-color: #fff;
 }
 .main .incomplete-courses .content .card .card-content {
   padding: 20px;
@@ -339,7 +340,8 @@ li {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 30px;
 }
 .your-certificates .content .card {
   flex: 1;
@@ -368,6 +370,7 @@ li {
   width: 90px;
   height: 90px;
   border-radius: 50%;
+  background-color: #fff;
 }
 .your-certificates .content .card .card-content {
   padding: 20px;

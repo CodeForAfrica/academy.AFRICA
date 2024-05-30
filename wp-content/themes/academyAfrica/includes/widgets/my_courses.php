@@ -220,17 +220,24 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $course_id = $er->post_id;
                                 $course = get_post($course_id);
                                 $title = get_the_title($course);
-                                $provider = get_the_author_meta('display_name', $course->post_author);
+                                $authors = get_coauthors($course->ID);
+                                $first_name = get_the_author_meta('first_name', $authors[0]->ID);
+                                $last_name = get_the_author_meta('last_name', $authors[0]->ID);
+                                $provider = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
                                 $course_link = get_permalink($course);
-
-                                $image = get_the_post_thumbnail_url($course);
+                                if (count($authors) > 1) {
+                                    $provider .= ' + ' . (count($authors) - 1) . ' more';
+                                }
+                                $course_thumbnail = get_the_post_thumbnail_url($course);
+                                $mooc_logo = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-blue.svg';
+                                $image = $course_thumbnail ? $course_thumbnail : $mooc_logo;
                                 $atts = ['per_page' => '9',];
                                 $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
                                 $completed = ((string) floor(($progress["completed"] / max($progress["total"], 1)) * 100)) . "%";
                                 $lessons_count = $progress["total"];
 
                             ?>
-                                <a href="<? echo $course_link ?>">
+                                <a href="<? echo $course_link ?>" >
                                     <div id="<? echo $course_id ?>" class="card">
                                         <div class="course-card-pattern">
                                             <img src="<? echo $image ?>" alt="course-thumbnail">
@@ -332,12 +339,20 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                     $certificate_id = learndash_get_setting($course_id, 'certificate');
                                     $cert_post = get_post($certificate_id);
                                     $title = get_the_title($course);
-                                    $provider = get_the_author_meta('display_name', $course->post_author);
-                                    $course_link = get_permalink($course_id);
+                                    $authors = get_coauthors($course->ID);
+                                    $first_name = get_the_author_meta('first_name', $authors[0]->ID);
+                                    $last_name = get_the_author_meta('last_name', $authors[0]->ID);
+                                    $provider = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
+                                    if (count($authors) > 1) {
+                                        $provider .= ' + ' . (count($authors) - 1) . ' more';
+                                    }
+                                    $course_link = add_query_arg("certificate",1,get_permalink($course_id));
                                     $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
                                     $completed = floor(($progress["completed"] / $progress["total"]) * 100);
                                     $lessons_count = $progress["total"];
-                                    $image = get_the_post_thumbnail_url($course);
+                                    $course_thumbnail = get_the_post_thumbnail_url($course);
+                                    $mooc_logo = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-blue.svg';
+                                    $image = $course_thumbnail ? $course_thumbnail : $mooc_logo;
                                     // $certificate_link = learndash_get_course_certificate_link($course_id, get_current_user_id());
                             ?>
 
@@ -345,6 +360,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                         <? $cert_content = $this->replace_course_info($cert_post->post_content, $course_id) ?>
                                         <? echo do_shortcode($cert_content) ?>
                                     </div>
+                                    <div >
                                     <div class="card">
                                         <div class="course-card-pattern">
                                             <img src="<? echo $image ?>" alt="course-thumbnail">
@@ -369,8 +385,10 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                             <div class="card-footer">
                                                 <p>Certificate Achieved</p>
                                                 <div class="icons">
-
-                                                    <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
+                                                    <?
+                                                    $cert = learndash_get_course_certificate_link($course_id);
+                                                    ?>
+                                                    <a href="<? echo $cert ?>" download>
                                                         <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg" style="cursor: pointer;" alt="download" />
                                                     </a>
 
@@ -380,6 +398,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                         </div>
 
                                     </div>
+                                    </div>
+                                    
                             <?
                                 }
                             }

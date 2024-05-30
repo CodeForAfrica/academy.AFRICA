@@ -1447,14 +1447,14 @@ label {
   flex-direction: column;
 }
 .certificate .certificate-footer .signature .signature-img {
-  width: 47px;
-  height: 11px;
+  width: 94px;
+  height: 22px;
 }
 .certificate .certificate-footer .signature p {
-  color: #FFFFFF !important;
-  font-size: 4.368px !important;
-  font-weight: 400 !important;
-  line-height: 5.616px !important;
+  color: #FFFFFF;
+  font-size: 4.368px;
+  font-weight: 400;
+  line-height: 5.616px;
 }
 .certificate .certificate-footer .signature .signee-role {
   text-transform: uppercase;

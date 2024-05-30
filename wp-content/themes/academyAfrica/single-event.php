@@ -8,6 +8,7 @@ $resources_text = "Resources";
 $register_text = "Register Here";
 $or_title = "The Organisation";
 $speaker_title = "The Speaker";
+require_once __DIR__ . '/includes/utils/countries.php';
 ?>
 <main id="main" class="single-page-event">
     <?php
@@ -18,8 +19,9 @@ $speaker_title = "The Speaker";
             $post_id = $post_array->ID;
             $raw_date = get_post_meta($post_id, 'date', true);
             $date = date_format(date_create($raw_date), 'Y-m-d');
-            $offset = get_timezones()[get_post_meta($post_id, 'timezone', true)] ?? "+0:00";
+            $offset = "UTC";
             $raw_time = get_post_meta($post_id, 'time', true);
+
             $registration_link = get_post_meta($post_id, 'registration_link', true);
             $given_date_time = new DateTime($date.' '.$raw_time, new DateTimeZone($offset));
             $current_date_time = new DateTime("now", new DateTimeZone($offset));
@@ -29,25 +31,23 @@ $speaker_title = "The Speaker";
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
             $is_virtual = get_post_meta($post_id, 'is_virtual', true) ? "&#x1F5A5;" : "";
             $speakers = get_field("speaker", $post_id);
-            $time = str_replace("Africa/", "", $raw_time.' '.get_post_meta($post_id, 'timezone', true));
+            $time = $raw_time.' GMT +00:00';
             $language = get_post_meta($post_id, 'language', true);
             $organisations = get_field("organisations", $post_id);
-            $resources = get_field('resources')['url'];
+            $resources = get_field('resources', $post_id)['url'];
+            $countries = get_field("countries", $post_id);
             ?>
-            <script>
-                // console.log(<? echo json_encode($speakers) ?>)
-            </script>
             <h1 class="cfa-title">
                 <? echo $post_title ?>
             </h1>
             <div class="image-container">
                 <img width="100%" class="featured-image" src="<? echo $featured_image_url ?>"
-                    alt="<? echo $featured_image_url ?>">
+                    alt="<? echo $post_id ?>">
             </div>
             <div class="details">
                 <div class="custom-data">
                     <p class="speaker">
-                        <? echo $speaker->display_name ?>
+                        <? echo isset($speaker)?$speaker->display_name: "" ?>
                     </p>
                     <div class="with-icons">
                     <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=calendar, Size=16, Color=Black.svg" alt="">
@@ -55,16 +55,24 @@ $speaker_title = "The Speaker";
                         <? echo $date ?>
                     </p>
                     </div>
-                    <div class="with-icons">
-                    <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=clock, Size=16, Color=Black.svg" alt="">
-                    <p style="margin: 0" class="time">
-                        <? echo $time ?>
-                    </p>
-                    </div>
+                    
                     <div class="with-icons">
                     <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=world, Size=16, Color=Black.svg" alt="">
                     <p style="margin: 0" class="language">
                         <? echo $language ?>
+                    </p>
+                    </div>
+                    <div class="with-icons">
+                    <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=location, Size=16, Color=Black.svg" alt="">
+                    <p style="margin: 0" class="time">
+                        <? 
+                        if(isset($countries)){
+                            foreach($countries as $country) {
+                                echo country_flag_emoji($country['value']);
+                            }
+                        }
+            
+                         ?>
                     </p>
                     </div>
                 </div>

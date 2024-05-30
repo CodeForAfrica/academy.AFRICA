@@ -25,7 +25,8 @@ $course_intro    = $post_data->post_content;
     }
 </style>
 <?
-if ($course_status == "Completed") {
+$is_cert = isset($_GET["certificate"]);
+if ($course_status == "Completed" && $is_cert) {
     get_template_part('template-parts/course_completed', null, array('course_id' => $course_id));
 } else {
 ?>

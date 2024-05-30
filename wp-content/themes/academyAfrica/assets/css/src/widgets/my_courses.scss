@@ -139,6 +139,7 @@ li {
             width: 90px;
             height: 90px;
             border-radius: 50%;
+            background-color: #fff;
           }
         }
         .card-content {
@@ -234,7 +235,8 @@ li {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 30px;
     .card {
       flex: 1;
       max-width: 280px;
@@ -262,6 +264,7 @@ li {
           width: 90px;
           height: 90px;
           border-radius: 50%;
+          background-color: #fff;
         }
       }
       .card-content {

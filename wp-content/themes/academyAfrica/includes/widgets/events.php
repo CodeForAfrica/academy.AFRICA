@@ -112,7 +112,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     'organisation' => get_post_meta(get_the_ID(), 'organisation', true),
                     'is_virtual' => get_post_meta(get_the_ID(), 'is_virtual', true) ? "&#x1F5A5;" : "",
                     'date' => $date,
-                    'time' => str_replace("Africa/", "", get_post_meta(get_the_ID(), 'time', true) . ' ' . get_post_meta(get_the_ID(), 'timezone', true)),
+                    'time' => get_post_meta(get_the_ID(), 'time', true) . ' ' . "GMT +00:00",
                     'image' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
                     'country_code' => isset($countries) ? country_flag_emoji($countries[0]): country_flag_emoji("ZA"),
                     'language' => get_post_meta(get_the_ID(), 'language', true),
@@ -519,7 +519,6 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                             <? echo $time ?>
                                         </p>
                                         <p class="country">
-                                            <? echo $country ?>
                                             <? echo $is_virtual ?>
                                         </p>
                                     </div>
@@ -612,7 +611,6 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                             <? echo $time ?>
                                         </p>
                                         <p class="country">
-                                            <? echo $country ?>
                                             <? echo $is_virtual ?>
                                         </p>
                                     </div>

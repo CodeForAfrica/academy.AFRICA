@@ -70,34 +70,34 @@ global $shortcode_tags;
                         <p class="certificate-of">
                             <? echo $certificate_title ?>
                         </p>
-                        <p class="certificate-type">
+                        <p class="certificate-type" style="font-weight: 700;">
                             <? echo $certificate_type ?>
                         </p>
                     </div>
                     <div class="certificate-header-logo">
                         <hr />
-                        <img class="logo" alt="logo" style="background: transparent;"
+                        <img height="90px" width="90px" class="logo" alt="logo" style="background: transparent; margin-top: -80px; width: 110px; height: 110px"
                             src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.png' ?>" />
                     </div>
 
                 </div>
-                <div class="course-details">
+                <div class="course-details" style="align-items: flex-start;">
                     <div class="student">
-                        <p class="title">
+                        <p class="title" style="margin-bottom: 8px; font-size: 12px;">
                             <? echo $presented_to ?>
                         </p>
-                        <p class="name first-name">
+                        <p class="name first-name" style="margin-bottom: 12px; font-size: 36px;">
                             <? echo $user['first_name'] ?>
                         </p>
-                        <p class="name bold-text">
+                        <p class="name bold-text" style="margin-bottom: 12px; font-size: 36px;">
                             <? echo $user['last_name'] ?>
                         </p>
                     </div>
-                    <div class="course">
-                        <p class="course-description title">
+                    <div class="course" style="max-width: 400px">
+                        <p class="course-description title" style="text-align: right; font-size: 16px; margin-top: 8px;">
                             <? echo $certificate_description ?>
                         </p>
-                        <p class="name bold-text">
+                        <p class="name bold-text" style="margin-bottom: 12px; font-size: 20px;">
                             <? echo $certificate_course ?>
                         </p>
                     </div>
@@ -106,25 +106,25 @@ global $shortcode_tags;
             <div class="certificate-footer">
                 <div class="company-details">
                     <div class="brand-details">
-                        <img height="30px" width="30px" class="logo" alt="logo" style="background: transparent;"
+                        <img height="60px" width="60px" class="logo" alt="logo" style="background: transparent; width: 60px; height: 60px;"
                             src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
-                        <p class="company-name">
+                        <p class="company-name" style="line-height: 60px; font-size: 14px;">
                             <? echo $company_name ?>
                         </p>
                     </div>
-                    <img class="artwork" height="30px" width="52px" alt="artwork" style="background: transparent;"
+                    <img class="artwork" height="60px" width="102px" alt="artwork" style="background: transparent; width: 80px; height: 40px;"
                         src="<? echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" />
                 </div>
                 <div class="signature">
                     <img class="signature-img" alt="signature" alt="<? echo $academy_head['name'] ?>"
-                        style="background: transparent;" src="<? echo $academy_head['signature'] ?>" />
-                    <p class="signee-name">
+                        style="background: transparent; margin-bottom: 8px;" src="<? echo $academy_head['signature'] ?>" />
+                    <p class="signee-name" style="margin-bottom: 8px; font-size: 12px;">
                         <? echo $academy_head['name'] ?>
                     </p>
-                    <p class="signee-role">
+                    <p class="signee-role" style="margin-bottom: 8px; font-size: 12px;">
                         <? echo $academy_head['role'] ?>
                     </p>
-                    <p class="sign-date">
+                    <p class="sign-date" style="font-size: 12px;">
                         <? echo $academy_head['date'] ?>
                     </p>
                 </div>
@@ -139,7 +139,7 @@ global $shortcode_tags;
             <h4 class="title">
                 <? echo $share_title ?>
             </h4>
-            <div class="share">
+            <div class="share" style="display: flex; justify-content: center;">
             <?php get_template_part('template-parts/social_share', 'template', array()); ?>
             </div>
             <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
