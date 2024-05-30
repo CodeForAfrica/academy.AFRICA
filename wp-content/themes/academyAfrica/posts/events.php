@@ -35,29 +35,6 @@ function event_post_type()
     register_post_type('event', $args);
 }
 
-function get_timezones()
-{
-    $timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL_WITH_BC);
-
-    $timezonesArray = array();
-
-    foreach ($timezones as $timezone) {
-        try {
-            $dateTimeZone = new DateTimeZone($timezone);
-            $offset = $dateTimeZone->getOffset(new DateTime('now', $dateTimeZone));
-            $offsetHours = floor(abs($offset) / 3600);
-            $offsetMinutes = floor((abs($offset) % 3600) / 60);
-            $offsetSign = ($offset < 0) ? '-' : '+';
-            $gmtOffset = $offsetSign . sprintf('%02d:%02d', $offsetHours, $offsetMinutes);
-
-            $timezonesArray[$timezone] = $gmtOffset;
-        } catch (Exception $e) {
-            continue;
-        }
-    }
-    return $timezonesArray;
-}
-
 function get_post_options($post_type)
 {
     $args = array(
@@ -124,10 +101,8 @@ function custom_fields()
     $country = $custom["country"][0];
     $date = $custom["date"][0];
     $time = $custom["time"][0];
-    $timezone = $custom["timezone"][0];
     $users = get_user_options();
     $is_virtual = $custom["is_virtual"][0];
-    $timezones = get_timezones();
 ?>
     <div class="form-container">
         <script>
@@ -142,25 +117,6 @@ function custom_fields()
         <div class="form-group">
             <label for="tite">Time</label>
             <input value="<?php echo $time; ?>" type="time" class="large-text" id="time" name="time">
-        </div>
-        <div class="form-group">
-            <label for="timezone">
-                Timezone
-            </label>
-            <select value="<?php echo $timezone; ?>" name="timezone" id="timezone">
-                <option value=""></option>
-                <?php
-                foreach ($timezones as $name => $offset) {
-                    $label = $name . ' ' . $offset;
-                    $selected = $name === $timezone ? 'selected="selected"' : null;
-                ?>
-                    <option <? echo $selected ?> value="<?php echo $name ?>">
-                        <?php echo $label ?>
-                    </option>
-                <?php
-                }
-                ?>
-            </select>
         </div>
         <div class="form-group checkbox-label">
             <label>
@@ -187,7 +143,6 @@ function save_details()
     global $post;
     // update_post_meta($post->ID, "country", $_POST["country"]);
     update_post_meta($post->ID, "is_virtual", $_POST["is_virtual"]);
-    update_post_meta($post->ID, "timezone", $_POST["timezone"]);
     update_post_meta($post->ID, "date", $_POST["date"]);
     update_post_meta($post->ID, "time", $_POST["time"]);
 }
