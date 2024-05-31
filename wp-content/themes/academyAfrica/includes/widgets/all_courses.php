@@ -172,6 +172,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
         $language = $this->get_query_param('language');
+        $learning_path = $this->get_query_param('learning_path');
         $view = $this->get_query_param('view');
         $page = $this->get_query_param('course_page');
         $current_page = $page ? $page[0] : 1;
@@ -228,6 +229,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             'orderby' => $order_by,
             'order' => $order,
             'language' => $language,
+            'learning_path' => $learning_path
         ];
         $default_atts = CoursesFunctions::get_default_atts();
         $atts = shortcode_atts($default_atts, $atts, 'academy-africa_course_grid');
