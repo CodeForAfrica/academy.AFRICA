@@ -49,12 +49,12 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
     public function get_events($args)
     {
         $meta_query = $args["meta_query"] ?? array();
-        $country_filters = $this->get_query_param('country');
+        $country_filters = $this->get_query_param('country')[0];
         if (!empty($country_filters)) {
             $meta_query[] = array(
                 'relation' => 'OR',
                 'key'     => 'countries',
-                'value'   => '"' . $country_filters . '"',
+                'value'   => $country_filters,
                 'compare' => 'LIKE',
             );
         }
