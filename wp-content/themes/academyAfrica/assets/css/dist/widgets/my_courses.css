@@ -341,7 +341,7 @@ li {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 30px;
+  gap: 32px;
 }
 .your-certificates .content .card {
   flex: 1;
