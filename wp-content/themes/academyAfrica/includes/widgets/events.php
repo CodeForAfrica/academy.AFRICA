@@ -2,7 +2,8 @@
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
-
+include dirname(__FILE__) . '/' . '../utils/african_countries.php';
+include_once dirname(__FILE__) . '/' . '../utils/countries.php';
 class Academy_Africa_Events  extends \Elementor\Widget_Base
 {
 
@@ -51,9 +52,10 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $country_filters = $this->get_query_param('country');
         if (!empty($country_filters)) {
             $meta_query[] = array(
-                'key'     => 'country',
-                'value'   => $country_filters,
-                'compare' => 'IN',
+                'relation' => 'OR',
+                'key'     => 'countries',
+                'value'   => '"' . $country_filters . '"',
+                'compare' => 'LIKE',
             );
         }
         $date_param = $this->get_query_param('date');
@@ -98,8 +100,6 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $result = array();
 
         if ($query->have_posts()) {
-            include dirname(__FILE__) . '/' . '../utils/african_countries.php';
-            include_once dirname(__FILE__) . '/' . '../utils/countries.php';
             while ($query->have_posts()) {
                 $query->the_post();
                 $user_data = get_userdata(get_post_meta(get_the_ID(), 'speaker', true));
@@ -243,22 +243,45 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     );
                     $query = new WP_Query($args);
                     $options = array();
-                    if ($query->have_posts()) {
-                        while ($query->have_posts()) {
-                            $query->the_post();
-                            $post_id = get_the_ID();
-                            $field_name = get_post_meta($post_id, $option, true);
-                            if ($field_name) {
-                                $options[$field_name] = $field_name;
+                    if($option == "country") {
+                        if ($query->have_posts()) {
+                            while ($query->have_posts()) {
+                                $query->the_post();
+                                $post_id = get_the_ID();
+                                $values = get_post_meta($post_id, "countries", true);
+                                if (isset($values)) {
+                                    foreach($values as $field_name){
+                                        $c_name = get_country_code($field_name);
+                                        $opt = isset($c_name) ? $c_name["name"]: "";
+                                        $options[$opt] = $field_name;
+                                    }
+                                }
                             }
+                            wp_reset_postdata();
                         }
-                        wp_reset_postdata();
+                        $output[] = array(
+                            "title" => $this->filter_labels()[$option] ?? $option,
+                            "name" => $option,
+                            "options" => $options
+                        );
+                    } else {
+                        if ($query->have_posts()) {
+                            while ($query->have_posts()) {
+                                $query->the_post();
+                                $post_id = get_the_ID();
+                                $field_name = get_post_meta($post_id, $option, true);
+                                if ($field_name) {
+                                    $options[$field_name] = $field_name;
+                                }
+                            }
+                            wp_reset_postdata();
+                        }
+                        $output[] = array(
+                            "title" => $this->filter_labels()[$option] ?? $option,
+                            "name" => $option,
+                            "options" => $options
+                        );
                     }
-                    $output[] = array(
-                        "title" => $this->filter_labels()[$option] ?? $option,
-                        "name" => $option,
-                        "options" => $options
-                    );
                 }
             }
         }
@@ -316,10 +339,10 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $previous_events_title = $settings["previous_events_title"];
         $filter_options = $this->get_filter_by();
 ?>
-        <main class="events">
 <script>
-    // console.log(<? echo json_encode($previous_events[0]) ?>)
+    console.log(<? echo json_encode($previous)?>)
 </script>
+        <main class="events">
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <p class="filter-by">
