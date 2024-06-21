@@ -26,6 +26,26 @@ class CoursesFunctions
         return $organizations;
     }
 
+    public static function getAllLearningPaths()
+    {
+        $args = array(
+            'post_type' => 'ac-learning-path',
+            'post_status' => 'publish',
+            'numberposts' => -1
+        );
+        $learning_path_posts = get_posts($args);
+        $learning_paths = array();
+        foreach ($learning_path_posts as $learning_path_post) {
+            $lp = array(
+                'id' => $learning_path_post->ID,
+                'title' => $learning_path_post->post_title,
+                'excerpt' => $learning_path_post->post_excerpt
+            );
+            array_push($learning_paths, $lp);
+        }
+        return $learning_paths;
+    }
+
     public static function getLearningPaths($attr = [])
     {
         if (empty($attr['per_page'])) {
@@ -134,6 +154,7 @@ class CoursesFunctions
             "organization" => [],
             "instructor" => [],
             "language" => [],
+            'learning_path' => [],
         ]);
     }
 
@@ -225,6 +246,29 @@ class CoursesFunctions
             array_push($meta_query, $lang_q);
         }
 
+        $post__in = null;
+        $learning_path = !empty($atts['learning_path']) ? $atts['learning_path'] : [];
+        if (!empty($learning_path)) {
+            $lps = self::getLearningPaths(['per_page' => -1]);
+            $courses = array();
+            foreach ($lps['learning_paths'] as $lp) {
+                if (in_array($lp['title'], $learning_path)) {
+                    foreach ($lp['courses'] as $course) {
+                        if (isset($course['id'])) {
+                            array_push($courses, $course['id']);
+                        }
+                    }
+                }
+            }
+
+            $course_ids = array_map(function ($course) {
+                return $course->ID;
+            }, $courses);
+
+            $post__in = $course_ids;
+        }
+
+
         $tax_query['relation'] = 'OR';
 
         $author_query = [];
@@ -236,7 +280,6 @@ class CoursesFunctions
             }
         }
 
-        $post__in = null;
         $query_args = apply_filters('academy-africa_course_grid_query_args', [
             'post_type' => sanitize_text_field($atts['post_type']),
             'posts_per_page' => intval($atts['per_page']),
@@ -366,6 +409,7 @@ class CoursesFunctions
     {
         $allOrganizations = CoursesFunctions::getOrganizations();
         $allInstructors = CoursesFunctions::getAllInstructors();
+        $allLearningPaths = CoursesFunctions::getAllLearningPaths();
         $filter_by = [
             [
                 'title' => 'Organizations',
@@ -373,10 +417,15 @@ class CoursesFunctions
                 'options' => []
             ],
             [
-                'title' => 'Instructors',
-                'name' => 'instructor',
+                'title' => 'Learning Paths',
+                'name' => 'learning_path',
                 'options' => []
             ],
+            // [
+            //     'title' => 'Instructors',
+            //     'name' => 'instructor',
+            //     'options' => []
+            // ],
             [
                 'title' => 'Languages',
                 'name' => 'language',
@@ -395,13 +444,21 @@ class CoursesFunctions
             array_push($filter_by[0]['options'], $formatedOrganization);
         }
 
-        foreach ($allInstructors as $instructor) {
-            $formatedInstructor = (object)[
-                'id' => $instructor['id'],
-                'name' => $instructor['name'],
+        foreach ($allLearningPaths as $learningPath) {
+            $formatedLearningPath = (object)[
+                'id' => $learningPath['id'],
+                'name' => $learningPath['title'],
             ];
-            array_push($filter_by[1]['options'], $formatedInstructor);
+            array_push($filter_by[1]['options'], $formatedLearningPath);
         }
+
+        // foreach ($allInstructors as $instructor) {
+        //     $formatedInstructor = (object)[
+        //         'id' => $instructor['id'],
+        //         'name' => $instructor['name'],
+        //     ];
+        //     array_push($filter_by[2]['options'], $formatedInstructor);
+        // }
 
         return $filter_by;
     }

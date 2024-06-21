@@ -90,9 +90,9 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
             'instructor' => $instructors,
             "orderby_order" => $order_by,
             'user_ids' => array($user_id),
-            'post_ids' => $courses,
+            'post__in' => $courses,
         );
-        return learndash_reports_get_activity($args);
+        return learndash_reports_get_activity($args, $user_id);
     }
 
     public function get_enrolled_courses()
@@ -237,7 +237,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $lessons_count = $progress["total"];
 
                             ?>
-                                <a href="<? echo $course_link ?>" >
+                                <a href="<? echo $course_link ?>">
                                     <div id="<? echo $course_id ?>" class="card">
                                         <div class="course-card-pattern">
                                             <img src="<? echo $image ?>" alt="course-thumbnail">
@@ -334,19 +334,19 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                         <div class="content">
                             <?
                             if (!empty($completed_courses['results'])) {
-                                foreach ($completed_courses['results'] as $course) {
+                                foreach ($completed_courses['results'] as $key => $course) {
                                     $course_id = $course->post_id;
                                     $certificate_id = learndash_get_setting($course_id, 'certificate');
                                     $cert_post = get_post($certificate_id);
                                     $title = get_the_title($course);
-                                    $authors = get_coauthors($course->ID);
+                                    $authors = get_coauthors($course_id);
                                     $first_name = get_the_author_meta('first_name', $authors[0]->ID);
                                     $last_name = get_the_author_meta('last_name', $authors[0]->ID);
-                                    $provider = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
+                                    $course_author = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
                                     if (count($authors) > 1) {
-                                        $provider .= ' + ' . (count($authors) - 1) . ' more';
+                                        $course_author .= ' + ' . (count($authors) - 1) . ' more';
                                     }
-                                    $course_link = add_query_arg("certificate",1,get_permalink($course_id));
+                                    $course_link = add_query_arg("certificate", 1, get_permalink($course_id));
                                     $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
                                     $completed = floor(($progress["completed"] / $progress["total"]) * 100);
                                     $lessons_count = $progress["total"];
@@ -360,46 +360,46 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                         <? $cert_content = $this->replace_course_info($cert_post->post_content, $course_id) ?>
                                         <? echo do_shortcode($cert_content) ?>
                                     </div>
-                                    <div >
-                                    <div class="card">
-                                        <div class="course-card-pattern">
-                                            <img src="<? echo $image ?>" alt="course-thumbnail">
-                                        </div>
-                                        <div class="card-content">
-                                            <a href="<? echo $course_link ?>">
-                                                <div class="card-title">
-                                                    <p>
-                                                        <? echo $title ?>
-                                                    </p>
-                                                </div>
-                                            </a>
-                                            <p class="provider">
-                                                by
-                                                <? echo $provider ?>
-                                            </p>
-                                            <p class="lessons-count">
-                                                <? echo $lessons_count ?> lessons
-                                            </p>
-                                            <div class="completed-progress-bar">
+                                    <div>
+                                        <div class="card">
+                                            <div class="course-card-pattern">
+                                                <img src="<? echo $image ?>" alt="course-thumbnail">
                                             </div>
-                                            <div class="card-footer">
-                                                <p>Certificate Achieved</p>
-                                                <div class="icons">
-                                                    <?
-                                                    $cert = learndash_get_course_certificate_link($course_id);
-                                                    ?>
-                                                    <a href="<? echo $cert ?>" download>
-                                                        <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg" style="cursor: pointer;" alt="download" />
-                                                    </a>
+                                            <div class="card-content">
+                                                <a href="<? echo $course_link ?>">
+                                                    <div class="card-title">
+                                                        <p>
+                                                            <? echo $title ?>
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                                <p class="provider">
+                                                    by
+                                                    <? echo $course_author ?>
+                                                </p>
+                                                <p class="lessons-count">
+                                                    <? echo $lessons_count ?> lessons
+                                                </p>
+                                                <div class="completed-progress-bar">
+                                                </div>
+                                                <div class="card-footer">
+                                                    <p>Certificate Achieved</p>
+                                                    <div class="icons">
+                                                        <?
+                                                        $cert = learndash_get_course_certificate_link($course_id);
+                                                        ?>
+                                                        <a href="<? echo $cert ?>" download>
+                                                            <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg" style="cursor: pointer;" alt="download" />
+                                                        </a>
 
-                                                    <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg" alt="share" />
+                                                        <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg" alt="share" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
-                                    </div>
-                                    
+
                             <?
                                 }
                             }

@@ -291,7 +291,7 @@
 .search-page .search-page-main .search-page-results .list {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 40px;
   flex-wrap: wrap;
   margin-bottom: 30px;

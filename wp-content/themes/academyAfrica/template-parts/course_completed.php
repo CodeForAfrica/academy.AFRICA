@@ -76,8 +76,7 @@ global $shortcode_tags;
                     </div>
                     <div class="certificate-header-logo">
                         <hr />
-                        <img height="90px" width="90px" class="logo" alt="logo" style="background: transparent; margin-top: -80px; width: 110px; height: 110px"
-                            src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.png' ?>" />
+                        <img height="90px" width="90px" class="logo" alt="logo" style="background: transparent; margin-top: -80px; width: 110px; height: 110px" src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.png' ?>" />
                     </div>
 
                 </div>
@@ -106,18 +105,15 @@ global $shortcode_tags;
             <div class="certificate-footer">
                 <div class="company-details">
                     <div class="brand-details">
-                        <img height="60px" width="60px" class="logo" alt="logo" style="background: transparent; width: 60px; height: 60px;"
-                            src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
+                        <img height="60px" width="60px" class="logo" alt="logo" style="background: transparent; width: 60px; height: 60px;" src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
                         <p class="company-name" style="line-height: 60px; font-size: 14px;">
                             <? echo $company_name ?>
                         </p>
                     </div>
-                    <img class="artwork" height="60px" width="102px" alt="artwork" style="background: transparent; width: 80px; height: 40px;"
-                        src="<? echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" />
+                    <img class="artwork" height="60px" width="102px" alt="artwork" style="background: transparent; width: 80px; height: 40px;" src="<? echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" />
                 </div>
                 <div class="signature">
-                    <img class="signature-img" alt="signature" alt="<? echo $academy_head['name'] ?>"
-                        style="background: transparent; margin-bottom: 8px;" src="<? echo $academy_head['signature'] ?>" />
+                    <img class="signature-img" alt="signature" alt="<? echo $academy_head['name'] ?>" style="background: transparent; margin-bottom: 8px;" src="<? echo $academy_head['signature'] ?>" />
                     <p class="signee-name" style="margin-bottom: 8px; font-size: 12px;">
                         <? echo $academy_head['name'] ?>
                     </p>
@@ -140,29 +136,34 @@ global $shortcode_tags;
                 <? echo $share_title ?>
             </h4>
             <div class="share" style="display: flex; justify-content: center;">
-            <?php get_template_part('template-parts/social_share', 'template', array()); ?>
+                <?php get_template_part('template-parts/social_share', 'template', array()); ?>
             </div>
-            <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
-                <button class="button primary">
-                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g id="Icon">
-                            <path id="Vector"
-                                d="M14.5 10.5V13.1667C14.5 13.5203 14.3595 13.8594 14.1095 14.1095C13.8594 14.3595 13.5203 14.5 13.1667 14.5H3.83333C3.47971 14.5 3.14057 14.3595 2.89052 14.1095C2.64048 13.8594 2.5 13.5203 2.5 13.1667V10.5"
-                                stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path id="Vector_2" d="M5.16797 7.16797L8.5013 10.5013L11.8346 7.16797" stroke="#EFF0FD"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </g>
-                    </svg>
-                    Download
-                </button>
-            </a>
+            <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px; flex-direction: column;">
+                <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
+                    <button class="button primary">
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Icon">
+                                <path id="Vector" d="M14.5 10.5V13.1667C14.5 13.5203 14.3595 13.8594 14.1095 14.1095C13.8594 14.3595 13.5203 14.5 13.1667 14.5H3.83333C3.47971 14.5 3.14057 14.3595 2.89052 14.1095C2.64048 13.8594 2.5 13.5203 2.5 13.1667V10.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path id="Vector_2" d="M5.16797 7.16797L8.5013 10.5013L11.8346 7.16797" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </g>
+                        </svg>
+                        Download
+                    </button>
+                </a>
+                <a href="<? echo get_permalink($course_id) ?>">
+                    <button class="button primary">
+                        View Course
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
     <script type="text/javascript">
         function convertHTMLtoPDF() {
-            const { jsPDF } = window.jspdf;
+            const {
+                jsPDF
+            } = window.jspdf;
 
             let doc = new jsPDF('l', 'mm', [210, 297]);
             doc.setFillColor(255, 255, 255);
@@ -170,14 +171,17 @@ global $shortcode_tags;
             const width = doc.internal.pageSize.getWidth();
             const height = doc.internal.pageSize.getHeight();
             doc.html(pdfjs, {
-                callback: function (doc) {
+                callback: function(doc) {
                     doc.save(`<? echo $user['first_name'] . ' ' . $user['first_name'] ?> | <? echo $certificate_course ?>.pdf`);
                 },
                 width: width,
                 height,
                 windowWidth: 891,
-                html2canvas: { scale: 0.954, backgroundColor: "#ffffff" },
+                html2canvas: {
+                    scale: 0.954,
+                    backgroundColor: "#ffffff"
+                },
             });
-        }            
+        }
     </script>
 </div>
