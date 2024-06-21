@@ -17,14 +17,14 @@ if (isset($_GET['email_sent'])) {
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="Google">
                 Sign in with Google
             </button>
-            <button onclick="theChampInitiateLogin(this, 'facebook')" class="facebook">
+            <!-- <button onclick="theChampInitiateLogin(this, 'facebook')" class="facebook">
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Facebook">
                 Sign In with Facebook
             </button>
             <button onclick="theChampInitiateLogin(this, 'x')" class="twitter">
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/twitter.svg" alt="Twitter">
                 Sign In with X (formerly Twitter)
-            </button>
+            </button> -->
         </div>
         <div class="content-divider">
             <div></div><span>or</span>
