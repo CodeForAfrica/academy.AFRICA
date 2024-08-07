@@ -493,7 +493,7 @@ function custom_login_page()
     }
 }
 
-// add_action('init', 'custom_login_page');
+add_action('init', 'custom_login_page');
 add_action('login_form_middle', 'add_lost_password_link');
 function add_lost_password_link()
 {
