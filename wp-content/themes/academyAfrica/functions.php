@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.3.7');
+define('ACADEMY_AFRICA_VERSION', '1.3.8');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -186,11 +186,14 @@ function my_acf_show_admin($show)
 
 add_action('user_register', 'send_activation_link', 10, 1);
 
+function set_html_content_type() {
+    return 'text/html';
+}
 function send_activation_link($user_id)
 {
     if ($user_id) {
         $user = get_user_by('ID', $user_id);
-        $sign_in_url = home_url() . '#sign-in';
+        $sign_in_url = home_url() . '/login';
         $code = $user->data->user_activation_key;
         $valid_code = (!!$code && isset($code)) ? $code : sha1($user_id . time());
         global $wpdb;
@@ -203,7 +206,44 @@ function send_activation_link($user_id)
         $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $valid_code, 'user_id' => $user_id), $sign_in_url);
 ?>
         <?
-        wp_mail($email, '[academy.AFRICA] Login Details', 'Activation link : ' . $activation_link);
+        add_filter('wp_mail_content_type', 'set_html_content_type');
+        $name = get_user_meta($user->data->ID, 'first_name', true).' '.get_user_meta($user_id, 'last_name', true);
+        $body = "Hi <strong>".$name."</strong>,
+        <p>
+        Thank you for creating an account with academy.AFRICA! To get started, please verify your account by clicking the link below:</p>
+            <a href=".  $activation_link .">
+            <button style=\"background: #004085;
+            border: 1px solid #004085;
+            margin-top: 16px;
+            margin-bottom: 16px;
+            padding: 8px 16px; 
+            font-size: 14px; 
+            line-height: 16px;
+            color: #ffffff; 
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            border-radius: 0;\"
+            onmouseover=\"this.style.background='#cce5ff'; this.style.color='#004085';\"
+            onmouseout=\"this.style.background='#004085'; this.style.color='#ffffff';\">
+            Activate Your Account
+            </button>
+            </a>
+        <p>Once your account is activated, you'll have full access to academy.AFRICA and can begin your learning journey with us.</p>
+        <p>If you did not sign up for this account, please disregard this email.</p>
+        <p style=\"margin-bottom: 0; margin-top: 10px\">
+        Thank you,
+        </p>
+        <p>The academy.AFRICA Team</p>
+        ";
+        wp_mail($email, 'Please Verify Your academy.AFRICA Account', $body);
+        remove_filter('wp_mail_content_type', 'set_html_content_type');
     }
 }
 
@@ -220,7 +260,7 @@ function whitelist_address()
 
 function restrict_user_status($user, $username, $password)
 {
-    if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+    if (in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
         return $user;
     } else {
         if ($user instanceof WP_User) {
@@ -229,13 +269,26 @@ function restrict_user_status($user, $username, $password)
                 if (!isset($user->data->user_activation_key)) {
                     send_activation_link($user->data->ID);
                 }
+                wp_logout();
                 return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
             } else {
                 return $user;
             }
         } else {
+            wp_logout();
             return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
         }
+    }
+}
+
+function render_inactive($render){
+    wp_logout();
+    if($render){
+        ?>
+        <script>
+            window.error = "Your account is not active. Please check your email inbox or spam folder for an activation link."
+        </script>
+    <?
     }
 }
 
@@ -243,7 +296,7 @@ function authenticate_user()
 {
     $user_id = get_current_user_id();
     $user = get_user_by('ID', $user_id);
-    if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+    if (in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
         return $user;
     } else {
         if ($user instanceof WP_User) {
@@ -252,16 +305,11 @@ function authenticate_user()
             if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
                 if ($user->data->user_status == 1 || $account_status !== "active") {
                     send_activation_link($user->data->ID);
-                    wp_logout();
-        ?>
-                    <script>
-                        window.location.reload();
-                    </script>
-        <?
+                    render_inactive(true);
                 }
             }
         } else {
-            wp_logout();
+            render_inactive(false);
         }
     }
 }
@@ -446,9 +494,10 @@ function check_register_action()
         );
         $new_user = wp_insert_user($user);
         if (is_wp_error($new_user)) {
-            echo $new_user->get_error_message();
+            wp_redirect(home_url('/login?action=register&error_message=' . urlencode($new_user->get_error_message())));
         } else {
-            echo "<br>You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.";
+            $success_message = "You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.";
+            wp_redirect(home_url('/login?action=register&success=' . urlencode($success_message)));
         }
         exit;
     }
@@ -646,3 +695,12 @@ function academyafrica_customize_register($wp_customize)
     }
 }
 add_action('customize_register', 'academyafrica_customize_register');
+
+function auto_confirm_admin_email($new_email) {
+    // Confirm the email change programmatically
+    if (get_option('admin_email') !== $new_email) {
+        update_option('admin_email', $new_email);
+    }
+    return $new_email;
+}
+add_filter('pre_update_option_admin_email', 'auto_confirm_admin_email');

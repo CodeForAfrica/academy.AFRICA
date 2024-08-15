@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .button {
   text-transform: uppercase;
   font-weight: 800;
@@ -233,6 +234,27 @@
   font-style: normal;
   font-weight: 400;
   line-height: 16px; /* 114.286% */
+}
+.login .error_message {
+  background-color: #f8d7da; /* Light red background */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb; /* Slightly darker red border */
+  padding: 10px 15px; /* Space inside the message box */
+  border-radius: 5px; /* Rounded corners */
+  font-family: Arial, sans-serif; /* Font style */
+  font-size: 14px; /* Font size */
+  margin: 10px 0; /* Space above and below the message */
+}
+.login .error_message::before {
+  content: "⚠"; /* Warning triangle icon (Unicode) */
+  margin-right: 8px;
+  font-size: 16px; /* Size of the icon */
+}
+.login .error_message.text-center {
+  text-align: center;
+}
+.login .error_message:hover {
+  background-color: #f1b0b7; /* Slightly darker on hover */
 }
 
 /*# sourceMappingURL=login.css.map */
