@@ -254,14 +254,13 @@ function whitelist_address()
         '::1',
         'localhost',
         'academyafridev.wpenginepowered.com',
-        'academyafristg.wpenginepowered.com',
-        'academy.africa'
-    );
+        'academyafristg.wpenginepowered.com'
+        );
 }
 
 function restrict_user_status($user, $username, $password)
 {
-    if (in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+    if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
         return $user;
     } else {
         if ($user instanceof WP_User) {
@@ -297,7 +296,7 @@ function authenticate_user()
 {
     $user_id = get_current_user_id();
     $user = get_user_by('ID', $user_id);
-    if (in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
+    if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
         return $user;
     } else {
         if ($user instanceof WP_User) {
