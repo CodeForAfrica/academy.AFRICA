@@ -17,7 +17,18 @@ if (!defined('ABSPATH')) {
 <?php get_template_part('template-parts/footer', 'template'); ?>
 
 <?php wp_footer(); ?>
-
+<script>
+	
+		window.addEventListener("load", function(){
+			if(window.error){
+        const element = document.getElementById("error_message");
+        if(element){
+            element.className = "error_message";
+            element.innerText = window.error;
+        }
+    }
+		})
+</script>
 </body>
 
 </html>

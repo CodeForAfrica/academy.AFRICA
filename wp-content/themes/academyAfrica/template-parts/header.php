@@ -178,11 +178,4 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
             ?>
         });
     });
-    if(window.error){
-        const element =document.getElementById("error_message");
-        if(element){
-            element.className = "error_message";
-            element.innerText = window.error;
-        }
-    }
 </script>

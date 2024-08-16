@@ -258,64 +258,19 @@ function whitelist_address()
         );
 }
 
-function restrict_user_status($user, $username, $password)
-{
-    if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
-        return $user;
-    } else {
-        if ($user instanceof WP_User) {
-            $account_status = get_user_meta($user->data->ID, 'account_status', true);
-            if ($user->data->user_status == 1 || $account_status !== "active") {
-                if (!isset($user->data->user_activation_key)) {
-                    send_activation_link($user->data->ID);
-                }
-                wp_logout();
-                return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
-            } else {
-                return $user;
-            }
-        } else {
-            wp_logout();
-            return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
-        }
-    }
+function set_global_error($message = "An error occured"){
+    ?>
+    <script>
+        window.error = <? echo json_encode($message) ?>
+    </script>
+<?
 }
-
 function render_inactive($render){
     wp_logout();
     if($render){
-        ?>
-        <script>
-            window.error = "Your account is not active. Please check your email inbox or spam folder for an activation link."
-        </script>
-    <?
+        set_global_error("Your account is not active. Please check your email inbox or spam folder for an activation link.");
     }
 }
-
-function authenticate_user()
-{
-    $user_id = get_current_user_id();
-    $user = get_user_by('ID', $user_id);
-    if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
-        return $user;
-    } else {
-        if ($user instanceof WP_User) {
-            $account_status = get_user_meta($user->data->ID, 'account_status', true);
-            global $whitelist;
-            if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
-                if ($user->data->user_status == 1 || $account_status !== "active") {
-                    send_activation_link($user->data->ID);
-                    render_inactive(true);
-                }
-            }
-        } else {
-            render_inactive(false);
-        }
-    }
-}
-
-add_action('init', 'authenticate_user');
-add_filter('authenticate', 'restrict_user_status', 20, 3);
 
 const required_plugins = array(
     'LearnDash' => [
@@ -471,236 +426,24 @@ function hide_admin_bar()
 
 add_action('after_setup_theme', 'hide_admin_bar');
 
-function check_password_reset_action()
-{
-    if (isset($_POST['pass_reset'])) {
-        ?>
-        <div>Password reset instructions have been sent to your email address.</div>
-<?
-    }
-}
-
-function check_register_action()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['action'] === 'register')) {
-        $user = array(
-            'first_name' => $_POST['firstName'],
-            'last_name' => $_POST['lastName'],
-            'user_email' => $_POST['email'],
-            'user_pass' => $_POST['password'],
-            'user_nicename' => $_POST['firstName'] . $_POST['lastName'],
-            'user_login' => $_POST['email'],
-            'user_status' => 1,
-        );
-        $new_user = wp_insert_user($user);
-        if (is_wp_error($new_user)) {
-            wp_redirect(home_url('/login?action=register&error_message=' . urlencode($new_user->get_error_message())));
-        } else {
-            $success_message = "You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.";
-            wp_redirect(home_url('/login?action=register&success=' . urlencode($success_message)));
-        }
-        exit;
-    }
-}
-
-function activate_new_user_action()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && ((isset($_GET['action'])) && $_GET['action'] === 'account_activation') && (isset($_GET['key'])) && (isset($_GET['user_id']))) {
-        $user_id = $_GET['user_id'];
-        $code = $_GET['key'];
-        global $wpdb;
-        $user = get_user_by('ID', $user_id);
-        update_user_meta($user_id, 'account_status', "active");
-        $wpdb->update(
-            'wp_users',
-            array('user_status' => 0),
-            array(
-                'ID' => $user_id,
-                'user_activation_key' => $code
-            ),
-        );
-    }
-}
-
-function custom_login_page()
-{
-    $path_name = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : "/";
-    $login_page = home_url("/login" . "?redirect_url=" . $path_name);
-    $to_redirect = array("lostpassword");
-    $reset_password_page = home_url('/login?action=lostpassword');
-    $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];
-    check_password_reset_action();
-    check_register_action();
-    activate_new_user_action();
-    if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'lostpassword') {
-        wp_redirect($reset_password_page);
-        exit;
-    }
-    if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && (!isset($_GET['action']) || isset($to_redirect[$_GET['action']]))) {
-        wp_redirect($login_page);
-        exit;
-    }
-}
-
-add_action('init', 'custom_login_page');
-add_action('login_form_middle', 'add_lost_password_link');
-function add_lost_password_link()
-{
-    return '<a class="remember-me" href="/login?action=lostpassword">Lost Password?</a>';
-}
 
 function enqueue_my_scripts()
 {
-    if (is_page('profile')) { // Replace 'my-page' with the slug of your page
+    if (is_page('profile')) {
         wp_enqueue_script('tiny_mce');
         wp_enqueue_script('jquery');
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
-function fix_wpelogin($url)
-{
-    $url = add_query_arg('wpe-login', true, $url);
-    $url = add_query_arg('email_sent', true, $url);
-    return $url;
+
+// Get the path to the 'inc' directory
+$inc_dir = __DIR__ . '/includes/functions/';
+
+// Check if the directory exists
+$files = glob( $inc_dir . '*.php' );
+    // Include each file
+foreach ( $files as $file ) {
+    require_once $file;
 }
-add_filter('lostpassword_url', 'fix_wpelogin');
+// add_action('init', 'custom_login_page');
 
-function academyafrica_customize_register($wp_customize)
-{
-    // Section for Profile Settings
-    $wp_customize->add_section('profile_settings_section', array(
-        'title'    => __('Profile Settings', 'academyafrica'),
-        'priority' => 30,
-    ));
-
-    // Add settings and controls for each field
-    $fields = array(
-        'page_title' => array(
-            'label' => __('Page Title', 'mytheme'),
-            'default' => 'Profile Settings'
-        ),
-        'avatar_label' => array(
-            'label' => __('Avatar Label', 'mytheme'),
-            'default' => 'Change your profile image'
-        ),
-        'upload_text' => array(
-            'label' => __('Upload Text', 'mytheme'),
-            'default' => 'upload'
-        ),
-        'view_my_courses' => array(
-            'label' => __('View My Courses', 'mytheme'),
-            'default' => 'View your courses'
-        ),
-        'form_description' => array(
-            'label' => __('Form Description', 'mytheme'),
-            'default' => 'Please enter your information and indicate whether you would like it to be visible to the public.'
-        ),
-        'first_name_label' => array(
-            'label' => __('First Name Label', 'mytheme'),
-            'default' => 'First Name'
-        ),
-        'last_name_label' => array(
-            'label' => __('Last Name Label', 'mytheme'),
-            'default' => 'Last Name'
-        ),
-        'facebook_label' => array(
-            'label' => __('Facebook Label', 'mytheme'),
-            'default' => 'Facebook'
-        ),
-        'linked_in_label' => array(
-            'label' => __('LinkedIn Label', 'mytheme'),
-            'default' => 'Linked In'
-        ),
-        'slack_label' => array(
-            'label' => __('Slack Label', 'mytheme'),
-            'default' => 'Slack'
-        ),
-        'city_label' => array(
-            'label' => __('City Label', 'mytheme'),
-            'default' => 'City'
-        ),
-        'company_label' => array(
-            'label' => __('Company Label', 'mytheme'),
-            'default' => 'Company'
-        ),
-        'country_label' => array(
-            'label' => __('Country Label', 'mytheme'),
-            'default' => 'Country'
-        ),
-        'phone_label' => array(
-            'label' => __('Phone Label', 'mytheme'),
-            'default' => 'Phone'
-        ),
-        'email_label' => array(
-            'label' => __('Email Label', 'mytheme'),
-            'default' => 'Email'
-        ),
-        'twitter_label' => array(
-            'label' => __('Twitter Label', 'mytheme'),
-            'default' => 'Twitter'
-        ),
-        'position_label' => array(
-            'label' => __('Position Label', 'mytheme'),
-            'default' => 'Position'
-        ),
-        'bio_label' => array(
-            'label' => __('Bio Label', 'mytheme'),
-            'default' => 'Tell us a little about yourself'
-        ),
-        'mandatory_label' => array(
-            'label' => __('Mandatory Label', 'mytheme'),
-            'default' => 'Mandatory Fields'
-        ),
-        'receive_updates_label' => array(
-            'label' => __('Receive Updates Label', 'mytheme'),
-            'default' => 'Would you like to receive email updates about new content and events by academy.AFRICA?'
-        ),
-        'new_courses_label' => array(
-            'label' => __('New Courses Label', 'mytheme'),
-            'default' => 'New Courses'
-        ),
-        'new_events_label' => array(
-            'label' => __('New Events Label', 'mytheme'),
-            'default' => 'New Events'
-        ),
-        'save_changes_label' => array(
-            'label' => __('Save Changes Label', 'mytheme'),
-            'default' => 'Save Changes'
-        ),
-        'settings_title' => array(
-            'label' => __('Settings Title', 'mytheme'),
-            'default' => 'Network Settings'
-        ),
-        'settings_description' => array(
-            'label' => __('Settings Description', 'mytheme'),
-            'default' => 'Please indicate the networks you belong to or use the ‘Join’ button to join a network.'
-        ),
-        'membership_label' => array(
-            'label' => __('Membership Label', 'mytheme'),
-            'default' => 'I’m already a member'
-        ),
-    );
-
-    foreach ($fields as $field => $data) {
-        $wp_customize->add_setting($field, array(
-            'default'   => $data['default'],
-            'transport' => 'refresh',
-        ));
-
-        $wp_customize->add_control($field, array(
-            'label'    => $data['label'],
-            'section'  => 'profile_settings_section',
-            'type'     => 'text',
-        ));
-    }
-}
-add_action('customize_register', 'academyafrica_customize_register');
-
-function auto_confirm_admin_email($new_email) {
-    // Confirm the email change programmatically
-    if (get_option('admin_email') !== $new_email) {
-        update_option('admin_email', $new_email);
-    }
-    return $new_email;
-}
-add_filter('pre_update_option_admin_email', 'auto_confirm_admin_email');

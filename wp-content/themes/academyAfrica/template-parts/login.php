@@ -1,10 +1,10 @@
 
-<div class="login">
 <?
 if (isset($_GET['email_sent'])) {
         echo 'Password reset instructions have been sent to your email. Follow the link to reset.';
     } else {
 ?>
+<div class="login">
     <div class="content" id="login-modal-content">
         <header>
             <h6 style="font-size: 20px;" class="cfa-title">Welcome Back</h6>

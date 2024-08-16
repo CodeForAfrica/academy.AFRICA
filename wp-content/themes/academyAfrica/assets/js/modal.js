@@ -40,7 +40,7 @@ function onload() {
   const isLoginFailed = new URLSearchParams(search).get("login")==="failed"
   if (isLoginFailed) {
     if (pathname === "/login/") {
-      document.getElementById("login_error").innerText =
+      window.error =
         "Error: An error occurred, either the password you entered is incorrect, the email is incorrect or your account is not activated";
     } else {
 

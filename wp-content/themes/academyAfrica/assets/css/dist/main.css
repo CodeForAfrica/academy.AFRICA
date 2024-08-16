@@ -624,10 +624,10 @@
   color: #721c24; /* Dark red text */
   border: 1px solid #f5c6cb; /* Slightly darker red border */
   padding: 10px 15px; /* Space inside the message box */
-  border-radius: 5px; /* Rounded corners */
   font-family: Arial, sans-serif; /* Font style */
   font-size: 14px; /* Font size */
   margin: 10px 0; /* Space above and below the message */
+  text-align: center;
 }
 .error_message::before {
   content: "⚠"; /* Warning triangle icon (Unicode) */

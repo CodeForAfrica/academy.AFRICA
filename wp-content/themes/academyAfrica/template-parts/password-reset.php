@@ -14,10 +14,31 @@ function get_full_url($path = '', $search = '') {
 ?>
 <div style="min-height: calc(100vh - 620px);" class="login">
 <?php
-if ( isset($_POST['pass_reset'])) {
+if ( isset($_GET['email_sent'])) {
     ?>
-    <div>Password reset instructions have been sent to your email.</div>
-    <?
+        <div class="login" style="min-height: calc(100vh - 550px)">
+        <strong>🎉 Password Reset Request Received!</strong>
+<p style="margin-top: 16px;" class="description">We've sent you an email with instructions to reset your password. Please check your inbox for the email. If you don't see it in a few minutes, be sure to check your spam or junk folder, just in case it got filtered there.
+</p>
+<p class="description">
+Didn't get the email?
+</p>
+<div style="display:flex; gap: 8px">
+<span class="description">You can </span> 
+<form action="<? echo wp_lostpassword_url()?>" method="post">
+<input type="email" placeholder="Email"  id="user_login" name="user_login" value="<? echo $_GET['user_login']?>" required hidden>
+<input type="text" hidden name="pass_reset" value="pass-reset">
+<button class="description" style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: #0C1A81; text-decoration: none; cursor: pointer; display: inline;" 
+        onmouseover="this.style.textDecoration='underline';" 
+        onmouseout="this.style.textDecoration='none';">
+        resend the reset link 
+</button>
+</div>
+</form>
+<span class="description">or contact our support team for further assistance.</span>
+
+        </div>
+        <?
 } else {
     ?>
     <div class="content" id="login-modal-content">
@@ -46,5 +67,12 @@ if ( isset($_POST['pass_reset'])) {
     <?
 }
 ?>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const error= urlParams.get('error_message');
+    if(error){
+        window.error = error;
+    }
+</script>
 </div>
 <?php get_footer(); ?>
