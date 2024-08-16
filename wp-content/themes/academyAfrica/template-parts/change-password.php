@@ -10,14 +10,14 @@ if(isset($_POST["rp_key"])){
         $confirm_password = $_POST['pass2'];
         if ( $new_password !== $confirm_password ) {
             set_global_error("Passwords do not match");
-        }
-        $user = check_password_reset_key($reset_key, $user_login);
-
-        if ( is_wp_error($user) ) {
-            set_global_error("Invalid Key");
-        } else {
-            reset_password($user, $new_password);
-            $is_success = true;
+        }else {
+            $user = check_password_reset_key($reset_key, $user_login);
+            if ( is_wp_error($user) ) {
+                set_global_error("Invalid Key");
+            } else {
+                reset_password($user, $new_password);
+                $is_success = true;
+            }
         }
 }
 ?>
