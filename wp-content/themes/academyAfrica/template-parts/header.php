@@ -61,7 +61,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                     the_custom_logo();
                     echo "</div>";
                 }
-                echo '<h1 class="site_name"><a href="' . esc_url(home_url('/')) . '">' . esc_html(get_bloginfo('name')) . '</a></h1>';
+                // echo '<h1 class="site_name"><a href="' . esc_url(home_url('/')) . '">' . esc_html(get_bloginfo('name')) . '</a></h1>';
                 ?>
             </div>
             <div class='nav-actions'>
@@ -71,7 +71,7 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                 <div class="menu">
                     <div class="items">
                         <?php
-                        $path_name=$_SERVER['REQUEST_URI'];
+                        $path_name = $_SERVER['REQUEST_URI'];
                         foreach ($menu_items as $menu_item) {
                             $class = 'item';
                             $class .= ' ' . $menu_item["class"];
@@ -90,8 +90,8 @@ $menu_items = MenuFunctions::get_menu_items('menu-1');
                                 echo "</div>";
                                 echo "</div>";
                             } else {
-                                $query_param = $menu_item['class'] == "sign-in"? '?redirect_url='.$path_name : '';
-                                echo "<a class='" . $class . "' href='" . $menu_item['url'] .$query_param. "'>" . $menu_item['title'] . "</a>";
+                                $query_param = $menu_item['class'] == "sign-in" ? '?redirect_url=' . $path_name : '';
+                                echo "<a class='" . $class . "' href='" . $menu_item['url'] . $query_param . "'>" . $menu_item['title'] . "</a>";
                             }
                         }
                         ?>

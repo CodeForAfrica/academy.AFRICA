@@ -89,8 +89,8 @@
 
                 .image {
                     img {
-                        width: 52px;
-                        height: 52px;
+                        width: 141px;
+                        height: 64px;
                     }
                 }
 
@@ -599,24 +599,38 @@
 
 
 }
+
 .error_message {
-    background-color: #f8d7da; /* Light red background */
-    color: #721c24; /* Dark red text */
-    border: 1px solid #f5c6cb; /* Slightly darker red border */
-    padding: 10px 15px; /* Space inside the message box */
-    font-family: Arial, sans-serif; /* Font style */
-    font-size: 14px; /* Font size */
-    margin: 10px 0; /* Space above and below the message */
+    background-color: #f8d7da;
+    /* Light red background */
+    color: #721c24;
+    /* Dark red text */
+    border: 1px solid #f5c6cb;
+    /* Slightly darker red border */
+    padding: 10px 15px;
+    /* Space inside the message box */
+    font-family: Arial, sans-serif;
+    /* Font style */
+    font-size: 14px;
+    /* Font size */
+    margin: 10px 0;
+    /* Space above and below the message */
     text-align: center;
+
     &::before {
-      content: "\26A0"; /* Warning triangle icon (Unicode) */
-      margin-right: 8px;
-      font-size: 16px; /* Size of the icon */
+        content: "\26A0";
+        /* Warning triangle icon (Unicode) */
+        margin-right: 8px;
+        font-size: 16px;
+        /* Size of the icon */
     }
+
     &.text-center {
-      text-align: center;
+        text-align: center;
     }
+
     &:hover {
-      background-color: #f1b0b7; /* Slightly darker on hover */
+        background-color: #f1b0b7;
+        /* Slightly darker on hover */
     }
-  }
+}
