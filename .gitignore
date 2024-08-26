@@ -116,3 +116,5 @@ yarn.lock
 !/wp-content/plugins/index.php
 !/wp-content/plugins/academy-africa
 /vendor/
+wp-content/drop-ins/
+wp-content/languages/
