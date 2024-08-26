@@ -33,7 +33,26 @@ if (isset($_GET['email_sent'])) {
                 <p id="login_error">
                 </p>
             </div>
-            <?php wp_login_form(array('value_redirect_to' => $_GET['redirect_url'], 'redirect' => $_GET['redirect_url'])); ?>
+            <?php
+            // Capture the login form output
+            ob_start();
+            wp_login_form(array('value_redirect_to' => $_GET['redirect_url'], 'redirect' => $_GET['redirect_url']));
+            $form_output = ob_get_clean();
+
+            // Get the Google Captcha shortcode output
+            $captcha_output = do_shortcode('[bws_google_captcha]');
+
+            // Find the position of the submit button
+            $submit_button_pos = strpos($form_output, '<input type="submit"');
+
+            // Insert the captcha before the submit button
+            if ($submit_button_pos !== false) {
+                $form_output = substr_replace($form_output, $captcha_output, $submit_button_pos, 0);
+            }
+
+            // Echo the combined output
+            echo $form_output;
+            ?>
             <footer style="display: flex; justify-content: space-between;" class="modal-footers">
                 <div>
                     <span>New to academy.AFRICA? </span><a class="remember-me" href="/login?action=register" style="margin-left: 4px; font-size: 16px;">Register
