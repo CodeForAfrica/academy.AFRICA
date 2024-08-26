@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.3.9');
+define('ACADEMY_AFRICA_VERSION', '1.4.0');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -186,7 +186,8 @@ function my_acf_show_admin($show)
 
 add_action('user_register', 'send_activation_link', 10, 1);
 
-function set_html_content_type() {
+function set_html_content_type()
+{
     return 'text/html';
 }
 function send_activation_link($user_id)
@@ -205,13 +206,13 @@ function send_activation_link($user_id)
         $email = $user->data->user_email;
         $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $valid_code, 'user_id' => $user_id), $sign_in_url);
 ?>
-        <?
+    <?
         add_filter('wp_mail_content_type', 'set_html_content_type');
-        $name = get_user_meta($user->data->ID, 'first_name', true).' '.get_user_meta($user_id, 'last_name', true);
-        $body = "Hi <strong>".$name."</strong>,
+        $name = get_user_meta($user->data->ID, 'first_name', true) . ' ' . get_user_meta($user_id, 'last_name', true);
+        $body = "Hi <strong>" . $name . "</strong>,
         <p>
         Thank you for creating an account with academy.AFRICA! To get started, please verify your account by clicking the link below:</p>
-            <a href=".  $activation_link .">
+            <a href=" .  $activation_link . ">
             <button style=\"background: #004085;
             border: 1px solid #004085;
             margin-top: 16px;
@@ -255,19 +256,21 @@ function whitelist_address()
         'localhost',
         'academyafridev.wpenginepowered.com',
         'academyafristg.wpenginepowered.com'
-        );
+    );
 }
 
-function set_global_error($message = "An error occured"){
+function set_global_error($message = "An error occured")
+{
     ?>
     <script>
         window.error = <? echo json_encode($message) ?>
     </script>
 <?
 }
-function render_inactive($render){
+function render_inactive($render)
+{
     wp_logout();
-    if($render){
+    if ($render) {
         set_global_error("Your account is not active. Please check your email inbox or spam folder for an activation link.");
     }
 }
@@ -440,10 +443,9 @@ add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
 $inc_dir = __DIR__ . '/includes/functions/';
 
 // Check if the directory exists
-$files = glob( $inc_dir . '*.php' );
-    // Include each file
-foreach ( $files as $file ) {
+$files = glob($inc_dir . '*.php');
+// Include each file
+foreach ($files as $file) {
     require_once $file;
 }
 // add_action('init', 'custom_login_page');
-
