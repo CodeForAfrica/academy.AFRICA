@@ -282,9 +282,6 @@ if (is_user_logged_in()) {
                     $description = get_the_content(null, false, $network_id);
                     $join = get_post_meta($network_id, 'join', true)["url"];
             ?>
-                    <script>
-                        console.log(<? echo json_encode($join) ?>)
-                    </script>
                     <div class="network">
                         <img class="img" src="<? echo $image_url ?>" alt="<? echo $network_title ?>">
                         <div class="content">
@@ -326,8 +323,6 @@ if (is_user_logged_in()) {
             </div>
         </form>
         <script>
-            // console.log(<? echo json_encode($_POST) ?>);
-
             function displayImage(input) {
                 const preview = document.getElementById('avatar_preview');
 

@@ -24,47 +24,43 @@ $course_intro    = $post_data->post_content;
         display: none;
     }
 </style>
-
-<script>
-    console.log(<? echo json_encode($course_id)?>)
-</script>
-    <div class="single-courses wysiwyg">
-        <div class="wrapper">
-            <div class="title-section">
-                <div class="title">
-                    <p class="cfa-title">
-                        <?php the_title(); ?>
-                    </p>
-                </div>
-                <div class="avatar">
-                    <?php
-                    $course_thumbnail = get_the_post_thumbnail_url($course_id);
-                    $mooc_logo = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-blue.svg';
-                    $logo_url = $course_thumbnail ? $course_thumbnail : $mooc_logo;
-                    echo '<img src="' . $logo_url . '" alt="">';
-                    ?>
-                </div>
-            </div>
-            <?php
-            if (!empty($short_description)) {
-            ?>
-                <div class="description">
-                    <?php echo $short_description; ?>
-                </div>
-            <?php
-            }
-            ?>
-            <hr class="divider">
-            <div class="introduction">
-                <p class="cfa-introduction-title">
-                    Introduction
+<div class="single-courses wysiwyg">
+    <div class="wrapper">
+        <div class="title-section">
+            <div class="title">
+                <p class="cfa-title">
+                    <?php the_title(); ?>
                 </p>
-                <div class="cfa-introduction">
-                    <?php echo do_shortcode($course_intro); ?>
-                </div>
+            </div>
+            <div class="avatar">
+                <?php
+                $course_thumbnail = get_the_post_thumbnail_url($course_id);
+                $mooc_logo = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-blue.svg';
+                $logo_url = $course_thumbnail ? $course_thumbnail : $mooc_logo;
+                echo '<img src="' . $logo_url . '" alt="">';
+                ?>
+            </div>
+        </div>
+        <?php
+        if (!empty($short_description)) {
+        ?>
+            <div class="description">
+                <?php echo $short_description; ?>
+            </div>
+        <?php
+        }
+        ?>
+        <hr class="divider">
+        <div class="introduction">
+            <p class="cfa-introduction-title">
+                Introduction
+            </p>
+            <div class="cfa-introduction">
+                <?php echo do_shortcode($course_intro); ?>
             </div>
         </div>
     </div>
+</div>
 <?
 get_footer();
 ?>

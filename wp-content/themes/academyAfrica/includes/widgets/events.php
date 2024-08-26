@@ -114,7 +114,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     'date' => $date,
                     'time' => get_post_meta(get_the_ID(), 'time', true) . ' ' . "GMT +00:00",
                     'image' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
-                    'country_code' => isset($countries) ? country_flag_emoji($countries[0]): country_flag_emoji("ZA"),
+                    'country_code' => isset($countries) ? country_flag_emoji($countries[0]) : country_flag_emoji("ZA"),
                     'language' => get_post_meta(get_the_ID(), 'language', true),
                     'post_url' => get_permalink(get_the_ID()),
                     'countries' => get_post_meta(get_the_ID(), 'countries', true)
@@ -243,16 +243,16 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     );
                     $query = new WP_Query($args);
                     $options = array();
-                    if($option == "country") {
+                    if ($option == "country") {
                         if ($query->have_posts()) {
                             while ($query->have_posts()) {
                                 $query->the_post();
                                 $post_id = get_the_ID();
                                 $values = get_post_meta($post_id, "countries", true);
                                 if (isset($values)) {
-                                    foreach($values as $field_name){
+                                    foreach ($values as $field_name) {
                                         $c_name = get_country_code($field_name);
-                                        $opt = isset($c_name) ? $c_name["name"]: "";
+                                        $opt = isset($c_name) ? $c_name["name"] : "";
                                         $options[$opt] = $field_name;
                                     }
                                 }
@@ -293,7 +293,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $args = array(
             'post_type' => 'event',
             'posts_per_page' => 10,
-            'paged'=> $this->get_query_param( 'upcoming_page' ) ? $this->get_query_param( 'upcoming_page' )[0]: 1,
+            'paged' => $this->get_query_param('upcoming_page') ? $this->get_query_param('upcoming_page')[0] : 1,
             'meta_query' => array(
                 array(
                     'key'     => 'date',
@@ -312,7 +312,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $args = array(
             'post_type' => 'event',
             'posts_per_page' => 10,
-            'paged'=> $this->get_query_param( 'previous_events_page' ) ? $this->get_query_param( 'previous_events_page' )[0] : 1,
+            'paged' => $this->get_query_param('previous_events_page') ? $this->get_query_param('previous_events_page')[0] : 1,
             'meta_query' => array(
                 array(
                     'key'     => 'date',
@@ -339,9 +339,6 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $previous_events_title = $settings["previous_events_title"];
         $filter_options = $this->get_filter_by();
 ?>
-<script>
-    console.log(<? echo json_encode($previous)?>)
-</script>
         <main class="events">
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
@@ -566,7 +563,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             </li>
 
                             <?
-                             $current = $this->get_query_param( 'upcoming_page' ) ? $this->get_query_param( 'upcoming_page' )[0] : "1"
+                            $current = $this->get_query_param('upcoming_page') ? $this->get_query_param('upcoming_page')[0] : "1"
                             ?>
                             <!-- Page links -->
                             <?php for ($i = 1; $i <= $upcoming_pagination['total_pages']; $i++) : ?>
@@ -574,9 +571,9 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                 $current_url_params = $_GET;
                                 $current_url_params["upcoming_page"] = $i;
                                 $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
-                                $cls = intval($current) === $i ? "active": "";
+                                $cls = intval($current) === $i ? "active" : "";
                                 ?>
-                                <li class="page-item <? echo $cls?>"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item <? echo $cls ?>"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
                             <?php endfor; ?>
 
                             <!-- Next page link -->
@@ -659,16 +656,16 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
 
                             <!-- Page links -->
                             <?
-                             $current = $this->get_query_param( 'previous_events_page' ) ? $this->get_query_param( 'previous_events_page' )[0] : "1"
+                            $current = $this->get_query_param('previous_events_page') ? $this->get_query_param('previous_events_page')[0] : "1"
                             ?>
                             <?php for ($i = 1; $i <= $previous_pagination['total_pages']; $i++) : ?>
                                 <?
                                 $current_url_params = $_GET;
                                 $current_url_params["previous_events_page"] = $i;
                                 $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
-                                $cls = intval($current) === $i ? "active": "";
+                                $cls = intval($current) === $i ? "active" : "";
                                 ?>
-                                <li class="page-item <? echo $cls?>"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item <? echo $cls ?>"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
                             <?php endfor; ?>
 
                             <!-- Next page link -->

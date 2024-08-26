@@ -118,9 +118,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
         return learndash_reports_get_activity($args);
     }
 
-    protected function register_controls()
-    {
-    }
+    protected function register_controls() {}
 
     protected function render()
     {
@@ -458,7 +456,6 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                         const pdfjs = element.querySelector("#certificate");
                         const width = doc.internal.pageSize.getWidth();
                         const height = doc.internal.pageSize.getHeight();
-                        // console.log({ width, height })
                         doc.html(pdfjs, {
                             callback: function(doc) {
                                 doc.save(`<? echo $user['first_name'] . ' ' . $user['first_name'] ?> | ${courseTitle}.pdf`);

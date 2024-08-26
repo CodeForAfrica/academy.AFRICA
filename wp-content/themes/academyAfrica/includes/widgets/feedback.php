@@ -129,9 +129,6 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
         $testimonials = $settings["testimonials"];
         $feedback = $this->get_user_feedback();
 ?>
-<script>
-    // console.log(<? echo json_encode($testimonials)?>)
-</script>
         <div class="feedback">
             <div class="title">
                 <h4 class="cfa-title">
