@@ -1,137 +1,168 @@
-
 @use "../abstracts/" as *;
 
 .login {
-    margin: auto;
-    max-width: 478px;
-    padding: 16px;
-    margin-top: 40px;
-    .social-login {
-        margin-top: 22px;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        button {
-          border-radius: 10px;
-          background: #fff;
-          padding: 15px;
-          box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          height: 54px;
-          width: 100%;
-          border: none;
-          gap: 15px;
-          text-transform: none;
-          border: 1px solid transparent;
-          &:hover {
-            border: 1px solid #0c1a81;
-            background-color: #eff0fd;
-          }
-          &.google {
-            color: rgba(0, 0, 0, 0.54);
-            font-family: Open Sans;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-            text-transform: none;
-          }
-          &.facebook {
-            gap: 15px;
-            color: #1877f2;
-            font-family: Open Sans;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-            text-transform: none;
-          }
-          &.twitter {
-            color: var(--shades-black, #000);
-            font-family: Open Sans;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-            text-transform: none;
-          }
-        }
+  margin: auto;
+  max-width: 478px;
+  padding: 16px;
+  margin-top: 40px;
+
+  .social-login {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    button {
+      border-radius: 10px;
+      background: #fff;
+      padding: 15px;
+      box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 54px;
+      width: 100%;
+      border: none;
+      gap: 15px;
+      text-transform: none;
+      border: 1px solid transparent;
+
+      &:hover {
+        border: 1px solid #0c1a81;
+        background-color: #eff0fd;
       }
-      .content-divider {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        gap: 25.379px;
-        margin: 22px 0;
-        div {
-          height: 1px;
-          flex: 1;
-          background: #8c8fa5;
-        }
-      }
-      input[type="text"],
-      input[type="password"],
-      input[type="email"],
-      input[type="number"] {
-        width: 100%;
-        border: 1px solid var(--neutral-300, #b7bac8);
-        background: var(--shades-white, #fff);
-        height: 44px;
-        margin-bottom: 10px;
-      }
-      input[type="submit"] {
-        @extend .primary;
-        width: 100%;
-        border: 1px solid transparent;
-      }
-      label {
-        color: var(--neutral-800, #4b5071);
-    
-        /* Paragraph/P2/Regular */
+
+      &.google {
+        color: rgba(0, 0, 0, 0.54);
         font-family: Open Sans;
-        font-size: 16px;
+        font-size: 20px;
         font-style: normal;
-        font-weight: 400;
-        line-height: 26px; /* 162.5% */
+        font-weight: 500;
+        line-height: normal;
+        text-transform: none;
       }
-      .error-message {
-        border-left: 5px solid red;
-        margin-top: 16px;
-        p {
-          line-height: 32px;
-          padding: 0 8px;
-        }
+
+      &.facebook {
+        gap: 15px;
+        color: #1877f2;
+        font-family: Open Sans;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-transform: none;
       }
-      .remember-me {
-        color: var(--Black, #000);
-font-family: "Open Sans";
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 16px; /* 114.286% */
+
+      &.twitter {
+        color: var(--shades-black, #000);
+        font-family: Open Sans;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-transform: none;
       }
-      .error_message {
-        background-color: #f8d7da; /* Light red background */
-        color: #721c24; /* Dark red text */
-        border: 1px solid #f5c6cb; /* Slightly darker red border */
-        padding: 10px 15px; /* Space inside the message box */
-        border-radius: 5px; /* Rounded corners */
-        font-family: Arial, sans-serif; /* Font style */
-        font-size: 14px; /* Font size */
-        margin: 10px 0; /* Space above and below the message */
-        &::before {
-          content: "\26A0"; /* Warning triangle icon (Unicode) */
-          margin-right: 8px;
-          font-size: 16px; /* Size of the icon */
-        }
-        &.text-center {
-          text-align: center;
-        }
-        &:hover {
-          background-color: #f1b0b7; /* Slightly darker on hover */
-        }
-      }
+    }
+  }
+
+  .content-divider {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 25.379px;
+    margin: 22px 0;
+
+    div {
+      height: 1px;
+      flex: 1;
+      background: #8c8fa5;
+    }
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"] {
+    width: 100%;
+    border: 1px solid var(--neutral-300, #b7bac8);
+    background: var(--shades-white, #fff);
+    height: 44px;
+    margin-bottom: 10px;
+  }
+
+  input[type="submit"] {
+    @extend .primary;
+    width: 100%;
+    border: 1px solid transparent;
+  }
+
+  label {
+    color: var(--neutral-800, #4b5071);
+
+    /* Paragraph/P2/Regular */
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    /* 162.5% */
+  }
+
+  .error-message {
+    border-left: 5px solid red;
+    margin-top: 16px;
+
+    p {
+      line-height: 32px;
+      padding: 0 8px;
+    }
+  }
+
+  .remember-me {
+    color: var(--primary-700, #0c1a81);
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    text-decoration: underline !important;
+    /* 114.286% */
+  }
+
+  .error_message {
+    background-color: #f8d7da;
+    /* Light red background */
+    color: #721c24;
+    /* Dark red text */
+    border: 1px solid #f5c6cb;
+    /* Slightly darker red border */
+    padding: 10px 15px;
+    /* Space inside the message box */
+    border-radius: 5px;
+    /* Rounded corners */
+    font-family: Arial, sans-serif;
+    /* Font style */
+    font-size: 14px;
+    /* Font size */
+    margin: 10px 0;
+
+    /* Space above and below the message */
+    &::before {
+      content: "\26A0";
+      /* Warning triangle icon (Unicode) */
+      margin-right: 8px;
+      font-size: 16px;
+      /* Size of the icon */
+    }
+
+    &.text-center {
+      text-align: center;
+    }
+
+    &:hover {
+      background-color: #f1b0b7;
+      /* Slightly darker on hover */
+    }
+  }
 }

@@ -39,7 +39,7 @@ if (isset($_GET['email_sent'])) {
                     <span>New to academy.AFRICA? </span><a class="remember-me" href="/login?action=register" style="margin-left: 4px; font-size: 16px;">Register
                         now</a>
                 </div>
-                <a style="font-size: 14px; color: var(--Black, #000);" href="javascript:history.back()">Back</a>
+                <a style="font-size: 14px; color: var(--primary-700, #0c1a81);" href="javascript:history.back()">Back</a>
             </footer>
         </div>
         <script>
