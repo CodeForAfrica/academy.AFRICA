@@ -166,3 +166,40 @@
     }
   }
 }
+
+.success_message {
+  background-color: #84dfa6;
+  
+  /* Light red background */
+  color: #09922d;
+  /* Dark red text */
+  border: 1px solid #0ce108;
+  /* Slightly darker red border */
+  padding: 10px 15px;
+  /* Space inside the message box */
+  border-radius: 5px;
+  /* Rounded corners */
+  font-family: Arial, sans-serif;
+  /* Font style */
+  font-size: 14px;
+  /* Font size */
+  margin: 10px 0;
+
+  /* Space above and below the message */
+  &::before {
+    content: "\26A0";
+    /* Warning triangle icon (Unicode) */
+    margin-right: 8px;
+    font-size: 16px;
+    /* Size of the icon */
+  }
+
+  &.text-center {
+    text-align: center;
+  }
+
+  &:hover {
+    background-color: #3cbe22;
+    /* Slightly darker on hover */
+  }
+}

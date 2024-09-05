@@ -2,6 +2,11 @@
 if (isset($_GET['email_sent'])) {
     echo 'Password reset instructions have been sent to your email. Follow the link to reset.';
 } else {
+    if(isset($_GET['action']) && $_GET["action"] == "account_activation"){
+      ?>
+      <div class="success_message text-center">Account activated successfully. You can now proceed to login</div>
+      <?
+    }
 ?>
     <div class="login">
         <div class="content" id="login-modal-content">
@@ -36,7 +41,7 @@ if (isset($_GET['email_sent'])) {
             <?php
             // Capture the login form output
             ob_start();
-            wp_login_form(array('value_redirect_to' => $_GET['redirect_url'], 'redirect' => $_GET['redirect_url']));
+            wp_login_form(array('value_redirect_to' => $_GET['redirect_url'], 'label_username' => 'Email Address', 'redirect' => $_GET['redirect_url']));
             $form_output = ob_get_clean();
 
             // Get the Google Captcha shortcode output
