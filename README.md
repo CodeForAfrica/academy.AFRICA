@@ -1,3 +1,19 @@
+# [academy.AFRICA](https://academy.africa/)
+
+## Introduction
+
+Journalism is evolving so quickly that newsrooms are struggling to keep up.
+
+[academy.AFRICA](https://academy.africa/) seeks to help, by bringing face-to-face training into partner newsrooms across Africa, and by hosting public workshops at monthly [Hacks/Hackers meetups](https://facebook.com/HacksHackersAfrica).
+
+The academy will also offer [online courses](https://courses.academy.africa/) and webinars, designed to teach just one tool or technique at a time, so participants can upgrade their skills at their own pace.
+
+The training will be spearheaded by the continent’s largest digital journalism network, [Code for Africa](https://codeforafrica.org/), with support from [Google News Lab]() and [World Bank](https://www.worldbank.org)'s [Global Media Development Programme](https://blogs.worldbank.org/category/tags/media-development).
+
+Find out more here: https://academy.africa/
+
+## Development
+
 ### Documentation
    For detailed documentation on the plugins used, check the [wiki](https://github.com/CodeForAfrica/academyAfrica/wiki)
 
