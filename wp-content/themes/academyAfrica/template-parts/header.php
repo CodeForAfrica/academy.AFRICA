@@ -18,6 +18,29 @@ use AcademyAfrica\Theme\Utils\MenuFunctions;
 
 $menu_items = MenuFunctions::get_menu_items('menu-1');
 
+function handle_login_failure() {
+    $current_url = $_SERVER['REQUEST_URI'];
+    $query_params = $_GET;
+
+    if ( isset( $query_params['login'] ) && $query_params['login'] === 'failed' ) {
+        if ( strpos( $current_url, '/login/' ) !== false ) {
+            $error_message = "Error: An error occurred, either the password you entered is incorrect, the email is incorrect, or your account is not activated.";
+            return $error_message;
+        } else {
+            $redirect_url = esc_url( add_query_arg( array(
+                'login' => 'failed',
+                'redirect_url' => urlencode($current_url)
+            ), '/login/' ) );
+
+            wp_redirect( $redirect_url );
+            exit;
+        }
+    }
+
+    return null; // No login failure detected
+}
+
+handle_login_failure();
 
 ?>
 <nav class="header">
