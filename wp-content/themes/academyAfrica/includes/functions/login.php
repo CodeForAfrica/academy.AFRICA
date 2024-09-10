@@ -34,6 +34,9 @@ function custom_login_page()
         wp_redirect($login_page);
         exit;
     }
+    if($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET["wpe-login"])){
+        home_url("/login" . "?redirect_url=" . $path_name."&login=failed");
+    }
 }
 
 function add_lost_password_link()
