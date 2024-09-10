@@ -41,7 +41,7 @@ function onload() {
   if (isLoginFailed) {
     if (pathname === "/login/") {
       window.error =
-        "Error: An error occurred, either the password you entered is incorrect, the email is incorrect or your account is not activated";
+        "Error: An error occurred, either the password you entered is incorrect, the email is incorrect or your account email is not activated";
     } else {
 
       window.location.href = `/login/?login=failed&redirect_url=${pathname}`
