@@ -37,7 +37,7 @@ function custom_login_page()
     if($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET["wpe-login"])){
         $login = home_url("/login" . "?redirect_url=" . $path_name."&login=failed");
         wp_redirect($login);
-        exit;
+        // exit;
     }
 }
 
