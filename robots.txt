@@ -42,8 +42,6 @@ Disallow: /
 # Allow Search Engines
 User-agent: *
 Disallow: /wp-admin/
-Disallow: /login/
-
 
 # Include Sitemap
 Sitemap: https://academy.africa/sitemap.xml
