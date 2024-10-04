@@ -130,7 +130,7 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
                 grabCursor: true,
                 loop: true,
                 autoplay: {
-                    delay: 2500,
+                    delay: 30 * 1000,
                     disableOnInteraction: true,
                 },
                 pagination: {
