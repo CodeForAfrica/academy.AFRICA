@@ -412,11 +412,6 @@ class CoursesFunctions
         $allLearningPaths = CoursesFunctions::getAllLearningPaths();
         $filter_by = [
             [
-                'title' => 'Organizations',
-                'name' => 'organization',
-                'options' => []
-            ],
-            [
                 'title' => 'Learning Paths',
                 'name' => 'learning_path',
                 'options' => []
@@ -436,13 +431,13 @@ class CoursesFunctions
             ]
         ];
 
-        foreach ($allOrganizations as $organization) {
-            $formatedOrganization = (object)[
-                'id' => $organization['id'],
-                'name' => $organization['title'],
-            ];
-            array_push($filter_by[0]['options'], $formatedOrganization);
-        }
+        // foreach ($allOrganizations as $organization) {
+        //     $formatedOrganization = (object)[
+        //         'id' => $organization['id'],
+        //         'name' => $organization['title'],
+        //     ];
+        //     array_push($filter_by[0]['options'], $formatedOrganization);
+        // }
 
         foreach ($allLearningPaths as $learningPath) {
             $formatedLearningPath = (object)[
