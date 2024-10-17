@@ -444,7 +444,7 @@ class CoursesFunctions
                 'id' => $learningPath['id'],
                 'name' => $learningPath['title'],
             ];
-            array_push($filter_by[1]['options'], $formatedLearningPath);
+            array_push($filter_by[0]['options'], $formatedLearningPath);
         }
 
         // foreach ($allInstructors as $instructor) {
