@@ -254,6 +254,7 @@ function whitelist_address()
         '127.0.0.1',
         '::1',
         'localhost',
+        'academy.africa',
         'academyafridev.wpenginepowered.com',
         'academyafristg.wpenginepowered.com'
     );
