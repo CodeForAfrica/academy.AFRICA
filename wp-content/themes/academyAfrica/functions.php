@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.4.9');
+define('ACADEMY_AFRICA_VERSION', '1.5.0');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -254,7 +254,6 @@ function whitelist_address()
         '127.0.0.1',
         '::1',
         'localhost',
-        'academy.africa',
         'academyafridev.wpenginepowered.com',
         'academyafristg.wpenginepowered.com'
     );
