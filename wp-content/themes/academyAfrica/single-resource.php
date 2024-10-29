@@ -52,9 +52,9 @@ $course_intro    = $post_data->post_content;
         ?>
         <hr class="divider">
         <div class="introduction">
-            <p class="cfa-introduction-title">
+            <!-- <p class="cfa-introduction-title">
                 Introduction
-            </p>
+            </p> -->
             <div class="cfa-introduction">
                 <?php echo do_shortcode($course_intro); ?>
             </div>
