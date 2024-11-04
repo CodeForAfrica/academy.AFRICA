@@ -23,6 +23,8 @@ $skip_link_url = apply_filters('hello_elementor_skip_link_url', '#content');
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="<?php echo esc_attr($viewport_content); ?>">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 	<?php wp_head(); ?>
 </head>
 

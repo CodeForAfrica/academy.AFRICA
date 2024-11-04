@@ -304,4 +304,22 @@
   /* Slightly darker on hover */
 }
 
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.password-wrapper input {
+  width: 100%;
+  margin-bottom: 0 !important;
+  padding-right: 40px; /* Adjust padding to make space for the icon */
+}
+.password-wrapper .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=login.css.map */

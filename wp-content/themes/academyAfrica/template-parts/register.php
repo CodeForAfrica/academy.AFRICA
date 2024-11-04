@@ -73,7 +73,7 @@ if ($success) {
             $success_message = "You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.  Please check your email inbox or spam folder for an activation link.";
             $url = home_url('/login?action=register&success=' . urlencode($success_message));
             ?>
-            <form action="<? echo $url ?>" method="post">
+            <form action="<? echo $url ?>" method="post" onsubmit="return validateForm()">
                 <label for="firstName">First Name</label>
                 <input placeholder="First Name" name="firstName" type="text">
                 <label for="lastName">Last Name</label>
@@ -81,7 +81,16 @@ if ($success) {
                 <label for="email">Email</label>
                 <input placeholder="Email" name="email" type="email">
                 <label for="password">Password</label>
-                <input placeholder="Password" name="password" type="password">
+                <div class="password-wrapper">
+                    <input placeholder="Password" name="password" type="password" id="password">
+                    <span id="toggle-password" class="toggle-password material-icons" onclick="togglePasswordVisibility('password')">visibility_off</span>
+                </div>
+                <label for="confirm-password">Confirm Password</label>
+                <div class="password-wrapper">
+                    <input required placeholder="Password" name="confirm-password" type="password" id="confirm-password">
+                    <span id="toggle-confirm-password" class="toggle-password material-icons" onclick="togglePasswordVisibility('confirm-password')">visibility_off</span>
+                </div>
+                <div id="error-alert" style="color: red;"></div>
                 <input type="hidden" name="action" value="register">
                 <? echo do_shortcode('[bws_google_captcha]') ?>
                 <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit">SIGN UP</button>
@@ -97,6 +106,29 @@ if ($success) {
                         now</a>
                 </div>
             </footer>
+            <script>
+                function validateForm() {
+                    const password = document.getElementById("password").value;
+                    const confirmPassword = document.getElementById("confirm-password").value;
+                    if (password !== confirmPassword) {
+                        const errorAlert = document.getElementById("error-alert");
+                        errorAlert.innerText = "Passwords do not match";
+                        return false;
+                    }
+                    return true;
+                }
+                function togglePasswordVisibility(id) {
+                    const password = document.getElementById(id);
+                    const togglePassword = document.getElementById(`toggle-${id}`);
+                    if (password.type === "password") {
+                        password.type = "text";
+                        togglePassword.innerText = "visibility";
+                    } else {
+                        password.type = "password";
+                        togglePassword.innerText = "visibility_off";
+                    }
+                }
+            </script>
         </div>
     </div>
 <?
