@@ -50,7 +50,7 @@ if(isset($_POST["rp_key"])){
         <?
         }else {
             ?>
-            <p>Your password has been successfully reset. You can now <a style="color: #0C1A81; text-decoration: none;" href="/login/?redirect_url=/">
+            <p>Your password has been successfully reset. You can now <a style="color: #0C1A81; text-decoration: none;" href="/login/?redirect_url=/learning-pathways">
         <strong>log in</strong>
         </a> with your new password.</p>
             <?

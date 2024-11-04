@@ -94,7 +94,11 @@ handle_login_failure();
                 <div class="menu">
                     <div class="items">
                         <?php
-                        $path_name = $_SERVER['REQUEST_URI'];
+                        $redirect_url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+                        $parsed_url = parse_url($redirect_url);
+                        $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
+                        $path_name = (!empty($path) && $path !== '/' && $path !== '/login/') ? $redirect_url : "/learning-pathways";
+
                         foreach ($menu_items as $menu_item) {
                             $class = 'item';
                             $class .= ' ' . $menu_item["class"];
@@ -125,7 +129,9 @@ handle_login_failure();
 
     </div>
 
-
+    <script>
+                            console.log(<? echo json_encode($_SERVER) ?>, "<? echo $path_name?>");
+                        </script>
     <div style="display: none;">
         <!-- add user avatar if it exists -->
         <?php

@@ -43,8 +43,9 @@ function onload() {
       window.error =
         "Error: An error occurred, either the password you entered is incorrect, the email is incorrect or your account email is not activated";
     } else {
-
-      window.location.href = `/login/?login=failed&redirect_url=${pathname}`
+      const logins = ["/login/", "/login", "/register/", "/"]
+      const redirect = logins.includes(pathname) ? "/learning-pathways" : pathname
+      window.location.href = `/login/?login=failed&redirect_url=${redirect}`
     }
     return;
   }
@@ -57,7 +58,7 @@ document.onkeydown = function (event) {
     event = event || window.event;
     if (event.keyCode === 27) {
       event.preventDefault();
-      window.location.href = "/"
+      window.location.href = "/learning-pathways"
     }
   }
 }

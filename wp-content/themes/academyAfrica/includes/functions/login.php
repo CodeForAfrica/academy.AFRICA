@@ -2,7 +2,11 @@
 // Load custom functions
 function custom_login_page()
 {
-    $path_name = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : "/";
+    $redirect_url = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : '';
+    $parsed_url = parse_url($redirect_url);
+    $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
+    
+    $path_name = (!empty($path) && $path !== '/' && $path !== '/login') ? $redirect_url : "/learning-pathways";
     $login_page = home_url("/login" . "?redirect_url=" . $path_name);
     $to_redirect = array("lostpassword");
     $reset_password_page = home_url('/login?action=lostpassword');
