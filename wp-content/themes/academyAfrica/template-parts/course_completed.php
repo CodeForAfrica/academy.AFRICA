@@ -8,6 +8,7 @@ $presented_to = "PRESENTED TO";
 $certificate_description = "For completing the academy.AFRICA course";
 $course_id = $args["course_id"] ?? null;
 $course = get_post($course_id);
+$course_title = get_the_title($course);
 $certificate_course = get_the_title($course);
 $company_name = "academy.Africa";
 $user_id = get_current_user_id();
@@ -18,6 +19,13 @@ $user = array(
     "first_name" => get_user_meta($user_id, 'first_name', true),
     "last_name" => get_user_meta($user_id, 'last_name', true),
 );
+
+$share_message = <<<EOD
+🎉 Just completed the $course_title on academy.Africa!
+🚀 Ready to take on new challenges and apply what I've learned.
+Check out the course. 👉🏽" . get_permalink($course_id);
+EOD;
+
 
 $social_media_links = [
     [
@@ -136,7 +144,7 @@ global $shortcode_tags;
                 <? echo $share_title ?>
             </h4>
             <div class="share" style="display: flex; justify-content: center;">
-                <?php get_template_part('template-parts/social_share', 'template', array()); ?>
+                <?php get_template_part('template-parts/social_share', 'template', array('message' => $share_message)); ?>
             </div>
             <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px; flex-direction: column;">
                 <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
