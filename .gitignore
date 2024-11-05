@@ -118,3 +118,4 @@ yarn.lock
 /vendor/
 wp-content/drop-ins/
 wp-content/languages/
+.idea/
