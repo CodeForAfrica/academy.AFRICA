@@ -10,6 +10,7 @@ $course_id = $args["course_id"] ?? null;
 $course = get_post($course_id);
 $course_title = get_the_title($course);
 $certificate_course = get_the_title($course);
+$course_link = get_permalink($course_id);
 $company_name = "academy.Africa";
 $user_id = get_current_user_id();
 $certificate_link = learndash_get_course_certificate_link($args["course_id"], $user_id);
@@ -23,7 +24,7 @@ $user = array(
 $share_message = <<<EOD
 🎉 Just completed the $course_title on academy.Africa!
 🚀 Ready to take on new challenges and apply what I've learned.
-Check out the course. 👉🏽" . get_permalink($course_id);
+Check out the course. 👉🏽 $course_link" 
 EOD;
 
 
