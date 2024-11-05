@@ -24,7 +24,7 @@ $user = array(
 $share_message = <<<EOD
 🎉 Just completed the $course_title on academy.Africa!
 🚀 Ready to take on new challenges and apply what I've learned.
-Check out the course. 👉🏽 $course_link" 
+Check out the course 👉🏽.
 EOD;
 
 
