@@ -17,6 +17,7 @@
     flex-wrap: wrap;
     max-width: 912px;
     margin: auto;
+    
   }
   .certificate {
     min-width: 450px;
@@ -121,11 +122,15 @@
     .company-name {
     line-height: 30px;
   }
+  .certificate-preview {
+    flex: 1;
+    box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
+  }
 }
 
 @include media-breakpoint-down(tablet) {
   .course-completed {
-    color: var(--primary-700, #0c1a81);
+    // color: var(--primary-700, #0c1a81);
 
     /* Mobile Headings */
     font-family: Lora;

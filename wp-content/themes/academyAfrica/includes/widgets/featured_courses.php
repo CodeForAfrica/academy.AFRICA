@@ -274,6 +274,27 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
 
         $posts = $query->get_posts();
         $courses = $posts;
+        $course_name = '';
+        $course_completion_date = date("j F Y");
+        if (!empty($courses)) {
+            $first_course = $courses[0];
+            $course_name = get_the_title($first_course);
+            $course_meta = get_post_meta($first_course, 'sfwd-courses', true);
+            if (!empty($course_meta['sfwd-courses_course_completion_date'])) {
+            $course_completion_date = $course_meta['sfwd-courses_course_completion_date'];
+            }
+        } else {
+            $course_name = 'Data Visualization';
+        }
+        $user = wp_get_current_user();
+        $user_first_name = $user->first_name;
+        $user_last_name = $user->last_name;
+        if (empty($user_first_name)) {
+            $user_first_name = 'First Name';
+        }
+        if (empty($user_last_name)) {
+            $user_last_name = 'Last Name';
+        }
         ?>
         <div class="featured-courses">
             <div class="featured-content">
@@ -318,86 +339,10 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     ?>
                 </div>
             </div>
-            <div class="featured-certificate">
-                <div class="certificate-root">
-                    <p class="certificate-header">
-                        <?php echo $certificate_header; ?>
-                    </p>
-                    <div class="certificate-showcase">
-                        <div class="certificate">
-                            <div style="padding-bottom: 24px;" class="certificate-content">
-                                <div class="certificate-content-header">
-                                    <hr />
-                                    <div class="certificate-header-details">
-                                        <p class="certificate-of">
-                                            <? echo $certificate_title ?>
-                                        </p>
-                                        <p class="certificate-type">
-                                            <? echo $certificate_type ?>
-                                        </p>
-                                    </div>
-                                    <div class="certificate-header-logo">
-                                        <hr />
-                                        <img class="logo" alt="logo"
-                                            src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.svg' ?>" />
-                                    </div>
+            <div class="certificate-showcase">
+            <?php get_template_part('template-parts/certificate', 'template', array("academy_head" => $academy_head, "course" => array("date" => $course_completion_date, "name" => $course_name), "user" => array("last_name"=> $user_last_name,"first_name" => $user_first_name))); ?>
 
-                                </div>
-                                <div class="course-details">
-                                    <div class="student">
-                                        <p style="whitespace: nowrap;" class="title">
-                                            <? echo $presented_to ?>
-                                        </p>
-                                        <p class="name first-name">
-                                        <? echo $user_first_name ?>
-                                        </p>
-                                        <p style="font-weight: 700;" class="name bold-text">
-                                        <? echo $user_last_name ?>
-                                        </p>
-                                    </div>
-                                    <div class="course">
-                                        <p class="course-description title">
-                                            <? echo $certificate_description ?>
-                                        </p>
-                                        <p style="font-weight: 700;" class="name bold-text">
-                                            <? echo $certificate_course ?>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="certificate-footer">
-                                <div class="company-details">
-                                    <div class="brand-details">
-                                        <img class="logo" alt="logo"
-                                            src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
-                                        <p style="line-height: 24px;" class="company-name">
-                                            <? echo $company_name ?>
-                                        </p>
-                                    </div>
-                                    <img class="artwork" alt="artwork"
-                                        src="<? echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" />
-                                </div>
-                                <div class="signature">
-                                    <img class="signature-img" alt="signature" alt="<? echo $academy_head['name'] ?>"
-                                        src="<? echo $academy_head['signature'] ?>" />
-                                    <p class="signee-name">
-                                        <? echo $academy_head['name'] ?>
-                                    </p>
-                                    <p class="signee-role">
-                                        <? echo $academy_head['role'] ?>
-                                    </p>
-                                    <p class="sign-date">
-                                        <? echo $academy_head['date'] ?>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="certificate-site-name">
-                                <p>
-                                    www.academy.africa
-                                </p>
-                            </div>
-                        </div>
-                        <div class="certificate-showcase-content">
+            <div class="certificate-showcase-content">
                             <div class="showcase-header">
                                 <p class="certificate-header">
                                     <?php echo $certificate_header; ?>
@@ -411,8 +356,6 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                 <i class="fa-solid fa-chevron-right icon"></i>
                             </a>
                         </div>
-                    </div>
-                </div>
             </div>
         </div>
         <?

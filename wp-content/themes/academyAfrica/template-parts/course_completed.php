@@ -8,6 +8,7 @@ $presented_to = "PRESENTED TO";
 $certificate_description = "For completing the academy.AFRICA course";
 $course_id = $args["course_id"] ?? null;
 $course = get_post($course_id);
+$completion_date = get_the_date('Y-m-d', $course_id);
 $course_title = get_the_title($course);
 $certificate_course = get_the_title($course);
 $course_link = get_permalink($course_id);
@@ -20,6 +21,8 @@ $user = array(
     "first_name" => get_user_meta($user_id, 'first_name', true),
     "last_name" => get_user_meta($user_id, 'last_name', true),
 );
+
+$course_meta = get_post_meta($course_id, 'sfwd-courses', true);
 
 $share_message = <<<EOD
 🎉 Just completed the $course_title on academy.Africa!
@@ -71,75 +74,8 @@ global $shortcode_tags;
         <? echo do_shortcode($cert_post->post_content) ?>
     </div>
     <div class="content">
-        <div class="certificate">
-            <div class="certificate-content">
-                <div class="certificate-content-header">
-                    <hr />
-                    <div class="certificate-header-details">
-                        <p class="certificate-of">
-                            <? echo $certificate_title ?>
-                        </p>
-                        <p class="certificate-type" style="font-weight: 700;">
-                            <? echo $certificate_type ?>
-                        </p>
-                    </div>
-                    <div class="certificate-header-logo">
-                        <hr />
-                        <img height="90px" width="90px" class="logo" alt="logo" style="background: transparent; margin-top: -80px; width: 110px; height: 110px" src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.png' ?>" />
-                    </div>
+    <?php get_template_part('template-parts/certificate', 'template', array("academy_head" => $academy_head, "course" => array("date" => $completion_date, "name" => $certificate_course), "user" => $user)); ?>
 
-                </div>
-                <div class="course-details" style="align-items: flex-start;">
-                    <div class="student">
-                        <p class="title" style="margin-bottom: 8px; font-size: 12px;">
-                            <? echo $presented_to ?>
-                        </p>
-                        <p class="name first-name" style="margin-bottom: 12px; font-size: 36px;">
-                            <? echo $user['first_name'] ?>
-                        </p>
-                        <p class="name bold-text" style="margin-bottom: 12px; font-size: 36px;">
-                            <? echo $user['last_name'] ?>
-                        </p>
-                    </div>
-                    <div class="course" style="max-width: 400px">
-                        <p class="course-description title" style="text-align: right; font-size: 16px; margin-top: 8px;">
-                            <? echo $certificate_description ?>
-                        </p>
-                        <p class="name bold-text" style="margin-bottom: 12px; font-size: 20px;">
-                            <? echo $certificate_course ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="certificate-footer">
-                <div class="company-details">
-                    <div class="brand-details">
-                        <img height="60px" width="60px" class="logo" alt="logo" style="background: transparent; width: 60px; height: 60px;" src="<? echo get_stylesheet_directory_uri() . '/assets/images/mooc-logo-white.svg' ?>" />
-                        <p class="company-name" style="line-height: 60px; font-size: 14px;">
-                            <? echo $company_name ?>
-                        </p>
-                    </div>
-                    <img class="artwork" height="60px" width="102px" alt="artwork" style="background: transparent; width: 80px; height: 40px;" src="<? echo get_stylesheet_directory_uri() . '/assets/images/cfa_logo.svg' ?>" />
-                </div>
-                <div class="signature">
-                    <img class="signature-img" alt="signature" alt="<? echo $academy_head['name'] ?>" style="background: transparent; margin-bottom: 8px;" src="<? echo $academy_head['signature'] ?>" />
-                    <p class="signee-name" style="margin-bottom: 8px; font-size: 12px;">
-                        <? echo $academy_head['name'] ?>
-                    </p>
-                    <p class="signee-role" style="margin-bottom: 8px; font-size: 12px;">
-                        <? echo $academy_head['role'] ?>
-                    </p>
-                    <p class="sign-date" style="font-size: 12px;">
-                        <? echo $academy_head['date'] ?>
-                    </p>
-                </div>
-            </div>
-            <div class="certificate-site-name">
-                <p style="color: #fff; margin: 0;">
-                    www.academy.africa
-                </p>
-            </div>
-        </div>
         <div class="share-section">
             <h4 class="title">
                 <? echo $share_title ?>

@@ -232,24 +232,6 @@
               }
             }
           }
-
-          .certificate-showcase-content {
-            .showcase-header {
-              display: block;
-
-              .certificate-header {
-                display: block;
-                width: 100%;
-                text-align: center;
-                margin-bottom: 50px;
-              }
-            }
-
-            .showcase-text {
-              font-size: 18px;
-              line-height: 28px;
-            }
-          }
         }
       }
 
@@ -330,7 +312,7 @@
   }
 
   @include media-breakpoint-up(large) {
-    padding: 80px 148px 0;
+    padding: 80px 148px;
 
     .featured-content {
       .title-description {
@@ -350,6 +332,173 @@
       .featured-course-list {
         background: $color-neutral-50;
       }
+    }
+  }
+}
+
+.certificate-preview {
+  &-body {
+    padding: 24px 24px 16px;
+    .divider-black {
+      height: 4px;
+      width: 100%;
+      background-color: #000;
+    }
+    .grid-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      flex:1;
+      margin-top: 16px;
+      p {
+        text-transform: uppercase;
+        margin: 0;
+        font-family: Lora;
+        font-size: 20px;
+        white-space: nowrap;
+      }
+    }
+
+    .full-image {
+      width: 100px;
+      height: 100px;
+      margin-top: 16px;
+    }
+    .divider-blue {
+      height: 3px;
+      width: 100%;
+      background: #1020E1;
+      margin-top: 16px;
+    }
+    .certificate-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 16px;
+      p {
+        margin-bottom: 0;
+      }
+      .first-name {
+font-size: 16px;
+      }
+      .last-name {
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .presented-to {
+        font-size: 9px;
+        white-space: nowrap;
+      }
+      .course {
+        text-align: right;
+        .course-title {
+          margin-top: 16px;
+          font-size: 9px;
+        }
+        .course-name {
+          font-size: 12px;
+          font-weight: 700;
+          height: 70px;
+        }
+        .date {
+          font-size: 9px;
+        }
+      }
+    }
+  }
+  &-footer{
+    background-color: #1020E1;
+    padding: 16px 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    color: white;
+    .cfa-logo {
+      flex: 1;
+    }
+    p {
+      margin: 0;
+    }
+    .signature {
+      text-align: right;
+      .signee-name {
+        font-size: 5px;
+        font-weight: 400;
+        margin: 8px 0 0 0;
+      }
+      .signee-role {
+        font-size: 6px;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    .sign-date {
+      font-size: 6px;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+    &::after{
+      content: "www.academyafrica.com";
+      display: block;
+      width: 100%;
+      background-color: red;
+      color: white;
+      text-align: right;
+      font-size: 5px;
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      padding: 2px 24px;
+      height: 12px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.certificate-showcase {
+  display: flex;
+  background-color: $color-shades-white;
+  gap: 40px;
+  margin-top: 16px;
+  .certificate-preview {
+    flex: 1;
+    box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
+  }
+  @include media-breakpoint-down(large) {
+    flex-wrap: wrap;
+  }
+  .certificate-showcase-content {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    .showcase-header {
+      display: block;
+
+      .certificate-header {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 50px;
+      }
+    }
+
+    .showcase-text {
+      color: $color-primary-700;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 18px;
     }
   }
 }

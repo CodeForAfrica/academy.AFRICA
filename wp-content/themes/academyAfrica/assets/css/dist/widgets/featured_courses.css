@@ -306,19 +306,6 @@
     font-size: 15.324px;
     line-height: 22.986px;
   }
-  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .showcase-header {
-    display: block;
-  }
-  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .showcase-header .certificate-header {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  .featured-courses .featured-certificate .certificate-root .certificate-showcase .certificate-showcase-content .showcase-text {
-    font-size: 18px;
-    line-height: 28px;
-  }
 }
 @media (min-width: 1440px) {
   .featured-courses .featured-certificate .certificate-root {
@@ -382,7 +369,7 @@
 }
 @media (min-width: 1440px) {
   .featured-courses {
-    padding: 80px 148px 0;
+    padding: 80px 148px;
   }
   .featured-courses .featured-content .title-description {
     margin-left: 0;
@@ -398,6 +385,169 @@
   .featured-courses .featured-content .featured-course-list {
     background: #F7F9FD;
   }
+}
+
+.certificate-preview-body {
+  padding: 24px 24px 16px;
+}
+.certificate-preview-body .divider-black {
+  height: 4px;
+  width: 100%;
+  background-color: #000;
+}
+.certificate-preview-body .grid-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.certificate-preview-body .grid-item {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 16px;
+}
+.certificate-preview-body .grid-item p {
+  text-transform: uppercase;
+  margin: 0;
+  font-family: Lora;
+  font-size: 20px;
+  white-space: nowrap;
+}
+.certificate-preview-body .full-image {
+  width: 100px;
+  height: 100px;
+  margin-top: 16px;
+}
+.certificate-preview-body .divider-blue {
+  height: 3px;
+  width: 100%;
+  background: #1020E1;
+  margin-top: 16px;
+}
+.certificate-preview-body .certificate-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+}
+.certificate-preview-body .certificate-content p {
+  margin-bottom: 0;
+}
+.certificate-preview-body .certificate-content .first-name {
+  font-size: 16px;
+}
+.certificate-preview-body .certificate-content .last-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+.certificate-preview-body .certificate-content .presented-to {
+  font-size: 9px;
+  white-space: nowrap;
+}
+.certificate-preview-body .certificate-content .course {
+  text-align: right;
+}
+.certificate-preview-body .certificate-content .course .course-title {
+  margin-top: 16px;
+  font-size: 9px;
+}
+.certificate-preview-body .certificate-content .course .course-name {
+  font-size: 12px;
+  font-weight: 700;
+  height: 70px;
+}
+.certificate-preview-body .certificate-content .course .date {
+  font-size: 9px;
+}
+.certificate-preview-footer {
+  background-color: #1020E1;
+  padding: 16px 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  color: white;
+}
+.certificate-preview-footer .cfa-logo {
+  flex: 1;
+}
+.certificate-preview-footer p {
+  margin: 0;
+}
+.certificate-preview-footer .signature {
+  text-align: right;
+}
+.certificate-preview-footer .signature .signee-name {
+  font-size: 5px;
+  font-weight: 400;
+  margin: 8px 0 0 0;
+}
+.certificate-preview-footer .signature .signee-role {
+  font-size: 6px;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+}
+.certificate-preview-footer .signature .sign-date {
+  font-size: 6px;
+  font-weight: 400;
+  margin: 0;
+}
+.certificate-preview-footer::after {
+  content: "www.academyafrica.com";
+  display: block;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: right;
+  font-size: 5px;
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  padding: 2px 24px;
+  height: 12px;
+  box-sizing: border-box;
+}
+
+.certificate-showcase {
+  display: flex;
+  background-color: #FFFFFF;
+  gap: 40px;
+  margin-top: 16px;
+}
+.certificate-showcase .certificate-preview {
+  flex: 1;
+  box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 1440px) {
+  .certificate-showcase {
+    flex-wrap: wrap;
+  }
+}
+.certificate-showcase .certificate-showcase-content {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.certificate-showcase .certificate-showcase-content .showcase-header {
+  display: block;
+}
+.certificate-showcase .certificate-showcase-content .showcase-header .certificate-header {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.certificate-showcase .certificate-showcase-content .showcase-text {
+  color: #0C1A81;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
 }
 
 /*# sourceMappingURL=featured_courses.css.map */
