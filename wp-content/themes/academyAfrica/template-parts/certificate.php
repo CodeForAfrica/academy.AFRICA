@@ -3,6 +3,7 @@ $cfa_certificate_logo_2 = get_stylesheet_directory_uri() . '/assets/images/cfa-c
 $academy_head_signature = get_stylesheet_directory_uri() . '/assets/images/signature.svg';
 $academy_head = $args['academy_head'];
 $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-black.svg';
+// https://www.figma.com/design/0EnVajzsLy2eqmXUi79HnB/CfA---MOOC?node-id=13501-132650&t=PgDiEC6Alfdqk8GR-4
 ?>
 <div class="certificate-preview">
 <div class="certificate-preview-body">

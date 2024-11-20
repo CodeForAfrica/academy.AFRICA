@@ -410,7 +410,7 @@
   text-transform: uppercase;
   margin: 0;
   font-family: Lora;
-  font-size: 20px;
+  font-size: 24px;
   white-space: nowrap;
 }
 .certificate-preview-body .full-image {
@@ -433,31 +433,40 @@
 .certificate-preview-body .certificate-content p {
   margin-bottom: 0;
 }
+.certificate-preview-body .certificate-content * {
+  font-family: Open Sans;
+}
 .certificate-preview-body .certificate-content .first-name {
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 24px;
 }
 .certificate-preview-body .certificate-content .last-name {
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 24px;
   font-weight: 700;
 }
 .certificate-preview-body .certificate-content .presented-to {
   font-size: 9px;
+  line-height: 12px;
   white-space: nowrap;
 }
 .certificate-preview-body .certificate-content .course {
   text-align: right;
 }
 .certificate-preview-body .certificate-content .course .course-title {
-  margin-top: 16px;
   font-size: 9px;
+  line-height: 12px;
+  white-space: nowrap;
 }
 .certificate-preview-body .certificate-content .course .course-name {
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 16px;
   font-weight: 700;
   height: 70px;
 }
 .certificate-preview-body .certificate-content .course .date {
   font-size: 9px;
+  line-height: 12px;
 }
 .certificate-preview-footer {
   background-color: #1020E1;
