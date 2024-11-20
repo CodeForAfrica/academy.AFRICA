@@ -24,7 +24,8 @@ require_once __DIR__ . '/includes/utils/countries.php';
 
             $registration_link = get_post_meta($post_id, 'registration_link', true);
             $given_date_time = new DateTime($date . ' ' . $raw_time, new DateTimeZone($offset));
-            $current_date_time = new DateTime("now", new DateTimeZone($offset));
+            $current_date_time = new DateTime("today midnight", new DateTimeZone($offset));
+            $current_date_time->modify('tomorrow midnight -1 second');
             $is_past_event = $given_date_time < $current_date_time;
             $post_title = $post_array->post_title;
             $post_content = $post_array->post_content;
