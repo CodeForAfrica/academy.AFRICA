@@ -23,10 +23,9 @@ require_once __DIR__ . '/includes/utils/countries.php';
             $raw_time = get_post_meta($post_id, 'time', true);
 
             $registration_link = get_post_meta($post_id, 'registration_link', true);
-            $given_date_time = new DateTime($date . ' ' . $raw_time, new DateTimeZone($offset));
-            $current_date_time = new DateTime("today midnight", new DateTimeZone($offset));
-            $current_date_time->modify('tomorrow midnight -1 second');
-            $is_past_event = $given_date_time < $current_date_time;
+            $event_date_time = new DateTime($date . ' ' . $raw_time, new DateTimeZone($offset));
+            $current_date_time = new DateTime("today midnight -1 second", new DateTimeZone($offset));
+            $is_past_event = $event_date_time < $current_date_time;
             $post_title = $post_array->post_title;
             $post_content = $post_array->post_content;
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
