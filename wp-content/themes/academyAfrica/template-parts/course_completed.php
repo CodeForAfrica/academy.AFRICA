@@ -59,7 +59,7 @@ $social_media_links = [
 ];
 
 $academy_head = array(
-    'name' => $settings['academy_head_name'],
+    'name' => "Tolulope Adeyemo",
     'role' => 'Head of Academy',
     'signature' => get_stylesheet_directory_uri() . '/assets/images/signature.png',
     'date' => date("d/m/Y")

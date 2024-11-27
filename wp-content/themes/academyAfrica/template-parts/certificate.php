@@ -59,7 +59,7 @@ $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-bl
   <div class="signature">
   <img src="<? echo $academy_head_signature?>" alt="academy_head_signature" class="academy-head-signature">
   <p class="signee-name">
-      <? echo $academy_head['name'] || "Tolulope Adeyemo" ?>
+      <? echo $academy_head['name'] ?>
   </p>
   <p class="signee-role">
       <? echo $academy_head['role'] ?>
