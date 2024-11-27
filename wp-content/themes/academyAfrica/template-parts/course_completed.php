@@ -75,8 +75,8 @@ global $shortcode_tags;
     </div>
     <div class="content">
     <?php get_template_part('template-parts/certificate', 'template', array("academy_head" => $academy_head, "course" => array("date" => $completion_date, "name" => $certificate_course), "user" => $user)); ?>
-
-        <div class="share-section">
+<div style="flex: 1; display: flex; justify-content: center;">
+<div class="share-section">
             <h4 class="title">
                 <? echo $share_title ?>
             </h4>
@@ -103,6 +103,7 @@ global $shortcode_tags;
                 </a>
             </div>
         </div>
+</div>
     </div>
     <script type="text/javascript">
         function convertHTMLtoPDF() {
