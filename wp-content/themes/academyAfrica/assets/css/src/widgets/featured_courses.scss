@@ -478,11 +478,23 @@ line-height: 24px;
   gap: 40px;
   margin-top: 16px;
   .certificate-preview {
-    flex: 1;
+    flex: 2;
     box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  @include media-breakpoint-up(tablet) {
+    
+    .certificate-preview {
+      max-width: 600px;
+    }
   }
   @include media-breakpoint-down(large) {
     flex-wrap: wrap;
+  }
+  @include media-breakpoint-down(tablet) {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 40px;
   }
   .certificate-showcase-content {
     flex: 1;
@@ -491,7 +503,6 @@ line-height: 24px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1;
     .showcase-header {
       display: block;
 
