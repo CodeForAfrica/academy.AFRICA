@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST[
       <input type="email" name="user_email" value="<?php echo $user_email; ?>" id="user_email">
     </div>
 
-    <label for="description">Description</label><br>
+    <label for="description">Message</label><br>
     <textarea name="description" id="description" rows="5" cols="30" required></textarea><br><br>
     <input type="hidden" name="action" value="contact-us">
     <div class="submit-area">
