@@ -1,6 +1,6 @@
 .contact-us {
   max-width: 1920px;
-  padding: 148px;
+  padding: 60px 148px;
   min-height: calc(100vh - 606px);
 }
 .contact-us * {
