@@ -700,6 +700,7 @@
   margin-top: 10px;
   text-decoration: none;
   display: inline-block;
+  white-space: nowrap;
 }
 .root .links .icon {
   color: #FFFFFF;

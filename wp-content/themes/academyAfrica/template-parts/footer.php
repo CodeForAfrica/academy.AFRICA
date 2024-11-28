@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 use AcademyAfrica\Theme\Utils\MenuFunctions;
 
-$menu_items = MenuFunctions::get_menu_items('menu-1');
+$menu_items = MenuFunctions::get_menu_items('menu-2');
 
 // social media links array
 $social_media_links = [
