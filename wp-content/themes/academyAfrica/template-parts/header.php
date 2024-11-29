@@ -18,21 +18,22 @@ use AcademyAfrica\Theme\Utils\MenuFunctions;
 
 $menu_items = MenuFunctions::get_menu_items('menu-1');
 
-function handle_login_failure() {
+function handle_login_failure()
+{
     $current_url = $_SERVER['REQUEST_URI'];
     $query_params = $_GET;
 
-    if ( isset( $query_params['login'] ) && $query_params['login'] === 'failed' ) {
-        if ( strpos( $current_url, '/login/' ) !== false ) {
+    if (isset($query_params['login']) && $query_params['login'] === 'failed') {
+        if (strpos($current_url, '/login/') !== false) {
             $error_message = "Error: An error occurred, either the password you entered is incorrect, the email is incorrect, or your account is not activated.";
             return $error_message;
         } else {
-            $redirect_url = esc_url( add_query_arg( array(
+            $redirect_url = esc_url(add_query_arg(array(
                 'login' => 'failed',
                 'redirect_url' => urlencode($current_url)
-            ), '/login/' ) );
+            ), '/login/'));
 
-            wp_redirect( $redirect_url );
+            wp_redirect($redirect_url);
             exit;
         }
     }
@@ -129,9 +130,6 @@ handle_login_failure();
 
     </div>
 
-    <script>
-                            console.log(<? echo json_encode($_SERVER) ?>, "<? echo $path_name?>");
-                        </script>
     <div style="display: none;">
         <!-- add user avatar if it exists -->
         <?php
@@ -197,7 +195,6 @@ handle_login_failure();
 
 <script>
     const signOutMenu = document.querySelectorAll("a[href='#sign-out']");
-    // console.log(signOutMenu);
     Array.from(signOutMenu).forEach((element) => {
         element.addEventListener("click", function() {
             <?php

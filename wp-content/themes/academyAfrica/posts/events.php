@@ -65,7 +65,10 @@ function get_post_options($post_type)
 function get_user_options()
 {
     $users_args = array(
-        'number' => 3000, 'order' => 'ASC', 'orderby' => 'display_name', 'meta_query' => array(
+        'number' => 3000,
+        'order' => 'ASC',
+        'orderby' => 'display_name',
+        'meta_query' => array(
             array(
                 'key' => 'wp_capabilities',
                 'value' => 'subscriber',
@@ -105,10 +108,6 @@ function custom_fields()
     $is_virtual = $custom["is_virtual"][0];
 ?>
     <div class="form-container">
-        <script>
-            // console.log(<?php echo json_encode($custom) ?>);
-        </script>
-
         <div class="form-group">
             <label for="date">Date</label>
             <input value="<?php echo $date; ?>" type="date" class="large-text" id="date" name="date">
