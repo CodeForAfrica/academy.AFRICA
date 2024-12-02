@@ -1,3 +1,5 @@
+@use "../abstracts/" as *;
+
 .contact-us {
   max-width: 1920px;
   padding: 60px 148px;
@@ -13,5 +15,11 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 40px;
+  }
+}
+
+@include media-breakpoint-down(large) {
+  .contact-us {
+    padding: 60px 24px;
   }
 }
