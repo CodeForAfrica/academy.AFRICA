@@ -380,7 +380,7 @@
 }
 @media (min-width: 1920px) {
   .featured-courses {
-    padding: 80px 388px 0;
+    padding: 80px 388px;
   }
   .featured-courses .featured-content .featured-course-list {
     background: #F7F9FD;

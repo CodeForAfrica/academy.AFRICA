@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 .featured-courses {
   padding: 16px;
@@ -326,7 +326,7 @@
   }
 
   @include media-breakpoint-up(xlarge) {
-    padding: 80px 388px 0;
+    padding: 80px 388px;
 
     .featured-content {
       .featured-course-list {
@@ -339,11 +339,13 @@
 .certificate-preview {
   &-body {
     padding: 24px 24px 16px;
+
     .divider-black {
       height: 4px;
       width: 100%;
       background-color: #000;
     }
+
     .grid-container {
       display: flex;
       justify-content: space-between;
@@ -353,8 +355,9 @@
     .grid-item {
       display: flex;
       flex-direction: column;
-      flex:1;
+      flex: 1;
       margin-top: 16px;
+
       p {
         text-transform: uppercase;
         margin: 0;
@@ -369,58 +372,70 @@
       height: 100px;
       margin-top: 16px;
     }
+
     .divider-blue {
       height: 3px;
       width: 100%;
       background: #1020E1;
       margin-top: 16px;
     }
+
     .certificate-content {
       display: flex;
       justify-content: space-between;
       gap: 16px;
       margin-top: 16px;
+
       p {
         margin-bottom: 0;
       }
+
       * {
         font-family: Open Sans;
       }
+
       .first-name {
-font-size: 18px;
-line-height: 24px;
+        font-size: 18px;
+        line-height: 24px;
       }
+
       .last-name {
         font-size: 18px;
         line-height: 24px;
         font-weight: 700;
       }
+
       .presented-to {
         font-size: 9px;
         line-height: 12px;
         white-space: nowrap;
       }
+
       .course {
         text-align: right;
+
         .course-title {
           font-size: 9px;
           line-height: 12px;
           white-space: nowrap;
         }
+
         .course-name {
           font-size: 14px;
-        line-height: 16px;
+          line-height: 16px;
           font-weight: 700;
           height: 70px;
         }
+
         .date {
           font-size: 9px;
-        line-height: 12px;
+          line-height: 12px;
         }
       }
     }
   }
-  &-footer{
+
+  &-footer {
     background-color: #1020E1;
     padding: 16px 24px;
     position: relative;
@@ -429,32 +444,39 @@ line-height: 24px;
     justify-content: space-between;
     gap: 32px;
     color: white;
+
     .cfa-logo {
       flex: 1;
     }
+
     p {
       margin: 0;
     }
+
     .signature {
       text-align: right;
+
       .signee-name {
         font-size: 5px;
         font-weight: 400;
         margin: 8px 0 0 0;
       }
+
       .signee-role {
         font-size: 6px;
         font-weight: 700;
         margin: 0;
         text-transform: uppercase;
+      }
+
+      .sign-date {
+        font-size: 6px;
+        font-weight: 400;
+        margin: 0;
+      }
     }
-    .sign-date {
-      font-size: 6px;
-      font-weight: 400;
-      margin: 0;
-    }
-  }
-    &::after{
+
+    &::after {
       content: "www.academyafrica.com";
       display: block;
       width: 100%;
@@ -477,25 +499,30 @@ line-height: 24px;
   background-color: $color-shades-white;
   gap: 40px;
   margin-top: 16px;
+
   .certificate-preview {
     flex: 2;
     box-shadow: 0px 5.74648px 9.57746px 0px rgba(0, 0, 0, 0.1);
     width: 100%;
   }
+
   @include media-breakpoint-up(tablet) {
-    
+
     .certificate-preview {
       max-width: 600px;
     }
   }
+
   @include media-breakpoint-down(large) {
     flex-wrap: wrap;
   }
+
   @include media-breakpoint-down(tablet) {
     flex-direction: column;
     align-items: center;
     padding: 0 40px;
   }
+
   .certificate-showcase-content {
     flex: 1;
     text-align: center;
@@ -503,6 +530,7 @@ line-height: 24px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     .showcase-header {
       display: block;
 
