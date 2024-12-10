@@ -413,7 +413,7 @@ function admin_notice_minimum_plugin_version($plugin_name, $min_version)
 
 function restrict_admin_access()
 {
-    if (!current_user_can('administrator') && !current_user_can('editor') && !current_user_can('author')) {
+    if (!current_user_can('administrator') && !current_user_can('editor') && !current_user_can('author') && !(defined('DOING_AJAX') && DOING_AJAX)) {
         wp_redirect(home_url());
         exit;
     }
