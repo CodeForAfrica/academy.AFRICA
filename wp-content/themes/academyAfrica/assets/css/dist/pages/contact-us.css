@@ -131,6 +131,10 @@
 .contact-us * {
   font-family: Open Sans;
 }
+.contact-us .gglcptch_recaptcha {
+  display: flex;
+  justify-content: flex-end;
+}
 .contact-us .input {
   margin-bottom: 16px;
 }

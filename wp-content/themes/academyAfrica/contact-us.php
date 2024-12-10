@@ -58,6 +58,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST[
     <label for="description">Message</label><br>
     <textarea name="description" id="description" rows="5" cols="30" required></textarea><br><br>
     <input type="hidden" name="action" value="contact-us">
+    <div style="text-align: right;">
+      <style>
+        .gglcptch_recaptcha {
+    display: flex;
+    justify-content: flex-end;
+  }
+        </style>
+    <? echo do_shortcode('[bws_google_captcha]') ?>
+    <script>
+      function submit(event) {
+        
+        var captchaResponse = grecaptcha.getResponse();
+        if (captchaResponse.length === 0) {
+          event.preventDefault();
+          alert('Please complete the CAPTCHA');
+        }
+      }
+    </script>
+    </div>
     <div class="submit-area">
                 <button type="submit" class="button primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">

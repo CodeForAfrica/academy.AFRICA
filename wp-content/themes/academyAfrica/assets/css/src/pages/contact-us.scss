@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 .contact-us {
   max-width: 1920px;
@@ -8,9 +8,16 @@
   * {
     font-family: Open Sans;
   }
+
+  .gglcptch_recaptcha {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .input {
     margin-bottom: 16px;
   }
+
   .submit-area {
     display: flex;
     justify-content: flex-end;
