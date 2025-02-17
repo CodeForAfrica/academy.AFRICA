@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 $font-family_1: Open Sans;
 
@@ -13,6 +13,7 @@ $font-family_1: Open Sans;
   .d-none {
     display: none;
   }
+
   // @include media-breakpoint-down(tablet) {
   //   #mobile-filter {
   //     flex: 1;
@@ -24,17 +25,20 @@ $font-family_1: Open Sans;
     height: 1px;
     margin: 40px 0;
   }
+
   .content {
     flex: 1;
     padding: 20px;
   }
 }
+
 li {
   margin: 0;
 }
 
 .main {
   flex: 1;
+
   .filter-section {
     margin-bottom: 50px;
     display: flex;
@@ -82,9 +86,11 @@ li {
       }
     }
   }
+
   .incomplete-courses {
     padding: 80px 60px 40px;
     position: relative;
+
     .description {
       color: $color-primary-700;
       font-family: $font-family_1;
@@ -92,6 +98,7 @@ li {
       font-style: normal;
       font-weight: 600;
       line-height: 48px;
+
       @include media-breakpoint-down(tablet) {
         color: var(--primary-700, #0c1a81);
 
@@ -99,9 +106,11 @@ li {
         font-size: 24px;
         font-style: normal;
         font-weight: 700;
-        line-height: 28px; /* 120% */
+        line-height: 28px;
+        /* 120% */
       }
     }
+
     .content {
       box-sizing: border-box;
       justify-content: flex-start;
@@ -110,6 +119,7 @@ li {
       flex-wrap: wrap;
       gap: 30px;
       margin: 40px 0;
+
       .card {
         flex: 1;
         max-width: 280px;
@@ -122,13 +132,14 @@ li {
         display: flex;
         border: 0.5px solid $color-neutral-200;
         background: $color-shades-white;
+
         .logo {
           width: 100%;
         }
+
         .course-card-pattern {
           height: 200px;
-          background: url("../../../images/CourseCardPatternDark.svg") no-repeat
-            center center;
+          background: url("../../../images/CourseCardPatternDark.svg") no-repeat center center;
           background-size: cover;
           display: flex;
           align-items: center;
@@ -142,9 +153,11 @@ li {
             background-color: #fff;
           }
         }
+
         .card-content {
           padding: 20px;
           width: 100%;
+
           .card-title {
             color: $color-primary-700;
             font-family: $font-family_1;
@@ -154,12 +167,14 @@ li {
             line-height: 24px;
             height: 71px;
             overflow: hidden;
+
             p {
               text-overflow: ellipsis;
               height: 71px;
               margin: 0;
             }
           }
+
           .lessons-count {
             color: $color-shades-black;
             font-family: $font-family_1;
@@ -169,28 +184,30 @@ li {
             line-height: 21px;
             margin: 20px 0;
           }
+
           .progress-bar {
             background-color: $color-neutral-100;
             height: 10px;
             border-radius: 5px;
+
             div {
               border-radius: 5px;
               height: 100%;
-              background-image: linear-gradient(
-                to right,
-                #ec1e27,
-                #d6004d,
-                #ad006b,
-                #73007e,
-                #0c1a81
-              );
+              background-image: linear-gradient(to right,
+                  #ec1e27,
+                  #d6004d,
+                  #ad006b,
+                  #73007e,
+                  #0c1a81);
             }
           }
+
           .card-footer {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
             margin-top: 4px;
+
             p {
               color: $color-shades-black;
               text-align: center;
@@ -203,6 +220,7 @@ li {
             }
           }
         }
+
         .provider {
           color: $color-secondary-500;
           font-family: $font-family_1;
@@ -218,9 +236,11 @@ li {
     }
   }
 }
+
 .your-certificates {
   padding: 80px 60px;
   background: $color-neutral-50;
+
   .your-certificates-title {
     margin: 0;
     color: $color-primary-700;
@@ -230,6 +250,7 @@ li {
     font-weight: 700;
     line-height: 48px;
   }
+
   .content {
     box-sizing: border-box;
     padding: 0;
@@ -237,6 +258,8 @@ li {
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 32px;
+
+
     .card {
       flex: 1;
       max-width: 280px;
@@ -245,15 +268,15 @@ li {
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex-shrink: 0;
       display: flex;
       border: 0.5px solid $color-neutral-200;
       background: $color-shades-white;
       margin-top: 40px;
+
+
       .course-card-pattern {
         height: 200px;
-        background: url("../../../images/CourseCardPatternDark.svg") no-repeat
-          center center;
+        background: url("../../../images/CourseCardPatternDark.svg") no-repeat center center;
         background-size: cover;
         display: flex;
         align-items: center;
@@ -267,9 +290,11 @@ li {
           background-color: #fff;
         }
       }
+
       .card-content {
         padding: 20px;
         width: 100%;
+
         .card-title {
           color: $color-primary-700;
           font-family: $font-family_1;
@@ -279,12 +304,14 @@ li {
           line-height: 24px;
           height: 71px;
           overflow: hidden;
+
           p {
             text-overflow: ellipsis;
             height: 71px;
             margin: 0;
           }
         }
+
         .lessons-count {
           color: $color-shades-black;
           font-family: $font-family_1;
@@ -294,16 +321,19 @@ li {
           line-height: 21px;
           margin: 20px 0;
         }
+
         .completed-progress-bar {
           height: 10px;
           border-radius: 5px;
           background: #0c1a81;
         }
+
         .card-footer {
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
           margin-top: 4px;
+
           p {
             color: $color-shades-black;
             text-align: center;
@@ -314,6 +344,7 @@ li {
             font-weight: 400;
             line-height: 21px;
           }
+
           .icons {
             display: flex;
             justify-content: space-between;
@@ -321,6 +352,7 @@ li {
           }
         }
       }
+
       .provider {
         color: $color-secondary-500;
         font-family: $font-family_1;
@@ -335,12 +367,14 @@ li {
     }
   }
 }
+
 @include media-breakpoint-down(tablet) {
   .main {
     .incomplete-courses {
       a {
         flex: 1;
       }
+
       .content {
         .card {
           min-width: calc(50% - 30px);
@@ -355,9 +389,6 @@ li {
     .content {
       .card {
         min-width: calc(50% - 30px);
-        &:last-child {
-          display: none;
-        }
       }
     }
   }
@@ -375,15 +406,18 @@ li {
   z-index: 9;
   transition: all 0.35s ease-in-out;
 }
+
 .open-filter {
   width: 100%;
   // margin: 40px 0;
 }
+
 .actions,
 .close-filters {
   display: flex;
   justify-content: space-between;
   margin-top: 36px;
+
   .clear-filters {
     color: var(--secondary-600, #b6131e);
     font-family: Open Sans;
@@ -391,11 +425,13 @@ li {
     font-style: normal;
     font-weight: 400;
     background: transparent;
-    line-height: 28px; /* 155.556% */
+    line-height: 28px;
+    /* 155.556% */
     margin-top: 40px;
     text-transform: none;
     outline: none;
   }
+
   .filter-by {
     color: var(--shades-black, #000);
 
@@ -404,7 +440,8 @@ li {
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
-    line-height: 34px; /* 121.429% */
+    line-height: 34px;
+    /* 121.429% */
     letter-spacing: -0.56px;
   }
 }

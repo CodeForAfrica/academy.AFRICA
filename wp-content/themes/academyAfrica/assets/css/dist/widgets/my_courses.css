@@ -213,7 +213,8 @@ li {
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 28px; /* 120% */
+    line-height: 28px;
+    /* 120% */
   }
 }
 .main .incomplete-courses .content {
@@ -351,7 +352,6 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-shrink: 0;
   display: flex;
   border: 0.5px solid #CCCFDA;
   background: #FFFFFF;
@@ -450,9 +450,6 @@ li {
   .your-certificates .content .card {
     min-width: calc(50% - 30px);
   }
-  .your-certificates .content .card:last-child {
-    display: none;
-  }
 }
 .mobile-filters {
   padding: 0;
@@ -485,7 +482,8 @@ li {
   font-style: normal;
   font-weight: 400;
   background: transparent;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
   margin-top: 40px;
   text-transform: none;
   outline: none;
@@ -498,7 +496,8 @@ li {
   font-size: 28px;
   font-style: normal;
   font-weight: 700;
-  line-height: 34px; /* 121.429% */
+  line-height: 34px;
+  /* 121.429% */
   letter-spacing: -0.56px;
 }
 
