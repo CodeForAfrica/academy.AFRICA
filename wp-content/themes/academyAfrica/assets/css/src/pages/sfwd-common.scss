@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 #content {
     .page-header {
@@ -274,6 +274,10 @@
 
                 @include media-breakpoint-up(desktop) {
                     width: 812px;
+                }
+
+                @include media-breakpoint-down(tablet) {
+                    padding: 40px 24px;
                 }
 
                 @include media-breakpoint-up(large) {

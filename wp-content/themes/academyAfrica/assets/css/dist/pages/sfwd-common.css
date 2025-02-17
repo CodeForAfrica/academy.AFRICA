@@ -334,6 +334,11 @@
     width: 812px;
   }
 }
+@media (max-width: 768px) {
+  .sfwd-container .sfwd-large-screen .content .sfwd-lessons {
+    padding: 40px 24px;
+  }
+}
 @media (min-width: 1440px) {
   .sfwd-container .sfwd-large-screen .content .sfwd-lessons {
     width: 1040px;
