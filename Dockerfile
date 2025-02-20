@@ -1,15 +1,15 @@
 # Use the official WordPress image as the base image
 FROM wordpress:6.4.3
 
-# Install mPDF library
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    libfontconfig1 \
-    libxrender1 \
-    libjpeg62-turbo \
-    libfreetype6 \
-    libpng16-16 \
-    && rm -rf /var/lib/apt/lists/*
+ENV XDEBUG_PORT 9000
+ENV XDEBUG_IDEKEY docker
 
-RUN mkdir -p /var/www/html/wp-content/plugins/mpdf && \
-    curl -SL "https://github.com/mpdf/mpdf/archive/v8.0.10.tar.gz" | tar -xz -C /var/www/html/wp-content/plugins/mpdf --strip-components=1
+RUN pecl install "xdebug" \
+    && docker-php-ext-enable xdebug
+
+RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.client_port=${XDEBUG_PORT}" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.idekey=${XDEBUG_IDEKEY}" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.log=/tmp/xdebug.log" >> /usr/local/etc/php/conf.d/xdebug.ini
