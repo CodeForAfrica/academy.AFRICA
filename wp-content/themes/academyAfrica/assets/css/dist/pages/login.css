@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.button {
+.button, .login .verification-resend form button {
   text-transform: uppercase;
   font-weight: 800;
   line-height: 19px;
@@ -15,7 +15,7 @@
   cursor: pointer;
   font-family: "Open Sans";
 }
-.button .icon {
+.button .icon, .login .verification-resend form button .icon {
   font-size: 16px;
   color: #FFFFFF;
 }
@@ -25,41 +25,41 @@
   justify-content: center;
   gap: 8px;
 }
-.button.small {
+.button.small, .login .verification-resend form button.small {
   padding: 8px 16px;
 }
-.button.medium {
+.button.medium, .login .verification-resend form button.medium {
   padding: 12px 16px;
 }
-.button.large {
+.button.large, .login .verification-resend form button.large {
   padding: 24px;
 }
-.button.cta {
+.button.cta, .login .verification-resend form button.cta {
   background: #ED1C24;
   border: 1px solid #ED1C24;
 }
-.button.cta:hover {
+.button.cta:hover, .login .verification-resend form button.cta:hover {
   background: #FEECED;
   color: #ED1C24;
 }
-.button.primary, .login input.button[type=submit] {
+.button.primary, .login .verification-resend form button, .login input.button[type=submit] {
   background: #0C1A81;
   border: 1px solid #0C1A81;
 }
-.button.primary:hover, .login input.button[type=submit]:hover {
+.button.primary:hover, .login .verification-resend form button:hover, .login input.button[type=submit]:hover {
   background: #EFF0FD;
   color: #0C1A81;
 }
-.button.secondary {
+.button.secondary, .login .verification-resend form button.secondary {
   background: #FEECED;
   border: 1px solid #FEECED;
 }
-.button.secondary:hover {
+.button.secondary:hover, .login .verification-resend form button.secondary:hover {
   background: #ED1C24;
   color: #FFFFFF;
   border: 1px solid #ED1C24;
 }
-.button.disabled {
+.button.disabled, .login .verification-resend form button.disabled {
   background: #CCCFDA;
   color: #616582;
   border: 1px solid #CCCFDA;
@@ -129,6 +129,20 @@
   max-width: 478px;
   padding: 16px;
   margin-top: 40px;
+}
+.login .verification-resend {
+  padding: 15px;
+  margin-bottom: 6rem;
+}
+.login .verification-resend .description {
+  color: var(--shades-black, #000);
+  /* Paragraph/P3/Regular */
+  font-family: Open Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  /* 155.556% */
 }
 .login .social-login {
   margin-top: 22px;
@@ -312,7 +326,8 @@
 .password-wrapper input {
   width: 100%;
   margin-bottom: 0 !important;
-  padding-right: 40px; /* Adjust padding to make space for the icon */
+  padding-right: 40px;
+  /* Adjust padding to make space for the icon */
 }
 .password-wrapper .toggle-password {
   position: absolute;

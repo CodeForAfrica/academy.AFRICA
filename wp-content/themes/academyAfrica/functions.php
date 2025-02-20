@@ -187,66 +187,260 @@ function my_acf_show_admin($show)
 
 add_action('user_register', 'send_activation_link', 10, 1);
 
+// Prevent logged-in users from accessing login page
+function redirect_logged_in_users()
+{
+    if (!is_admin() && is_page('login') && is_user_logged_in()) {
+        $redirect_url = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : home_url('/');
+        wp_redirect($redirect_url);
+        exit;
+    }
+}
+add_action('template_redirect', 'redirect_logged_in_users');
+
+function generate_user_activation_key($user_id)
+{
+    $activation_key = wp_generate_password(32, false);
+    $expiry = time() + (24 * 60 * 60); // 24 hours from now
+
+    update_user_meta($user_id, 'account_activation_key', $activation_key);
+    update_user_meta($user_id, 'activation_key_expiry', $expiry);
+
+    return $activation_key;
+}
+
+function is_activation_key_valid($user_id, $key)
+{
+    $stored_key = get_user_meta($user_id, 'account_activation_key', true);
+    $expiry = get_user_meta($user_id, 'activation_key_expiry', true);
+
+    if (empty($stored_key) || empty($expiry)) {
+        return false;
+    }
+
+    if (time() > $expiry) {
+        delete_user_meta($user_id, 'account_activation_key');
+        delete_user_meta($user_id, 'activation_key_expiry');
+        return false;
+    }
+
+    return $stored_key === $key;
+}
+
+// Add verification check to authenticate filter
+function verify_user_on_login($user, $username = '')
+{
+    if (!$user || is_wp_error($user)) {
+        return $user;
+    }
+
+    $is_verified = get_user_meta($user->ID, 'is_verified', true);
+
+    if (!$is_verified) {
+        $activation_key = get_user_meta($user->ID, 'account_activation_key', true);
+        if (empty($activation_key)) {
+            $activation_key = generate_user_activation_key($user->ID);
+        }
+
+        send_activation_link($user->ID);
+
+        // Store the error message in a transient
+        set_transient('login_error_message', 'Please verify your account. Check your email for the verification link.', 30);
+
+        // Redirect to custom login page
+        wp_redirect(add_query_arg('verification', 'required', home_url('/login')));
+        exit;
+    }
+
+    return $user;
+}
+
+// Change priority to run earlier
+remove_filter('authenticate', 'verify_user_on_login', 99);
+add_filter('authenticate', 'verify_user_on_login', 20);
+
+// Additional security to prevent unauthorized access
+function check_verified_user_status()
+{
+    $user = wp_get_current_user();
+    if ($user->ID && !get_user_meta($user->ID, 'is_verified', true)) {
+        wp_logout();
+        wp_redirect(add_query_arg('verification', 'required', home_url('/login')));
+        exit;
+    }
+}
+add_action('init', 'check_verified_user_status');
+
 function set_html_content_type()
 {
     return 'text/html';
 }
+function generate_verification_token($user_id, $activation_key)
+{
+    $data = json_encode([
+        'user_id' => $user_id,
+        'activation_key' => $activation_key,
+        'timestamp' => time()
+    ]);
+
+    $signature = hash_hmac('sha256', $data, AUTH_SALT, true);
+    return base64_encode($signature . $data);
+}
+
+function decode_verification_token($token)
+{
+    // xdebug_break();
+
+    $decoded = base64_decode($token);
+    if ($decoded === false) {
+        return false;
+    }
+
+    // Get the first 32 bytes as signature (SHA256 produces 32 bytes)
+    $signature = substr($decoded, 0, 32);
+    // Get the rest as JSON data
+    $json_data = substr($decoded, 32);
+
+    $data = json_decode($json_data, true);
+    if (!$data || !isset($data['user_id']) || !isset($data['activation_key']) || !isset($data['timestamp'])) {
+        return false;
+    }
+
+    $expected_signature = hash_hmac('sha256', $json_data, AUTH_SALT, true);
+    if (!hash_equals($signature, $expected_signature)) {
+        return false;
+    }
+
+    return $data;
+}
+
 function send_activation_link($user_id)
 {
     if ($user_id) {
         $user = get_user_by('ID', $user_id);
         $sign_in_url = home_url() . '/login';
-        $code = $user->data->user_activation_key;
-        $valid_code = (!!$code && isset($code)) ? $code : sha1($user_id . time());
-        global $wpdb;
-        $wpdb->update(
-            'wp_users',
-            array('user_activation_key' => $valid_code, 'user_status' => 1,),
-            array('ID' => $user_id),
-        );
+
+        $activation_key = get_user_meta($user_id, 'account_activation_key', true);
+        $expiry = get_user_meta($user_id, 'activation_key_expiry', true);
+        if (empty($activation_key) || empty($expiry) || time() > $expiry) {
+            $activation_key = generate_user_activation_key($user_id);
+        }
+
+        $token = generate_verification_token($user_id, $activation_key);
+
         $email = $user->data->user_email;
-        $activation_link = add_query_arg(array('action' => 'account_activation', 'key' => $valid_code, 'user_id' => $user_id), $sign_in_url);
-?>
-    <?
+        $activation_link = add_query_arg(
+            array(
+                'action' => 'account_activation',
+                'token' => $token
+            ),
+            $sign_in_url
+        );
         add_filter('wp_mail_content_type', 'set_html_content_type');
-        $name = get_user_meta($user->data->ID, 'first_name', true) . ' ' . get_user_meta($user_id, 'last_name', true);
-        $body = "Hi <strong>" . $name . "</strong>,
-        <p>
-        Thank you for creating an account with academy.AFRICA! To get started, please verify your account by clicking the link below:</p>
-            <a href=" .  $activation_link . ">
-            <button style=\"background: #004085;
-            border: 1px solid #004085;
-            margin-top: 16px;
-            margin-bottom: 16px;
-            padding: 8px 16px; 
-            font-size: 14px; 
-            line-height: 16px;
-            color: #ffffff; 
-            text-transform: uppercase;
-            font-weight: 800;
-            letter-spacing: 1.6px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            font-family: 'Open Sans', sans-serif;
-            border-radius: 0;\"
-            onmouseover=\"this.style.background='#cce5ff'; this.style.color='#004085';\"
-            onmouseout=\"this.style.background='#004085'; this.style.color='#ffffff';\">
-            Activate Your Account
-            </button>
-            </a>
-        <p>Once your account is activated, you'll have full access to academy.AFRICA and can begin your learning journey with us.</p>
-        <p>If you did not sign up for this account, please disregard this email.</p>
-        <p style=\"margin-bottom: 0; margin-top: 10px\">
-        Thank you,
-        </p>
-        <p>The academy.AFRICA Team</p>
-        ";
+        $body = get_registration_email_template($user_id, $activation_link);
         wp_mail($email, 'Please Verify Your academy.AFRICA Account', $body);
         remove_filter('wp_mail_content_type', 'set_html_content_type');
     }
+}
+
+function resend_verification_email()
+{
+    // xdebug_break();
+
+    if (isset($_POST['action']) && $_POST['action'] === 'resend_verification' && isset($_POST['email'])) {
+        $user = get_user_by('email', sanitize_email($_POST['email']));
+
+        if ($user && !get_user_meta($user->ID, 'is_verified', true)) {
+            send_activation_link($user->ID);
+            set_transient('login_message_activation_email_sent', 'Verification email resent. Please check your email.', 30);
+            wp_redirect(add_query_arg('email_verification_sent', 'true', home_url('/login')));
+            exit;
+        }
+
+        wp_redirect(add_query_arg('email_not_found', 'true', home_url('/login')));
+        set_transient('login_error_message', 'Email not found. Please check your email address.', 30);
+        exit;
+    }
+}
+
+add_action('init', 'resend_verification_email');
+
+function get_registration_email_template($user_id, $activation_link)
+{
+    $user = get_user_by('ID', $user_id);
+    $name = get_user_meta($user->data->ID, 'first_name', true) . ' ' . get_user_meta($user_id, 'last_name', true);
+
+    $body = <<<EOD
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration Confirmation</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color: #333333;
+            }
+            p {
+                color: #666666;
+            }
+            .button {
+                background: #004085;
+                text-decoration: none;
+                border: 1px solid #004085;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                padding: 8px 16px; 
+                font-size: 14px; 
+                line-height: 16px;
+                color: #ffffff !important; 
+                text-transform: uppercase;
+                font-weight: 800;
+                letter-spacing: 1.6px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                cursor: pointer;
+                font-family: 'Open Sans', sans-serif;
+                border-radius: 0;
+            }
+            .button:hover {
+                background-color: #cce5ff;
+                color:#004085 !important
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Registration Confirmation</h1>
+            <p>Dear <strong>$name</strong>,</p>
+            <p>Thank you for registering with <strong>academy.AFRICA!</strong> We're excited to have you on board.</p>
+            <p><strong>This link is valid for 24 hours.</strong></p>
+            <p>To get started, please verify your account by clicking the button below:</p>
+            <a class="button" href="$activation_link" target="_blank">Verify Your Account</a>
+            <p>If you did not sign up for this account, please disregard this email.</p>
+            <p>Thank you,<br>The academy.AFRICA Team</p>
+        </div>
+    </body>
+    </html>
+    EOD;
+
+    return $body;
 }
 
 function whitelist_address()
@@ -262,7 +456,7 @@ function whitelist_address()
 
 function set_global_error($message = "An error occured")
 {
-    ?>
+?>
     <script>
         window.error = <? echo json_encode($message) ?>
     </script>
