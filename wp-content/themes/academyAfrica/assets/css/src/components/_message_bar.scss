@@ -1,0 +1,48 @@
+@use "../abstracts/" as *;
+
+.message-bar {
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    width: 100%;
+
+    &-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    &-text {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    &.message-success {
+        background-color: $color-success-50;
+        color: $color-success-700;
+        border: 1px solid $color-success-200;
+    }
+
+    &.message-error {
+        background-color: $color-secondary-50;
+        color: $color-secondary-700;
+        border: 1px solid $color-secondary-200;
+    }
+
+    &.message-warning {
+        background-color: $color-warning-50;
+        color: $color-warning-700;
+        border: 1px solid $color-warning-200;
+    }
+
+    &.message-info {
+        background-color: $color-primary-50;
+        color: $color-primary-700;
+        border: 1px solid $color-primary-200;
+    }
+
+    i {
+        font-size: 16px;
+    }
+}
