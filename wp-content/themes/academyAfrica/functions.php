@@ -275,6 +275,7 @@ function set_html_content_type()
 {
     return 'text/html';
 }
+
 function generate_verification_token($user_id, $activation_key)
 {
     $data = json_encode([
@@ -282,35 +283,23 @@ function generate_verification_token($user_id, $activation_key)
         'activation_key' => $activation_key,
         'timestamp' => time()
     ]);
-
-    $signature = hash_hmac('sha256', $data, AUTH_SALT, true);
-    return base64_encode($signature . $data);
+    return base64_encode($data);
 }
 
 function decode_verification_token($token)
 {
-    // xdebug_break();
 
     $decoded = base64_decode($token);
     if ($decoded === false) {
         return false;
     }
-
-    // Get the first 32 bytes as signature (SHA256 produces 32 bytes)
-    $signature = substr($decoded, 0, 32);
-    // Get the rest as JSON data
-    $json_data = substr($decoded, 32);
-
-    $data = json_decode($json_data, true);
+    $data = json_decode($decoded, true);
+    $user_id = $data['user_id'];
+    $activation_key = $data['activation_key'];
+    $timestamp = $data['timestamp'];
     if (!$data || !isset($data['user_id']) || !isset($data['activation_key']) || !isset($data['timestamp'])) {
         return false;
     }
-
-    $expected_signature = hash_hmac('sha256', $json_data, AUTH_SALT, true);
-    if (!hash_equals($signature, $expected_signature)) {
-        return false;
-    }
-
     return $data;
 }
 
