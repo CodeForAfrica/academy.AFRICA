@@ -32,6 +32,33 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
         return ['academy-africa'];
     }
 
+    public function get_verified_users()
+    {
+        $args = [
+            'meta_key' => 'is_verified',
+            'meta_value' => '1'
+        ];
+        $verified_users = get_users($args);
+        return $verified_users;
+    }
+
+    public function get_verified_users_count()
+    {
+        $verified_users = $this->get_verified_users();
+        return count($verified_users);
+    }
+
+    public function get_courses_count()
+    {
+        $all_courses = get_posts([
+            'post_type' => 'sfwd-courses',
+            'post_status' => 'publish',
+            'numberposts' => -1,
+            'fields' => 'ids'
+        ]);
+        return count($all_courses);
+    }
+
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -108,7 +135,22 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
         $title = $settings['title'];
         $sign_up_label = $settings['sign_up_label'];
         $sign_up_url = $settings['sign_up_link']['url'];
+        $metrics = !empty($settings['metrics']) ? $settings['metrics'] : array();
+
+        array_unshift($metrics, [
+            'metric' => $this->get_courses_count(),
+            'label' => 'Courses'
+        ]);
+        array_unshift($metrics, [
+            'metric' => $this->get_verified_users_count(),
+            'label' => 'Members'
+        ]);
 ?>
+        <script>
+            console.log(<? echo json_encode($this->get_verified_users()) ?>);
+        </script>
+        <?
+        ?>
         <div class="hero">
             <div class="background-image"></div>
             <div class="content-parent">
@@ -131,8 +173,8 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                 <div class="metrics-content">
                     <div class="metrics">
                         <?
-                        if (!empty($settings['metrics'])) {
-                            foreach ($settings['metrics'] as $item) {
+                        if (!empty($metrics)) {
+                            foreach ($metrics as $item) {
                                 $metric = esc_html($item['metric']);
                                 $label = esc_html($item['label']);
                         ?>
@@ -155,7 +197,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                 <img alt="mask" class="mask" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/mask.svg' ?>">
             </div>
             <script>
-                function register(){
+                function register() {
                     window.location.href = "/login?action=register"
                 }
             </script>
