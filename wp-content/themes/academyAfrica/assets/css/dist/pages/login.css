@@ -50,6 +50,12 @@
   background: #EFF0FD;
   color: #0C1A81;
 }
+.button.primary:disabled, .login .verification-resend form button:disabled, .login input.button[type=submit]:disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
 .button.secondary, .login .verification-resend form button.secondary {
   background: #FEECED;
   border: 1px solid #FEECED;

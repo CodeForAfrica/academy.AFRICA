@@ -1,4 +1,4 @@
-@use "colors" as *;
+@use "colors"as *;
 
 .button {
   text-transform: uppercase;
@@ -57,6 +57,13 @@
     &:hover {
       background: $color-primary-50;
       color: $color-primary-700;
+    }
+
+    &:disabled {
+      background: $color-neutral-200;
+      color: $color-neutral-700;
+      border: 1px solid $color-neutral-200;
+      cursor: not-allowed;
     }
   }
 

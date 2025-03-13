@@ -49,6 +49,12 @@
   background: #EFF0FD;
   color: #0C1A81;
 }
+.button.primary:disabled, .wpProQuiz_content .wpProQuiz_button:disabled {
+  background: #CCCFDA;
+  color: #616582;
+  border: 1px solid #CCCFDA;
+  cursor: not-allowed;
+}
 .button.secondary, .wpProQuiz_content .secondary.wpProQuiz_button {
   background: #FEECED;
   border: 1px solid #FEECED;
