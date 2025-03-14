@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.5.21');
+define('ACADEMY_AFRICA_VERSION', '1.5.22');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -449,7 +449,7 @@ function set_global_error($message = "An error occured")
     <script>
         window.error = <? echo json_encode($message) ?>
     </script>
-    <?
+<?
 }
 function render_inactive($render)
 {
