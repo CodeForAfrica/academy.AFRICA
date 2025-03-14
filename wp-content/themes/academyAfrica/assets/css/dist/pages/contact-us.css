@@ -149,6 +149,9 @@
   justify-content: flex-end;
   margin-top: 40px;
 }
+.contact-us .submit-area p input {
+  width: 100%;
+}
 
 @media (max-width: 1440px) {
   .contact-us {
