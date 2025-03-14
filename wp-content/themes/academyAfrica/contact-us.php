@@ -11,7 +11,7 @@ $save_label = get_theme_mod('save_label', 'Submit');
 ?>
 <main class="contact-us">
   <?php
-  echo do_shortcode('[contact-form-7 id="5043f09" title="Contact form 1"]');
+  echo do_shortcode('[contact-form-7 id="9521ba1" title="Contact form 1"]');
   ?>
 </main>
 <?php
