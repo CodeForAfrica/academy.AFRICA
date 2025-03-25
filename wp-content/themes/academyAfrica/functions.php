@@ -633,3 +633,14 @@ foreach ($files as $file) {
     require_once $file;
 }
 // add_action('init', 'custom_login_page');
+
+add_filter(
+    'wpcf7_recaptcha_threshold',
+
+    function ($threshold) {
+        $threshold = 0.8;
+        return $threshold;
+    },
+    10,
+    1
+);
