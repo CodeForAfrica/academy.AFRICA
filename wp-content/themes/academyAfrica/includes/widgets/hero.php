@@ -35,17 +35,18 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
     public function get_verified_users()
     {
         $args = [
-            'meta_key' => 'is_verified',
-            'meta_value' => '1'
+            'meta_key' => 'email',
+            'meta_compare' => 'EXISTS'
         ];
         $verified_users = get_users($args);
+
         return $verified_users;
     }
 
     public function get_verified_users_count()
     {
-        $verified_users = $this->get_verified_users();
-        return count($verified_users);
+        $user_count = count_users();
+        return $user_count['total_users'];
     }
 
     public function get_courses_count()
