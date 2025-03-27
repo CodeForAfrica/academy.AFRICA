@@ -39,8 +39,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
             'meta_value' => '1'
         ];
         $verified_users = get_users($args);
-        $all_users = get_users();
-        return $all_users;
+        return $verified_users;
     }
 
     public function get_verified_users_count()
