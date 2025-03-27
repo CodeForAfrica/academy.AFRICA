@@ -34,10 +34,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
 
     public function get_verified_users()
     {
-        $args = [
-            'meta_key' => 'is_verified',
-            'meta_value' => '1'
-        ];
+        $args = [];
         $verified_users = get_users($args);
         return $verified_users;
     }
