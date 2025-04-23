@@ -60,6 +60,14 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
         return count($all_courses);
     }
 
+    public function get_events_count()
+    {
+        $all_events = get_posts([
+            'post_type' => 'event',
+            'fields' => 'ids'
+        ]);
+        return count($all_events);
+    }
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -148,7 +156,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
         ]);
 ?>
         <script>
-            console.log(<? echo json_encode($this->get_verified_users()) ?>);
+            console.log(<? echo json_encode(array("events", $this->get_events_count())) ?>);
         </script>
         <?
         ?>
