@@ -98,6 +98,9 @@ if (is_user_logged_in()) {
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));
     $user_updates = explode(",", get_user_meta($user_id, 'updates', true));
 ?>
+    <script>
+        console.log(`<? echo json_encode($description) ?>`);
+    </script>
     <main class="profile">
         <h4 class="cfa-title">
             <? echo $page_title ?>
@@ -232,7 +235,15 @@ if (is_user_logged_in()) {
                     <label for="description">
                         <? echo $bio_label ?>
                     </label>
-                    <textarea name="description" id="description" rows="10"><? echo $description ?></textarea>
+                    <?
+                    $content = $description;
+                    $editor_id = 'description';
+                    wp_editor($description, $editor_id, [
+                        'textarea_name' => $editor_id,
+                        'media_buttons' => true,
+                        'textarea_rows' => 10,
+                    ]);
+                    ?>
                 </div>
             </div>
 
