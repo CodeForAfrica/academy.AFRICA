@@ -229,7 +229,11 @@ if (is_user_logged_in()) {
                     <?
                     $content = $description;
                     $editor_id = 'description';
-                    wp_editor($content, $editor_id);
+                    wp_editor($content, $editor_id, [
+                        'textarea_name' => $editor_id,
+                        'media_buttons' => true,
+                        'textarea_rows' => 10,
+                    ]);
                     ?>
                     <!-- <textarea name="description" id="description" rows="10" value="<? echo $description ?>"><? echo $description ?></textarea> -->
                 </div>
