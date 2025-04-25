@@ -124,8 +124,9 @@ if ($course_status == "Completed" && $is_cert) {
                         $last_name = get_the_author_meta('last_name', $author->ID);
                         $name = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $author->display_name;
                         $avatar_url = get_avatar_url($author->ID);
-                        // $avatar_url = "/wp-content/uploads/2025/04/avatar.svg";
-                        $description = get_user_meta($author->ID, '_description', true);
+                        $user = get_userdata($author->ID);
+                        $description = $user->description;
+                        // $description = get_user_meta($author->ID, 'description', true);
                         $twitter = get_the_author_meta('twitter', $author->ID);
                         $facebook = get_the_author_meta('facebook', $author->ID);
                         $linkedin = get_the_author_meta('linked_in', $author->ID);
