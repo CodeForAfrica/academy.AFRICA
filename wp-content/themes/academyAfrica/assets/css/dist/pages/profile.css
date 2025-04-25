@@ -238,6 +238,7 @@
 }
 .profile .user-form .input input[type=text],
 .profile .user-form .input input[type=tel],
+.profile .user-form .input input[type=url],
 .profile .user-form .input input[type=email] {
   border: 1px solid var(--neutral-300, #b7bac8);
   background: var(--shades-white, #fff);
@@ -245,6 +246,7 @@
 }
 .profile .user-form .input input[type=text]:disabled,
 .profile .user-form .input input[type=tel]:disabled,
+.profile .user-form .input input[type=url]:disabled,
 .profile .user-form .input input[type=email]:disabled {
   background: var(--neutral-50, #f7f9fd);
 }

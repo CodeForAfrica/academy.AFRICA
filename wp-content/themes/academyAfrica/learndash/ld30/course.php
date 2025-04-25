@@ -124,14 +124,60 @@ if ($course_status == "Completed" && $is_cert) {
                         $last_name = get_the_author_meta('last_name', $author->ID);
                         $name = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $author->display_name;
                         $avatar_url = get_avatar_url($author->ID);
+                        // $avatar_url = "/wp-content/uploads/2025/04/avatar.svg";
                         $description = wpautop($author->description);
+                        $twitter = get_the_author_meta('twitter', $author->ID);
+                        $facebook = get_the_author_meta('facebook', $author->ID);
+                        $linkedin = get_the_author_meta('linked_in', $author->ID);
+                        $instagram = get_the_author_meta('instagram', $author->ID);
+                        $website = get_the_author_meta('website', $author->ID);
+                        $slack = get_the_author_meta('slack', $author->ID);
                     ?>
+                        <script>
+                            console.log(<?php echo json_encode($website); ?>);
+                        </script>
                         <div class="author">
-                            <div class="name">
-                                <p><?php echo $name; ?></p>
-                            </div>
-                            <div class="avatar">
-                                <img src="<?php echo $avatar_url; ?>" alt="">
+                            <div class="avatar-name">
+
+                                <div class="avatar">
+                                    <img src="<?php echo $avatar_url; ?>" alt="">
+                                </div>
+                                <div class="name">
+                                    <p><?php echo $name; ?></p>
+                                </div>
+                                <div class="share-icons">
+                                    <!-- LinkedIn -->
+                                    <?php if (!empty($linkedin)) : ?>
+                                        <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($linkedin); ?>" target="_blank">
+                                            <img class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=linkedin, Size=24, Color=Black.svg" alt="LinkedIn">
+                                        </a>
+                                    <?php endif; ?>
+
+                                    <!-- Twitter -->
+                                    <?php if (!empty($twitter)) : ?>
+                                        <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($twitter); ?>" target="_blank">
+                                            <img style="margin-bottom: -2px" class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=twitter, Size=24, Color=Black.svg" alt="Twitter">
+                                        </a>
+                                    <?php endif; ?>
+                                    <!-- Facebook -->
+                                    <?php if (!empty($facebook)) : ?>
+                                        <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($facebook); ?>" target="_blank">
+                                            <img class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=facebook, Size=24, Color=Black.svg" alt="Facebook">
+                                        </a>
+                                    <?php endif; ?>
+                                    <!-- Website -->
+                                    <?php if (!empty($website)) : ?>
+                                        <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($website); ?>" target="_blank">
+                                            <img class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=world, Size=24, Color=Black.svg" alt="Website">
+                                        </a>
+                                    <?php endif; ?>
+                                    <!-- Instagram -->
+                                    <?php if (!empty($instagram)) : ?>
+                                        <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($instagram); ?>" target="_blank">
+                                            <img class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=instagram, Size=24, Color=Black.svg" alt="Instagram">
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                             <div class="description wysiwyg">
                                 <?php echo $description; ?>

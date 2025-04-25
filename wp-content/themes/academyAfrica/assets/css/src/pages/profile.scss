@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 .profile {
   max-width: 1920px;
@@ -126,6 +126,7 @@
 
       input[type="text"],
       input[type="tel"],
+      input[type="url"],
       input[type="email"] {
         border: 1px solid var(--neutral-300, #b7bac8);
         background: var(--shades-white, #fff);

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST[
             update_user_meta($user_id, 'avatar', $new_avatar_url);
         }
     }
-    $keys = array("first_name", "last_name", "user_email", "city", "country", "position", "company", "facebook", "linked_in", "twitter", "description", "slack", "prefix", "phone");
+    $keys = array("first_name", "last_name", "user_email", "city", "country", "position", "company", "facebook", "linked_in", "twitter", "description", "slack", "prefix", "phone", "website");
     foreach ($keys as $key) {
         if (isset($_POST[$key])) {
             update_user_meta($user_id, $key, $_POST[$key]);
@@ -84,6 +84,7 @@ if (is_user_logged_in()) {
     $facebook = get_user_meta($user_id, 'facebook', true);
     $slack = get_user_meta($user_id, 'slack', true);
     $twitter = get_user_meta($user_id, 'twitter', true);
+    $website = get_user_meta($user_id, 'website', true);
     $company = get_user_meta($user_id, 'company', true);
     $description = $current_user->description;
     $prefix = get_user_meta($user_id, 'prefix', true);
@@ -190,29 +191,35 @@ if (is_user_logged_in()) {
                     <input type="text" name="company" value="<? echo $company ?>" id="company">
                 </div>
 
-                <div class="input">
+                <!-- <div class="input">
                     <label for="slack">
-                        <? echo $slack_label ?>
+                        <? /*echo $slack_label*/ ?>
                     </label>
                     <input type="text" name="slack" value="<? echo $slack ?>" id="slack">
-                </div>
+                </div> -->
                 <div class="input">
                     <label for="twitter">
                         <? echo $twitter_label ?>
                     </label>
-                    <input type="text" name="twitter" value="<? echo $twitter ?>" id="twitter">
+                    <input type="url" name="twitter" value="<? echo $twitter ?>" id="twitter">
                 </div>
                 <div class="input">
                     <label for="facebook">
                         <? echo $facebook_label ?>
                     </label>
-                    <input type="text" name="facebook" value="<? echo $facebook ?>" id="facebook">
+                    <input type="url" name="facebook" value="<? echo $facebook ?>" id="facebook">
                 </div>
                 <div class="input">
                     <label for="linked_in">
                         <? echo $linked_in_label ?>
                     </label>
-                    <input type="text" name="linked_in" value="<? echo $linked_in ?>" id="linked_in">
+                    <input type="url" name="linked_in" value="<? echo $linked_in ?>" id="linked_in">
+                </div>
+                <div class="input">
+                    <label for="website">
+                        Website
+                    </label>
+                    <input type="url" name="website" value="<? echo $website ?>" id="website">
                 </div>
                 <input type="hidden" name="action" value="profile">
                 <div class="bio">
