@@ -86,7 +86,7 @@ if (is_user_logged_in()) {
     $twitter = get_user_meta($user_id, 'twitter', true);
     $website = get_user_meta($user_id, 'website', true);
     $company = get_user_meta($user_id, 'company', true);
-    $description = $current_user->description;
+    $description = get_user_meta($user_id, 'description', true);
     $prefix = get_user_meta($user_id, 'prefix', true);
     $phone = get_user_meta($user_id, 'phone', true);
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));
