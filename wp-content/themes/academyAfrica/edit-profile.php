@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST[
             update_user_meta($user_id, 'avatar', $new_avatar_url);
         }
     }
-    $keys = array("first_name", "last_name", "user_email", "city", "country", "position", "company", "facebook", "linked_in", "twitter", "description", "slack", "prefix", "phone", "website");
+    $keys = array("first_name", "last_name", "user_email", "city", "country", "position", "company", "facebook", "linked_in", "twitter", "_description", "slack", "prefix", "phone", "website");
     foreach ($keys as $key) {
         if (isset($_POST[$key])) {
             update_user_meta($user_id, $key, $_POST[$key]);
@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST[
                 $user_data = get_userdata($user_id);
                 $user_data->user_email = $_POST[$key];
                 wp_update_user($user_data);
+                print_r($user_data);
             }
         }
     }
@@ -86,7 +87,7 @@ if (is_user_logged_in()) {
     $twitter = get_user_meta($user_id, 'twitter', true);
     $website = get_user_meta($user_id, 'website', true);
     $company = get_user_meta($user_id, 'company', true);
-    $description = get_user_meta($user_id, 'description', true);
+    $description = get_user_meta($user_id, '_description', true);
     $prefix = get_user_meta($user_id, 'prefix', true);
     $phone = get_user_meta($user_id, 'phone', true);
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));
@@ -228,14 +229,13 @@ if (is_user_logged_in()) {
                     </label>
                     <?
                     $content = $description;
-                    $editor_id = 'description';
-                    wp_editor($content, $editor_id, [
+                    $editor_id = '_description';
+                    wp_editor($description, $editor_id, [
                         'textarea_name' => $editor_id,
                         'media_buttons' => true,
                         'textarea_rows' => 10,
                     ]);
                     ?>
-                    <!-- <textarea name="description" id="description" rows="10" value="<? echo $description ?>"><? echo $description ?></textarea> -->
                 </div>
             </div>
 
