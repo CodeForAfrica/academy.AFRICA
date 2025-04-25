@@ -232,15 +232,7 @@ if (is_user_logged_in()) {
                     <label for="description">
                         <? echo $bio_label ?>
                     </label>
-                    <?
-                    $content = $description;
-                    $editor_id = 'description';
-                    wp_editor($description, $editor_id, [
-                        'textarea_name' => $editor_id,
-                        'media_buttons' => true,
-                        'textarea_rows' => 10,
-                    ]);
-                    ?>
+                    <textarea name="description" id="description" rows="10"><? echo $description ?></textarea>
                 </div>
             </div>
 
