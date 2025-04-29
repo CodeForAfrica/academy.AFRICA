@@ -1,8 +1,8 @@
 # Use the official WordPress image as the base image
-FROM wordpress:6.7.2
+FROM wordpress:6.8.0
 
-ENV XDEBUG_PORT 9000
-ENV XDEBUG_IDEKEY docker
+ENV XDEBUG_PORT=9000
+ENV XDEBUG_IDEKEY=docker
 
 RUN pecl install "xdebug" \
     && docker-php-ext-enable xdebug

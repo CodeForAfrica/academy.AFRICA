@@ -51,14 +51,17 @@ class CoursesFunctions
         if (empty($attr['per_page'])) {
             $attr['per_page'] = 3;
         }
+        $paged = isset($attr['paged']) ? intval($attr['paged']) : 1;
+        $orderby = isset($attr['orderby']) ? sanitize_text_field($attr['orderby']) : 'date';
+        $order = isset($attr['order']) ? sanitize_text_field($attr['order']) : 'DESC';
 
         $args = array(
             'post_type' => 'ac-learning-path',
             'post_status' => 'publish',
             'posts_per_page' => intval($attr['per_page']),
-            'paged' => $attr['paged'],
-            'orderby' => sanitize_text_field($attr['orderby']),
-            'order' => sanitize_text_field($attr['order']),
+            'paged' => $paged,
+            'orderby' => $orderby,
+            'order' => $order,
         );
         $learning_path_posts = get_posts($args);
         $learning_paths = array();

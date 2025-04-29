@@ -4,6 +4,11 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+require_once __DIR__ . '/../../includes/utils/courses.php';
+
+use AcademyAfrica\Theme\Courses\CoursesFunctions;
+
+
 $course_id = get_the_ID();
 
 $course_price = learndash_get_course_price($course_id);
@@ -17,6 +22,21 @@ $short_description = get_field('short_description', $course_id);
 $course_status = learndash_course_status($course_id);
 $post_data = get_post($course_id);
 $course_intro    = $post_data->post_content;
+
+$leaning_attr = [
+    'per_page' => -1,
+];
+$pathways = CoursesFunctions::getLearningPaths($leaning_attr);
+
+$course_pathways = array_filter($pathways['learning_paths'], function ($pathway) use ($course_id) {
+    foreach ($pathway['courses'] as $course) {
+        if ($course['id']->ID == $course_id) {
+            return true;
+        }
+    }
+    return false;
+});
+
 ?>
 
 <style>
@@ -100,6 +120,22 @@ if ($course_status == "Completed" && $is_cert) {
                     <?php echo do_shortcode($course_intro); ?>
                 </div>
             </div>
+            <hr class="divider">
+            <div class="pathways">
+                <?php if (!empty($course_pathways)) : ?>
+                    <p class="pathways-title">Completing this course can bring you closer to completing the following pathways</p>
+                    <ul class="pathways-list">
+                        <?php foreach ($course_pathways as $pathway) : ?>
+                            <li>
+                                <a class="pathways-link" href="<?php echo esc_url(get_permalink($pathway['id'])); ?>" target="_blank">
+                                    <?php echo esc_html($pathway['title']); ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+
             <?
             if (count($lesson_topics) > 0) {
             ?>
@@ -134,9 +170,6 @@ if ($course_status == "Completed" && $is_cert) {
                         $website = get_the_author_meta('website', $author->ID);
                         $slack = get_the_author_meta('slack', $author->ID);
                     ?>
-                        <script>
-                            console.log(<?php echo json_encode($website); ?>);
-                        </script>
                         <div class="author">
                             <div class="avatar-name">
 

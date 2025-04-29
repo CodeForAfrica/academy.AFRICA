@@ -155,9 +155,6 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
             'label' => 'Members'
         ]);
 ?>
-        <script>
-            console.log(<? echo json_encode(array("events", $this->get_events_count())) ?>);
-        </script>
         <?
         ?>
         <div class="hero">

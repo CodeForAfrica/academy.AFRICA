@@ -211,7 +211,7 @@
                                     position: absolute;
                                     top: 100%;
                                     left: 0;
-                                    width: 100%;
+                                    // width: 100%;
                                     background: $color-primary-700;
                                     color: $color-shades-white;
 
@@ -233,7 +233,7 @@
                                         line-height: 14px;
                                         font-weight: 400;
                                         padding: 10px;
-                                        width: 120px;
+                                        // width: 120px;
 
                                         &:last-child {
                                             border-top: none;

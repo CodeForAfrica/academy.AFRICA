@@ -98,9 +98,6 @@ if (is_user_logged_in()) {
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));
     $user_updates = explode(",", get_user_meta($user_id, 'updates', true));
 ?>
-    <script>
-        console.log(`<? echo json_encode($description) ?>`);
-    </script>
     <main class="profile">
         <h4 class="cfa-title">
             <? echo $page_title ?>

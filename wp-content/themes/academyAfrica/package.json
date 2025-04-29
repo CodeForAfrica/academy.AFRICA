@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "sass": "^1.69.5"
-  }
+    "sass": "^1.87.0"
+  },
+  "packageManager": "pnpm@10.8.0"
 }
