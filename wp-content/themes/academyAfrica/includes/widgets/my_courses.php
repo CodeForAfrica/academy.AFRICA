@@ -166,13 +166,15 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
         );
 ?>
         <main class="body">
-            <?php get_template_part('template-parts/filter_bar', 'template', [
-                'filter_by' => $filter_by,
-                'filter_options' => $filter_options,
-                'sort_by' => $sort_by,
-                'sort_options' => $sort_options,
-                'sort' => $sort
-            ]); ?>
+            <div class="desktop-only">
+                <?php get_template_part('template-parts/filter_bar', 'template', [
+                    'filter_by' => $filter_by,
+                    'filter_options' => $filter_options,
+                    'sort_by' => $sort_by,
+                    'sort_options' => $sort_options,
+                    'sort' => $sort
+                ]); ?>
+            </div>
             <div class="main" id="all-courses">
                 <section class="incomplete-courses">
                     <h4 class="cfa-title">
@@ -180,31 +182,55 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                             <? echo $current_user->display_name; ?>
                         </strong>
                     </h4>
+                    <div class="filter-by-language">
+                        <div class="label">
+                            <?php echo __('Choose a course Language:', 'academy-africa'); ?>
+                        </div>
+                        <div class="language-buttons">
+                            <?php
+                            $languages =  [
+                                'all' => __('All', 'academy-africa'),
+                                'en' => __('English', 'academy-africa'),
+                                'fr' => __('French', 'academy-africa'),
+                                'ar' => __('Arabic', 'academy-africa'),
+                            ];
+                            foreach ($languages as $language_code => $language_name) {
+
+                            ?>
+                                <button id="<? echo $language_code ?>" class="button medium ld-button"
+                                    onclick="filterByLanguage('<?php echo $language_code; ?>')">
+                                    <?php echo $language_name; ?>
+                                </button>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="mobile-only">
+                        <?php get_template_part('template-parts/filter_bar', 'template', [
+                            'filter_by' => $filter_by,
+                            'filter_options' => $filter_options,
+                            'sort_by' => $sort_by,
+                            'sort_options' => $sort_options,
+                            'sort' => $sort
+                        ]); ?>
+
+                    </div>
                     <div class="filter-section">
                         <div class="sort">
                             <div class="label">
-                                Sort by:
+                                <? echo $sort_by ?>
                             </div>
-                            <select name="sort" id="sort" class="select" onchange="changeSort(this)">
-                                <option value="newest">Most Recent</option>
-                                <? $selected = $sort === "oldest" ? 'selected="selected"' : "" ?>
-                                <option <? echo $selected ?> value="oldest">Oldest</option>
+                            <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
+                                <?
+                                foreach ($sort_options as $key => $option) {
+                                    $selected = $sort == $key ? "selected" : "";
+                                ?>
+                                    <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
+                                <?
+                                }
+                                ?>
                             </select>
-                        </div>
-                        <div class="filter">
-                            <button id="courses-mobile-filter" class="button primary filter-btn">
-                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_11905_79908)">
-                                        <path d="M15.1693 2H1.83594L7.16927 8.30667V12.6667L9.83594 14V8.30667L15.1693 2Z" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_11905_79908">
-                                            <rect width="16" height="16" fill="white" transform="translate(0.5)" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                Filter
-                            </button>
                         </div>
                     </div>
                     <? if (!empty($enrolled)) {
@@ -469,6 +495,31 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                         });
                     }
                 }
+            </script>
+            <script>
+                function filterByLanguage(language) {
+                    if (language == 'all') {
+                        language = '';
+                    }
+                    const urlParams = new URLSearchParams(window.location.search);
+                    urlParams.set('language', language);
+                    window.location.search = urlParams.toString();
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const selectedLanguage = urlParams.get('language');
+                    if (selectedLanguage) {
+                        const button = document.getElementById(selectedLanguage);
+                        if (button) {
+                            button.classList.add('primary');
+                        }
+                    } else {
+                        const allButton = document.getElementById('all');
+                        if (allButton) {
+                            allButton.classList.add('primary');
+                        }
+                    }
+                });
             </script>
         </main>
 <?

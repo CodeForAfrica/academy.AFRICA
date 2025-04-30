@@ -251,18 +251,53 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
 ?>
         <main class="all-courses">
-            <?php get_template_part('template-parts/filter_bar', 'template', [
-                'filter_by' => $filter_by,
-                'filter_options' => $filter_options,
-                'sort_by' => $sort_by,
-                'sort_options' => $sort_options,
-                'sort' => $sort
-            ]); ?>
+            <div class="desktop-only">
+                <?php get_template_part('template-parts/filter_bar', 'template', [
+                    'filter_by' => $filter_by,
+                    'filter_options' => $filter_options,
+                    'sort_by' => $sort_by,
+                    'sort_options' => $sort_options,
+                    'sort' => $sort
+                ]); ?>
+            </div>
             <div class="courses-main" id="all-courses">
                 <section class="course-grid">
                     <h4 class="cfa-title">
                         <? echo $courses_title ?>
                     </h4>
+                    <div class="filter-by-language">
+                        <div class="label">
+                            <?php echo __('Choose a course Language:', 'academy-africa'); ?>
+                        </div>
+                        <div class="language-buttons">
+                            <?php
+                            $languages =  [
+                                'all' => __('All', 'academy-africa'),
+                                'en' => __('English', 'academy-africa'),
+                                'fr' => __('French', 'academy-africa'),
+                                'ar' => __('Arabic', 'academy-africa'),
+                            ];
+                            foreach ($languages as $language_code => $language_name) {
+
+                            ?>
+                                <button id="<? echo $language_code ?>" class="button medium ld-button"
+                                    onclick="filterByLanguage('<?php echo $language_code; ?>')">
+                                    <?php echo $language_name; ?>
+                                </button>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="mobile-only">
+                        <?php get_template_part('template-parts/filter_bar', 'template', [
+                            'filter_by' => $filter_by,
+                            'filter_options' => $filter_options,
+                            'sort_by' => $sort_by,
+                            'sort_options' => $sort_options,
+                            'sort' => $sort
+                        ]); ?>
+                    </div>
                     <div class="filter-section">
                         <div class="sort">
                             <div class="label">
@@ -295,6 +330,32 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             </button>
                         </div>
                     </div>
+
+                    <script>
+                        function filterByLanguage(language) {
+                            if (language == 'all') {
+                                language = '';
+                            }
+                            const urlParams = new URLSearchParams(window.location.search);
+                            urlParams.set('language', language);
+                            window.location.search = urlParams.toString();
+                        }
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const selectedLanguage = urlParams.get('language');
+                            if (selectedLanguage) {
+                                const button = document.getElementById(selectedLanguage);
+                                if (button) {
+                                    button.classList.add('primary');
+                                }
+                            } else {
+                                const allButton = document.getElementById('all');
+                                if (allButton) {
+                                    allButton.classList.add('primary');
+                                }
+                            }
+                        });
+                    </script>
                     <div class="course-list">
                         <?
                         if (!empty($courses)) {

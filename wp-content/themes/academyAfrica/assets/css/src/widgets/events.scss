@@ -1,45 +1,40 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 .events {
   display: flex;
   justify-content: space-between;
   position: relative;
+
   .divider {
     height: 0.5px;
     background: #a9a9a9;
     margin: 40px 0;
     border: none;
   }
+
   .filter-by {
     color: var(--shades-black, #000);
     font-family: Open Sans;
-    font-size: 28px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 34px;
+    line-height: 28px;
     letter-spacing: -0.56px;
+    font-weight: 400;
   }
-  .events-mobile-filters {
-    padding: 0;
-    position: absolute;
-    top: 0;
-    width: 0;
-    height: 100%;
-    left: 0;
-    background: #fff;
-    overflow: hidden;
-    z-index: 9;
-    transition: all 0.35s ease-in-out;
-  }
+
+  .events-mobile-filters {}
+
   .open-filter {
     width: 100%;
     // margin: 40px 0;
   }
+
   .actions {
     display: flex;
     justify-content: space-between;
     margin-top: 36px;
   }
+
   .section-title {
     color: var(--primary-700, #0c1a81);
     margin: 40px 0;
@@ -48,14 +43,17 @@
     font-size: 33px;
     font-style: normal;
     font-weight: 700;
-    line-height: 40px; /* 121.212% */
+    line-height: 40px;
+    /* 121.212% */
     letter-spacing: -0.66px;
   }
+
   .selected-filters {
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
     margin: 40px 0;
+
     .chip {
       border: 0.2px solid var(--primary-700, #0c1a81);
       background: var(--primary-50, #eff0fd);
@@ -68,32 +66,39 @@
       font-size: 16px;
       font-style: normal;
       font-weight: 800;
-      line-height: 19px; /* 118.75% */
+      line-height: 19px;
+      /* 118.75% */
       letter-spacing: 1.6px;
       text-transform: uppercase;
     }
   }
+
   .events-content {
     flex: 1;
     padding: 80px 60px;
+
     .cfa-title {
       font-size: 48px;
     }
+
     .content {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
     }
+
     .card {
       border: 0.5px solid var(--neutral-200, #cccfda);
       background: var(--shades-white, #fff);
       padding: 20px;
       width: 300px;
+
       .flex-between {
         display: flex;
         justify-content: space-between;
         margin-top: 10px;
       }
+
       .event-title {
         color: var(--primary-700, #0c1a81);
         margin-top: 20px;
@@ -101,10 +106,12 @@
         font-size: 18px;
         font-style: normal;
         font-weight: 700;
-        line-height: 24px; /* 133.333% */
+        line-height: 24px;
+        /* 133.333% */
         height: 48px;
         overflow: hidden;
       }
+
       .speaker-name {
         color: #000;
         font-family: Open Sans;
@@ -112,11 +119,13 @@
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
-        line-height: 19px; /* 118.75% */
+        line-height: 19px;
+        /* 118.75% */
         overflow: hidden;
         white-space: nowrap;
         margin-top: 10px;
       }
+
       .date,
       .time,
       .country,
@@ -130,10 +139,12 @@
         font-size: 12px;
         font-style: normal;
         font-weight: 600;
-        line-height: 14px; /* 116.667% */
+        line-height: 14px;
+        /* 116.667% */
         letter-spacing: 0.96px;
         text-transform: uppercase;
       }
+
       .country {
         font-size: 18px;
         line-height: 18px;
@@ -161,6 +172,7 @@
       }
     }
   }
+
   .clear-filters {
     color: var(--secondary-600, #b6131e);
     font-family: Open Sans;
@@ -168,7 +180,8 @@
     font-style: normal;
     font-weight: 400;
     background: transparent;
-    line-height: 28px; /* 155.556% */
+    line-height: 28px;
+    /* 155.556% */
     margin-top: 40px;
     text-transform: none;
     outline: none;
@@ -178,6 +191,7 @@
 @include media-breakpoint-up(large) {
   .events {
     padding: 0 88px;
+
     .events-content {
       .content {
         .card {
@@ -193,6 +207,7 @@
     padding: 0 328px;
   }
 }
+
 @include media-breakpoint-down(tablet) {
   .events {
     .events-content {
@@ -200,8 +215,10 @@
         justify-content: center;
       }
     }
+
     .cfa-title {
       text-align: left;
+
       &::after {
         left: 0;
         transform: translateX(0%);
@@ -221,6 +238,7 @@
       display: none;
       padding: 60px 0 20px;
     }
+
     .open-filter {
       display: none;
     }

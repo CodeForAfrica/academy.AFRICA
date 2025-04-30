@@ -419,28 +419,9 @@ class CoursesFunctions
                 'name' => 'learning_path',
                 'options' => []
             ],
-            // [
-            //     'title' => 'Instructors',
-            //     'name' => 'instructor',
-            //     'options' => []
-            // ],
-            [
-                'title' => 'Languages',
-                'name' => 'language',
-                'options' => [
-                    (object)['id' => 'en', 'name' => 'English'],
-                    (object)['id' => 'fr', 'name' => 'French'],
-                ]
-            ]
+
         ];
 
-        // foreach ($allOrganizations as $organization) {
-        //     $formatedOrganization = (object)[
-        //         'id' => $organization['id'],
-        //         'name' => $organization['title'],
-        //     ];
-        //     array_push($filter_by[0]['options'], $formatedOrganization);
-        // }
 
         foreach ($allLearningPaths as $learningPath) {
             $formatedLearningPath = (object)[
@@ -449,14 +430,6 @@ class CoursesFunctions
             ];
             array_push($filter_by[0]['options'], $formatedLearningPath);
         }
-
-        // foreach ($allInstructors as $instructor) {
-        //     $formatedInstructor = (object)[
-        //         'id' => $instructor['id'],
-        //         'name' => $instructor['name'],
-        //     ];
-        //     array_push($filter_by[2]['options'], $formatedInstructor);
-        // }
 
         return $filter_by;
     }

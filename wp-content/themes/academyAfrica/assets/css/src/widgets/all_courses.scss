@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 .all-courses {
   font-family: Open Sans;
@@ -36,20 +36,22 @@
 
         .sort {
           display: flex;
-          align-items: center;
+          flex-direction: column;
           justify-content: space-between;
           font-family: Open Sans;
           font-size: 18px;
           font-style: normal;
           font-weight: 400;
           line-height: 28px;
+          margin-top: 16px;
+          gap: 8px;
 
           .label {
             color: $color-shades-black;
           }
 
           .select {
-            width: 200px;
+
             display: flex;
             height: 50px;
             padding: 15px 15px 0px 15px;
@@ -318,6 +320,22 @@
       .course-grid {
         width: 1100px;
       }
+    }
+  }
+}
+
+.filter-by-language {
+  margin-bottom: 16px;
+
+  .ld-button {
+    margin-right: 16px;
+    margin-bottom: 16px;
+
+    &:not(.primary) {
+      background-color: #EFF0FD !important;
+      color: #0C1A81;
+      outline: none;
+      border: 1px solid #0C1A81;
     }
   }
 }

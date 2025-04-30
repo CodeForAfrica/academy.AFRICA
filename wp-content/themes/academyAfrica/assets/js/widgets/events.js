@@ -68,7 +68,7 @@ function buildQueryString(object) {
       queryParts.push(`${encodeURIComponent(key)}=${encodedValues.join(",")}`);
     } else {
       queryParts.push(
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
       );
     }
   });
@@ -86,8 +86,7 @@ function onChangeCheckBox(input, category, value, apply) {
   if (apply) applyFilters();
 }
 
-
-window.onload = function onLoad() {
+function onLoad() {
   const { search } = window.location;
   filters = parseQueryString(search);
   Object.keys(filters).forEach((key) => {
@@ -103,21 +102,15 @@ window.onload = function onLoad() {
     }
   });
   addSelectedChips();
-};
+}
 
+window.onload = onLoad;
 function clearFilters() {
   filters = {};
   applyFilters();
 }
 
-function closeFilters() {
-  const filters = document.getElementById("filters");
-  if (filters) {
-    filters.style.width = 0;
-    filters.style.overflowX = "hidden";
-    filters.style.padding = 0;
-  }
-}
+function closeFilters() {}
 
 function openFilters() {
   const filters = document.getElementById("filters");

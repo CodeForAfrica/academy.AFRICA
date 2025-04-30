@@ -161,19 +161,20 @@
 }
 .all-courses .courses-main .course-grid .filter-section .sort {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   font-family: Open Sans;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
+  margin-top: 16px;
+  gap: 8px;
 }
 .all-courses .courses-main .course-grid .filter-section .sort .label {
   color: #000000;
 }
 .all-courses .courses-main .course-grid .filter-section .sort .select {
-  width: 200px;
   display: flex;
   height: 50px;
   padding: 15px 15px 0px 15px;
@@ -393,6 +394,20 @@
   .all-courses .courses-main .course-grid {
     width: 1100px;
   }
+}
+
+.filter-by-language {
+  margin-bottom: 16px;
+}
+.filter-by-language .ld-button {
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+.filter-by-language .ld-button:not(.primary) {
+  background-color: #EFF0FD !important;
+  color: #0C1A81;
+  outline: none;
+  border: 1px solid #0C1A81;
 }
 
 /*# sourceMappingURL=all_courses.css.map */

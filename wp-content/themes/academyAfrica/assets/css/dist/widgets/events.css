@@ -143,23 +143,11 @@
 .events .filter-by {
   color: var(--shades-black, #000);
   font-family: Open Sans;
-  font-size: 28px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 34px;
+  line-height: 28px;
   letter-spacing: -0.56px;
-}
-.events .events-mobile-filters {
-  padding: 0;
-  position: absolute;
-  top: 0;
-  width: 0;
-  height: 100%;
-  left: 0;
-  background: #fff;
-  overflow: hidden;
-  z-index: 9;
-  transition: all 0.35s ease-in-out;
+  font-weight: 400;
 }
 .events .open-filter {
   width: 100%;
@@ -177,7 +165,8 @@
   font-size: 33px;
   font-style: normal;
   font-weight: 700;
-  line-height: 40px; /* 121.212% */
+  line-height: 40px;
+  /* 121.212% */
   letter-spacing: -0.66px;
 }
 .events .selected-filters {
@@ -197,7 +186,8 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 800;
-  line-height: 19px; /* 118.75% */
+  line-height: 19px;
+  /* 118.75% */
   letter-spacing: 1.6px;
   text-transform: uppercase;
 }
@@ -231,7 +221,8 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 133.333% */
+  line-height: 24px;
+  /* 133.333% */
   height: 48px;
   overflow: hidden;
 }
@@ -242,7 +233,8 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 19px; /* 118.75% */
+  line-height: 19px;
+  /* 118.75% */
   overflow: hidden;
   white-space: nowrap;
   margin-top: 10px;
@@ -260,7 +252,8 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-  line-height: 14px; /* 116.667% */
+  line-height: 14px;
+  /* 116.667% */
   letter-spacing: 0.96px;
   text-transform: uppercase;
 }
@@ -294,7 +287,8 @@
   font-style: normal;
   font-weight: 400;
   background: transparent;
-  line-height: 28px; /* 155.556% */
+  line-height: 28px;
+  /* 155.556% */
   margin-top: 40px;
   text-transform: none;
   outline: none;

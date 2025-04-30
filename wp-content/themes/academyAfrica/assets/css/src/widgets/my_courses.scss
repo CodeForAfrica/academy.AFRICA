@@ -51,13 +51,15 @@ li {
 
     .sort {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: space-between;
       font-family: Open Sans;
       font-size: 18px;
       font-style: normal;
       font-weight: 400;
       line-height: 28px;
+      margin-top: 16px;
+      gap: 8px;
 
       .label {
         color: $color-shades-black;
@@ -65,7 +67,7 @@ li {
 
       .select {
         height: 50px;
-        width: 200px;
+
         border: none;
         border-radius: 4px;
         background: #fff;

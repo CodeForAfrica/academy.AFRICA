@@ -352,7 +352,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $options = $item["options"];
                             $option_name = $item["name"];
                     ?>
-                            <p style="margin-top: 40px" class="filter-by-title">
+                            <p class="filter-by-title">
                                 <? echo $title ?>
                             </p>
                             <?
@@ -401,28 +401,16 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
             </aside>
 
             <section class="events-content">
+                <div class="cfa-title" <?php echo $this->get_render_attribute_string('page_title'); ?>>
+                    <? echo $page_title ?>
+                </div>
                 <div id="filters" class="events-mobile-filters">
-                    <div style="padding: 60px;">
+                    <div>
                         <div class="filters">
-                            <div style="display:flex; justify-content: space-between; margin: 0 0 40px; align-items: center;" class="close-filters">
+                            <div class="close-filters">
                                 <h1 class="filter-by">
                                     <? echo $filter_by ?>
                                 </h1>
-                                <button onclick="closeFilters()" style="margin: 0" class="button clear-filters">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <g clip-path="url(#clip0_11179_27069)">
-                                            <path d="M8.0026 14.6693C11.6845 14.6693 14.6693 11.6845 14.6693 8.0026C14.6693 4.32071 11.6845 1.33594 8.0026 1.33594C4.32071 1.33594 1.33594 4.32071 1.33594 8.0026C1.33594 11.6845 4.32071 14.6693 8.0026 14.6693Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M10 6L6 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M6 6L10 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_11179_27069">
-                                                <rect width="16" height="16" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    Close
-                                </button>
                             </div>
                             <?
                             if (!empty($filter_options)) {
@@ -484,19 +472,6 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                         </div>
                     </div>
                 </div>
-                <div class="cfa-title" <?php echo $this->get_render_attribute_string('page_title'); ?>>
-                    <? echo $page_title ?>
-                </div>
-                <button onclick="openFilters()" class="button primary open-filter"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g id="Icon" clip-path="url(#clip0_11892_105059)">
-                            <path id="Vector" d="M15.1693 2.5H1.83594L7.16927 8.80667V13.1667L9.83594 14.5V8.80667L15.1693 2.5Z" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_11892_105059">
-                                <rect width="16" height="16" fill="currentColor" transform="translate(0.5 0.5)" />
-                            </clipPath>
-                        </defs>
-                    </svg>Filter</button>
                 <div class="selected-filters" id="selected-filters"></div>
                 <? if (!empty($upcoming_events)) { ?>
                     <div class="section-title" <?php echo $this->get_render_attribute_string('upcoming_events_title'); ?>>
