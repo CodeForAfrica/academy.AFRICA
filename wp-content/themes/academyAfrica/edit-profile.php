@@ -28,10 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST[
                 wp_update_user($user_data);
             }
             if ($key === "description") {
-                wp_update_user([
+                wp_update_user(array(
                     'ID' => $user_id,
-                    'description' => $_POST['description']
-                ]);
+                    'description' => $_POST[$key],
+                ));
             }
         }
     }
@@ -92,7 +92,8 @@ if (is_user_logged_in()) {
     $twitter = get_user_meta($user_id, 'twitter', true);
     $website = get_user_meta($user_id, 'website', true);
     $company = get_user_meta($user_id, 'company', true);
-    $description = get_user_meta($user_id, 'description', true);
+    $user_meta = get_user_meta($user_id);
+    $description = $user_meta['description'][0];
     $prefix = get_user_meta($user_id, 'prefix', true);
     $phone = get_user_meta($user_id, 'phone', true);
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));

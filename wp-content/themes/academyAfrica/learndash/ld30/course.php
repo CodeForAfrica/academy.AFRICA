@@ -161,8 +161,10 @@ if ($course_status == "Completed" && $is_cert) {
                         $name = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $author->display_name;
                         $avatar_url = get_avatar_url($author->ID);
                         $user = get_userdata($author->ID);
-                        $description = $user->description;
+                        // $description = $user->description;
                         // $description = get_user_meta($author->ID, 'description', true);
+                        $user_meta = get_user_meta($author->ID);
+                        $description = $user_meta['description'][0];
                         $twitter = get_the_author_meta('twitter', $author->ID);
                         $facebook = get_the_author_meta('facebook', $author->ID);
                         $linkedin = get_the_author_meta('linked_in', $author->ID);
