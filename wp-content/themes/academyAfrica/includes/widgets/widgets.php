@@ -65,6 +65,7 @@ final class Widget
         require_once(__DIR__ . '/header.php');
         require_once(__DIR__ . '/events.php');
         require_once(__DIR__ . '/learning_pathways.php');
+        require_once(__DIR__ . '/home_learning_pathways.php');
 
         $widgets_manager->register_widget_type(new \Academy_Africa_Hero());
         $widgets_manager->register_widget_type(new \Academy_Africa_All_Courses());
@@ -80,6 +81,7 @@ final class Widget
         $widgets_manager->register(new \Academy_Africa_Header_Section());
         $widgets_manager->register(new \Academy_Africa_Events());
         $widgets_manager->register(new \Academy_Africa_Learning_Pathways());
+        $widgets_manager->register(new \Academy_Africa_Home_Learning_Pathways());
     }
 
     function register_styles()
@@ -89,6 +91,7 @@ final class Widget
             'academy-africa-error' => 'error.css',
             'academy-africa-all-courses' => 'all_courses.css',
             'academy-africa-learning-pathways' => 'learning_pathways.css',
+            'academy-africa-home-pathways'=> 'home_learning_pathways.css',
             'academy-africa-faq' => 'faq.css',
             'academy-africa-slider' => 'slider.css',
             'academy-africa-connect' => 'connect.css',

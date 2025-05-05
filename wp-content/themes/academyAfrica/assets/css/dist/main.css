@@ -50,6 +50,9 @@
   background: #EFF0FD;
   color: #0C1A81;
 }
+.button.primary:hover .icon, .modal-content input.button[type=submit]:hover .icon {
+  color: #0C1A81;
+}
 .button.primary:disabled, .modal-content input.button[type=submit]:disabled {
   background: #CCCFDA;
   color: #616582;

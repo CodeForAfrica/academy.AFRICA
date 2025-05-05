@@ -50,6 +50,9 @@
   background: #EFF0FD;
   color: #0C1A81;
 }
+.button.primary:hover .icon, .login .verification-resend form button:hover .icon, .login input.button[type=submit]:hover .icon {
+  color: #0C1A81;
+}
 .button.primary:disabled, .login .verification-resend form button:disabled, .login input.button[type=submit]:disabled {
   background: #CCCFDA;
   color: #616582;

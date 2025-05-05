@@ -1,0 +1,36 @@
+@use "../abstracts/" as *;
+
+$font-family_1: Open Sans;
+$font-family_2: Lora;
+
+.home-learning-pathways {
+    padding: 0;
+
+    .content {
+        justify-content: space-between;
+
+        .card.pathway-card {
+            background-color: $color-shades-white;
+            border: none;
+            display: flex;
+
+            .pathway-cta {
+                align-self: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin: auto;
+                margin-right: 0;
+            }
+
+            .pathway-cta-description {
+                color: $color-primary-700;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 18px;
+            }
+        }
+
+    }
+}

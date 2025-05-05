@@ -57,6 +57,10 @@
     &:hover {
       background: $color-primary-50;
       color: $color-primary-700;
+
+      .icon {
+        color: $color-primary-700;
+      }
     }
 
     &:disabled {

@@ -49,6 +49,9 @@
   background: #EFF0FD;
   color: #0C1A81;
 }
+.button.primary:hover .icon {
+  color: #0C1A81;
+}
 .button.primary:disabled {
   background: #CCCFDA;
   color: #616582;

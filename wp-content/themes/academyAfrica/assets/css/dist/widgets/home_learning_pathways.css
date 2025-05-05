@@ -132,38 +132,31 @@
   color: #0C1A81;
 }
 
-.about-section {
-  padding: 50px 16px 0;
+.home-learning-pathways {
+  padding: 0;
 }
-.about-section .content {
-  color: #000000;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 28px;
+.home-learning-pathways .content {
+  justify-content: space-between;
 }
-.about-section .content a {
+.home-learning-pathways .content .card.pathway-card {
+  background-color: #FFFFFF;
+  border: none;
+  display: flex;
+}
+.home-learning-pathways .content .card.pathway-card .pathway-cta {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-right: 0;
+}
+.home-learning-pathways .content .card.pathway-card .pathway-cta-description {
   color: #0C1A81;
-  text-decoration: none;
-}
-@media (min-width: 768px) {
-  .about-section {
-    padding: 50px 40px 0;
-  }
-}
-@media (min-width: 1152px) {
-  .about-section {
-    padding: 80px 60px 0;
-  }
-}
-@media (min-width: 1440px) {
-  .about-section {
-    padding: 80px 148px 0;
-  }
-}
-@media (min-width: 1920px) {
-  .about-section {
-    padding: 80px 388px 0;
-  }
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
 }
 
-/*# sourceMappingURL=about_section.css.map */
+/*# sourceMappingURL=home_learning_pathways.css.map */

@@ -49,6 +49,9 @@
   background: #EFF0FD;
   color: #0C1A81;
 }
+.button.primary:hover .icon, .wpProQuiz_content .wpProQuiz_button:hover .icon {
+  color: #0C1A81;
+}
 .button.primary:disabled, .wpProQuiz_content .wpProQuiz_button:disabled {
   background: #CCCFDA;
   color: #616582;

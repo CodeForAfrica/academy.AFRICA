@@ -49,6 +49,9 @@
   background: #EFF0FD;
   color: #0C1A81;
 }
+.button.primary:hover .icon, .join-our-slack .form #mc_embed_shell #mc_embed_signup #mc-embedded-subscribe-form #mc_embed_signup_scroll .clear #mc-embedded-subscribe:hover .icon {
+  color: #0C1A81;
+}
 .button.primary:disabled, .join-our-slack .form #mc_embed_shell #mc_embed_signup #mc-embedded-subscribe-form #mc_embed_signup_scroll .clear #mc-embedded-subscribe:disabled {
   background: #CCCFDA;
   color: #616582;
