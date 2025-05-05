@@ -9,7 +9,7 @@ $students = $args['students'];
 $course_link = $args['course_link'];
 ?>
 
-<a href="<? echo $course_link ?>" class="course-card">
+<a href="<? echo $course_link ?>" class="course-card" id="course-card-<? echo $course_index ?>">
     <div class="card">
         <div class="course-card-pattern">
             <img src="<? echo $logo_url 
@@ -39,3 +39,18 @@ $course_link = $args['course_link'];
         </div>
     </div>
 </a>
+<script>
+    document.getElementById('course-card-<? echo $course_index ?>').addEventListener('click', function() {
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            'event': 'course_card_click',
+            'course_title': '<? echo $course_title ?>',
+            'course_link': '<? echo $course_link ?>',
+        });
+        gtag('event', 'course_card_click', {
+            'event_category': 'engagement',
+            'event_label': '<? echo $course_title ?>',
+            'course_link': '<? echo $course_link ?>'
+        });
+    });
+</script>

@@ -93,7 +93,7 @@ if ($success) {
                 <div id="error-alert" style="color: red;"></div>
                 <input type="hidden" name="action" value="register">
                 <? echo do_shortcode('[bws_google_captcha]') ?>
-                <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit">SIGN UP</button>
+                <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit" id="register">SIGN UP</button>
                 <label class="mui-checkbox">
                     <input type="checkbox">
                     <span class="checkmark"></span>
@@ -127,6 +127,21 @@ if ($success) {
                         password.type = "password";
                         togglePassword.innerText = "visibility_off";
                     }
+                }
+
+                const btn = document.getElementById("register");
+                if (btn) {
+                    btn.addEventListener("click", function() {
+                        window.dataLayer = window.dataLayer || [];
+                        dataLayer.push({
+                            'event': 'register',
+                            'method': 'standard'
+                        });
+                        gtag('event', 'register', {
+                            'event_category': 'engagement',
+                            'event_label': 'standard'
+                        });
+                    });
                 }
             </script>
         </div>

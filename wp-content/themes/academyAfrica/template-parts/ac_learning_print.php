@@ -86,3 +86,17 @@ $content = $args['content'];
     </div>
 
 </div>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'event': 'page_view',
+        'page_title': '<?php echo $learning_path_title ?>',
+        'page_url': window.location.href,
+        'status_code': '<?php echo $status_code ?>'
+    });
+    gtag('event', 'page_view', {
+        'page_title': '<?php echo $learning_path_title ?>',
+        'page_location': window.location.href,
+        'status_code': '<?php echo $status_code ?>'
+    });
+</script>

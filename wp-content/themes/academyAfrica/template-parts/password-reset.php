@@ -60,7 +60,7 @@ function get_full_url($path = '', $search = '')
                 <input type="email" placeholder="Email" id="user_login" name="user_login" required>
                 <input type="text" hidden name="pass_reset" value="pass-reset">
                 <? echo do_shortcode('[bws_google_captcha]') ?>
-                <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit">SUBMIT</button>
+                <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit" id="reset-btn">SUBMIT</button>
             </form>
             <footer style="display: flex; justify-content: flex-end;" class="modal-footers">
 
@@ -76,6 +76,19 @@ function get_full_url($path = '', $search = '')
         const error = urlParams.get('error_message');
         if (error) {
             window.error = error;
+        }
+        const passwordResetLink = document.getElementById("reset-btn");
+        if (passwordResetLink) {
+            passwordResetLink.addEventListener("click", function() {
+                window.dataLayer = window.dataLayer || [];
+                dataLayer.push({
+                    'event': 'password_reset'
+                });
+                gtag('event', 'password_reset', {
+                    'event_category': 'engagement',
+                    'event_label': 'password_reset'
+                });
+            });
         }
     </script>
 </div>

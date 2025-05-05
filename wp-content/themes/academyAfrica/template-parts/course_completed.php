@@ -74,36 +74,36 @@ global $shortcode_tags;
         <? echo do_shortcode($cert_post->post_content) ?>
     </div>
     <div class="content">
-    <?php get_template_part('template-parts/certificate', 'template', array("academy_head" => $academy_head, "course" => array("date" => $completion_date, "name" => $certificate_course), "user" => $user)); ?>
-<div style="flex: 1; display: flex; justify-content: center;">
-<div class="share-section">
-            <h4 class="title">
-                <? echo $share_title ?>
-            </h4>
-            <div class="share" style="display: flex; justify-content: center;">
-                <?php get_template_part('template-parts/social_share', 'template', array('message' => $share_message)); ?>
-            </div>
-            <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px; flex-direction: column;">
-                <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
-                    <button class="button primary">
-                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g id="Icon">
-                                <path id="Vector" d="M14.5 10.5V13.1667C14.5 13.5203 14.3595 13.8594 14.1095 14.1095C13.8594 14.3595 13.5203 14.5 13.1667 14.5H3.83333C3.47971 14.5 3.14057 14.3595 2.89052 14.1095C2.64048 13.8594 2.5 13.5203 2.5 13.1667V10.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path id="Vector_2" d="M5.16797 7.16797L8.5013 10.5013L11.8346 7.16797" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </g>
-                        </svg>
-                        Download
-                    </button>
-                </a>
-                <a href="<? echo get_permalink($course_id) ?>">
-                    <button class="button primary">
-                        View Course
-                    </button>
-                </a>
+        <?php get_template_part('template-parts/certificate', 'template', array("academy_head" => $academy_head, "course" => array("date" => $completion_date, "name" => $certificate_course), "user" => $user)); ?>
+        <div style="flex: 1; display: flex; justify-content: center;">
+            <div class="share-section">
+                <h4 class="title">
+                    <? echo $share_title ?>
+                </h4>
+                <div class="share" style="display: flex; justify-content: center;">
+                    <?php get_template_part('template-parts/social_share', 'template', array('message' => $share_message)); ?>
+                </div>
+                <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px; flex-direction: column;">
+                    <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
+                        <button class="button primary" id="download-certificate">
+                            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="Icon">
+                                    <path id="Vector" d="M14.5 10.5V13.1667C14.5 13.5203 14.3595 13.8594 14.1095 14.1095C13.8594 14.3595 13.5203 14.5 13.1667 14.5H3.83333C3.47971 14.5 3.14057 14.3595 2.89052 14.1095C2.64048 13.8594 2.5 13.5203 2.5 13.1667V10.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path id="Vector_2" d="M5.16797 7.16797L8.5013 10.5013L11.8346 7.16797" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                            </svg>
+                            Download
+                        </button>
+                    </a>
+                    <a href="<? echo get_permalink($course_id) ?>">
+                        <button class="button primary">
+                            View Course
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
-</div>
     </div>
     <script type="text/javascript">
         function convertHTMLtoPDF() {
@@ -129,5 +129,6 @@ global $shortcode_tags;
                 },
             });
         }
+        
     </script>
 </div>

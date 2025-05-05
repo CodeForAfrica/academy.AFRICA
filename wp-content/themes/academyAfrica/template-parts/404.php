@@ -46,6 +46,21 @@ $home = "Home";
         </div>
 
     </div>
+    <script>
+        // Track page view event
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            'event': 'page_view',
+            'page_title': '<?php echo $title ?>',
+            'page_url': window.location.href,
+            'status_code': '<?php echo $status_code ?>'
+        });
+        gtag('event', 'page_view', {
+            'page_title': '<?php echo $title ?>',
+            'page_location': window.location.href,
+            'status_code': '<?php echo $status_code ?>'
+        });
+    </script>
 
 </main>
 

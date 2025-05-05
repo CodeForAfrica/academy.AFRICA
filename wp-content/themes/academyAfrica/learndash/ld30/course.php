@@ -98,6 +98,11 @@ if ($course_status == "Completed" && $is_cert) {
             ?>
                 <div class='progress'>
                     <?php echo do_shortcode('[learndash_course_progress]'); ?>
+                    <?php
+                    if($course_status == "Completed") {
+                        echo "<a href='" . get_permalink($course_id) . "?certificate=true' class='pathways-link'>Download Certificate</a>";
+                    }
+                    ?>
                 </div>
                 <div class="continue">
                     <?php echo do_shortcode('[ld_course_resume label="Continue the Course <span></span>"]'); ?>

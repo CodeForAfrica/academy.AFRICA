@@ -229,6 +229,23 @@
   background-image: linear-gradient(to right, #ec1e27, #d6004d, #ad006b, #73007e, #0c1a81);
   background-color: transparent;
 }
+.single-courses .wrapper .progress .pathways-link {
+  background-color: #EFF0FD !important;
+  color: #0C1A81;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  border-radius: 0;
+  display: block;
+  white-space: nowrap;
+  width: fit-content;
+  padding: 12px 16px;
+  gap: 8px;
+}
 .single-courses .wrapper .continue .learndash-wrapper .ld-course-resume.ld-button {
   background-color: #EFF0FD !important;
   color: #0C1A81;

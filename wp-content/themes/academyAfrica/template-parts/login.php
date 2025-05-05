@@ -69,7 +69,7 @@ if (isset($_GET['email_sent'])) {
                 <form method="post" action="">
                     <input type="hidden" name="action" value="resend_verification">
                     <input type="email" name="email" placeholder="Enter your email address" required>
-                    <button type="submit">Resend Verification Email</button>
+                    <button type="submit" id="resend-email-verification">Resend Verification Email</button>
                 </form>
             </div>
         <?php
@@ -83,7 +83,7 @@ if (isset($_GET['email_sent'])) {
                     Sign up to access all the features on academy.AFRICA
                 </p>
                 <div class="social-login">
-                    <button class="google" onclick="theChampInitiateLogin(this, 'google')">
+                    <button class="google" onclick="theChampInitiateLogin(this, 'google')" id="google-login">
                         <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="Google">
                         Sign in with Google
                     </button>
@@ -146,6 +146,49 @@ if (isset($_GET['email_sent'])) {
             if (btn) {
                 btn.value = "SIGN IN"
             }
+
+            document.getElementById("wp-submit").addEventListener("click", function() {
+                window.dataLayer = window.dataLayer || [];
+                dataLayer.push({
+                    'event': 'login',
+                    'method': 'standard'
+                });
+                gtag('event', 'login', {
+                    'event_category': 'engagement',
+                    'event_label': 'standard'
+                });
+            });
+            const loginError = document.getElementById("login_error");
+            if (loginError) {
+                const errorMessage = loginError.innerText;
+                if (errorMessage) {
+                    window.dataLayer = window.dataLayer || [];
+                    dataLayer.push({
+                        'event': 'login_error',
+                        'error_message': errorMessage
+                    });
+                    gtag('event', 'login_error', {
+                        'event_category': 'engagement',
+                        'event_label': errorMessage
+                    });
+                }
+            }
+            const googleLoginBtn = document.getElementById("google-login");
+            if (googleLoginBtn) {
+                googleLoginBtn.addEventListener("click", function() {
+                    window.dataLayer = window.dataLayer || [];
+                    dataLayer.push({
+                        'event': 'login',
+                        'method': 'google'
+                    });
+                    gtag('event', 'login', {
+                        'event_category': 'engagement',
+                        'event_label': 'google'
+                    });
+                });
+            }
+            
+
         </script>
     </div>
 <?  }
