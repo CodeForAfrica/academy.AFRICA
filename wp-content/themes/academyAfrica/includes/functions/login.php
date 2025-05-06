@@ -5,7 +5,7 @@ function custom_login_page()
     $redirect_url = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : '';
     $parsed_url = parse_url($redirect_url);
     $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
-    
+
     $path_name = (!empty($path) && $path !== '/' && $path !== '/login') ? $redirect_url : "/learning-pathways";
     $login_page = home_url("/login" . "?redirect_url=" . $path_name);
     $to_redirect = array("lostpassword");
@@ -18,9 +18,9 @@ function custom_login_page()
         exit;
     }
     if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'rp') {
-        if(isset($_GET["key"]) && isset($_GET["login"])){
+        if (isset($_GET["key"]) && isset($_GET["login"])) {
             $reset_key = $_GET["key"];
-            wp_redirect(home_url('/login?action=rp&key='.$reset_key).'&login='.$_GET["login"]);
+            wp_redirect(home_url('/login?action=rp&key=' . $reset_key) . '&login=' . $_GET["login"]);
         } else {
             $url = add_query_arg(array(
                 'action' => 'lostpassword',
@@ -38,8 +38,8 @@ function custom_login_page()
         wp_redirect($login_page);
         exit;
     }
-    if($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET["wpe-login"])){
-        $login = home_url("/login" . "?redirect_url=" . $path_name."&login=failed");
+    if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET["wpe-login"])) {
+        $login = home_url("/login" . "?redirect_url=" . $path_name . "&login=failed");
         wp_redirect($login);
         // exit;
     }
@@ -51,11 +51,11 @@ function add_lost_password_link()
 }
 function authenticate_user()
 {
-  if ( !is_user_logged_in() ) {
-    if ( isset($_GET['login_type']) && $_GET['login_type'] === 'social' ) {
-      set_global_error("An error occurred while signing up with Google. Please try again with your username and password.");
+    if (!is_user_logged_in()) {
+        if (isset($_GET['login_type']) && $_GET['login_type'] === 'social') {
+            set_global_error("An error occurred while signing up with Google. Please try again with your username and password.");
+        }
     }
-}
     $user_id = get_current_user_id();
     $user = get_user_by('ID', $user_id);
     if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
@@ -103,4 +103,3 @@ add_action('init', 'authenticate_user');
 add_filter('authenticate', 'restrict_user_status', 20, 3);
 add_action('init', 'custom_login_page');
 add_action('login_form_middle', 'add_lost_password_link');
-?>

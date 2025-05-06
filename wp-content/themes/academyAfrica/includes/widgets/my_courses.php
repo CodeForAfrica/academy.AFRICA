@@ -190,9 +190,9 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                             <?php
                             $languages =  [
                                 'all' => __('All', 'academy-africa'),
-                                'en' => __('English', 'academy-africa'),
-                                'fr' => __('French', 'academy-africa'),
-                                'ar' => __('Arabic', 'academy-africa'),
+                                'English' => __('English', 'academy-africa'),
+                                'French' => __('French', 'academy-africa'),
+                                'Arabic' => __('Arabic', 'academy-africa'),
                             ];
                             foreach ($languages as $language_code => $language_name) {
 
