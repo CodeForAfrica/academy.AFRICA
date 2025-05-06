@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
 
 $lesson_id = get_the_ID();
 $course_id = learndash_get_course_id($lesson_id);
+$course_status = learndash_course_status($course_id);
 
 $course_url = get_permalink($course_id);
 $course = get_post($course_id);
@@ -115,6 +116,13 @@ $has_assignments = learndash_lesson_hasassignments($topic);
                         echo $complete_button;
                         echo "</div>";
                     }
+
+                    if($course_status == 'Completed') {
+                        echo "<div class='sfwd-lessons__footer__certificate'>";
+                        echo "<a href='$course_url?certificate=true' class='certificate_download '>Download Certificate</a>";
+                        echo "</div>";
+                    }
+
                     ?>
                     <script>
                         document.querySelector('.sfwd-mark-complete').addEventListener('submit', function(e) {

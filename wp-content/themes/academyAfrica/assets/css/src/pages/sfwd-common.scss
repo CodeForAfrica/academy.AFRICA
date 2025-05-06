@@ -1,4 +1,4 @@
-@use "../abstracts/"as *;
+@use "../abstracts/" as *;
 
 #content {
     .page-header {
@@ -506,6 +506,14 @@
                                 letter-spacing: 1.6px;
                                 text-transform: uppercase;
                             }
+                        }
+                    }
+
+                    &__certificate {
+                        .certificate_download {
+                            @extend .button;
+                            @extend .primary;
+                            @extend .large;
                         }
                     }
                 }
