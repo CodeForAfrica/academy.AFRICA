@@ -102,29 +102,33 @@ $courses = get_field('courses', $learning_path_id);
 
 <script type="text/javascript">
     function downloadSingleLearningPath() {
-        var printTemplate = `<? get_template_part('template-parts/ac_learning_print', 'template', [
-                                    'learning_path_title' => $learning_path_title,
-                                    'learning_path_excerpt' => $learning_path_excerpt,
-                                    'courses' => $courses,
-                                    'content' => get_the_content()
-                                ]); ?>`;
+        var printTemplate = document.getElementById('learning').innerHTML;
 
         var printWindow = window.open('', '', '');
         printWindow.document.write('<!DOCTYPE html>');
         printWindow.document.write('<html><head>');
-        printWindow.document.write('<title><?php echo $learning_path_title ?></title>');
-        printWindow.document.write('</head><body >');
+        printWindow.document.write('<title><?php echo addslashes($learning_path_title); ?></title>');
+        printWindow.document.write('</head><body>');
         printWindow.document.write(printTemplate);
         printWindow.document.write('</body></html>');
-        // printWindow.print();
         printWindow.document.close(); // necessary for IE >= 10
-        printWindow.focus(); // necessary for IE >= 10*/
+        printWindow.focus(); // necessary for IE >= 10
 
         printWindow.onload = function() {
             printWindow.print();
         };
-
     }
+
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'event': 'learning_path_print',
+        'page_title': '<?php echo $learning_path_title ?>',
+        'page_url': window.location.href,
+    });
+    gtag('event', 'learning_path_print', {
+        'page_title': '<?php echo $learning_path_title ?>',
+        'page_location': window.location.href,
+    });
 </script>
 
 <?php get_footer(); ?>

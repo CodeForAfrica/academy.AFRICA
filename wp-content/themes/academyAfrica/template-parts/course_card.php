@@ -7,14 +7,15 @@ $logo_url = $course_thumbnail ? $course_thumbnail : $mooc_logo;
 $course_price = $args['course_price'];
 $students = $args['students'];
 $course_link = $args['course_link'];
+$course_index = isset($args['course_index']) ? $args['course_index'] : uniqid();
 ?>
 
 <a href="<? echo $course_link ?>" class="course-card" id="course-card-<? echo $course_index ?>">
     <div class="card">
         <div class="course-card-pattern">
-            <img src="<? echo $logo_url 
-            ?>"
-            alt="course-thumbnail">
+            <img src="<? echo $logo_url
+                        ?>"
+                alt="course-thumbnail">
         </div>
         <div class="course-card-content">
             <p class="course-title">

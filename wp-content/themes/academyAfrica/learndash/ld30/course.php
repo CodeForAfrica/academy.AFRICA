@@ -132,7 +132,7 @@ if ($course_status == "Completed" && $is_cert) {
                     <ul class="pathways-list">
                         <?php foreach ($course_pathways as $pathway) : ?>
                             <li>
-                                <a class="pathways-link" href="<?php echo esc_url(get_permalink($pathway['id'])); ?>" target="_blank">
+                                <a class="pathways-link" href="<?php echo esc_url(get_permalink($pathway['id'])); ?>" >
                                     <?php echo esc_html($pathway['title']); ?>
                                 </a>
                             </li>
