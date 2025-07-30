@@ -490,6 +490,9 @@
 .single-courses .wrapper .instructor .authors .author .name p {
   font-weight: 700;
 }
+.single-courses .wrapper .instructor .authors .author .avatar {
+  height: 100px;
+}
 .single-courses .wrapper .instructor .authors .author .avatar img {
   min-width: 100px;
   height: 100px;

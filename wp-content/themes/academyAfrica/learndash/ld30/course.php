@@ -99,7 +99,7 @@ if ($course_status == "Completed" && $is_cert) {
                 <div class='progress'>
                     <?php echo do_shortcode('[learndash_course_progress]'); ?>
                     <?php
-                    if($course_status == "Completed") {
+                    if ($course_status == "Completed") {
                         echo "<a href='" . get_permalink($course_id) . "?certificate=true' class='pathways-link'>Download Certificate</a>";
                     }
                     ?>
@@ -132,7 +132,7 @@ if ($course_status == "Completed" && $is_cert) {
                     <ul class="pathways-list">
                         <?php foreach ($course_pathways as $pathway) : ?>
                             <li>
-                                <a class="pathways-link" href="<?php echo esc_url(get_permalink($pathway['id'])); ?>" >
+                                <a class="pathways-link" href="<?php echo esc_url(get_permalink($pathway['id'])); ?>">
                                     <?php echo esc_html($pathway['title']); ?>
                                 </a>
                             </li>
@@ -169,7 +169,7 @@ if ($course_status == "Completed" && $is_cert) {
                         // $description = $user->description;
                         // $description = get_user_meta($author->ID, 'description', true);
                         $user_meta = get_user_meta($author->ID);
-                        $description = $user_meta['description'][0];
+                        $description = !empty($user_meta['description'][0]) ? $user_meta['description'][0] : $author->description;
                         $twitter = get_the_author_meta('twitter', $author->ID);
                         $facebook = get_the_author_meta('facebook', $author->ID);
                         $linkedin = get_the_author_meta('linked_in', $author->ID);
@@ -177,11 +177,14 @@ if ($course_status == "Completed" && $is_cert) {
                         $website = get_the_author_meta('website', $author->ID);
                         $slack = get_the_author_meta('slack', $author->ID);
                     ?>
+                        <script>
+                            console.log(<? echo json_encode($user_meta['description'][0]) ?>)
+                        </script>
                         <div class="author">
                             <div class="avatar-name">
 
                                 <div class="avatar">
-                                    <img src="<?php echo $avatar_url; ?>" alt="">
+                                    <img height="100px" src="<?php echo $avatar_url; ?>" alt="">
                                 </div>
                                 <div class="name">
                                     <p><?php echo $name; ?></p>

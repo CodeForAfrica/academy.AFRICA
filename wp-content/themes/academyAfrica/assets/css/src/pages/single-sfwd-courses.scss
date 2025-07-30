@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 
 .single-courses {
@@ -479,6 +479,8 @@
                     }
 
                     .avatar {
+                        height: 100px;
+
                         img {
                             min-width: 100px;
                             height: 100px;
@@ -521,6 +523,7 @@
                             justify-content: center;
                             text-align: center;
                             min-width: unset;
+
                         }
 
                         .name {
