@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.6.7');
+define('ACADEMY_AFRICA_VERSION', '1.6.8');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -39,6 +39,7 @@ function my_theme_enqueue_styles()
     wp_enqueue_style('single-event', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single_event.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('profile', get_stylesheet_directory_uri() . '/assets/css/dist/pages/profile.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('contact-us', get_stylesheet_directory_uri() . '/assets/css/dist/pages/contact-us.css', array(), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_style('default-page-content', get_stylesheet_directory_uri() . '/assets/css/dist/pages/page-content.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('single-courses', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-courses.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('single-lesson', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-lessons.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('single-quiz', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-quiz.css', array(), ACADEMY_AFRICA_VERSION);
