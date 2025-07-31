@@ -34,7 +34,8 @@ require_once __DIR__ . '/includes/utils/countries.php';
             $time = $raw_time . ' GMT +00:00';
             $language = get_post_meta($post_id, 'language', true);
             $organisations = get_field("organisations", $post_id);
-            $resources = get_field('resources', $post_id)['url'];
+            $resources_field = get_field('resources', $post_id);
+            $resources = isset($resources_field['url']) ? $resources_field['url'] : null;
             $countries = get_field("countries", $post_id);
     ?>
             <h1 class="cfa-title">
@@ -111,19 +112,21 @@ require_once __DIR__ . '/includes/utils/countries.php';
                 <h4 class="title"><? echo $speaker_title ?></h4>
 
                 <?
-                foreach ($speakers as $speaker) {
-                    $sp_title = $speaker->post_title;
-                    $avatar_url = get_the_post_thumbnail_url($speaker->ID, 'full');
-                    $sp_desc = get_the_excerpt($speaker->ID);
+                if (isset($speakers) && is_array($speakers) && count($speakers) > 0) {
+                    foreach ($speakers as $speaker) {
+                        $sp_title = $speaker->post_title;
+                        $avatar_url = get_the_post_thumbnail_url($speaker->ID, 'full');
+                        $sp_desc = get_the_excerpt($speaker->ID);
                 ?>
-                    <img style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0;" src="<? echo $avatar_url ?>" alt="<? echo $speaker->display_name ?>" class="logo">
-                    <p style="text-transform: capitalize; margin: 0" class="name">
-                        <? echo $sp_title ?>
-                    </p>
-                    <p class="description" style="margin-bottom: 32px; margin-top: 16px;">
-                        <? echo $sp_desc ?>
-                    </p>
+                        <img style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0;" src="<? echo $avatar_url ?>" alt="<? echo $speaker->display_name ?>" class="logo">
+                        <p style="text-transform: capitalize; margin: 0" class="name">
+                            <? echo $sp_title ?>
+                        </p>
+                        <p class="description" style="margin-bottom: 32px; margin-top: 16px;">
+                            <? echo $sp_desc ?>
+                        </p>
                 <?
+                    }
                 }
                 ?>
             </div>
