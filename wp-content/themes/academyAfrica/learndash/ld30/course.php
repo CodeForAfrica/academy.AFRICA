@@ -175,7 +175,7 @@ if ($course_status == "Completed" && $is_cert) {
                         $author_facebook = get_field("facebook", $author->ID);
                         $author_linkedin = get_field("linked_in", $author->ID);
                         $author_instagram = get_field("instagram", $author->ID);
-                        $twitter = get_the_author_meta('twitter', $author->ID) ?: $author_twitter['url'];
+                        $twitter = get_the_author_meta('twitter', $author->ID) ?: (is_array($author_twitter) && isset($author_twitter['url']) ? $author_twitter['url'] : null);
                         $facebook = get_the_author_meta('facebook', $author->ID) ?: $author_facebook;
                         $linkedin = get_the_author_meta('linked_in', $author->ID) ?: $author_linkedin;
                         $instagram = get_the_author_meta('instagram', $author->ID) ?: $author_instagram;
