@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 $font-family_1: Open Sans;
 $font-family_2: Lora;
@@ -83,6 +83,11 @@ $font-family_2: Lora;
           font-style: normal;
           font-weight: 700;
           line-height: 24px;
+        }
+
+        .pathway-description {
+          color: white;
+          margin-top: 8px;
         }
 
         .course-count {

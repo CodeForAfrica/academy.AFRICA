@@ -512,25 +512,30 @@
   .single-courses .wrapper .instructor .title .cfa-introduction-title {
     text-align: center;
   }
-  .single-courses .wrapper .instructor .authors {
+  .single-courses .wrapper .instructor .authors,
+  .single-courses .wrapper .instructor .organization {
     flex-direction: column;
     gap: 24px;
   }
-  .single-courses .wrapper .instructor .authors .author {
+  .single-courses .wrapper .instructor .authors .author,
+  .single-courses .wrapper .instructor .organization .author {
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 16px;
   }
-  .single-courses .wrapper .instructor .authors .author .avatar-name {
+  .single-courses .wrapper .instructor .authors .author .avatar-name,
+  .single-courses .wrapper .instructor .organization .author .avatar-name {
     justify-content: center;
     text-align: center;
     min-width: unset;
   }
-  .single-courses .wrapper .instructor .authors .author .name {
+  .single-courses .wrapper .instructor .authors .author .name,
+  .single-courses .wrapper .instructor .organization .author .name {
     margin-top: 0;
   }
-  .single-courses .wrapper .instructor .authors .author .avatar img {
+  .single-courses .wrapper .instructor .authors .author .avatar img,
+  .single-courses .wrapper .instructor .organization .author .avatar img {
     width: 100px;
     height: 100px;
   }

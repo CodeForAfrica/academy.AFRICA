@@ -167,8 +167,6 @@ if ($course_status == "Completed" && $is_cert) {
                         $name = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $author->display_name;
                         $avatar_url = get_avatar_url($author->ID);
                         $user = get_userdata($author->ID);
-                        // $description = $user->description;
-                        // $description = get_user_meta($author->ID, 'description', true);
                         $user_meta = get_user_meta($author->ID);
                         $description = !empty($user_meta['description'][0]) ? $user_meta['description'][0] : $author->description;
                         $author_twitter = get_field("twitter", $author->ID);
@@ -237,26 +235,68 @@ if ($course_status == "Completed" && $is_cert) {
             <?php
             if ($organizations) {
             ?>
-                <div class="organization">
+                <div class="instructor organization">
                     <div class="title">
                         <p class="cfa-introduction-title">The Organization</p>
                     </div>
-                    <div class="list">
+                    <div class="authors">
                         <?php
                         foreach ($organizations as $organization) {
-                            echo "
-                <div class='item'>
-                    <div class='name'>
-                        <p>" . $organization->post_title . "</p>
-                    </div>
-                    <div class='avatar'>
-                        <img src='" . get_the_post_thumbnail_url($organization->ID) . "' alt=''>
-                    </div>
-                    <div class='description'>
-                        <div>" . $organization->post_excerpt . "</div>
-                    </div>
-                </div>
-                ";
+                            $org_twitter = get_field("twitter", $organization->ID);
+                            $org_facebook = get_field("facebook", $organization->ID);
+                            $org_linkedin = get_field("linked_in", $organization->ID);
+                            $org_instagram = get_field("instagram", $organization->ID);
+                            $org_website = get_field("website", $organization->ID);
+                            $org_slack = get_field("slack", $organization->ID);
+                        ?>
+                            <div class="author">
+                                <div class="avatar-name">
+
+                                    <div class="avatar">
+                                        <img height="100px" style="border-radius: 0;" src="<?php echo get_the_post_thumbnail_url($organization->ID); ?>" alt="">
+                                    </div>
+                                    <div class="name">
+                                        <p><?php echo $organization->post_title; ?></p>
+                                    </div>
+                                    <div class="share-icons">
+                                        <!-- LinkedIn -->
+                                        <?php if (!empty($org_linkedin)) : ?>
+                                            <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($org_linkedin); ?>" target="_blank">
+                                                <img class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=linkedin, Size=24, Color=Black.svg" alt="LinkedIn">
+                                            </a>
+                                        <?php endif; ?>
+
+                                        <!-- Twitter -->
+                                        <?php if (!empty($org_twitter)) : ?>
+                                            <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($org_witter); ?>" target="_blank">
+                                                <img style="margin-bottom: -2px" class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=twitter, Size=24, Color=Black.svg" alt="Twitter">
+                                            </a>
+                                        <?php endif; ?>
+                                        <!-- Facebook -->
+                                        <?php if (!empty($org_facebook)) : ?>
+                                            <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($org_facebook); ?>" target="_blank">
+                                                <img class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=facebook, Size=24, Color=Black.svg" alt="Facebook">
+                                            </a>
+                                        <?php endif; ?>
+                                        <!-- Website -->
+                                        <?php if (!empty($org_website)) : ?>
+                                            <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($org_website); ?>" target="_blank">
+                                                <img class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=world, Size=24, Color=Black.svg" alt="Website">
+                                            </a>
+                                        <?php endif; ?>
+                                        <!-- Instagram -->
+                                        <?php if (!empty($org_instagram)) : ?>
+                                            <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($org_instagram); ?>" target="_blank">
+                                                <img class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=instagram, Size=24, Color=Black.svg" alt="Instagram">
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="description wysiwyg">
+                                    <?php echo $organization->post_excerpt; ?>
+                                </div>
+                            </div>
+                        <?
                         }
                         ?>
                     </div>
