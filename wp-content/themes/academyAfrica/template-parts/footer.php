@@ -51,14 +51,14 @@ $social_media_links = [
 
 $secondary_menus = [
     [
-        'url' => 'https://codeforafrica.org/',
+        'url' => '/privacy-policy',
         'label' => 'Imprint',
     ],
     [
-        'url' => 'https://codeforafrica.org/',
+        'url' => '/privacy-policy',
         'label' => 'Privacy',
     ]
-    ];
+];
 
 $search = array(
     'post_type' => 'footer',
@@ -69,14 +69,14 @@ $search = array(
 $custom_posts = get_posts($search);
 $footer = $custom_posts[0];
 $logo = get_post_meta($footer->ID, 'logo', true);
-$thumbnail_url = wp_get_attachment_image_src( $logo, 100 )[0];
+$thumbnail_url = wp_get_attachment_image_src($logo, 100)[0];
 $site_description = get_post_meta($footer->ID, 'site_description', true);
 $stay_in_touch = get_post_meta($footer->ID, 'stay_in_touch', true);
 $secondary_links = get_post_meta($footer->ID, 'secondary_links', true);
 $newsletter = get_post_meta($footer->ID, 'newsletter', true);
 $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
 
-    ?>
+?>
 <footer class="footer-wrapper">
     <div class="root">
         <div class="item">
@@ -84,11 +84,11 @@ $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
                 <img height="110" width="250"
                     src="<?php echo $thumbnail_url ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
                 <p class="description">
-                <? echo $site_description?>
+                    <? echo $site_description ?>
                 </p>
                 <div class="footer-connect">
                     <span style="white-space: nowrap;">
-                    <? echo $stay_in_touch?>
+                        <? echo $stay_in_touch ?>
                     </span>
                     <div class="social-icons">
                         <?
@@ -130,10 +130,10 @@ $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
         <div class="item">
             <div class="embed">
                 <p class="title">
-                    <? echo $newsletter_title?>
+                    <? echo $newsletter_title ?>
                 </p>
                 <div>
-                <? echo $newsletter?>
+                    <? echo $newsletter ?>
                 </div>
             </div>
         </div>
