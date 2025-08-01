@@ -133,9 +133,10 @@
 }
 
 .default-page-content {
-  max-width: 1920px;
+  max-width: 1440px;
   padding: 40px 60px;
   min-height: calc(100vh - 606px);
+  margin: 0 auto;
 }
 .default-page-content * {
   font-family: Open Sans;
