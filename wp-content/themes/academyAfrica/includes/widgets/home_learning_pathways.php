@@ -157,6 +157,7 @@ class Academy_Africa_Home_Learning_Pathways  extends \Elementor\Widget_Base
                     if (!empty($learning_pathways)) {
                         foreach ($learning_pathways as $pathway) {
                             $pathway_name = $pathway["title"];
+                            $pathway_desc = get_field('pathway_description', $pathway["id"]);
                             $pathway_icon = $pathway["thumbnail"];
                             $pathway_courses = $pathway["courses"];
                             $pathway_link = get_permalink($pathway["id"]);
@@ -169,9 +170,14 @@ class Academy_Africa_Home_Learning_Pathways  extends \Elementor\Widget_Base
                                         </div>
                                     </div>
                                     <div class="pathway-card-content">
-                                        <p class="pathway-name">
-                                            <? echo $pathway_name ?>
-                                        </p>
+                                        <div>
+                                            <p class="pathway-name">
+                                                <? echo $pathway_name ?>
+                                            </p>
+                                            <p class="pathway-description">
+                                                <? echo wp_trim_words($pathway_desc, 20, '...') ?>
+                                            </p>
+                                        </div>
                                         <p class="course-count">
                                             <? echo count($pathway_courses) . ' ' . $courses_count ?>
                                         </p>
