@@ -1,4 +1,4 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 .assignment-upload {
     background: $color-neutral-50;
@@ -95,14 +95,16 @@
     }
 }
 
-
+.ld-quiz-question-item__status {
+    display: none !important;
+}
 
 .wpProQuiz_content {
     .wpProQuiz_button {
-       @extend .button;
-       @extend .primary;
-       margin-right: 0 !important;
-       margin-top: 20px;
+        @extend .button;
+        @extend .primary;
+        margin-right: 0 !important;
+        margin-top: 20px;
     }
 
     .wpProQuiz_questionList {
@@ -138,7 +140,7 @@
                 color: $color-primary-700;
             }
 
-            &.wpProQuiz_answerIncorrect{
+            &.wpProQuiz_answerIncorrect {
                 border: 1px solid $color-secondary-600;
                 background: #FCE8E9;
                 color: $color-neutral-900;

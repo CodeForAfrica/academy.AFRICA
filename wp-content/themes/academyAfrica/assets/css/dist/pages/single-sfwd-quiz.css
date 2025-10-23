@@ -196,6 +196,10 @@
   display: none;
 }
 
+.ld-quiz-question-item__status {
+  display: none !important;
+}
+
 .wpProQuiz_content .wpProQuiz_button {
   margin-right: 0 !important;
   margin-top: 20px;
