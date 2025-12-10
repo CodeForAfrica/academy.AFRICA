@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 <?php get_header(); ?>
 <?
 $status_code = 404;
-$title = "Page not found -";
+$title = "PAGE NOT FOUND";
 $description = "There seems to be an error on this page. Please contact us for more details";
 $refresh = "Refresh";
 $home = "Home";
