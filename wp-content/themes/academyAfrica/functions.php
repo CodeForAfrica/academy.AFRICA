@@ -645,3 +645,17 @@ add_filter(
     10,
     1
 );
+
+
+/**
+ * Standardize browser tab title for 404 pages.
+ * Ensures document.title is consistent regardless of parent theme defaults.
+ */
+function aa_404_document_title_parts($parts)
+{
+    if (is_404()) {
+        $parts['title'] = 'PAGE NOT FOUND';
+    }
+    return $parts;
+}
+add_filter('document_title_parts', 'aa_404_document_title_parts', 20);
