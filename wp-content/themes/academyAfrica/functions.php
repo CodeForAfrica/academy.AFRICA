@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.7.5');
+define('ACADEMY_AFRICA_VERSION', '1.7.6');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -198,6 +198,39 @@ function redirect_logged_in_users()
     }
 }
 add_action('template_redirect', 'redirect_logged_in_users');
+
+function academyafrica_track_404()
+{
+    if (!is_404()) {
+        return;
+    }
+
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '';
+    $referrer = isset($_SERVER['HTTP_REFERER']) ? wp_unslash($_SERVER['HTTP_REFERER']) : '';
+
+    $payload = array(
+        'not_found_path' => $request_uri,
+        'not_found_url' => home_url($request_uri),
+        'not_found_referrer' => $referrer,
+        'page_title' => '404',
+    );
+
+    $payload_json = wp_json_encode($payload);
+
+    echo "<script>
+        (function() {
+            var payload = {$payload_json};
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'page_not_found', payload);
+                return;
+            }
+            if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+                window.dataLayer.push(Object.assign({ event: 'page_not_found' }, payload));
+            }
+        })();
+    </script>";
+}
+add_action('wp_footer', 'academyafrica_track_404', 20);
 
 function generate_user_activation_key($user_id)
 {
