@@ -1,4 +1,4 @@
-<? $cfa_certificate_logo = get_stylesheet_directory_uri() . '/assets/images/cfa-certificate-logo.svg';
+<?php $cfa_certificate_logo = get_stylesheet_directory_uri() . '/assets/images/cfa-certificate-logo.svg';
 $cfa_certificate_logo_2 = get_stylesheet_directory_uri() . '/assets/images/cfa-certificate-logo-2.svg';
 $academy_head_signature = get_stylesheet_directory_uri() . '/assets/images/signature.svg';
 $academy_head = $args['academy_head'];
@@ -20,7 +20,7 @@ $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-bl
       </div>
 
       <div class="full-image">
-        <img src="<? echo $mooc_logo_black ?>" alt="mooc_logo_black" class="mooc-logo-black">
+        <img src="<?php echo $mooc_logo_black ?>" alt="mooc_logo_black" class="mooc-logo-black">
       </div>
     </div>
     <div>
@@ -51,21 +51,21 @@ $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-bl
   </div>
   <div class="certificate-preview-footer">
     <div>
-      <img src="<? echo $cfa_certificate_logo ?>" alt="cfa_certificate_logo" class="cfa-certificate-logo">
+      <img src="<?php echo $cfa_certificate_logo ?>" alt="cfa_certificate_logo" class="cfa-certificate-logo">
     </div>
     <div class="cfa-logo">
-      <img src="<? echo $cfa_certificate_logo_2 ?>" alt="cfa_certificate_logo" class="cfa-certificate-logo">
+      <img src="<?php echo $cfa_certificate_logo_2 ?>" alt="cfa_certificate_logo" class="cfa-certificate-logo">
     </div>
     <div class="signature">
-      <img src="<? echo $academy_head_signature ?>" alt="academy_head_signature" class="academy-head-signature">
+      <img src="<?php echo $academy_head_signature ?>" alt="academy_head_signature" class="academy-head-signature">
       <p class="signee-name">
-        <? echo $academy_head['name'] ?>
+        <?php echo $academy_head['name'] ?? ''; ?>
       </p>
       <p class="signee-role">
-        <? echo $academy_head['role'] ?>
+        <?php echo $academy_head['role'] ?? ''; ?>
       </p>
       <p class="sign-date">
-        <? echo $academy_head['date'] ?>
+        <?php echo $academy_head['date'] ?? ''; ?>
       </p>
     </div>
   </div>
@@ -77,14 +77,14 @@ $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-bl
       window.dataLayer = window.dataLayer || [];
       dataLayer.push({
         'event': 'download_certificate_click',
-        'user_id': '<?php echo $args['user']['id']; ?>',
-        'course_id': '<?php echo $args['course']['id']; ?>',
+        'user_id': '<?php echo $args['user']['id'] ?? ''; ?>',
+        'course_id': '<?php echo $args['course']['id'] ?? ''; ?>',
         'download_type': 'pdf',
         'date': new Date().toISOString()
       });
       gtag('event', 'download_certificate', {
-        'user_id': '<?php echo $args['user']['id']; ?>',
-        'course_id': '<?php echo $args['course']['id']; ?>',
+        'user_id': '<?php echo $args['user']['id'] ?? ''; ?>',
+        'course_id': '<?php echo $args['course']['id'] ?? ''; ?>',
         'download_type': 'pdf',
         'date': new Date().toISOString()
       });
