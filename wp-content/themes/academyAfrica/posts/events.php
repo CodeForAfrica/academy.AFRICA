@@ -100,29 +100,30 @@ function custom_fields()
 {
     global $post;
     $custom = get_post_custom($post->ID);
-    $speaker = $custom["speaker"][0];
-    $country = $custom["country"][0];
-    $date = $custom["date"][0];
-    $time = $custom["time"][0];
+    $speaker = $custom["speaker"][0] ?? '';
+    $country = $custom["country"][0] ?? '';
+    $date = $custom["date"][0] ?? '';
+    $time = $custom["time"][0] ?? '';
     $users = get_user_options();
-    $is_virtual = $custom["is_virtual"][0];
+    $is_virtual = $custom["is_virtual"][0] ?? false;
 ?>
+    <?php wp_nonce_field('event_custom_fields_nonce', 'event_nonce'); ?>
     <div class="form-container">
         <div class="form-group">
             <label for="date">Date</label>
-            <input value="<?php echo $date; ?>" type="date" class="large-text" id="date" name="date">
+            <input value="<?php echo esc_attr($date); ?>" type="date" class="large-text" id="date" name="date">
         </div>
 
         <div class="form-group">
-            <label for="tite">Time</label>
-            <input value="<?php echo $time; ?>" type="time" class="large-text" id="time" name="time">
+            <label for="time">Time</label>
+            <input value="<?php echo esc_attr($time); ?>" type="time" class="large-text" id="time" name="time">
         </div>
         <div class="form-group checkbox-label">
             <label>
                 <?php
                 $checked = $is_virtual ? 'checked' : "";
                 ?>
-                <input <?php echo $checked ?> type="checkbox" name="is_virtual">
+                <input <?php echo $checked ?> type="checkbox" name="is_virtual" value="1">
                 Is Virtual
             </label>
         </div>
@@ -137,13 +138,33 @@ function admin_init()
     add_meta_box("custom_fields", "Event Fields", "custom_fields", "event", "normal", "low");
 }
 
-function save_details()
+function save_details($post_id)
 {
-    global $post;
-    // update_post_meta($post->ID, "country", $_POST["country"]);
-    update_post_meta($post->ID, "is_virtual", $_POST["is_virtual"]);
-    update_post_meta($post->ID, "date", $_POST["date"]);
-    update_post_meta($post->ID, "time", $_POST["time"]);
+    // Security checks
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+    if (get_post_type($post_id) !== 'event') return;
+    
+    // Verify nonce for security
+    if (!isset($_POST['event_nonce']) || !wp_verify_nonce($_POST['event_nonce'], 'event_custom_fields_nonce')) {
+        return;
+    }
+    
+    // Only update if the post data exists to prevent undefined key errors
+    if (isset($_POST["is_virtual"])) {
+        update_post_meta($post_id, "is_virtual", sanitize_text_field($_POST["is_virtual"]));
+    } else {
+        // If checkbox is not checked, delete the meta or set to empty
+        update_post_meta($post_id, "is_virtual", '');
+    }
+    
+    if (isset($_POST["date"])) {
+        update_post_meta($post_id, "date", sanitize_text_field($_POST["date"]));
+    }
+    
+    if (isset($_POST["time"])) {
+        update_post_meta($post_id, "time", sanitize_text_field($_POST["time"]));
+    }
 }
 
 add_action("admin_init", "admin_init");
