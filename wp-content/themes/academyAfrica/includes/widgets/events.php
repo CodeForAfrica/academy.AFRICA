@@ -49,7 +49,8 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
     public function get_events($args)
     {
         $meta_query = $args["meta_query"] ?? array();
-        $country_filters = $this->get_query_param('country')[0];
+        $country_param = $this->get_query_param('country');
+        $country_filters = !empty($country_param) ? $country_param[0] : null;
         if (!empty($country_filters)) {
             $meta_query[] = array(
                 'relation' => 'OR',
@@ -108,7 +109,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                 $countries = get_post_meta(get_the_ID(), 'countries', true);
                 $post_data = array(
                     'title' => get_the_title(),
-                    'speaker' => $user_data->display_name,
+                    'speaker' => $user_data ? $user_data->display_name : 'Unknown Speaker',
                     'organisation' => get_post_meta(get_the_ID(), 'organisation', true),
                     'is_virtual' => get_post_meta(get_the_ID(), 'is_virtual', true) ? "&#x1F5A5;" : "",
                     'date' => $date,
@@ -290,10 +291,11 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
     public function get_upcoming_events()
     {
         $current_date = date('Y-m-d');
+        $upcoming_page_param = $this->get_query_param('upcoming_page');
         $args = array(
             'post_type' => 'event',
             'posts_per_page' => 10,
-            'paged' => $this->get_query_param('upcoming_page') ? $this->get_query_param('upcoming_page')[0] : 1,
+            'paged' => !empty($upcoming_page_param) ? $upcoming_page_param[0] : 1,
             'meta_query' => array(
                 array(
                     'key'     => 'date',
@@ -309,10 +311,11 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
     public function get_previous_events()
     {
         $current_date = date('Y-m-d');
+        $previous_page_param = $this->get_query_param('previous_events_page');
         $args = array(
             'post_type' => 'event',
             'posts_per_page' => 10,
-            'paged' => $this->get_query_param('previous_events_page') ? $this->get_query_param('previous_events_page')[0] : 1,
+            'paged' => !empty($previous_page_param) ? $previous_page_param[0] : 1,
             'meta_query' => array(
                 array(
                     'key'     => 'date',
@@ -538,7 +541,8 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             </li>
 
                             <?
-                            $current = $this->get_query_param('upcoming_page') ? $this->get_query_param('upcoming_page')[0] : "1"
+                            $upcoming_page_param = $this->get_query_param('upcoming_page');
+                            $current = !empty($upcoming_page_param) ? $upcoming_page_param[0] : "1";
                             ?>
                             <!-- Page links -->
                             <?php for ($i = 1; $i <= $upcoming_pagination['total_pages']; $i++) : ?>
@@ -631,7 +635,8 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
 
                             <!-- Page links -->
                             <?
-                            $current = $this->get_query_param('previous_events_page') ? $this->get_query_param('previous_events_page')[0] : "1"
+                            $previous_page_param = $this->get_query_param('previous_events_page');
+                            $current = !empty($previous_page_param) ? $previous_page_param[0] : "1";
                             ?>
                             <?php for ($i = 1; $i <= $previous_pagination['total_pages']; $i++) : ?>
                                 <?

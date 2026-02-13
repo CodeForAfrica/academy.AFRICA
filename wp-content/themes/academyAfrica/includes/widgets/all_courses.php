@@ -175,14 +175,14 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $learning_path = $this->get_query_param('learning_path');
         $view = $this->get_query_param('view');
         $page = $this->get_query_param('course_page');
-        $current_page = $page ? $page[0] : 1;
+        $current_page = !empty($page) ? $page[0] : 1;
         $pathway_title = $settings['learning_title'];
         $pathway_description = $settings['learning_description'];
         $pathway_button_text = $settings['learning_button_text'];
         $pathway_button_link = $settings['learning_button_link'];
         $pathway_sample_course = $settings['learning_sample_course'];
         $pathway = get_post($pathway_sample_course);
-        if ($pathway->post_type == 'ac-learning-path') {
+        if ($pathway && $pathway->post_type == 'ac-learning-path') {
             $pathway_courses = get_field('courses', $pathway);
         } else {
             $pathway = null;
@@ -213,7 +213,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
         $sort_by = $settings['sort_by_text'];
         $sort = $this->get_query_param('sort');
-        if ($sort) {
+        if (!empty($sort)) {
             $sort = $sort[0];
             $order_by = $sort_options[$sort]["orderby"];
             $order = $sort_options[$sort]["order"];
@@ -221,8 +221,9 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             $order_by = "date";
             $order = "DESC";
         }
+        $view = $this->get_query_param('view');
         $atts = [
-            'per_page' => $view[0] == 'all' ? -1 : 9,
+            'per_page' => !empty($view) && $view[0] == 'all' ? -1 : 9,
             'paged' => $current_page,
             'organization' => $orgs,
             'instructor' => $instructors,

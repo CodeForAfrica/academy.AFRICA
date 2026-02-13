@@ -3,8 +3,8 @@
 $sort_by = $args["sort_by"] ?? "Search By";
 $sort = $args["sort"];
 $filter_by = $args["filter_by"] ?? "Filter By";
-$filter_options = $args["filter_options"];
-$sort_options = $args["sort_options"];
+$filter_options = $args["filter_options"] ?? [];
+$sort_options = $args["sort_options"] ?? [];
 ?>
 
 <aside class="filter-sidebar">
