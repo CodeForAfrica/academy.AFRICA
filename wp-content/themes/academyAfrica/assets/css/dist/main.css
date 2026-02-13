@@ -1683,10 +1683,6 @@ strong {
 
 .size-full,
 .size-large {
-  -moz-filter: drop-shadow(10px 10px 6px #C0C0C0) !important;
-  -webkit-filter: drop-shadow(10px 10px 6px #C0C0C0) !important;
-  -ms-filter: drop-shadow(10px 10px 6px #C0C0C0) !important;
-  filter: drop-shadow(10px 10px 6px #C0C0C0) !important;
   padding-bottom: 17px;
 }
 
