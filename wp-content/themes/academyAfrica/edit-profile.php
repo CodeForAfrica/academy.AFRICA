@@ -158,14 +158,23 @@ if (is_user_logged_in()) {
                         {
                             return strcmp($a["dial_code"], $b["dial_code"]);
                         }
-                        usort($all_countries, 'sort_by_dial_code');
-                        foreach ($all_countries as $country) {
-                            $label = $country['flag'] . ' ' . $country['dial_code'];
-                            $selected = $prefix === $country['dial_code'] ? 'selected="selected"' : null;
+                        if (isset($all_countries) && is_array($all_countries)) {
+                            usort($all_countries, 'sort_by_dial_code');
+                            foreach ($all_countries as $country) {
+                                $label = $country['flag'] . ' ' . $country['dial_code'];
+                                $selected = $prefix === $country['dial_code'] ? 'selected="selected"' : null;
                         ?>
                             <option <? echo $selected ?> value="<?php echo $country['dial_code'] ?>">
                                 <?php echo $label ?>
                             </option>
+                        <?php
+                            }
+                        } else {
+                            // Fallback if countries data is not available
+                        ?>
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+27">🇿🇦 +27</option>
                         <?php
                         }
                         ?>
