@@ -678,3 +678,16 @@ add_filter(
     10,
     1
 );
+
+/**
+ * Register strings for Polylang translation
+ */
+function academyafrica_register_polylang_strings() {
+    if (function_exists('pll_register_string')) {
+        // Register footer strings
+        pll_register_string('footer-imprint', 'Imprint', 'AcademyAfrica Footer');
+        pll_register_string('footer-privacy', 'Privacy', 'AcademyAfrica Footer');
+        // Add more strings as needed
+    }
+}
+add_action('init', 'academyafrica_register_polylang_strings');

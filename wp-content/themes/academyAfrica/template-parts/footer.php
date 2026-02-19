@@ -21,6 +21,10 @@ use AcademyAfrica\Theme\Utils\MenuFunctions;
 
 $menu_items = MenuFunctions::get_menu_items('menu-2');
 
+// Get current language from Polylang (defaults to 'en' if Polylang not active)
+$current_language = function_exists('pll_current_language') ? pll_current_language() : 'en';
+
+
 // social media links array
 $social_media_links = [
     [
@@ -49,27 +53,36 @@ $social_media_links = [
     ],
 ];
 
+// Use Polylang for translatable secondary menu labels
 $secondary_menus = [
     [
         'url' => '/privacy-policy',
-        'label' => 'Imprint',
+        'label' => function_exists('pll__') ? pll__('Imprint') : 'Imprint',
     ],
     [
         'url' => '/privacy-policy',
-        'label' => 'Privacy',
+        'label' => function_exists('pll__') ? pll__('Privacy') : 'Privacy',
     ]
 ];
 
+// Query footer by current language
 $search = array(
     'post_type' => 'footer',
     'posts_per_page' => -1,
-    'language' => 'en',
+    'lang' => $current_language,
 );
 
 $custom_posts = get_posts($search);
+
+// Fallback to English if no footer found for current language
+if (empty($custom_posts)) {
+    $search['lang'] = 'en';
+    $custom_posts = get_posts($search);
+}
+
 $footer = $custom_posts[0];
 $logo = get_post_meta($footer->ID, 'logo', true);
-$thumbnail_url = wp_get_attachment_image_src($logo, 100)[0];
+$thumbnail_url = wp_get_attachment_image_src($logo, 100)[0] ?? '';
 $site_description = get_post_meta($footer->ID, 'site_description', true);
 $stay_in_touch = get_post_meta($footer->ID, 'stay_in_touch', true);
 $secondary_links = get_post_meta($footer->ID, 'secondary_links', true);
