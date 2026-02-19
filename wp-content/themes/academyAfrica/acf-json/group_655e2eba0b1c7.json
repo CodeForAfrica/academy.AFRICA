@@ -94,15 +94,19 @@
             },
             "choices": {
                 "English": "English",
-                "French": "French"
+                "French": "French",
+                "العربية": "العربية"
             },
             "default_value": "English",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         }
     ],
     "location": [
@@ -123,5 +127,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1716224628
+    "modified": 1771490309
 }
