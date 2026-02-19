@@ -16,7 +16,10 @@ require_once __DIR__ . '/../includes/utils/menus.php';
 
 use AcademyAfrica\Theme\Utils\MenuFunctions;
 
-$menu_items = MenuFunctions::get_menu_items('menu-1');
+// Get current language from Polylang
+$current_language = function_exists('pll_current_language') ? pll_current_language() : 'en';
+
+$menu_items = MenuFunctions::get_menu_items('menu-1', $current_language);
 
 function handle_login_failure()
 {
@@ -44,6 +47,9 @@ function handle_login_failure()
 handle_login_failure();
 
 ?>
+<script>
+    console.log(<?php echo json_encode($menu_items); ?>, <?php echo json_encode($current_language); ?>);
+</script>
 <nav class="header">
     <!-- Mobile Nav -->
     <div class="mobile" id="mobile-nav">
