@@ -24,6 +24,10 @@ $course_status = learndash_course_status($course_id);
 $post_data = get_post($course_id);
 $course_intro    = $post_data->post_content;
 
+// Fetch lessons for this course
+$lessons = learndash_get_course_lessons_list($course_id, $user_id);
+$lesson_topics = !empty($lessons) ? $lessons : [];
+
 $leaning_attr = [
     'per_page' => -1,
 ];
@@ -143,7 +147,7 @@ if ($course_status == "Completed" && $is_cert) {
             </div>
 
             <?
- 
+            if (count($lesson_topics) > 0) {
             ?>
                 <div class="carriculum">
                     <div class="title">
@@ -152,6 +156,7 @@ if ($course_status == "Completed" && $is_cert) {
                     <?php echo do_shortcode('[course_content]'); ?>
                 </div>
             <?
+            }
             ?>
             <div class="instructor">
                 <div class="title">
