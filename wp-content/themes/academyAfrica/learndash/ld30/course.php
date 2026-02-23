@@ -143,7 +143,7 @@ if ($course_status == "Completed" && $is_cert) {
             </div>
 
             <?
-            if (count($lesson_topics) > 0) {
+ 
             ?>
                 <div class="carriculum">
                     <div class="title">
@@ -152,7 +152,6 @@ if ($course_status == "Completed" && $is_cert) {
                     <?php echo do_shortcode('[course_content]'); ?>
                 </div>
             <?
-            }
             ?>
             <div class="instructor">
                 <div class="title">
