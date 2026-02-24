@@ -19,10 +19,10 @@ if (!defined('ABSPATH')) {
 
 use AcademyAfrica\Theme\Utils\MenuFunctions;
 
-$menu_items = MenuFunctions::get_menu_items('menu-2');
-
 // Get current language from Polylang (defaults to 'en' if Polylang not active)
 $current_language = function_exists('pll_current_language') ? pll_current_language() : 'en';
+
+$menu_items = MenuFunctions::get_menu_items('menu-2', $current_language);
 
 
 // social media links array

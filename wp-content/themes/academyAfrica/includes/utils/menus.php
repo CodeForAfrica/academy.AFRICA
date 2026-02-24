@@ -19,21 +19,29 @@ class MenuFunctions
             return [];
         }
 
-        $menu_id = $locations[$menu_location];
-        
-        // Polylang automatically handles menu switching if configured in:
-        // Languages > Settings > "The menus are translated"
-        $menu_items = wp_get_nav_menu_items($menu_id);
+        $default_menu_id = $locations[$menu_location];
+        $menu_id = $default_menu_id;
 
-        // Fallback: if empty, try getting English menu by name
-        if (empty($menu_items)) {
-            $en_menu = wp_get_nav_menu_object($menu_location . 'en');
-            if ($en_menu) {
-                $menu_items = wp_get_nav_menu_items($en_menu->term_id);
+        // Resolve the translated menu for the current language via Polylang.
+        // Nav menus are taxonomy terms, so pll_get_term() can look up their translation.
+        if (function_exists('pll_get_term')) {
+            $lang = $language ?: (function_exists('pll_current_language') ? pll_current_language() : null);
+            if ($lang) {
+                $translated_id = pll_get_term($default_menu_id, $lang);
+                if ($translated_id) {
+                    $menu_id = $translated_id;
+                }
             }
         }
 
-        if (!$menu_items) {
+        $menu_items = wp_get_nav_menu_items($menu_id);
+
+        // Fallback: if the translated menu is empty, use the original English menu
+        if (empty($menu_items) && $menu_id !== $default_menu_id) {
+            $menu_items = wp_get_nav_menu_items($default_menu_id);
+        }
+
+        if (empty($menu_items)) {
             return [];
         }
 

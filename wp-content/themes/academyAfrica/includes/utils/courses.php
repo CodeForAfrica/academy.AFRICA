@@ -235,19 +235,7 @@ class CoursesFunctions
         }
 
         $language = !empty($atts['language']) ? $atts['language'] : [];
-        if (!empty($language)) {
-            $lang_q = array(
-                'relation' => 'OR'
-            );
-            foreach ($language as $lang) {
-                array_push($lang_q, array(
-                    'key' => 'cfa-language',
-                    'value' => $lang,
-                    'compare' => 'LIKE'
-                ));
-            }
-            array_push($meta_query, $lang_q);
-        }
+        $lang_slug = !empty($language) ? implode(',', $language) : '';
 
         $post__in = null;
         $learning_path = !empty($atts['learning_path']) ? $atts['learning_path'] : [];
@@ -295,6 +283,7 @@ class CoursesFunctions
             'post__in' => $post__in,
             'author__in' => $author_query,
             'meta_query' => $meta_query,
+            'lang' => $lang_slug,
         ], $atts, $filter = null);
 
         return $query_args;

@@ -669,6 +669,10 @@
 
 .footer-wrapper {
   background: var(--primary-700, #0c1a81);
+  color: #FFFFFF;
+}
+.footer-wrapper a {
+  color: #FFFFFF;
 }
 
 .root {
@@ -842,6 +846,9 @@
   line-height: 14px;
   letter-spacing: 0.24px;
   margin-top: 52px;
+}
+.root .site-description .span {
+  color: #FFFFFF;
 }
 .root .site-description .footer-connect {
   display: flex;

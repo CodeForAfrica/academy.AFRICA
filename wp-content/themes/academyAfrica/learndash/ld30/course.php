@@ -23,6 +23,8 @@ $short_description = get_field('short_description', $course_id);
 $course_status = learndash_course_status($course_id);
 $post_data = get_post($course_id);
 $course_intro    = $post_data->post_content;
+// Get course language per Polylang
+$course_language = function_exists('pll_get_post_language') ? pll_get_post_language($course_id) : 'en';
 
 // Fetch lessons for this course
 $lessons = learndash_get_course_lessons_list($course_id, $user_id);

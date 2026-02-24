@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.7.9');
+define('ACADEMY_AFRICA_VERSION', '1.7.10');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -575,6 +575,9 @@ const required_plugins = array(
 
 function check_compatibility()
 {
+    if (!function_exists('is_plugin_active')) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    }
     $is_admin = current_user_can('administrator');
     if ($is_admin) {
         foreach (required_plugins as $plugin_name => $plugin) {
