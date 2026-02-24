@@ -8,8 +8,6 @@ require_once __DIR__ . '/../../includes/utils/courses.php';
 
 use AcademyAfrica\Theme\Courses\CoursesFunctions;
 
-use function ElementorDeps\DI\get;
-
 $course_id = get_the_ID();
 
 $course_price = learndash_get_course_price($course_id);
@@ -28,6 +26,18 @@ $course_language = function_exists('pll_get_post_language') ? pll_get_post_langu
 
 // Fetch lessons for this course
 $lessons = learndash_get_course_lessons_list($course_id, $user_id);
+if (empty($lessons)) {
+    // Fallback: LearnDash course steps index may be out of sync; query by meta directly
+    $lessons = get_posts([
+        'post_type'   => 'sfwd-lessons',
+        'numberposts' => -1,
+        'post_status' => 'publish',
+        'orderby'     => 'menu_order',
+        'order'       => 'ASC',
+        'meta_query'  => [['key' => 'course_id', 'value' => $course_id]],
+        'lang'        => '',
+    ]);
+}
 $lesson_topics = !empty($lessons) ? $lessons : [];
 
 $leaning_attr = [
