@@ -4,9 +4,10 @@ if (!defined('ABSPATH')) {
 }
 
 require_once __DIR__ . '/../utils/courses.php';
-
+require_once __DIR__ . '/../utils/polylang.php';
 
 use AcademyAfrica\Theme\Courses\CoursesFunctions;
+use AcademyAfrica\Theme\Utils\PolylangHelper;
 
 class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 {
@@ -272,12 +273,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                         </div>
                         <div class="language-buttons">
                             <?php
-                            $languages =  [
-                                'all' => __('All', 'academy-africa'),
-                                'English' => __('English', 'academy-africa'),
-                                'French' => __('French', 'academy-africa'),
-                                'Arabic' => __('Arabic', 'academy-africa'),
-                            ];
+                            $pll_languages = PolylangHelper::get_languages();
+                            $languages = array_merge(
+                                ['all' => __('All', 'academy-africa')],
+                                $pll_languages
+                            );
                             foreach ($languages as $language_code => $language_name) {
 
                             ?>
