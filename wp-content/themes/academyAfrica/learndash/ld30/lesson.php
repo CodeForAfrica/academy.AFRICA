@@ -59,7 +59,7 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                     </div>
                 </div>
                 <div class='course-carriculum'>
-                    <?php echo do_shortcode('[course_content]'); ?>
+                    <?php echo do_shortcode('[course_content course_id="' . $course_id . '"]'); ?>
                 </div>
             </div>
             <div class="sfwd-lessons">

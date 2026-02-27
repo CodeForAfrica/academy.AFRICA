@@ -179,7 +179,7 @@ if ($course_status == "Completed" && $is_cert) {
                     <div class="title">
                         <p class="cfa-introduction-title"><?php echo function_exists('pll__') ? esc_html(pll__('Course Curriculum')) : 'Course Curriculum'; ?></p>
                     </div>
-                    <?php echo do_shortcode('[course_content]'); ?>
+                    <?php echo do_shortcode('[course_content course_id="' . $course_id . '"]'); ?>
                 </div>
             <?
             }

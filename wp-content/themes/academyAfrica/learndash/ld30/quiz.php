@@ -57,7 +57,7 @@ $is_quiz = $post_type == 'sfwd-quiz';
                         </div>
                     </div>
                     <div class='course-carriculum'>
-                        <?php echo do_shortcode('[course_content]'); ?>
+                        <?php echo do_shortcode('[course_content course_id="' . $course_id . '"]'); ?>
                     </div>
                 </div>
             <?
