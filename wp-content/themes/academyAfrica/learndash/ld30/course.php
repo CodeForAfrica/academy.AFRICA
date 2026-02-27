@@ -117,18 +117,25 @@ if ($course_status == "Completed" && $is_cert) {
                     <?php echo do_shortcode('[learndash_course_progress]'); ?>
                     <?php
                     if ($course_status == "Completed") {
-                        echo "<a href='" . get_permalink($course_id) . "?certificate=true' class='pathways-link'>Download Certificate</a>";
+                        $cert_label = function_exists('pll__') ? pll__('Download Certificate') : 'Download Certificate';
+                        echo "<a href='" . get_permalink($course_id) . "?certificate=true' class='pathways-link'>" . esc_html($cert_label) . "</a>";
                     }
                     ?>
                 </div>
                 <div class="continue">
-                    <?php echo do_shortcode('[ld_course_resume label="Continue the Course <span></span>"]'); ?>
+                    <?php
+                    $continue_label = function_exists('pll__') ? pll__('Continue the Course') : 'Continue the Course';
+                    echo do_shortcode('[ld_course_resume label="' . $continue_label . ' <span></span>"]');
+                    ?>
                 </div>
             <?
             } else {
             ?>
                 <div class="enroll enroll-btn" id="enroll-button">
-                    <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
+                    <?php
+                    $enroll_label = function_exists('pll__') ? pll__('Enroll Now') : 'Enroll Now';
+                    echo do_shortcode('[learndash_payment_buttons label="' . $enroll_label . '"]');
+                    ?>
                 </div>
             <?
             }
@@ -136,7 +143,7 @@ if ($course_status == "Completed" && $is_cert) {
             <hr class="divider">
             <div class="introduction">
                 <p class="cfa-introduction-title">
-                    Introduction
+                    <?php echo function_exists('pll__') ? esc_html(pll__('Introduction')) : 'Introduction'; ?>
                 </p>
                 <div class="cfa-introduction">
                     <?php echo do_shortcode($course_intro); ?>
@@ -145,7 +152,7 @@ if ($course_status == "Completed" && $is_cert) {
             <hr class="divider">
             <div class="pathways">
                 <?php if (!empty($course_pathways)) : ?>
-                    <p class="pathways-title">Completing this course can bring you closer to completing the following pathways</p>
+                    <p class="pathways-title"><?php echo function_exists('pll__') ? esc_html(pll__('Completing this course can bring you closer to completing the following pathways')) : 'Completing this course can bring you closer to completing the following pathways'; ?></p>
                     <ul class="pathways-list">
                         <?php foreach ($course_pathways as $pathway) : ?>
                             <li>
@@ -163,7 +170,7 @@ if ($course_status == "Completed" && $is_cert) {
             ?>
                 <div class="carriculum">
                     <div class="title">
-                        <p class="cfa-introduction-title">Course Curriculum</p>
+                        <p class="cfa-introduction-title"><?php echo function_exists('pll__') ? esc_html(pll__('Course Curriculum')) : 'Course Curriculum'; ?></p>
                     </div>
                     <?php echo do_shortcode('[course_content]'); ?>
                 </div>
@@ -172,7 +179,7 @@ if ($course_status == "Completed" && $is_cert) {
             ?>
             <div class="instructor">
                 <div class="title">
-                    <p class="cfa-introduction-title">The Instructor</p>
+                    <p class="cfa-introduction-title"><?php echo function_exists('pll__') ? esc_html(pll__('The Instructor')) : 'The Instructor'; ?></p>
                 </div>
                 <div class="authors">
                     <?php
@@ -253,7 +260,7 @@ if ($course_status == "Completed" && $is_cert) {
             ?>
                 <div class="instructor organization">
                     <div class="title">
-                        <p class="cfa-introduction-title">The Organization</p>
+                        <p class="cfa-introduction-title"><?php echo function_exists('pll__') ? esc_html(pll__('The Organization')) : 'The Organization'; ?></p>
                     </div>
                     <div class="authors">
                         <?php
@@ -324,7 +331,10 @@ if ($course_status == "Completed" && $is_cert) {
             if (!$is_enrolled) {
             ?>
                 <div class="enroll enrolllled" id="enroll-button">
-                    <?php echo do_shortcode('[learndash_payment_buttons label="Enroll Now"]'); ?>
+                    <?php
+                    $enroll_label = function_exists('pll__') ? pll__('Enroll Now') : 'Enroll Now';
+                    echo do_shortcode('[learndash_payment_buttons label="' . $enroll_label . '"]');
+                    ?>
                 </div>
             <?
             }
@@ -335,11 +345,11 @@ if ($course_status == "Completed" && $is_cert) {
                 <div class="related">
                     <div class="accordion-parent">
                         <div class="accordion">
-                            Related
+                            <?php echo function_exists('pll__') ? esc_html(pll__('Related')) : 'Related'; ?>
                         </div>
                         <div class="panel">
                             <div class="related-courses">
-                                <div class="title"> Related Courses </div>
+                                <div class="title"><?php echo function_exists('pll__') ? esc_html(pll__('Related Courses')) : 'Related Courses'; ?></div>
                                 <div class="list">
                                     <?php
                                     $related_courses = array_slice($related_courses, 0, 3);

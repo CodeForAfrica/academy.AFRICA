@@ -690,7 +690,18 @@ function academyafrica_register_polylang_strings() {
         // Register footer strings
         pll_register_string('footer-imprint', 'Imprint', 'AcademyAfrica Footer');
         pll_register_string('footer-privacy', 'Privacy', 'AcademyAfrica Footer');
-        // Add more strings as needed
+
+        // Register course page strings
+        pll_register_string('course-download-certificate', 'Download Certificate', 'AcademyAfrica Course');
+        pll_register_string('course-continue', 'Continue the Course', 'AcademyAfrica Course');
+        pll_register_string('course-enroll-now', 'Enroll Now', 'AcademyAfrica Course');
+        pll_register_string('course-introduction', 'Introduction', 'AcademyAfrica Course');
+        pll_register_string('course-pathways-text', 'Completing this course can bring you closer to completing the following pathways', 'AcademyAfrica Course');
+        pll_register_string('course-curriculum', 'Course Curriculum', 'AcademyAfrica Course');
+        pll_register_string('course-instructor', 'The Instructor', 'AcademyAfrica Course');
+        pll_register_string('course-organization', 'The Organization', 'AcademyAfrica Course');
+        pll_register_string('course-related', 'Related', 'AcademyAfrica Course');
+        pll_register_string('course-related-courses', 'Related Courses', 'AcademyAfrica Course');
     }
 }
 add_action('init', 'academyafrica_register_polylang_strings');
