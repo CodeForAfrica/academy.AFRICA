@@ -691,6 +691,14 @@ function academyafrica_register_polylang_strings() {
         pll_register_string('footer-imprint', 'Imprint', 'AcademyAfrica Footer');
         pll_register_string('footer-privacy', 'Privacy', 'AcademyAfrica Footer');
 
+        // Register course completed page strings
+        pll_register_string('course-completed-congratulations', 'Congratulations', 'AcademyAfrica Course');
+        pll_register_string('course-completed-share-title', 'Share the good news!', 'AcademyAfrica Course');
+        pll_register_string('course-completed-share-message', '🎉 Just completed the %s on academy.Africa!' . "\n" . '🚀 Ready to take on new challenges and apply what I\'ve learned.' . "\n" . 'Check out the course 👉🏽.', 'AcademyAfrica Course');
+        pll_register_string('course-completed-download', 'Download', 'AcademyAfrica Course');
+        pll_register_string('course-completed-view-course', 'View Course', 'AcademyAfrica Course');
+        pll_register_string('course-completed-head-role', 'Head of Academy', 'AcademyAfrica Course');
+
         // Register course page strings
         pll_register_string('course-download-certificate', 'Download Certificate', 'AcademyAfrica Course');
         pll_register_string('course-continue', 'Continue the Course', 'AcademyAfrica Course');
@@ -705,3 +713,25 @@ function academyafrica_register_polylang_strings() {
     }
 }
 add_action('init', 'academyafrica_register_polylang_strings');
+
+/**
+ * Fix question marks in downloaded LearnDash certificates for non-Latin languages.
+ *
+ * LearnDash uses TCPDF to generate PDFs. TCPDF cannot load Google Web Fonts
+ * (Open Sans, Lato, etc.) so characters from non-Latin scripts (Arabic, Amharic,
+ * CJK, etc.) render as "?". This filter detects non-Latin characters in the
+ * certificate content and switches to "freeserif" — a Unicode font bundled with
+ * TCPDF that supports Arabic, Ethiopic, Hebrew, Cyrillic, CJK, and many others.
+ */
+add_filter('learndash_certificate_content', function ($cert_content, $_cert_id) {
+    // Unicode ranges for scripts that standard TCPDF fonts cannot render:
+    // Arabic, Hebrew, Ethiopic (Amharic), Devanagari, CJK Unified Ideographs
+    $non_latin_pattern = '/[\x{0600}-\x{06FF}\x{0590}-\x{05FF}\x{1200}-\x{137F}\x{0900}-\x{097F}\x{4E00}-\x{9FFF}]/u';
+
+    if (preg_match($non_latin_pattern, wp_strip_all_tags($cert_content))) {
+        // freeserif is bundled with TCPDF and has broad Unicode glyph coverage
+        $cert_content = '<style>* { font-family: freeserif !important; }</style>' . $cert_content;
+    }
+
+    return $cert_content;
+}, 10, 2);

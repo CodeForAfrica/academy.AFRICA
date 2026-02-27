@@ -1,9 +1,9 @@
 <?php
 
-$congratulations = "Congratulations";
+$congratulations = function_exists('pll__') ? pll__('Congratulations') : 'Congratulations';
 $certificate_title = "CERTIFICATE OF";
 $certificate_type = "COMPLETION";
-$share_title = "Share the good news!";
+$share_title = function_exists('pll__') ? pll__('Share the good news!') : 'Share the good news!';
 $presented_to = "PRESENTED TO";
 $certificate_description = "For completing the academy.AFRICA course";
 $course_id = $args["course_id"] ?? null;
@@ -24,11 +24,10 @@ $user = array(
 
 $course_meta = get_post_meta($course_id, 'sfwd-courses', true);
 
-$share_message = <<<EOD
-🎉 Just completed the $course_title on academy.Africa!
-🚀 Ready to take on new challenges and apply what I've learned.
-Check out the course 👉🏽.
-EOD;
+$share_message_template = function_exists('pll__')
+    ? pll__("🎉 Just completed the %s on academy.Africa!\n🚀 Ready to take on new challenges and apply what I've learned.\nCheck out the course 👉🏽.")
+    : "🎉 Just completed the %s on academy.Africa!\n🚀 Ready to take on new challenges and apply what I've learned.\nCheck out the course 👉🏽.";
+$share_message = sprintf($share_message_template, $course_title);
 
 
 $social_media_links = [
@@ -60,7 +59,7 @@ $social_media_links = [
 
 $academy_head = array(
     'name' => "Tolulope Adeyemo",
-    'role' => 'Head of Academy',
+    'role' => function_exists('pll__') ? pll__('Head of Academy') : 'Head of Academy',
     'signature' => get_stylesheet_directory_uri() . '/assets/images/signature.png',
     'date' => date("d/m/Y")
 );
@@ -93,12 +92,12 @@ global $shortcode_tags;
                                     <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </g>
                             </svg>
-                            Download
+                            <?php echo function_exists('pll__') ? esc_html(pll__('Download')) : 'Download'; ?>
                         </button>
                     </a>
                     <a href="<? echo get_permalink($course_id) ?>">
                         <button class="button primary">
-                            View Course
+                            <?php echo function_exists('pll__') ? esc_html(pll__('View Course')) : 'View Course'; ?>
                         </button>
                     </a>
                 </div>

@@ -13,8 +13,7 @@ $course_id = get_the_ID();
 $course_price = learndash_get_course_price($course_id);
 $price = $course_price['price'] ? $course_price['price'] : 'Free';
 $user_id = get_current_user_id();
-$user_courses = learndash_user_get_enrolled_courses($user_id);
-$is_enrolled = in_array($course_id, $user_courses);
+$is_enrolled = sfwd_lms_has_access($course_id, $user_id);
 $organizations = get_field('organization', $course_id);
 $related_courses = get_field('related_courses', $course_id);
 $short_description = get_field('short_description', $course_id);
@@ -111,7 +110,7 @@ if ($course_status == "Completed" && $is_cert) {
                 <?php get_template_part('template-parts/social_share', 'template'); ?>
             </div>
             <?
-            if ($is_enrolled && count($lesson_topics) > 1) {
+            if ($is_enrolled && count($lesson_topics) > 0) {
             ?>
                 <div class='progress'>
                     <?php echo do_shortcode('[learndash_course_progress]'); ?>
@@ -125,7 +124,15 @@ if ($course_status == "Completed" && $is_cert) {
                 <div class="continue">
                     <?php
                     $continue_label = function_exists('pll__') ? pll__('Continue the Course') : 'Continue the Course';
-                    echo do_shortcode('[ld_course_resume label="' . $continue_label . ' <span></span>"]');
+                    $resume_output = do_shortcode('[ld_course_resume label="' . $continue_label . ' <span></span>"]');
+                    if (!empty(trim($resume_output))) {
+                        echo $resume_output;
+                    } elseif (!empty($lesson_topics)) {
+                        // User enrolled but hasn't started yet — link to first lesson
+                        $first_lesson = is_array($lesson_topics[0]) ? $lesson_topics[0]['post'] : $lesson_topics[0];
+                        $first_lesson_url = get_permalink($first_lesson->ID);
+                        echo '<a href="' . esc_url($first_lesson_url) . '" class="ld-button">' . esc_html($continue_label) . ' <span></span></a>';
+                    }
                     ?>
                 </div>
             <?
