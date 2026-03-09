@@ -119,3 +119,5 @@ yarn.lock
 wp-content/drop-ins/
 wp-content/languages/
 .idea/
+creds.json
+full_db_backup.sql
