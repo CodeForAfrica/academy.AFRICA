@@ -683,38 +683,6 @@ add_filter(
 );
 
 /**
- * Register strings for Polylang translation
- */
-function academyafrica_register_polylang_strings() {
-    if (function_exists('pll_register_string')) {
-        // Register footer strings
-        pll_register_string('footer-imprint', 'Imprint', 'AcademyAfrica Footer');
-        pll_register_string('footer-privacy', 'Privacy', 'AcademyAfrica Footer');
-
-        // Register course completed page strings
-        pll_register_string('course-completed-congratulations', 'Congratulations', 'AcademyAfrica Course');
-        pll_register_string('course-completed-share-title', 'Share the good news!', 'AcademyAfrica Course');
-        pll_register_string('course-completed-share-message', '🎉 Just completed the %s on academy.Africa!' . "\n" . '🚀 Ready to take on new challenges and apply what I\'ve learned.' . "\n" . 'Check out the course 👉🏽.', 'AcademyAfrica Course');
-        pll_register_string('course-completed-download', 'Download', 'AcademyAfrica Course');
-        pll_register_string('course-completed-view-course', 'View Course', 'AcademyAfrica Course');
-        pll_register_string('course-completed-head-role', 'Head of Academy', 'AcademyAfrica Course');
-
-        // Register course page strings
-        pll_register_string('course-download-certificate', 'Download Certificate', 'AcademyAfrica Course');
-        pll_register_string('course-continue', 'Continue the Course', 'AcademyAfrica Course');
-        pll_register_string('course-enroll-now', 'Enroll Now', 'AcademyAfrica Course');
-        pll_register_string('course-introduction', 'Introduction', 'AcademyAfrica Course');
-        pll_register_string('course-pathways-text', 'Completing this course can bring you closer to completing the following pathways', 'AcademyAfrica Course');
-        pll_register_string('course-curriculum', 'Course Curriculum', 'AcademyAfrica Course');
-        pll_register_string('course-instructor', 'The Instructor', 'AcademyAfrica Course');
-        pll_register_string('course-organization', 'The Organization', 'AcademyAfrica Course');
-        pll_register_string('course-related', 'Related', 'AcademyAfrica Course');
-        pll_register_string('course-related-courses', 'Related Courses', 'AcademyAfrica Course');
-    }
-}
-add_action('init', 'academyafrica_register_polylang_strings');
-
-/**
  * Fix question marks in downloaded LearnDash certificates for non-Latin languages.
  *
  * LearnDash uses TCPDF to generate PDFs. TCPDF cannot load Google Web Fonts

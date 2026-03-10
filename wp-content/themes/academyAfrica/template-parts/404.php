@@ -16,10 +16,10 @@ if (!defined('ABSPATH')) {
 <?php get_header(); ?>
 <?
 $status_code = 404;
-$title = "PAGE NOT FOUND";
-$description = "There seems to be an error on this page. Please contact us for more details";
-$refresh = "Refresh";
-$home = "Home";
+$title = academyafrica_translate('PAGE NOT FOUND');
+$description = academyafrica_translate('There seems to be an error on this page. Please contact us for more details');
+$refresh = academyafrica_translate('Refresh');
+$home = academyafrica_translate('Home');
 ?>
 <main id="content" class="site-main" style="margin: 0;">
 

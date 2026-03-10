@@ -1,8 +1,8 @@
 <?php
 // get from $args
-$sort_by = $args["sort_by"] ?? "Search By";
+$sort_by = $args["sort_by"] ?? academyafrica_translate('Search By');
 $sort = $args["sort"];
-$filter_by = $args["filter_by"] ?? "Filter By";
+$filter_by = $args["filter_by"] ?? academyafrica_translate('Filter By');
 $filter_options = $args["filter_options"] ?? [];
 $sort_options = $args["sort_options"] ?? [];
 ?>
@@ -78,7 +78,7 @@ $sort_options = $args["sort_options"] ?? [];
                                     ?>
                                         <div class="show-more">
                                             <button class="show-more-btn">
-                                                Show More
+                                                <?php echo esc_html(academyafrica_translate('Show More')); ?>
                                             </button>
                                         </div>
                                     <?
@@ -122,7 +122,7 @@ $sort_options = $args["sort_options"] ?? [];
                                     </clipPath>
                                 </defs>
                             </svg>
-                            Close
+                            <?php echo esc_html(academyafrica_translate('Close')); ?>
                         </button>
                     </div>
                 </div>

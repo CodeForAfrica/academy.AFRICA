@@ -10,10 +10,10 @@ $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-bl
     <div class="divider-black"></div>
     <div class="grid-container">
       <div class="grid-item">
-        <p>CERTIFICATE OF</p>
+        <p><?php echo esc_html(academyafrica_translate('CERTIFICATE OF')); ?></p>
         <p>
           <strong>
-            COMPLETION
+            <?php echo esc_html(academyafrica_translate('COMPLETION')); ?>
           </strong>
         </p>
         <div class="divider-blue"></div>
@@ -27,7 +27,7 @@ $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-bl
       <div class="certificate-content">
         <div class="name">
           <p class="presented-to">
-            PRESENTED TO
+            <?php echo esc_html(academyafrica_translate('PRESENTED TO')); ?>
           </p>
           <p class="first-name">
             <?php echo $args['user']['first_name']; ?>
@@ -38,7 +38,7 @@ $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-bl
         </div>
         <div class="course">
           <p></p>
-          <p class="course-title">For completing a course on</p>
+          <p class="course-title"><?php echo esc_html(academyafrica_translate('For completing a course on')); ?></p>
           <p class="course-name">
             <?php echo $args['course']['name']; ?>
           </p>

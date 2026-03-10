@@ -1,11 +1,11 @@
 <?php
 
-$congratulations = function_exists('pll__') ? pll__('Congratulations') : 'Congratulations';
-$certificate_title = "CERTIFICATE OF";
-$certificate_type = "COMPLETION";
-$share_title = function_exists('pll__') ? pll__('Share the good news!') : 'Share the good news!';
-$presented_to = "PRESENTED TO";
-$certificate_description = "For completing the academy.AFRICA course";
+$congratulations = academyafrica_translate('Congratulations');
+$certificate_title = academyafrica_translate('CERTIFICATE OF');
+$certificate_type = academyafrica_translate('COMPLETION');
+$share_title = academyafrica_translate('Share the good news!');
+$presented_to = academyafrica_translate('PRESENTED TO');
+$certificate_description = academyafrica_translate('For completing a course on');
 $course_id = $args["course_id"] ?? null;
 $course = get_post($course_id);
 $completion_date = get_the_date('Y-m-d', $course_id);
@@ -24,9 +24,7 @@ $user = array(
 
 $course_meta = get_post_meta($course_id, 'sfwd-courses', true);
 
-$share_message_template = function_exists('pll__')
-    ? pll__("🎉 Just completed the %s on academy.Africa!\n🚀 Ready to take on new challenges and apply what I've learned.\nCheck out the course 👉🏽.")
-    : "🎉 Just completed the %s on academy.Africa!\n🚀 Ready to take on new challenges and apply what I've learned.\nCheck out the course 👉🏽.";
+$share_message_template = academyafrica_translate("🎉 Just completed the %s on academy.Africa!\n🚀 Ready to take on new challenges and apply what I've learned.\nCheck out the course 👉🏽.");
 $share_message = sprintf($share_message_template, $course_title);
 
 
@@ -59,7 +57,7 @@ $social_media_links = [
 
 $academy_head = array(
     'name' => "Tolulope Adeyemo",
-    'role' => function_exists('pll__') ? pll__('Head of Academy') : 'Head of Academy',
+    'role' => academyafrica_translate('Head of Academy'),
     'signature' => get_stylesheet_directory_uri() . '/assets/images/signature.png',
     'date' => date("d/m/Y")
 );
@@ -92,12 +90,12 @@ global $shortcode_tags;
                                     <path id="Vector_3" d="M8.5 10.5V2.5" stroke="#EFF0FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </g>
                             </svg>
-                            <?php echo function_exists('pll__') ? esc_html(pll__('Download')) : 'Download'; ?>
+                            <?php echo esc_html(academyafrica_translate('Download')); ?>
                         </button>
                     </a>
                     <a href="<? echo get_permalink($course_id) ?>">
                         <button class="button primary">
-                            <?php echo function_exists('pll__') ? esc_html(pll__('View Course')) : 'View Course'; ?>
+                            <?php echo esc_html(academyafrica_translate('View Course')); ?>
                         </button>
                     </a>
                 </div>

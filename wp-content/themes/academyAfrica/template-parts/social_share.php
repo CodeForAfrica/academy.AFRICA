@@ -1,11 +1,11 @@
 <?php
 
 $url_to_share = isset($args["url"]) ? $args["url"] : get_permalink(0);
-$share_message = isset($args["message"]) ? $args["message"] : "Check out this link: $url_to_share";
+$share_message = isset($args["message"]) ? $args["message"] : sprintf(academyafrica_translate('Check out this link: %s'), $url_to_share);
 ?>
 <div style="display: flex;" class="share-menu">
     <div style="color: #000; cursor: pointer; margin-right: 16px;" class="share-icon" onclick="toggleShareButtons()">
-        <img class='icon-image' src="<? echo get_stylesheet_directory_uri() ?>/assets/images/icons/Type=share, Size=24, Color=Black.svg" alt="Share">
+        <img class='icon-image' src="<? echo get_stylesheet_directory_uri() ?>/assets/images/icons/Type=share, Size=24, Color=Black.svg" alt="<?php echo esc_attr(academyafrica_translate('Share')); ?>">
     </div>
     <div class="share-icons">
         <!-- LinkedIn -->

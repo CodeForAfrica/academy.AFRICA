@@ -23,7 +23,7 @@ $course_index = isset($args['course_index']) ? $args['course_index'] : uniqid();
             </p>
             <div class="course-meta">
                 <p class="course-author">
-                    By <? echo $course_author ?>
+                    <?php echo esc_html(academyafrica_translate('By')); ?> <? echo $course_author ?>
                 </p>
                 <div class="course-details">
                     <div class="course-students">

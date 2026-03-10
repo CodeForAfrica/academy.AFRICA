@@ -26,10 +26,10 @@ if ($success) {
             </p>
             <div class="actions">
                 <a class="button" href="/login">
-                    SIGN IN
+                    <?php echo esc_html(academyafrica_translate('SIGN IN')); ?>
                 </a>
                 <a class="button" href="/">
-                    Home
+                    <?php echo esc_html(academyafrica_translate('Home')); ?>
                 </a>
             </div>
         </div>
@@ -39,14 +39,14 @@ if ($success) {
 ?>
     <div class="login" id="register-modal">
         <div class="content" id="register-modal-content">
-            <h6 style="font-size: 20px;" class="cfa-title">Welcome to Academy.AFRICA</h6>
+            <h6 style="font-size: 20px;" class="cfa-title"><?php echo esc_html(academyafrica_translate('Welcome to Academy.AFRICA')); ?></h6>
             <p class="subtitle">
-                Sign up to access all the features on academy.AFRICA
+                <?php echo esc_html(academyafrica_translate('Sign up to access all the features on academy.AFRICA')); ?>
             </p>
             <div class="social-login">
                 <button class="google" onclick="theChampInitiateLogin(this, 'google')">
                     <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="Google">
-                    Sign up with Google
+                    <?php echo esc_html(academyafrica_translate('Sign up with Google')); ?>
                 </button>
                 <!-- <button onclick="theChampInitiateLogin(this, 'facebook')" class="facebook">
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Google">
@@ -58,7 +58,7 @@ if ($success) {
             </button> -->
             </div>
             <div class="content-divider">
-                <div></div><span>or</span>
+                <div></div><span><?php echo esc_html(academyafrica_translate('or')); ?></span>
                 <div></div>
             </div>
             <?
@@ -70,40 +70,39 @@ if ($success) {
                                                 }
                                                     ?>
             <?
-            $success_message = "You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.  Please check your email inbox or spam folder for an activation link.";
+            $success_message = academyafrica_translate('You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.  Please check your email inbox or spam folder for an activation link.');
             $url = home_url('/login?action=register&success=' . urlencode($success_message));
             ?>
             <form action="<? echo $url ?>" method="post" onsubmit="return validateForm()">
-                <label for="firstName">First Name</label>
-                <input placeholder="First Name" name="firstName" type="text">
-                <label for="lastName">Last Name</label>
-                <input placeholder="Last Name" name="lastName" type="text">
-                <label for="email">Email</label>
-                <input placeholder="Email" name="email" type="email">
-                <label for="password">Password</label>
+                <label for="firstName"><?php echo esc_html(academyafrica_translate('First Name')); ?></label>
+                <input placeholder="<?php echo esc_attr(academyafrica_translate('First Name')); ?>" name="firstName" type="text">
+                <label for="lastName"><?php echo esc_html(academyafrica_translate('Last Name')); ?></label>
+                <input placeholder="<?php echo esc_attr(academyafrica_translate('Last Name')); ?>" name="lastName" type="text">
+                <label for="email"><?php echo esc_html(academyafrica_translate('Email')); ?></label>
+                <input placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" name="email" type="email">
+                <label for="password"><?php echo esc_html(academyafrica_translate('Password')); ?></label>
                 <div class="password-wrapper">
-                    <input placeholder="Password" name="password" type="password" id="password">
+                    <input placeholder="<?php echo esc_attr(academyafrica_translate('Password')); ?>" name="password" type="password" id="password">
                     <span id="toggle-password" class="toggle-password material-icons" onclick="togglePasswordVisibility('password')">visibility_off</span>
                 </div>
-                <label for="confirm-password">Confirm Password</label>
+                <label for="confirm-password"><?php echo esc_html(academyafrica_translate('Confirm Password')); ?></label>
                 <div class="password-wrapper">
-                    <input required placeholder="Password" name="confirm-password" type="password" id="confirm-password">
+                    <input required placeholder="<?php echo esc_attr(academyafrica_translate('Password')); ?>" name="confirm-password" type="password" id="confirm-password">
                     <span id="toggle-confirm-password" class="toggle-password material-icons" onclick="togglePasswordVisibility('confirm-password')">visibility_off</span>
                 </div>
                 <div id="error-alert" style="color: red;"></div>
                 <input type="hidden" name="action" value="register">
                 <? echo do_shortcode('[bws_google_captcha]') ?>
-                <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit" id="register">SIGN UP</button>
+                <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit" id="register"><?php echo esc_html(academyafrica_translate('SIGN UP')); ?></button>
                 <label class="mui-checkbox">
                     <input type="checkbox">
                     <span class="checkmark"></span>
-                    Remember me
+                    <?php echo esc_html(academyafrica_translate('Remember me')); ?>
                 </label>
             </form>
             <footer class="modal-footer">
                 <div style="margin: 16px 0;">
-                    <span>Already a member?</span><a href="/wp-login.php" class="remember-me" style="margin-left: 4px;"> Login
-                        now</a>
+                    <span><?php echo esc_html(academyafrica_translate('Already a member?')); ?></span><a href="/wp-login.php" class="remember-me" style="margin-left: 4px;"> <?php echo esc_html(academyafrica_translate('Login now')); ?></a>
                 </div>
             </footer>
             <script>
@@ -112,7 +111,7 @@ if ($success) {
                     const confirmPassword = document.getElementById("confirm-password").value;
                     if (password !== confirmPassword) {
                         const errorAlert = document.getElementById("error-alert");
-                        errorAlert.innerText = "Passwords do not match";
+                        errorAlert.innerText = <?php echo wp_json_encode(academyafrica_translate('Passwords do not match')); ?>;
                         return false;
                     }
                     return true;

@@ -10,7 +10,7 @@ if ($error_message) {
 }
 if ($activation_email_sent) {
     get_template_part('template-parts/message-bar', 'template', array(
-        'message' => 'Activation email sent successfully. Please check your email.',
+        'message' => academyafrica_translate('Activation email sent successfully. Please check your email.'),
         'type' => 'success'
     ));
     delete_transient('login_message_activation_email_sent');
@@ -18,7 +18,7 @@ if ($activation_email_sent) {
 
 if (isset($_GET['email_sent'])) {
     get_template_part('template-parts/message-bar', 'template', array(
-        'message' => 'Password reset instructions have been sent to your email. Follow the link to reset.',
+        'message' => academyafrica_translate('Password reset instructions have been sent to your email. Follow the link to reset.'),
         'type' => 'info'
     ));
 } else {
@@ -31,7 +31,7 @@ if (isset($_GET['email_sent'])) {
 
             if ($is_verified) {
                 get_template_part('template-parts/message-bar', 'template', array(
-                    'message' => 'Your account is already verified. Please proceed to login.',
+                    'message' => academyafrica_translate('Your account is already verified. Please proceed to login.'),
                     'type' => 'info'
                 ));
                 wp_redirect(home_url('/'));
@@ -41,18 +41,18 @@ if (isset($_GET['email_sent'])) {
                 delete_user_meta($token_data['user_id'], 'activation_key_expiry');
 
                 get_template_part('template-parts/message-bar', 'template', array(
-                    'message' => 'Account activated successfully. You can now proceed to login.',
+                    'message' => academyafrica_translate('Account activated successfully. You can now proceed to login.'),
                     'type' => 'success'
                 ));
             } else {
                 get_template_part('template-parts/message-bar', 'template', array(
-                    'message' => 'Invalid or expired activation link. Please request a new one.',
+                    'message' => academyafrica_translate('Invalid or expired activation link. Please request a new one.'),
                     'type' => 'error'
                 ));
             }
         } else {
             get_template_part('template-parts/message-bar', 'template', array(
-                'message' => 'Invalid or expired activation link. Please request a new one.',
+                'message' => academyafrica_translate('Invalid or expired activation link. Please request a new one.'),
                 'type' => 'error'
             ));
         }
@@ -65,11 +65,11 @@ if (isset($_GET['email_sent'])) {
         if (isset($_GET['verification']) && $_GET['verification'] === 'required') {
         ?>
             <div class="verification-resend">
-                <p class="description">Didn't receive the email? Check your spam folder or request a new verification email.</p>
+                <p class="description"><?php echo esc_html(academyafrica_translate("Didn't receive the email? Check your spam folder or request a new verification email.")); ?></p>
                 <form method="post" action="">
                     <input type="hidden" name="action" value="resend_verification">
-                    <input type="email" name="email" placeholder="Enter your email address" required>
-                    <button type="submit" id="resend-email-verification">Resend Verification Email</button>
+                    <input type="email" name="email" placeholder="<?php echo esc_attr(academyafrica_translate('Enter your email address')); ?>" required>
+                    <button type="submit" id="resend-email-verification"><?php echo esc_html(academyafrica_translate('Resend Verification Email')); ?></button>
                 </form>
             </div>
         <?php
@@ -77,15 +77,15 @@ if (isset($_GET['email_sent'])) {
         ?>
             <div class="content" id="login-modal-content">
                 <header>
-                    <h6 style="font-size: 20px;" class="cfa-title">Welcome Back</h6>
+                    <h6 style="font-size: 20px;" class="cfa-title"><?php echo esc_html(academyafrica_translate('Welcome Back')); ?></h6>
                 </header>
                 <p class="subtitle">
-                    Sign up to access all the features on academy.AFRICA
+                    <?php echo esc_html(academyafrica_translate('Sign up to access all the features on academy.AFRICA')); ?>
                 </p>
                 <div class="social-login">
                     <button class="google" onclick="theChampInitiateLogin(this, 'google')" id="google-login">
                         <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="Google">
-                        Sign in with Google
+                        <?php echo esc_html(academyafrica_translate('Sign in with Google')); ?>
                     </button>
                     <!-- <button onclick="theChampInitiateLogin(this, 'facebook')" class="facebook">
                 <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Facebook">
@@ -97,7 +97,7 @@ if (isset($_GET['email_sent'])) {
             </button> -->
                 </div>
                 <div class="content-divider">
-                    <div></div><span>or</span>
+                    <div></div><span><?php echo esc_html(academyafrica_translate('or')); ?></span>
                     <div></div>
                 </div>
                 <div class="error-message">
@@ -108,7 +108,7 @@ if (isset($_GET['email_sent'])) {
                 // Capture the login form output
                 ob_start();
 
-                $login_args = array('label_username' => 'Email Address');
+                $login_args = array('label_username' => academyafrica_translate('Email Address'));
                 if (isset($_GET['redirect_url'])) {
                     $login_args['redirect'] = $_GET['redirect_url'];
                     $login_args['value_redirect_to'] = $_GET['redirect_url'];
@@ -132,10 +132,9 @@ if (isset($_GET['email_sent'])) {
                 ?>
                 <footer style="display: flex; justify-content: space-between;" class="modal-footers">
                     <div>
-                        <span>New to academy.AFRICA? </span><a class="remember-me" href="/login?action=register" style="margin-left: 4px; font-size: 16px;">Register
-                            now</a>
+                        <span><?php echo esc_html(academyafrica_translate('New to academy.AFRICA?')); ?> </span><a class="remember-me" href="/login?action=register" style="margin-left: 4px; font-size: 16px;"><?php echo esc_html(academyafrica_translate('Register now')); ?></a>
                     </div>
-                    <a style="font-size: 14px; color: var(--primary-700, #0c1a81);" href="javascript:history.back()">Back</a>
+                    <a style="font-size: 14px; color: var(--primary-700, #0c1a81);" href="javascript:history.back()"><?php echo esc_html(academyafrica_translate('Back')); ?></a>
                 </footer>
             </div>
         <?
@@ -144,7 +143,7 @@ if (isset($_GET['email_sent'])) {
         <script>
             const btn = document.getElementById("wp-submit");
             if (btn) {
-                btn.value = "SIGN IN"
+                btn.value = <?php echo wp_json_encode(academyafrica_translate('SIGN IN')); ?>;
             }
 
             document.getElementById("wp-submit").addEventListener("click", function() {

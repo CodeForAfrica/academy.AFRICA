@@ -57,11 +57,11 @@ $social_media_links = [
 $secondary_menus = [
     [
         'url' => '/privacy-policy',
-        'label' => function_exists('pll__') ? pll__('Imprint') : 'Imprint',
+        'label' => academyafrica_translate('Imprint'),
     ],
     [
         'url' => '/privacy-policy',
-        'label' => function_exists('pll__') ? pll__('Privacy') : 'Privacy',
+        'label' => academyafrica_translate('Privacy'),
     ]
 ];
 
