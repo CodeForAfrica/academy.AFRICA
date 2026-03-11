@@ -257,8 +257,10 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $image = $course_thumbnail ? $course_thumbnail : $mooc_logo;
                                 $atts = ['per_page' => '9',];
                                 $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
-                                $completed = ((string) floor(($progress["completed"] / max($progress["total"], 1)) * 100)) . "%";
-                                $lessons_count = $progress["total"];
+                                $completed_steps = (int) ($progress['completed'] ?? 0);
+                                $total_steps = (int) ($progress['total'] ?? 0);
+                                $completed = ((string) floor(($completed_steps / max($total_steps, 1)) * 100)) . "%";
+                                $lessons_count = $total_steps;
 
                             ?>
                                 <a href="<? echo $course_link ?>">
@@ -372,8 +374,10 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                     }
                                     $course_link = add_query_arg("certificate", 1, get_permalink($course_id));
                                     $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
-                                    $completed = floor(($progress["completed"] / $progress["total"]) * 100);
-                                    $lessons_count = $progress["total"];
+                                    $completed_steps = (int) ($progress['completed'] ?? 0);
+                                    $total_steps = (int) ($progress['total'] ?? 0);
+                                    $completed = (int) floor(($completed_steps / max($total_steps, 1)) * 100);
+                                    $lessons_count = $total_steps;
                                     $course_thumbnail = get_the_post_thumbnail_url($course);
                                     $mooc_logo = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-blue.svg';
                                     $image = $course_thumbnail ? $course_thumbnail : $mooc_logo;
