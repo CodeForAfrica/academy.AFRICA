@@ -45,8 +45,8 @@ $courses = get_field('courses', $learning_path_id);
                         $course_excerpt = $course->post_excerpt;
                         $course_link = get_permalink($course->ID);
                         $course_author = get_the_author_meta('display_name', $course->post_author);
-                        $course_meta = get_post_meta($course->ID);
-                        $course_price = $course_meta['sfwd-courses_course_price'];
+                        $course_meta = get_post_meta($course->ID, 'sfwd-courses', true);
+                        $course_price = isset($course_meta['sfwd-courses_course_price']) ? $course_meta['sfwd-courses_course_price'] : 0;
                         $course_price = $course_price == 0 ? "Free" : $course_price;
                         $students_count = learndash_course_grid_count_students($course->ID);
                         ?>

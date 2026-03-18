@@ -199,12 +199,12 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                     <?
 
                     foreach ($the_query->posts as $post) {
-                        $course_title = get_the_title($course);
+                        $course_title = get_the_title($post);
                         $course_author = get_the_author_meta('display_name', $post->post_author);
                         $course_thumbnail = get_the_post_thumbnail_url($post);
                         $course_link = get_permalink($post);
-                        $course_meta = get_post_meta($post, 'sfwd-courses', true);
-                        $course_price = $course_meta['sfwd-courses_course_price'];
+                        $course_meta = get_post_meta($post->ID, 'sfwd-courses', true);
+                        $course_price = isset($course_meta['sfwd-courses_course_price']) ? $course_meta['sfwd-courses_course_price'] : 0;
                         $course_price = $course_price == 0 ? "Free" : $course_price;
 
                         $course_attrs = CoursesFunctions::get_post_attr($post, $atts);

@@ -40,8 +40,8 @@ $content = $args['content'];
                         $course_excerpt = $course->post_excerpt;
                         $course_link = get_permalink($course->ID);
                         $course_author = get_the_author_meta('display_name', $course->post_author);
-                        $course_meta = get_post_meta($course->ID);
-                        $course_price = $course_meta['sfwd-courses_course_price'];
+                        $course_meta = get_post_meta($course->ID, 'sfwd-courses', true);
+                        $course_price = isset($course_meta['sfwd-courses_course_price']) ? $course_meta['sfwd-courses_course_price'] : 0;
                         $course_price = $course_price == 0 ? academyafrica_translate('Free') : $course_price;
                         $students_count = learndash_course_grid_count_students($course->ID);
                         // If counter is 4 or a multiple of 5 after the 4th, insert a page break
