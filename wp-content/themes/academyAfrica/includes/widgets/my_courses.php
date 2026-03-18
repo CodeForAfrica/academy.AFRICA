@@ -66,7 +66,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
     {
         return array(
             "date-asc" => "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) ASC",
-            "" => "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) DESC"
+            "date-desc" => "GREATEST(ld_user_activity.activity_started, ld_user_activity.activity_completed) DESC"
         );
     }
 
@@ -76,10 +76,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
         $courses = learndash_user_get_enrolled_courses($user_id);
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
-        $sort = $this->get_query_param('sort')[0];
-        $current_page = $this->get_query_param("page") ? $this->get_query_param("page") : 1;
+        $sort = $this->get_query_param('sort');
+        $sort = !empty($sort) ? $sort[0] : 'date-desc';
+        $current_page = $this->get_query_param("page");
+        $current_page = !empty($current_page) ? $current_page[0] : 1;
         $user_id = get_current_user_id();
-        $order_by = $this->sort_params()[$sort ?? 'date-desc'];
+        $order_by = $this->sort_params()[$sort];
         $args = array(
             'post_types' => 'sfwd-courses',
             'activity_types' => 'course',
@@ -99,10 +101,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
     {
         $orgs = $this->get_query_param('organization');
         $instructors = $this->get_query_param('instructor');
-        $sort = $this->get_query_param('sort')[0];
-        $current_page = $this->get_query_param("courses_page") ? $this->get_query_param("courses_page") : 1;
+        $sort = $this->get_query_param('sort');
+        $sort = !empty($sort) ? $sort[0] : 'date-desc';
+        $current_page = $this->get_query_param("courses_page");
+        $current_page = !empty($current_page) ? $current_page[0] : 1;
         $course_ids = learndash_user_get_enrolled_courses(get_current_user_id());
-        $order_by = $this->sort_params()[$sort ?? 'date-desc'];
+        $order_by = $this->sort_params()[$sort];
         $args = array(
             'post_types' => 'sfwd-courses',
             'activity_types' => 'course',
@@ -314,7 +318,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
 
                                 <?
                                 $current_url_params = $_GET;
-                                $current_page = (int) $current_url_params["courses_page"] ?? 1;
+                                $current_page = isset($current_url_params["courses_page"]) ? (int) $current_url_params["courses_page"] : 1;
                                 $next_page = $current_page + 1;
                                 $previous_page = $current_page - 1;
                                 $pr_2 = $previous_page - 1;

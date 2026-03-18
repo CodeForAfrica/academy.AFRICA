@@ -185,8 +185,13 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $pathway = get_post($pathway_sample_course);
         if ($pathway && $pathway->post_type == 'ac-learning-path') {
             $pathway_courses = get_field('courses', $pathway);
+            // Ensure $pathway_courses is an array
+            if (!is_array($pathway_courses)) {
+                $pathway_courses = [];
+            }
         } else {
             $pathway = null;
+            $pathway_courses = [];
         }
 
         $sort_options = [
