@@ -19,7 +19,12 @@ $is_enrolled       = sfwd_lms_has_access($course_id, $user_id);
 $organizations     = get_field('organization', $course_id) ?: [];
 $related_courses   = get_field('related_courses', $course_id) ?: [];
 $short_description = get_field('short_description', $course_id) ?: '';
-$course_status     = learndash_course_status($course_id);
+$cs_cache_key  = 'course_status_u' . $user_id . '_c' . $course_id;
+$course_status = wp_cache_get($cs_cache_key, 'academy_africa');
+if (false === $course_status) {
+    $course_status = learndash_course_status($course_id);
+    wp_cache_set($cs_cache_key, $course_status, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+}
 $post_data         = get_post($course_id);
 if (!$post_data) {
     do_action('qm/error', 'course.php: get_post() returned null for course_id={id}', ['id' => $course_id]);
@@ -198,7 +203,15 @@ if ($course_status == "Completed" && $is_cert) {
 
             <?php if ($is_enrolled && count($lesson_topics) > 0) : ?>
                 <div class='progress'>
-                    <?php echo do_shortcode('[learndash_course_progress]'); ?>
+                    <?php
+                    $cp_cache_key = 'course_progress_u' . $user_id . '_c' . $course_id;
+                    $cp_output    = wp_cache_get($cp_cache_key, 'academy_africa');
+                    if (false === $cp_output) {
+                        $cp_output = do_shortcode('[learndash_course_progress]');
+                        wp_cache_set($cp_cache_key, $cp_output, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+                    }
+                    echo $cp_output;
+                    ?>
                     <?php
                     if ($course_status == "Completed") {
                         $cert_label = function_exists('pll__') ? pll__('Download Certificate') : 'Download Certificate';

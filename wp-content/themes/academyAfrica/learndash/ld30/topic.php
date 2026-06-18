@@ -14,7 +14,12 @@ if (!$course_id) {
     do_action('qm/error', 'topic.php: learndash_get_course_id() returned null for topic_id={id}', ['id' => $lesson_id]);
 }
 
-$course_status = learndash_course_status($course_id);
+$cs_cache_key  = 'course_status_u' . $user_id . '_c' . $course_id;
+$course_status = wp_cache_get($cs_cache_key, 'academy_africa');
+if (false === $course_status) {
+    $course_status = learndash_course_status($course_id);
+    wp_cache_set($cs_cache_key, $course_status, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+}
 $course_url    = get_permalink($course_id);
 $course        = get_post($course_id);
 if (!$course) {
@@ -66,7 +71,15 @@ do_action('qm/stop', 'topic:init');
                         <div class="lesson-count">
                             <?php echo count($lessons); ?> Lessons
                         </div>
-                        <?php echo do_shortcode('[learndash_course_progress]'); ?>
+                        <?php
+                        $cp_cache_key = 'course_progress_u' . $user_id . '_c' . $course_id;
+                        $cp_output    = wp_cache_get($cp_cache_key, 'academy_africa');
+                        if (false === $cp_output) {
+                            $cp_output = do_shortcode('[learndash_course_progress]');
+                            wp_cache_set($cp_cache_key, $cp_output, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+                        }
+                        echo $cp_output;
+                        ?>
                     </div>
                 </div>
                 <div class='course-carriculum'>

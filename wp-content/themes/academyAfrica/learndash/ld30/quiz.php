@@ -33,9 +33,7 @@ if (false === $lessons) {
     ]);
 }
 
-$parent_post = get_post_ancestors($quizId);
-$post_type   = get_post_type($quizId);
-$is_quiz     = $post_type === 'sfwd-quiz';
+$is_quiz = get_post_type($quizId) === 'sfwd-quiz';
 
 do_action('qm/stop', 'quiz:init');
 ?>
@@ -67,7 +65,15 @@ do_action('qm/stop', 'quiz:init');
                             <div class="lesson-count">
                                 <?php echo count($lessons); ?> Lessons
                             </div>
-                            <?php echo do_shortcode('[learndash_course_progress]'); ?>
+                            <?php
+                            $cp_cache_key = 'course_progress_u' . $user_id . '_c' . $course_id;
+                            $cp_output    = wp_cache_get($cp_cache_key, 'academy_africa');
+                            if (false === $cp_output) {
+                                $cp_output = do_shortcode('[learndash_course_progress]');
+                                wp_cache_set($cp_cache_key, $cp_output, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+                            }
+                            echo $cp_output;
+                            ?>
                         </div>
                     </div>
                     <div class='course-carriculum'>

@@ -715,6 +715,8 @@ foreach (['learndash_lesson_completed', 'learndash_topic_completed', 'learndash_
         $user_id   = $data['user']->ID ?? ($data['user_id'] ?? 0);
         if ($course_id && $user_id) {
             wp_cache_delete('course_content_u' . $user_id . '_c' . $course_id, 'academy_africa');
+            wp_cache_delete('course_status_u' . $user_id . '_c' . $course_id, 'academy_africa');
+            wp_cache_delete('course_progress_u' . $user_id . '_c' . $course_id, 'academy_africa');
         }
     });
 }
