@@ -22,7 +22,7 @@ add_filter('locale_stylesheet_uri', 'chld_thm_cfg_locale_css');
 if (!function_exists('child_theme_configurator_css')) :
     function child_theme_configurator_css()
     {
-        wp_enqueue_style('chld_thm_cfg_separate', trailingslashit(get_stylesheet_directory_uri()) . 'ctc-style.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'));
+        wp_enqueue_style('chld_thm_cfg_separate', trailingslashit(get_stylesheet_directory_uri()) . 'ctc-style.css', array('hello-elementor', 'hello-elementor-theme-style'));
     }
 endif;
 add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
@@ -35,7 +35,7 @@ const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 function my_theme_enqueue_styles()
 {
-    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor', 'hello-elementor-theme-style'), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor-theme-style'), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('single-event', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single_event.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('profile', get_stylesheet_directory_uri() . '/assets/css/dist/pages/profile.css', array(), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('contact-us', get_stylesheet_directory_uri() . '/assets/css/dist/pages/contact-us.css', array(), ACADEMY_AFRICA_VERSION);
@@ -71,23 +71,12 @@ add_action('wp_enqueue_scripts', 'load_fa');
 
 function my_theme_enqueue_scripts()
 {
-    $js_files = glob(get_stylesheet_directory() . '/assets/js/*.js');
-    foreach ($js_files as $js_file) {
-        $js_file_name = basename($js_file, '.js');
+    $js_files = ['courses', 'filters', 'header', 'modal', 'search'];
+    foreach ($js_files as $js_file_name) {
         wp_enqueue_script($js_file_name, get_stylesheet_directory_uri() . '/assets/js/' . $js_file_name . '.js', [], ACADEMY_AFRICA_VERSION);
     }
-    wp_enqueue_script("canvas", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js", array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_script("jsPDF", "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js", array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_script('html2pdf', 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js', array(), ACADEMY_AFRICA_VERSION);
 }
 
-function load_swipper()
-{
-    wp_enqueue_script('swipperjs', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('swippercss', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), ACADEMY_AFRICA_VERSION);
-}
-
-add_action('wp_enqueue_scripts', 'load_swipper');
 
 function home_page()
 {
@@ -165,11 +154,37 @@ add_filter('get_avatar_data', 'change_avatar', 100, 2);
 
 function change_avatar($args, $id_or_email)
 {
-    $avatar_url = get_user_meta($id_or_email, 'avatar', true);
+    static $cache = [];
 
-    if (!empty($avatar_url)) {
-        $args['url'] = $avatar_url;
+    // Resolve $id_or_email to a user ID — it can be an int, email string,
+    // WP_User object, or WP_Comment object (which holds the commenter's email).
+    if ($id_or_email instanceof WP_User) {
+        $user_id = $id_or_email->ID;
+    } elseif ($id_or_email instanceof WP_Comment) {
+        $user_id = (int) $id_or_email->user_id;
+        if (!$user_id && !empty($id_or_email->comment_author_email)) {
+            $user = get_user_by('email', $id_or_email->comment_author_email);
+            $user_id = $user ? $user->ID : 0;
+        }
+    } elseif (is_numeric($id_or_email)) {
+        $user_id = (int) $id_or_email;
+    } else {
+        $user = get_user_by('email', $id_or_email);
+        $user_id = $user ? $user->ID : 0;
     }
+
+    if (!$user_id) {
+        return $args;
+    }
+
+    if (!array_key_exists($user_id, $cache)) {
+        $cache[$user_id] = get_user_meta($user_id, 'avatar', true) ?: null;
+    }
+
+    if ($cache[$user_id]) {
+        $args['url'] = $cache[$user_id];
+    }
+
     return $args;
 }
 
@@ -291,6 +306,10 @@ add_filter('authenticate', 'verify_user_on_login', 20);
 // Additional security to prevent unauthorized access
 function check_verified_user_status()
 {
+    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || (defined('WP_CLI') && WP_CLI)) {
+        return;
+    }
+
     $user = wp_get_current_user();
     if ($user->ID && !get_user_meta($user->ID, 'is_verified', true)) {
         wp_logout();
@@ -317,18 +336,16 @@ function generate_verification_token($user_id, $activation_key)
 
 function decode_verification_token($token)
 {
-
     $decoded = base64_decode($token);
     if ($decoded === false) {
         return false;
     }
+
     $data = json_decode($decoded, true);
-    $user_id = $data['user_id'];
-    $activation_key = $data['activation_key'];
-    $timestamp = $data['timestamp'];
-    if (!$data || !isset($data['user_id']) || !isset($data['activation_key']) || !isset($data['timestamp'])) {
+    if (!$data || !isset($data['user_id'], $data['activation_key'], $data['timestamp'])) {
         return false;
     }
+
     return $data;
 }
 
@@ -662,14 +679,9 @@ if (!function_exists('get_coauthors')) {
     }
 }
 
-// Get the path to the 'inc' directory
 $inc_dir = __DIR__ . '/includes/functions/';
-
-// Check if the directory exists
-$files = glob($inc_dir . '*.php');
-// Include each file
-foreach ($files as $file) {
-    require_once $file;
+foreach (['learndash', 'login', 'password_reset', 'polylang-strings', 'register'] as $_inc) {
+    require_once $inc_dir . $_inc . '.php';
 }
 // add_action('init', 'custom_login_page');
 

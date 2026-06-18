@@ -88,6 +88,9 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
 
     protected function render()
     {
+        wp_enqueue_script('swipperjs', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', [], ACADEMY_AFRICA_VERSION);
+        wp_enqueue_style('swippercss', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], ACADEMY_AFRICA_VERSION);
+
         $settings = $this->get_settings_for_display();
         $sliders = $settings['sliders'];
 ?>
@@ -124,24 +127,26 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
             </div>
         </div>
         <script>
-            var swiper = new Swiper(".mySwiper", {
-                spaceBetween: 100,
-                centeredSlides: true,
-                grabCursor: true,
-                loop: true,
-                autoplay: {
-                    delay: 30 * 1000,
-                    disableOnInteraction: true,
-                },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-                breakpoints: {
-                    1920: {
-                        spaceBetween: 200,
+            window.addEventListener('load', function () {
+                new Swiper(".mySwiper", {
+                    spaceBetween: 100,
+                    centeredSlides: true,
+                    grabCursor: true,
+                    loop: true,
+                    autoplay: {
+                        delay: 30 * 1000,
+                        disableOnInteraction: true,
+                    },
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        1920: {
+                            spaceBetween: 200,
+                        }
                     }
-                }
+                });
             });
         </script>
 <?
