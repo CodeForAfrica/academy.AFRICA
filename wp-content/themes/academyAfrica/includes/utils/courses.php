@@ -63,65 +63,89 @@ class CoursesFunctions
         if (empty($attr['per_page'])) {
             $attr['per_page'] = 3;
         }
-        $paged = isset($attr['paged']) ? intval($attr['paged']) : 1;
-        $orderby = isset($attr['orderby']) ? sanitize_text_field($attr['orderby']) : 'date';
-        $order = isset($attr['order']) ? sanitize_text_field($attr['order']) : 'DESC';
+        $paged   = isset($attr['paged'])   ? intval($attr['paged'])                          : 1;
+        $orderby = isset($attr['orderby']) ? sanitize_text_field($attr['orderby'])           : 'date';
+        $order   = isset($attr['order'])   ? sanitize_text_field($attr['order'])             : 'DESC';
+
+        $cache_key = 'academy_learning_paths_' . md5(serialize([
+            'per_page' => $attr['per_page'],
+            'paged'    => $paged,
+            'orderby'  => $orderby,
+            'order'    => $order,
+        ]));
+
+        $cached = wp_cache_get($cache_key, 'academy_africa');
+        if (false !== $cached) {
+            do_action('qm/debug', 'getLearningPaths: cache hit (per_page={per_page})', [
+                'per_page' => $attr['per_page'],
+            ]);
+            return $cached;
+        }
 
         do_action('qm/start', 'getLearningPaths');
 
-        $args = array(
-            'post_type' => 'ac-learning-path',
-            'post_status' => 'publish',
+        $learning_path_posts = get_posts(array(
+            'post_type'      => 'ac-learning-path',
+            'post_status'    => 'publish',
             'posts_per_page' => intval($attr['per_page']),
-            'paged' => $paged,
-            'orderby' => $orderby,
-            'order' => $order,
-        );
-        $learning_path_posts = get_posts($args);
-        do_action('qm/debug', 'getLearningPaths: fetched {count} paths (per_page={per_page})', [
+            'paged'          => $paged,
+            'orderby'        => $orderby,
+            'order'          => $order,
+            'update_post_meta_cache'      => false,
+            'update_post_thumbnail_cache' => true,
+        ));
+        do_action('qm/debug', 'getLearningPaths: DB fetch {count} paths (per_page={per_page})', [
             'count'    => count($learning_path_posts),
             'per_page' => $attr['per_page'],
         ]);
+
         $learning_paths = array();
         foreach ($learning_path_posts as $learning_path_post) {
             $acf_courses = \get_field('courses', $learning_path_post->ID);
-            $course_ids = !empty($acf_courses) ? array_map(function($c) {
+            $course_ids  = !empty($acf_courses) ? array_map(function ($c) {
                 return is_object($c) ? $c->ID : (int) $c;
             }, $acf_courses) : [];
+
             $courses = array();
             if (!empty($course_ids)) {
                 $course_posts = get_posts(array(
-                    'post__in' => $course_ids,
-                    'post_type' => 'sfwd-courses',
-                    'posts_per_page' => -1,
-                    'orderby' => 'post__in',
-                    'update_post_meta_cache' => false,
+                    'post__in'                    => $course_ids,
+                    'post_type'                   => 'sfwd-courses',
+                    'posts_per_page'              => -1,
+                    'orderby'                     => 'post__in',
+                    'update_post_meta_cache'      => false,
                     'update_post_thumbnail_cache' => true,
                 ));
                 foreach ($course_posts as $course) {
                     $courses[] = array(
-                        'id' => $course->ID,
-                        'title' => $course->post_title,
+                        'id'        => $course->ID,
+                        'title'     => $course->post_title,
                         'thumbnail' => get_the_post_thumbnail_url($course),
-                        'excerpt' => $course->post_excerpt,
+                        'excerpt'   => $course->post_excerpt,
                     );
                 }
             }
+
             $learning_paths[] = array(
-                'id' => $learning_path_post->ID,
-                'title' => $learning_path_post->post_title,
-                'excerpt' => $learning_path_post->post_excerpt,
+                'id'        => $learning_path_post->ID,
+                'title'     => $learning_path_post->post_title,
+                'excerpt'   => $learning_path_post->post_excerpt,
                 'thumbnail' => get_the_post_thumbnail_url($learning_path_post),
-                'courses' => $courses
+                'courses'   => $courses,
             );
         }
+
         do_action('qm/stop', 'getLearningPaths');
 
-        return array(
+        $result = array(
             'learning_paths' => $learning_paths,
-            'count' => wp_count_posts('ac-learning-path')->publish,
-            'per_page' => $attr['per_page'],
+            'count'          => wp_count_posts('ac-learning-path')->publish,
+            'per_page'       => $attr['per_page'],
         );
+
+        wp_cache_set($cache_key, $result, 'academy_africa', WEEK_IN_SECONDS);
+
+        return $result;
     }
 
     public static function getAllInstructors()
@@ -455,4 +479,32 @@ class CoursesFunctions
 
         return $filter_by;
     }
+
+    /**
+     * Flush all learning-path cache entries.
+     * Called whenever a learning path or course is saved/deleted so stale
+     * data never shows. wp_cache_flush_group() is used when available
+     * (Redis Object Cache Pro); otherwise falls back to a version bump
+     * that effectively invalidates all keys in the group.
+     */
+    public static function flush_learning_path_cache(): void {
+        if (function_exists('wp_cache_flush_group')) {
+            wp_cache_flush_group('academy_africa');
+        } else {
+            // Bump a version key — all getLearningPaths keys become stale
+            $version = (int) wp_cache_get('academy_lp_cache_version', 'academy_africa');
+            wp_cache_set('academy_lp_cache_version', $version + 1, 'academy_africa', WEEK_IN_SECONDS);
+        }
+        do_action('qm/debug', 'CoursesFunctions: learning path cache flushed');
+    }
 }
+
+// Invalidate learning path cache whenever a learning path or course is saved/deleted
+add_action('save_post_ac-learning-path', ['AcademyAfrica\Theme\Courses\CoursesFunctions', 'flush_learning_path_cache']);
+add_action('delete_post',                function (int $post_id): void {
+    if (get_post_type($post_id) === 'ac-learning-path') {
+        AcademyAfrica\Theme\Courses\CoursesFunctions::flush_learning_path_cache();
+    }
+});
+// Also flush when a course that belongs to a learning path is updated
+add_action('save_post_sfwd-courses',     ['AcademyAfrica\Theme\Courses\CoursesFunctions', 'flush_learning_path_cache']);

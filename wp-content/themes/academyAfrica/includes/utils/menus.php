@@ -13,24 +13,30 @@ class MenuFunctions
      */
     public static function get_menu_items($menu_location, $language = null)
     {
+        // Per-request static cache — header.php calls this for both desktop and
+        // mobile menus, so without caching the same menu is fetched twice.
+        static $cache = [];
+        $lang         = $language ?: (function_exists('pll_current_language') ? pll_current_language() : '');
+        $cache_key    = $menu_location . '|' . $lang;
+
+        if (isset($cache[$cache_key])) {
+            return $cache[$cache_key];
+        }
+
         $locations = get_nav_menu_locations();
 
         if (!isset($locations[$menu_location])) {
-            return [];
+            return $cache[$cache_key] = [];
         }
 
         $default_menu_id = $locations[$menu_location];
-        $menu_id = $default_menu_id;
+        $menu_id         = $default_menu_id;
 
         // Resolve the translated menu for the current language via Polylang.
-        // Nav menus are taxonomy terms, so pll_get_term() can look up their translation.
-        if (function_exists('pll_get_term')) {
-            $lang = $language ?: (function_exists('pll_current_language') ? pll_current_language() : null);
-            if ($lang) {
-                $translated_id = pll_get_term($default_menu_id, $lang);
-                if ($translated_id) {
-                    $menu_id = $translated_id;
-                }
+        if ($lang && function_exists('pll_get_term')) {
+            $translated_id = pll_get_term($default_menu_id, $lang);
+            if ($translated_id) {
+                $menu_id = $translated_id;
             }
         }
 
@@ -42,10 +48,10 @@ class MenuFunctions
         }
 
         if (empty($menu_items)) {
-            return [];
+            return $cache[$cache_key] = [];
         }
 
-        return self::build_menu_tree($menu_items);
+        return $cache[$cache_key] = self::build_menu_tree($menu_items);
     }
 
     private static function build_menu_tree($menu_items, $parent = 0)

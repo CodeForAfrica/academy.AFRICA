@@ -4,8 +4,9 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-$quizId = get_the_ID();
+$quizId    = get_the_ID();
 $course_id = learndash_get_course_id($quizId);
+$user_id   = get_current_user_id();
 
 do_action('qm/start', 'quiz:init');
 
@@ -14,22 +15,28 @@ if (!$course_id) {
 }
 
 $course_url = get_permalink($course_id);
-$course = get_post($course_id);
+$course     = get_post($course_id);
 if (!$course) {
     do_action('qm/error', 'quiz.php: get_post() returned null for course_id={id}', ['id' => $course_id]);
 }
 
-do_action('qm/start', 'quiz:fetch_lessons');
-$lessons = learndash_get_course_lessons_list($course_id);
-do_action('qm/stop', 'quiz:fetch_lessons');
-do_action('qm/debug', 'quiz:fetch_lessons: found {count} lessons for course {id}', [
-    'count' => count($lessons),
-    'id'    => $course_id,
-]);
+// Lesson list — shared cache with course.php (user-agnostic, just count + structure)
+$lessons = wp_cache_get('course_lessons_' . $course_id, 'academy_africa');
+if (false === $lessons) {
+    do_action('qm/start', 'quiz:fetch_lessons');
+    $lessons = learndash_get_course_lessons_list($course_id, 0) ?: [];
+    wp_cache_set('course_lessons_' . $course_id, $lessons, 'academy_africa', HOUR_IN_SECONDS);
+    do_action('qm/stop', 'quiz:fetch_lessons');
+    do_action('qm/debug', 'quiz:fetch_lessons: DB fetch {count} lessons for course {id}', [
+        'count' => count($lessons),
+        'id'    => $course_id,
+    ]);
+}
 
 $parent_post = get_post_ancestors($quizId);
-$post_type = get_post_type($quizId);
-$is_quiz = $post_type == 'sfwd-quiz';
+$post_type   = get_post_type($quizId);
+$is_quiz     = $post_type === 'sfwd-quiz';
+
 do_action('qm/stop', 'quiz:init');
 ?>
 
@@ -40,23 +47,12 @@ do_action('qm/stop', 'quiz:init');
 </style>
 
 <div class="sfwd-container quiz-page wysiwyg">
-    <!-- <div class='sfwd-small-screen'>
-        <div class="title">
-            <div class="cfa-title"><?php the_title(); ?></div>
-            <h1>Quiz</h1>
-        </div>
-        <div class='helper'>
-            <p> For best experience, please use a laptop or larger screen </p>
-        </div>
-    </div> -->
     <div class="sfwd-large-screen wysiwyg">
         <div class="content">
-            <?
-            if ($is_quiz) {
-            ?>
+            <?php if ($is_quiz) : ?>
                 <div class="progress">
                     <div class="back-to-course">
-                        <a href="<?php echo $course_url; ?>" class="link">
+                        <a href="<?php echo esc_url($course_url); ?>" class="link">
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
                                 <path d="M7 13L1 6.93015L6.86175 1" stroke="#1F1F1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
@@ -65,7 +61,7 @@ do_action('qm/stop', 'quiz:init');
                     </div>
                     <div class="course-details">
                         <div class="course-title">
-                            <?php echo $course->post_title; ?>
+                            <?php echo esc_html($course->post_title); ?>
                         </div>
                         <div class="progress-bar">
                             <div class="lesson-count">
@@ -76,127 +72,73 @@ do_action('qm/stop', 'quiz:init');
                     </div>
                     <div class='course-carriculum'>
                         <?php
+                        // Cache per user per course — LearnDash updates completion marks via
+                        // AJAX so page reloads don't need a fresh render on every request.
                         do_action('qm/start', 'quiz:course_content_shortcode');
-                        echo do_shortcode('[course_content course_id="' . $course_id . '"]');
+                        $cc_cache_key = 'course_content_u' . $user_id . '_c' . $course_id;
+                        $cc_output    = wp_cache_get($cc_cache_key, 'academy_africa');
+                        if (false === $cc_output) {
+                            $cc_output = do_shortcode('[course_content course_id="' . $course_id . '"]');
+                            wp_cache_set($cc_cache_key, $cc_output, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+                        }
+                        echo $cc_output;
                         do_action('qm/stop', 'quiz:course_content_shortcode');
                         ?>
                     </div>
                 </div>
-            <?
-            }
-            ?>
-            <div class="sfwd-lessons <? echo !$is_quiz ? 'not-quiz' : ''; ?>">
-                <?
-                if ($is_quiz) {
-                ?>
+            <?php endif; ?>
+
+            <div class="sfwd-lessons <?php echo !$is_quiz ? 'not-quiz' : ''; ?>">
+                <?php if ($is_quiz) : ?>
                     <div class="sfwd-lessons__title">
                         <div class="sfwd-lessons__title__text"><?php the_title(); ?></div>
                     </div>
-                <?
-                }
-                ?>
+                <?php endif; ?>
                 <div class="sfwd-lessons__content">
-                    <?
+                    <?php
                     if ($show_content) :
-
-                        /**
-                         * Content and/or tabs
-                         */
                         learndash_get_template_part(
                             'modules/tabs.php',
-                            array(
+                            [
                                 'course_id' => $course_id,
                                 'post_id'   => $quiz_post->ID,
                                 'user_id'   => $user_id,
                                 'content'   => $content,
                                 'materials' => $materials,
                                 'context'   => 'quiz',
-                            ),
+                            ],
                             true
                         );
 
                         if ($attempts_left) :
-
-                            /**
-                             * Fires before the actual quiz content (not WP_Editor content).
-                             *
-                             * @since 3.0.0
-                             *
-                             * @param int $quiz_id   Quiz ID.
-                             * @param int $course_id Course ID.
-                             * @param int $user_id   User ID.
-                             */
                             do_action('learndash-quiz-actual-content-before', $quiz_post->ID, $course_id, $user_id);
-
                             echo $quiz_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Post content
-
-                            /**
-                             * Fires after the actual quiz content (not WP_Editor content).
-                             *
-                             * @since 3.0.0
-                             *
-                             * @param int $quiz_id   Quiz ID.
-                             * @param int $course_id Course ID.
-                             * @param int $user_id   User ID.
-                             */
                             do_action('learndash-quiz-actual-content-after', $quiz_post->ID, $course_id, $user_id);
-
                         else :
-
-                            /**
-                             * Display an alert
-                             */
-
-                            /**
-                             * Fires before the quiz attempts alert.
-                             *
-                             * @since 3.0.0
-                             *
-                             * @param int $quiz_id   Quiz ID.
-                             * @param int $course_id Course ID.
-                             * @param int $user_id   User ID.
-                             */
                             do_action('learndash-quiz-attempts-alert-before', $quiz_post->ID, $course_id, $user_id);
-
                             learndash_get_template_part(
                                 'modules/alert.php',
-                                array(
+                                [
                                     'type'    => 'warning',
                                     'icon'    => 'alert',
                                     'message' => sprintf(
-                                        // translators: placeholders: quiz, attempts count.
                                         esc_html_x('You have already taken this %1$s %2$d time(s) and may not take it again.', 'placeholders: quiz, attempts count', 'learndash'),
                                         learndash_get_custom_label_lower('quiz'),
                                         $attempts_count
                                     ),
-                                ),
+                                ],
                                 true
                             );
-
-                            /**
-                             * Fires after the quiz attempts alert.
-                             *
-                             * @since 3.0.0
-                             *
-                             * @param int $quiz_id   Quiz ID.
-                             * @param int $course_id Course ID.
-                             * @param int $user_id   User ID.
-                             */
                             do_action('learndash-quiz-attempts-alert-after', $quiz_post->ID, $course_id, $user_id);
-
                         endif;
                     endif;
                     ?>
                 </div>
-                <?
-                if ($is_quiz) {
-                ?>
+                <?php if ($is_quiz) : ?>
                     <div class="sfwd-lessons__footer">
                         <hr class="sfwd-lessons__navigation__divider" />
                     </div>
-                <?
-                }
-                ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

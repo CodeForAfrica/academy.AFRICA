@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.7.13');
+define('ACADEMY_AFRICA_VERSION', '1.7.14');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -693,6 +693,20 @@ add_filter(
  * certificate content and switches to "freeserif" — a Unicode font bundled with
  * TCPDF that supports Arabic, Ethiopic, Hebrew, Cyrillic, CJK, and many others.
  */
+/**
+ * Invalidate the per-user [course_content] sidebar cache when a user
+ * completes a lesson, topic, or quiz so their progress marks stay current.
+ */
+foreach (['learndash_lesson_completed', 'learndash_topic_completed', 'learndash_quiz_completed'] as $_ld_hook) {
+    add_action($_ld_hook, function (array $data) {
+        $course_id = $data['course']->ID ?? ($data['course_id'] ?? 0);
+        $user_id   = $data['user']->ID ?? ($data['user_id'] ?? 0);
+        if ($course_id && $user_id) {
+            wp_cache_delete('course_content_u' . $user_id . '_c' . $course_id, 'academy_africa');
+        }
+    });
+}
+
 add_filter('learndash_certificate_content', function ($cert_content, $_cert_id) {
     // Unicode ranges for scripts that standard TCPDF fonts cannot render:
     // Arabic, Hebrew, Ethiopic (Amharic), Devanagari, CJK Unified Ideographs
