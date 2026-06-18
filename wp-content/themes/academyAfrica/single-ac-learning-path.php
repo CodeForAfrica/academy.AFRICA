@@ -8,7 +8,7 @@
 $learning_path_id = get_the_ID();
 $learning_path_title = get_the_title();
 $learning_path_excerpt = get_the_excerpt();
-$courses = get_field('courses', $learning_path_id);
+$courses = get_field('courses', $learning_path_id) ?: [];
 ?>
 
 <?php get_header(); ?>
@@ -48,7 +48,7 @@ $courses = get_field('courses', $learning_path_id);
                         $course_meta = get_post_meta($course->ID, 'sfwd-courses', true);
                         $course_price = isset($course_meta['sfwd-courses_course_price']) ? $course_meta['sfwd-courses_course_price'] : 0;
                         $course_price = $course_price == 0 ? "Free" : $course_price;
-                        $students_count = learndash_course_grid_count_students($course->ID);
+                        $students_count = academyafrica_count_students($course->ID);
                         ?>
                         <div class="individual-course">
                             <div class="course-index">

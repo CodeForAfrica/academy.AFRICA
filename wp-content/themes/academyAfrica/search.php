@@ -62,6 +62,8 @@ $current_page = get_query_var('paged') ? get_query_var('paged') : 1;
 
 
 $filter_options = CoursesFunctions::get_filter_by();
+$filter_by = $allFilters;
+$sort_by = is_string($sort) ? $sort : '';
 
 
 

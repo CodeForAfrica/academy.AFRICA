@@ -32,41 +32,40 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
         return ['academy-africa'];
     }
 
-    public function get_verified_users()
-    {
-
-        $args = [
-            'meta_key' => 'is_verified',
-            'meta_value' => '1'
-        ];
-        $verified_users = get_users($args);
-        return $verified_users;
-    }
-
     public function get_verified_users_count()
     {
-        $verified_users = $this->get_verified_users();
-        return count($verified_users);
+        $count = wp_cache_get('verified_users_count', 'academy_africa');
+        if (false !== $count) {
+            return $count;
+        }
+        global $wpdb;
+        $count = (int) $wpdb->get_var(
+            "SELECT COUNT(*) FROM {$wpdb->usermeta} WHERE meta_key = 'is_verified' AND meta_value = '1'"
+        );
+        wp_cache_set('verified_users_count', $count, 'academy_africa', HOUR_IN_SECONDS);
+        return $count;
     }
 
     public function get_courses_count()
     {
-        $all_courses = get_posts([
-            'post_type' => 'sfwd-courses',
-            'post_status' => 'publish',
-            'numberposts' => -1,
-            'fields' => 'ids'
-        ]);
-        return count($all_courses);
+        $count = wp_cache_get('published_courses_count', 'academy_africa');
+        if (false !== $count) {
+            return $count;
+        }
+        $count = (int) wp_count_posts('sfwd-courses')->publish;
+        wp_cache_set('published_courses_count', $count, 'academy_africa', HOUR_IN_SECONDS);
+        return $count;
     }
 
     public function get_events_count()
     {
-        $all_events = get_posts([
-            'post_type' => 'event',
-            'fields' => 'ids'
-        ]);
-        return count($all_events);
+        $count = wp_cache_get('published_events_count', 'academy_africa');
+        if (false !== $count) {
+            return $count;
+        }
+        $count = (int) wp_count_posts('event')->publish;
+        wp_cache_set('published_events_count', $count, 'academy_africa', HOUR_IN_SECONDS);
+        return $count;
     }
     protected function register_controls()
     {

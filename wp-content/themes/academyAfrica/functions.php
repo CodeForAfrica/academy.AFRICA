@@ -150,11 +150,6 @@ add_action('init', 'event_post_type');
 add_action('init', 'create_networks_post_type');
 add_action('init', 'create_footer_post_type');
 
-if (basename($_SERVER['PHP_SELF']) == 'profile.php') {
-    $custom_profile_edit_url = home_url('/profile');
-    wp_redirect($custom_profile_edit_url);
-    exit();
-}
 function redirect_to_custom_profile_edit()
 {
     if (basename($_SERVER['PHP_SELF']) == 'profile.php') {
@@ -508,13 +503,6 @@ const required_plugins = array(
         'check' => 'class_exists',
         'url' => 'https://www.learndash.com/support/docs/add-ons/certificate-builder-add-on/'
     ],
-    'LearnDash Course Grid' => [
-        'name' => 'LearnDash Course Grid',
-        'min_version' => '2.0.8',
-        'path' => 'learndash-course-grid/learndash_course_grid.php',
-        'check' => 'class_exists',
-        'url' => 'https://www.learndash.com/support/docs/add-ons/course-grid/'
-    ],
     'LearnDash Elementor' => [
         'name' => 'LearnDash Elementor',
         'min_version' => '1.0.4',
@@ -659,6 +647,19 @@ function enqueue_my_scripts()
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
+
+// Fallback stub for when Co-Authors Plus plugin is disabled.
+if (!function_exists('get_coauthors')) {
+    function get_coauthors($post_id = 0) {
+        $post_id = $post_id ? (int) $post_id : get_the_ID();
+        $post = get_post($post_id);
+        if (!$post) {
+            return [];
+        }
+        $author = get_userdata($post->post_author);
+        return $author ? [$author] : [];
+    }
+}
 
 // Get the path to the 'inc' directory
 $inc_dir = __DIR__ . '/includes/functions/';

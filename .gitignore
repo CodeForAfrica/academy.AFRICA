@@ -121,3 +121,4 @@ wp-content/languages/
 .idea/
 creds.json
 full_db_backup.sql
+mysql.sql

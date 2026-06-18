@@ -30,13 +30,13 @@ require_once __DIR__ . '/includes/utils/countries.php';
             $post_content = $post_array->post_content;
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
             $is_virtual = get_post_meta($post_id, 'is_virtual', true) ? "&#x1F5A5;" : "";
-            $speakers = get_field("speaker", $post_id);
+            $speakers = get_field("speaker", $post_id) ?: [];
             $time = $raw_time . ' GMT +00:00';
             $language = get_post_meta($post_id, 'language', true);
-            $organisations = get_field("organisations", $post_id);
-            $resources_field = get_field('resources', $post_id);
+            $organisations = get_field("organisations", $post_id) ?: [];
+            $resources_field = get_field('resources', $post_id) ?: [];
             $resources = isset($resources_field['url']) ? $resources_field['url'] : null;
-            $countries = get_field("countries", $post_id);
+            $countries = get_field("countries", $post_id) ?: [];
     ?>
             <h1 class="cfa-title">
                 <? echo $post_title ?>
@@ -132,6 +132,7 @@ require_once __DIR__ . '/includes/utils/countries.php';
             </div>
             <div class="linked-post">
                 <?
+                if (isset($organisations) && is_array($organisations) && count($organisations) > 0):
                 foreach ($organisations as $organisation) {
                     $org_title = $organisation->post_title;
                     $img = get_the_post_thumbnail_url($organisation->ID, 'full');
@@ -147,6 +148,7 @@ require_once __DIR__ . '/includes/utils/countries.php';
                     </p>
                 <?
                 }
+                endif;
                 ?>
             </div>
     <?

@@ -99,6 +99,10 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         }
         $query = new WP_Query($args);
         $result = array();
+        $pagination = array(
+            'current_page' => max(1, get_query_var('paged')),
+            'total_pages'  => 0,
+        );
 
         if ($query->have_posts()) {
             while ($query->have_posts()) {

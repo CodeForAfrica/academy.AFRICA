@@ -379,8 +379,8 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 $course_thumbnail = get_the_post_thumbnail_url($course, 'full');
                                 $course_link = get_permalink($course);
                                 $course_meta = get_post_meta($course, 'sfwd-courses', true);
-                                $course_price = $course_meta['sfwd-courses_course_price'];
-                                $course_price = $course_price == 0 ? "Free" : $course_price;
+                                $course_price = is_array($course_meta) ? $course_meta['sfwd-courses_course_price'] : 0;
+                                $course_price = empty($course_price) ? "Free" : $course_price;
 
                                 $course_attrs = CoursesFunctions::get_post_attr($course, $atts);
                                 extract($course_attrs);

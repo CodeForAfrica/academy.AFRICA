@@ -74,59 +74,6 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
-            'certificate_title',
-            [
-                'label' => __('Certificate Title', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __('CERTIFICATE OF', 'academy-africa'),
-                'label_block' => true,
-            ]
-        );
-        $this->add_control(
-            'certificate_type',
-            [
-                'label' => __('Certificate Type', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('COMPLETION', 'academy-africa'),
-                'label_block' => true,
-            ]
-        );
-        $this->add_control(
-            'presented_to',
-            [
-                'label' => __('Certificate Presented to', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __('PRESENTED TO', 'academy-africa'),
-                'label_block' => true,
-            ]
-        );
-        $this->add_control(
-            'certificate_description',
-            [
-                'label' => __('Certificate Presented to', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __('For completing the academy.AFRICA course', 'academy-africa'),
-                'label_block' => true,
-            ]
-        );
-        $this->add_control(
-            'certificate_course',
-            [
-                'label' => __('Course', 'academy-africa'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __('Data Visualisation', 'academy-africa'),
-                'label_block' => true,
-            ]
-        );
-        $this->end_controls_section();
-
-        $this->start_controls_section(
-            'certificate',
-            [
-                'label' => __('Certificate', 'academy-africa'),
-            ]
-        );
-        $this->add_control(
             'certificate_header',
             [
                 'label' => __('Certificate Header', 'academy-africa'),
@@ -280,7 +227,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
             $first_course = $courses[0];
             $course_name = get_the_title($first_course);
             $course_meta = get_post_meta($first_course, 'sfwd-courses', true);
-            if (!empty($course_meta['sfwd-courses_course_completion_date'])) {
+            if (is_array($course_meta) && !empty($course_meta['sfwd-courses_course_completion_date'])) {
             $course_completion_date = $course_meta['sfwd-courses_course_completion_date'];
             }
         } else {
@@ -315,8 +262,8 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                             $course_thumbnail = get_the_post_thumbnail_url($course);
                             $course_link = get_permalink($course);
                             $course_meta = get_post_meta($course, 'sfwd-courses', true);
-                            $course_price = $course_meta['sfwd-courses_course_price'];
-                            $course_price = $course_price == 0 ? "Free" : $course_price;
+                            $course_price = is_array($course_meta) ? $course_meta['sfwd-courses_course_price'] : 0;
+                            $course_price = empty($course_price) ? "Free" : $course_price;
 
                             $course_attrs = CoursesFunctions::get_post_attr($course, $atts);
                             extract($course_attrs);

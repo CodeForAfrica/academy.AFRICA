@@ -8,41 +8,53 @@ class CoursesFunctions
 
     public static function getOrganizations()
     {
+        $cached = wp_cache_get('academy_organizations', 'academy_africa');
+        if (false !== $cached) {
+            return $cached;
+        }
         $args = array(
             'post_type' => 'ac-organization',
             'post_status' => 'publish',
-            'numberposts' => -1
+            'numberposts' => -1,
+            'update_post_meta_cache' => false,
+            'update_post_thumbnail_cache' => false,
         );
         $organization_posts = get_posts($args);
         $organizations = array();
         foreach ($organization_posts as $organization_post) {
-            $organization = array(
+            $organizations[] = array(
                 'id' => $organization_post->ID,
                 'title' => $organization_post->post_title,
                 'excerpt' => $organization_post->post_excerpt
             );
-            array_push($organizations, $organization);
         }
+        wp_cache_set('academy_organizations', $organizations, 'academy_africa', HOUR_IN_SECONDS);
         return $organizations;
     }
 
     public static function getAllLearningPaths()
     {
+        $cached = wp_cache_get('academy_all_learning_paths', 'academy_africa');
+        if (false !== $cached) {
+            return $cached;
+        }
         $args = array(
             'post_type' => 'ac-learning-path',
             'post_status' => 'publish',
-            'numberposts' => -1
+            'numberposts' => -1,
+            'update_post_meta_cache' => false,
+            'update_post_thumbnail_cache' => false,
         );
         $learning_path_posts = get_posts($args);
         $learning_paths = array();
         foreach ($learning_path_posts as $learning_path_post) {
-            $lp = array(
+            $learning_paths[] = array(
                 'id' => $learning_path_post->ID,
                 'title' => $learning_path_post->post_title,
                 'excerpt' => $learning_path_post->post_excerpt
             );
-            array_push($learning_paths, $lp);
         }
+        wp_cache_set('academy_all_learning_paths', $learning_paths, 'academy_africa', HOUR_IN_SECONDS);
         return $learning_paths;
     }
 
@@ -66,29 +78,36 @@ class CoursesFunctions
         $learning_path_posts = get_posts($args);
         $learning_paths = array();
         foreach ($learning_path_posts as $learning_path_post) {
-            $course_ids = get_field('courses', $learning_path_post->ID);
+            $acf_courses = \get_field('courses', $learning_path_post->ID);
+            $course_ids = !empty($acf_courses) ? array_map(function($c) {
+                return is_object($c) ? $c->ID : (int) $c;
+            }, $acf_courses) : [];
             $courses = array();
-            foreach ($course_ids as $course_id) {
-                $course = get_post($course_id);
-                $course_title = $course->post_title;
-                $course_thumbnail = get_the_post_thumbnail_url($course);
-                $course_excerpt = $course->post_excerpt;
-                $course = array(
-                    'id' => $course_id,
-                    'title' => $course_title,
-                    'thumbnail' => $course_thumbnail,
-                    'excerpt' => $course_excerpt
-                );
-                array_push($courses, $course);
+            if (!empty($course_ids)) {
+                $course_posts = get_posts(array(
+                    'post__in' => $course_ids,
+                    'post_type' => 'sfwd-courses',
+                    'posts_per_page' => -1,
+                    'orderby' => 'post__in',
+                    'update_post_meta_cache' => false,
+                    'update_post_thumbnail_cache' => true,
+                ));
+                foreach ($course_posts as $course) {
+                    $courses[] = array(
+                        'id' => $course->ID,
+                        'title' => $course->post_title,
+                        'thumbnail' => get_the_post_thumbnail_url($course),
+                        'excerpt' => $course->post_excerpt,
+                    );
+                }
             }
-            $learning_path = array(
+            $learning_paths[] = array(
                 'id' => $learning_path_post->ID,
                 'title' => $learning_path_post->post_title,
                 'excerpt' => $learning_path_post->post_excerpt,
                 'thumbnail' => get_the_post_thumbnail_url($learning_path_post),
                 'courses' => $courses
             );
-            array_push($learning_paths, $learning_path);
         }
         return array(
             'learning_paths' => $learning_paths,
@@ -99,31 +118,28 @@ class CoursesFunctions
 
     public static function getAllInstructors()
     {
-        $all_courses = get_posts(array(
-            'post_type' => 'sfwd-courses',
-            'post_status' => 'publish',
-            'numberposts' => -1,
-            'fields' => 'ids'
-        ));
+        $cached = wp_cache_get('academy_instructors', 'academy_africa');
+        if (false !== $cached) {
+            return $cached;
+        }
+        global $wpdb;
+        $author_ids = $wpdb->get_col(
+            "SELECT DISTINCT post_author FROM {$wpdb->posts}
+             WHERE post_type = 'sfwd-courses' AND post_status = 'publish'"
+        );
         $instructors = array();
-        foreach ($all_courses as $course_id) {
-            $course = get_post($course_id);
-            $instructor_id = $course->post_author;
-            $instructor = get_user_by('id', $instructor_id);
-            // trim instructor name $instructor->first_name . ' ' . $instructor->last_name;
-            $instructor_name = trim($instructor->first_name . ' ' . $instructor->last_name);
-            $instructor_avatar = get_avatar_url($instructor_id);
-            $instructor_username = $instructor->user_nicename;
-            $instructor = array(
-                'id' => $instructor_id,
-                // if username is empty, use name
-                'name' => $instructor_name ? $instructor_name : $instructor_username,
-                'avatar' => $instructor_avatar
-            );
-            if (!in_array($instructor, $instructors)) {
-                array_push($instructors, $instructor);
+        if (!empty($author_ids)) {
+            $users = get_users(array('include' => $author_ids));
+            foreach ($users as $user) {
+                $instructor_name = trim($user->first_name . ' ' . $user->last_name);
+                $instructors[] = array(
+                    'id' => $user->ID,
+                    'name' => $instructor_name ?: $user->user_nicename,
+                    'avatar' => get_avatar_url($user->ID)
+                );
             }
         }
+        wp_cache_set('academy_instructors', $instructors, 'academy_africa', HOUR_IN_SECONDS);
         return $instructors;
     }
 
@@ -252,11 +268,7 @@ class CoursesFunctions
                 }
             }
 
-            $course_ids = array_map(function ($course) {
-                return $course->ID;
-            }, $courses);
-
-            $post__in = $course_ids;
+            $post__in = $courses;
         }
 
 
@@ -284,6 +296,8 @@ class CoursesFunctions
             'author__in' => $author_query,
             'meta_query' => $meta_query,
             'lang' => $lang_slug,
+            'update_post_meta_cache' => true,
+            'update_post_thumbnail_cache' => true,
         ], $atts, $filter = null);
 
         return $query_args;
@@ -342,7 +356,7 @@ class CoursesFunctions
         $price_text = '';
         if ($post->post_type == 'sfwd-courses') {
             // $course_options = get_post_meta($post->ID, '_sfwd-courses', true);
-            $students_count = learndash_course_grid_count_students($post->ID);
+            $students_count = academyafrica_count_students($post->ID);
             $price_args = learndash_get_course_price($post->ID);
         }
         $currency = learndash_get_currency_symbol();

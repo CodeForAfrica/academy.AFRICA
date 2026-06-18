@@ -14,9 +14,9 @@ $course_price = learndash_get_course_price($course_id);
 $price = $course_price['price'] ? $course_price['price'] : 'Free';
 $user_id = get_current_user_id();
 $is_enrolled = sfwd_lms_has_access($course_id, $user_id);
-$organizations = get_field('organization', $course_id);
-$related_courses = get_field('related_courses', $course_id);
-$short_description = get_field('short_description', $course_id);
+$organizations = get_field('organization', $course_id) ?: [];
+$related_courses = get_field('related_courses', $course_id) ?: [];
+$short_description = get_field('short_description', $course_id) ?: '';
 $course_status = learndash_course_status($course_id);
 $post_data = get_post($course_id);
 $course_intro    = $post_data->post_content;
@@ -365,10 +365,10 @@ if ($course_status == "Completed" && $is_cert) {
                                         $course_title = $course->post_title;
                                         $course_link = get_permalink($course->ID);
                                         $course_author = get_the_author_meta('display_name', $course->post_author);
-                                        $course_meta = get_post_meta($course->ID);
-                                        $course_price = $course_meta['sfwd-courses_course_price'];
-                                        $course_price = $course_price == 0 ? "Free" : $course_price;
-                                        $students_count = learndash_course_grid_count_students($course->ID);
+                                        $course_meta = get_post_meta($course->ID, 'sfwd-courses', true);
+                                        $course_price = is_array($course_meta) ? $course_meta['sfwd-courses_course_price'] : 0;
+                                        $course_price = empty($course_price) ? "Free" : $course_price;
+                                        $students_count = academyafrica_count_students($course->ID);
 
                                     ?>
                                         <?php get_template_part(
