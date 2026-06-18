@@ -67,6 +67,8 @@ class CoursesFunctions
         $orderby = isset($attr['orderby']) ? sanitize_text_field($attr['orderby']) : 'date';
         $order = isset($attr['order']) ? sanitize_text_field($attr['order']) : 'DESC';
 
+        do_action('qm/start', 'getLearningPaths');
+
         $args = array(
             'post_type' => 'ac-learning-path',
             'post_status' => 'publish',
@@ -76,6 +78,10 @@ class CoursesFunctions
             'order' => $order,
         );
         $learning_path_posts = get_posts($args);
+        do_action('qm/debug', 'getLearningPaths: fetched {count} paths (per_page={per_page})', [
+            'count'    => count($learning_path_posts),
+            'per_page' => $attr['per_page'],
+        ]);
         $learning_paths = array();
         foreach ($learning_path_posts as $learning_path_post) {
             $acf_courses = \get_field('courses', $learning_path_post->ID);
@@ -109,6 +115,8 @@ class CoursesFunctions
                 'courses' => $courses
             );
         }
+        do_action('qm/stop', 'getLearningPaths');
+
         return array(
             'learning_paths' => $learning_paths,
             'count' => wp_count_posts('ac-learning-path')->publish,
@@ -122,6 +130,7 @@ class CoursesFunctions
         if (false !== $cached) {
             return $cached;
         }
+        do_action('qm/start', 'getAllInstructors');
         global $wpdb;
         $author_ids = $wpdb->get_col(
             "SELECT DISTINCT post_author FROM {$wpdb->posts}
@@ -140,6 +149,8 @@ class CoursesFunctions
             }
         }
         wp_cache_set('academy_instructors', $instructors, 'academy_africa', HOUR_IN_SECONDS);
+        do_action('qm/stop', 'getAllInstructors');
+        do_action('qm/debug', 'getAllInstructors: loaded {count} instructors', ['count' => count($instructors)]);
         return $instructors;
     }
 
@@ -300,6 +311,11 @@ class CoursesFunctions
             'update_post_thumbnail_cache' => true,
         ], $atts, $filter = null);
 
+        do_action('qm/debug', 'build_query: posts_per_page={per_page} post__in_count={in_count}', [
+            'per_page' => $query_args['posts_per_page'],
+            'in_count' => is_array($query_args['post__in']) ? count($query_args['post__in']) : 'null',
+        ]);
+
         return $query_args;
     }
 
@@ -348,6 +364,7 @@ class CoursesFunctions
         if (is_numeric($post)) {
             $post = get_post($post);
         }
+        do_action('qm/start', 'get_post_attr:' . $post->ID);
         $user_id = get_current_user_id();
 
         // $course_options = null;
@@ -408,7 +425,9 @@ class CoursesFunctions
             'link' => $course_link,
         ];
 
-        return apply_filters('academy-africa_course_grid_post_attr', $post_attr, $post->ID, $atts, $args);
+        $result = apply_filters('academy-africa_course_grid_post_attr', $post_attr, $post->ID, $atts, $args);
+        do_action('qm/stop', 'get_post_attr:' . $post->ID);
+        return $result;
     }
 
     public static function get_filter_by()

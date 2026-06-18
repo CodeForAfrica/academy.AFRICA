@@ -242,7 +242,9 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         $atts = shortcode_atts($default_atts, $atts, 'academy-africa_course_grid');
 
         $query = CoursesFunctions::build_query($atts);
+        do_action('qm/start', 'all_courses:WP_Query');
         $query = new WP_Query($query);
+        do_action('qm/stop', 'all_courses:WP_Query');
         $no_of_pages = $query->max_num_pages;
 
         if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
@@ -253,6 +255,10 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
         $posts = $query->get_posts();
         $courses = $posts;
+        do_action('qm/debug', 'all_courses: found {count} courses (page={page})', [
+            'count' => count($courses),
+            'page'  => $current_page,
+        ]);
 
 
 

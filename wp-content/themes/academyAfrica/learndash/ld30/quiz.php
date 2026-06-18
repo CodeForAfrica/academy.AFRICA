@@ -7,12 +7,30 @@ if (!defined('ABSPATH')) {
 $quizId = get_the_ID();
 $course_id = learndash_get_course_id($quizId);
 
+do_action('qm/start', 'quiz:init');
+
+if (!$course_id) {
+    do_action('qm/error', 'quiz.php: learndash_get_course_id() returned null for quiz_id={id}', ['id' => $quizId]);
+}
+
 $course_url = get_permalink($course_id);
 $course = get_post($course_id);
+if (!$course) {
+    do_action('qm/error', 'quiz.php: get_post() returned null for course_id={id}', ['id' => $course_id]);
+}
+
+do_action('qm/start', 'quiz:fetch_lessons');
 $lessons = learndash_get_course_lessons_list($course_id);
+do_action('qm/stop', 'quiz:fetch_lessons');
+do_action('qm/debug', 'quiz:fetch_lessons: found {count} lessons for course {id}', [
+    'count' => count($lessons),
+    'id'    => $course_id,
+]);
+
 $parent_post = get_post_ancestors($quizId);
 $post_type = get_post_type($quizId);
 $is_quiz = $post_type == 'sfwd-quiz';
+do_action('qm/stop', 'quiz:init');
 ?>
 
 <style>
@@ -57,7 +75,11 @@ $is_quiz = $post_type == 'sfwd-quiz';
                         </div>
                     </div>
                     <div class='course-carriculum'>
-                        <?php echo do_shortcode('[course_content course_id="' . $course_id . '"]'); ?>
+                        <?php
+                        do_action('qm/start', 'quiz:course_content_shortcode');
+                        echo do_shortcode('[course_content course_id="' . $course_id . '"]');
+                        do_action('qm/stop', 'quiz:course_content_shortcode');
+                        ?>
                     </div>
                 </div>
             <?

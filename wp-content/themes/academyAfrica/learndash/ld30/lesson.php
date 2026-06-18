@@ -11,13 +11,31 @@ if (!defined('ABSPATH')) {
 
 $lesson_id = get_the_ID();
 $course_id = learndash_get_course_id($lesson_id);
-$course_status = learndash_course_status($course_id);
 
+do_action('qm/start', 'lesson:init');
+
+if (!$course_id) {
+    do_action('qm/error', 'lesson.php: learndash_get_course_id() returned null for lesson_id={id}', ['id' => $lesson_id]);
+}
+
+$course_status = learndash_course_status($course_id);
 $course_url = get_permalink($course_id);
 $course = get_post($course_id);
+if (!$course) {
+    do_action('qm/error', 'lesson.php: get_post() returned null for course_id={id}', ['id' => $course_id]);
+}
+
+do_action('qm/start', 'lesson:fetch_lessons');
 $lessons = learndash_get_course_lessons_list($course_id);
+do_action('qm/stop', 'lesson:fetch_lessons');
+do_action('qm/debug', 'lesson:fetch_lessons: found {count} lessons for course {id}', [
+    'count' => count($lessons),
+    'id'    => $course_id,
+]);
+
 $lesson = get_post($lesson_id);
 $has_assignments = learndash_lesson_hasassignments($lesson);
+do_action('qm/stop', 'lesson:init');
 ?>
 
 <style>
@@ -59,7 +77,11 @@ $has_assignments = learndash_lesson_hasassignments($lesson);
                     </div>
                 </div>
                 <div class='course-carriculum'>
-                    <?php echo do_shortcode('[course_content course_id="' . $course_id . '"]'); ?>
+                    <?php
+                    do_action('qm/start', 'lesson:course_content_shortcode');
+                    echo do_shortcode('[course_content course_id="' . $course_id . '"]');
+                    do_action('qm/stop', 'lesson:course_content_shortcode');
+                    ?>
                 </div>
             </div>
             <div class="sfwd-lessons">

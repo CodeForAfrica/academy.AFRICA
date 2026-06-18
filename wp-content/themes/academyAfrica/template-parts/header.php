@@ -47,9 +47,6 @@ function handle_login_failure()
 handle_login_failure();
 
 ?>
-<script>
-    console.log(<?php echo json_encode($menu_items); ?>, <?php echo json_encode($current_language); ?>);
-</script>
 <nav class="header">
     <!-- Mobile Nav -->
     <div class="mobile" id="mobile-nav">

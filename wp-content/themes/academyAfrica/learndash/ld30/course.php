@@ -10,6 +10,7 @@ use AcademyAfrica\Theme\Courses\CoursesFunctions;
 
 $course_id = get_the_ID();
 
+do_action('qm/start', 'course:init');
 $course_price = learndash_get_course_price($course_id);
 $price = $course_price['price'] ? $course_price['price'] : 'Free';
 $user_id = get_current_user_id();
@@ -19,11 +20,15 @@ $related_courses = get_field('related_courses', $course_id) ?: [];
 $short_description = get_field('short_description', $course_id) ?: '';
 $course_status = learndash_course_status($course_id);
 $post_data = get_post($course_id);
-$course_intro    = $post_data->post_content;
+if (!$post_data) {
+    do_action('qm/error', 'course.php: get_post() returned null for course_id={id}', ['id' => $course_id]);
+}
+$course_intro    = $post_data ? $post_data->post_content : '';
 // Get course language per Polylang
 $course_language = function_exists('pll_get_post_language') ? pll_get_post_language($course_id) : 'en';
 
 // Fetch lessons for this course
+do_action('qm/start', 'course:fetch_lessons');
 $lessons = learndash_get_course_lessons_list($course_id, $user_id);
 if (empty($lessons)) {
     // Fallback: LearnDash course steps index may be out of sync; query by meta directly
@@ -37,12 +42,28 @@ if (empty($lessons)) {
         'lang'        => '',
     ]);
 }
+do_action('qm/stop', 'course:fetch_lessons');
+do_action('qm/debug', 'course:fetch_lessons: found {count} lessons for course {id}', [
+    'count' => count($lessons),
+    'id'    => $course_id,
+]);
+if (empty($lessons)) {
+    do_action('qm/warning', 'course.php: no lessons found for course_id={id}', ['id' => $course_id]);
+}
 $lesson_topics = !empty($lessons) ? $lessons : [];
 
 $leaning_attr = [
     'per_page' => -1,
 ];
+do_action('qm/start', 'course:getLearningPaths');
 $pathways = CoursesFunctions::getLearningPaths($leaning_attr);
+do_action('qm/stop', 'course:getLearningPaths');
+do_action('qm/debug', 'course:getLearningPaths: found {count} paths for course {id}', [
+    'count' => count($pathways['learning_paths']),
+    'id'    => $course_id,
+]);
+
+do_action('qm/stop', 'course:init');
 
 $course_pathways = array_filter($pathways['learning_paths'], function ($pathway) use ($course_id) {
     foreach ($pathway['courses'] as $course) {
@@ -179,7 +200,11 @@ if ($course_status == "Completed" && $is_cert) {
                     <div class="title">
                         <p class="cfa-introduction-title"><?php echo function_exists('pll__') ? esc_html(pll__('Course Curriculum')) : 'Course Curriculum'; ?></p>
                     </div>
-                    <?php echo do_shortcode('[course_content course_id="' . $course_id . '"]'); ?>
+                    <?php
+                    do_action('qm/start', 'course:course_content_shortcode');
+                    echo do_shortcode('[course_content course_id="' . $course_id . '"]');
+                    do_action('qm/stop', 'course:course_content_shortcode');
+                    ?>
                 </div>
             <?
             }
@@ -191,6 +216,9 @@ if ($course_status == "Completed" && $is_cert) {
                 <div class="authors">
                     <?php
                     $authors = get_coauthors();
+                    if (empty($authors)) {
+                        do_action('qm/warning', 'course.php: get_coauthors() returned empty for course_id={id}', ['id' => $course_id]);
+                    }
                     foreach ($authors as $author) {
                         $first_name = get_the_author_meta('first_name', $author->ID);
                         $last_name = get_the_author_meta('last_name', $author->ID);
@@ -298,7 +326,7 @@ if ($course_status == "Completed" && $is_cert) {
 
                                         <!-- Twitter -->
                                         <?php if (!empty($org_twitter)) : ?>
-                                            <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($org_witter); ?>" target="_blank">
+                                            <a style="color: #000; margin-right: 8px;" href="<?php echo esc_url($org_twitter); ?>" target="_blank">
                                                 <img style="margin-bottom: -2px" class='icon-image' src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/icons/Type=twitter, Size=24, Color=Black.svg" alt="Twitter">
                                             </a>
                                         <?php endif; ?>

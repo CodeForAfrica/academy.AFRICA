@@ -64,7 +64,8 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 /wp-includes
 /wp-content/themes/*
 /wp-content/plugins/*
-/wp-content/mu-plugins
+/wp-content/mu-plugins/*
+!/wp-content/mu-plugins/academy-error-logger.php
 .htaccess
 apple-touch-icon-precomposed.png
 apple-touch-icon.png
@@ -122,3 +123,6 @@ wp-content/languages/
 creds.json
 full_db_backup.sql
 mysql.sql
+debug.log
+wp-content/academy-africa.log
+wp-content/academy-africa.log.1
