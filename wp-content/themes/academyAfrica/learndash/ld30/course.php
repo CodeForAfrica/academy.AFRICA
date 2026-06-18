@@ -46,7 +46,7 @@ $pathways = CoursesFunctions::getLearningPaths($leaning_attr);
 
 $course_pathways = array_filter($pathways['learning_paths'], function ($pathway) use ($course_id) {
     foreach ($pathway['courses'] as $course) {
-        if ($course['id']->ID == $course_id) {
+        if ($course['id'] == $course_id) {
             return true;
         }
     }

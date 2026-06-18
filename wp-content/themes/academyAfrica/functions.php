@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.7.11');
+define('ACADEMY_AFRICA_VERSION', '1.7.12');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -650,7 +650,8 @@ add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
 
 // Fallback stub for when Co-Authors Plus plugin is disabled.
 if (!function_exists('get_coauthors')) {
-    function get_coauthors($post_id = 0) {
+    function get_coauthors($post_id = 0)
+    {
         $post_id = $post_id ? (int) $post_id : get_the_ID();
         $post = get_post($post_id);
         if (!$post) {
