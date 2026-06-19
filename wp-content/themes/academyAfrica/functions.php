@@ -278,12 +278,6 @@ function verify_user_on_login($user, $username = '')
         return $user;
     }
 
-    // Administrators, editors, and authors predate the email-verification system
-    // and must never be blocked at login — they have wp-admin access anyway.
-    if (user_can($user, 'manage_options') || user_can($user, 'editor') || user_can($user, 'author')) {
-        return $user;
-    }
-
     $is_verified = get_user_meta($user->ID, 'is_verified', true);
 
     if (!$is_verified) {
@@ -294,8 +288,10 @@ function verify_user_on_login($user, $username = '')
 
         send_activation_link($user->ID);
 
+        // Store the error message in a transient
         set_transient('login_error_message', 'Please verify your account. Check your email for the verification link.', 30);
 
+        // Redirect to custom login page
         wp_redirect(add_query_arg('verification', 'required', home_url('/login')));
         exit;
     }
@@ -315,14 +311,7 @@ function check_verified_user_status()
     }
 
     $user = wp_get_current_user();
-
-    // Never log out administrators, editors, or authors — these roles predate
-    // the email-verification system and may not have the is_verified meta set.
-    if (!$user->ID || current_user_can('manage_options') || current_user_can('editor') || current_user_can('author')) {
-        return;
-    }
-
-    if (!get_user_meta($user->ID, 'is_verified', true)) {
+    if ($user->ID && !get_user_meta($user->ID, 'is_verified', true)) {
         wp_logout();
         wp_redirect(add_query_arg('verification', 'required', home_url('/login')));
         exit;
@@ -664,9 +653,7 @@ function hide_admin_bar()
     }
 }
 
-// Must run on 'init' (not 'after_setup_theme') so auth cookies are fully
-// resolved and current_user_can() returns accurate results.
-add_action('init', 'hide_admin_bar');
+add_action('after_setup_theme', 'hide_admin_bar');
 
 
 function enqueue_my_scripts()
