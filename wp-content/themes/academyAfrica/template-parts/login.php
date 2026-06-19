@@ -109,10 +109,26 @@ if (isset($_GET['email_sent'])) {
                 ob_start();
 
                 $login_args = array('label_username' => academyafrica_translate('Email Address'));
-                if (isset($_GET['redirect_url'])) {
-                    $login_args['redirect'] = $_GET['redirect_url'];
-                    $login_args['value_redirect_to'] = $_GET['redirect_url'];
+
+                // Determine where to send the user after login.
+                // Priority: explicit redirect_url param → HTTP referer (if not home/login) → /learning-pathways
+                if (isset($_GET['redirect_url']) && $_GET['redirect_url'] !== '') {
+                    $post_login_redirect = $_GET['redirect_url'];
+                } elseif (!empty($_SERVER['HTTP_REFERER'])) {
+                    $referer_path = parse_url(wp_unslash($_SERVER['HTTP_REFERER']), PHP_URL_PATH) ?? '';
+                    $login_path   = parse_url(home_url('/login'), PHP_URL_PATH) ?? '/login';
+                    if ($referer_path !== '/' && $referer_path !== $login_path) {
+                        $post_login_redirect = esc_url_raw(wp_unslash($_SERVER['HTTP_REFERER']));
+                    } else {
+                        $post_login_redirect = '/learning-pathways';
+                    }
+                } else {
+                    $post_login_redirect = '/learning-pathways';
                 }
+
+                $login_args['redirect']          = $post_login_redirect;
+                $login_args['value_redirect_to'] = $post_login_redirect;
+
                 wp_login_form($login_args);
                 $form_output = ob_get_clean();
 

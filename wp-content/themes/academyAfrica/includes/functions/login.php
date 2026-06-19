@@ -2,7 +2,16 @@
 // Load custom functions
 function custom_login_page()
 {
-    $redirect_url = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : '';
+    // Prefer our custom param, then WordPress's native redirect_to (used by
+    // LearnDash, course pages, etc.), then fall back to the referer.
+    if (isset($_GET['redirect_url']) && $_GET['redirect_url'] !== '') {
+        $redirect_url = $_GET['redirect_url'];
+    } elseif (isset($_GET['redirect_to']) && $_GET['redirect_to'] !== '') {
+        $redirect_url = $_GET['redirect_to'];
+    } else {
+        $redirect_url = '';
+    }
+
     $parsed_url = parse_url($redirect_url);
     $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
 
