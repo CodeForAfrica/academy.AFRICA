@@ -101,7 +101,7 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
         <div class="connect">
             <div class="cfa-title-centered">
                 <h4>
-                    <? echo $title ?>
+                    <?php echo $title ?>
                 </h4>
             </div>
             <div class="content">
@@ -111,17 +111,17 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
                 </div>
                 <div class="banner center">
                     <p class="share">
-                        <? echo $share_text ?>
+                        <?php echo $share_text ?>
                     </p>
                     <p class="become-a-member">
-                        <? echo $become_a_member_text ?>
+                        <?php echo $become_a_member_text ?>
                     </p>
                     <a href=src="<?php echo $about_us_url ?>" class="primary-button">
-                        <? echo $join_us_on_slack ?>
+                        <?php echo $join_us_on_slack ?>
                     </a>
                 </div>
             </div>
         </div>
-        <?
+        <?php
     }
 }

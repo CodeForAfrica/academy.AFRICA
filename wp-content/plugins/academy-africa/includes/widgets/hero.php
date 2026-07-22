@@ -114,10 +114,10 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                 <div class="mobile-hidden"></div>
                 <div class="content">
                     <div class="title" <?php echo $this->get_render_attribute_string('title'); ?>>
-                        <? echo $title ?>
+                        <?php echo $title ?>
                     </div>
                     <a class="signup-button" href="<?php echo $sign_up_url; ?>">
-                        <? echo $sign_up_label ?>
+                        <?php echo $sign_up_label ?>
                     </a>
                 </div>
                 <img height="217" alt="mask" class="mask" src="/wp-content/plugins/academy-africa/includes/assets/images/mask.png" />
@@ -125,7 +125,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
             <div class="content-parent">
                 <div class="metrics-content">
                     <div class="metrics">
-                        <?
+                        <?php
                         if (!empty($settings['metrics'])) {
                             foreach ($settings['metrics'] as $item) {
                                 $metric = esc_html($item['metric']);
@@ -133,13 +133,13 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                         ?>
                                 <div class="metric">
                                     <h2 class="numbers">
-                                        <? echo $metric ?>
+                                        <?php echo $metric ?>
                                     </h2>
                                     <p class="label">
-                                        <? echo $label ?>
+                                        <?php echo $label ?>
                                     </p>
                                 </div>
-                        <?
+                        <?php
                             }
                         }
                         ?>
@@ -148,6 +148,6 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                 <div class="mask"></div>
             </div>
         </div>
-<?
+<?php
     }
 }

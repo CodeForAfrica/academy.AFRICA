@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 ?>
 
 <?php get_header(); ?>
-<?
+<?php
 $status_code = 404;
 $title = academyafrica_translate('PAGE NOT FOUND');
 $description = academyafrica_translate('There seems to be an error on this page. Please contact us for more details');
@@ -27,20 +27,20 @@ $home = academyafrica_translate('Home');
         <div></div>
         <div class="content">
             <p class="code">
-                <? echo $status_code ?>
+                <?php echo $status_code ?>
             </p>
             <p class="text">
-                <? echo $title ?>
+                <?php echo $title ?>
             </p>
             <p class="description">
-                <? echo $description ?>
+                <?php echo $description ?>
             </p>
             <div class="actions">
                 <a class="button" href="" onclick="location.reload();" data-analytics-action="refresh">
-                    <? echo $refresh ?>
+                    <?php echo $refresh ?>
                 </a>
                 <a class="button" href="/" data-analytics-action="home">
-                    <? echo $home ?>
+                    <?php echo $home ?>
                 </a>
             </div>
         </div>

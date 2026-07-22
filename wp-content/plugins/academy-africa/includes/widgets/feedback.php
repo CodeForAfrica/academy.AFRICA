@@ -81,11 +81,11 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
         <div class="feedback">
             <div class="cfa-title">
                 <h4>
-                    <? echo $title ?>
+                    <?php echo $title ?>
                 </h4>
             </div>
             <div class="content">
-                <?
+                <?php
                 if (!empty($feedback)) {
                     foreach ($feedback as $item) {
                         $name = $item["name"];
@@ -99,27 +99,27 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
                                     <img height="70px" width="70px" src="/wp-content/plugins/academy-africa/includes/assets/images/avatar.png" alt="user" class="avatar">
                                     <div class="name-role">
                                         <p class="name">
-                                            <? echo $name ?>
+                                            <?php echo $name ?>
                                         </p>
                                         <p class="role">
-                                            <? echo $role ?>
+                                            <?php echo $role ?>
                                         </p>
                                         <p class="role">
-                                            <? echo $company ?>
+                                            <?php echo $company ?>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="description">
-                                    <? echo $description ?>
+                                    <?php echo $description ?>
                                 </div>
                             </div>
                         </div>
-                <?
+                <?php
                     }
                 }
                 ?>
             </div>
         </div>
-<?
+<?php
     }
 }

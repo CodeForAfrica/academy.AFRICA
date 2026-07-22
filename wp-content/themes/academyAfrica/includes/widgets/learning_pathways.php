@@ -162,14 +162,14 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
                 <section class="learning-pathways">
                     <div class="title">
                         <h4 class="cfa-title">
-                            <? echo $pathway_title ?>
+                            <?php echo $pathway_title ?>
                         </h4>
                     </div>
                     <p class="description">
-                        <? echo $pathway_description ?>
+                        <?php echo $pathway_description ?>
                     </p>
                     <div class="content">
-                        <?
+                        <?php
 
                         if (!empty($learning_pathways)) {
                             foreach ($learning_pathways as $pathway) {
@@ -179,35 +179,35 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
                                 $pathway_courses = $pathway["courses"];
                                 $pathway_link = get_permalink($pathway["id"]);
                         ?>
-                                <a href="<? echo $pathway_link ?>" class="pathway-link">
+                                <a href="<?php echo $pathway_link ?>" class="pathway-link">
                                     <div class="card">
                                         <div class="course-card-pattern">
                                             <div class="icon">
-                                                <img src="<? echo $pathway_icon ?>" alt="sample-icon">
+                                                <img src="<?php echo $pathway_icon ?>" alt="sample-icon">
                                             </div>
                                         </div>
                                         <div class="pathway-card-content">
                                             <div>
                                                 <p class="pathway-name">
-                                                    <? echo $pathway_name ?>
+                                                    <?php echo $pathway_name ?>
                                                 </p>
                                                 <p class="pathway-description">
-                                                    <? echo wp_trim_words($pathway_desc, 20, '...') ?>
+                                                    <?php echo wp_trim_words($pathway_desc, 20, '...') ?>
                                                 </p>
                                             </div>
 
                                             <p class="course-count">
-                                                <? echo count($pathway_courses) . ' ' . $courses_count ?>
+                                                <?php echo count($pathway_courses) . ' ' . $courses_count ?>
                                             </p>
                                         </div>
                                     </div>
                                 </a>
-                        <?
+                        <?php
                             }
                         }
                         ?>
                     </div>
-                    <?
+                    <?php
                     if ($has_pagination) {
                     ?>
                         <hr class="divider">
@@ -216,57 +216,57 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
                                 View All
                             </a>
                             <ul class="pagination">
-                                <?
+                                <?php
                                 if ($current_page > 1) {
                                 ?>
                                     <li class="page-item">
-                                        <div class="page-link" onclick="paginateLearningPath(<? echo $current_page - 1 ?>)">
+                                        <div class="page-link" onclick="paginateLearningPath(<?php echo $current_page - 1 ?>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </li>
-                                    <?
+                                    <?php
                                 }
                                 for ($i = 1; $i <= $total_pages; $i++) {
                                     if ($i == $current_page) {
                                     ?>
                                         <li class="page-item active">
                                             <div class="page-link">
-                                                <? echo $i ?>
+                                                <?php echo $i ?>
                                             </div>
                                         </li>
-                                    <?
+                                    <?php
                                     } else {
                                     ?>
                                         <li class="page-item">
-                                            <div class="page-link" onclick="paginateLearningPath(<? echo $i ?>)">
-                                                <? echo $i ?>
+                                            <div class="page-link" onclick="paginateLearningPath(<?php echo $i ?>)">
+                                                <?php echo $i ?>
                                             </div>
                                         </li>
-                                    <?
+                                    <?php
                                     }
                                 }
                                 if ($current_page < $total_pages) {
                                     ?>
                                     <li class="page-item">
-                                        <div class="page-link" onclick="paginateLearningPath(<? echo $current_page + 1 ?>)">
+                                        <div class="page-link" onclick="paginateLearningPath(<?php echo $current_page + 1 ?>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </li>
-                                <?
+                                <?php
                                 }
                                 ?>
                             </ul>
                         </div>
-                    <?
+                    <?php
                     }
                     ?>
                 </section>
             </div>
         </main>
-<?
+<?php
     }
 }

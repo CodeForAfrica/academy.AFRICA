@@ -97,25 +97,25 @@ class Academy_Africa_Error extends \Elementor\Widget_Base
             <div></div>
             <div class="content">
                 <p class="code" <?php echo $this->get_render_attribute_string('status_code'); ?>>
-                    <? echo $status_code ?>
+                    <?php echo $status_code ?>
                 </p>
                 <p class="text" <?php echo $this->get_render_attribute_string('title'); ?>>
-                    <? echo $title ?>
+                    <?php echo $title ?>
                 </p>
                 <p class="description" <?php echo $this->get_render_attribute_string('description'); ?>>
-                    <? echo $description ?>
+                    <?php echo $description ?>
                 </p>
                 <div class="actions">
                     <a class="button" href="" onclick="location.reload();" <?php echo $this->get_render_attribute_string('refresh'); ?>>
-                        <? echo $refresh ?>
+                        <?php echo $refresh ?>
                     </a>
                     <a class="button" href="/" <?php echo $this->get_render_attribute_string('home'); ?>>
-                        <? echo $home ?>
+                        <?php echo $home ?>
                     </a>
                 </div>
             </div>
 
         </div>
-<?
+<?php
     }
 }

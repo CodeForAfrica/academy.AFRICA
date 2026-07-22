@@ -187,7 +187,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                 <section class="incomplete-courses">
                     <h4 class="cfa-title">
                         Welcome <strong style="text-transform: capitalize;">
-                            <? echo $current_user->display_name; ?>
+                            <?php echo $current_user->display_name; ?>
                         </strong>
                     </h4>
                     <div class="filter-by-language">
@@ -205,7 +205,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                             foreach ($languages as $language_code => $language_name) {
 
                             ?>
-                                <button id="<? echo $language_code ?>" class="button medium ld-button"
+                                <button id="<?php echo $language_code ?>" class="button medium ld-button"
                                     onclick="filterByLanguage('<?php echo $language_code; ?>')">
                                     <?php echo $language_name; ?>
                                 </button>
@@ -227,27 +227,27 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                     <div class="filter-section">
                         <div class="sort">
                             <div class="label">
-                                <? echo $sort_by ?>
+                                <?php echo $sort_by ?>
                             </div>
                             <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
-                                <?
+                                <?php
                                 foreach ($sort_options as $key => $option) {
                                     $selected = $sort == $key ? "selected" : "";
                                 ?>
-                                    <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
-                                <?
+                                    <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $option["name"] ?></option>
+                                <?php
                                 }
                                 ?>
                             </select>
                         </div>
                     </div>
-                    <? if (!empty($enrolled)) {
+                    <?php if (!empty($enrolled)) {
                     ?>
                         <p class="description">
                             Complete your courses
                         </p>
                         <div class="content">
-                            <?
+                            <?php
                             foreach ($enrolled as $er) {
                                 $course_id = $er->post_id;
                                 $course = get_post($course_id);
@@ -271,38 +271,38 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $lessons_count = $total_steps;
 
                             ?>
-                                <a href="<? echo $course_link ?>">
-                                    <div id="<? echo $course_id ?>" class="card">
+                                <a href="<?php echo $course_link ?>">
+                                    <div id="<?php echo $course_id ?>" class="card">
                                         <div class="course-card-pattern">
-                                            <img src="<? echo $image ?>" alt="course-thumbnail">
+                                            <img src="<?php echo $image ?>" alt="course-thumbnail">
                                         </div>
                                         <div class="card-content">
                                             <div class="card-title">
                                                 <p>
-                                                    <? echo $title ?>
+                                                    <?php echo $title ?>
                                                 </p>
                                             </div>
                                             <p class="provider">
                                                 by
-                                                <? echo $provider ?>
+                                                <?php echo $provider ?>
                                             </p>
                                             <p class="lessons-count">
-                                                <? echo $lessons_count ?> lessons
+                                                <?php echo $lessons_count ?> lessons
                                             </p>
                                             <div class="progress-bar">
-                                                <div style="width: <? echo $completed ?>"></div>
+                                                <div style="width: <?php echo $completed ?>"></div>
                                             </div>
                                             <div class="card-footer">
                                                 <p>Enrolled</p>
                                                 <p>
-                                                    <? echo $completed ?> Completed
+                                                    <?php echo $completed ?> Completed
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
 
-                            <?
+                            <?php
                             }
 
                             ?>
@@ -320,7 +320,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                     </a>
                                 </li>
 
-                                <?
+                                <?php
                                 $current_url_params = $_GET;
                                 $current_page = isset($current_url_params["courses_page"]) ? (int) $current_url_params["courses_page"] : 1;
                                 $next_page = $current_page + 1;
@@ -329,20 +329,20 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $next_2 = $next_page + 2;
                                 ?>
                                 <?php for ($i = 1; $i <= $my_courses_pagination['total_pages']; $i++) : ?>
-                                    <?
+                                    <?php
                                     $current_url_params["courses_page"] = $i;
                                     $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
                                     if ($i === $previous_page || $i === $next_page || $i === $my_courses_pagination['total_pages'] || $i === 1 || $i === $current_page) {
                                     ?>
-                                        <li class="page-item"><a class="page-link" href="<? echo $new_url ?>">
+                                        <li class="page-item"><a class="page-link" href="<?php echo $new_url ?>">
                                                 <?php echo $i; ?>
                                             </a></li>
-                                    <?
+                                    <?php
                                     }
                                     if (($i === $next_2 && $next_2 < $my_courses_pagination['total_pages']) || $i === $pr_2 && $i > 1) {
                                     ?>
                                         <li style="margin-top: 6px">...</li>
-                                <?
+                                <?php
                                     }
 
                                 endfor; ?>
@@ -358,15 +358,15 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
 
                             </ul>
                         </div>
-                    <? } ?>
+                    <?php } ?>
                 </section>
-                <? if (!empty($completed_courses['results'])) { ?>
+                <?php if (!empty($completed_courses['results'])) { ?>
                     <section class="your-certificates">
                         <h4 class="your-certificates-title">
                             Your Certificates
                         </h4>
                         <div class="content">
-                            <?
+                            <?php
                             if (!empty($completed_courses['results'])) {
                                 foreach ($completed_courses['results'] as $key => $course) {
                                     $course_id = $course->post_id;
@@ -392,39 +392,39 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                     // $certificate_link = learndash_get_course_certificate_link($course_id, get_current_user_id());
                             ?>
 
-                                    <div class="cert-pdf" id="<? echo $course_id ?>">
-                                        <? $cert_content = $this->replace_course_info($cert_post->post_content, $course_id) ?>
-                                        <? echo do_shortcode($cert_content) ?>
+                                    <div class="cert-pdf" id="<?php echo $course_id ?>">
+                                        <?php $cert_content = $this->replace_course_info($cert_post->post_content, $course_id) ?>
+                                        <?php echo do_shortcode($cert_content) ?>
                                     </div>
                                     <div>
                                         <div class="card">
                                             <div class="course-card-pattern">
-                                                <img src="<? echo $image ?>" alt="course-thumbnail">
+                                                <img src="<?php echo $image ?>" alt="course-thumbnail">
                                             </div>
                                             <div class="card-content">
-                                                <a href="<? echo $course_link ?>">
+                                                <a href="<?php echo $course_link ?>">
                                                     <div class="card-title">
                                                         <p>
-                                                            <? echo $title ?>
+                                                            <?php echo $title ?>
                                                         </p>
                                                     </div>
                                                 </a>
                                                 <p class="provider">
                                                     by
-                                                    <? echo $course_author ?>
+                                                    <?php echo $course_author ?>
                                                 </p>
                                                 <p class="lessons-count">
-                                                    <? echo $lessons_count ?> lessons
+                                                    <?php echo $lessons_count ?> lessons
                                                 </p>
                                                 <div class="completed-progress-bar">
                                                 </div>
                                                 <div class="card-footer">
                                                     <p>Certificate Achieved</p>
                                                     <div class="icons">
-                                                        <?
+                                                        <?php
                                                         $cert = learndash_get_course_certificate_link($course_id);
                                                         ?>
-                                                        <a href="<? echo $cert ?>" download>
+                                                        <a href="<?php echo $cert ?>" download>
                                                             <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg" style="cursor: pointer;" alt="download" />
                                                         </a>
 
@@ -436,7 +436,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                         </div>
                                     </div>
 
-                            <?
+                            <?php
                                 }
                             }
                             ?>
@@ -456,12 +456,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
 
                                 <!-- Page links -->
                                 <?php for ($i = 1; $i <= $certificate_pagination['total_pages']; $i++) : ?>
-                                    <?
+                                    <?php
                                     $current_url_params = $_GET;
                                     $current_url_params["courses_page"] = $i;
                                     $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
                                     ?>
-                                    <li class="page-item"><a class="page-link" href="<? echo $new_url ?>">
+                                    <li class="page-item"><a class="page-link" href="<?php echo $new_url ?>">
                                             <?php echo $i; ?>
                                         </a></li>
                                 <?php endfor; ?>
@@ -478,7 +478,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                             </ul>
                         </div>
                     </section>
-                <?
+                <?php
 
                 }
                 ?>
@@ -496,7 +496,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                         const height = doc.internal.pageSize.getHeight();
                         doc.html(pdfjs, {
                             callback: function(doc) {
-                                doc.save(`<? echo $user['first_name'] . ' ' . $user['first_name'] ?> | ${courseTitle}.pdf`);
+                                doc.save(`<?php echo $user['first_name'] . ' ' . $user['first_name'] ?> | ${courseTitle}.pdf`);
                             },
                             width: width,
                             height,
@@ -534,6 +534,6 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                 });
             </script>
         </main>
-<?
+<?php
     }
 }

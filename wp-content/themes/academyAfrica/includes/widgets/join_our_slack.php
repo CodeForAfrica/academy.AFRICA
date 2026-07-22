@@ -115,6 +115,6 @@ class Academy_Africa_Join_Our_Slack extends \Elementor\Widget_Base
                 </script>
             </div>
         </div>
-<?
+<?php
     }
 }

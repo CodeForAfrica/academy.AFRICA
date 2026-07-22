@@ -97,14 +97,14 @@ $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
                 <img height="110" width="250"
                     src="<?php echo $thumbnail_url ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
                 <p class="description">
-                    <? echo $site_description ?>
+                    <?php echo $site_description ?>
                 </p>
                 <div class="footer-connect">
                     <span style="white-space: nowrap;">
-                        <? echo $stay_in_touch ?>
+                        <?php echo $stay_in_touch ?>
                     </span>
                     <div class="social-icons">
-                        <?
+                        <?php
                         if (!empty($social_media_links)) {
                             foreach ($social_media_links as $item) {
                                 $link = esc_url($item['link']['url']);
@@ -122,7 +122,7 @@ $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
         </div>
         <div class="item">
             <div class="links">
-                <?
+                <?php
                 if (!empty($menu_items)) {
                     foreach ($menu_items as $item) {
                         $page_link = esc_url($item['url']);
@@ -143,10 +143,10 @@ $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
         <div class="item">
             <div class="embed">
                 <p class="title">
-                    <? echo $newsletter_title ?>
+                    <?php echo $newsletter_title ?>
                 </p>
                 <div>
-                    <? echo $newsletter ?>
+                    <?php echo $newsletter ?>
                 </div>
             </div>
         </div>

@@ -173,18 +173,18 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
         <main class="body">
             <div class="sidebar" id="sidebar">
                 <p class="filter-by">
-                    <? echo $filter_by ?>
+                    <?php echo $filter_by ?>
                 </p>
-                <?
+                <?php
                 if (!empty($filter_options)) {
                     foreach ($filter_options as $item) {
                         $title = $item["title"];
                         $options = $item["options"];
                 ?>
                         <p style="margin-top: 40px" class="filter-by-title">
-                            <? echo $title ?>
+                            <?php echo $title ?>
                         </p>
-                        <?
+                        <?php
                         if (!empty($options)) {
                             foreach ($options as $option) {
                         ?>
@@ -193,11 +193,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                         <label class="mui-checkbox">
                                             <input type="checkbox">
                                             <span class="checkmark"></span>
-                                            <? echo $option ?>
+                                            <?php echo $option ?>
                                         </label>
                                     </li>
                                 </ul>
-                <?
+                <?php
                             }
                         }
                     }
@@ -208,13 +208,13 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             <div class="courses-main">
                 <section class="learning-pathways">
                     <h4 class="cfa-title">
-                        <? echo $learning_pathways_title ?>
+                        <?php echo $learning_pathways_title ?>
                     </h4>
                     <p class="description">
-                        <? echo $learning_pathways_description ?>
+                        <?php echo $learning_pathways_description ?>
                     </p>
                     <div class="content">
-                        <?
+                        <?php
                         if (!empty($learning_pathways)) {
                             foreach ($learning_pathways as $pathway) {
                                 $name = $pathway["title"];
@@ -223,19 +223,19 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 <div class="card">
                                     <div class="course-card-pattern">
                                         <div class="icon">
-                                            <img src="<? echo $icon ?>" alt="sample-icon">
+                                            <img src="<?php echo $icon ?>" alt="sample-icon">
                                         </div>
                                     </div>
                                     <div class="pathway-card-content">
                                         <p class="pathway-name">
-                                            <? echo $name ?>
+                                            <?php echo $name ?>
                                         </p>
                                         <p class="course-count">
-                                            <? echo $pathway["courses"] ?>
+                                            <?php echo $pathway["courses"] ?>
                                         </p>
                                     </div>
                                 </div>
-                        <?
+                        <?php
                             }
                         }
                         ?>
@@ -266,17 +266,17 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 </section>
                 <section class="all-courses">
                     <h4 class="cfa-title">
-                        <? echo $courses_title ?>
+                        <?php echo $courses_title ?>
                     </h4>
                     <p class="description">
-                        <? echo $courses_description ?>
+                        <?php echo $courses_description ?>
                     </p>
                     <div class="key">
                         <div class="course-free-tag">
                             Free
                         </div>
                         <p class="key-text">
-                            <? echo $free_tag_key ?>
+                            <?php echo $free_tag_key ?>
                         </p>
                     </div>
                     <div class="key">
@@ -284,11 +284,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             paid
                         </div>
                         <p class="key-text">
-                            <? echo $paid_tag_key ?>
+                            <?php echo $paid_tag_key ?>
                         </p>
                     </div>
                     <div class="content">
-                        <?
+                        <?php
                         if (!empty($courses)) {
                             foreach ($courses as $course) {
                                 $title = $course['title'];
@@ -298,28 +298,28 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 $image = $course['image'];
                         ?>
                                 <div class="card">
-                                    <img alt="course-logo" class="logo" src="<? echo $image ?>" />
+                                    <img alt="course-logo" class="logo" src="<?php echo $image ?>" />
                                     <div class="card-content">
                                         <div class="card-title">
                                             <p>
-                                                <? echo $title ?>
+                                                <?php echo $title ?>
                                             </p>
                                         </div>
                                         <p class="provider">
-                                            by <? echo $provider ?>
+                                            by <?php echo $provider ?>
                                         </p>
                                         <div class="card-footer">
                                             <div class="student-count">
                                                 <img alt="user" src="/wp-content/plugins/academy-africa/includes/assets/images/user.svg" />
-                                                <span><? echo $student_count ?></span>
+                                                <span><?php echo $student_count ?></span>
                                             </div>
                                             <div class="tag free">
-                                                <? echo $price ?>
+                                                <?php echo $price ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                        <?
+                        <?php
                             }
                         }
                         ?>
@@ -350,6 +350,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 </section>
             </div>
         </main>
-<?
+<?php
     }
 }

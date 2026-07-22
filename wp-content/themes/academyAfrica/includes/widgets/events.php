@@ -350,9 +350,9 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <p class="filter-by">
-                        <? echo $filter_by ?>
+                        <?php echo $filter_by ?>
                     </p>
-                    <?
+                    <?php
                     if (!empty($filter_options)) {
                         foreach ($filter_options as $item) {
                             $title = $item["title"];
@@ -360,30 +360,30 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $option_name = $item["name"];
                     ?>
                             <p class="filter-by-title">
-                                <? echo $title ?>
+                                <?php echo $title ?>
                             </p>
-                            <?
+                            <?php
                             if (!empty($options)) {
                             ?>
                                 <ul>
 
-                                    <?
+                                    <?php
                                     foreach ($options as $option => $opt_value) {
                                     ?>
 
                                         <li>
                                             <label class="mui-checkbox">
-                                                <input type="checkbox" name="<? echo $option_name . '-' . $opt_value ?>" onclick="onChangeCheckBox(this, '<? echo $option_name ?>','<? echo $opt_value ?>', true)">
+                                                <input type="checkbox" name="<?php echo $option_name . '-' . $opt_value ?>" onclick="onChangeCheckBox(this, '<?php echo $option_name ?>','<?php echo $opt_value ?>', true)">
                                                 <span class="checkmark"></span>
-                                                <? echo $option ?>
+                                                <?php echo $option ?>
                                             </label>
                                         </li>
 
-                                    <?
+                                    <?php
                                     }
                                     ?>
                                 </ul>
-                    <?
+                    <?php
                             }
                         }
                     }
@@ -409,49 +409,49 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
 
             <section class="events-content">
                 <div class="cfa-title" <?php echo $this->get_render_attribute_string('page_title'); ?>>
-                    <? echo $page_title ?>
+                    <?php echo $page_title ?>
                 </div>
                 <div id="filters" class="events-mobile-filters">
                     <div>
                         <div class="filters">
                             <div class="close-filters">
                                 <h1 class="filter-by">
-                                    <? echo $filter_by ?>
+                                    <?php echo $filter_by ?>
                                 </h1>
                             </div>
-                            <?
+                            <?php
                             if (!empty($filter_options)) {
                                 foreach ($filter_options as $item) {
                                     $title = $item["title"];
                             ?>
                                     <div class="accordion-parent">
-                                        <button class="accordion"><? echo $title ?></button>
-                                        <?
+                                        <button class="accordion"><?php echo $title ?></button>
+                                        <?php
                                         $options = $item["options"];
                                         $option_name = $item["name"];
                                         if (!empty($options)) {
                                         ?><div class="panel">
-                                                <ul><?
+                                                <ul><?php
                                                     foreach ($options as $option => $opt_value) {
                                                     ?>
 
                                                         <li>
                                                             <label class="mui-checkbox">
-                                                                <input type="checkbox" name="<? echo $option_name . '-' . $opt_value ?>" onclick="onChangeCheckBox(this, '<? echo $option_name ?>','<? echo $opt_value ?>')">
+                                                                <input type="checkbox" name="<?php echo $option_name . '-' . $opt_value ?>" onclick="onChangeCheckBox(this, '<?php echo $option_name ?>','<?php echo $opt_value ?>')">
                                                                 <span class="checkmark"></span>
-                                                                <? echo $option ?>
+                                                                <?php echo $option ?>
                                                             </label>
                                                         </li>
 
-                                                    <?
+                                                    <?php
                                                     }
                                                     ?>
                                                 </ul>
                                             </div>
-                                        <?
+                                        <?php
                                         }
                                         ?>
-                                    </div><?
+                                    </div><?php
                                         }
                                     }
                                             ?>
@@ -480,12 +480,12 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     </div>
                 </div>
                 <div class="selected-filters" id="selected-filters"></div>
-                <? if (!empty($upcoming_events)) { ?>
+                <?php if (!empty($upcoming_events)) { ?>
                     <div class="section-title" <?php echo $this->get_render_attribute_string('upcoming_events_title'); ?>>
-                        <? echo $upcoming_events_title ?>
+                        <?php echo $upcoming_events_title ?>
                     </div>
                     <div class="content">
-                        <?
+                        <?php
 
                         foreach ($upcoming_events as $event) {
                             $image = $event["image"];
@@ -497,37 +497,37 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $time = $event["time"];
                             $is_virtual = $event["is_virtual"];
                         ?>
-                            <a href="<? echo $event["post_url"] ?>">
+                            <a href="<?php echo $event["post_url"] ?>">
                                 <div class="card">
-                                    <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
+                                    <img width="100%" src="<?php echo $image ?>" alt="<?php echo $title ?>">
 
                                     <p class="event-title">
-                                        <? echo $title ?>
+                                        <?php echo $title ?>
                                     </p>
                                     <p class="speaker-name">
-                                        <? echo $speaker ?>
+                                        <?php echo $speaker ?>
                                     </p>
                                     <div class="flex-between date-and-language">
                                         <p class="date">
-                                            <? echo $date ?>
+                                            <?php echo $date ?>
                                         </p>
                                         <p class="language">
-                                            <? echo $language ?>
+                                            <?php echo $language ?>
                                         </p>
 
                                     </div>
                                     <div class="flex-between time-and-country">
                                         <p class="time">
-                                            <? echo $time ?>
+                                            <?php echo $time ?>
                                         </p>
                                         <p class="country">
-                                            <? echo $is_virtual ?>
+                                            <?php echo $is_virtual ?>
                                         </p>
                                     </div>
                                 </div>
                             </a>
 
-                        <?
+                        <?php
                         }
                         ?>
                     </div>
@@ -544,19 +544,19 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                                 </a>
                             </li>
 
-                            <?
+                            <?php
                             $upcoming_page_param = $this->get_query_param('upcoming_page');
                             $current = !empty($upcoming_page_param) ? $upcoming_page_param[0] : "1";
                             ?>
                             <!-- Page links -->
                             <?php for ($i = 1; $i <= $upcoming_pagination['total_pages']; $i++) : ?>
-                                <?
+                                <?php
                                 $current_url_params = $_GET;
                                 $current_url_params["upcoming_page"] = $i;
                                 $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
                                 $cls = intval($current) === $i ? "active" : "";
                                 ?>
-                                <li class="page-item <? echo $cls ?>"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item <?php echo $cls ?>"><a class="page-link" href="<?php echo $new_url ?>"><?php echo $i; ?></a></li>
                             <?php endfor; ?>
 
                             <!-- Next page link -->
@@ -570,16 +570,16 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
 
                         </ul>
                     </div>
-                <?
+                <?php
                 }
                 if (!empty($previous_events)) {
 
                 ?>
                     <div class="section-title" <?php echo $this->get_render_attribute_string('previous_events_title'); ?>>
-                        <? echo $previous_events_title ?>
+                        <?php echo $previous_events_title ?>
                     </div>
                     <div class="content">
-                        <?
+                        <?php
                         foreach ($previous_events as $event) {
                             $image = $event["image"];
                             $title = $event["title"];
@@ -590,36 +590,36 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             $time = $event["time"];
                             $is_virtual = $event["is_virtual"];
                         ?>
-                            <a href="<? echo $event["post_url"] ?>">
+                            <a href="<?php echo $event["post_url"] ?>">
                                 <div class="card">
-                                    <img width="100%" src="<? echo $image ?>" alt="<? echo $title ?>">
+                                    <img width="100%" src="<?php echo $image ?>" alt="<?php echo $title ?>">
 
                                     <p class="event-title">
-                                        <? echo $title ?>
+                                        <?php echo $title ?>
                                     </p>
                                     <p class="speaker-name">
-                                        <? echo $speaker ?>
+                                        <?php echo $speaker ?>
                                     </p>
                                     <div class="flex-between date-and-language">
                                         <p class="date">
-                                            <? echo $date ?>
+                                            <?php echo $date ?>
                                         </p>
                                         <p class="language">
-                                            <? echo $language ?>
+                                            <?php echo $language ?>
                                         </p>
 
                                     </div>
                                     <div class="flex-between time-and-country">
                                         <p class="time">
-                                            <? echo $time ?>
+                                            <?php echo $time ?>
                                         </p>
                                         <p class="country">
-                                            <? echo $is_virtual ?>
+                                            <?php echo $is_virtual ?>
                                         </p>
                                     </div>
                                 </div>
                             </a>
-                        <?
+                        <?php
                         }
 
                         ?>
@@ -638,18 +638,18 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                             </li>
 
                             <!-- Page links -->
-                            <?
+                            <?php
                             $previous_page_param = $this->get_query_param('previous_events_page');
                             $current = !empty($previous_page_param) ? $previous_page_param[0] : "1";
                             ?>
                             <?php for ($i = 1; $i <= $previous_pagination['total_pages']; $i++) : ?>
-                                <?
+                                <?php
                                 $current_url_params = $_GET;
                                 $current_url_params["previous_events_page"] = $i;
                                 $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
                                 $cls = intval($current) === $i ? "active" : "";
                                 ?>
-                                <li class="page-item <? echo $cls ?>"><a class="page-link" href="<? echo $new_url ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item <?php echo $cls ?>"><a class="page-link" href="<?php echo $new_url ?>"><?php echo $i; ?></a></li>
                             <?php endfor; ?>
 
                             <!-- Next page link -->
@@ -663,11 +663,11 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
 
                         </ul>
                     </div>
-                <?
+                <?php
                 }
                 ?>
             </section>
         </main>
-<?
+<?php
     }
 }

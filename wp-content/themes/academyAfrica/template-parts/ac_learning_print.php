@@ -6,7 +6,7 @@ $content = $args['content'];
 
 ?>
 
-<link rel="stylesheet" href="<? echo get_stylesheet_directory_uri() ?>/assets/css/dist/print/ac_learning_print.css">
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() ?>/assets/css/dist/print/ac_learning_print.css">
 <div class="pdf-template">
     <div class="template">
         <div class="template__title">
@@ -15,10 +15,10 @@ $content = $args['content'];
             </div>
             <div class="template__title__text">
                 <div class="cfa-title">
-                    <? echo $learning_path_title ?>
+                    <?php echo $learning_path_title ?>
                 </div>
                 <div class="cfa-excerpt">
-                    <? echo $learning_path_excerpt ?>
+                    <?php echo $learning_path_excerpt ?>
                 </div>
             </div>
         </div>
@@ -28,13 +28,13 @@ $content = $args['content'];
                     <?php echo esc_html(academyafrica_translate('Take the courses')); ?>
                 </div>
                 <div class="content">
-                    <? echo $content ?>
+                    <?php echo $content ?>
                 </div>
                 <div class="list">
                     <?php
                     $counter = 0;
                     foreach ($courses as $course_index =>  $course) : ?>
-                        <?
+                        <?php
                         $course_thumbnail = get_the_post_thumbnail_url($course);
                         $course_title = $course->post_title;
                         $course_excerpt = $course->post_excerpt;
@@ -52,7 +52,7 @@ $content = $args['content'];
                         ?>
                         <div class="individual-course">
                             <div class="course-index">
-                                <? echo $course_index + 1 ?>
+                                <?php echo $course_index + 1 ?>
                             </div>
                             <div class="course">
                                 <?php get_template_part(
@@ -68,11 +68,11 @@ $content = $args['content'];
                                     ]
                                 ); ?>
                                 <div class="extra-course-details">
-                                    <a href="<? echo $course_link ?>" class="course-title">
-                                        <? echo $course_title ?>
+                                    <a href="<?php echo $course_link ?>" class="course-title">
+                                        <?php echo $course_title ?>
                                     </a>
                                     <div class="course-excerpt">
-                                        <? echo $course_excerpt ?>
+                                        <?php echo $course_excerpt ?>
                                     </div>
                                 </div>
                             </div>

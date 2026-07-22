@@ -69,23 +69,23 @@ global $shortcode_tags;
 ?>
 <div class="course-completed">
     <h4 class="cfa-title">
-        <? echo $congratulations ?>
+        <?php echo $congratulations ?>
     </h4>
     <div class="cert-pdf">
-        <? echo do_shortcode($cert_post->post_content) ?>
+        <?php echo do_shortcode($cert_post->post_content) ?>
     </div>
     <div class="content">
         <?php get_template_part('template-parts/certificate', 'template', array("academy_head" => $academy_head, "course" => array("date" => $completion_date, "name" => $certificate_course), "user" => $user)); ?>
         <div style="flex: 1; display: flex; justify-content: center;">
             <div class="share-section">
                 <h4 class="title">
-                    <? echo $share_title ?>
+                    <?php echo $share_title ?>
                 </h4>
                 <div class="share" style="display: flex; justify-content: center;">
                     <?php get_template_part('template-parts/social_share', 'template', array('message' => $share_message)); ?>
                 </div>
                 <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px; flex-direction: column;">
-                    <a href="<? echo learndash_get_course_certificate_link($course_id) ?>" download>
+                    <a href="<?php echo learndash_get_course_certificate_link($course_id) ?>" download>
                         <button class="button primary" id="download-certificate">
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="Icon">
@@ -97,7 +97,7 @@ global $shortcode_tags;
                             <?php echo esc_html(academyafrica_translate('Download')); ?>
                         </button>
                     </a>
-                    <a href="<? echo get_permalink($course_id) ?>">
+                    <a href="<?php echo get_permalink($course_id) ?>">
                         <button class="button primary">
                             <?php echo esc_html(academyafrica_translate('View Course')); ?>
                         </button>
@@ -119,7 +119,7 @@ global $shortcode_tags;
             const height = doc.internal.pageSize.getHeight();
             doc.html(pdfjs, {
                 callback: function(doc) {
-                    doc.save(`<? echo $user['first_name'] . ' ' . $user['first_name'] ?> | <? echo $certificate_course ?>.pdf`);
+                    doc.save(`<?php echo $user['first_name'] . ' ' . $user['first_name'] ?> | <?php echo $certificate_course ?>.pdf`);
                 },
                 width: width,
                 height,

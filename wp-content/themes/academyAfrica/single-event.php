@@ -39,34 +39,34 @@ require_once __DIR__ . '/includes/utils/countries.php';
             $countries = get_field("countries", $post_id) ?: [];
     ?>
             <h1 class="cfa-title">
-                <? echo $post_title ?>
+                <?php echo $post_title ?>
             </h1>
             <div class="image-container">
-                <img width="100%" class="featured-image" src="<? echo $featured_image_url ?>"
-                    alt="<? echo $post_id ?>">
+                <img width="100%" class="featured-image" src="<?php echo $featured_image_url ?>"
+                    alt="<?php echo $post_id ?>">
             </div>
             <div class="details">
                 <div class="custom-data">
                     <p class="speaker">
-                        <? echo isset($speaker) ? $speaker->display_name : "" ?>
+                        <?php echo isset($speaker) ? $speaker->display_name : "" ?>
                     </p>
                     <div class="with-icons">
                         <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=calendar, Size=16, Color=Black.svg" alt="">
                         <p style="margin: 0" class="date">
-                            <? echo $date ?>
+                            <?php echo $date ?>
                         </p>
                     </div>
 
                     <div class="with-icons">
                         <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=world, Size=16, Color=Black.svg" alt="">
                         <p style="margin: 0" class="language">
-                            <? echo $language ?>
+                            <?php echo $language ?>
                         </p>
                     </div>
                     <div class="with-icons">
                         <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=location, Size=16, Color=Black.svg" alt="">
                         <p style="margin: 0" class="time">
-                            <?
+                            <?php
                             if (isset($countries)) {
                                 foreach ($countries as $country) {
                                     echo country_flag_emoji($country['value']);
@@ -81,77 +81,77 @@ require_once __DIR__ . '/includes/utils/countries.php';
                     <div style="margin-bottom: 20px">
                         <?php get_template_part('template-parts/social_share', 'template'); ?>
                     </div>
-                    <?
+                    <?php
                     if ($is_past_event) {
                     ?>
-                        <a href="<? echo $resources ?>" <? echo $resources ? 'download' : '' ?>>
+                        <a href="<?php echo $resources ?>" <?php echo $resources ? 'download' : '' ?>>
                             <button class="button resources">
                                 <img src="/wp-content/themes/academyAfrica/assets/images/MOOCButton.svg" alt="">
-                                <? echo $resources_text ?>
+                                <?php echo $resources_text ?>
                             </button>
                         </a>
-                    <?
+                    <?php
                     } else {
                     ?>
-                        <a href="<? echo $registration_link ?>">
+                        <a href="<?php echo $registration_link ?>">
                             <button class="button cta signup-button">
-                                <? echo $register_text ?>
+                                <?php echo $register_text ?>
                             </button>
                         </a>
 
-                    <?
+                    <?php
                     }
                     ?>
                 </div>
             </div>
             <hr class="divider">
             <p class="content">
-                <? echo $post_content ?>
+                <?php echo $post_content ?>
             </p>
             <div class="linked-post">
-                <h4 class="title"><? echo $speaker_title ?></h4>
+                <h4 class="title"><?php echo $speaker_title ?></h4>
 
-                <?
+                <?php
                 if (isset($speakers) && is_array($speakers) && count($speakers) > 0) {
                     foreach ($speakers as $speaker) {
                         $sp_title = $speaker->post_title;
                         $avatar_url = get_the_post_thumbnail_url($speaker->ID, 'full');
                         $sp_desc = get_the_excerpt($speaker->ID);
                 ?>
-                        <img style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0;" src="<? echo $avatar_url ?>" alt="<? echo $speaker->display_name ?>" class="logo">
+                        <img style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0;" src="<?php echo $avatar_url ?>" alt="<?php echo $speaker->display_name ?>" class="logo">
                         <p style="text-transform: capitalize; margin: 0" class="name">
-                            <? echo $sp_title ?>
+                            <?php echo $sp_title ?>
                         </p>
                         <p class="description" style="margin-bottom: 32px; margin-top: 16px;">
-                            <? echo $sp_desc ?>
+                            <?php echo $sp_desc ?>
                         </p>
-                <?
+                <?php
                     }
                 }
                 ?>
             </div>
             <div class="linked-post">
-                <?
+                <?php
                 if (isset($organisations) && is_array($organisations) && count($organisations) > 0):
                 foreach ($organisations as $organisation) {
                     $org_title = $organisation->post_title;
                     $img = get_the_post_thumbnail_url($organisation->ID, 'full');
                     $desc = get_the_excerpt($organisation->ID);
                 ?>
-                    <h4 class="title"><? echo $or_title ?></h4>
-                    <img src="<? echo $img ?>" alt="<? echo $org_title ?>" style="height: 100px;" class="logo">
+                    <h4 class="title"><?php echo $or_title ?></h4>
+                    <img src="<?php echo $img ?>" alt="<?php echo $org_title ?>" style="height: 100px;" class="logo">
                     <p class="name">
-                        <? echo $org_title ?>
+                        <?php echo $org_title ?>
                     </p>
                     <p class="description">
-                        <? echo $desc ?>
+                        <?php echo $desc ?>
                     </p>
-                <?
+                <?php
                 }
                 endif;
                 ?>
             </div>
-    <?
+    <?php
         endwhile;
     endif;
     ?>
@@ -161,7 +161,7 @@ require_once __DIR__ . '/includes/utils/countries.php';
                 <path d="M10 4L6 8L10 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" />
             </svg>
-            <? echo $back_text ?>
+            <?php echo $back_text ?>
         </a>
     </div>
 </main>

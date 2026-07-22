@@ -146,14 +146,14 @@ class Academy_Africa_Home_Learning_Pathways  extends \Elementor\Widget_Base
             <section class="learning-pathways home-learning-pathways">
                 <div class="title">
                     <h4 class="cfa-title">
-                        <? echo $pathway_title ?>
+                        <?php echo $pathway_title ?>
                     </h4>
                 </div>
                 <p class="description">
-                    <? echo $pathway_description ?>
+                    <?php echo $pathway_description ?>
                 </p>
                 <div class="content">
-                    <?
+                    <?php
                     if (!empty($learning_pathways)) {
                         foreach ($learning_pathways as $pathway) {
                             $pathway_name = $pathway["title"];
@@ -162,39 +162,39 @@ class Academy_Africa_Home_Learning_Pathways  extends \Elementor\Widget_Base
                             $pathway_courses = $pathway["courses"];
                             $pathway_link = get_permalink($pathway["id"]);
                     ?>
-                            <a href="<? echo $pathway_link ?>" class="pathway-link">
+                            <a href="<?php echo $pathway_link ?>" class="pathway-link">
                                 <div class="card">
                                     <div class="course-card-pattern">
                                         <div class="icon">
-                                            <img src="<? echo $pathway_icon ?>" alt="sample-icon">
+                                            <img src="<?php echo $pathway_icon ?>" alt="sample-icon">
                                         </div>
                                     </div>
                                     <div class="pathway-card-content">
                                         <div>
                                             <p class="pathway-name">
-                                                <? echo $pathway_name ?>
+                                                <?php echo $pathway_name ?>
                                             </p>
                                             <p class="pathway-description">
-                                                <? echo wp_trim_words($pathway_desc, 20, '...') ?>
+                                                <?php echo wp_trim_words($pathway_desc, 20, '...') ?>
                                             </p>
                                         </div>
                                         <p class="course-count">
-                                            <? echo count($pathway_courses) . ' ' . $courses_count ?>
+                                            <?php echo count($pathway_courses) . ' ' . $courses_count ?>
                                         </p>
                                     </div>
                                 </div>
                             </a>
-                    <?
+                    <?php
                         }
                     }
                     ?>
                     <div class="pathway-card card">
                         <div class="pathway-cta">
                             <p class="pathway-cta-description">
-                                <? echo $pathway_cta_description ?>
+                                <?php echo $pathway_cta_description ?>
                             </p>
-                            <a href="<? echo $pathway_cta_link['url'] ?>" class="button primary large all-courses">
-                                <? echo $pathway_cta_link_text ?>
+                            <a href="<?php echo $pathway_cta_link['url'] ?>" class="button primary large all-courses">
+                                <?php echo $pathway_cta_link_text ?>
                                 <i class="fa-solid fa-chevron-right icon"></i>
                             </a>
                         </div>
@@ -203,6 +203,6 @@ class Academy_Africa_Home_Learning_Pathways  extends \Elementor\Widget_Base
                 </div>
             </section>
         </main>
-<?
+<?php
     }
 }

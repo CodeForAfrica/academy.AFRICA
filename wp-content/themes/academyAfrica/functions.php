@@ -493,9 +493,9 @@ function set_global_error($message = "An error occured")
 {
 ?>
     <script>
-        window.error = <? echo json_encode($message) ?>
+        window.error = <?php echo json_encode($message) ?>
     </script>
-<?
+<?php
 }
 function render_inactive($render)
 {

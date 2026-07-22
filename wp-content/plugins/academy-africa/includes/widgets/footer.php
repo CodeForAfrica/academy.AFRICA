@@ -211,13 +211,13 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
                     <div class="site-description">
                         <img height="110" width="250" src="<?php echo $image_url ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
                         <p class="description" <?php echo $this->get_render_attribute_string('site_description'); ?>>
-                            <? echo $site_description ?>
+                            <?php echo $site_description ?>
                         </p>
                         <div class="footer-connect">
                             <span style="white-space: nowrap;" <?php echo $this->get_render_attribute_string('stay_in_touch_text'); ?>>
-                                <? echo $stay_in_touch_text ?>
+                                <?php echo $stay_in_touch_text ?>
                             </span>
-                            <?
+                            <?php
                             if (!empty($settings['social_media_links'])) {
                                 foreach ($settings['social_media_links'] as $item) {
                                     $link = esc_url($item['link']['url']);
@@ -233,7 +233,7 @@ class Academy_Africa_Footer extends \Elementor\Widget_Base
                 </div>
                 <div class="item">
                     <div class="links">
-                        <?
+                        <?php
                         if (!empty($settings['primary_links'])) {
                             foreach ($settings['primary_links'] as $item) {
                                 $page_link = esc_url($item['page_link']['url']);
