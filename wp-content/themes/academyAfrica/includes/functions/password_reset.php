@@ -6,7 +6,7 @@ function password_reset($user_email){
           'action' => 'lostpassword',
           'error_message' => 'Invalid email address.'
       ), home_url('/login'));
-      wp_redirect(home_url($url));
+      wp_safe_redirect($url);
       exit;
   }
 
@@ -19,7 +19,7 @@ function password_reset($user_email){
           'action' => 'lostpassword',
           'error_message' => 'No user was found with that email address.'
       ), home_url('/login'));
-      wp_redirect(home_url($url));
+      wp_safe_redirect($url);
       exit;
   }
 
@@ -30,7 +30,7 @@ function password_reset($user_email){
           'action' => 'lostpassword',
           'error_message' => 'An error occurred while generating the password reset key.'
       ), home_url('/login'));
-      wp_redirect(home_url($url));
+      wp_safe_redirect($url);
       exit;
   }
 
