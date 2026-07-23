@@ -403,6 +403,19 @@ function academyafrica_migrate_account_verification()
         return;
     }
 
+    // Keep this off the hot path: skip background/Heartbeat/cron requests and
+    // only run when a capable admin is actually driving an admin page view.
+    if (wp_doing_ajax() || wp_doing_cron() || !current_user_can('manage_options')) {
+        return;
+    }
+
+    // Lock so that a request which dies mid-migration (this site has known
+    // memory pressure) cannot re-trigger the full scan on every admin request.
+    if (get_transient('aa_verification_migration_lock')) {
+        return;
+    }
+    set_transient('aa_verification_migration_lock', 1, 5 * MINUTE_IN_SECONDS);
+
     global $wpdb;
     $batch = 500;
 
@@ -442,6 +455,7 @@ function academyafrica_migrate_account_verification()
     } while (count($ids) === $batch);
 
     update_option('aa_verification_migrated_v1', time());
+    delete_transient('aa_verification_migration_lock');
 }
 add_action('admin_init', 'academyafrica_migrate_account_verification');
 
