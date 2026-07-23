@@ -23,24 +23,10 @@ function check_register_action()
     }
 }
 
-function activate_new_user_action()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && ((isset($_GET['action'])) && $_GET['action'] === 'account_activation') && (isset($_GET['key'])) && (isset($_GET['user_id']))) {
-        $user_id = $_GET['user_id'];
-        $code = $_GET['key'];
-        global $wpdb;
-        $user = get_user_by('ID', $user_id);
-        update_user_meta($user_id, 'account_status', "active");
-        $wpdb->update(
-            'wp_users',
-            array('user_status' => 0),
-            array(
-                'ID' => $user_id,
-                'user_activation_key' => $code
-            ),
-        );
-    }
-}
+// Legacy activate_new_user_action() removed (#56): account activation is now
+// handled by handle_account_activation() on `init`, keyed on the signed token +
+// `is_verified` meta, instead of an unvalidated ?key=&user_id= wp_users write.
+
 function academyafrica_customize_register($wp_customize)
 {
     // Section for Profile Settings
