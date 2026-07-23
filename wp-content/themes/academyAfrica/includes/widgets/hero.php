@@ -34,7 +34,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
 
     public function get_verified_users_count()
     {
-        $count = wp_cache_get('verified_users_count', 'academy_africa');
+        $count = \AcademyAfrica\Theme\Cache\Cache::get('verified_users_count');
         if (false !== $count) {
             return $count;
         }
@@ -42,29 +42,29 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
         $count = (int) $wpdb->get_var(
             "SELECT COUNT(*) FROM {$wpdb->usermeta} WHERE meta_key = 'is_verified' AND meta_value = '1'"
         );
-        wp_cache_set('verified_users_count', $count, 'academy_africa', HOUR_IN_SECONDS);
+        \AcademyAfrica\Theme\Cache\Cache::set('verified_users_count', $count, HOUR_IN_SECONDS);
         return $count;
     }
 
     public function get_courses_count()
     {
-        $count = wp_cache_get('published_courses_count', 'academy_africa');
+        $count = \AcademyAfrica\Theme\Cache\Cache::get('published_courses_count');
         if (false !== $count) {
             return $count;
         }
         $count = (int) wp_count_posts('sfwd-courses')->publish;
-        wp_cache_set('published_courses_count', $count, 'academy_africa', HOUR_IN_SECONDS);
+        \AcademyAfrica\Theme\Cache\Cache::set('published_courses_count', $count, HOUR_IN_SECONDS);
         return $count;
     }
 
     public function get_events_count()
     {
-        $count = wp_cache_get('published_events_count', 'academy_africa');
+        $count = \AcademyAfrica\Theme\Cache\Cache::get('published_events_count');
         if (false !== $count) {
             return $count;
         }
         $count = (int) wp_count_posts('event')->publish;
-        wp_cache_set('published_events_count', $count, 'academy_africa', HOUR_IN_SECONDS);
+        \AcademyAfrica\Theme\Cache\Cache::set('published_events_count', $count, HOUR_IN_SECONDS);
         return $count;
     }
     protected function register_controls()

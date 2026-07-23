@@ -20,10 +20,10 @@ $organizations     = get_field('organization', $course_id) ?: [];
 $related_courses   = get_field('related_courses', $course_id) ?: [];
 $short_description = get_field('short_description', $course_id) ?: '';
 $cs_cache_key  = 'course_status_u' . $user_id . '_c' . $course_id;
-$course_status = wp_cache_get($cs_cache_key, 'academy_africa');
+$course_status = \AcademyAfrica\Theme\Cache\Cache::get($cs_cache_key);
 if (false === $course_status) {
     $course_status = learndash_course_status($course_id);
-    wp_cache_set($cs_cache_key, $course_status, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+    \AcademyAfrica\Theme\Cache\Cache::set($cs_cache_key, $course_status, 5 * MINUTE_IN_SECONDS);
 }
 $post_data         = get_post($course_id);
 if (!$post_data) {
@@ -38,7 +38,7 @@ $course_language = function_exists('pll_get_post_language') ? pll_get_post_langu
 // ------------------------------------------------------------------
 do_action('qm/start', 'course:fetch_lessons');
 
-$lessons = wp_cache_get('course_lessons_' . $course_id, 'academy_africa');
+$lessons = \AcademyAfrica\Theme\Cache\Cache::get('course_lessons_' . $course_id);
 if (false === $lessons) {
     $lessons = learndash_get_course_lessons_list($course_id, 0);
     if (empty($lessons)) {
@@ -56,7 +56,7 @@ if (false === $lessons) {
         ]);
     }
     $lessons = $lessons ?: [];
-    wp_cache_set('course_lessons_' . $course_id, $lessons, 'academy_africa', HOUR_IN_SECONDS);
+    \AcademyAfrica\Theme\Cache\Cache::set('course_lessons_' . $course_id, $lessons, HOUR_IN_SECONDS);
     if (empty($lessons)) {
         do_action('qm/warning', 'course.php: no lessons found for course_id={id}', ['id' => $course_id]);
     }
@@ -92,7 +92,7 @@ $course_pathways = array_filter($pathways['learning_paths'], function ($pathway)
 // Instructor data — cached per course; multiple get_field() +
 // get_user_meta() calls per author add up fast with co-authors
 // ------------------------------------------------------------------
-$authors_data = wp_cache_get('course_author_data_' . $course_id, 'academy_africa');
+$authors_data = \AcademyAfrica\Theme\Cache\Cache::get('course_author_data_' . $course_id);
 if (false === $authors_data) {
     $raw_authors = get_coauthors();
     if (empty($raw_authors)) {
@@ -125,13 +125,13 @@ if (false === $authors_data) {
             'website'     => get_the_author_meta('website',   $author->ID) ?: ($author->website ?? ''),
         ];
     }
-    wp_cache_set('course_author_data_' . $course_id, $authors_data, 'academy_africa', HOUR_IN_SECONDS);
+    \AcademyAfrica\Theme\Cache\Cache::set('course_author_data_' . $course_id, $authors_data, HOUR_IN_SECONDS);
 }
 
 // ------------------------------------------------------------------
 // Organization data — cached per course; 6× get_field() per org
 // ------------------------------------------------------------------
-$orgs_data = wp_cache_get('course_orgs_data_' . $course_id, 'academy_africa');
+$orgs_data = \AcademyAfrica\Theme\Cache\Cache::get('course_orgs_data_' . $course_id);
 if (false === $orgs_data) {
     $orgs_data = [];
     foreach ($organizations as $organization) {
@@ -147,7 +147,7 @@ if (false === $orgs_data) {
             'website'   => get_field('website',   $organization->ID),
         ];
     }
-    wp_cache_set('course_orgs_data_' . $course_id, $orgs_data, 'academy_africa', HOUR_IN_SECONDS);
+    \AcademyAfrica\Theme\Cache\Cache::set('course_orgs_data_' . $course_id, $orgs_data, HOUR_IN_SECONDS);
 }
 
 ?>
@@ -205,10 +205,10 @@ if ($course_status == "Completed" && $is_cert) {
                 <div class='progress'>
                     <?php
                     $cp_cache_key = 'course_progress_u' . $user_id . '_c' . $course_id;
-                    $cp_output    = wp_cache_get($cp_cache_key, 'academy_africa');
+                    $cp_output    = \AcademyAfrica\Theme\Cache\Cache::get($cp_cache_key);
                     if (false === $cp_output) {
                         $cp_output = do_shortcode('[learndash_course_progress]');
-                        wp_cache_set($cp_cache_key, $cp_output, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+                        \AcademyAfrica\Theme\Cache\Cache::set($cp_cache_key, $cp_output, 5 * MINUTE_IN_SECONDS);
                     }
                     echo $cp_output;
                     ?>
@@ -279,10 +279,10 @@ if ($course_status == "Completed" && $is_cert) {
                     do_action('qm/start', 'course:course_content_shortcode');
                     if (!$is_enrolled) {
                         $cc_cache_key = 'course_content_html_' . $course_id;
-                        $cc_output = wp_cache_get($cc_cache_key, 'academy_africa');
+                        $cc_output = \AcademyAfrica\Theme\Cache\Cache::get($cc_cache_key);
                         if (false === $cc_output) {
                             $cc_output = do_shortcode('[course_content course_id="' . $course_id . '"]');
-                            wp_cache_set($cc_cache_key, $cc_output, 'academy_africa', HOUR_IN_SECONDS);
+                            \AcademyAfrica\Theme\Cache\Cache::set($cc_cache_key, $cc_output, HOUR_IN_SECONDS);
                         }
                         echo $cc_output;
                     } else {
