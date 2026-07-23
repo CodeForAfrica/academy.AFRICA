@@ -213,9 +213,9 @@ if ($course_status == "Completed" && $is_cert) {
                     echo $cp_output;
                     ?>
                     <?php
-                    if ($course_status == "Completed") {
+                    if ($course_status == "Completed" && academyafrica_course_has_certificate($course_id)) {
                         $cert_label = function_exists('pll__') ? pll__('Download Certificate') : 'Download Certificate';
-                        echo "<a href='" . get_permalink($course_id) . "?certificate=true' class='pathways-link'>" . esc_html($cert_label) . "</a>";
+                        echo "<a href='" . esc_url(get_permalink($course_id) . '?certificate=true') . "' class='pathways-link'>" . esc_html($cert_label) . "</a>";
                     }
                     ?>
                 </div>

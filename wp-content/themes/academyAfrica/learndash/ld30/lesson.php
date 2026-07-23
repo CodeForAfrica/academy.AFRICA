@@ -149,24 +149,33 @@ do_action('qm/stop', 'lesson:init');
                 <div class="sfwd-lessons__footer">
                     <hr class="sfwd-lessons__navigation__divider" />
                     <?php
-                    if (!is_array($topics)) {
+                    // A topicless lesson is completed via its own button. A lesson
+                    // WITH topics is auto-completed once its topics are done
+                    // (LearnDash progression rules), so it shows no button here.
+                    if (empty($topics)) {
                         $complete_button = learndash_mark_complete($lesson);
                         if ($complete_button) {
                             echo "<div class='sfwd-lessons__footer__complete'>" . $complete_button . "</div>";
                         }
-                        if ($course_status == 'Completed') {
-                            echo "<div class='sfwd-lessons__footer__certificate'>";
-                            echo "<a href='" . esc_url($course_url . '?certificate=true') . "' class='certificate_download'>Download Certificate</a>";
-                            echo "</div>";
-                        }
+                    }
+                    // Certificate access on a completed course, independent of the
+                    // lesson's topic structure, and only when one is published.
+                    if ($course_status == 'Completed' && academyafrica_course_has_certificate($course_id)) {
+                        echo "<div class='sfwd-lessons__footer__certificate'>";
+                        echo "<a href='" . esc_url($course_url . '?certificate=true') . "' class='certificate_download'>Download Certificate</a>";
+                        echo "</div>";
+                    }
                     ?>
-                        <script>
-                            document.querySelector('.sfwd-mark-complete').addEventListener('submit', function(e) {
+                    <script>
+                        (function() {
+                            var form = document.querySelector('.sfwd-mark-complete');
+                            if (!form) return;
+                            form.addEventListener('submit', function(e) {
                                 var url = e.target.action.split('#')[0];
                                 e.target.action = url;
                             });
-                        </script>
-                    <?php } ?>
+                        })();
+                    </script>
                 </div>
             </div>
         </div>

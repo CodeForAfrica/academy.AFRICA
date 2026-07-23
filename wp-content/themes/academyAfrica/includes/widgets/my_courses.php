@@ -370,8 +370,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                             if (!empty($completed_courses['results'])) {
                                 foreach ($completed_courses['results'] as $key => $course) {
                                     $course_id = $course->post_id;
-                                    $certificate_id = learndash_get_setting($course_id, 'certificate');
-                                    $cert_post = get_post($certificate_id);
+                                    // Skip completed courses that have no published certificate
+                                    // rather than fataling on $cert_post->post_content below (#46).
+                                    $cert_post = academyafrica_get_course_certificate_post($course_id);
+                                    if (!$cert_post) {
+                                        continue;
+                                    }
                                     $title = get_the_title($course);
                                     $authors = get_coauthors($course_id);
                                     $first_name = get_the_author_meta('first_name', $authors[0]->ID);
