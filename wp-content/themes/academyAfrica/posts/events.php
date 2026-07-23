@@ -5,6 +5,58 @@
 // Exit if accessed directly
 if (!defined('ABSPATH')) exit;
 
+/**
+ * Parse an event's stored date (optionally with time) into a timestamp, or null
+ * when the stored value is missing or unparseable. Shared by the event list and
+ * single-event views so one malformed record can't fatal on
+ * date_format(false, ...) or new DateTime() (#57, findings 17 & 39).
+ *
+ * @param mixed  $raw_date
+ * @param string $raw_time
+ * @return int|null
+ */
+function academyafrica_event_timestamp($raw_date, $raw_time = '')
+{
+    if (empty($raw_date) || !is_string($raw_date)) {
+        return null;
+    }
+    $raw_date = trim($raw_date);
+    // Treat MySQL/ACF zero-dates as missing rather than parsing them to year -1.
+    if ($raw_date === '' || strncmp($raw_date, '0000-00-00', 10) === 0) {
+        return null;
+    }
+    $value = trim($raw_date . ' ' . (is_string($raw_time) ? $raw_time : ''));
+    $ts = strtotime($value);
+
+    return false === $ts ? null : $ts;
+}
+
+/**
+ * Format an event date for display, returning $fallback for missing/invalid data.
+ *
+ * @param mixed  $raw_date
+ * @param string $format
+ * @param string $fallback
+ * @return string
+ */
+function academyafrica_format_event_date($raw_date, $format = 'd/m/Y', $fallback = '')
+{
+    $ts = academyafrica_event_timestamp($raw_date);
+
+    return null === $ts ? $fallback : date($format, $ts);
+}
+
+/**
+ * Cache-buster for the event filter options, bumped whenever an event is saved
+ * so cached filter dropdowns don't go stale (#57, finding 32).
+ *
+ * @return int
+ */
+function academyafrica_event_filters_version()
+{
+    return (int) get_option('aa_event_filters_version', 1);
+}
+
 function event_post_type()
 {
     $labels = array(
@@ -165,6 +217,9 @@ function save_details($post_id)
     if (isset($_POST["time"])) {
         update_post_meta($post_id, "time", sanitize_text_field($_POST["time"]));
     }
+
+    // Invalidate cached event filter options so new metadata shows up.
+    update_option('aa_event_filters_version', time());
 }
 
 add_action("admin_init", "admin_init");
