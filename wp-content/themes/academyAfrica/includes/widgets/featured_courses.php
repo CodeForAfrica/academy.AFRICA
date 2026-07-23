@@ -254,7 +254,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                     </div>
                 </div>
                 <div class="featured-course-list">
-                    <?
+                    <?php
                     if (!empty($courses)) {
                         foreach ($courses as $course) {
                             $course_title = get_the_title($course);
@@ -280,7 +280,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                     'students' => $students
                                 ]
                             ); ?>
-                            <?
+                            <?php
                         }
                     }
                     ?>
@@ -296,15 +296,15 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                 </p>
                             </div>
                             <p class="showcase-text">
-                                <? echo $certificate_cta_description ?>
+                                <?php echo $certificate_cta_description ?>
                             </p>
                             <a class="button primary large all-courses" href="<?php echo $courses_link['url']; ?>">
-                                <? echo $courses_link_label; ?>
+                                <?php echo $courses_link_label; ?>
                                 <i class="fa-solid fa-chevron-right icon"></i>
                             </a>
                         </div>
             </div>
         </div>
-        <?
+        <?php
     }
 }

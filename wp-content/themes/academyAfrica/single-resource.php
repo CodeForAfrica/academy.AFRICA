@@ -61,6 +61,6 @@ $course_intro    = $post_data->post_content;
         </div>
     </div>
 </div>
-<?
+<?php
 get_footer();
 ?>

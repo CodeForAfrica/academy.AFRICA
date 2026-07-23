@@ -277,7 +277,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
             <div class="courses-main" id="all-courses">
                 <section class="course-grid">
                     <h4 class="cfa-title">
-                        <? echo $courses_title ?>
+                        <?php echo $courses_title ?>
                     </h4>
                     <div class="filter-by-language">
                         <div class="label">
@@ -293,7 +293,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             foreach ($languages as $language_code => $language_name) {
 
                             ?>
-                                <button id="<? echo $language_code ?>" class="button medium ld-button"
+                                <button id="<?php echo $language_code ?>" class="button medium ld-button"
                                     onclick="filterByLanguage('<?php echo $language_code; ?>')">
                                     <?php echo $language_name; ?>
                                 </button>
@@ -314,15 +314,15 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                     <div class="filter-section">
                         <div class="sort">
                             <div class="label">
-                                <? echo $sort_by ?>
+                                <?php echo $sort_by ?>
                             </div>
                             <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
-                                <?
+                                <?php
                                 foreach ($sort_options as $key => $option) {
                                     $selected = $sort == $key ? "selected" : "";
                                 ?>
-                                    <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
-                                <?
+                                    <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $option["name"] ?></option>
+                                <?php
                                 }
                                 ?>
                             </select>
@@ -370,7 +370,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                         });
                     </script>
                     <div class="course-list">
-                        <?
+                        <?php
                         if (!empty($courses)) {
                             foreach ($courses as $course) {
                                 $course_title = get_the_title($course);
@@ -403,12 +403,12 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                         'students' => $students
                                     ]
                                 ); ?>
-                        <?
+                        <?php
                             }
                         }
                         ?>
                     </div>
-                    <?
+                    <?php
                     if ($has_pagination) {
                     ?>
                         <hr class="divider">
@@ -417,52 +417,52 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                                 View All
                             </button>
                             <ul class="pagination">
-                                <?
+                                <?php
                                 if ($current_page > 1) {
                                 ?>
                                     <li class="page-item">
-                                        <div class="page-link" onclick="paginateCourses(<? echo $current_page - 1 ?>)">
+                                        <div class="page-link" onclick="paginateCourses(<?php echo $current_page - 1 ?>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </li>
-                                    <?
+                                    <?php
                                 }
                                 for ($i = 1; $i <= $no_of_pages; $i++) {
                                     if ($i == $current_page) {
                                     ?>
                                         <li class="page-item active">
                                             <div class="page-link">
-                                                <? echo $i ?>
+                                                <?php echo $i ?>
                                             </div>
                                         </li>
-                                    <?
+                                    <?php
                                     } else {
                                     ?>
                                         <li class="page-item">
-                                            <div class="page-link" onclick="paginateCourses(<? echo $i ?>)">
-                                                <? echo $i ?>
+                                            <div class="page-link" onclick="paginateCourses(<?php echo $i ?>)">
+                                                <?php echo $i ?>
                                             </div>
                                         </li>
-                                    <?
+                                    <?php
                                     }
                                 }
                                 if ($current_page < $no_of_pages) {
                                     ?>
                                     <li class="page-item">
-                                        <div class="page-link" onclick="paginateCourses(<? echo $current_page + 1 ?>)">
+                                        <div class="page-link" onclick="paginateCourses(<?php echo $current_page + 1 ?>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </li>
-                                <?
+                                <?php
                                 }
                                 ?>
                             </ul>
                         </div>
-                    <?
+                    <?php
                     }
                     ?>
                 </section>
@@ -470,34 +470,34 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 ?>
                     <div class="career-dev">
                         <div class="title">
-                            <? echo $pathway_title ?>
+                            <?php echo $pathway_title ?>
                         </div>
                         <div class="body">
                             <div class="content">
                                 <div class="text">
-                                    <? echo $pathway_description ?>
+                                    <?php echo $pathway_description ?>
                                 </div>
                                 <div class="cta">
-                                    <a href="<? echo $pathway_button_link ?>" class="button primary medium">
-                                        <? echo $pathway_button_text ?>
+                                    <a href="<?php echo $pathway_button_link ?>" class="button primary medium">
+                                        <?php echo $pathway_button_text ?>
                                         <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="sample-course">
-                                <a class="pathway-link" href="<? echo get_permalink($pathway) ?>">
+                                <a class="pathway-link" href="<?php echo get_permalink($pathway) ?>">
                                     <div class="card">
                                         <div class="course-card-pattern">
                                             <div class="icon">
-                                                <img src="<?php echo get_the_post_thumbnail_url($pathway); ?>" alt="<? echo $pathway->post_title ?>" />
+                                                <img src="<?php echo get_the_post_thumbnail_url($pathway); ?>" alt="<?php echo $pathway->post_title ?>" />
                                             </div>
                                         </div>
                                         <div class="pathway-card-content">
                                             <p class="pathway-name">
-                                                <? echo $pathway->post_title ?>
+                                                <?php echo $pathway->post_title ?>
                                             </p>
                                             <p class="course-count">
-                                                <? echo count($pathway_courses) . ' Courses' ?>
+                                                <?php echo count($pathway_courses) . ' Courses' ?>
                                             </p>
                                         </div>
                                     </div>
@@ -505,11 +505,11 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             </div>
                         </div>
                     </div>
-                <?
+                <?php
                 }
                 ?>
             </div>
         </main>
-<?
+<?php
     }
 }

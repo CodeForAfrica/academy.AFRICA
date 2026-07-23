@@ -171,18 +171,18 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
         <main class="body">
             <div class="sidebar" id="sidebar">
                 <p class="filter-by">
-                    <? echo $filter_by ?>
+                    <?php echo $filter_by ?>
                 </p>
-                <?
+                <?php
                 if (!empty($filter_options)) {
                     foreach ($filter_options as $item) {
                         $title = $item["title"];
                         $options = $item["options"];
                 ?>
                         <p style="margin-top: 40px" class="filter-by-title">
-                            <? echo $title ?>
+                            <?php echo $title ?>
                         </p>
-                        <?
+                        <?php
                         if (!empty($options)) {
                             foreach ($options as $option) {
                         ?>
@@ -191,11 +191,11 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                                         <label class="mui-checkbox">
                                             <input type="checkbox">
                                             <span class="checkmark"></span>
-                                            <? echo $option ?>
+                                            <?php echo $option ?>
                                         </label>
                                     </li>
                                 </ul>
-                <?
+                <?php
                             }
                         }
                     }
@@ -212,7 +212,7 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                         Complete your courses
                     </p>
                     <div class="content">
-                        <?
+                        <?php
                         if (!empty($incomplete_courses)) {
                             foreach ($incomplete_courses as $course) {
                                 $title = $course['title'];
@@ -222,29 +222,29 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                                 $image = $course['image'];
                         ?>
                                 <div class="card">
-                                    <img alt="course-logo" class="logo" src="<? echo $image ?>" />
+                                    <img alt="course-logo" class="logo" src="<?php echo $image ?>" />
                                     <div class="card-content">
                                         <div class="card-title">
                                             <p>
-                                                <? echo $title ?>
+                                                <?php echo $title ?>
                                             </p>
                                         </div>
                                         <p class="provider">
-                                            by <? echo $provider ?>
+                                            by <?php echo $provider ?>
                                         </p>
                                         <p class="lessons-count">
-                                            <? echo $lessons_count ?> lessons
+                                            <?php echo $lessons_count ?> lessons
                                         </p>
                                         <div class="progress-bar">
-                                            <div style="width: <? echo $completed ?>"></div>
+                                            <div style="width: <?php echo $completed ?>"></div>
                                         </div>
                                         <div class="card-footer">
                                             <p>Enrolled</p>
-                                            <p><? echo $completed ?> Completed</p>
+                                            <p><?php echo $completed ?> Completed</p>
                                         </div>
                                     </div>
                                 </div>
-                        <?
+                        <?php
                             }
                         }
                         ?>
@@ -278,7 +278,7 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                         Your Certificates
                     </h4>
                     <div class="content">
-                        <?
+                        <?php
                         if (!empty($completed_courses)) {
                             foreach ($completed_courses as $course) {
                                 $title = $course['title'];
@@ -292,14 +292,14 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                                     <div class="card-content">
                                         <div class="card-title">
                                             <p>
-                                                <? echo $title ?>
+                                                <?php echo $title ?>
                                             </p>
                                         </div>
                                         <p class="provider">
-                                            by <? echo $provider ?>
+                                            by <?php echo $provider ?>
                                         </p>
                                         <p class="lessons-count">
-                                            <? echo $lessons_count ?> lessons
+                                            <?php echo $lessons_count ?> lessons
                                         </p>
                                         <div class="completed-progress-bar">
                                         </div>
@@ -312,7 +312,7 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                                         </div>
                                     </div>
                                 </div>
-                        <?
+                        <?php
                             }
                         }
                         ?>
@@ -343,6 +343,6 @@ class Academy_Africa_My_Courses  extends \Elementor\Widget_Base
                 </section>
             </div>
         </main>
-<?
+<?php
     }
 }

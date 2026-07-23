@@ -132,6 +132,6 @@ class Academy_Africa_Header_Section extends \Elementor\Widget_Base
                     </div>
             </div>
         </div>
-<?
+<?php
     }
 }

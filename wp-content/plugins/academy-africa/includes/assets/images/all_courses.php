@@ -318,6 +318,6 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 </section>
             </div>
         </main>
-<?
+<?php
     }
 }

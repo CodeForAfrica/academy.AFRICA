@@ -140,22 +140,22 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
             <div class="partners">
                 <div class="title">
                     <h4 class="cfa-title">
-                        <? echo $title ?>
+                        <?php echo $title ?>
                     </h4>
                 </div>
                 <div class="partner-content">
-                    <?
+                    <?php
                     if (!empty($our_partners)) {
                         foreach ($our_partners as $partner) {
                             $icon = $partner["icon"];
                             $name = $partner["name"];
                             $url = $partner["url"];
                             ?>
-                            <a href="<? echo $url ?>" target="_blank" class="partner-link">
-                                <img src="<? echo $icon ?>" alt="<? echo $name ?>" class="partner" />
-                                <!-- <div class="partner" style="background: url(<? echo $icon ?>); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: lightgray;"></div> -->
+                            <a href="<?php echo $url ?>" target="_blank" class="partner-link">
+                                <img src="<?php echo $icon ?>" alt="<?php echo $name ?>" class="partner" />
+                                <!-- <div class="partner" style="background: url(<?php echo $icon ?>); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: lightgray;"></div> -->
                             </a>
-                            <?
+                            <?php
                         }
                     }
                     ?>
@@ -164,22 +164,22 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
             <hr />
             <div class="other-partners">
                 <h1 class="other-partners-title">
-                    <? echo $other_partners_title ?>
+                    <?php echo $other_partners_title ?>
                 </h1>
                 <div class="other-partners-content">
-                    <?
+                    <?php
                     if (!empty($other_partners)) {
                         foreach ($other_partners as $partner) {
                             $icon = $partner["icon"];
                             $name = $partner["name"];
                             $url = $partner["url"];
                             ?>
-                            <a href="<? echo $url ?>" target="_blank" class="partner-tag">
+                            <a href="<?php echo $url ?>" target="_blank" class="partner-tag">
                                 <div class="partner-tag-content">
-                                    <? echo $name ?>
+                                    <?php echo $name ?>
                                 </div>
                             </a>
-                            <?
+                            <?php
                         }
                     }
                     ?>
@@ -187,6 +187,6 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
             </div>
         </div>
 
-        <?
+        <?php
     }
 }

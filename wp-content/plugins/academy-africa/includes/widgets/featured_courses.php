@@ -247,7 +247,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
             <!-- Fetch from Learndash -->
             <div class="neutral-bg">
                 <div class="content">
-                    <?
+                    <?php
                     if (!empty($courses)) {
                         foreach ($courses as $course) {
                             $title = $course['title'];
@@ -281,7 +281,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                     </div>
                                 </div>
                             </div>
-                            <?
+                            <?php
                         }
                     }
                     ?>
@@ -298,10 +298,10 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                         <div class="flex-items">
                             <div style="flex: 1">
                                 <p class="certificate-of">
-                                    <? echo $certificate_title ?>
+                                    <?php echo $certificate_title ?>
                                 </p>
                                 <p class="certificate-type">
-                                    <? echo $certificate_type ?>
+                                    <?php echo $certificate_type ?>
                                 </p>
                                 <hr>
                                 </hr>
@@ -326,59 +326,59 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                         <div class="course-details">
                             <div class="student">
                                 <p class="title">
-                                    <? echo $presented_to ?>
+                                    <?php echo $presented_to ?>
                                 </p>
                                 <p class="first-name">
-                                    <? echo $user['first_name'] ?>
+                                    <?php echo $user['first_name'] ?>
                                 </p>
                                 <p class="last-name">
-                                    <? echo $user['last_name'] ?>
+                                    <?php echo $user['last_name'] ?>
                                 </p>
                             </div>
                             <div class="course">
                                 <p class="course-description">
-                                    <? echo $certificate_description ?>
+                                    <?php echo $certificate_description ?>
                                 </p>
                                 <p class="course-name">
-                                    <? echo $certificate_course ?>
+                                    <?php echo $certificate_course ?>
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="certificate-footer">
-                        <img height="40px" width="40px" alt="logo" src="<? echo $art_board ?>" />
+                        <img height="40px" width="40px" alt="logo" src="<?php echo $art_board ?>" />
                         <p class="company-name">
-                            <? echo $company_name ?>
+                            <?php echo $company_name ?>
                         </p>
-                        <img alt="artwork" src="<? echo $company_image ?>" />
+                        <img alt="artwork" src="<?php echo $company_image ?>" />
                         <div class="signature">
-                            <img alt="signature" alt="<? echo $academy_head['name'] ?>"
-                                src="<? echo $academy_head['signature'] ?>" />
+                            <img alt="signature" alt="<?php echo $academy_head['name'] ?>"
+                                src="<?php echo $academy_head['signature'] ?>" />
                             <p class="signee-name">
-                                <? echo $academy_head['name'] ?>
+                                <?php echo $academy_head['name'] ?>
                             </p>
                             <p class="signee-role">
-                                <? echo $academy_head['role'] ?>
+                                <?php echo $academy_head['role'] ?>
                             </p>
                             <p class="sign-date">
-                                <? echo $academy_head['date'] ?>
+                                <?php echo $academy_head['date'] ?>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="certificate-showcase-content">
                     <p class="showcase-text">
-                        <? echo $banner_description ?>
+                        <?php echo $banner_description ?>
                     </p>
                     <p class="course-text">
-                        <? echo $want_to_learn ?>
+                        <?php echo $want_to_learn ?>
                     </p>
                     <a class="all-courses" href="<?php echo $courses_link_url; ?>">
-                        <? echo $courses_link_label ?>
+                        <?php echo $courses_link_label ?>
                     </a>
                 </div>
             </div>
         </div>
-        <?
+        <?php
     }
 }

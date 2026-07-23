@@ -35,11 +35,11 @@ $courses = get_field('courses', $learning_path_id) ?: [];
                     Take the courses
                 </div>
                 <div class="content">
-                    <? the_content() ?>
+                    <?php the_content() ?>
                 </div>
                 <div class="list">
                     <?php foreach ($courses as $course_index =>  $course) : ?>
-                        <?
+                        <?php
                         $course_thumbnail = get_the_post_thumbnail_url($course);
                         $course_title = $course->post_title;
                         $course_excerpt = $course->post_excerpt;
@@ -52,7 +52,7 @@ $courses = get_field('courses', $learning_path_id) ?: [];
                         ?>
                         <div class="individual-course">
                             <div class="course-index">
-                                <? echo $course_index + 1 ?>
+                                <?php echo $course_index + 1 ?>
                             </div>
                             <div class="course">
                                 <?php get_template_part(
@@ -68,11 +68,11 @@ $courses = get_field('courses', $learning_path_id) ?: [];
                                     ]
                                 ); ?>
                                 <div class="extra-course-details">
-                                    <a href="<? echo $course_link ?>" class="course-title">
-                                        <? echo $course_title ?>
+                                    <a href="<?php echo $course_link ?>" class="course-title">
+                                        <?php echo $course_title ?>
                                     </a>
                                     <div class="course-excerpt">
-                                        <? echo $course_excerpt ?>
+                                        <?php echo $course_excerpt ?>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@ $courses = get_field('courses', $learning_path_id) ?: [];
         </div>
     </div>
     <div id="learning">
-        <? get_template_part('template-parts/ac_learning_print', 'template', [
+        <?php get_template_part('template-parts/ac_learning_print', 'template', [
             'learning_path_title' => $learning_path_title,
             'learning_path_excerpt' => $learning_path_excerpt,
             'courses' => $courses,

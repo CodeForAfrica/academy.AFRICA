@@ -154,7 +154,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
             'label' => 'Members'
         ]);
 ?>
-        <?
+        <?php
         ?>
         <div class="hero">
             <div class="background-image"></div>
@@ -162,22 +162,22 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                 <div class="content">
                     <div class="title">
                         <div class="cfa-title" <?php echo $this->get_render_attribute_string('title'); ?>>
-                            <? echo $title ?>
+                            <?php echo $title ?>
                         </div>
                     </div>
-                    <?
+                    <?php
                     if (!is_user_logged_in()) {
                     ?>
                         <button class="button cta large signup-button" onclick="register()">
-                            <? echo $sign_up_label ?>
+                            <?php echo $sign_up_label ?>
                         </button>
-                    <?
+                    <?php
                     }
                     ?>
                 </div>
                 <div class="metrics-content">
                     <div class="metrics">
-                        <?
+                        <?php
                         if (!empty($metrics)) {
                             foreach ($metrics as $item) {
                                 $metric = esc_html($item['metric']);
@@ -185,13 +185,13 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                         ?>
                                 <div class="metric">
                                     <h2 class="numbers">
-                                        <? echo $metric ?>
+                                        <?php echo $metric ?>
                                     </h2>
                                     <p class="label">
-                                        <? echo $label ?>
+                                        <?php echo $label ?>
                                     </p>
                                 </div>
-                        <?
+                        <?php
                             }
                         }
                         ?>
@@ -207,6 +207,6 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
                 }
             </script>
         </div>
-<?
+<?php
     }
 }

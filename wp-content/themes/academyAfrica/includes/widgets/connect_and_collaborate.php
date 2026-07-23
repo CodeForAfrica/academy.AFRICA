@@ -102,14 +102,14 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
             <div class="title-wrapper">
                 <div class="cfa-title">
                     <h4>
-                        <? echo $title ?>
+                        <?php echo $title ?>
                     </h4>
                 </div>
             </div>
             <div class="content">
                 <div class="share-text">
                     <p class="share">
-                        <? echo $share_text ?>
+                        <?php echo $share_text ?>
                     </p>
                 </div>
                 <div class="center africa">
@@ -119,18 +119,18 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
                 <div class="join-slack">
                     <div class="share-text">
                         <p class="share">
-                            <? echo $share_text ?>
+                            <?php echo $share_text ?>
                         </p>
                     </div>
                     <p class="become-a-member">
-                        <? echo $become_a_member_text ?>
+                        <?php echo $become_a_member_text ?>
                     </p>
-                    <a href="<? echo $join_us_url ?>" class="button primary large">
-                        <? echo $join_us_on_slack ?>
+                    <a href="<?php echo $join_us_url ?>" class="button primary large">
+                        <?php echo $join_us_on_slack ?>
                     </a>
                 </div>
             </div>
         </div>
-        <?
+        <?php
     }
 }

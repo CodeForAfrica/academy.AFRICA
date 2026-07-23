@@ -1,4 +1,4 @@
-<?
+<?php
 
 function check_register_action()
 {

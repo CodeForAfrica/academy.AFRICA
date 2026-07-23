@@ -66,6 +66,6 @@ class Academy_Africa_About_Section extends \Elementor\Widget_Base
                 <?php echo $content; ?>
             </div>
         </div>
-<?
+<?php
     }
 }

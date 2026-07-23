@@ -1,4 +1,4 @@
-<?
+<?php
 function password_reset($user_email){
   // Check if the email address is valid
   if ( !is_email($user_email) ) {

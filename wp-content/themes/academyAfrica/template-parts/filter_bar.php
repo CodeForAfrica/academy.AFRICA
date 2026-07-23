@@ -11,27 +11,27 @@ $sort_options = $args["sort_options"] ?? [];
     <div class="sidebar" id="sidebar">
         <div class="sort">
             <p class="sort-by">
-                <? echo $sort_by ?>
+                <?php echo $sort_by ?>
             </p>
             <select name="sort" id="courses-sort" class="select" onchange="sortCourses(this)">
-                <?
+                <?php
                 foreach ($sort_options as $key => $option) {
                     $selected = $sort == $key ? "selected" : "";
                 ?>
-                    <option <? echo $selected ?> value="<? echo $key ?>"><? echo $option["name"] ?></option>
-                <?
+                    <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $option["name"] ?></option>
+                <?php
                 }
                 ?>
             </select>
         </div>
-        <? if (!empty($filter_options)) {
+        <?php if (!empty($filter_options)) {
         ?>
             <div class="filter" id="side-filter-bar">
                 <p class="filter-by">
-                    <? echo $filter_by ?>
+                    <?php echo $filter_by ?>
                 </p>
                 <div class="filter-body">
-                    <?
+                    <?php
                     if (!empty($filter_options)) {
                         foreach ($filter_options as $item) {
                             $title = $item["title"];
@@ -39,62 +39,62 @@ $sort_options = $args["sort_options"] ?? [];
                     ?>
                             <div class="filter-item">
                                 <p class="filter-by-title">
-                                    <? echo $title ?>
+                                    <?php echo $title ?>
                                 </p>
-                                <?
+                                <?php
                                 if (!empty($options)) {
                                 ?>
                                     <ul class="filter-list">
-                                        <?
+                                        <?php
                                         foreach ($options as $options_index => $option) {
                                         ?>
-                                            <? if ($options_index >= 3) {
+                                            <?php if ($options_index >= 3) {
                                             ?>
                                                 <li class="hidden">
                                                     <label class="mui-checkbox">
-                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<?php echo $item["name"] ?>', '<?php echo $option->name ?>')" value="<?php echo $option->id ?>" name="<?php echo $item["name"] . '-' . $option->name ?>">
                                                         <span class="checkmark"></span>
-                                                        <? echo $option->name ?>
+                                                        <?php echo $option->name ?>
                                                     </label>
                                                 </li>
-                                            <?
+                                            <?php
                                             } else {
                                             ?>
                                                 <li>
                                                     <label class="mui-checkbox">
-                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<?php echo $item["name"] ?>', '<?php echo $option->name ?>')" value="<?php echo $option->id ?>" name="<?php echo $item["name"] . '-' . $option->name ?>">
                                                         <span class="checkmark"></span>
-                                                        <? echo $option->name ?>
+                                                        <?php echo $option->name ?>
                                                     </label>
                                                 </li>
-                                            <?
+                                            <?php
                                             }
                                             ?>
-                                        <?
+                                        <?php
                                         }
                                         ?>
                                     </ul>
-                                    <? if (count($options) > 3) {
+                                    <?php if (count($options) > 3) {
                                     ?>
                                         <div class="show-more">
                                             <button class="show-more-btn">
                                                 <?php echo esc_html(academyafrica_translate('Show More')); ?>
                                             </button>
                                         </div>
-                                    <?
+                                    <?php
                                     } ?>
-                                <?
+                                <?php
                                 }
                                 ?>
                             </div>
-                    <?
+                    <?php
                         }
                     }
                     ?>
                 </div>
             </div>
 
-        <?
+        <?php
         } ?>
     </div>
 </aside>
@@ -106,7 +106,7 @@ $sort_options = $args["sort_options"] ?? [];
             <div id="mobile-filters" class="mobile-filter">
                 <div class="filter-header">
                     <h4 class="filter-title">
-                        <? echo $filter_by ?>
+                        <?php echo $filter_by ?>
                     </h4>
                     <div class="close">
                         <button class="buttons" id="close-filter-modal">
@@ -127,7 +127,7 @@ $sort_options = $args["sort_options"] ?? [];
                     </div>
                 </div>
                 <div class="filters">
-                    <?
+                    <?php
                     if (!empty($filter_options)) {
                         foreach ($filter_options as $item) {
                             $title = $item["title"];
@@ -135,29 +135,29 @@ $sort_options = $args["sort_options"] ?? [];
 
                     ?>
                             <div class="accordion-parent">
-                                <button class="accordion"><? echo $title ?></button>
-                                <?
+                                <button class="accordion"><?php echo $title ?></button>
+                                <?php
                                 if (!empty($options)) {
                                 ?>
                                     <div class="panel">
                                         <ul>
-                                            <?
+                                            <?php
                                             foreach ($options as $option) {
                                             ?>
                                                 <li>
                                                     <label class="mui-checkbox">
-                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<? echo $item["name"] ?>', '<? echo $option->name ?>')" value="<? echo $option->id ?>" name="<? echo $item["name"] . '-' . $option->name ?>">
+                                                        <input type="checkbox" onclick="filterSearchCourses(this, '<?php echo $item["name"] ?>', '<?php echo $option->name ?>')" value="<?php echo $option->id ?>" name="<?php echo $item["name"] . '-' . $option->name ?>">
                                                         <span class="checkmark"></span>
-                                                        <? echo $option->name ?>
+                                                        <?php echo $option->name ?>
                                                     </label>
                                                 </li>
-                                            <?
+                                            <?php
                                             }
                                             ?>
                                         </ul>
                                     </div>
                             </div>
-                <?
+                <?php
                                 }
                             }
                         }

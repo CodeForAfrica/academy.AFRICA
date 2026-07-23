@@ -132,11 +132,11 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
         <div class="feedback">
             <div class="title">
                 <h4 class="cfa-title">
-                    <? echo $title ?>
+                    <?php echo $title ?>
                 </h4>
             </div>
             <div class="content">
-                <?
+                <?php
                 if (!empty($feedback)) {
                     foreach ($feedback as $item) {
                         $name = $item["name"];
@@ -148,30 +148,30 @@ class Academy_Africa_User_Feedback extends \Elementor\Widget_Base
                         <div class="card">
                             <div class="content-card">
                                 <div class="user">
-                                    <img src="<? echo $logo ?>" alt="user" class="avatar">
+                                    <img src="<?php echo $logo ?>" alt="user" class="avatar">
                                     <div class="name-role">
                                         <p class="name">
-                                            <? echo $name ?>
+                                            <?php echo $name ?>
                                         </p>
                                         <p class="role">
-                                            <? echo $role ?>
+                                            <?php echo $role ?>
                                         </p>
                                         <p class="role">
-                                            <? echo $company ?>
+                                            <?php echo $company ?>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="description">
-                                    <? echo $description ?>
+                                    <?php echo $description ?>
                                 </div>
                             </div>
                         </div>
-                <?
+                <?php
                     }
                 }
                 ?>
             </div>
         </div>
-<?
+<?php
     }
 }

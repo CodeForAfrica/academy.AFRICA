@@ -1,4 +1,4 @@
-<?
+<?php
 function get_url_param($param_name)
 {
     // Check if the parameter exists in the URL
@@ -22,7 +22,7 @@ if ($success) {
             <p class="text">
             </p>
             <p style="max-width: 400px; margin: 0;" class="description">
-                <? echo $success ?>
+                <?php echo $success ?>
             </p>
             <div class="actions">
                 <a class="button" href="/login">
@@ -34,7 +34,7 @@ if ($success) {
             </div>
         </div>
     </div>
-<?
+<?php
 } else {
 ?>
     <div class="login" id="register-modal">
@@ -61,19 +61,19 @@ if ($success) {
                 <div></div><span><?php echo esc_html(academyafrica_translate('or')); ?></span>
                 <div></div>
             </div>
-            <?
+            <?php
             $error = get_url_param("error_message");
             if ($error) {
-            ?><div class="error_message"><?
+            ?><div class="error_message"><?php
                                             echo $error;
-                                            ?></div><?
+                                            ?></div><?php
                                                 }
                                                     ?>
-            <?
+            <?php
             $success_message = academyafrica_translate('You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.  Please check your email inbox or spam folder for an activation link.');
             $url = home_url('/login?action=register&success=' . urlencode($success_message));
             ?>
-            <form action="<? echo $url ?>" method="post" onsubmit="return validateForm()">
+            <form action="<?php echo $url ?>" method="post" onsubmit="return validateForm()">
                 <label for="firstName"><?php echo esc_html(academyafrica_translate('First Name')); ?></label>
                 <input placeholder="<?php echo esc_attr(academyafrica_translate('First Name')); ?>" name="firstName" type="text">
                 <label for="lastName"><?php echo esc_html(academyafrica_translate('Last Name')); ?></label>
@@ -92,7 +92,7 @@ if ($success) {
                 </div>
                 <div id="error-alert" style="color: red;"></div>
                 <input type="hidden" name="action" value="register">
-                <? echo do_shortcode('[bws_google_captcha]') ?>
+                <?php echo do_shortcode('[bws_google_captcha]') ?>
                 <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit" id="register"><?php echo esc_html(academyafrica_translate('SIGN UP')); ?></button>
                 <label class="mui-checkbox">
                     <input type="checkbox">
@@ -145,6 +145,6 @@ if ($success) {
             </script>
         </div>
     </div>
-<?
+<?php
 }
 ?>

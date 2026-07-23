@@ -1,4 +1,4 @@
-<?
+<?php
 $error_message = get_transient('login_error_message');
 $activation_email_sent = get_transient('login_message_activation_email_sent');
 if ($error_message) {
@@ -61,7 +61,7 @@ if (isset($_GET['email_sent'])) {
 ?>
 
     <div class="login">
-        <?
+        <?php
         if (isset($_GET['verification']) && $_GET['verification'] === 'required') {
         ?>
             <div class="verification-resend">
@@ -153,7 +153,7 @@ if (isset($_GET['email_sent'])) {
                     <a style="font-size: 14px; color: var(--primary-700, #0c1a81);" href="javascript:history.back()"><?php echo esc_html(academyafrica_translate('Back')); ?></a>
                 </footer>
             </div>
-        <?
+        <?php
         }
         ?>
         <script>
@@ -206,4 +206,4 @@ if (isset($_GET['email_sent'])) {
 
         </script>
     </div>
-<?  }
+<?php  }

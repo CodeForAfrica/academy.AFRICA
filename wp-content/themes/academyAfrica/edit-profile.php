@@ -101,14 +101,14 @@ if (is_user_logged_in()) {
 ?>
     <main class="profile">
         <h4 class="cfa-title">
-            <? echo $page_title ?>
+            <?php echo $page_title ?>
         </h4>
         <form method="post" action="" enctype="multipart/form-data">
             <label for="avatar" class="avatar-label">
-                <? echo $avatar_label ?>
+                <?php echo $avatar_label ?>
             </label>
             <div class="avatar">
-                <img height="100px" width="100px" style="height: 100px;" src="<? echo $avatar_url ?>" alt="<?php echo esc_attr($current_user->user_firstname); ?>" id="avatar_preview">
+                <img height="100px" width="100px" style="height: 100px;" src="<?php echo $avatar_url ?>" alt="<?php echo esc_attr($current_user->user_firstname); ?>" id="avatar_preview">
                 <button type="button" onclick="document.getElementById('avatar').click()" class="button primary">
                     <input onchange="displayImage(this)" style="display: none;" type="file" name="avatar" id="avatar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -116,42 +116,42 @@ if (is_user_logged_in()) {
                         <path d="M11.3346 5.33333L8.0013 2L4.66797 5.33333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M8 2V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <? echo $upload_text ?>
+                    <?php echo $upload_text ?>
                 </button>
             </div>
 
             <p class="my-courses">
                 <a href="/my-courses">
-                    <? echo $view_my_courses ?>
+                    <?php echo $view_my_courses ?>
                 </a>
             </p>
             <p class="form-description">
-                <? echo $form_description ?>
+                <?php echo $form_description ?>
             </p>
             <div class="user-form">
                 <div class="input">
                     <label for="user_firstname">
-                        <? echo $first_name_label ?>*
+                        <?php echo $first_name_label ?>*
                     </label>
-                    <input type="text" name="first_name" required value="<? echo $first_name ?>" id="user_firstname">
+                    <input type="text" name="first_name" required value="<?php echo $first_name ?>" id="user_firstname">
                 </div>
                 <div class="input">
                     <label for="user_lastname">
-                        <? echo $last_name_label ?>*
+                        <?php echo $last_name_label ?>*
                     </label>
-                    <input type="text" name="last_name" required value="<? echo $last_name ?>" id="user_lastname">
+                    <input type="text" name="last_name" required value="<?php echo $last_name ?>" id="user_lastname">
                 </div>
                 <div class="input">
                     <label for="user_email">
-                        <? echo $email_label ?>
+                        <?php echo $email_label ?>
                     </label>
-                    <input type="email" name="user_email" value="<? echo $user_email ?>" id="user_email" disabled>
+                    <input type="email" name="user_email" value="<?php echo $user_email ?>" id="user_email" disabled>
                 </div>
                 <div class="input">
                     <label for="phone">
-                        <? echo $phone_label ?>
+                        <?php echo $phone_label ?>
                     </label>
-                    <select style="width:96px" class="prefix" value="<? echo $prefix ?>" name="prefix" id="prefix">
+                    <select style="width:96px" class="prefix" value="<?php echo $prefix ?>" name="prefix" id="prefix">
                         <?php
                         include_once __DIR__ . '/includes/utils/countries.php';
                         function sort_by_dial_code($a, $b)
@@ -164,7 +164,7 @@ if (is_user_logged_in()) {
                                 $label = $country['flag'] . ' ' . $country['dial_code'];
                                 $selected = $prefix === $country['dial_code'] ? 'selected="selected"' : null;
                         ?>
-                            <option <? echo $selected ?> value="<?php echo $country['dial_code'] ?>">
+                            <option <?php echo $selected ?> value="<?php echo $country['dial_code'] ?>">
                                 <?php echo $label ?>
                             </option>
                         <?php
@@ -179,70 +179,70 @@ if (is_user_logged_in()) {
                         }
                         ?>
                     </select>
-                    <input type="tel" name="phone" value="<? echo $phone ?>" id="phone">
+                    <input type="tel" name="phone" value="<?php echo $phone ?>" id="phone">
                 </div>
                 <div class="input">
                     <label for="city">
-                        <? echo $city_label ?>*
+                        <?php echo $city_label ?>*
                     </label>
-                    <input type="text" name="city" required value="<? echo $city ?>" id="city">
+                    <input type="text" name="city" required value="<?php echo $city ?>" id="city">
                 </div>
 
                 <div class="input">
                     <label for="country">
-                        <? echo $country_label ?>*
+                        <?php echo $country_label ?>*
                     </label>
-                    <input type="text" name="country" id="country" required value="<? echo $_country ?>">
+                    <input type="text" name="country" id="country" required value="<?php echo $_country ?>">
                 </div>
                 <div class="input">
                     <label for="position">
-                        <? echo $position_label ?>
+                        <?php echo $position_label ?>
                     </label>
-                    <input type="text" name="position" value="<? echo $position ?>" id="position">
+                    <input type="text" name="position" value="<?php echo $position ?>" id="position">
                 </div>
                 <div class="input">
                     <label for="company">
-                        <? echo $company_label ?>
+                        <?php echo $company_label ?>
                     </label>
-                    <input type="text" name="company" value="<? echo $company ?>" id="company">
+                    <input type="text" name="company" value="<?php echo $company ?>" id="company">
                 </div>
 
                 <!-- <div class="input">
                     <label for="slack">
-                        <? /*echo $slack_label*/ ?>
+                        <?php /*echo $slack_label*/ ?>
                     </label>
-                    <input type="text" name="slack" value="<? echo $slack ?>" id="slack">
+                    <input type="text" name="slack" value="<?php echo $slack ?>" id="slack">
                 </div> -->
                 <div class="input">
                     <label for="twitter">
-                        <? echo $twitter_label ?>
+                        <?php echo $twitter_label ?>
                     </label>
-                    <input type="url" name="twitter" value="<? echo $twitter ?>" id="twitter">
+                    <input type="url" name="twitter" value="<?php echo $twitter ?>" id="twitter">
                 </div>
                 <div class="input">
                     <label for="facebook">
-                        <? echo $facebook_label ?>
+                        <?php echo $facebook_label ?>
                     </label>
-                    <input type="url" name="facebook" value="<? echo $facebook ?>" id="facebook">
+                    <input type="url" name="facebook" value="<?php echo $facebook ?>" id="facebook">
                 </div>
                 <div class="input">
                     <label for="linked_in">
-                        <? echo $linked_in_label ?>
+                        <?php echo $linked_in_label ?>
                     </label>
-                    <input type="url" name="linked_in" value="<? echo $linked_in ?>" id="linked_in">
+                    <input type="url" name="linked_in" value="<?php echo $linked_in ?>" id="linked_in">
                 </div>
                 <div class="input">
                     <label for="website">
                         Website
                     </label>
-                    <input type="url" name="website" value="<? echo $website ?>" id="website">
+                    <input type="url" name="website" value="<?php echo $website ?>" id="website">
                 </div>
                 <input type="hidden" name="action" value="profile">
                 <div class="bio">
                     <label for="description">
-                        <? echo $bio_label ?>
+                        <?php echo $bio_label ?>
                     </label>
-                    <?
+                    <?php
                     $content = $description;
                     $editor_id = 'description';
                     wp_editor($description, $editor_id, [
@@ -256,44 +256,44 @@ if (is_user_logged_in()) {
 
             <p class="mandatory">
                 *
-                <? echo $mandatory_label ?>
+                <?php echo $mandatory_label ?>
             </p>
             <div class="updates">
                 <p class="receive-updates">
-                    <? echo $receive_updates_label ?>
+                    <?php echo $receive_updates_label ?>
                 </p>
                 <div class="checkbox-group">
                     <ul>
                         <li>
                             <label class="mui-checkbox">
-                                <?
+                                <?php
                                 $checked = in_array("courses", $user_updates) ? 'checked="true"' : "";
                                 ?>
-                                <input type="checkbox" <? echo $checked ?> name="updates[]" value="courses">
+                                <input type="checkbox" <?php echo $checked ?> name="updates[]" value="courses">
                                 <span class="checkmark"></span>
-                                <? echo $new_courses_label ?>
+                                <?php echo $new_courses_label ?>
                             </label>
                         </li>
                         <li>
                             <label class="mui-checkbox">
-                                <?
+                                <?php
                                 $checked = in_array("events", $user_updates) ? 'checked="true"' : "";
                                 ?>
-                                <input type="checkbox" <? echo $checked ?> name="updates[]" value="events">
+                                <input type="checkbox" <?php echo $checked ?> name="updates[]" value="events">
                                 <span class="checkmark"></span>
-                                <? echo $new_events_label ?>
+                                <?php echo $new_events_label ?>
                             </label>
                         </li>
                     </ul>
                 </div>
             </div>
             <h1 class="setting-title">
-                <? echo $settings_title ?>
+                <?php echo $settings_title ?>
             </h1>
             <p class="setting-description">
-                <? echo $settings_description ?>
+                <?php echo $settings_description ?>
             </p>
-            <?
+            <?php
             $args = array(
                 'post_type' => 'network',
                 'posts_per_page' => -1,
@@ -309,30 +309,30 @@ if (is_user_logged_in()) {
                     $join = get_post_meta($network_id, 'join', true)["url"];
             ?>
                     <div class="network">
-                        <img class="img" src="<? echo $image_url ?>" alt="<? echo $network_title ?>">
+                        <img class="img" src="<?php echo $image_url ?>" alt="<?php echo $network_title ?>">
                         <div class="content">
                             <p class="title">
-                                <? echo $network_title ?>
+                                <?php echo $network_title ?>
                             </p>
                             <div class="description">
-                                <? echo $description ?>
+                                <?php echo $description ?>
                             </div>
                             <label class="mui-checkbox">
-                                <?
+                                <?php
                                 $checked = in_array($network_id, $user_networks) ? 'checked="true"' : "";
                                 ?>
-                                <input <? echo $checked ?> type="checkbox" name="networks[]" value="<? echo $network_id ?>">
+                                <input <?php echo $checked ?> type="checkbox" name="networks[]" value="<?php echo $network_id ?>">
                                 <span class="checkmark"></span>
-                                <? echo $membership_label ?>
+                                <?php echo $membership_label ?>
                             </label>
-                            <a target="_blank" href="<? echo $join ?>">
+                            <a target="_blank" href="<?php echo $join ?>">
                                 <button type="button" class="primary button">
                                     Join
                                 </button>
                             </a>
                         </div>
                     </div>
-            <?
+            <?php
                 }
                 wp_reset_query();
             }
@@ -344,7 +344,7 @@ if (is_user_logged_in()) {
                         <path d="M11.3346 14.4993V9.16602H4.66797V14.4993" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M4.66797 2.5V5.83333H10.0013" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <? echo $save_changes_label ?>
+                    <?php echo $save_changes_label ?>
                 </button>
             </div>
         </form>

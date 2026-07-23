@@ -105,6 +105,6 @@ class Academy_Africa_FAQ  extends \Elementor\Widget_Base
             }
             ?>
         </div>
-<?
+<?php
     }
 }

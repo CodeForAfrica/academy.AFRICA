@@ -149,6 +149,6 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
                 });
             });
         </script>
-<?
+<?php
     }
 }

@@ -28,8 +28,8 @@ function get_full_url($path = '', $search = '')
             </p>
             <div style="display:flex; gap: 8px">
                 <span class="description"><?php echo esc_html(academyafrica_translate('You can')); ?> </span>
-                <form action="<? echo wp_lostpassword_url() ?>" method="post">
-                    <input type="email" placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" id="user_login" name="user_login" value="<? echo $_GET['user_login'] ?>" required hidden>
+                <form action="<?php echo wp_lostpassword_url() ?>" method="post">
+                    <input type="email" placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" id="user_login" name="user_login" value="<?php echo $_GET['user_login'] ?>" required hidden>
                     <input type="text" hidden name="pass_reset" value="pass-reset">
                     <button class="description" style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: #0C1A81; text-decoration: none; cursor: pointer; display: inline;"
                         onmouseover="this.style.textDecoration='underline';"
@@ -41,7 +41,7 @@ function get_full_url($path = '', $search = '')
             <span class="description"><?php echo esc_html(academyafrica_translate('or contact our support team for further assistance.')); ?></span>
 
         </div>
-    <?
+    <?php
     } else {
     ?>
         <div class="content" id="login-modal-content">
@@ -55,11 +55,11 @@ function get_full_url($path = '', $search = '')
                 <p id="login_error">
                 </p>
             </div>
-            <form action="<? echo wp_lostpassword_url() ?>" method="post">
+            <form action="<?php echo wp_lostpassword_url() ?>" method="post">
                 <label for="email"><?php echo esc_html(academyafrica_translate('Email')); ?></label>
                 <input type="email" placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" id="user_login" name="user_login" required>
                 <input type="text" hidden name="pass_reset" value="pass-reset">
-                <? echo do_shortcode('[bws_google_captcha]') ?>
+                <?php echo do_shortcode('[bws_google_captcha]') ?>
                 <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit" id="reset-btn"><?php echo esc_html(academyafrica_translate('SUBMIT')); ?></button>
             </form>
             <footer style="display: flex; justify-content: flex-end;" class="modal-footers">
@@ -68,7 +68,7 @@ function get_full_url($path = '', $search = '')
                 <a style="font-size: 14px; color: var(--Black, #000);" href="javascript:history.back()"><?php echo esc_html(academyafrica_translate('Back')); ?></a>
             </footer>
         </div>
-    <?
+    <?php
     }
     ?>
     <script>
