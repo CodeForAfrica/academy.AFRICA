@@ -417,42 +417,32 @@ function academyafrica_migrate_account_verification()
     set_transient('aa_verification_migration_lock', 1, 5 * MINUTE_IN_SECONDS);
 
     global $wpdb;
-    $batch = 500;
 
-    // 1. Users whose legacy meta marked them active.
-    $paged = 1;
-    do {
-        $ids = get_users(array(
-            'fields'     => 'ID',
-            'number'     => $batch,
-            'paged'      => $paged,
-            'meta_key'   => 'account_status',
-            'meta_value' => 'active',
-        ));
-        foreach ($ids as $id) {
-            if (!get_user_meta($id, 'is_verified', true)) {
-                update_user_meta($id, 'is_verified', true);
-            }
-        }
-        $paged++;
-    } while (count($ids) === $batch);
+    // Grandfather set: legacy state was active (user_status = 0 OR
+    // account_status meta == 'active') and the user has no is_verified meta yet.
+    // Done set-based in SQL so we never load tens of thousands of users/meta
+    // into PHP memory (this install has 50k+ users).
+    $where = "(u.user_status = 0 OR EXISTS (
+                  SELECT 1 FROM {$wpdb->usermeta} a
+                  WHERE a.user_id = u.ID AND a.meta_key = 'account_status' AND a.meta_value = 'active'
+              ))
+              AND NOT EXISTS (
+                  SELECT 1 FROM {$wpdb->usermeta} m
+                  WHERE m.user_id = u.ID AND m.meta_key = 'is_verified'
+              )";
 
-    // 2. Users with an active core status (user_status = 0) — covers admins and
-    //    older accounts created before the custom meta existed.
-    $offset = 0;
-    do {
-        $ids = $wpdb->get_col($wpdb->prepare(
-            "SELECT ID FROM {$wpdb->users} WHERE user_status = 0 LIMIT %d OFFSET %d",
-            $batch,
-            $offset
-        ));
-        foreach ($ids as $id) {
-            if (!get_user_meta($id, 'is_verified', true)) {
-                update_user_meta($id, 'is_verified', true);
-            }
-        }
-        $offset += $batch;
-    } while (count($ids) === $batch);
+    // Capture affected IDs (ints only — lightweight) so we can surgically clear
+    // their meta cache after the write instead of flushing the whole cache.
+    $ids = $wpdb->get_col("SELECT u.ID FROM {$wpdb->users} u WHERE {$where}");
+
+    $wpdb->query(
+        "INSERT INTO {$wpdb->usermeta} (user_id, meta_key, meta_value)
+         SELECT u.ID, 'is_verified', '1' FROM {$wpdb->users} u WHERE {$where}"
+    );
+
+    foreach ($ids as $id) {
+        wp_cache_delete((int) $id, 'user_meta');
+    }
 
     update_option('aa_verification_migrated_v1', time());
     delete_transient('aa_verification_migration_lock');
