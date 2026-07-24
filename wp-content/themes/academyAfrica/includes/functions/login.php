@@ -21,7 +21,6 @@ function custom_login_page()
     $reset_password_page = home_url('/login?action=lostpassword');
     $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];
     check_register_action();
-    activate_new_user_action();
     if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'lostpassword') {
         wp_redirect($reset_password_page);
         exit;
@@ -58,57 +57,17 @@ function add_lost_password_link()
 {
     return '<a class="remember-me" href="/login?action=lostpassword">Lost Password?</a>';
 }
+// Surface a friendly error when a social (Google) sign-in fails. Account-state
+// enforcement now lives solely in verify_user_on_login()/check_verified_user_status()
+// keyed on the `is_verified` meta (see #56); the legacy account_status/user_status
+// path has been removed.
 function authenticate_user()
 {
-    if (!is_user_logged_in()) {
-        if (isset($_GET['login_type']) && $_GET['login_type'] === 'social') {
-            set_global_error("An error occurred while signing up with Google. Please try again with your username and password.");
-        }
-    }
-    $user_id = get_current_user_id();
-    $user = get_user_by('ID', $user_id);
-    if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
-        return $user;
-    } else {
-        if ($user instanceof WP_User) {
-            $account_status = get_user_meta($user->data->ID, 'account_status', true);
-            global $whitelist;
-            if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
-                if ($user->data->user_status == 1 || $account_status !== "active") {
-                    send_activation_link($user->data->ID);
-                    render_inactive(true);
-                }
-            }
-        } else {
-            render_inactive(false);
-        }
-    }
-}
-
-function restrict_user_status($user, $username, $password)
-{
-    if (!in_array($_SERVER['REMOTE_ADDR'], whitelist_address())) {
-        return $user;
-    } else {
-        if ($user instanceof WP_User) {
-            $account_status = get_user_meta($user->data->ID, 'account_status', true);
-            if ($user->data->user_status == 1 || $account_status !== "active") {
-                if (!isset($user->data->user_activation_key)) {
-                    send_activation_link($user->data->ID);
-                }
-                wp_logout();
-                return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
-            } else {
-                return $user;
-            }
-        } else {
-            wp_logout();
-            return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your account is not active.'));
-        }
+    if (!is_user_logged_in() && isset($_GET['login_type']) && $_GET['login_type'] === 'social') {
+        set_global_error("An error occurred while signing up with Google. Please try again with your username and password.");
     }
 }
 
 add_action('init', 'authenticate_user');
-add_filter('authenticate', 'restrict_user_status', 20, 3);
 add_action('init', 'custom_login_page');
 add_action('login_form_middle', 'add_lost_password_link');

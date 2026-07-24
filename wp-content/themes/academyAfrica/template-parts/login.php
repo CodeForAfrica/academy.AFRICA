@@ -22,34 +22,20 @@ if (isset($_GET['email_sent'])) {
         'type' => 'info'
     ));
 } else {
-    if (isset($_GET['action']) && $_GET['action'] === 'account_activation' && isset($_GET['token'])) {
-        $token_data = decode_verification_token($_GET['token']);
-        // xdebug_break();
-
-        if ($token_data) {
-            $is_verified = get_user_meta($token_data['user_id'], 'is_verified', true);
-
-            if ($is_verified) {
-                get_template_part('template-parts/message-bar', 'template', array(
-                    'message' => academyafrica_translate('Your account is already verified. Please proceed to login.'),
-                    'type' => 'info'
-                ));
-                wp_redirect(home_url('/'));
-            } else if (is_activation_key_valid($token_data['user_id'], $token_data['activation_key'])) {
-                update_user_meta($token_data['user_id'], 'is_verified', true);
-                delete_user_meta($token_data['user_id'], 'account_activation_key');
-                delete_user_meta($token_data['user_id'], 'activation_key_expiry');
-
-                get_template_part('template-parts/message-bar', 'template', array(
-                    'message' => academyafrica_translate('Account activated successfully. You can now proceed to login.'),
-                    'type' => 'success'
-                ));
-            } else {
-                get_template_part('template-parts/message-bar', 'template', array(
-                    'message' => academyafrica_translate('Invalid or expired activation link. Please request a new one.'),
-                    'type' => 'error'
-                ));
-            }
+    // Account activation itself is processed before output in
+    // handle_account_activation() (#56); here we only render its outcome.
+    if (isset($_GET['activation'])) {
+        $activation = sanitize_key(wp_unslash($_GET['activation']));
+        if ($activation === 'success') {
+            get_template_part('template-parts/message-bar', 'template', array(
+                'message' => academyafrica_translate('Account activated successfully. You can now proceed to login.'),
+                'type' => 'success'
+            ));
+        } elseif ($activation === 'already') {
+            get_template_part('template-parts/message-bar', 'template', array(
+                'message' => academyafrica_translate('Your account is already verified. Please proceed to login.'),
+                'type' => 'info'
+            ));
         } else {
             get_template_part('template-parts/message-bar', 'template', array(
                 'message' => academyafrica_translate('Invalid or expired activation link. Please request a new one.'),

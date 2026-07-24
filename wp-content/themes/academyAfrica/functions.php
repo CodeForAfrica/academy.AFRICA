@@ -268,56 +268,335 @@ function is_activation_key_valid($user_id, $key)
         return false;
     }
 
-    return $stored_key === $key;
+    // Constant-time comparison to avoid leaking the key via timing.
+    return hash_equals((string) $stored_key, (string) $key);
 }
 
-// Add verification check to authenticate filter
+/**
+ * Whether the current request is non-interactive (API/CLI) and therefore must
+ * receive a WP_Error rather than an HTML redirect when verification fails.
+ */
+function academyafrica_is_non_interactive_request()
+{
+    if (defined('REST_REQUEST') && REST_REQUEST) {
+        return true;
+    }
+    if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) {
+        return true;
+    }
+    if (defined('WP_CLI') && WP_CLI) {
+        return true;
+    }
+    if (wp_doing_ajax()) {
+        return true;
+    }
+    // Application passwords / HTTP Basic auth (e.g. over REST or XML-RPC).
+    if (!empty($_SERVER['PHP_AUTH_USER']) || !empty($_SERVER['HTTP_AUTHORIZATION'])) {
+        return true;
+    }
+    return false;
+}
+
+// `is_verified` is the single authoritative account-state flag; the legacy
+// account_status/user_status path has been removed (see #56).
+
+/**
+ * Whether is_verified enforcement is active. Enforcement only turns on once the
+ * one-time grandfathering migration has completed, so a deploy can never lock
+ * out legitimate users (including admins) before their accounts are migrated
+ * — which would otherwise deadlock, since running the migration itself requires
+ * an admin to be able to log in (#56 review).
+ */
+function academyafrica_verification_enforced()
+{
+    return (bool) get_option('aa_verification_migrated_v1');
+}
+
+/**
+ * Roles that are always allowed through the pre-enforcement grandfather fallback
+ * so staff/admins can bootstrap and run the migration. Filterable.
+ *
+ * @return string[]
+ */
+function academyafrica_privileged_roles()
+{
+    return (array) apply_filters('academyafrica_privileged_roles', array('administrator', 'editor', 'author'));
+}
+
+/**
+ * Narrow legacy-state fallback, consulted ONLY before enforcement is active: an
+ * account the migration would grandfather (explicit legacy account_status of
+ * 'active', or a privileged role) is allowed through so it isn't locked out in
+ * the window before the migration runs.
+ */
+function academyafrica_user_is_grandfathered($user_id)
+{
+    if ('active' === get_user_meta($user_id, 'account_status', true)) {
+        return true;
+    }
+    $user = get_userdata($user_id);
+    return $user instanceof WP_User && (bool) array_intersect((array) $user->roles, academyafrica_privileged_roles());
+}
+
+/**
+ * The single verification predicate used by every enforcement point (login,
+ * session guard, application passwords) so they can never disagree.
+ */
+function academyafrica_user_passes_verification($user_id)
+{
+    if (get_user_meta($user_id, 'is_verified', true)) {
+        return true;
+    }
+    if (!academyafrica_verification_enforced() && academyafrica_user_is_grandfathered($user_id)) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Send the activation email at most once per cooldown window per user, so a
+ * caller with valid credentials for an unverified account can't trigger mail on
+ * every attempt (#56 review).
+ */
+function academyafrica_maybe_send_activation_link($user_id)
+{
+    $key = 'aa_activation_sent_' . (int) $user_id;
+    if (get_transient($key)) {
+        return;
+    }
+    set_transient($key, 1, 10 * MINUTE_IN_SECONDS);
+    send_activation_link($user_id);
+}
+
 function verify_user_on_login($user, $username = '')
 {
-    if (!$user || is_wp_error($user)) {
+    if (!$user || is_wp_error($user) || !($user instanceof WP_User)) {
         return $user;
     }
 
-    $is_verified = get_user_meta($user->ID, 'is_verified', true);
-
-    if (!$is_verified) {
-        $activation_key = get_user_meta($user->ID, 'account_activation_key', true);
-        if (empty($activation_key)) {
-            $activation_key = generate_user_activation_key($user->ID);
-        }
-
-        send_activation_link($user->ID);
-
-        // Store the error message in a transient
-        set_transient('login_error_message', 'Please verify your account. Check your email for the verification link.', 30);
-
-        // Redirect to custom login page
-        wp_redirect(add_query_arg('verification', 'required', home_url('/login')));
-        exit;
+    if (academyafrica_user_passes_verification($user->ID)) {
+        return $user;
     }
 
-    return $user;
+    academyafrica_maybe_send_activation_link($user->ID);
+
+    // Non-interactive clients get a proper authentication error, not a redirect.
+    if (academyafrica_is_non_interactive_request()) {
+        return new WP_Error(
+            'account_unverified',
+            __('Your account is not verified. Please use the verification link sent to your email.', 'academyafrica')
+        );
+    }
+
+    set_transient('login_error_message', 'Please verify your account. Check your email for the verification link.', 30);
+    wp_safe_redirect(add_query_arg('verification', 'required', home_url('/login')));
+    exit;
 }
 
-// Change priority to run earlier
-remove_filter('authenticate', 'verify_user_on_login', 99);
 add_filter('authenticate', 'verify_user_on_login', 20);
 
-// Additional security to prevent unauthorized access
+// Application-password authentication resolves the user via determine_current_user
+// → wp_authenticate_application_password(), which does NOT run the `authenticate`
+// chain that verify_user_on_login() is on. Enforce the same policy on that path
+// so an unverified account with an app password can't authenticate (#56 review).
+function academyafrica_enforce_verification_app_password($error, $user)
+{
+    if ($user instanceof WP_User && !academyafrica_user_passes_verification($user->ID)) {
+        if (!is_wp_error($error)) {
+            $error = new WP_Error();
+        }
+        $error->add(
+            'account_unverified',
+            __('Your account is not verified. Please use the verification link sent to your email.', 'academyafrica')
+        );
+    }
+    return $error;
+}
+add_filter('wp_authenticate_application_password_errors', 'academyafrica_enforce_verification_app_password', 10, 2);
+
+// Additional guard to prevent an unverified session from surviving on the front
+// end (e.g. after a programmatic login). Interactive requests only, and mirrors
+// the login predicate exactly.
 function check_verified_user_status()
 {
-    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || (defined('WP_CLI') && WP_CLI)) {
+    if (is_admin() || academyafrica_is_non_interactive_request()) {
         return;
     }
 
     $user = wp_get_current_user();
-    if ($user->ID && !get_user_meta($user->ID, 'is_verified', true)) {
+    if ($user->ID && !academyafrica_user_passes_verification($user->ID)) {
         wp_logout();
-        wp_redirect(add_query_arg('verification', 'required', home_url('/login')));
+        wp_safe_redirect(add_query_arg('verification', 'required', home_url('/login')));
         exit;
     }
 }
 add_action('init', 'check_verified_user_status');
+
+/**
+ * Handle the account-activation link before any output is sent, then redirect
+ * with a status flag the login template renders. Replaces the previous logic
+ * that mutated state and redirected from inside the template (after output).
+ */
+function handle_account_activation()
+{
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'GET') {
+        return;
+    }
+    if (!isset($_GET['action'], $_GET['token']) || $_GET['action'] !== 'account_activation') {
+        return;
+    }
+
+    $login_url = home_url('/login');
+    $token_data = decode_verification_token(sanitize_text_field(wp_unslash($_GET['token'])));
+
+    if (!$token_data) {
+        wp_safe_redirect(add_query_arg('activation', 'invalid', $login_url));
+        exit;
+    }
+
+    $user_id = absint($token_data['user_id']);
+
+    if (get_user_meta($user_id, 'is_verified', true)) {
+        wp_safe_redirect(add_query_arg('activation', 'already', $login_url));
+        exit;
+    }
+
+    if (is_activation_key_valid($user_id, $token_data['activation_key'])) {
+        update_user_meta($user_id, 'is_verified', true);
+        delete_user_meta($user_id, 'account_activation_key');
+        delete_user_meta($user_id, 'activation_key_expiry');
+        wp_safe_redirect(add_query_arg('activation', 'success', $login_url));
+        exit;
+    }
+
+    wp_safe_redirect(add_query_arg('activation', 'invalid', $login_url));
+    exit;
+}
+add_action('init', 'handle_account_activation');
+
+/**
+ * One-time migration: grandfather existing users as verified so that turning on
+ * `is_verified` enforcement doesn't lock anyone out.
+ *
+ * An account is grandfathered only on signals that carry real meaning in this
+ * install: an explicit legacy account_status of 'active', or a privileged role.
+ * wp_users.user_status is deliberately NOT used — wp_insert_user() never
+ * persisted the `user_status => 1` that registration passed, so it is 0 for
+ * every user (including never-activated ones), which would verify pending
+ * accounts (#56 review).
+ *
+ * These signals select a small set (a few hundred), so the backfill is fast and
+ * done per user (proper cache invalidation, retryable). Prefer running it via
+ * WP-CLI (`wp academyafrica migrate-verification`) before enabling enforcement;
+ * an admin_init fallback runs it for the first capable admin otherwise.
+ *
+ * @param bool $force Bypass the completed flag and stale lock (WP-CLI).
+ * @return bool True on success (completion recorded); false if it did not run
+ *              or failed (left retryable).
+ */
+function academyafrica_migrate_account_verification($force = false)
+{
+    if (!$force && get_option('aa_verification_migrated_v1')) {
+        return true;
+    }
+
+    // Atomic lock: add_option() fails if the row already exists, so concurrent
+    // runs can't both proceed (no check-then-set race). A crashed run leaves the
+    // lock; clear it with the WP-CLI --force flag.
+    if (!$force && false === add_option('aa_verification_migration_lock', time(), '', 'no')) {
+        return false;
+    }
+
+    global $wpdb;
+
+    // Set A — explicit legacy "active" accounts (small: a few hundred).
+    $active_ids = $wpdb->get_col(
+        $wpdb->prepare(
+            "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value = %s",
+            'account_status',
+            'active'
+        )
+    );
+    if ('' !== $wpdb->last_error) {
+        error_log('academyafrica verification migration: query failed: ' . $wpdb->last_error);
+        delete_option('aa_verification_migration_lock');
+        return false; // leave retryable; do NOT record completion
+    }
+
+    // Set B — privileged roles that must retain access.
+    $priv_ids = get_users(array(
+        'role__in' => academyafrica_privileged_roles(),
+        'fields'   => 'ID',
+        'number'   => -1,
+    ));
+
+    $ids = array_values(array_unique(array_map('intval', array_merge((array) $active_ids, (array) $priv_ids))));
+
+    $verified = 0;
+    foreach ($ids as $id) {
+        if (get_user_meta($id, 'is_verified', true)) {
+            continue;
+        }
+        // update_user_meta returns false on failure (and true/meta_id on success);
+        // it also invalidates the user's meta cache for us.
+        if (false !== update_user_meta($id, 'is_verified', true)) {
+            $verified++;
+        }
+    }
+
+    // Only record completion after the work is done.
+    update_option('aa_verification_migrated_v1', time());
+    update_option('aa_verification_migrated_v1_count', $verified);
+    delete_option('aa_verification_migration_lock');
+
+    return true;
+}
+
+// Fallback trigger: run once for the first capable admin if it wasn't already
+// run via WP-CLI. The grandfather set is small, so this is safe on admin_init.
+add_action('admin_init', function () {
+    if (get_option('aa_verification_migrated_v1')) {
+        return;
+    }
+    if (wp_doing_ajax() || wp_doing_cron() || !current_user_can('manage_options')) {
+        return;
+    }
+    academyafrica_migrate_account_verification();
+});
+
+// Preferred, deployment-controlled path: run before enabling enforcement.
+if (defined('WP_CLI') && WP_CLI) {
+    WP_CLI::add_command('academyafrica migrate-verification', function ($args, $assoc_args) {
+        $force = isset($assoc_args['force']);
+        $ok = academyafrica_migrate_account_verification($force);
+        if ($ok) {
+            WP_CLI::success(sprintf(
+                'Verification migration complete. Grandfathered %d user(s).',
+                (int) get_option('aa_verification_migrated_v1_count')
+            ));
+        } else {
+            WP_CLI::error('Migration did not run (locked or a query failed). Re-run with --force to clear a stale lock.');
+        }
+    });
+}
+
+/**
+ * Social sign-ups (Google, etc.) authenticate an already-verified email, so mark
+ * the account verified and suppress the standard activation email for them.
+ */
+function academyafrica_suppress_activation_for_social($profile_data = null)
+{
+    remove_action('user_register', 'send_activation_link', 10);
+}
+add_action('the_champ_before_registration', 'academyafrica_suppress_activation_for_social', 10, 1);
+
+function academyafrica_mark_social_user_verified($user_id)
+{
+    if ($user_id) {
+        update_user_meta($user_id, 'is_verified', true);
+    }
+}
+add_action('the_champ_user_successfully_created', 'academyafrica_mark_social_user_verified', 10, 1);
 
 function set_html_content_type()
 {
@@ -352,6 +631,10 @@ function decode_verification_token($token)
 function send_activation_link($user_id)
 {
     if ($user_id) {
+        // Already-verified accounts never need an activation email.
+        if (get_user_meta($user_id, 'is_verified', true)) {
+            return;
+        }
         $user = get_user_by('ID', $user_id);
         $sign_in_url = home_url() . '/login';
 
