@@ -1,27 +1,83 @@
 <?php
 
+function academyafrica_register_error_redirect($message)
+{
+    wp_safe_redirect(home_url('/login?action=register&error_message=' . urlencode($message)));
+    exit;
+}
+
 function check_register_action()
 {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['action']) && $_POST['action'] === 'register')) {
-        $user = array(
-            'first_name' => $_POST['firstName'],
-            'last_name' => $_POST['lastName'],
-            'user_email' => $_POST['email'],
-            'user_pass' => $_POST['password'],
-            'user_nicename' => $_POST['firstName'] . $_POST['lastName'],
-            'user_login' => $_POST['email'],
-            // NB: wp_insert_user() does not persist user_status, so it is not a
-            // reliable activation signal; verification is tracked via is_verified.
-        );
-        $new_user = wp_insert_user($user);
-        if (is_wp_error($new_user)) {
-            wp_redirect(home_url('/login?action=register&error_message=' . urlencode($new_user->get_error_message())));
-        } else {
-            $success_message = "You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.";
-            wp_redirect(home_url('/login?action=register&success=' . urlencode($success_message)));
-        }
+    if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST' || ($_POST['action'] ?? '') !== 'register') {
+        return;
+    }
+
+    // CSRF protection.
+    if (
+        empty($_POST['academyafrica_register_nonce']) ||
+        !wp_verify_nonce($_POST['academyafrica_register_nonce'], 'academyafrica_register')
+    ) {
+        academyafrica_register_error_redirect(__('Your session has expired. Please try again.', 'academyafrica'));
+    }
+
+    // Honeypot: only bots populate this field. Pretend success so we don't
+    // reveal the trap.
+    if (!empty($_POST['academyafrica_hp'])) {
+        wp_safe_redirect(home_url('/login?action=register&success=' . urlencode(__('Please check your email to activate your account.', 'academyafrica'))));
         exit;
     }
+
+    // Per-IP abuse throttle.
+    $ip = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'])) : '';
+    $throttle_key = 'aa_register_throttle_' . md5($ip);
+    $attempts = (int) get_transient($throttle_key);
+    if ($attempts >= 5) {
+        academyafrica_register_error_redirect(__('Too many attempts. Please try again later.', 'academyafrica'));
+    }
+    set_transient($throttle_key, $attempts + 1, 10 * MINUTE_IN_SECONDS);
+
+    // Sanitize and validate input.
+    $first_name = isset($_POST['firstName']) ? sanitize_text_field(wp_unslash($_POST['firstName'])) : '';
+    $last_name  = isset($_POST['lastName']) ? sanitize_text_field(wp_unslash($_POST['lastName'])) : '';
+    $email      = isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '';
+    $password   = isset($_POST['password']) ? (string) $_POST['password'] : '';
+    $confirm    = isset($_POST['confirm-password']) ? (string) $_POST['confirm-password'] : '';
+
+    if ($first_name === '' || $last_name === '' || $email === '' || $password === '') {
+        academyafrica_register_error_redirect(__('Please fill in all required fields.', 'academyafrica'));
+    }
+    if (!is_email($email)) {
+        academyafrica_register_error_redirect(__('Please enter a valid email address.', 'academyafrica'));
+    }
+    if (email_exists($email)) {
+        academyafrica_register_error_redirect(__('An account with that email already exists.', 'academyafrica'));
+    }
+    if (strlen($password) < 8) {
+        academyafrica_register_error_redirect(__('Password must be at least 8 characters long.', 'academyafrica'));
+    }
+    if ($confirm !== '' && $password !== $confirm) {
+        academyafrica_register_error_redirect(__('Passwords do not match.', 'academyafrica'));
+    }
+
+    // Account starts unverified; verification is enforced via `is_verified` (#56).
+    $new_user = wp_insert_user(array(
+        'first_name'    => $first_name,
+        'last_name'     => $last_name,
+        'user_email'    => $email,
+        'user_pass'     => $password,
+        'user_nicename' => sanitize_title($first_name . $last_name),
+        'user_login'    => $email,
+    ));
+
+    if (is_wp_error($new_user)) {
+        academyafrica_register_error_redirect($new_user->get_error_message());
+    }
+
+    // Activation email is sent by the user_register hook (send_activation_link).
+    delete_transient($throttle_key);
+    $success_message = __('You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'academyafrica');
+    wp_safe_redirect(home_url('/login?action=register&success=' . urlencode($success_message)));
+    exit;
 }
 
 // Legacy activate_new_user_action() removed (#56): account activation is now

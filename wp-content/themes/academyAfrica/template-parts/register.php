@@ -22,7 +22,7 @@ if ($success) {
             <p class="text">
             </p>
             <p style="max-width: 400px; margin: 0;" class="description">
-                <?php echo $success ?>
+                <?php echo esc_html($success) ?>
             </p>
             <div class="actions">
                 <a class="button" href="/login">
@@ -64,11 +64,9 @@ if ($success) {
             <?php
             $error = get_url_param("error_message");
             if ($error) {
-            ?><div class="error_message"><?php
-                                            echo $error;
-                                            ?></div><?php
-                                                }
-                                                    ?>
+            ?><div class="error_message"><?php echo esc_html($error); ?></div><?php
+            }
+            ?>
             <?php
             $success_message = academyafrica_translate('You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.  Please check your email inbox or spam folder for an activation link.');
             $url = home_url('/login?action=register&success=' . urlencode($success_message));
@@ -92,6 +90,9 @@ if ($success) {
                 </div>
                 <div id="error-alert" style="color: red;"></div>
                 <input type="hidden" name="action" value="register">
+                <?php wp_nonce_field('academyafrica_register', 'academyafrica_register_nonce'); ?>
+                <?php // Honeypot: hidden from humans; bots that fill it are rejected server-side. ?>
+                <input type="text" name="academyafrica_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0;" value="">
                 <?php echo do_shortcode('[bws_google_captcha]') ?>
                 <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit" id="register"><?php echo esc_html(academyafrica_translate('SIGN UP')); ?></button>
                 <label class="mui-checkbox">

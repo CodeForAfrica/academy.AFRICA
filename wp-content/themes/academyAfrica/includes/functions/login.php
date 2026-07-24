@@ -4,37 +4,46 @@ function custom_login_page()
 {
     // Prefer our custom param, then WordPress's native redirect_to (used by
     // LearnDash, course pages, etc.), then fall back to the referer.
+    $redirect_url = '';
     if (isset($_GET['redirect_url']) && $_GET['redirect_url'] !== '') {
-        $redirect_url = $_GET['redirect_url'];
+        $redirect_url = wp_unslash($_GET['redirect_url']);
     } elseif (isset($_GET['redirect_to']) && $_GET['redirect_to'] !== '') {
-        $redirect_url = $_GET['redirect_to'];
-    } else {
-        $redirect_url = '';
+        $redirect_url = wp_unslash($_GET['redirect_to']);
     }
 
+    // Keep only the path (+ query) of the requested target so a caller cannot
+    // smuggle in an external host and turn login into an open redirect.
     $parsed_url = parse_url($redirect_url);
     $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
+    if (!empty($parsed_url['query'])) {
+        $path .= '?' . $parsed_url['query'];
+    }
 
-    $path_name = (!empty($path) && $path !== '/' && $path !== '/login') ? $redirect_url : "/learning-pathways";
-    $login_page = home_url("/login" . "?redirect_url=" . $path_name);
+    $path_name = (!empty($path) && strpos($path, '/') === 0 && $path !== '/' && $path !== '/login') ? $path : "/learning-pathways";
+    $login_page = add_query_arg('redirect_url', $path_name, home_url('/login'));
     $to_redirect = array("lostpassword");
     $reset_password_page = home_url('/login?action=lostpassword');
     $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];
     check_register_action();
     if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'lostpassword') {
-        wp_redirect($reset_password_page);
+        wp_safe_redirect($reset_password_page);
         exit;
     }
     if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'rp') {
         if (isset($_GET["key"]) && isset($_GET["login"])) {
-            $reset_key = $_GET["key"];
-            wp_redirect(home_url('/login?action=rp&key=' . $reset_key) . '&login=' . $_GET["login"]);
+            // add_query_arg() encodes the values, producing a well-formed URL.
+            $target = add_query_arg(array(
+                'action' => 'rp',
+                'key'    => sanitize_text_field(wp_unslash($_GET["key"])),
+                'login'  => sanitize_text_field(wp_unslash($_GET["login"])),
+            ), home_url('/login'));
+            wp_safe_redirect($target);
         } else {
             $url = add_query_arg(array(
                 'action' => 'lostpassword',
                 'error_message' => 'Password Reset link is invalid.'
             ), home_url('/login'));
-            wp_redirect(home_url($url));
+            wp_safe_redirect($url);
         }
         exit;
     }
@@ -43,13 +52,16 @@ function custom_login_page()
         exit;
     }
     if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && (!isset($_GET['action']) || isset($to_redirect[$_GET['action']]))) {
-        wp_redirect($login_page);
+        wp_safe_redirect($login_page);
         exit;
     }
     if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET["wpe-login"])) {
-        $login = home_url("/login" . "?redirect_url=" . $path_name . "&login=failed");
-        wp_redirect($login);
-        // exit;
+        $login = add_query_arg(array(
+            'redirect_url' => $path_name,
+            'login'        => 'failed',
+        ), home_url('/login'));
+        wp_safe_redirect($login);
+        exit;
     }
 }
 

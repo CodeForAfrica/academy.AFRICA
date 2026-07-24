@@ -202,8 +202,10 @@ add_action('user_register', 'send_activation_link', 10, 1);
 function redirect_logged_in_users()
 {
     if (!is_admin() && is_page('login') && is_user_logged_in()) {
-        $redirect_url = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : home_url('/');
-        wp_redirect($redirect_url);
+        $requested = isset($_GET['redirect_url']) ? wp_unslash($_GET['redirect_url']) : '';
+        // wp_safe_redirect + wp_validate_redirect confine the target to this host.
+        $redirect_url = wp_validate_redirect($requested, home_url('/'));
+        wp_safe_redirect($redirect_url);
         exit;
     }
 }

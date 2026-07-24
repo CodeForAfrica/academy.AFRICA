@@ -28,16 +28,16 @@ function get_full_url($path = '', $search = '')
             </p>
             <div style="display:flex; gap: 8px">
                 <span class="description"><?php echo esc_html(academyafrica_translate('You can')); ?> </span>
-                <form action="<?php echo wp_lostpassword_url() ?>" method="post">
-                    <input type="email" placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" id="user_login" name="user_login" value="<?php echo $_GET['user_login'] ?>" required hidden>
+                <form action="<?php echo esc_url(wp_lostpassword_url()) ?>" method="post">
+                    <input type="email" placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" id="user_login" name="user_login" value="<?php echo esc_attr(wp_unslash($_GET['user_login'] ?? '')) ?>" required hidden>
                     <input type="text" hidden name="pass_reset" value="pass-reset">
                     <button class="description" style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: #0C1A81; text-decoration: none; cursor: pointer; display: inline;"
                         onmouseover="this.style.textDecoration='underline';"
                         onmouseout="this.style.textDecoration='none';">
                         <?php echo esc_html(academyafrica_translate('resend the reset link')); ?>
                     </button>
+                </form>
             </div>
-            </form>
             <span class="description"><?php echo esc_html(academyafrica_translate('or contact our support team for further assistance.')); ?></span>
 
         </div>
@@ -55,7 +55,7 @@ function get_full_url($path = '', $search = '')
                 <p id="login_error">
                 </p>
             </div>
-            <form action="<?php echo wp_lostpassword_url() ?>" method="post">
+            <form action="<?php echo esc_url(wp_lostpassword_url()) ?>" method="post">
                 <label for="email"><?php echo esc_html(academyafrica_translate('Email')); ?></label>
                 <input type="email" placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" id="user_login" name="user_login" required>
                 <input type="text" hidden name="pass_reset" value="pass-reset">

@@ -24,7 +24,11 @@ if(isset($_POST["rp_key"])){
 <div style="min-height: calc(100vh - 620px);" class="login">
 <div class="content" id="login-modal-content">
         <?php
-        $url = home_url('/login?action=rp&key='.$_GET["key"]).'&login='.$_GET["login"];
+        $url = add_query_arg(array(
+            'action' => 'rp',
+            'key'    => sanitize_text_field(wp_unslash($_GET["key"] ?? '')),
+            'login'  => sanitize_text_field(wp_unslash($_GET["login"] ?? '')),
+        ), home_url('/login'));
         if(!$is_success) {
         ?>
         <header>
@@ -33,13 +37,13 @@ if(isset($_POST["rp_key"])){
         <p class="subtitle">
             <?php echo esc_html(academyafrica_translate('Enter your new password below or generate one')); ?>
         </p>
-        <form name="resetpassform" id="resetpassform" action="<?php echo $url ?>" method="post" autocomplete="off">
-			<input type="hidden" id="user_login" name="user_login" value="<?php echo $_GET["login"]?>" autocomplete="off">
+        <form name="resetpassform" id="resetpassform" action="<?php echo esc_url($url) ?>" method="post" autocomplete="off">
+			<input type="hidden" id="user_login" name="user_login" value="<?php echo esc_attr(wp_unslash($_GET["login"] ?? ''))?>" autocomplete="off">
             <label for="password"><?php echo esc_html(academyafrica_translate('Password')); ?></label>
             <input placeholder="<?php echo esc_attr(academyafrica_translate('Password')); ?>" name="pass1" type="password">
             <label for="pass2"><?php echo esc_html(academyafrica_translate('Confirm Password')); ?></label>
             <input placeholder="<?php echo esc_attr(academyafrica_translate('Password')); ?>" name="pass2" type="password">
-            <input type="text" hidden name="rp_key" value="<?php echo $_GET["key"]?>">
+            <input type="text" hidden name="rp_key" value="<?php echo esc_attr(wp_unslash($_GET["key"] ?? ''))?>">
             <button class="button primary" style="width: 100%; margin: 24px 0;" type="submit"><?php echo esc_html(academyafrica_translate('SAVE PASSWORD')); ?></button>
 		</form>
         <footer style="display: flex; justify-content: flex-end;" class="modal-footers">
