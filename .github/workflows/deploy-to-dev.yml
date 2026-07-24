@@ -36,8 +36,28 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Only deletions (--diff-filter=D), scoped to wp-content.
-          mapfile -t DELETED < <(git diff --name-only --diff-filter=D "$BEFORE_SHA" "$AFTER_SHA" -- 'wp-content/*')
+          # Make sure the base commit is actually present. On a force-push (or a
+          # shallow/rewritten history) $BEFORE_SHA may be missing, which would
+          # make `git diff` fail. Fail loudly rather than silently reporting
+          # "nothing to purge" — otherwise Git-deleted files (e.g. the removed
+          # mu-plugin) would keep running on WP Engine until manual cleanup.
+          if ! git cat-file -e "${BEFORE_SHA}^{commit}" 2>/dev/null; then
+            echo "::error::Base commit ${BEFORE_SHA} is unavailable (force-push or shallow history); cannot compute deleted files. Purge manually and re-check the deploy."
+            exit 1
+          fi
+
+          # Only deletions (--diff-filter=D), scoped to wp-content. Capture with
+          # an explicit status check — process substitution feeding mapfile would
+          # otherwise discard a nonzero git-diff exit even under `set -e`.
+          if ! deleted_out=$(git diff --name-only --diff-filter=D "$BEFORE_SHA" "$AFTER_SHA" -- 'wp-content/*'); then
+            echo "::error::git diff failed to compute deleted files; not treating this as an empty deletion set."
+            exit 1
+          fi
+
+          DELETED=()
+          if [ -n "$deleted_out" ]; then
+            mapfile -t DELETED <<< "$deleted_out"
+          fi
 
           if [ ${#DELETED[@]} -eq 0 ]; then
             echo "No deleted wp-content files to purge."
