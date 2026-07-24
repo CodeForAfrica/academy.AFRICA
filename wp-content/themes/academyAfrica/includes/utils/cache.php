@@ -28,21 +28,32 @@ class Cache
     /** Cache group shared by every custom cache in the theme. */
     public const GROUP = 'academy_africa';
 
-    /** Key holding the group's namespace version counter. */
-    public const VERSION_KEY = 'academy_africa_cache_version';
+    /**
+     * Option holding the group's namespace version counter.
+     *
+     * Stored as an autoloaded option (durable, in the DB) rather than an
+     * object-cache key: on a persistent backend without group flushing, the
+     * version-bump fallback is only correct while the counter survives and
+     * stays monotonic. A cache key can expire or be evicted under memory
+     * pressure while older `:vN` data entries linger — the counter would then
+     * reset to 1 and reads could hit entries that were meant to be invalidated.
+     * An option never expires; only the data entries carry TTLs.
+     */
+    public const VERSION_OPTION = 'academy_africa_cache_version';
 
     /**
      * Current namespace version for the group. Seeded to 1 on first read so
-     * keys never carry `:v0`, which reads as ambiguous.
+     * keys never carry `:v0`, which reads as ambiguous. Backed by an autoloaded
+     * option, so the read is served from the alloptions cache (no per-call query).
      */
     public static function version(): int
     {
-        $version = wp_cache_get(self::VERSION_KEY, self::GROUP);
-        if (false === $version) {
+        $version = (int) get_option(self::VERSION_OPTION, 0);
+        if ($version < 1) {
             $version = 1;
-            wp_cache_set(self::VERSION_KEY, $version, self::GROUP, WEEK_IN_SECONDS);
+            update_option(self::VERSION_OPTION, $version, true);
         }
-        return (int) $version;
+        return $version;
     }
 
     /**
@@ -88,18 +99,18 @@ class Cache
     /**
      * Invalidate every user-agnostic cache in the group.
      *
-     * Always bumps the namespace version (the universally reliable path). When
-     * the backend supports group flushing we flush first to reclaim memory, then
-     * bump — after a real flush the version key is gone, so the bump restarts the
-     * namespace cleanly with no risk of colliding with stranded entries.
+     * Monotonically bumps the durable namespace version (the universally
+     * reliable path — every prior `:vN` key becomes unreachable). When the
+     * backend supports group flushing we also flush the group first to reclaim
+     * the stranded entries immediately.
      */
     public static function flush(): void
     {
         if (self::supports_group_flush()) {
             wp_cache_flush_group(self::GROUP);
         }
-        $next = ((int) wp_cache_get(self::VERSION_KEY, self::GROUP)) + 1;
-        wp_cache_set(self::VERSION_KEY, $next, self::GROUP, WEEK_IN_SECONDS);
+        $next = self::version() + 1;
+        update_option(self::VERSION_OPTION, $next, true);
 
         do_action('qm/debug', 'Cache: flushed academy_africa group (version {version})', [
             'version' => $next,

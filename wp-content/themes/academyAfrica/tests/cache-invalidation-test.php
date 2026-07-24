@@ -23,6 +23,8 @@ define('WEEK_IN_SECONDS', 604800);
 // it behaves like a persistent backend (Redis/Memcached) — exactly the setup
 // where the old version-bump fallback silently failed.
 $GLOBALS['__store'] = [];
+// Durable options store (survives object-cache flush/eviction).
+$GLOBALS['__options'] = [];
 // Toggle: does the simulated backend support wp_cache_flush_group()?
 $GLOBALS['__supports_flush_group'] = false;
 // Captured hook callbacks so we can fire enrollment/completion handlers.
@@ -89,6 +91,19 @@ function get_post_type($id)
     return $GLOBALS['__post_types'][$id] ?? 'post';
 }
 
+// Durable options store — the namespace version now lives here, not in the
+// object cache, so it survives cache eviction/flush (the reviewed fix).
+function get_option($name, $default = false)
+{
+    return array_key_exists($name, $GLOBALS['__options']) ? $GLOBALS['__options'][$name] : $default;
+}
+
+function update_option($name, $value, $autoload = null)
+{
+    $GLOBALS['__options'][$name] = $value;
+    return true;
+}
+
 // ---------------------------------------------------------------------------
 // Load the code under test
 // ---------------------------------------------------------------------------
@@ -118,6 +133,7 @@ function check($label, $cond)
 function reset_cache($supports_flush_group)
 {
     $GLOBALS['__store'] = [];
+    $GLOBALS['__options'] = [];
     $GLOBALS['__supports_flush_group'] = $supports_flush_group;
 }
 
@@ -157,8 +173,25 @@ Cache::set('academy_organizations', ['org'], HOUR_IN_SECONDS);
 check('value readable before flush', Cache::get('academy_organizations') === ['org']);
 Cache::flush();
 check('value is a MISS after flush', Cache::get('academy_organizations') === false);
-// Group was physically flushed, so no orphaned entries linger.
-check('group physically emptied (no stranded keys)', count($GLOBALS['__store']) <= 1);
+// Group was physically flushed and the version lives in an option, not the
+// group — so the object-cache store is completely empty after a flush.
+check('group physically emptied (no stranded keys)', count($GLOBALS['__store']) === 0);
+
+// --- 3b. Version counter survives object-cache eviction (reviewed fix) ------
+// Simulate a persistent backend that evicts the whole object cache while
+// older :vN data entries would otherwise linger. Because the version is a
+// durable option, it must NOT reset to 1 and stale reads must stay misses.
+echo "\n[version survives cache eviction]\n";
+reset_cache(false);
+Cache::set('academy_organizations', ['stale'], HOUR_IN_SECONDS);
+Cache::flush();                       // version -> 2
+$v_after_flush = Cache::version();
+$GLOBALS['__store'] = [];              // object cache evicted/cleared entirely
+check('version persists across eviction (no reset to 1)', Cache::version() === $v_after_flush);
+check('version is still >= 2 after eviction', Cache::version() >= 2);
+// A value written before the eviction at :v1 must never be resurrected.
+$GLOBALS['__store']["academy_africa\0academy_organizations:v1"] = ['zombie'];
+check('stranded :v1 entry is not read after bump+eviction', Cache::get('academy_organizations') === false);
 
 // --- 4. Targeted per-user delete (completion / enrollment) ------------------
 echo "\n[targeted per-user delete]\n";

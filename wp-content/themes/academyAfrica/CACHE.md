@@ -24,6 +24,12 @@ actual key = "<logical key>:v<N>"      where N = academy_africa_cache_version
 - When the backend *does* support group flushing (checked via
   `wp_cache_supports('flush_group')`), `Cache::flush()` also flushes the group
   to reclaim the stranded entries immediately.
+- `N` is stored in the **autoloaded option** `academy_africa_cache_version`, not
+  in the object cache. The fallback is only correct while the counter survives
+  and stays monotonic; a cache key could expire or be evicted under memory
+  pressure while older `:vN` data entries linger, resetting `N` to 1 and
+  resurrecting stale entries. An option never expires — only the data entries
+  carry TTLs.
 
 > Historical note: before this change the fallback bumped a version key that was
 > never part of any cache key, so on backends without `flush_group` **nothing was
@@ -51,7 +57,7 @@ Legend — **Scope**: `content` = user-agnostic, invalidated by version bump;
 | `course_status_u{uid}_c{cid}` | Per-user LearnDash course status string | 5 m | per-user | `learndash/ld30/{course,lesson,topic}.php` |
 | `course_progress_u{uid}_c{cid}` | Rendered `[learndash_course_progress]` per user | 5 m | per-user | `learndash/ld30/{course,lesson,topic,quiz}.php` |
 | `course_content_u{uid}_c{cid}` | Rendered `[course_content]` per enrolled user | 5 m | per-user | `learndash/ld30/{lesson,topic,quiz}.php` |
-| `academy_africa_cache_version` | Group version counter (internal) | 1 w | — | `Cache` helper |
+| `academy_africa_cache_version` *(autoloaded option, not a cache entry)* | Group version counter (internal) | none — durable | — | `Cache` helper |
 
 ## Invalidation triggers
 
