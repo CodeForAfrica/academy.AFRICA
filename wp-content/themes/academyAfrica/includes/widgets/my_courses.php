@@ -81,7 +81,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
         $current_page = $this->get_query_param("page");
         $current_page = !empty($current_page) ? $current_page[0] : 1;
         $user_id = get_current_user_id();
-        $order_by = $this->sort_params()[$sort];
+        $sort_params = $this->sort_params();
+        $order_by = $sort_params[$sort] ?? $sort_params['date-desc'];
         $args = array(
             'post_types' => 'sfwd-courses',
             'activity_types' => 'course',
@@ -106,7 +107,8 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
         $current_page = $this->get_query_param("courses_page");
         $current_page = !empty($current_page) ? $current_page[0] : 1;
         $course_ids = learndash_user_get_enrolled_courses(get_current_user_id());
-        $order_by = $this->sort_params()[$sort];
+        $sort_params = $this->sort_params();
+        $order_by = $sort_params[$sort] ?? $sort_params['date-desc'];
         $args = array(
             'post_types' => 'sfwd-courses',
             'activity_types' => 'course',
@@ -146,6 +148,10 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
         $my_courses_pagination = $enrolled_courses["pager"] ?? [];
         $sort = $this->get_query_param('sort');
         $sort_by = "Sort By";
+        // Only date ordering is offered here: My Courses lists come from
+        // learndash_reports_get_activity(), which sorts by activity timestamps
+        // (see sort_params()) and cannot order by course title. Offering a
+        // name sort would produce an unsupported ordering.
         $sort_options = [
             "date-desc" => [
                 "orderby" => "date",
@@ -156,16 +162,6 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                 "orderby" => "date",
                 "order" => "ASC",
                 "name" => "Oldest"
-            ],
-            "name-asc" => [
-                "orderby" => "title",
-                "order" => "ASC",
-                "name" => "Name (A-Z)"
-            ],
-            "name-desc" => [
-                "orderby" => "title",
-                "order" => "DESC",
-                "name" => "Name (Z-A)"
             ]
         ];
         $user = array(
@@ -253,13 +249,17 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $course = get_post($course_id);
                                 $title = get_the_title($course);
                                 $authors = get_coauthors($course->ID);
-                                $first_name = get_the_author_meta('first_name', $authors[0]->ID);
-                                $last_name = get_the_author_meta('last_name', $authors[0]->ID);
-                                $provider = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
-                                $course_link = get_permalink($course);
-                                if (count($authors) > 1) {
-                                    $provider .= ' + ' . (count($authors) - 1) . ' more';
+                                if (!empty($authors)) {
+                                    $first_name = get_the_author_meta('first_name', $authors[0]->ID);
+                                    $last_name = get_the_author_meta('last_name', $authors[0]->ID);
+                                    $provider = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
+                                    if (count($authors) > 1) {
+                                        $provider .= ' + ' . (count($authors) - 1) . ' more';
+                                    }
+                                } else {
+                                    $provider = '';
                                 }
+                                $course_link = get_permalink($course);
                                 $course_thumbnail = get_the_post_thumbnail_url($course);
                                 $mooc_logo = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-blue.svg';
                                 $image = $course_thumbnail ? $course_thumbnail : $mooc_logo;
@@ -374,11 +374,15 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                     $cert_post = get_post($certificate_id);
                                     $title = get_the_title($course);
                                     $authors = get_coauthors($course_id);
-                                    $first_name = get_the_author_meta('first_name', $authors[0]->ID);
-                                    $last_name = get_the_author_meta('last_name', $authors[0]->ID);
-                                    $course_author = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
-                                    if (count($authors) > 1) {
-                                        $course_author .= ' + ' . (count($authors) - 1) . ' more';
+                                    if (!empty($authors)) {
+                                        $first_name = get_the_author_meta('first_name', $authors[0]->ID);
+                                        $last_name = get_the_author_meta('last_name', $authors[0]->ID);
+                                        $course_author = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
+                                        if (count($authors) > 1) {
+                                            $course_author .= ' + ' . (count($authors) - 1) . ' more';
+                                        }
+                                    } else {
+                                        $course_author = '';
                                     }
                                     $course_link = add_query_arg("certificate", 1, get_permalink($course_id));
                                     $progress = learndash_user_get_course_progress(get_current_user_id(), $course_id, 'legacy');
@@ -393,8 +397,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                             ?>
 
                                     <div class="cert-pdf" id="<?php echo $course_id ?>">
-                                        <?php $cert_content = $this->replace_course_info($cert_post->post_content, $course_id) ?>
-                                        <?php echo do_shortcode($cert_content) ?>
+                                        <?php
+                                        if ($cert_post instanceof WP_Post) {
+                                            $cert_content = $this->replace_course_info($cert_post->post_content, $course_id);
+                                            echo do_shortcode($cert_content);
+                                        }
+                                        ?>
                                     </div>
                                     <div>
                                         <div class="card">

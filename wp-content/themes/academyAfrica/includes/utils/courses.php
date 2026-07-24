@@ -263,9 +263,7 @@ class CoursesFunctions
             }
         }
 
-        $meta_query = array(
-            'relation' => 'OR',
-        );
+        $meta_query = array();
         $organization = !empty($atts['organization']) ? $atts['organization'] : [];
         if (!empty($organization)) {
             $orgs = self::getOrganizations();
@@ -283,6 +281,11 @@ class CoursesFunctions
                 );
                 array_push($meta_query, $org_q);
             }
+        }
+        // Match any of the selected organizations (OR within the group). Only
+        // add the relation when there are multiple clauses to combine.
+        if (count($meta_query) > 1) {
+            $meta_query['relation'] = 'OR';
         }
 
         $language = !empty($atts['language']) ? $atts['language'] : [];
@@ -303,11 +306,19 @@ class CoursesFunctions
                 }
             }
 
-            $post__in = $courses;
+            // A learning-path filter is active. If it resolves to no courses
+            // (empty or unknown path), return zero results. WP_Query ignores an
+            // empty post__in array — which would otherwise show ALL courses —
+            // so use a non-existent ID to force an empty result set.
+            $post__in = !empty($courses) ? $courses : [0];
         }
 
-
-        $tax_query['relation'] = 'OR';
+        // Combine multiple taxonomy clauses with OR (a course matches if it has
+        // any of the selected terms). Different filter groups (taxonomy, meta,
+        // author, learning path) are still AND-ed together by WP_Query.
+        if (count($tax_query) > 1) {
+            $tax_query['relation'] = 'OR';
+        }
 
         $author_query = [];
         $instructors = !empty($atts['instructor']) ? $atts['instructor'] : [];
@@ -318,14 +329,20 @@ class CoursesFunctions
             }
         }
 
+        // Allowlist orderby/order so an unexpected value can never reach the
+        // SQL ORDER BY clause; unknown values fall back to a safe default.
+        $allowed_orderby = ['ID', 'title', 'date', 'name', 'menu_order', 'author', 'modified', 'rand'];
+        $orderby = in_array($atts['orderby'], $allowed_orderby, true) ? $atts['orderby'] : 'date';
+        $order   = strtoupper((string) $atts['order']) === 'ASC' ? 'ASC' : 'DESC';
+
         $query_args = apply_filters('academy-africa_course_grid_query_args', [
             'post_type' => sanitize_text_field($atts['post_type']),
             'posts_per_page' => intval($atts['per_page']),
             'paged' => intval($atts['paged']),
             's' => sanitize_text_field($atts['search']),
             'post_status' => 'publish',
-            'orderby' => sanitize_text_field($atts['orderby']),
-            'order' => sanitize_text_field($atts['order']),
+            'orderby' => $orderby,
+            'order' => $order,
             'tax_query' => $tax_query,
             'post__in' => $post__in,
             'author__in' => $author_query,
@@ -395,6 +412,8 @@ class CoursesFunctions
         $price = '';
         $price_type = '';
         $price_text = '';
+        $students_count = 0;
+        $price_args = [];
         if ($post->post_type == 'sfwd-courses') {
             // $course_options = get_post_meta($post->ID, '_sfwd-courses', true);
             $students_count = academyafrica_count_students($post->ID);
@@ -433,7 +452,7 @@ class CoursesFunctions
 
         $user_object = get_user_by('ID', $post->post_author);
         $author = apply_filters('academy-africa_course_grid_author', [
-            'name' => $user_object->display_name,
+            'name' => $user_object ? $user_object->display_name : '',
             'avatar' => get_avatar_url($post->post_author),
         ], $post->ID, $post->post_author);
         $course_link = get_permalink($post->ID);

@@ -219,11 +219,14 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
         $sort_by = $settings['sort_by_text'];
         $sort = $this->get_query_param('sort');
-        if (!empty($sort)) {
-            $sort = $sort[0];
+        $sort = !empty($sort) ? $sort[0] : '';
+        // Only honour a sort value that is one of the offered options; anything
+        // else (absent, tampered, or renamed) falls back to the safe default.
+        if ($sort !== '' && isset($sort_options[$sort])) {
             $order_by = $sort_options[$sort]["orderby"];
             $order = $sort_options[$sort]["order"];
         } else {
+            $sort = '';
             $order_by = "date";
             $order = "DESC";
         }
@@ -375,17 +378,21 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                             foreach ($courses as $course) {
                                 $course_title = get_the_title($course);
                                 $authors = get_coauthors($course->ID);
-                                $first_name = get_the_author_meta('first_name', $authors[0]->ID);
-                                $last_name = get_the_author_meta('last_name', $authors[0]->ID);
-                                $course_author = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
+                                if (!empty($authors)) {
+                                    $first_name = get_the_author_meta('first_name', $authors[0]->ID);
+                                    $last_name = get_the_author_meta('last_name', $authors[0]->ID);
+                                    $course_author = (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $authors[0]->display_name;
 
-                                if (count($authors) > 1) {
-                                    $course_author .= ' + ' . (count($authors) - 1) . ' more';
+                                    if (count($authors) > 1) {
+                                        $course_author .= ' + ' . (count($authors) - 1) . ' more';
+                                    }
+                                } else {
+                                    $course_author = '';
                                 }
                                 $course_thumbnail = get_the_post_thumbnail_url($course, 'full');
                                 $course_link = get_permalink($course);
                                 $course_meta = get_post_meta($course->ID, 'sfwd-courses', true);
-                                $course_price = is_array($course_meta) ? $course_meta['sfwd-courses_course_price'] : 0;
+                                $course_price = is_array($course_meta) ? ($course_meta['sfwd-courses_course_price'] ?? 0) : 0;
                                 $course_price = empty($course_price) ? "Free" : $course_price;
 
                                 $course_attrs = CoursesFunctions::get_post_attr($course, $atts);
