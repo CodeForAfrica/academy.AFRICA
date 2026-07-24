@@ -159,7 +159,10 @@ if (false === $orgs_data) {
 </style>
 <?php
 $is_cert = isset($_GET["certificate"]);
-if ($course_status == "Completed" && $is_cert) {
+// Only open the certificate experience when a published certificate actually
+// exists — otherwise a bookmarked/hand-built ?certificate URL would render it
+// for a cert-less course (#46 review).
+if ($course_status == "Completed" && $is_cert && academyafrica_course_has_certificate($course_id)) {
     get_template_part('template-parts/course_completed', null, array('course_id' => $course_id));
 } else {
 ?>

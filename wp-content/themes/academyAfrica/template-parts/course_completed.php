@@ -88,7 +88,7 @@ global $shortcode_tags;
                     <?php get_template_part('template-parts/social_share', 'template', array('message' => $share_message)); ?>
                 </div>
                 <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px; flex-direction: column;">
-                    <?php if (!empty($certificate_link)) : ?>
+                    <?php if ($cert_post && !empty($certificate_link)) : ?>
                     <a href="<?php echo esc_url($certificate_link) ?>" download>
                         <button class="button primary" id="download-certificate">
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
