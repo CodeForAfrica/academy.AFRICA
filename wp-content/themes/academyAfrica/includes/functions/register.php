@@ -10,7 +10,8 @@ function check_register_action()
             'user_pass' => $_POST['password'],
             'user_nicename' => $_POST['firstName'] . $_POST['lastName'],
             'user_login' => $_POST['email'],
-            'user_status' => 1,
+            // NB: wp_insert_user() does not persist user_status, so it is not a
+            // reliable activation signal; verification is tracked via is_verified.
         );
         $new_user = wp_insert_user($user);
         if (is_wp_error($new_user)) {
