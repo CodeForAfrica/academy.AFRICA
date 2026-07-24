@@ -57,6 +57,46 @@ function academyafrica_event_filters_version()
     return (int) get_option('aa_event_filters_version', 1);
 }
 
+/**
+ * Increment the filter-cache version so cached dropdowns are recomputed.
+ * Incremented (not time()) so multiple mutations within the same second still
+ * produce distinct versions (#57 review).
+ */
+function academyafrica_bump_event_filters_version()
+{
+    update_option('aa_event_filters_version', academyafrica_event_filters_version() + 1);
+}
+
+/**
+ * Invalidate the event filter cache on any event mutation — not just editor
+ * saves. Covers create/update (editor, REST, importer), status transitions,
+ * trash/untrash, permanent deletion, and ACF field updates, so stale
+ * country/language options can't linger (#57 review).
+ *
+ * @param int          $post_id
+ * @param WP_Post|null $post
+ */
+function academyafrica_invalidate_event_filters($post_id, $post = null)
+{
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
+    }
+    $post_type = ($post instanceof WP_Post) ? $post->post_type : get_post_type($post_id);
+    if ('event' === $post_type) {
+        academyafrica_bump_event_filters_version();
+    }
+}
+add_action('save_post_event', 'academyafrica_invalidate_event_filters', 10, 2);
+add_action('before_delete_post', 'academyafrica_invalidate_event_filters', 10, 2);
+add_action('trashed_post', 'academyafrica_invalidate_event_filters', 10, 1);
+add_action('untrashed_post', 'academyafrica_invalidate_event_filters', 10, 1);
+// ACF-managed fields (countries, language, etc.) save outside save_post_event.
+add_action('acf/save_post', function ($post_id) {
+    if (is_numeric($post_id) && 'event' === get_post_type($post_id)) {
+        academyafrica_bump_event_filters_version();
+    }
+}, 20);
+
 function event_post_type()
 {
     $labels = array(
@@ -218,8 +258,8 @@ function save_details($post_id)
         update_post_meta($post_id, "time", sanitize_text_field($_POST["time"]));
     }
 
-    // Invalidate cached event filter options so new metadata shows up.
-    update_option('aa_event_filters_version', time());
+    // Filter-cache invalidation is handled independently of this metabox save by
+    // academyafrica_invalidate_event_filters() (hooked to save/delete/ACF).
 }
 
 add_action("admin_init", "admin_init");

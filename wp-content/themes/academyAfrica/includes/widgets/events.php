@@ -256,6 +256,12 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
             'update_post_term_cache' => false,
         )) : array();
 
+        // fields => 'ids' skips meta priming; batch it so the per-event
+        // get_post_meta() calls below are served from one cache read (#57 review).
+        if (!empty($event_ids)) {
+            update_meta_cache('post', $event_ids);
+        }
+
         $output = array();
         foreach ($filter_options as $option) {
             if ($option == "date") {
