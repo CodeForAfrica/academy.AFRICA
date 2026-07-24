@@ -688,24 +688,47 @@ function academyafrica_heartbeat_edit_post_types(): array
     return ['post', 'page', 'sfwd-courses', 'sfwd-lessons', 'sfwd-topic', 'sfwd-quiz', 'ac-learning-path', 'ac-organization'];
 }
 
-add_filter('heartbeat_settings', function (array $settings): array {
-    // Site-wide: slow the tick from 15s to 60s.
-    $interval = 60;
-
-    // On admin screens that don't depend on frequent ticks, push to the
-    // core-clamped maximum (120s) instead of killing heartbeat outright.
-    if (is_admin() && function_exists('get_current_screen')) {
-        $screen  = get_current_screen();
-        $is_edit = $screen
-            && $screen->base === 'post'
-            && in_array($screen->post_type, academyafrica_heartbeat_edit_post_types(), true);
-
-        if (!$is_edit) {
-            $interval = 120; // seconds — WordPress clamps heartbeat to 15–120
-        }
+/**
+ * Whether the current admin request is a post-editor screen for one of the
+ * post types that need a responsive heartbeat.
+ *
+ * Deliberately uses $GLOBALS['pagenow'] + the request rather than
+ * get_current_screen(): the heartbeat_settings filter is applied while scripts
+ * are registered, which can run before set_current_screen(), so
+ * get_current_screen() may return null on the very edit screens we want to
+ * keep fast. $pagenow is set early in wp-settings.php and is always available.
+ */
+function academyafrica_is_heartbeat_edit_screen(): bool
+{
+    if (!is_admin()) {
+        return false;
     }
 
-    $settings['interval'] = $interval;
+    $pagenow = $GLOBALS['pagenow'] ?? '';
+
+    if ($pagenow === 'post-new.php') {
+        $post_type = isset($_GET['post_type']) ? sanitize_key(wp_unslash($_GET['post_type'])) : 'post';
+    } elseif ($pagenow === 'post.php') {
+        $post_id   = isset($_GET['post']) ? absint($_GET['post']) : 0;
+        $post_type = $post_id ? get_post_type($post_id) : '';
+    } else {
+        return false;
+    }
+
+    return in_array($post_type, academyafrica_heartbeat_edit_post_types(), true);
+}
+
+add_filter('heartbeat_settings', function (array $settings): array {
+    // Editor screens keep a responsive 60s tick (autosave + post locking).
+    // Every other admin screen is slowed to the core-clamped maximum (120s)
+    // instead of killing heartbeat outright, so wp-auth-check and autosave
+    // keep resolving. The frontend keeps the 60s default.
+    if (is_admin() && !academyafrica_is_heartbeat_edit_screen()) {
+        $settings['interval'] = 120; // seconds — WordPress clamps to 15–120
+    } else {
+        $settings['interval'] = 60;
+    }
+
     return $settings;
 });
 

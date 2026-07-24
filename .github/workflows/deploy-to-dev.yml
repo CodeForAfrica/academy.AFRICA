@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          # Need the previous commit so we can diff for deleted files below.
+          fetch-depth: 0
       - name: GitHub Action Deploy to WP Engine
         uses: wpengine/github-action-wpe-site-deploy@v3
         with:
@@ -17,3 +20,44 @@ jobs:
           SRC_PATH: "wp-content/"
           REMOTE_PATH: "wp-content/"
           FLAGS: -azvr --inplace --exclude=".*"  --exclude=wp-content/mu-plugins/
+      # The rsync deploy above only adds/updates files — it never removes them
+      # (no --delete, which would be unsafe here: uploads, WP Engine's own
+      # mu-plugins, and admin-installed plugins live in wp-content but are not
+      # in Git). So when a tracked file is removed from the repo it lingers on
+      # the server. This step deletes ONLY the paths Git removed in this push,
+      # which by definition can never include anything untracked.
+      - name: Purge files deleted from Git on WP Engine
+        if: ${{ github.event.before != '0000000000000000000000000000000000000000' }}
+        env:
+          WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
+          WPE_ENV: academyafrica1
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          # Only deletions (--diff-filter=D), scoped to wp-content.
+          mapfile -t DELETED < <(git diff --name-only --diff-filter=D "$BEFORE_SHA" "$AFTER_SHA" -- 'wp-content/*')
+
+          if [ ${#DELETED[@]} -eq 0 ]; then
+            echo "No deleted wp-content files to purge."
+            exit 0
+          fi
+
+          printf 'Purging %d file(s) from WP Engine:\n' "${#DELETED[@]}"
+          printf '  %s\n' "${DELETED[@]}"
+
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$WPE_SSHG_KEY_PRIVATE" > ~/.ssh/wpe_key
+          chmod 600 ~/.ssh/wpe_key
+          ssh-keyscan -H "${WPE_ENV}.ssh.wpengine.net" >> ~/.ssh/known_hosts 2>/dev/null
+
+          # rsync deploys to sites/${WPE_ENV}/, so paths are relative to there.
+          # rm -f ignores already-absent files, so re-running is harmless.
+          REMOTE_CMD="cd 'sites/${WPE_ENV}' || exit 1"
+          for f in "${DELETED[@]}"; do
+            REMOTE_CMD="${REMOTE_CMD}; rm -f -- $(printf '%q' "$f")"
+          done
+
+          ssh -i ~/.ssh/wpe_key -o StrictHostKeyChecking=no \
+            "${WPE_ENV}@${WPE_ENV}.ssh.wpengine.net" "$REMOTE_CMD"
