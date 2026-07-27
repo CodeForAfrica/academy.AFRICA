@@ -147,17 +147,21 @@ do_action('qm/stop', 'topic:init');
                     if ($complete_button) {
                         echo "<div class='sfwd-lessons__footer__complete'>" . $complete_button . "</div>";
                     }
-                    if ($course_status == 'Completed') {
+                    if ($course_status == 'Completed' && academyafrica_course_has_certificate($course_id)) {
                         echo "<div class='sfwd-lessons__footer__certificate'>";
                         echo "<a href='" . esc_url($course_url . '?certificate=true') . "' class='certificate_download'>Download Certificate</a>";
                         echo "</div>";
                     }
                     ?>
                     <script>
-                        document.querySelector('.sfwd-mark-complete').addEventListener('submit', function(e) {
-                            var url = e.target.action.split('#')[0];
-                            e.target.action = url;
-                        });
+                        (function() {
+                            var form = document.querySelector('.sfwd-mark-complete');
+                            if (!form) return;
+                            form.addEventListener('submit', function(e) {
+                                var url = e.target.action.split('#')[0];
+                                e.target.action = url;
+                            });
+                        })();
                     </script>
                 </div>
             </div>

@@ -360,18 +360,26 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                         </div>
                     <?php } ?>
                 </section>
-                <?php if (!empty($completed_courses['results'])) { ?>
+                <?php
+                // Only completed courses that have a published certificate belong in
+                // this section. Filter up front so the header never renders with zero
+                // cards, and so the loop body can assume a valid cert (#46 review).
+                $certificate_courses = array_filter(
+                    $completed_courses['results'] ?? array(),
+                    function ($course) {
+                        return (bool) academyafrica_get_course_certificate_post($course->post_id);
+                    }
+                );
+                if (!empty($certificate_courses)) { ?>
                     <section class="your-certificates">
                         <h4 class="your-certificates-title">
                             Your Certificates
                         </h4>
                         <div class="content">
                             <?php
-                            if (!empty($completed_courses['results'])) {
-                                foreach ($completed_courses['results'] as $key => $course) {
+                            foreach ($certificate_courses as $key => $course) {
                                     $course_id = $course->post_id;
-                                    $certificate_id = learndash_get_setting($course_id, 'certificate');
-                                    $cert_post = get_post($certificate_id);
+                                    $cert_post = academyafrica_get_course_certificate_post($course_id);
                                     $title = get_the_title($course);
                                     $authors = get_coauthors($course_id);
                                     $first_name = get_the_author_meta('first_name', $authors[0]->ID);
@@ -438,7 +446,6 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
 
                             <?php
                                 }
-                            }
                             ?>
                         </div>
                         <hr class="divider">

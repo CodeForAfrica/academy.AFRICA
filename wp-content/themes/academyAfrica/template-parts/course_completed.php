@@ -18,9 +18,10 @@ $certificate_course = get_the_title($course);
 $course_link = get_permalink($course_id);
 $company_name = "academy.Africa";
 $user_id = get_current_user_id();
-$certificate_link = learndash_get_course_certificate_link($args["course_id"], $user_id);
-$certificate_id = learndash_get_setting($course_id, 'certificate');
-$cert_post = get_post($certificate_id);
+$certificate_link = $course_id ? learndash_get_course_certificate_link($args["course_id"], $user_id) : '';
+// May be null when the course has no assigned certificate, or it was deleted
+// or unpublished. Callers below must guard before using it (#46).
+$cert_post = academyafrica_get_course_certificate_post($course_id);
 $user = array(
     "first_name" => get_user_meta($user_id, 'first_name', true),
     "last_name" => get_user_meta($user_id, 'last_name', true),
@@ -71,9 +72,11 @@ global $shortcode_tags;
     <h4 class="cfa-title">
         <?php echo $congratulations ?>
     </h4>
-    <div class="cert-pdf">
-        <?php echo do_shortcode($cert_post->post_content) ?>
-    </div>
+    <?php if ($cert_post) : ?>
+        <div class="cert-pdf">
+            <?php echo do_shortcode($cert_post->post_content) ?>
+        </div>
+    <?php endif; ?>
     <div class="content">
         <?php get_template_part('template-parts/certificate', 'template', array("academy_head" => $academy_head, "course" => array("date" => $completion_date, "name" => $certificate_course), "user" => $user)); ?>
         <div style="flex: 1; display: flex; justify-content: center;">
@@ -85,7 +88,8 @@ global $shortcode_tags;
                     <?php get_template_part('template-parts/social_share', 'template', array('message' => $share_message)); ?>
                 </div>
                 <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px; flex-direction: column;">
-                    <a href="<?php echo learndash_get_course_certificate_link($course_id) ?>" download>
+                    <?php if ($cert_post && !empty($certificate_link)) : ?>
+                    <a href="<?php echo esc_url($certificate_link) ?>" download>
                         <button class="button primary" id="download-certificate">
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="Icon">
@@ -97,6 +101,7 @@ global $shortcode_tags;
                             <?php echo esc_html(academyafrica_translate('Download')); ?>
                         </button>
                     </a>
+                    <?php endif; ?>
                     <a href="<?php echo get_permalink($course_id) ?>">
                         <button class="button primary">
                             <?php echo esc_html(academyafrica_translate('View Course')); ?>
