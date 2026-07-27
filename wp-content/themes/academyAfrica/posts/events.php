@@ -5,6 +5,98 @@
 // Exit if accessed directly
 if (!defined('ABSPATH')) exit;
 
+/**
+ * Parse an event's stored date (optionally with time) into a timestamp, or null
+ * when the stored value is missing or unparseable. Shared by the event list and
+ * single-event views so one malformed record can't fatal on
+ * date_format(false, ...) or new DateTime() (#57, findings 17 & 39).
+ *
+ * @param mixed  $raw_date
+ * @param string $raw_time
+ * @return int|null
+ */
+function academyafrica_event_timestamp($raw_date, $raw_time = '')
+{
+    if (empty($raw_date) || !is_string($raw_date)) {
+        return null;
+    }
+    $raw_date = trim($raw_date);
+    // Treat MySQL/ACF zero-dates as missing rather than parsing them to year -1.
+    if ($raw_date === '' || strncmp($raw_date, '0000-00-00', 10) === 0) {
+        return null;
+    }
+    $value = trim($raw_date . ' ' . (is_string($raw_time) ? $raw_time : ''));
+    $ts = strtotime($value);
+
+    return false === $ts ? null : $ts;
+}
+
+/**
+ * Format an event date for display, returning $fallback for missing/invalid data.
+ *
+ * @param mixed  $raw_date
+ * @param string $format
+ * @param string $fallback
+ * @return string
+ */
+function academyafrica_format_event_date($raw_date, $format = 'd/m/Y', $fallback = '')
+{
+    $ts = academyafrica_event_timestamp($raw_date);
+
+    return null === $ts ? $fallback : date($format, $ts);
+}
+
+/**
+ * Cache-buster for the event filter options, bumped whenever an event is saved
+ * so cached filter dropdowns don't go stale (#57, finding 32).
+ *
+ * @return int
+ */
+function academyafrica_event_filters_version()
+{
+    return (int) get_option('aa_event_filters_version', 1);
+}
+
+/**
+ * Increment the filter-cache version so cached dropdowns are recomputed.
+ * Incremented (not time()) so multiple mutations within the same second still
+ * produce distinct versions (#57 review).
+ */
+function academyafrica_bump_event_filters_version()
+{
+    update_option('aa_event_filters_version', academyafrica_event_filters_version() + 1);
+}
+
+/**
+ * Invalidate the event filter cache on any event mutation — not just editor
+ * saves. Covers create/update (editor, REST, importer), status transitions,
+ * trash/untrash, permanent deletion, and ACF field updates, so stale
+ * country/language options can't linger (#57 review).
+ *
+ * @param int          $post_id
+ * @param WP_Post|null $post
+ */
+function academyafrica_invalidate_event_filters($post_id, $post = null)
+{
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
+    }
+    $post_type = ($post instanceof WP_Post) ? $post->post_type : get_post_type($post_id);
+    if ('event' === $post_type) {
+        academyafrica_bump_event_filters_version();
+    }
+}
+add_action('save_post_event', 'academyafrica_invalidate_event_filters', 10, 2);
+add_action('before_delete_post', 'academyafrica_invalidate_event_filters', 10, 2);
+add_action('trashed_post', 'academyafrica_invalidate_event_filters', 10, 1);
+add_action('untrashed_post', 'academyafrica_invalidate_event_filters', 10, 1);
+// ACF-managed fields (countries, language, etc.) save outside save_post_event.
+add_action('acf/save_post', function ($post_id) {
+    if (is_numeric($post_id) && 'event' === get_post_type($post_id)) {
+        academyafrica_bump_event_filters_version();
+    }
+}, 20);
+
 function event_post_type()
 {
     $labels = array(
@@ -165,6 +257,9 @@ function save_details($post_id)
     if (isset($_POST["time"])) {
         update_post_meta($post_id, "time", sanitize_text_field($_POST["time"]));
     }
+
+    // Filter-cache invalidation is handled independently of this metabox save by
+    // academyafrica_invalidate_event_filters() (hooked to save/delete/ACF).
 }
 
 add_action("admin_init", "admin_init");

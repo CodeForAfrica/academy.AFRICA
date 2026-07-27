@@ -18,14 +18,13 @@ require_once __DIR__ . '/includes/utils/countries.php';
             $post_array = get_post();
             $post_id = $post_array->ID;
             $raw_date = get_post_meta($post_id, 'date', true);
-            $date = date_format(date_create($raw_date), 'Y-m-d');
-            $offset = "UTC";
             $raw_time = get_post_meta($post_id, 'time', true);
+            // Safe parsing — a missing/malformed date must not fatal the page (#57).
+            $event_ts = academyafrica_event_timestamp($raw_date, $raw_time);
+            $date = academyafrica_format_event_date($raw_date, 'Y-m-d');
 
             $registration_link = get_post_meta($post_id, 'registration_link', true);
-            $event_date_time = new DateTime($date . ' ' . $raw_time, new DateTimeZone($offset));
-            $current_date_time = new DateTime("today midnight -1 second", new DateTimeZone($offset));
-            $is_past_event = $event_date_time < $current_date_time;
+            $is_past_event = ($event_ts !== null) && $event_ts < strtotime('today midnight -1 second');
             $post_title = $post_array->post_title;
             $post_content = $post_array->post_content;
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
@@ -67,12 +66,13 @@ require_once __DIR__ . '/includes/utils/countries.php';
                         <img src="/wp-content/themes/academyAfrica/assets/images/icons/Type=location, Size=16, Color=Black.svg" alt="">
                         <p style="margin: 0" class="time">
                             <?php
-                            if (isset($countries)) {
+                            if (is_array($countries)) {
                                 foreach ($countries as $country) {
-                                    echo country_flag_emoji($country['value']);
+                                    if (is_array($country) && isset($country['value'])) {
+                                        echo country_flag_emoji($country['value']);
+                                    }
                                 }
                             }
-
                             ?>
                         </p>
                     </div>

@@ -107,10 +107,13 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
-                $user_data = get_userdata(get_post_meta(get_the_ID(), 'speaker', true));
+                $speaker_meta = get_post_meta(get_the_ID(), 'speaker', true);
+                $user_data = $speaker_meta ? get_userdata($speaker_meta) : false;
                 $raw_date = get_post_meta(get_the_ID(), 'date', true);
-                $date = date_format(date_create($raw_date), 'd/m/Y');
+                // Safe: never fatals on a missing/malformed date (#57).
+                $date = academyafrica_format_event_date($raw_date, 'd/m/Y');
                 $countries = get_post_meta(get_the_ID(), 'countries', true);
+                $has_countries = is_array($countries) && !empty($countries);
                 $post_data = array(
                     'title' => get_the_title(),
                     'speaker' => $user_data ? $user_data->display_name : 'Unknown Speaker',
@@ -119,10 +122,10 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                     'date' => $date,
                     'time' => get_post_meta(get_the_ID(), 'time', true) . ' ' . "GMT +00:00",
                     'image' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
-                    'country_code' => isset($countries) ? country_flag_emoji($countries[0]) : country_flag_emoji("ZA"),
+                    'country_code' => $has_countries ? country_flag_emoji($countries[0]) : country_flag_emoji("ZA"),
                     'language' => get_post_meta(get_the_ID(), 'language', true),
                     'post_url' => get_permalink(get_the_ID()),
-                    'countries' => get_post_meta(get_the_ID(), 'countries', true)
+                    'countries' => $has_countries ? $countries : array()
                 );
 
                 $result[] = $post_data;
@@ -227,69 +230,84 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $filter_options = $settings['filter_options'];
+        if (empty($filter_options)) {
+            return array();
+        }
+
+        // Cache the whole result; invalidated by the version bump on event save.
+        $cache_key = 'aa_event_filters_' . academyafrica_event_filters_version()
+            . '_' . md5(wp_json_encode($filter_options));
+        $cached = get_transient($cache_key);
+        if (false !== $cached) {
+            return $cached;
+        }
+
+        // Load event IDs ONCE and derive every meta-based dimension from them,
+        // instead of running an unbounded query per filter dimension (#57).
+        $needs_events = (bool) array_filter($filter_options, function ($o) {
+            return $o !== 'date';
+        });
+        $event_ids = $needs_events ? get_posts(array(
+            'post_type'              => 'event',
+            'post_status'            => 'publish',
+            'posts_per_page'         => -1,
+            'fields'                 => 'ids',
+            'no_found_rows'          => true,
+            'update_post_term_cache' => false,
+        )) : array();
+
+        // fields => 'ids' skips meta priming; batch it so the per-event
+        // get_post_meta() calls below are served from one cache read (#57 review).
+        if (!empty($event_ids)) {
+            update_meta_cache('post', $event_ids);
+        }
+
         $output = array();
-        if (!empty($filter_options)) {
-            foreach ($filter_options as $option) {
-                if ($option == "date") {
-                    $output[] = array(
-                        "title" => "Date",
-                        "name" => "date",
-                        "options" => array(
-                            "All" => "all",
-                            "This Week" => "week",
-                            "This Month" => "month",
-                            "Closed" => "closed"
-                        )
-                    );
+        foreach ($filter_options as $option) {
+            if ($option == "date") {
+                $output[] = array(
+                    "title" => "Date",
+                    "name" => "date",
+                    "options" => array(
+                        "All" => "all",
+                        "This Week" => "week",
+                        "This Month" => "month",
+                        "Closed" => "closed"
+                    )
+                );
+                continue;
+            }
+
+            $options = array();
+            foreach ($event_ids as $post_id) {
+                if ($option == "country") {
+                    $values = get_post_meta($post_id, "countries", true);
+                    if (!is_array($values)) {
+                        continue;
+                    }
+                    foreach ($values as $field_name) {
+                        $c_name = get_country_code($field_name);
+                        $opt = (is_array($c_name) && isset($c_name["name"])) ? $c_name["name"] : "";
+                        if ($opt !== "") {
+                            $options[$opt] = $field_name;
+                        }
+                    }
                 } else {
-                    $args = array(
-                        'post_type' => 'event',
-                        'posts_per_page' => -1,
-                    );
-                    $query = new WP_Query($args);
-                    $options = array();
-                    if ($option == "country") {
-                        if ($query->have_posts()) {
-                            while ($query->have_posts()) {
-                                $query->the_post();
-                                $post_id = get_the_ID();
-                                $values = get_post_meta($post_id, "countries", true);
-                                if (isset($values)) {
-                                    foreach ($values as $field_name) {
-                                        $c_name = get_country_code($field_name);
-                                        $opt = isset($c_name) ? $c_name["name"] : "";
-                                        $options[$opt] = $field_name;
-                                    }
-                                }
-                            }
-                            wp_reset_postdata();
-                        }
-                        $output[] = array(
-                            "title" => $this->filter_labels()[$option] ?? $option,
-                            "name" => $option,
-                            "options" => $options
-                        );
-                    } else {
-                        if ($query->have_posts()) {
-                            while ($query->have_posts()) {
-                                $query->the_post();
-                                $post_id = get_the_ID();
-                                $field_name = get_post_meta($post_id, $option, true);
-                                if ($field_name) {
-                                    $options[$field_name] = $field_name;
-                                }
-                            }
-                            wp_reset_postdata();
-                        }
-                        $output[] = array(
-                            "title" => $this->filter_labels()[$option] ?? $option,
-                            "name" => $option,
-                            "options" => $options
-                        );
+                    $field_name = get_post_meta($post_id, $option, true);
+                    if (!empty($field_name) && is_scalar($field_name)) {
+                        $options[$field_name] = $field_name;
                     }
                 }
             }
+
+            $output[] = array(
+                "title" => $this->filter_labels()[$option] ?? $option,
+                "name" => $option,
+                "options" => $options
+            );
         }
+
+        set_transient($cache_key, $output, 15 * MINUTE_IN_SECONDS);
         return $output;
     }
     public function get_upcoming_events()
