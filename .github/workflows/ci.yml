@@ -71,14 +71,26 @@ jobs:
       - run: composer install --no-interaction --no-progress --prefer-dist
       - run: composer test
 
-  # --- Reported (non-blocking) checks -------------------------------------
-  # These surface issues on the legacy base without blocking the build yet;
-  # promote to required once PRs #54/#55 land and the counts reach zero.
-
-  coding-standards:
-    name: WordPress standards (report)
+  # Baseline regression gate (blocking): passes on the known legacy occurrences
+  # recorded in bin/ci/baselines/superglobal-output.txt, but fails on any NEW
+  # unescaped superglobal output. Shrink the baseline as #54/#55 land.
+  superglobal-output:
+    name: Unescaped superglobal output
     runs-on: ubuntu-latest
-    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - run: php bin/ci/check-superglobal-output.php
+
+  # Advisory (non-blocking): full WordPress security-standard report. The legacy
+  # base still has many findings (cleared by #55), so this surfaces them in the
+  # log without failing the build. Promote to blocking once the count is zero.
+  coding-standards:
+    name: WordPress standards (advisory)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -87,16 +99,4 @@ jobs:
           coverage: none
           tools: composer
       - run: composer install --no-interaction --no-progress --prefer-dist
-      - run: composer phpcs
-
-  superglobal-output:
-    name: Unescaped superglobal output (report)
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          coverage: none
-      - run: php bin/ci/check-superglobal-output.php
+      - run: composer phpcs || true

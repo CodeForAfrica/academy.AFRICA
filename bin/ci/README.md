@@ -13,15 +13,13 @@ pushes to `develop`/`main`, and each is runnable locally.
 | Local assets | `php bin/ci/check-asset-refs.php` | Statically-referenced theme/plugin assets (`/wp-content/...`, `get_stylesheet_directory_uri() . '...'`) that don't exist on disk (#53). |
 | JavaScript | `bash bin/ci/check-js.sh` | Syntax of custom source JS via `node --check`. |
 | Unit tests | `composer test` (PHPUnit) | Regression coverage for the malformed-metadata failure class (event date normalization, #57). |
+| Superglobal output | `php bin/ci/check-superglobal-output.php` | Request data echoed without escaping. **Baseline gate**: passes on the known legacy occurrences in `bin/ci/baselines/superglobal-output.txt`, fails on any *new* one. Regenerate with `--update-baseline`; shrink as #54/#55 land. |
 
-## Reported (non-blocking for now)
-
-Promote to required once PRs #54/#55 land and the counts reach zero.
+## Advisory (non-blocking)
 
 | Check | Command | Reports |
 |-------|---------|---------|
-| WordPress standards | `composer phpcs` | `WordPress.Security.*` (escaping, nonces, input) + short tags + PHP-version compatibility (`phpcs.xml.dist`). |
-| Superglobal output | `php bin/ci/check-superglobal-output.php` | Request data echoed without escaping. |
+| WordPress standards | `composer phpcs` | `WordPress.Security.*` (escaping, nonces, input) + short tags + PHP-version compatibility (`phpcs.xml.dist`). Runs with `|| true` in CI — the legacy base still has many findings (cleared by #55); promote to blocking once zero. |
 
 ## Scope
 
