@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<ruleset name="academy.AFRICA custom code">
+    <description>
+        Focused coding-standard / security gate for the custom theme and plugin
+        (issue #48). Scoped to the runtime-audit failure classes rather than full
+        WordPress-Extra style, so the report is actionable.
+    </description>
+
+    <!-- Scan only custom code; third-party plugins and WP core are excluded. -->
+    <file>wp-content/themes/academyAfrica</file>
+    <file>wp-content/mu-plugins/academy-error-logger.php</file>
+    <file>wp-content/plugins/academy-africa</file>
+
+    <!-- Built/minified assets and vendored code are not ours to lint. -->
+    <exclude-pattern>*/assets/css/dist/*</exclude-pattern>
+    <exclude-pattern>*/assets/js/*.min.js</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <!-- Configuration-dependent short tags (audit finding #5 / #45). -->
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+
+    <!-- Security failure classes the audit flagged. -->
+    <rule ref="WordPress.Security.EscapeOutput"/>
+    <rule ref="WordPress.Security.NonceVerification"/>
+    <rule ref="WordPress.Security.ValidatedSanitizedInput"/>
+
+    <!-- Catch use of syntax/APIs unsupported on the supported PHP versions. -->
+    <rule ref="PHPCompatibilityWP"/>
+    <config name="testVersion" value="8.1-"/>
+</ruleset>

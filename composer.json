@@ -1,0 +1,27 @@
+{
+    "name": "codeforafrica/academy-africa-quality",
+    "description": "Dev-only quality/regression tooling for the academy.AFRICA custom theme and plugin (issue #48).",
+    "license": "MIT",
+    "type": "project",
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.9",
+        "wp-coding-standards/wpcs": "^3.1",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpunit/phpunit": "^9.6"
+    },
+    "scripts": {
+        "lint": "php bin/ci/lint-php.php",
+        "short-tags": "php bin/ci/check-short-tags.php",
+        "asset-refs": "php bin/ci/check-asset-refs.php",
+        "superglobals": "php bin/ci/check-superglobal-output.php",
+        "phpcs": "phpcs",
+        "test": "phpunit"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

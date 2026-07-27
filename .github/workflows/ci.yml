@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  php-lint:
+    name: PHP parse + short tags (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.1', '8.2', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      # Parse errors AND config-dependent short tags fatal here (short_open_tag=Off).
+      - run: php bin/ci/lint-php.php
+
+  static-gates:
+    name: Short tags + local asset references
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - name: Configuration-dependent short tags
+        run: php bin/ci/check-short-tags.php
+      - name: Broken local asset references
+        run: php bin/ci/check-asset-refs.php
+
+  javascript:
+    name: JavaScript syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: bash bin/ci/check-js.sh
+
+  unit-tests:
+    name: Unit tests (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.1', '8.2', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer
+      - run: composer install --no-interaction --no-progress --prefer-dist
+      - run: composer test
+
+  # --- Reported (non-blocking) checks -------------------------------------
+  # These surface issues on the legacy base without blocking the build yet;
+  # promote to required once PRs #54/#55 land and the counts reach zero.
+
+  coding-standards:
+    name: WordPress standards (report)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer
+      - run: composer install --no-interaction --no-progress --prefer-dist
+      - run: composer phpcs
+
+  superglobal-output:
+    name: Unescaped superglobal output (report)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - run: php bin/ci/check-superglobal-output.php
