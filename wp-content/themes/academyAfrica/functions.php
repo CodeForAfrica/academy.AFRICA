@@ -47,7 +47,10 @@ function my_theme_enqueue_styles()
         wp_enqueue_style('single-event', $base . 'pages/single_event.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
-    if (is_page('profile')) {
+    // Follow the Profile template (edit-profile.php) rather than a single slug,
+    // so renamed or Polylang-translated profile pages still get the styles; keep
+    // the slug as a harmless fallback.
+    if (is_page_template('edit-profile.php') || is_page('profile')) {
         wp_enqueue_style('profile', $base . 'pages/profile.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
