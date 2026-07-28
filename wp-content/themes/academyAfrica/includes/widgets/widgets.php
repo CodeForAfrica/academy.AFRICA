@@ -13,24 +13,7 @@ final class Widget
         add_action('elementor/elements/categories_registered', [$this, 'add_elementor_widget_categories']);
         add_action('elementor/widgets/register', [$this,  'register_widgets']);
         add_action('wp_enqueue_scripts', [$this, 'register_styles']);
-        // add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
-        add_action('elementor/frontend/after_register_scripts', [$this, 'register_scripts']);
         add_action('elementor/frontend/after_register_scripts', [$this, 'register_widget_scripts']);
-    }
-
-    function register_scripts()
-    {
-        // Course-grid scripts, registered (not enqueued) so the All Courses /
-        // My Courses widgets can pull them in only where a grid renders.
-        // The previous ['academy-africa'] dependency was invalid — there is no
-        // script handle by that name (it is a style handle) — so it is dropped.
-        $scripts = [
-            "academy-africa-filters" => "filters.js",
-            "academy-africa-courses" => "courses.js",
-        ];
-        foreach ($scripts as $handle => $file) {
-            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, [], ACADEMY_AFRICA_VERSION);
-        }
     }
 
     function register_widget_scripts()

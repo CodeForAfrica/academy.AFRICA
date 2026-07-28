@@ -81,15 +81,18 @@ function my_theme_enqueue_styles()
 
     if (is_search() || is_page_template('search.php')) {
         wp_enqueue_style('search', $base . 'pages/search.css', array(), ACADEMY_AFRICA_VERSION);
+        // search.php renders template-parts/filter_bar.php directly (not via a
+        // widget), so it needs the filter-bar stylesheet enqueued here.
+        wp_enqueue_style('academy-africa-filter-bar', $base . 'pages/filter_bar.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
     if (is_page_template('login.php')) {
         wp_enqueue_style('cfa-login', $base . 'pages/login.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
-    // Note: the course-grid filter bar (filter_bar.css) is registered in
-    // includes/widgets/widgets.php and pulled in via the All Courses / My
-    // Courses widgets' get_style_depends(), so it loads only where a grid renders.
+    // The course-grid filter bar (academy-africa-filter-bar, registered in
+    // includes/widgets/widgets.php) is otherwise pulled in via the All Courses,
+    // My Courses, and Learning Pathways widgets' get_style_depends().
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -111,13 +114,19 @@ add_action('wp_enqueue_scripts', 'load_fa');
 
 function my_theme_enqueue_scripts()
 {
-    // Site-wide chrome + search. The course-grid scripts (courses.js, filters.js)
-    // are registered in includes/widgets/widgets.php and loaded on demand via the
-    // All Courses / My Courses widgets' get_script_depends(), so they no longer
-    // ship on every page.
-    $js_files = ['header', 'modal', 'search'];
+    // Site-wide scripts. filters.js stays global: besides the course-grid filter
+    // sidebar it provides addAccordion(), used by accordions across the site
+    // (FAQ, Events, Learning Pathways, the filter bar, single course curriculum).
+    $js_files = ['header', 'modal', 'search', 'filters'];
     foreach ($js_files as $js_file_name) {
         wp_enqueue_script($js_file_name, get_stylesheet_directory_uri() . '/assets/js/' . $js_file_name . '.js', [], ACADEMY_AFRICA_VERSION);
+    }
+
+    // courses.js is LearnDash single-view behaviour (enroll-button styling +
+    // quiz "View Answers" relabel), not course-grid behaviour, so load it only
+    // on single LearnDash content.
+    if (is_singular(array('sfwd-courses', 'sfwd-lessons', 'sfwd-quiz', 'sfwd-topic'))) {
+        wp_enqueue_script('courses', get_stylesheet_directory_uri() . '/assets/js/courses.js', [], ACADEMY_AFRICA_VERSION);
     }
 }
 

@@ -24,7 +24,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
     public function get_script_depends()
     {
-        return ['academy-africa-filters', 'academy-africa-courses', 'academy-africa_learndash_course_grid', 'academy-africa_all_courses'];
+        return ['academy-africa_learndash_course_grid', 'academy-africa_all_courses'];
     }
 
     public function get_title()
