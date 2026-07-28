@@ -952,33 +952,67 @@ add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
 // Heartbeat optimisation
 // Heartbeat defaults to every 15s. With 60+ queries per tick and
 // multiple editors open simultaneously this saturates the DB.
-// We raise the interval to 60s sitewide, then kill it entirely on
-// admin pages that don't need live updates (post lists, settings,
-// plugin pages, etc.) — keeping it only on post/page edit screens
-// where autosave and post-locking actually depend on it.
+// We slow the tick down site-wide, and slow it down further on admin
+// screens that don't need frequent updates (list tables, settings,
+// plugin pages, dashboard). We deliberately do NOT deregister the
+// heartbeat script: wp-auth-check (the "session expired" login modal)
+// and autosave declare it as a dependency, so removing the handle
+// breaks those scripts on every screen where they load. Tuning the
+// interval cuts the DB load while keeping the handle — and its
+// dependents — intact.
 // ------------------------------------------------------------------
 
+/**
+ * Post types whose edit screens genuinely need a responsive heartbeat
+ * (autosave + post locking). They keep the shorter interval.
+ */
+function academyafrica_heartbeat_edit_post_types(): array
+{
+    return ['post', 'page', 'sfwd-courses', 'sfwd-lessons', 'sfwd-topic', 'sfwd-quiz', 'ac-learning-path', 'ac-organization'];
+}
+
+/**
+ * Whether the current admin request is a post-editor screen for one of the
+ * post types that need a responsive heartbeat.
+ *
+ * Deliberately uses $GLOBALS['pagenow'] + the request rather than
+ * get_current_screen(): the heartbeat_settings filter is applied while scripts
+ * are registered, which can run before set_current_screen(), so
+ * get_current_screen() may return null on the very edit screens we want to
+ * keep fast. $pagenow is set early in wp-settings.php and is always available.
+ */
+function academyafrica_is_heartbeat_edit_screen(): bool
+{
+    if (!is_admin()) {
+        return false;
+    }
+
+    $pagenow = $GLOBALS['pagenow'] ?? '';
+
+    if ($pagenow === 'post-new.php') {
+        $post_type = isset($_GET['post_type']) ? sanitize_key(wp_unslash($_GET['post_type'])) : 'post';
+    } elseif ($pagenow === 'post.php') {
+        $post_id   = isset($_GET['post']) ? absint($_GET['post']) : 0;
+        $post_type = $post_id ? get_post_type($post_id) : '';
+    } else {
+        return false;
+    }
+
+    return in_array($post_type, academyafrica_heartbeat_edit_post_types(), true);
+}
+
 add_filter('heartbeat_settings', function (array $settings): array {
-    $settings['interval'] = 60; // seconds (default: 15)
+    // Editor screens keep a responsive 60s tick (autosave + post locking).
+    // Every other admin screen is slowed to the core-clamped maximum (120s)
+    // instead of killing heartbeat outright, so wp-auth-check and autosave
+    // keep resolving. The frontend keeps the 60s default.
+    if (is_admin() && !academyafrica_is_heartbeat_edit_screen()) {
+        $settings['interval'] = 120; // seconds — WordPress clamps to 15–120
+    } else {
+        $settings['interval'] = 60;
+    }
+
     return $settings;
-});
-
-add_action('admin_enqueue_scripts', function (): void {
-    $screen = get_current_screen();
-    if (!$screen) {
-        return;
-    }
-
-    // Post types that genuinely need heartbeat: autosave + post locking.
-    $needs_heartbeat = ['post', 'page', 'sfwd-courses', 'sfwd-lessons', 'sfwd-topic', 'sfwd-quiz', 'ac-learning-path', 'ac-organization'];
-
-    // Keep heartbeat on edit screens for the post types above.
-    // Disable everywhere else (list tables, settings pages, plugin pages, dashboard).
-    if ($screen->base === 'post' && in_array($screen->post_type, $needs_heartbeat, true)) {
-        return;
-    }
-
-    wp_deregister_script('heartbeat');
 });
 
 // Fallback stub for when Co-Authors Plus plugin is disabled.
