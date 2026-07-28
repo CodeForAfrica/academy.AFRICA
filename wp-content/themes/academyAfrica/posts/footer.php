@@ -24,8 +24,10 @@ function create_footer_post_type()
         'has_archive'   => true,
         'menu_position' => 5,
         'supports'      => array('title', 'editor', 'thumbnail',),
-        'rewrite'       => array('slug' => 'Footers'),
+        'rewrite'       => array('slug' => 'footers'),
     );
 
-    register_post_type('Footer', $args);
+    // Post-type key is lowercase to match the `post_type => 'footer'` query in
+    // template-parts/footer.php (post-type keys are case-sensitive).
+    register_post_type('footer', $args);
 }
