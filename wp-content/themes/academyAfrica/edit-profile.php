@@ -99,7 +99,7 @@ if (is_user_logged_in()) {
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));
     $user_updates = explode(",", get_user_meta($user_id, 'updates', true));
 ?>
-    <div class="profile">
+    <main id="content" class="profile">
         <h4 class="cfa-title">
             <?php echo $page_title ?>
         </h4>
@@ -365,7 +365,7 @@ if (is_user_logged_in()) {
                 }
             }
         </script>
-    </div>
+    </main>
 <?php
 } else {
     echo 'Please log in to edit your profile.';

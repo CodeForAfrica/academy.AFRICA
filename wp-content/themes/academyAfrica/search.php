@@ -92,7 +92,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
 ?>
 
 <?php get_header(); ?>
-<div class="search-page">
+<main id="content" class="search-page">
     <?php get_template_part('template-parts/filter_bar', 'template', [
         'filter_by' => $filter_by,
         'filter_options' => $filter_options,
@@ -289,7 +289,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
             </div>
         </div>
     </div>
-</div>
+</main>
 
 
 

@@ -10,7 +10,7 @@ $or_title = "The Organisation";
 $speaker_title = "The Speaker";
 require_once __DIR__ . '/includes/utils/countries.php';
 ?>
-<div id="main" class="single-page-event">
+<main id="content" class="single-page-event">
     <?php
     if (have_posts()):
         while (have_posts()):
@@ -164,7 +164,7 @@ require_once __DIR__ . '/includes/utils/countries.php';
             <?php echo esc_html($back_text) ?>
         </a>
     </div>
-</div>
+</main>
 
 <?php
 get_footer(); // Include the footer file

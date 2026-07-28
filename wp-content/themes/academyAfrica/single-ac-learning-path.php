@@ -14,7 +14,7 @@ $courses = get_field('courses', $learning_path_id) ?: [];
 <?php get_header(); ?>
 
 
-<div class="ac-learning-path-container">
+<main id="content" class="ac-learning-path-container">
     <div id='learning-path'>
         <div class="ac-learning-path-container__title">
             <div class="ac-learning-path-container__title__image">
@@ -98,7 +98,7 @@ $courses = get_field('courses', $learning_path_id) ?: [];
             Download as PDF
         </button>
     </div>
-</div>
+</main>
 
 <script type="text/javascript">
     function downloadSingleLearningPath() {

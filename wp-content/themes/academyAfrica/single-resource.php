@@ -24,7 +24,7 @@ $course_intro    = $post_data ? $post_data->post_content : '';
         display: none;
     }
 </style>
-<div class="single-courses wysiwyg">
+<main id="content" class="single-courses wysiwyg">
     <div class="wrapper">
         <div class="title-section">
             <div class="title">
@@ -60,7 +60,7 @@ $course_intro    = $post_data ? $post_data->post_content : '';
             </div>
         </div>
     </div>
-</div>
+</main>
 <?php
 get_footer();
 ?>
