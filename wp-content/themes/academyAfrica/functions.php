@@ -160,14 +160,31 @@ function academyafrica_posttype_maintenance()
     $legacy_ids = $wpdb->get_col(
         $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_type = %s", 'Footer')
     );
+    // Bail without recording completion on a DB error, so a later request retries
+    // instead of skipping the migration forever and leaving the footer broken.
+    if ('' !== $wpdb->last_error) {
+        return;
+    }
+
     if (!empty($legacy_ids)) {
-        $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'footer' WHERE post_type = 'Footer'");
+        $updated = $wpdb->query(
+            $wpdb->prepare(
+                "UPDATE {$wpdb->posts} SET post_type = %s WHERE post_type = %s",
+                'footer',
+                'Footer'
+            )
+        );
+        if (false === $updated || '' !== $wpdb->last_error) {
+            return; // leave the flag unset so the migration is retried
+        }
         foreach ($legacy_ids as $legacy_id) {
             clean_post_cache((int) $legacy_id);
         }
     }
 
     flush_rewrite_rules(false);
+
+    // Only now that the migration + flush have succeeded do we record completion.
     update_option('academyafrica_posttype_maint_version', $version);
 }
 add_action('init', 'academyafrica_posttype_maintenance', 20);
