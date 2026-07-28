@@ -109,7 +109,11 @@ $thumbnail_url = is_array($logo_src) ? $logo_src[0] : '';
                 <img height="110" width="250"
                     src="<?php echo esc_url($thumbnail_url) ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="logo">
                 <p class="description">
-                    <?php echo esc_html($site_description) ?>
+                    <?php
+                    // site_description is a WYSIWYG ACF field — allow safe formatting
+                    // (links, emphasis, paragraphs) while stripping unsafe markup.
+                    echo wp_kses_post($site_description);
+                    ?>
                 </p>
                 <div class="footer-connect">
                     <span style="white-space: nowrap;">
