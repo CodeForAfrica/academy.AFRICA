@@ -203,7 +203,9 @@ handle_login_failure();
             <?php
             $current_url = get_permalink();
             $logout_url = wp_logout_url(get_permalink());
-            echo "window.location.href = '" . esc_url($logout_url) . "'";
+            // JS context: serialize as a JS value so nonce/redirect query args
+            // survive (esc_url would emit HTML entities that don't decode here).
+            echo "window.location.href = " . wp_json_encode($logout_url) . ";";
             ?>
         });
     });

@@ -44,15 +44,15 @@ $share_message = isset($args["message"]) ? $args["message"] : sprintf(academyafr
                 window.dataLayer = window.dataLayer || [];
                 dataLayer.push({
                     'event': 'share_button_click',
-                    "message": "<?php echo $share_message ?>",
+                    "message": <?php echo wp_json_encode($share_message) ?>,
                     'platform': buttonId.split('-')[2],
-                    'url': "<?php echo $url_to_share ?>",
+                    'url': <?php echo wp_json_encode($url_to_share) ?>,
                 });
                 typeof window.gtag === 'function' && gtag('event', 'share_button_click', {
                     'event_category': 'engagement',
                     'event_label': buttonId.split('-')[2],
-                    'message': "<?php echo $share_message ?>",
-                    'url': "<?php echo $url_to_share ?>"
+                    'message': <?php echo wp_json_encode($share_message) ?>,
+                    'url': <?php echo wp_json_encode($url_to_share) ?>
                 });
             });
         }
