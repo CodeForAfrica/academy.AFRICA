@@ -3,9 +3,7 @@
 namespace AcademyAfrica\Theme;
 
 /**
- * The template for displaying the footer.
- *
- * Contains the body & html closing tags.
+ * The template for displaying 404 (not found) pages.
  *
  * @package Academy Africa
  */
@@ -15,7 +13,8 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <?php
-// template-parts/404 renders a complete document: it calls get_header()
-// (opens <main>) and get_footer() (footer.php closes <main>, </body>, </html>).
+// template-parts/404 renders a complete document: get_header() and get_footer()
+// emit no <main>, and the part opens and closes its own single
+// <main id="content">. This wrapper adds no markup of its own.
 get_template_part('template-parts/404', 'template');
 ?>
