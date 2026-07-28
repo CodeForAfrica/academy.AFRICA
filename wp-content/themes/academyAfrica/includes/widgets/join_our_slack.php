@@ -14,7 +14,7 @@ class Academy_Africa_Join_Our_Slack extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-join-our-slack', 'academy-africa'];
+        return ['academy-africa-join-our-slack'];
     }
 
     public function get_title()

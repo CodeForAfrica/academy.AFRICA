@@ -19,12 +19,12 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-all-courses', 'academy-africa-pathways', 'academy-africa'];
+        return ['academy-africa-all-courses', 'academy-africa-learning-pathways', 'academy-africa-filter-bar'];
     }
 
     public function get_script_depends()
     {
-        return ['academy-africa-filters', "academy-africa_learndash_course_grid", "academy-africa_all_courses"];
+        return ['academy-africa-filters', 'academy-africa-courses', 'academy-africa_learndash_course_grid', 'academy-africa_all_courses'];
     }
 
     public function get_title()

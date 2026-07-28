@@ -15,12 +15,12 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-my-courses', 'academy-africa'];
+        return ['academy-africa-my-courses', 'academy-africa-filter-bar'];
     }
 
     public function get_script_depends()
     {
-        return ['academy-africa_my_courses'];
+        return ['academy-africa-courses', 'academy-africa-filters', 'academy-africa_my_courses'];
     }
 
     public function get_title()

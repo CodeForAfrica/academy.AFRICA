@@ -13,7 +13,7 @@ class Academy_Africa_Partners extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-partners', 'academy-africa-other-partners'];
+        return ['academy-africa-partners'];
     }
 
     public function get_title()

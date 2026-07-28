@@ -20,11 +20,16 @@ final class Widget
 
     function register_scripts()
     {
+        // Course-grid scripts, registered (not enqueued) so the All Courses /
+        // My Courses widgets can pull them in only where a grid renders.
+        // The previous ['academy-africa'] dependency was invalid — there is no
+        // script handle by that name (it is a style handle) — so it is dropped.
         $scripts = [
-            "academy-africa-filters" => "filters.js"
+            "academy-africa-filters" => "filters.js",
+            "academy-africa-courses" => "courses.js",
         ];
         foreach ($scripts as $handle => $file) {
-            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa'], ACADEMY_AFRICA_VERSION);
+            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, [], ACADEMY_AFRICA_VERSION);
         }
     }
 
@@ -114,5 +119,15 @@ final class Widget
                 ACADEMY_AFRICA_VERSION
             );
         }
+
+        // Registered (not enqueued): the course-grid filter bar. Pulled in via
+        // the All Courses / My Courses widgets' get_style_depends() so it loads
+        // only on pages that actually render a grid, not site-wide.
+        wp_register_style(
+            'academy-africa-filter-bar',
+            get_stylesheet_directory_uri() . '/assets/css/dist/pages/filter_bar.css',
+            [],
+            ACADEMY_AFRICA_VERSION
+        );
     }
 }

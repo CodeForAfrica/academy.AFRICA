@@ -35,30 +35,70 @@ const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 function my_theme_enqueue_styles()
 {
-    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/assets/css/dist/main.css', array('hello-elementor', 'hello-elementor-theme-style'), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('single-event', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single_event.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('profile', get_stylesheet_directory_uri() . '/assets/css/dist/pages/profile.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('contact-us', get_stylesheet_directory_uri() . '/assets/css/dist/pages/contact-us.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('default-page-content', get_stylesheet_directory_uri() . '/assets/css/dist/pages/page-content.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('single-courses', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-courses.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('single-lesson', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-lessons.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('single-quiz', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-quiz.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('single-topic', get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-sfwd-topic.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('sfwd-common'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/sfwd-common.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('course-completed'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/course-completed.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('single-ac-learning-path'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/single-ac-learning-path.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('search'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/search.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('filter_bar'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/filter_bar.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style(('learning_path_print'), get_stylesheet_directory_uri() . '/assets/css/dist/print/print.css', array(), ACADEMY_AFRICA_VERSION, 'print');
-    wp_enqueue_style(('cfa-login'), get_stylesheet_directory_uri() . '/assets/css/dist/pages/login.css', array(), ACADEMY_AFRICA_VERSION);
+    $base = get_stylesheet_directory_uri() . '/assets/css/dist/';
+
+    // Base styles — needed on every front-end page.
+    wp_enqueue_style('child-style', $base . 'main.css', array('hello-elementor', 'hello-elementor-theme-style'), ACADEMY_AFRICA_VERSION);
+    wp_enqueue_style('default-page-content', $base . 'pages/page-content.css', array(), ACADEMY_AFRICA_VERSION);
+
+    // Page-specific bundles — loaded only where the page actually needs them so
+    // unrelated pages don't ship course/event/profile/auth CSS.
+    if (is_singular('event')) {
+        wp_enqueue_style('single-event', $base . 'pages/single_event.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+
+    if (is_page('profile')) {
+        wp_enqueue_style('profile', $base . 'pages/profile.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+
+    if (is_page_template('contact-us.php')) {
+        wp_enqueue_style('contact-us', $base . 'pages/contact-us.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+
+    // LearnDash single content (course, lesson, quiz, topic).
+    if (is_singular(array('sfwd-courses', 'sfwd-lessons', 'sfwd-quiz', 'sfwd-topic'))) {
+        wp_enqueue_style('sfwd-common', $base . 'pages/sfwd-common.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+    if (is_singular('sfwd-courses')) {
+        wp_enqueue_style('single-courses', $base . 'pages/single-sfwd-courses.css', array(), ACADEMY_AFRICA_VERSION);
+        wp_enqueue_style('course-completed', $base . 'pages/course-completed.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+    if (is_singular('sfwd-lessons')) {
+        wp_enqueue_style('single-lesson', $base . 'pages/single-sfwd-lessons.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+    if (is_singular('sfwd-quiz')) {
+        wp_enqueue_style('single-quiz', $base . 'pages/single-sfwd-quiz.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+    if (is_singular('sfwd-topic')) {
+        wp_enqueue_style('single-topic', $base . 'pages/single-sfwd-topic.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+
+    // Learning path single (+ its print stylesheet).
+    if (is_singular('ac-learning-path')) {
+        wp_enqueue_style('single-ac-learning-path', $base . 'pages/single-ac-learning-path.css', array(), ACADEMY_AFRICA_VERSION);
+        wp_enqueue_style('learning_path_print', $base . 'print/print.css', array(), ACADEMY_AFRICA_VERSION, 'print');
+    }
+
+    if (is_search() || is_page_template('search.php')) {
+        wp_enqueue_style('search', $base . 'pages/search.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+
+    if (is_page_template('login.php')) {
+        wp_enqueue_style('cfa-login', $base . 'pages/login.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+
+    // Note: the course-grid filter bar (filter_bar.css) is registered in
+    // includes/widgets/widgets.php and pulled in via the All Courses / My
+    // Courses widgets' get_style_depends(), so it loads only where a grid renders.
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
 function load_admin_styles()
 {
+    // Only events.css exists in assets/css/dist/admin/; the previously enqueued
+    // admin/main.css does not exist and produced a 404 on every admin screen.
     wp_enqueue_style('event-style', get_stylesheet_directory_uri() . '/assets/css/dist/admin/events.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('main-style', get_stylesheet_directory_uri() . '/assets/css/dist/admin/main.css', array(), ACADEMY_AFRICA_VERSION);
 }
 add_action('admin_enqueue_scripts', 'load_admin_styles');
 
@@ -71,7 +111,11 @@ add_action('wp_enqueue_scripts', 'load_fa');
 
 function my_theme_enqueue_scripts()
 {
-    $js_files = ['courses', 'filters', 'header', 'modal', 'search'];
+    // Site-wide chrome + search. The course-grid scripts (courses.js, filters.js)
+    // are registered in includes/widgets/widgets.php and loaded on demand via the
+    // All Courses / My Courses widgets' get_script_depends(), so they no longer
+    // ship on every page.
+    $js_files = ['header', 'modal', 'search'];
     foreach ($js_files as $js_file_name) {
         wp_enqueue_script($js_file_name, get_stylesheet_directory_uri() . '/assets/js/' . $js_file_name . '.js', [], ACADEMY_AFRICA_VERSION);
     }

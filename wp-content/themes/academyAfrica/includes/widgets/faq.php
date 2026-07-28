@@ -14,7 +14,7 @@ class Academy_Africa_FAQ  extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-faq', 'academy-africa'];
+        return ['academy-africa-faq'];
     }
 
     public function get_title()
