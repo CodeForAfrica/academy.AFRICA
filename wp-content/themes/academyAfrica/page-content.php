@@ -6,7 +6,7 @@ require_once(ABSPATH . 'wp-load.php');
 get_header();
 
 ?>
-<main class="about-section">
+<div class="about-section">
     <div class="content">
         <?php
         if (have_posts()) {
@@ -19,6 +19,6 @@ get_header();
         }
         ?>
     </div>
-</main>
+</div>
 <?php
 get_footer();

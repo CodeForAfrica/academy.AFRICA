@@ -14,6 +14,8 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 ?>
+</main><?php // close the single <main> opened in header.php ?>
+
 <?php get_template_part('template-parts/footer', 'template'); ?>
 
 <?php wp_footer(); ?>

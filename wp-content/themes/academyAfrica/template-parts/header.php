@@ -108,21 +108,21 @@ handle_login_failure();
                             $class .= ' ' . $menu_item["class"];
                             if (count($menu_item['children']) > 0) {
                                 $class .= ' parent';
-                                echo "<div class='" . $class . "'>";
+                                echo "<div class='" . esc_attr($class) . "'>";
                                 echo
-                                "<span class='collapsible'>" . $menu_item['title'] . "
+                                "<span class='collapsible'>" . esc_html($menu_item['title']) . "
                             </span>";
                                 echo "<div class='children'>";
                                 foreach ($menu_item['children'] as $child) {
                                     echo "
-                            <a class='item' href='" . $child['url'] . "'>" . $child['title'] . "</a>
+                            <a class='item' href='" . esc_url($child['url']) . "'>" . esc_html($child['title']) . "</a>
                             ";
                                 }
                                 echo "</div>";
                                 echo "</div>";
                             } else {
                                 $query_param = $menu_item['class'] == "sign-in" ? '?redirect_url=' . $path_name : '';
-                                echo "<a class='" . $class . "' href='" . $menu_item['url'] . $query_param . "'>" . $menu_item['title'] . "</a>";
+                                echo "<a class='" . esc_attr($class) . "' href='" . esc_url($menu_item['url'] . $query_param) . "'>" . esc_html($menu_item['title']) . "</a>";
                             }
                         }
                         ?>
@@ -140,7 +140,7 @@ handle_login_failure();
             $user = wp_get_current_user();
             $avatar = get_avatar_url($user->ID);
             if ($avatar) {
-                echo "<img class='user-avatar' src='" . $avatar . "' alt='user avatar' />";
+                echo "<img class='user-avatar' src='" . esc_url($avatar) . "' alt='user avatar' />";
             } else {
                 echo "<div class='user-avatar'>";
                 $user = wp_get_current_user();
@@ -168,19 +168,19 @@ handle_login_failure();
                 $class = 'item' . ' ' . $menu_item["class"];
                 if (count($menu_item['children']) > 0) {
                     $class .= ' parent mobile';
-                    echo "<div class='" . $class . "'>";
-                    echo "<span class='collapsible'>" . $menu_item['title'] . "
+                    echo "<div class='" . esc_attr($class) . "'>";
+                    echo "<span class='collapsible'>" . esc_html($menu_item['title']) . "
                     </span>";
                     echo "<div class='children'>";
                     foreach ($menu_item['children'] as $child) {
                         echo "
-                            <a class='item' href='" . $child['url'] . "'>" . $child['title'] . "</a>
+                            <a class='item' href='" . esc_url($child['url']) . "'>" . esc_html($child['title']) . "</a>
                             ";
                     }
                     echo "</div>";
                     echo "</div>";
                 } else {
-                    echo "<a class='" . $class . "' href='" . $menu_item['url'] . "'>" . $menu_item['title'] . "</a>";
+                    echo "<a class='" . esc_attr($class) . "' href='" . esc_url($menu_item['url']) . "'>" . esc_html($menu_item['title']) . "</a>";
                 }
             }
             ?>
@@ -203,7 +203,7 @@ handle_login_failure();
             <?php
             $current_url = get_permalink();
             $logout_url = wp_logout_url(get_permalink());
-            echo "window.location.href = '" . $logout_url . "'";
+            echo "window.location.href = '" . esc_url($logout_url) . "'";
             ?>
         });
     });

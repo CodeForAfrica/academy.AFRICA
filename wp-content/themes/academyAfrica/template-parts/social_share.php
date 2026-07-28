@@ -33,7 +33,7 @@ $share_message = isset($args["message"]) ? $args["message"] : sprintf(academyafr
 <script>
     function toggleShareButtons() {
         var shareButtons = document.querySelector('.share-icons');
-        shareButtons.classList.toggle('hide');
+        if (shareButtons) shareButtons.classList.toggle('hide');
     }
 
     const shareButtons = ['share-btn-linkedin', 'share-btn-twitter', 'share-btn-facebook', 'share-btn-instagram'];
@@ -48,7 +48,7 @@ $share_message = isset($args["message"]) ? $args["message"] : sprintf(academyafr
                     'platform': buttonId.split('-')[2],
                     'url': "<?php echo $url_to_share ?>",
                 });
-                gtag('event', 'share_button_click', {
+                typeof window.gtag === 'function' && gtag('event', 'share_button_click', {
                     'event_category': 'engagement',
                     'event_label': buttonId.split('-')[2],
                     'message': "<?php echo $share_message ?>",

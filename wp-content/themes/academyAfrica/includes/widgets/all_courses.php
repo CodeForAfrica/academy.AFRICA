@@ -267,7 +267,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
 
 
 ?>
-        <main class="all-courses">
+        <div class="all-courses">
             <div class="desktop-only">
                 <?php get_template_part('template-parts/filter_bar', 'template', [
                     'filter_by' => $filter_by,
@@ -516,7 +516,7 @@ class Academy_Africa_All_Courses  extends \Elementor\Widget_Base
                 }
                 ?>
             </div>
-        </main>
+        </div>
 <?php
     }
 }

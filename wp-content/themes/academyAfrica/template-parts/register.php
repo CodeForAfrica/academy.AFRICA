@@ -107,11 +107,14 @@ if ($success) {
             </footer>
             <script>
                 function validateForm() {
-                    const password = document.getElementById("password").value;
-                    const confirmPassword = document.getElementById("confirm-password").value;
-                    if (password !== confirmPassword) {
+                    const password = document.getElementById("password");
+                    const confirmPassword = document.getElementById("confirm-password");
+                    if (!password || !confirmPassword) return true;
+                    if (password.value !== confirmPassword.value) {
                         const errorAlert = document.getElementById("error-alert");
-                        errorAlert.innerText = <?php echo wp_json_encode(academyafrica_translate('Passwords do not match')); ?>;
+                        if (errorAlert) {
+                            errorAlert.innerText = <?php echo wp_json_encode(academyafrica_translate('Passwords do not match')); ?>;
+                        }
                         return false;
                     }
                     return true;
@@ -119,6 +122,7 @@ if ($success) {
                 function togglePasswordVisibility(id) {
                     const password = document.getElementById(id);
                     const togglePassword = document.getElementById(`toggle-${id}`);
+                    if (!password || !togglePassword) return;
                     if (password.type === "password") {
                         password.type = "text";
                         togglePassword.innerText = "visibility";
@@ -136,7 +140,7 @@ if ($success) {
                             'event': 'register',
                             'method': 'standard'
                         });
-                        gtag('event', 'register', {
+                        typeof window.gtag === 'function' && gtag('event', 'register', {
                             'event_category': 'engagement',
                             'event_label': 'standard'
                         });

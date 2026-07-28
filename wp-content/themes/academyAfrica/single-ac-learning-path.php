@@ -68,11 +68,11 @@ $courses = get_field('courses', $learning_path_id) ?: [];
                                     ]
                                 ); ?>
                                 <div class="extra-course-details">
-                                    <a href="<?php echo $course_link ?>" class="course-title">
-                                        <?php echo $course_title ?>
+                                    <a href="<?php echo esc_url($course_link) ?>" class="course-title">
+                                        <?php echo esc_html($course_title) ?>
                                     </a>
                                     <div class="course-excerpt">
-                                        <?php echo $course_excerpt ?>
+                                        <?php echo esc_html($course_excerpt) ?>
                                     </div>
                                 </div>
                             </div>
@@ -102,12 +102,15 @@ $courses = get_field('courses', $learning_path_id) ?: [];
 
 <script type="text/javascript">
     function downloadSingleLearningPath() {
-        var printTemplate = document.getElementById('learning').innerHTML;
+        var printSource = document.getElementById('learning');
+        if (!printSource) return;
+        var printTemplate = printSource.innerHTML;
 
         var printWindow = window.open('', '', '');
+        if (!printWindow) return;
         printWindow.document.write('<!DOCTYPE html>');
         printWindow.document.write('<html><head>');
-        printWindow.document.write('<title><?php echo addslashes($learning_path_title); ?></title>');
+        printWindow.document.write('<title><?php echo esc_js($learning_path_title); ?></title>');
         printWindow.document.write('</head><body>');
         printWindow.document.write(printTemplate);
         printWindow.document.write('</body></html>');
@@ -122,11 +125,11 @@ $courses = get_field('courses', $learning_path_id) ?: [];
     window.dataLayer = window.dataLayer || [];
     dataLayer.push({
         'event': 'learning_path_print',
-        'page_title': '<?php echo $learning_path_title ?>',
+        'page_title': '<?php echo esc_js($learning_path_title) ?>',
         'page_url': window.location.href,
     });
-    gtag('event', 'learning_path_print', {
-        'page_title': '<?php echo $learning_path_title ?>',
+    typeof window.gtag === 'function' && gtag('event', 'learning_path_print', {
+        'page_title': '<?php echo esc_js($learning_path_title) ?>',
         'page_location': window.location.href,
     });
 </script>

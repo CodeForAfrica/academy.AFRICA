@@ -30,13 +30,17 @@ $skip_link_url = apply_filters('hello_elementor_skip_link_url', '#content');
 </head>
 
 <body <?php body_class(); ?>>
-	<main>
-		<?php wp_body_open(); ?>
+	<?php wp_body_open(); ?>
 
-		<?php if ($enable_skip_link) { ?>
-			<a class="skip-link screen-reader-text" href="<?php echo esc_url($skip_link_url); ?>"><?php echo esc_html__('Skip to content', 'hello-elementor'); ?></a>
-		<?php } ?>
+	<?php if ($enable_skip_link) { ?>
+		<a class="skip-link screen-reader-text" href="<?php echo esc_url($skip_link_url); ?>"><?php echo esc_html__('Skip to content', 'hello-elementor'); ?></a>
+	<?php } ?>
 
-		<!-- get header template -->
+	<!-- site navigation — kept outside <main> -->
 
-		<?php get_template_part('template-parts/header', 'template'); ?>
+	<?php get_template_part('template-parts/header', 'template'); ?>
+
+	<?php // Single <main> landmark per document. Page templates and widgets render
+	// their content inside this element (they no longer open their own <main>).
+	// Closed in footer.php, and in 404.php which doesn't call get_footer(). ?>
+	<main id="content">

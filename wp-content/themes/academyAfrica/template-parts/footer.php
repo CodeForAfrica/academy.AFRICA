@@ -107,13 +107,13 @@ $thumbnail_url = is_array($logo_src) ? $logo_src[0] : '';
         <div class="item">
             <div class="site-description">
                 <img height="110" width="250"
-                    src="<?php echo $thumbnail_url ?>" alt=<?php echo get_bloginfo('name'); ?> class="logo">
+                    src="<?php echo esc_url($thumbnail_url) ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="logo">
                 <p class="description">
-                    <?php echo $site_description ?>
+                    <?php echo esc_html($site_description) ?>
                 </p>
                 <div class="footer-connect">
                     <span style="white-space: nowrap;">
-                        <?php echo $stay_in_touch ?>
+                        <?php echo esc_html($stay_in_touch) ?>
                     </span>
                     <div class="social-icons">
                         <?php
@@ -155,11 +155,17 @@ $thumbnail_url = is_array($logo_src) ? $logo_src[0] : '';
         <div class="item">
             <div class="embed">
                 <p class="title">
-                    <?php echo $newsletter_title ?>
+                    <?php echo esc_html($newsletter_title) ?>
                 </p>
                 <div>
-                    <?php echo $newsletter ?>
+                    <?php
+                    // Trusted content: the newsletter field holds an admin-entered
+                    // embed (e.g. a Mailchimp <form>), which wp_kses_post would strip.
+                    // Only site editors can set this meta, so it is output as-is.
+                    echo $newsletter;
+                    ?>
                 </div>
+
             </div>
         </div>
     </div>

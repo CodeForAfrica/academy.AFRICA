@@ -84,7 +84,7 @@ function get_full_url($path = '', $search = '')
                 dataLayer.push({
                     'event': 'password_reset'
                 });
-                gtag('event', 'password_reset', {
+                typeof window.gtag === 'function' && gtag('event', 'password_reset', {
                     'event_category': 'engagement',
                     'event_label': 'password_reset'
                 });

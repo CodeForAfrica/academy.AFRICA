@@ -364,7 +364,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
         $previous_events_title = $settings["previous_events_title"];
         $filter_options = $this->get_filter_by();
 ?>
-        <main class="events">
+        <div class="events">
             <aside class="filter-sidebar">
                 <div class="sidebar" id="sidebar">
                     <p class="filter-by">
@@ -685,7 +685,7 @@ class Academy_Africa_Events  extends \Elementor\Widget_Base
                 }
                 ?>
             </section>
-        </main>
+        </div>
 <?php
     }
 }

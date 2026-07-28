@@ -152,7 +152,7 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
 
 
 ?>
-        <main class="all-courses" id="all-courses">
+        <div class="all-courses" id="all-courses">
             <?php get_template_part('template-parts/filter_bar', 'template', [
                 'filter_by' => $filter_by,
                 'sort_options' => $sort_options,
@@ -266,7 +266,7 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
                     ?>
                 </section>
             </div>
-        </main>
+        </div>
 <?php
     }
 }

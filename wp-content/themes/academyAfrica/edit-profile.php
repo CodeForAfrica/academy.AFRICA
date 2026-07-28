@@ -99,7 +99,7 @@ if (is_user_logged_in()) {
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));
     $user_updates = explode(",", get_user_meta($user_id, 'updates', true));
 ?>
-    <main class="profile">
+    <div class="profile">
         <h4 class="cfa-title">
             <?php echo $page_title ?>
         </h4>
@@ -358,14 +358,14 @@ if (is_user_logged_in()) {
                     const reader = new FileReader();
 
                     reader.onload = function(e) {
-                        preview.src = e.target.result;
+                        if (preview) preview.src = e.target.result;
                     };
 
                     reader.readAsDataURL(file);
                 }
             }
         </script>
-    </main>
+    </div>
 <?php
 } else {
     echo 'Please log in to edit your profile.';

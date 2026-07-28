@@ -37,7 +37,7 @@ $course_intro    = $post_data ? $post_data->post_content : '';
                 $course_thumbnail = get_the_post_thumbnail_url($course_id);
                 $mooc_logo = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-blue.svg';
                 $logo_url = $course_thumbnail ? $course_thumbnail : $mooc_logo;
-                echo '<img src="' . $logo_url . '" alt="">';
+                echo '<img src="' . esc_url($logo_url) . '" alt="">';
                 ?>
             </div>
         </div>
@@ -45,7 +45,7 @@ $course_intro    = $post_data ? $post_data->post_content : '';
         if (!empty($short_description)) {
         ?>
             <div class="description">
-                <?php echo $short_description; ?>
+                <?php echo wp_kses_post($short_description); ?>
             </div>
         <?php
         }

@@ -4,13 +4,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeIcon = document.querySelector(".icon.close");
   const drawer = document.querySelector(".drawer");
 
-  hamburger.addEventListener("click", () => {
-    drawer.classList.toggle("open");
-    openIcon.style.display =
-      openIcon.style.display === "none" ? "block" : "none";
-    closeIcon.style.display =
-      closeIcon.style.display === "none" ? "block" : "none";
-  });
+  if (hamburger && drawer) {
+    hamburger.addEventListener("click", () => {
+      drawer.classList.toggle("open");
+      if (openIcon) {
+        openIcon.style.display =
+          openIcon.style.display === "none" ? "block" : "none";
+      }
+      if (closeIcon) {
+        closeIcon.style.display =
+          closeIcon.style.display === "none" ? "block" : "none";
+      }
+    });
+  }
 
   const parentNavs = document.querySelectorAll(".item.parent");
 
@@ -18,13 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const childNav = parentNav.querySelector(".children");
     parentNav.addEventListener("click", () => {
       parentNav.classList.toggle("open");
-      childNav.classList.toggle("open");
+      if (childNav) childNav.classList.toggle("open");
 
       // close other open navs
       parentNavs.forEach((nav) => {
         if (nav !== parentNav) {
           nav.classList.remove("open");
-          nav.querySelector(".children").classList.remove("open");
+          const otherChild = nav.querySelector(".children");
+          if (otherChild) otherChild.classList.remove("open");
         }
       });
 
@@ -32,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.addEventListener("click", (e) => {
         if (!parentNav.contains(e.target)) {
           parentNav.classList.remove("open");
-          childNav.classList.remove("open");
+          if (childNav) childNav.classList.remove("open");
         }
       });
     });
@@ -43,24 +50,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchClose = document.querySelectorAll("#search-close-btn");
   const mobileNav = document.querySelector("#mobile-nav");
 
+  const toggleSearch = () => {
+    if (searchForm) searchForm.classList.toggle("open");
+    if (mobileNav) mobileNav.classList.toggle("d-none");
+  };
 
-  searchIcon.addEventListener("click", () => {
-    searchForm.classList.toggle("open");
-    mobileNav.classList.toggle("d-none");
-  });
+  if (searchIcon) {
+    searchIcon.addEventListener("click", toggleSearch);
+  }
 
   searchClose.forEach((element) => {
-    element.addEventListener("click", () => {
-    searchForm.classList.toggle("open");
-    mobileNav.classList.toggle("d-none");
-  })
+    element.addEventListener("click", toggleSearch);
   });
 
 
   const signInMenu = document.querySelectorAll("a[href='#sign-in']");
   Array.from(signInMenu).forEach((element) => {
     element.addEventListener("click", function () {
-      openModal("login");
+      if (typeof openModal === "function") openModal("login");
     });
   });
 
@@ -72,8 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const navText = element.querySelector(".collapsible");
 
     const user_avatar = document.querySelector(".user-avatar");
-    if (user_avatar) {
+    if (user_avatar && navText) {
       navText.innerHTML = user_avatar.outerHTML;
-    } 
+    }
   });
 });

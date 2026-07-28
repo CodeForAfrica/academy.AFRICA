@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         course_items.forEach(course => {
             const price_ribbon = course.querySelector(".ribbon");
             const bottom_meta = course.querySelector(".bottom-meta");
+            if (!price_ribbon || !bottom_meta) return;
             const price = price_ribbon.textContent;
             add_price_tag(price, bottom_meta)
         });

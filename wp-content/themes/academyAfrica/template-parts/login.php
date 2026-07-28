@@ -148,13 +148,13 @@ if (isset($_GET['email_sent'])) {
                 btn.value = <?php echo wp_json_encode(academyafrica_translate('SIGN IN')); ?>;
             }
 
-            document.getElementById("wp-submit").addEventListener("click", function() {
+            document.getElementById("wp-submit")?.addEventListener("click", function() {
                 window.dataLayer = window.dataLayer || [];
                 dataLayer.push({
                     'event': 'login',
                     'method': 'standard'
                 });
-                gtag('event', 'login', {
+                typeof window.gtag === 'function' && gtag('event', 'login', {
                     'event_category': 'engagement',
                     'event_label': 'standard'
                 });
@@ -168,7 +168,7 @@ if (isset($_GET['email_sent'])) {
                         'event': 'login_error',
                         'error_message': errorMessage
                     });
-                    gtag('event', 'login_error', {
+                    typeof window.gtag === 'function' && gtag('event', 'login_error', {
                         'event_category': 'engagement',
                         'event_label': errorMessage
                     });
@@ -182,7 +182,7 @@ if (isset($_GET['email_sent'])) {
                         'event': 'login',
                         'method': 'google'
                     });
-                    gtag('event', 'login', {
+                    typeof window.gtag === 'function' && gtag('event', 'login', {
                         'event_category': 'engagement',
                         'event_label': 'google'
                     });

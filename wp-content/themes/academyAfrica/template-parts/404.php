@@ -21,7 +21,7 @@ $description = academyafrica_translate('There seems to be an error on this page.
 $refresh = academyafrica_translate('Refresh');
 $home = academyafrica_translate('Home');
 ?>
-<main id="content" class="site-main" style="margin: 0;">
+<div class="site-main" style="margin: 0;">
 
     <div class="error">
         <div></div>
@@ -92,6 +92,6 @@ $home = academyafrica_translate('Home');
         });
     </script>
 
-</main>
+</div>
 
 <?php get_footer(); ?>

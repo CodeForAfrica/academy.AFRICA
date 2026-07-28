@@ -9,10 +9,10 @@ $email_label = get_theme_mod('email_label', 'Email');
 $name_label = get_theme_mod('name_label', 'Name');
 $save_label = get_theme_mod('save_label', 'Submit');
 ?>
-<main class="contact-us">
+<div class="contact-us">
   <?php
   echo do_shortcode('[contact-form-7 id="9521ba1" title="Contact form 1"]');
   ?>
-</main>
+</div>
 <?php
 get_footer();

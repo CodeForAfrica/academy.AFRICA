@@ -16,6 +16,8 @@ if (!defined('ABSPATH')) {
 ?>
 <?php get_template_part('template-parts/404', 'template'); ?>
 
+</main><?php // close the single <main> opened via get_header() in template-parts/404 ?>
+
 </body>
 
 </html>

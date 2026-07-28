@@ -113,6 +113,7 @@ global $shortcode_tags;
     </div>
     <script type="text/javascript">
         function convertHTMLtoPDF() {
+            if (!window.jspdf) return;
             const {
                 jsPDF
             } = window.jspdf;
@@ -120,6 +121,7 @@ global $shortcode_tags;
             let doc = new jsPDF('l', 'mm', [210, 297]);
             doc.setFillColor(255, 255, 255);
             let pdfjs = document.getElementById('certificate');
+            if (!pdfjs) return;
             const width = doc.internal.pageSize.getWidth();
             const height = doc.internal.pageSize.getHeight();
             doc.html(pdfjs, {
