@@ -13,19 +13,7 @@ final class Widget
         add_action('elementor/elements/categories_registered', [$this, 'add_elementor_widget_categories']);
         add_action('elementor/widgets/register', [$this,  'register_widgets']);
         add_action('wp_enqueue_scripts', [$this, 'register_styles']);
-        // add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
-        add_action('elementor/frontend/after_register_scripts', [$this, 'register_scripts']);
         add_action('elementor/frontend/after_register_scripts', [$this, 'register_widget_scripts']);
-    }
-
-    function register_scripts()
-    {
-        $scripts = [
-            "academy-africa-filters" => "filters.js"
-        ];
-        foreach ($scripts as $handle => $file) {
-            wp_register_script($handle, get_stylesheet_directory_uri() . '/assets/js/' . $file, ['academy-africa'], ACADEMY_AFRICA_VERSION);
-        }
     }
 
     function register_widget_scripts()
@@ -114,5 +102,15 @@ final class Widget
                 ACADEMY_AFRICA_VERSION
             );
         }
+
+        // Registered (not enqueued): the course-grid filter bar. Pulled in via
+        // the All Courses / My Courses widgets' get_style_depends() so it loads
+        // only on pages that actually render a grid, not site-wide.
+        wp_register_style(
+            'academy-africa-filter-bar',
+            get_stylesheet_directory_uri() . '/assets/css/dist/pages/filter_bar.css',
+            [],
+            ACADEMY_AFRICA_VERSION
+        );
     }
 }

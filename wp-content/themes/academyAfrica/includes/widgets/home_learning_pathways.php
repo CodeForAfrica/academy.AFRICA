@@ -18,7 +18,7 @@ class Academy_Africa_Home_Learning_Pathways  extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-home-pathways', 'academy-africa'];
+        return ['academy-africa-home-pathways'];
     }
 
     public function get_script_depends()

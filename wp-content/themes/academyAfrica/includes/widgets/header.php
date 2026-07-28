@@ -14,7 +14,7 @@ class Academy_Africa_Header_Section extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-header-section', 'academy-africa'];
+        return ['academy-africa-header-section'];
     }
 
     public function get_title()

@@ -14,7 +14,7 @@ class Academy_Africa_About_Section extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-about-section', 'academy-africa'];
+        return ['academy-africa-about-section'];
     }
 
     public function get_title()

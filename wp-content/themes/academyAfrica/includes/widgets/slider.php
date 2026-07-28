@@ -14,7 +14,7 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-slider', 'academy-africa'];
+        return ['academy-africa-slider'];
     }
 
     public function get_title()

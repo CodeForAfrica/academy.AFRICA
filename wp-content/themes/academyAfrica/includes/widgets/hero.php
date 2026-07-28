@@ -14,7 +14,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-hero', 'academy-africa'];
+        return ['academy-africa-hero'];
     }
 
     public function get_title()

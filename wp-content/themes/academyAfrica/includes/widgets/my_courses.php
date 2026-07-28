@@ -15,7 +15,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-my-courses', 'academy-africa'];
+        return ['academy-africa-my-courses', 'academy-africa-filter-bar'];
     }
 
     public function get_script_depends()

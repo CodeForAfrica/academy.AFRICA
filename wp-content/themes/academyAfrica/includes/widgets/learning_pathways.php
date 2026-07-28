@@ -18,7 +18,7 @@ class Academy_Africa_Learning_Pathways  extends \Elementor\Widget_Base
 
     public function get_style_depends()
     {
-        return ['academy-africa-pathways', 'academy-africa'];
+        return ['academy-africa-learning-pathways', 'academy-africa-filter-bar'];
     }
 
     public function get_script_depends()
