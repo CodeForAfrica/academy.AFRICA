@@ -368,7 +368,9 @@ if (is_user_logged_in()) {
     </main>
 <?php
 } else {
-    echo 'Please log in to edit your profile.';
+    // Logged-out state still needs a single main landmark / #content target,
+    // since header.php no longer emits one.
+    echo '<main id="content" class="profile"><p>' . esc_html__('Please log in to edit your profile.', 'academy-africa') . '</p></main>';
 }
 ?>
 
