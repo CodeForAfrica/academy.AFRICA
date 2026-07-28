@@ -125,11 +125,11 @@ $courses = get_field('courses', $learning_path_id) ?: [];
     window.dataLayer = window.dataLayer || [];
     dataLayer.push({
         'event': 'learning_path_print',
-        'page_title': '<?php echo esc_js($learning_path_title) ?>',
+        'page_title': <?php echo wp_json_encode($learning_path_title) ?>,
         'page_url': window.location.href,
     });
     typeof window.gtag === 'function' && gtag('event', 'learning_path_print', {
-        'page_title': '<?php echo esc_js($learning_path_title) ?>',
+        'page_title': <?php echo wp_json_encode($learning_path_title) ?>,
         'page_location': window.location.href,
     });
 </script>

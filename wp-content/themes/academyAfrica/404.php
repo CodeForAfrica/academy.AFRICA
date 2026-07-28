@@ -14,10 +14,8 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 ?>
-<?php get_template_part('template-parts/404', 'template'); ?>
-
-</main><?php // close the single <main> opened via get_header() in template-parts/404 ?>
-
-</body>
-
-</html>
+<?php
+// template-parts/404 renders a complete document: it calls get_header()
+// (opens <main>) and get_footer() (footer.php closes <main>, </body>, </html>).
+get_template_part('template-parts/404', 'template');
+?>
