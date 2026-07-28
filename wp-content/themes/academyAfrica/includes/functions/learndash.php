@@ -49,7 +49,7 @@ function academyafrica_count_students($post_id)
     }
 
     $cache_key = absint($post_id) . '_students_count';
-    $count = wp_cache_get($cache_key, 'academy_africa');
+    $count = \AcademyAfrica\Theme\Cache\Cache::get($cache_key);
 
     if (false !== $count) {
         return $count;
@@ -72,7 +72,7 @@ function academyafrica_count_students($post_id)
     );
     $count = (int) $wpdb->get_var($query);
 
-    wp_cache_set($cache_key, $count, 'academy_africa', HOUR_IN_SECONDS);
+    \AcademyAfrica\Theme\Cache\Cache::set($cache_key, $count, HOUR_IN_SECONDS);
 
     return $count;
 }

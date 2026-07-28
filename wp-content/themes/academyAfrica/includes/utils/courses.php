@@ -2,13 +2,16 @@
 
 namespace AcademyAfrica\Theme\Courses;
 
+require_once __DIR__ . '/cache.php';
+
+use AcademyAfrica\Theme\Cache\Cache;
 
 class CoursesFunctions
 {
 
     public static function getOrganizations()
     {
-        $cached = wp_cache_get('academy_organizations', 'academy_africa');
+        $cached = Cache::get('academy_organizations');
         if (false !== $cached) {
             return $cached;
         }
@@ -28,13 +31,13 @@ class CoursesFunctions
                 'excerpt' => $organization_post->post_excerpt
             );
         }
-        wp_cache_set('academy_organizations', $organizations, 'academy_africa', HOUR_IN_SECONDS);
+        Cache::set('academy_organizations', $organizations, HOUR_IN_SECONDS);
         return $organizations;
     }
 
     public static function getAllLearningPaths()
     {
-        $cached = wp_cache_get('academy_all_learning_paths', 'academy_africa');
+        $cached = Cache::get('academy_all_learning_paths');
         if (false !== $cached) {
             return $cached;
         }
@@ -54,7 +57,7 @@ class CoursesFunctions
                 'excerpt' => $learning_path_post->post_excerpt
             );
         }
-        wp_cache_set('academy_all_learning_paths', $learning_paths, 'academy_africa', HOUR_IN_SECONDS);
+        Cache::set('academy_all_learning_paths', $learning_paths, HOUR_IN_SECONDS);
         return $learning_paths;
     }
 
@@ -74,7 +77,7 @@ class CoursesFunctions
             'order'    => $order,
         ]));
 
-        $cached = wp_cache_get($cache_key, 'academy_africa');
+        $cached = Cache::get($cache_key);
         if (false !== $cached) {
             do_action('qm/debug', 'getLearningPaths: cache hit (per_page={per_page})', [
                 'per_page' => $attr['per_page'],
@@ -143,14 +146,14 @@ class CoursesFunctions
             'per_page'       => $attr['per_page'],
         );
 
-        wp_cache_set($cache_key, $result, 'academy_africa', WEEK_IN_SECONDS);
+        Cache::set($cache_key, $result, WEEK_IN_SECONDS);
 
         return $result;
     }
 
     public static function getAllInstructors()
     {
-        $cached = wp_cache_get('academy_instructors', 'academy_africa');
+        $cached = Cache::get('academy_instructors');
         if (false !== $cached) {
             return $cached;
         }
@@ -172,7 +175,7 @@ class CoursesFunctions
                 );
             }
         }
-        wp_cache_set('academy_instructors', $instructors, 'academy_africa', HOUR_IN_SECONDS);
+        Cache::set('academy_instructors', $instructors, HOUR_IN_SECONDS);
         do_action('qm/stop', 'getAllInstructors');
         do_action('qm/debug', 'getAllInstructors: loaded {count} instructors', ['count' => count($instructors)]);
         return $instructors;
@@ -481,30 +484,15 @@ class CoursesFunctions
     }
 
     /**
-     * Flush all learning-path cache entries.
-     * Called whenever a learning path or course is saved/deleted so stale
-     * data never shows. wp_cache_flush_group() is used when available
-     * (Redis Object Cache Pro); otherwise falls back to a version bump
-     * that effectively invalidates all keys in the group.
+     * Flush all learning-path (and other user-agnostic) cache entries.
+     *
+     * Thin wrapper around {@see Cache::flush()}, kept for backward
+     * compatibility with any callers referencing this method. The actual
+     * invalidation hooks (save/delete/enrollment/completion) are registered
+     * centrally in includes/utils/cache.php.
      */
-    public static function flush_learning_path_cache(): void {
-        if (function_exists('wp_cache_flush_group')) {
-            wp_cache_flush_group('academy_africa');
-        } else {
-            // Bump a version key — all getLearningPaths keys become stale
-            $version = (int) wp_cache_get('academy_lp_cache_version', 'academy_africa');
-            wp_cache_set('academy_lp_cache_version', $version + 1, 'academy_africa', WEEK_IN_SECONDS);
-        }
-        do_action('qm/debug', 'CoursesFunctions: learning path cache flushed');
+    public static function flush_learning_path_cache(): void
+    {
+        Cache::flush();
     }
 }
-
-// Invalidate learning path cache whenever a learning path or course is saved/deleted
-add_action('save_post_ac-learning-path', ['AcademyAfrica\Theme\Courses\CoursesFunctions', 'flush_learning_path_cache']);
-add_action('delete_post',                function (int $post_id): void {
-    if (get_post_type($post_id) === 'ac-learning-path') {
-        AcademyAfrica\Theme\Courses\CoursesFunctions::flush_learning_path_cache();
-    }
-});
-// Also flush when a course that belongs to a learning path is updated
-add_action('save_post_sfwd-courses',     ['AcademyAfrica\Theme\Courses\CoursesFunctions', 'flush_learning_path_cache']);

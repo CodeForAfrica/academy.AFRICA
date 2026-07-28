@@ -21,11 +21,11 @@ if (!$course) {
 }
 
 // Lesson list — shared cache with course.php (user-agnostic, just count + structure)
-$lessons = wp_cache_get('course_lessons_' . $course_id, 'academy_africa');
+$lessons = \AcademyAfrica\Theme\Cache\Cache::get('course_lessons_' . $course_id);
 if (false === $lessons) {
     do_action('qm/start', 'quiz:fetch_lessons');
     $lessons = learndash_get_course_lessons_list($course_id, 0) ?: [];
-    wp_cache_set('course_lessons_' . $course_id, $lessons, 'academy_africa', HOUR_IN_SECONDS);
+    \AcademyAfrica\Theme\Cache\Cache::set('course_lessons_' . $course_id, $lessons, HOUR_IN_SECONDS);
     do_action('qm/stop', 'quiz:fetch_lessons');
     do_action('qm/debug', 'quiz:fetch_lessons: DB fetch {count} lessons for course {id}', [
         'count' => count($lessons),
@@ -67,10 +67,10 @@ do_action('qm/stop', 'quiz:init');
                             </div>
                             <?php
                             $cp_cache_key = 'course_progress_u' . $user_id . '_c' . $course_id;
-                            $cp_output    = wp_cache_get($cp_cache_key, 'academy_africa');
+                            $cp_output    = \AcademyAfrica\Theme\Cache\Cache::get($cp_cache_key);
                             if (false === $cp_output) {
                                 $cp_output = do_shortcode('[learndash_course_progress]');
-                                wp_cache_set($cp_cache_key, $cp_output, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+                                \AcademyAfrica\Theme\Cache\Cache::set($cp_cache_key, $cp_output, 5 * MINUTE_IN_SECONDS);
                             }
                             echo $cp_output;
                             ?>
@@ -82,10 +82,10 @@ do_action('qm/stop', 'quiz:init');
                         // AJAX so page reloads don't need a fresh render on every request.
                         do_action('qm/start', 'quiz:course_content_shortcode');
                         $cc_cache_key = 'course_content_u' . $user_id . '_c' . $course_id;
-                        $cc_output    = wp_cache_get($cc_cache_key, 'academy_africa');
+                        $cc_output    = \AcademyAfrica\Theme\Cache\Cache::get($cc_cache_key);
                         if (false === $cc_output) {
                             $cc_output = do_shortcode('[course_content course_id="' . $course_id . '"]');
-                            wp_cache_set($cc_cache_key, $cc_output, 'academy_africa', 5 * MINUTE_IN_SECONDS);
+                            \AcademyAfrica\Theme\Cache\Cache::set($cc_cache_key, $cc_output, 5 * MINUTE_IN_SECONDS);
                         }
                         echo $cc_output;
                         do_action('qm/stop', 'quiz:course_content_shortcode');
