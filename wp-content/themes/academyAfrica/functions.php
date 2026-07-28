@@ -155,7 +155,7 @@ function create_organization_post_type()
             ),
             'public' => true,
             'has_archive' => false,
-            "heirarchical" => true,
+            'hierarchical' => true,
             'rewrite' => array('slug' => 'academy-africa-organizations'),
             'show_in_rest' => true,
             'supports' => array('title', 'thumbnail', 'editor', 'excerpt', 'custom-fields', 'revisions', 'page-attributes')
@@ -175,7 +175,7 @@ function create_learning_path_post_type()
             ),
             'public' => true,
             'has_archive' => false,
-            "heirarchical" => true,
+            'hierarchical' => true,
             'rewrite' => array('slug' => 'learning-pathways'),
             'show_in_rest' => true,
             'supports' => array('title', 'thumbnail', 'editor', 'excerpt', 'custom-fields', 'revisions', 'page-attributes')
@@ -194,6 +194,56 @@ require_once __DIR__ . '/posts/footer.php';
 add_action('init', 'event_post_type');
 add_action('init', 'create_networks_post_type');
 add_action('init', 'create_footer_post_type');
+
+/**
+ * One-time post-type maintenance, run after the post types are registered.
+ *
+ * Guarded by an option so it runs once per version bump:
+ *  - Migrates legacy footer posts stored under the old capitalized `Footer`
+ *    key to the lowercase `footer` key (post-type keys are case-sensitive, so
+ *    otherwise the footer query would never find them).
+ *  - Flushes rewrite rules so the corrected `hierarchical` config and the
+ *    footer slug take effect without a manual Permalinks re-save.
+ */
+function academyafrica_posttype_maintenance()
+{
+    $version = '2024-07-footer-hierarchy';
+    if (get_option('academyafrica_posttype_maint_version') === $version) {
+        return;
+    }
+
+    global $wpdb;
+    $legacy_ids = $wpdb->get_col(
+        $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_type = %s", 'Footer')
+    );
+    // Bail without recording completion on a DB error, so a later request retries
+    // instead of skipping the migration forever and leaving the footer broken.
+    if ('' !== $wpdb->last_error) {
+        return;
+    }
+
+    if (!empty($legacy_ids)) {
+        $updated = $wpdb->query(
+            $wpdb->prepare(
+                "UPDATE {$wpdb->posts} SET post_type = %s WHERE post_type = %s",
+                'footer',
+                'Footer'
+            )
+        );
+        if (false === $updated || '' !== $wpdb->last_error) {
+            return; // leave the flag unset so the migration is retried
+        }
+        foreach ($legacy_ids as $legacy_id) {
+            clean_post_cache((int) $legacy_id);
+        }
+    }
+
+    flush_rewrite_rules(false);
+
+    // Only now that the migration + flush have succeeded do we record completion.
+    update_option('academyafrica_posttype_maint_version', $version);
+}
+add_action('init', 'academyafrica_posttype_maintenance', 20);
 
 function redirect_to_custom_profile_edit()
 {

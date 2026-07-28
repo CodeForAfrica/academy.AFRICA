@@ -80,14 +80,26 @@ if (empty($custom_posts)) {
     $custom_posts = get_posts($search);
 }
 
-$footer = $custom_posts[0];
-$logo = get_post_meta($footer->ID, 'logo', true);
-$thumbnail_url = wp_get_attachment_image_src($logo, 100)[0] ?? '';
-$site_description = get_post_meta($footer->ID, 'site_description', true);
-$stay_in_touch = get_post_meta($footer->ID, 'stay_in_touch', true);
-$secondary_links = get_post_meta($footer->ID, 'secondary_links', true);
-$newsletter = get_post_meta($footer->ID, 'newsletter', true);
-$newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
+// A footer post may not exist (e.g. none published for this language and no
+// English fallback). Guard against it so the site chrome renders an intentional
+// empty state instead of emitting warnings on a null post.
+$footer = !empty($custom_posts) ? $custom_posts[0] : null;
+
+if ($footer instanceof \WP_Post) {
+    $logo             = get_post_meta($footer->ID, 'logo', true);
+    $site_description = get_post_meta($footer->ID, 'site_description', true);
+    $stay_in_touch    = get_post_meta($footer->ID, 'stay_in_touch', true);
+    $secondary_links  = get_post_meta($footer->ID, 'secondary_links', true);
+    $newsletter       = get_post_meta($footer->ID, 'newsletter', true);
+    $newsletter_title = get_post_meta($footer->ID, 'newsletter_title', true);
+} else {
+    $logo = $site_description = $stay_in_touch = $secondary_links = $newsletter = $newsletter_title = '';
+}
+
+// wp_get_attachment_image_src() returns false for an empty/invalid attachment;
+// guard the [0] offset so we never index a bool.
+$logo_src      = $logo ? wp_get_attachment_image_src($logo, 100) : false;
+$thumbnail_url = is_array($logo_src) ? $logo_src[0] : '';
 
 ?>
 <footer class="footer-wrapper">

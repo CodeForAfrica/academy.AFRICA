@@ -328,18 +328,18 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 $pr_2 = $previous_page - 1;
                                 $next_2 = $next_page + 2;
                                 ?>
-                                <?php for ($i = 1; $i <= $my_courses_pagination['total_pages']; $i++) : ?>
+                                <?php for ($i = 1; $i <= ($my_courses_pagination['total_pages'] ?? 0); $i++) : ?>
                                     <?php
                                     $current_url_params["courses_page"] = $i;
                                     $new_url = add_query_arg($current_url_params, home_url($_SERVER['REQUEST_URI']));
-                                    if ($i === $previous_page || $i === $next_page || $i === $my_courses_pagination['total_pages'] || $i === 1 || $i === $current_page) {
+                                    if ($i === $previous_page || $i === $next_page || $i === ($my_courses_pagination['total_pages'] ?? 0) || $i === 1 || $i === $current_page) {
                                     ?>
                                         <li class="page-item"><a class="page-link" href="<?php echo $new_url ?>">
                                                 <?php echo $i; ?>
                                             </a></li>
                                     <?php
                                     }
-                                    if (($i === $next_2 && $next_2 < $my_courses_pagination['total_pages']) || $i === $pr_2 && $i > 1) {
+                                    if (($i === $next_2 && $next_2 < ($my_courses_pagination['total_pages'] ?? 0)) || $i === $pr_2 && $i > 1) {
                                     ?>
                                         <li style="margin-top: 6px">...</li>
                                 <?php
@@ -441,10 +441,10 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                                         $cert = learndash_get_course_certificate_link($course_id);
                                                         ?>
                                                         <a href="<?php echo $cert ?>" download>
-                                                            <img src="/wp-content/plugins/academy-africa/includes/assets/images/download.svg" style="cursor: pointer;" alt="download" />
+                                                            <img src="/wp-content/themes/academyAfrica/assets/images/download.svg" style="cursor: pointer;" alt="download" />
                                                         </a>
 
-                                                        <img src="/wp-content/plugins/academy-africa/includes/assets/images/share.svg" alt="share" />
+                                                        <img src="/wp-content/themes/academyAfrica/assets/images/share.svg" alt="share" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -470,7 +470,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                                 </li>
 
                                 <!-- Page links -->
-                                <?php for ($i = 1; $i <= $certificate_pagination['total_pages']; $i++) : ?>
+                                <?php for ($i = 1; $i <= ($certificate_pagination['total_pages'] ?? 0); $i++) : ?>
                                     <?php
                                     $current_url_params = $_GET;
                                     $current_url_params["courses_page"] = $i;

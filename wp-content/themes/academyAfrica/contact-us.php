@@ -2,7 +2,6 @@
 /*
 Template Name: Contact Us
 */
-require_once(ABSPATH . 'wp-load.php');
 get_header();
 
 $email_label = get_theme_mod('email_label', 'Email');

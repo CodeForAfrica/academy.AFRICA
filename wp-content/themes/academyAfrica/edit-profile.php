@@ -93,7 +93,7 @@ if (is_user_logged_in()) {
     $website = get_user_meta($user_id, 'website', true);
     $company = get_user_meta($user_id, 'company', true);
     $user_meta = get_user_meta($user_id);
-    $description = $user_meta['description'][0];
+    $description = $user_meta['description'][0] ?? '';
     $prefix = get_user_meta($user_id, 'prefix', true);
     $phone = get_user_meta($user_id, 'phone', true);
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));

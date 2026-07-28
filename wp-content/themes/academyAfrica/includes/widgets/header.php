@@ -88,7 +88,7 @@ class Academy_Africa_Header_Section extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         $title = $settings['title'];
         $headline = $settings['headline'];
-        $header_image = $settings['header_image']['url'];
+        $header_image = $settings['header_image']['url'] ?? '';
         $social_media_links = [
             [
                 'link' => [

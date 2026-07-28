@@ -2,7 +2,6 @@
 /*
 Template Name: Page Content
 */
-require_once(ABSPATH . 'wp-load.php');
 get_header();
 
 ?>
