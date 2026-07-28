@@ -96,7 +96,6 @@ class Academy_Africa_Join_Our_Slack extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         $title = $settings['title'];
         $content = $settings['content'];
-        $slack_url = $settings['slack_url'];
 ?>
         <div class="join-our-slack" id="join-our-slack">
             <div class="title">
