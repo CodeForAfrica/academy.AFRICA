@@ -142,7 +142,7 @@ class Academy_Africa_Hero extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         $title = $settings['title'];
         $sign_up_label = $settings['sign_up_label'];
-        $sign_up_url = $settings['sign_up_link']['url'];
+        $sign_up_url = $settings['sign_up_link']['url'] ?? '';
         $metrics = !empty($settings['metrics']) ? $settings['metrics'] : array();
 
         array_unshift($metrics, [

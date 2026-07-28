@@ -96,7 +96,7 @@ class Academy_Africa_Connect_and_Collaborate extends \Elementor\Widget_Base
         $become_a_member_text = $settings["become_a_member_text"];
         $join_us_on_slack = $settings["join_us_on_slack"];
         $title = $settings["title"];
-        $join_us_url = $settings["join_us_url"]["url"];
+        $join_us_url = $settings["join_us_url"]["url"] ?? '';
         ?>
         <div class="connect">
             <div class="title-wrapper">
