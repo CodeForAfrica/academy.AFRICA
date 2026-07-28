@@ -15,8 +15,10 @@ function get_template(){
 }
 
 get_header();
+echo '<main id="content">';
 $template = get_template();
 get_template_part($template, 'template');
+echo '</main>';
 get_footer();
 
 ?>

@@ -13,7 +13,7 @@
     // Track the search form submission
     document.getElementById('searchform').addEventListener('submit', function() {
         var searchTerm = document.getElementById('s').value;
-        gtag('event', 'search', {
+        typeof window.gtag === 'function' && gtag('event', 'search', {
             'event_category': 'engagement',
             'event_label': searchTerm
         });

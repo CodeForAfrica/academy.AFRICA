@@ -142,7 +142,7 @@ class Academy_Africa_Home_Learning_Pathways  extends \Elementor\Widget_Base
 
 
 ?>
-        <main class="all-courses" id="all-courses">
+        <div class="all-courses" id="all-courses">
             <section class="learning-pathways home-learning-pathways">
                 <div class="title">
                     <h4 class="cfa-title">
@@ -202,7 +202,7 @@ class Academy_Africa_Home_Learning_Pathways  extends \Elementor\Widget_Base
 
                 </div>
             </section>
-        </main>
+        </div>
 <?php
     }
 }

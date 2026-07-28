@@ -5,7 +5,7 @@ Template Name: Page Content
 get_header();
 
 ?>
-<main class="about-section">
+<main id="content" class="about-section">
     <div class="content">
         <?php
         if (have_posts()) {

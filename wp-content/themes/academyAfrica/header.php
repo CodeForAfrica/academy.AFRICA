@@ -30,13 +30,17 @@ $skip_link_url = apply_filters('hello_elementor_skip_link_url', '#content');
 </head>
 
 <body <?php body_class(); ?>>
-	<main>
-		<?php wp_body_open(); ?>
+	<?php wp_body_open(); ?>
 
-		<?php if ($enable_skip_link) { ?>
-			<a class="skip-link screen-reader-text" href="<?php echo esc_url($skip_link_url); ?>"><?php echo esc_html__('Skip to content', 'hello-elementor'); ?></a>
-		<?php } ?>
+	<?php if ($enable_skip_link) { ?>
+		<a class="skip-link screen-reader-text" href="<?php echo esc_url($skip_link_url); ?>"><?php echo esc_html__('Skip to content', 'hello-elementor'); ?></a>
+	<?php } ?>
 
-		<!-- get header template -->
+	<!-- site navigation -->
 
-		<?php get_template_part('template-parts/header', 'template'); ?>
+	<?php get_template_part('template-parts/header', 'template'); ?>
+
+	<?php // Note: header.php intentionally opens no <main>, matching the parent
+	// hello-elementor contract. Each view provides its own single
+	// <main id="content"> (parent template-parts on fallback routes; the child
+	// page templates below on their own routes). ?>

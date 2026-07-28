@@ -99,7 +99,7 @@ if (is_user_logged_in()) {
     $user_networks = explode(",", get_user_meta($user_id, 'networks', true));
     $user_updates = explode(",", get_user_meta($user_id, 'updates', true));
 ?>
-    <main class="profile">
+    <main id="content" class="profile">
         <h4 class="cfa-title">
             <?php echo $page_title ?>
         </h4>
@@ -358,7 +358,7 @@ if (is_user_logged_in()) {
                     const reader = new FileReader();
 
                     reader.onload = function(e) {
-                        preview.src = e.target.result;
+                        if (preview) preview.src = e.target.result;
                     };
 
                     reader.readAsDataURL(file);
@@ -368,7 +368,9 @@ if (is_user_logged_in()) {
     </main>
 <?php
 } else {
-    echo 'Please log in to edit your profile.';
+    // Logged-out state still needs a single main landmark / #content target,
+    // since header.php no longer emits one.
+    echo '<main id="content" class="profile"><p>' . esc_html__('Please log in to edit your profile.', 'academy-africa') . '</p></main>';
 }
 ?>
 

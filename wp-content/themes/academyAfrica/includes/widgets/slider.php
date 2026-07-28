@@ -128,6 +128,7 @@ class Academy_Africa_Slider  extends \Elementor\Widget_Base
         </div>
         <script>
             window.addEventListener('load', function () {
+                if (typeof Swiper === 'undefined') return;
                 new Swiper(".mySwiper", {
                     spaceBetween: 100,
                     centeredSlides: true,

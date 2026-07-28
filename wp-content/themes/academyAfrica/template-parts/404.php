@@ -64,7 +64,7 @@ $home = academyafrica_translate('Home');
         }
 
         var notFoundPayload = {
-            'page_title': '<?php echo $title ?>',
+            'page_title': <?php echo wp_json_encode($title) ?>,
             'page_url': window.location.href,
             'status_code': '<?php echo $status_code ?>',
             'not_found_path': window.location.pathname + window.location.search + window.location.hash,

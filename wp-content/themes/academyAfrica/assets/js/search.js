@@ -44,6 +44,7 @@ function parseQueryString(queryString) {
 
 function applyFilters(){
     const filterModal = document.querySelector("#filter-modal");
+    if (!filterModal) return;
     searchFilters = {};
 
     // get all checked inputs

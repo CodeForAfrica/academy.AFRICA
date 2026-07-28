@@ -169,7 +169,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
             "last_name" => get_user_meta($user_id, 'last_name', true),
         );
 ?>
-        <main class="body">
+        <div class="body">
             <div class="desktop-only">
                 <?php get_template_part('template-parts/filter_bar', 'template', [
                     'filter_by' => $filter_by,
@@ -500,6 +500,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
             </div>
             <script type="text/javascript">
                 function convertHTMLtoPDF(id, courseTitle) {
+                    if (!window.jspdf) return;
                     const {
                         jsPDF
                     } = window.jspdf;
@@ -548,7 +549,7 @@ class Academy_Africa_My_Courses extends \Elementor\Widget_Base
                     }
                 });
             </script>
-        </main>
+        </div>
 <?php
     }
 }

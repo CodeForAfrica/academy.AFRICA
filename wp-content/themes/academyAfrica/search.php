@@ -92,7 +92,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
 ?>
 
 <?php get_header(); ?>
-<div class="search-page">
+<main id="content" class="search-page">
     <?php get_template_part('template-parts/filter_bar', 'template', [
         'filter_by' => $filter_by,
         'filter_options' => $filter_options,
@@ -109,7 +109,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                     <?php echo $the_query->found_posts ?> results for:
                 </p>
                 <h1 class="search-page-title">
-                    "<?php echo $s ?>"
+                    "<?php echo esc_html($s) ?>"
                 </h1>
 
             </div>
@@ -128,7 +128,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                             foreach ($sort_options as $key => $option) {
                                 $selected = $sort == $key ? "selected" : "";
                             ?>
-                                <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $option["name"] ?></option>
+                                <option <?php echo $selected ?> value="<?php echo esc_attr($key) ?>"><?php echo esc_html($option["name"]) ?></option>
                             <?php
                             }
                             ?>
@@ -159,9 +159,9 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                         ?>
                             <div class="filter">
                                 <div class="filter-name">
-                                    <?php echo $org ?>
+                                    <?php echo esc_html($org) ?>
                                 </div>
-                                <button class="filter-remove" onclick="removeFilter('organization', '<?php echo $org ?>')">
+                                <button class="filter-remove" onclick="removeFilter('organization', '<?php echo esc_js($org) ?>')">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                         <path d="M8.0026 15.1693C11.6845 15.1693 14.6693 12.1845 14.6693 8.5026C14.6693 4.82071 11.6845 1.83594 8.0026 1.83594C4.32071 1.83594 1.33594 4.82071 1.33594 8.5026C1.33594 12.1845 4.32071 15.1693 8.0026 15.1693Z" stroke="#0C1A81" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M10 6.5L6 10.5" stroke="#0C1A81" stroke-linecap="round" stroke-linejoin="round" />
@@ -255,7 +255,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                     <?php
                     if ($current_page > 1) {
                     ?>
-                        <li class="page-item"><a class="page-link" href="<?php echo get_pagenum_link($current_page - 1) ?>">
+                        <li class="page-item"><a class="page-link" href="<?php echo esc_url(get_pagenum_link($current_page - 1)) ?>">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                     <path d="M10 12L6 8L10 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
@@ -266,18 +266,18 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                         if ($i == $current_page) {
                         ?>
                             <li class="page-item active">
-                                <a class="page-link" href="<?php echo get_pagenum_link($i) ?>"><?php echo $i ?></a>
+                                <a class="page-link" href="<?php echo esc_url(get_pagenum_link($i)) ?>"><?php echo $i ?></a>
                             </li>
                         <?php
                         } else {
                         ?>
-                            <li class="page-item"><a class="page-link" href="<?php echo get_pagenum_link($i) ?>"><?php echo $i ?></a></li>
+                            <li class="page-item"><a class="page-link" href="<?php echo esc_url(get_pagenum_link($i)) ?>"><?php echo $i ?></a></li>
                         <?php
                         }
                     }
                     if ($current_page < $no_of_pages) {
                         ?>
-                        <li class="page-item"><a class="page-link" href="<?php echo get_pagenum_link($current_page + 1) ?>">
+                        <li class="page-item"><a class="page-link" href="<?php echo esc_url(get_pagenum_link($current_page + 1)) ?>">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                     <path d="M6 12L10 8L6 4" stroke="#616582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
@@ -289,7 +289,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
             </div>
         </div>
     </div>
-</div>
+</main>
 
 
 

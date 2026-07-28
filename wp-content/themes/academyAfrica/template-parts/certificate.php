@@ -82,7 +82,7 @@ $mooc_logo_black = get_stylesheet_directory_uri() . '/assets/images/mooc-logo-bl
         'download_type': 'pdf',
         'date': new Date().toISOString()
       });
-      gtag('event', 'download_certificate', {
+      typeof window.gtag === 'function' && gtag('event', 'download_certificate', {
         'user_id': '<?php echo $args['user']['id'] ?? ''; ?>',
         'course_id': '<?php echo $args['course']['id'] ?? ''; ?>',
         'download_type': 'pdf',

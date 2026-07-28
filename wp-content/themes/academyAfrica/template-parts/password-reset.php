@@ -2,7 +2,10 @@
 
 namespace AcademyAfrica\Theme;
 
-get_header();
+// Rendered as a fragment via login.php's get_template_part(); login.php provides
+// the header, the single <main id="content"> wrapper, and the footer. (It used
+// to call get_header()/get_footer() itself, which produced a nested second
+// header/footer on the lost-password route.)
 function get_full_url($path = '', $search = '')
 {
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
@@ -29,7 +32,7 @@ function get_full_url($path = '', $search = '')
             <div style="display:flex; gap: 8px">
                 <span class="description"><?php echo esc_html(academyafrica_translate('You can')); ?> </span>
                 <form action="<?php echo wp_lostpassword_url() ?>" method="post">
-                    <input type="email" placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" id="user_login" name="user_login" value="<?php echo $_GET['user_login'] ?>" required hidden>
+                    <input type="email" placeholder="<?php echo esc_attr(academyafrica_translate('Email')); ?>" id="user_login" name="user_login" value="<?php echo esc_attr(wp_unslash($_GET['user_login'] ?? '')) ?>" required hidden>
                     <input type="text" hidden name="pass_reset" value="pass-reset">
                     <button class="description" style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: #0C1A81; text-decoration: none; cursor: pointer; display: inline;"
                         onmouseover="this.style.textDecoration='underline';"
@@ -84,7 +87,7 @@ function get_full_url($path = '', $search = '')
                 dataLayer.push({
                     'event': 'password_reset'
                 });
-                gtag('event', 'password_reset', {
+                typeof window.gtag === 'function' && gtag('event', 'password_reset', {
                     'event_category': 'engagement',
                     'event_label': 'password_reset'
                 });
@@ -92,4 +95,3 @@ function get_full_url($path = '', $search = '')
         }
     </script>
 </div>
-<?php get_footer(); ?>

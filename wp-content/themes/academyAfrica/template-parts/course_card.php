@@ -41,17 +41,17 @@ $course_index = isset($args['course_index']) ? $args['course_index'] : uniqid();
     </div>
 </a>
 <script>
-    document.getElementById('course-card-<?php echo $course_index ?>').addEventListener('click', function() {
+    document.getElementById('course-card-<?php echo $course_index ?>')?.addEventListener('click', function() {
         window.dataLayer = window.dataLayer || [];
         dataLayer.push({
             'event': 'course_card_click',
-            'course_title': '<?php echo $course_title ?>',
-            'course_link': '<?php echo $course_link ?>',
+            'course_title': <?php echo wp_json_encode($course_title) ?>,
+            'course_link': <?php echo wp_json_encode($course_link) ?>,
         });
-        gtag('event', 'course_card_click', {
+        typeof window.gtag === 'function' && gtag('event', 'course_card_click', {
             'event_category': 'engagement',
-            'event_label': '<?php echo $course_title ?>',
-            'course_link': '<?php echo $course_link ?>'
+            'event_label': <?php echo wp_json_encode($course_title) ?>,
+            'course_link': <?php echo wp_json_encode($course_link) ?>
         });
     });
 </script>
