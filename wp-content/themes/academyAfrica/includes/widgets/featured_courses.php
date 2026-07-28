@@ -226,7 +226,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
         if (!empty($courses)) {
             $first_course = $courses[0];
             $course_name = get_the_title($first_course);
-            $course_meta = get_post_meta($first_course, 'sfwd-courses', true);
+            $course_meta = get_post_meta($first_course->ID, 'sfwd-courses', true);
             if (is_array($course_meta) && !empty($course_meta['sfwd-courses_course_completion_date'])) {
             $course_completion_date = $course_meta['sfwd-courses_course_completion_date'];
             }
@@ -261,8 +261,8 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                             $course_author = get_the_author_meta('display_name', $course->post_author);
                             $course_thumbnail = get_the_post_thumbnail_url($course);
                             $course_link = get_permalink($course);
-                            $course_meta = get_post_meta($course, 'sfwd-courses', true);
-                            $course_price = is_array($course_meta) ? $course_meta['sfwd-courses_course_price'] : 0;
+                            $course_meta = get_post_meta($course->ID, 'sfwd-courses', true);
+                            $course_price = is_array($course_meta) ? ($course_meta['sfwd-courses_course_price'] ?? 0) : 0;
                             $course_price = empty($course_price) ? "Free" : $course_price;
 
                             $course_attrs = CoursesFunctions::get_post_attr($course, $atts);
