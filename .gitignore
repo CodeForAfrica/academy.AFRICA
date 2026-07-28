@@ -126,3 +126,6 @@ mysql.sql
 debug.log
 wp-content/academy-africa.log
 wp-content/academy-africa.log.1
+
+# PHPUnit
+.phpunit.result.cache

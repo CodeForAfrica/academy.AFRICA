@@ -58,7 +58,8 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 function load_admin_styles()
 {
     wp_enqueue_style('event-style', get_stylesheet_directory_uri() . '/assets/css/dist/admin/events.css', array(), ACADEMY_AFRICA_VERSION);
-    wp_enqueue_style('main-style', get_stylesheet_directory_uri() . '/assets/css/dist/admin/main.css', array(), ACADEMY_AFRICA_VERSION);
+    // 'admin/main.css' is not built/shipped — enqueuing it 404s on every admin
+    // page. Removed (caught by the CI asset-reference gate, #48).
 }
 add_action('admin_enqueue_scripts', 'load_admin_styles');
 
