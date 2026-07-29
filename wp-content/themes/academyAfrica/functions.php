@@ -40,6 +40,11 @@ function my_theme_enqueue_styles()
     // Base styles — needed on every front-end page.
     wp_enqueue_style('child-style', $base . 'main.css', array('hello-elementor', 'hello-elementor-theme-style'), ACADEMY_AFRICA_VERSION);
     wp_enqueue_style('default-page-content', $base . 'pages/page-content.css', array(), ACADEMY_AFRICA_VERSION);
+    // sfwd-common styles the shared course-card component (.course-card .card),
+    // which renders in the course grids on many pages (courses, my courses,
+    // learning paths, home, etc.), not just LearnDash single views — so it is a
+    // site-wide base style, not a page-specific bundle.
+    wp_enqueue_style('sfwd-common', $base . 'pages/sfwd-common.css', array(), ACADEMY_AFRICA_VERSION);
 
     // Page-specific bundles — loaded only where the page actually needs them so
     // unrelated pages don't ship course/event/profile/auth CSS.
@@ -59,9 +64,6 @@ function my_theme_enqueue_styles()
     }
 
     // LearnDash single content (course, lesson, quiz, topic).
-    if (is_singular(array('sfwd-courses', 'sfwd-lessons', 'sfwd-quiz', 'sfwd-topic'))) {
-        wp_enqueue_style('sfwd-common', $base . 'pages/sfwd-common.css', array(), ACADEMY_AFRICA_VERSION);
-    }
     if (is_singular('sfwd-courses')) {
         wp_enqueue_style('single-courses', $base . 'pages/single-sfwd-courses.css', array(), ACADEMY_AFRICA_VERSION);
         wp_enqueue_style('course-completed', $base . 'pages/course-completed.css', array(), ACADEMY_AFRICA_VERSION);
