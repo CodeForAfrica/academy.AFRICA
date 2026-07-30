@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.7.17');
+define('ACADEMY_AFRICA_VERSION', '1.7.18');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -63,18 +63,17 @@ function my_theme_enqueue_styles()
         wp_enqueue_style('contact-us', $base . 'pages/contact-us.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
-    // LearnDash single content (course, lesson, quiz, topic).
-    if (is_singular('sfwd-courses')) {
+    // LearnDash content is nested: a course page renders its lessons, topics
+    // and quizzes; a lesson page renders its quizzes; and LearnDash serves a
+    // quiz URL inside the course/lesson context (e.g. /quizzes/x/ resolves to
+    // is_singular('sfwd-courses')). So load every LearnDash single-view style
+    // on any LearnDash singular page rather than gating each to its exact post
+    // type — otherwise e.g. the quiz styles never apply when a quiz is taken.
+    if (is_singular(array('sfwd-courses', 'sfwd-lessons', 'sfwd-quiz', 'sfwd-topic'))) {
         wp_enqueue_style('single-courses', $base . 'pages/single-sfwd-courses.css', array(), ACADEMY_AFRICA_VERSION);
         wp_enqueue_style('course-completed', $base . 'pages/course-completed.css', array(), ACADEMY_AFRICA_VERSION);
-    }
-    if (is_singular('sfwd-lessons')) {
         wp_enqueue_style('single-lesson', $base . 'pages/single-sfwd-lessons.css', array(), ACADEMY_AFRICA_VERSION);
-    }
-    if (is_singular('sfwd-quiz')) {
         wp_enqueue_style('single-quiz', $base . 'pages/single-sfwd-quiz.css', array(), ACADEMY_AFRICA_VERSION);
-    }
-    if (is_singular('sfwd-topic')) {
         wp_enqueue_style('single-topic', $base . 'pages/single-sfwd-topic.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
