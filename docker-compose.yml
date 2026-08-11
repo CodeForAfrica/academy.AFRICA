@@ -12,6 +12,8 @@ services:
       WORDPRESS_CONFIG_EXTRA: |
           define( 'WP_SITEURL', '${SITE_URL}' );
           define( 'WP_HOME', '${SITE_URL}' );
+          define( 'WP_MEMORY_LIMIT', '1024M' );
+          define( 'WP_MAX_MEMORY_LIMIT', '1024M' );
     volumes:
       - ./wordpress:/var/www/html
       - ./wp-content/themes:/var/www/html/wp-content/themes

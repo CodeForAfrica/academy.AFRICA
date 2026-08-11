@@ -1,8 +1,25 @@
 @use "../abstracts/"as *;
 
-.contact-us {
+// The <main> is both id="content" and .contact-us, and main.scss resets
+// `body #content { padding: 0; max-width: 100% }`. An ID beats a class whatever
+// the load order, so the page box has to be qualified with the id to keep its
+// own width and padding.
+#content.contact-us {
   max-width: 1920px;
   padding: 60px 148px;
+
+  @include media-breakpoint-down(large) {
+    padding: 60px;
+  }
+
+  // Must stay after the ≤1440 block: both match on a phone, and with equal
+  // specificity the later rule is the one that applies.
+  @include media-breakpoint-down(tablet) {
+    padding: 60px 24px;
+  }
+}
+
+.contact-us {
   min-height: calc(100vh - 606px);
 
   * {
@@ -29,11 +46,5 @@
         background-color: #0C1A81 !important;
       }
     }
-  }
-}
-
-@include media-breakpoint-down(large) {
-  .contact-us {
-    padding: 60px 24px;
   }
 }

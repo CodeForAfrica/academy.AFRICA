@@ -1,5 +1,24 @@
 @use "../abstracts/"as *;
 
+// page-content.php (Privacy Policy and friends) renders
+// <main id="content" class="about-section">. Its only padding otherwise comes
+// from the About *widget* stylesheet's .about-section, and a bare class loses
+// to main.scss's `body #content { padding: 0; max-width: 100% }` — so the page
+// box is qualified with the id here. Scoping it to #content keeps the About
+// widget, which reuses .about-section inside other pages, untouched.
+#content.about-section {
+  max-width: 1440px;
+  padding: 40px 60px;
+  margin: 0 auto;
+  min-height: calc(100vh - 606px);
+
+  @include media-breakpoint-down(large) {
+    padding: 40px;
+  }
+}
+
+// NB: .default-page-content below is not rendered by any current template;
+// kept in case older content still uses it.
 .default-page-content {
     max-width: 1440px;
     padding: 40px 60px;

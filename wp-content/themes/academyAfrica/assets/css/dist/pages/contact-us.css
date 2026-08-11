@@ -132,9 +132,22 @@
   color: #0C1A81;
 }
 
-.contact-us {
+#content.contact-us {
   max-width: 1920px;
   padding: 60px 148px;
+}
+@media (max-width: 1440px) {
+  #content.contact-us {
+    padding: 60px;
+  }
+}
+@media (max-width: 768px) {
+  #content.contact-us {
+    padding: 60px 24px;
+  }
+}
+
+.contact-us {
   min-height: calc(100vh - 606px);
 }
 .contact-us * {
@@ -155,12 +168,6 @@
 .contact-us .submit-area p input {
   width: 100%;
   background-color: #0C1A81 !important;
-}
-
-@media (max-width: 1440px) {
-  .contact-us {
-    padding: 60px 24px;
-  }
 }
 
 /*# sourceMappingURL=contact-us.css.map */

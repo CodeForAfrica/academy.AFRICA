@@ -1,47 +1,72 @@
-@use "../abstracts/" as *;
+@use "../abstracts/"as *;
 
 .hide {
   display: none !important;
 }
-.single-page-event {
+
+// The event <main> is both id="content" and .single-page-event, and main.scss
+// resets `body #content { padding: 0; max-width: 100% }`. An ID beats a class
+// whatever the load order, so the page box keeps its width and padding only if
+// it is qualified with the id too. (Other single templates avoid this by
+// putting their padding on an inner wrapper instead.)
+#content.single-page-event {
   max-width: 1920px;
-  padding: 60px 40px;
+  padding: 60px;
+
+  @include media-breakpoint-up(large) {
+    padding: 60px 148px;
+  }
+
+  @include media-breakpoint-up(xlarge) {
+    padding: 60px 388px;
+  }
+}
+
+.single-page-event {
   .cfa-title {
     text-align: left;
     font-size: 20px;
     line-height: 28px;
     position: relative;
+
     &::after {
       left: 0;
       transform: none;
     }
   }
+
   .resources {
     background: var(--primary-50, #eff0fd);
     padding: 24px;
     color: var(--primary-700, #0c1a81);
   }
+
   .image-container {
     position: relative;
     width: 100%;
     overflow: hidden;
     margin: 50px 0;
   }
+
   .featured-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* This property crops the image while maintaining its aspect ratio */
+    object-fit: cover;
+    /* This property crops the image while maintaining its aspect ratio */
   }
+
   .divider {
     height: 0.5px;
     background: #a9a9a9;
     margin: 40px 0;
     border: none;
   }
+
   .details {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
     .custom-data {
       p {
         color: #000;
@@ -49,41 +74,50 @@
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
-        line-height: 24px; /* 133.333% */
+        line-height: 24px;
+        /* 133.333% */
         text-transform: uppercase;
         margin-bottom: 20px;
+
         & .speaker {
           color: var(--shades-black, #000);
           font-family: Open Sans;
           font-size: 18px;
           font-style: normal;
           font-weight: 700;
-          line-height: 24px; /* 133.333% */
+          line-height: 24px;
+          /* 133.333% */
           letter-spacing: -0.36px;
         }
       }
     }
+
     .share {
       text-align: right;
     }
   }
+
   @include media-breakpoint-down(tablet) {
     .details {
       flex-direction: column;
       align-items: flex-start;
+
       .share {
         text-align: left;
       }
     }
   }
+
   .content {
     color: var(--shades-black, #000);
     font-family: Open Sans;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 28px; /* 155.556% */
+    line-height: 28px;
+    /* 155.556% */
   }
+
   .linked-post {
     .title {
       color: var(--primary-700, #0c1a81);
@@ -91,31 +125,39 @@
       font-size: 18px;
       font-style: normal;
       font-weight: 700;
-      line-height: 24px; /* 133.333% */
+      line-height: 24px;
+      /* 133.333% */
     }
+
     .name {
       color: var(--shades-black, #000);
       font-family: Open Sans;
       font-size: 18px;
       font-style: normal;
       font-weight: 700;
-      line-height: 24px; /* 133.333% */
+      line-height: 24px;
+      /* 133.333% */
       letter-spacing: -0.36px;
     }
+
     .description {
       color: var(--shades-black, #000);
       font-family: Open Sans;
       font-size: 18px;
       font-style: normal;
       font-weight: 400;
-      line-height: 28px; /* 155.556% */
+      line-height: 28px;
+      /* 155.556% */
     }
+
     * {
       margin-top: 32px;
     }
   }
+
   .back {
     margin-top: 50px;
+
     a {
       color: var(--shades-black, #000);
       font-family: Open Sans;
@@ -142,20 +184,15 @@
   }
 }
 
-@include media-breakpoint-up(large) {
-  .single-page-event {
-    padding: 60px 148px;
-  }
-}
-@include media-breakpoint-up(xlarge) {
-  .single-page-event {
-    padding: 60px 388px;
-  }
-}
 .with-icons {
-  display: flex; align-items: center; gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 20px;
-  .date, .time, .language {
+
+  .date,
+  .time,
+  .language {
     font-size: 14px !important;
     font-weight: 600;
   }

@@ -1,8 +1,21 @@
 @use "../abstracts/"as *;
 
-.profile {
+// edit-profile.php renders <main id="content" class="profile">, so the page box
+// needs the id to beat main.scss's `body #content` reset.
+#content.profile {
   max-width: 1920px;
   padding: 60px;
+
+  @include media-breakpoint-up(large) {
+    padding: 60px 148px;
+  }
+
+  @include media-breakpoint-up(xlarge) {
+    padding: 60px 388px;
+  }
+}
+
+.profile {
 
   * {
     font-family: Open Sans;
@@ -259,18 +272,6 @@
         /* 155.556% */
       }
     }
-  }
-}
-
-@include media-breakpoint-up(large) {
-  .profile {
-    padding: 60px 148px;
-  }
-}
-
-@include media-breakpoint-up(xlarge) {
-  .profile {
-    padding: 60px 388px;
   }
 }
 

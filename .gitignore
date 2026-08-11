@@ -129,3 +129,4 @@ wp-content/academy-africa.log.1
 
 # PHPUnit
 .phpunit.result.cache
+db-backups/

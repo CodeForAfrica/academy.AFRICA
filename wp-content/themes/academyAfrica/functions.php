@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.7.18');
+define('ACADEMY_AFRICA_VERSION', '1.7.19');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -75,6 +75,15 @@ function my_theme_enqueue_styles()
         wp_enqueue_style('single-lesson', $base . 'pages/single-sfwd-lessons.css', array(), ACADEMY_AFRICA_VERSION);
         wp_enqueue_style('single-quiz', $base . 'pages/single-sfwd-quiz.css', array(), ACADEMY_AFRICA_VERSION);
         wp_enqueue_style('single-topic', $base . 'pages/single-sfwd-topic.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+
+    // single-resource.php reuses the course single-view markup
+    // (<main class="single-courses"> with .wrapper/.title-section/.avatar/
+    // .introduction inside), so it needs that bundle even though 'resource' is
+    // not a LearnDash post type — without it the page renders with no padding
+    // and full-bleed content.
+    if (is_singular('resource')) {
+        wp_enqueue_style('single-courses', $base . 'pages/single-sfwd-courses.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
     // Learning path single (+ its print stylesheet).
