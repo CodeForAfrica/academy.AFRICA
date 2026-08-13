@@ -103,6 +103,12 @@ function my_theme_enqueue_styles()
         wp_enqueue_style('cfa-login', $base . 'pages/login.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
+    // Only needed when the current singular post is actually locked — the
+    // password form (and its styling) is otherwise never rendered.
+    if (post_password_required()) {
+        wp_enqueue_style('password-protected', $base . 'pages/password-protected.css', array(), ACADEMY_AFRICA_VERSION);
+    }
+
     // The course-grid filter bar (academy-africa-filter-bar, registered in
     // includes/widgets/widgets.php) is otherwise pulled in via the All Courses,
     // My Courses, and Learning Pathways widgets' get_style_depends().
@@ -1149,7 +1155,7 @@ if (!function_exists('get_coauthors')) {
 require_once __DIR__ . '/includes/utils/cache.php';
 
 $inc_dir = __DIR__ . '/includes/functions/';
-foreach (['learndash', 'login', 'password_reset', 'polylang-strings', 'register'] as $_inc) {
+foreach (['learndash', 'login', 'password_reset', 'password_protected', 'polylang-strings', 'register'] as $_inc) {
     require_once $inc_dir . $_inc . '.php';
 }
 // add_action('init', 'custom_login_page');
