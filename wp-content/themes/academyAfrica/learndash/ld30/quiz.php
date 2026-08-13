@@ -122,19 +122,18 @@ do_action('qm/stop', 'quiz:init');
                             do_action('learndash-quiz-actual-content-after', $quiz_post->ID, $course_id, $user_id);
                         else :
                             do_action('learndash-quiz-attempts-alert-before', $quiz_post->ID, $course_id, $user_id);
-                            learndash_get_template_part(
-                                'modules/alert.php',
-                                [
-                                    'type'    => 'warning',
-                                    'icon'    => 'alert',
-                                    'message' => sprintf(
-                                        esc_html_x('You have already taken this %1$s %2$d time(s) and may not take it again.', 'placeholders: quiz, attempts count', 'learndash'),
-                                        learndash_get_custom_label_lower('quiz'),
-                                        $attempts_count
-                                    ),
-                                ],
-                                true
-                            );
+                            // Branded in place of learndash_get_template_part('modules/alert.php', ...) —
+                            // that component has no unscoped base styling here, so it rendered as
+                            // plain, unstyled text.
+                            academyafrica_render_ld_notice([
+                                'type'    => 'warning',
+                                'icon'    => 'alert',
+                                'message' => sprintf(
+                                    esc_html_x('You have already taken this %1$s %2$d time(s) and may not take it again.', 'placeholders: quiz, attempts count', 'learndash'),
+                                    learndash_get_custom_label_lower('quiz'),
+                                    $attempts_count
+                                ),
+                            ]);
                             do_action('learndash-quiz-attempts-alert-after', $quiz_post->ID, $course_id, $user_id);
                         endif;
                     endif;

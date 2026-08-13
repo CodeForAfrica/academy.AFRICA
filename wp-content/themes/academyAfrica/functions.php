@@ -75,6 +75,9 @@ function my_theme_enqueue_styles()
         wp_enqueue_style('single-lesson', $base . 'pages/single-sfwd-lessons.css', array(), ACADEMY_AFRICA_VERSION);
         wp_enqueue_style('single-quiz', $base . 'pages/single-sfwd-quiz.css', array(), ACADEMY_AFRICA_VERSION);
         wp_enqueue_style('single-topic', $base . 'pages/single-sfwd-topic.css', array(), ACADEMY_AFRICA_VERSION);
+        // Prerequisites / points-access / drip-feed / quiz retry-limit messages
+        // (academyafrica_render_ld_notice()) all render on these singular types.
+        wp_enqueue_style('learndash-notice', $base . 'pages/learndash-notice.css', array(), ACADEMY_AFRICA_VERSION);
     }
 
     // single-resource.php reuses the course single-view markup

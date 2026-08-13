@@ -76,3 +76,68 @@ function academyafrica_count_students($post_id)
 
     return $count;
 }
+
+/**
+ * Branded replacement for LearnDash's `modules/alert.php`, used by the course
+ * prerequisites, points-access, drip-feed "not available" and quiz
+ * retry-limit messages (see the learndash/ld30/modules/messages/*.php
+ * overrides and quiz.php). The stock component has no unscoped base CSS
+ * outside the registration wrapper, so it renders as plain, unstyled text
+ * wherever LearnDash shows it inside a single course/lesson/quiz view.
+ *
+ * @param array $args {
+ *     @type string     $type    'warning' or 'info'. Controls the accent color.
+ *     @type string     $icon    'alert' or 'calendar'.
+ *     @type string     $message HTML message, already escaped/kses'd by the caller.
+ *     @type array|false $button  Optional ['url' => ..., 'label' => ...].
+ * }
+ */
+function academyafrica_render_ld_notice($args)
+{
+    $args = wp_parse_args($args, [
+        'type'    => 'info',
+        'icon'    => 'alert',
+        'message' => '',
+        'button'  => false,
+    ]);
+
+    if (empty($args['message'])) {
+        return;
+    }
+    ?>
+    <div class="ld-notice ld-notice--<?php echo esc_attr($args['type']); ?>" role="status">
+        <span class="ld-notice__icon" aria-hidden="true">
+            <?php academyafrica_render_ld_notice_icon($args['icon']); ?>
+        </span>
+        <div class="ld-notice__body">
+            <div class="ld-notice__message"><?php echo wp_kses_post($args['message']); ?></div>
+            <?php if (!empty($args['button']['url'])) : ?>
+                <a class="button primary small ld-notice__button" href="<?php echo esc_url($args['button']['url']); ?>">
+                    <?php echo esc_html($args['button']['label'] ?? ''); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php
+}
+
+function academyafrica_render_ld_notice_icon($icon)
+{
+    if ('calendar' === $icon) {
+        ?>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M3 9H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 3V6M16 3V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <?php
+        return;
+    }
+    ?>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+        <path d="M12 8V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <circle cx="12" cy="16.5" r="1" fill="currentColor" />
+    </svg>
+    <?php
+}

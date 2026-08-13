@@ -1,0 +1,74 @@
+@use "../abstracts/" as *;
+
+// Renders wherever academyafrica_render_ld_notice() is used: course
+// prerequisites, points-access, drip-feed "not available", and quiz
+// retry-limit messages (see learndash/ld30/modules/messages/*.php and
+// quiz.php). All four render on LearnDash singular views, so this rides
+// along with the other single-* bundles rather than getting its own
+// conditional.
+.ld-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    font-family: Open Sans;
+    margin: 16px 0;
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        margin-top: 2px;
+    }
+
+    &__body {
+        flex: 1;
+    }
+
+    &__message {
+        font-size: 14px;
+        line-height: 20px;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    &__links a,
+    &__date {
+        font-weight: 600;
+    }
+
+    &__button {
+        margin-top: 12px;
+    }
+
+    &--warning {
+        background: $color-warning-50;
+        border-color: $color-warning-200;
+        color: $color-warning-800;
+
+        .ld-notice__icon {
+            color: $color-warning-600;
+        }
+
+        .ld-notice__links a {
+            color: $color-warning-800;
+        }
+    }
+
+    &--info {
+        background: $color-primary-50;
+        border-color: $color-primary-200;
+        color: $color-primary-800;
+
+        .ld-notice__icon {
+            color: $color-primary-700;
+        }
+    }
+}
