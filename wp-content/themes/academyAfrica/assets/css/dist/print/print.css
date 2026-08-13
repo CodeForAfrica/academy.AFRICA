@@ -627,6 +627,7 @@
   align-self: stretch;
 }
 .course-card .card .course-card-pattern {
+  position: relative;
   height: 145px;
   background: url("../../../images/CourseCardPatternDark.svg") no-repeat center center;
   background-size: cover;
@@ -640,6 +641,25 @@
   border-radius: 50%;
   object-fit: contain;
   background-color: #FFFFFF;
+}
+.course-card .card .course-card-lock {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: #0C1A81;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+.course-card .card .course-card-lock svg {
+  width: 16px;
+  height: 16px;
 }
 .course-card .card .course-card-content {
   padding: 20px;
@@ -892,5 +912,3 @@
 @page {
   margin: 0;
 }
-
-/*# sourceMappingURL=print.css.map */

@@ -272,6 +272,7 @@ class Academy_Africa_Featured_Courses extends \Elementor\Widget_Base
                                 'template-parts/course_card',
                                 'template',
                                 [
+                                    'course_id' => $course->ID,
                                     'course_title' => $course_title,
                                     'course_author' => $course_author,
                                     'course_thumbnail' => $course_thumbnail,

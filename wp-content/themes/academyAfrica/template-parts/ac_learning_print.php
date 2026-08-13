@@ -59,6 +59,7 @@ $content = $args['content'];
                                     'template-parts/course_card',
                                     'template',
                                     [
+                                        'course_id' => $course->ID,
                                         'course_title' => $course_title,
                                         'course_author' => $course_author,
                                         'course_thumbnail' => $course_thumbnail,

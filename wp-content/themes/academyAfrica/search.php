@@ -216,6 +216,7 @@ if ($no_of_pages > 1 && $current_page <= $no_of_pages) {
                             'template-parts/course_card',
                             'template',
                             [
+                                'course_id' => $post->ID,
                                 'course_title' => $course_title,
                                 'course_author' => $course_author,
                                 'course_thumbnail' => $course_thumbnail,

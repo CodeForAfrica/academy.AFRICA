@@ -16,6 +16,17 @@ $course_price      = learndash_get_course_price($course_id);
 $price             = $course_price['price'] ? $course_price['price'] : 'Free';
 $user_id           = get_current_user_id();
 $is_enrolled       = sfwd_lms_has_access($course_id, $user_id);
+
+// A "closed" (admin/group-managed) course with no custom button URL makes
+// [learndash_payment_buttons] render nothing — the visitor would otherwise
+// see an empty enroll box with no explanation, indistinguishable from a
+// broken component (#GNI Startups Lab hits this today).
+$enroll_label  = function_exists('pll__') ? pll__('Enroll Now') : 'Enroll Now';
+$enroll_button = !$is_enrolled ? trim(do_shortcode('[learndash_payment_buttons label="' . $enroll_label . '"]')) : '';
+$enroll_closed_message = function_exists('pll__')
+    ? pll__('Enrollment for this course is managed by the organization. Contact us to request access.')
+    : 'Enrollment for this course is managed by the organization. Contact us to request access.';
+
 $organizations     = get_field('organization', $course_id) ?: [];
 $related_courses   = get_field('related_courses', $course_id) ?: [];
 $short_description = get_field('short_description', $course_id) ?: '';
@@ -235,13 +246,12 @@ if ($course_status == "Completed" && $is_cert && academyafrica_course_has_certif
                     }
                     ?>
                 </div>
-            <?php else : ?>
+            <?php elseif (!empty($enroll_button)) : ?>
                 <div class="enroll enroll-btn" id="enroll-button">
-                    <?php
-                    $enroll_label = function_exists('pll__') ? pll__('Enroll Now') : 'Enroll Now';
-                    echo do_shortcode('[learndash_payment_buttons label="' . $enroll_label . '"]');
-                    ?>
+                    <?php echo $enroll_button; ?>
                 </div>
+            <?php else : ?>
+                <p class="enroll-closed-message"><?php echo esc_html($enroll_closed_message); ?></p>
             <?php endif; ?>
 
             <hr class="divider">
@@ -398,13 +408,12 @@ if ($course_status == "Completed" && $is_cert && academyafrica_course_has_certif
                 </div>
             <?php endif; ?>
 
-            <?php if (!$is_enrolled) : ?>
+            <?php if (!empty($enroll_button)) : ?>
                 <div class="enroll enrolllled" id="enroll-button">
-                    <?php
-                    $enroll_label = function_exists('pll__') ? pll__('Enroll Now') : 'Enroll Now';
-                    echo do_shortcode('[learndash_payment_buttons label="' . $enroll_label . '"]');
-                    ?>
+                    <?php echo $enroll_button; ?>
                 </div>
+            <?php elseif (!$is_enrolled) : ?>
+                <p class="enroll-closed-message"><?php echo esc_html($enroll_closed_message); ?></p>
             <?php endif; ?>
 
             <?php if (!empty($related_courses)) : ?>
@@ -423,6 +432,7 @@ if ($course_status == "Completed" && $is_cert && academyafrica_course_has_certif
                                         $course_price = is_array($course_meta) ? $course_meta['sfwd-courses_course_price'] : 0;
                                         $course_price = empty($course_price) ? "Free" : $course_price;
                                         get_template_part('template-parts/course_card', 'template', [
+                                            'course_id'        => $course->ID,
                                             'course_title'     => $course->post_title,
                                             'course_author'    => get_the_author_meta('display_name', $course->post_author),
                                             'course_thumbnail' => get_the_post_thumbnail_url($course, 'full'),

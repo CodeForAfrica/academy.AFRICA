@@ -222,6 +222,23 @@
             }
         }
 
+        // Shown in place of the enroll button for "closed" (admin/group-managed)
+        // courses — otherwise [learndash_payment_buttons] renders nothing and
+        // the page shows an unexplained empty box.
+        .enroll-closed-message {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: $color-neutral-50;
+            border: 1px solid $color-neutral-200;
+            border-radius: 4px;
+            color: $color-neutral-700;
+            font-family: Open Sans;
+            font-size: 14px;
+            line-height: 20px;
+            margin: 0;
+        }
+
         .divider {
             width: 100%;
             border: none;

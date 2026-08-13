@@ -59,6 +59,7 @@ $courses = get_field('courses', $learning_path_id) ?: [];
                                     'template-parts/course_card',
                                     'template',
                                     [
+                                        'course_id' => $course->ID,
                                         'course_title' => $course_title,
                                         'course_author' => $course_author,
                                         'course_thumbnail' => $course_thumbnail,
