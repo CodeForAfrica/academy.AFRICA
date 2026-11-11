@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.7.20');
+define('ACADEMY_AFRICA_VERSION', '1.7.21');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -118,6 +118,28 @@ function my_theme_enqueue_styles()
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
+
+/**
+ * Load front-end block styles (currently the Button block → theme default
+ * button) inside the block editor, so authors see buttons as they'll render.
+ *
+ * enqueue_block_assets also fires on the front end, where main.css already
+ * carries these rules, hence the is_admin() guard. In WP 6.3+ this reaches
+ * the iframed editor canvas too.
+ */
+function academy_africa_editor_assets()
+{
+    if (!is_admin()) {
+        return;
+    }
+    wp_enqueue_style(
+        'academy-africa-editor-style',
+        get_stylesheet_directory_uri() . '/assets/css/dist/editor/editor-style.css',
+        array(),
+        ACADEMY_AFRICA_VERSION
+    );
+}
+add_action('enqueue_block_assets', 'academy_africa_editor_assets');
 
 function load_admin_styles()
 {

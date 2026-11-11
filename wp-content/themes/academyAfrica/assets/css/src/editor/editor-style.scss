@@ -1,0 +1,5 @@
+// Styles loaded inside the block editor (see academy_africa_editor_assets()
+// in functions.php) so content authors see blocks the way the front end
+// renders them. Keep this to block-level components; selectors here must be
+// scoped to block classes because this sheet is not prefixed by WordPress.
+@use "../components/block-buttons";

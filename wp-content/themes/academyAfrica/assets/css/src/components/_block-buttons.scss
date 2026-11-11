@@ -1,0 +1,66 @@
+@use "../abstracts/colors" as *;
+
+// Block editor "Button" block (core/button) → theme default button.
+//
+// Every Button block renders as the theme's `.button.primary.medium`, so
+// buttons look uniform across course content regardless of what an author
+// picks in the block sidebar. Colour, gradient, border, radius, padding,
+// typography and the Outline/Fill style variations are all overridden —
+// hence the `!important`s: WP's palette classes (`.has-*-background-color`)
+// are themselves `!important`, and custom values are inline styles.
+//
+// Authors still control placement: alignment/justification and width live on
+// the wrapper (`.wp-block-buttons`, `.wp-block-button__width-*`) and are not
+// touched here.
+//
+// Also compiled into the editor stylesheet (editor/editor-style.scss) so
+// authors see the real button while editing.
+
+// Fallback layout for a group of buttons. WP normally adds this via generated
+// layout classes, but content wrapped in WPBakery shortcodes (most course
+// topics) goes through wpautop and loses them, leaving buttons touching.
+.wp-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  // wpautop leaves empty <p>/<br> between buttons; as flex items they'd add
+  // phantom gaps.
+  > p:empty,
+  > br {
+    display: none;
+  }
+}
+
+.wp-block-button .wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px !important;
+  font-family: "Open Sans" !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
+  line-height: 19px !important;
+  letter-spacing: 1.6px !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  color: $color-shades-white !important;
+  background: $color-primary-700 !important;
+  border: 1px solid $color-primary-700 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-primary-700 !important;
+    background: $color-primary-50 !important;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary-400;
+    outline-offset: 2px;
+  }
+}

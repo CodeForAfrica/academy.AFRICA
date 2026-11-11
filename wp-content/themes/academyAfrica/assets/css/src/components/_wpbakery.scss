@@ -184,13 +184,15 @@ strong {
 
 /* custom style for hyperlinks within course contents */
 
-div.vc_tta-panel-body a:link {
+// Excludes Button blocks, which use the theme button styles instead
+// (components/_block-buttons.scss).
+div.vc_tta-panel-body a:link:not(.wp-block-button__link) {
     color: $color-primary-700 !important;
     text-decoration: underline;
     font-weight: bold;
 }
 
-div.vc_tta-panel-body a:hover {
+div.vc_tta-panel-body a:hover:not(.wp-block-button__link) {
     color: red !important;
     text-decoration: underline;
 }
