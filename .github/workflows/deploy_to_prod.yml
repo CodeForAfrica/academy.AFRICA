@@ -1,0 +1,216 @@
+name: deploy_to_prod
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: academy-content-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Verify and deploy Academy theme to prod
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    env:
+      DEPLOY_ENV: prod
+      DEPLOY_BRANCH: main
+      AWS_PAGER: ""
+    steps:
+      - name: Check out selected revision without saved credentials
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Require successful push CI for this exact commit and branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "CodeForAfrica/academy.AFRICA"
+          test "$GITHUB_REF" = "refs/heads/$DEPLOY_BRANCH"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          gh api --method GET "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs" \
+            -f event=push -f branch="$DEPLOY_BRANCH" -f head_sha="$GITHUB_SHA" -f per_page=1 |
+            jq -e --arg sha "$GITHUB_SHA" --arg branch "$DEPLOY_BRANCH" '
+              .workflow_runs[0] |
+              .head_sha == $sha and .head_branch == $branch and .event == "push"
+              and .status == "completed" and .conclusion == "success"'
+      - name: Install Pulumi CLI using the existing app convention
+        run: |
+          set -euo pipefail
+          curl -fsSL https://get.pulumi.com | sh
+          echo "$HOME/.pulumi/bin" >> "$GITHUB_PATH"
+      - name: Resolve infrastructure-owned runtime and deployment contract
+        id: contract
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }} # zizmor: ignore[secrets-outside-env] Repository-scoped token shared by the manual dev/prod jobs; AWS access uses branch-scoped OIDC.
+          WORDPRESS_PULUMI_STACK: ${{ vars.WORDPRESS_PULUMI_STACK }}
+        run: |
+          set -euo pipefail
+          [[ "$WORDPRESS_PULUMI_STACK" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/(dev|prod)$ ]]
+          WORDPRESS_PULUMI_STACK="${WORDPRESS_PULUMI_STACK%/*}/$DEPLOY_ENV"
+          pulumi stack output --stack "$WORDPRESS_PULUMI_STACK" --json |
+            jq -e '.wordpressContentDeployment + {siteUrl: .wordpressDokkuAppUrl,
+              uptimeDeploymentWake: (if .uptimeDeploymentWake == null then null else (.uptimeDeploymentWake | fromjson) end)}' > "$RUNNER_TEMP/content-contract.json"
+          jq -e --arg env "$DEPLOY_ENV" '
+            def valid($pattern): type == "string" and test($pattern);
+            .schemaVersion == 1 and .environment == $env
+            and (.region | valid("^[a-z]{2}-[a-z]+-[0-9]+$"))
+            and (.roleArn | valid("^arn:aws:iam::[0-9]{12}:role/[A-Za-z0-9_+=,.@/-]+$"))
+            and (.bucket | valid("^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"))
+            and (.instanceId | valid("^i-([a-f0-9]{8}|[a-f0-9]{17})$"))
+            and (.documentName | valid("^ssm-[A-Za-z0-9_.-]+$"))
+            and (.documentVersion | valid("^[1-9][0-9]*$"))
+            and (.siteUrl | valid("^https://[A-Za-z0-9.-]+/?$"))
+            and (if $env == "dev" then
+              (.uptimeDeploymentWake | type == "object" and length > 0)
+              else (.uptimeDeploymentWake == null or (.uptimeDeploymentWake | type == "object")) end)
+          ' "$RUNNER_TEMP/content-contract.json" >/dev/null
+          jq -r '
+            "region=\(.region)", "role=\(.roleArn)",
+            "url=\(.siteUrl)", "wake=\(if .uptimeDeploymentWake == null then "" else (.uptimeDeploymentWake | tojson) end)"
+          ' "$RUNNER_TEMP/content-contract.json" >> "$GITHUB_OUTPUT"
+      - name: Assume the branch-scoped AWS role through OIDC
+        uses: aws-actions/configure-aws-credentials@451ce2a72e8d729a59ebeaacab82dbce58e7af4c
+        with:
+          aws-region: ${{ steps.contract.outputs.region }}
+          role-to-assume: ${{ steps.contract.outputs.role }}
+          role-session-name: academy-content-${{ github.run_id }}
+      - name: Wake opted-in infrastructure
+        uses: CodeForAfrica/iac-cfa-pulumi/.github/actions/wake-frozen-app@f6908d03e529587960dd51574e343be28e76e524
+        with:
+          configuration: ${{ steps.contract.outputs.wake }}
+      - name: Inspect the actual runtime PHP version without changing the site
+        id: runtime
+        run: |
+          set -euo pipefail
+          contract="$RUNNER_TEMP/content-contract.json"
+          instance="$(jq -r .instanceId "$contract")"
+          command=""
+          for attempt in {1..24}; do
+            echo "Waiting for SSM after wake: $attempt/24"
+            if command="$(aws ssm send-command --instance-ids "$instance" \
+              --document-name "$(jq -r .documentName "$contract")" \
+              --document-version "$(jq -r .documentVersion "$contract")" \
+              --parameters '{"Operation":["Inspect"]}' --query Command.CommandId --output text 2> "$RUNNER_TEMP/send-error")"; then break; fi
+            if ! grep -q InvalidInstanceId "$RUNNER_TEMP/send-error"; then cat "$RUNNER_TEMP/send-error"; exit 1; fi
+            sleep 5
+          done
+          [[ "$command" =~ ^[a-f0-9-]{36}$ ]]
+          for attempt in {1..60}; do
+            echo "Runtime inspection $attempt/60: $command"
+            if aws ssm get-command-invocation --command-id "$command" --instance-id "$instance" \
+              --output json > "$RUNNER_TEMP/runtime.json" 2> "$RUNNER_TEMP/runtime-error"; then
+              case "$(jq -r .Status "$RUNNER_TEMP/runtime.json")" in
+                Success)
+                  jq -e '.ResponseCode == 0' "$RUNNER_TEMP/runtime.json" >/dev/null
+                  jq -er '.StandardOutputContent | fromjson | .phpVersion |
+                    select(test("^[0-9]+[.][0-9]+[.][0-9]+$")) | "php=" + .' "$RUNNER_TEMP/runtime.json" >> "$GITHUB_OUTPUT"
+                  exit 0 ;;
+                Pending|InProgress|Delayed) ;;
+                *) jq -r '.Status, .StandardErrorContent' "$RUNNER_TEMP/runtime.json"; exit 1 ;;
+              esac
+            elif ! grep -q InvocationDoesNotExist "$RUNNER_TEMP/runtime-error"; then
+              cat "$RUNNER_TEMP/runtime-error"; exit 1
+            fi
+            sleep 5
+          done
+          echo "::error::Runtime inspection timed out."
+          exit 1
+      - name: Set up PHP security tooling matching the deployed runtime
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962
+        with:
+          php-version: ${{ steps.runtime.outputs.php }}
+          coverage: none
+          tools: composer
+      - name: Install locked PHP analysis dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+      - name: Enforce WordPress security and PHP compatibility rules
+        run: vendor/bin/phpcs --standard=phpcs.xml.dist --runtime-set testVersion "$PHP_VERSION-" wp-content/themes/academyAfrica
+        env:
+          PHP_VERSION: ${{ steps.runtime.outputs.php }}
+      - name: Package only the custom theme and upload an immutable artifact
+        id: artifact
+        run: |
+          set -euo pipefail
+          theme=wp-content/themes/academyAfrica
+          test -n "$(git ls-tree -r "$GITHUB_SHA" -- "$theme")"
+          while IFS= read -r -d '' entry; do
+            metadata="${entry%%$'\t'*}"
+            file="${entry#*$'\t'}"
+            read -r mode type _ <<< "$metadata"
+            [[ "$mode" = 100644 || "$mode" = 100755 ]]
+            test "$type" = blob
+            [[ "$file" == "$theme/"* && "$file" != *$'\n'* && "$file" != *$'\r'* && "$file" != *\\* ]]
+          done < <(git ls-tree -r -z "$GITHUB_SHA" -- "$theme")
+          archive="$RUNNER_TEMP/academy-theme.tar.gz"
+          git archive --format=tar.gz --output="$archive" "$GITHUB_SHA" -- "$theme"
+          checksum="$(sha256sum "$archive" | cut -d ' ' -f 1)"
+          key="academy-content/$DEPLOY_ENV/$GITHUB_SHA/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.tar.gz"
+          bucket="$(jq -r .bucket "$RUNNER_TEMP/content-contract.json")"
+          aws s3api put-object --bucket "$bucket" --key "$key" --body "$archive" \
+            --server-side-encryption AES256 --if-none-match '*' >/dev/null
+          printf 'key=%s\nchecksum=%s\n' "$key" "$checksum" >> "$GITHUB_OUTPUT"
+      - name: Invoke the restricted infrastructure-owned theme deployment document
+        id: release
+        env:
+          ARTIFACT_KEY: ${{ steps.artifact.outputs.key }}
+          ARTIFACT_CHECKSUM: ${{ steps.artifact.outputs.checksum }}
+          PHP_VERSION: ${{ steps.runtime.outputs.php }}
+        run: |
+          set -euo pipefail
+          contract="$RUNNER_TEMP/content-contract.json"
+          jq --arg key "$ARTIFACT_KEY" --arg checksum "$ARTIFACT_CHECKSUM" --arg sha "$GITHUB_SHA" --arg php "$PHP_VERSION" '
+            {Operation: ["Deploy"], RuntimePHP: [$php], ArtifactBucket: [.bucket], ArtifactKey: [$key], ArtifactSHA256: [$checksum],
+             Revision: [$sha], Environment: [.environment]}
+          ' "$contract" > "$RUNNER_TEMP/content-parameters.json"
+          command="$(aws ssm send-command --instance-ids "$(jq -r .instanceId "$contract")" \
+            --document-name "$(jq -r .documentName "$contract")" \
+            --document-version "$(jq -r .documentVersion "$contract")" \
+            --parameters "file://$RUNNER_TEMP/content-parameters.json" \
+            --query Command.CommandId --output text)"
+          [[ "$command" =~ ^[a-f0-9-]{36}$ ]]
+          echo "command=$command" >> "$GITHUB_OUTPUT"
+          echo "SSM deployment command: $command" >> "$GITHUB_STEP_SUMMARY"
+      - name: Wait for host deployment and health verification
+        env:
+          COMMAND_ID: ${{ steps.release.outputs.command }}
+        run: |
+          set -euo pipefail
+          instance="$(jq -r .instanceId "$RUNNER_TEMP/content-contract.json")"
+          for _ in {1..180}; do
+            if aws ssm get-command-invocation --command-id "$COMMAND_ID" --instance-id "$instance" \
+              --output json > "$RUNNER_TEMP/invocation.json" 2> "$RUNNER_TEMP/invocation-error"; then
+              status="$(jq -r .Status "$RUNNER_TEMP/invocation.json")"
+              case "$status" in
+                Success)
+                  jq -r .StandardOutputContent "$RUNNER_TEMP/invocation.json"
+                  jq -e '.ResponseCode == 0' "$RUNNER_TEMP/invocation.json" >/dev/null
+                  exit 0 ;;
+                Pending|InProgress|Delayed) ;;
+                *) jq -r '.Status, .StandardErrorContent' "$RUNNER_TEMP/invocation.json"; exit 1 ;;
+              esac
+            elif ! grep -q InvocationDoesNotExist "$RUNNER_TEMP/invocation-error"; then
+              cat "$RUNNER_TEMP/invocation-error"
+              exit 1
+            fi
+            sleep 5
+          done
+          echo "::error::SSM wait timed out; inspect $COMMAND_ID before retrying. It may still be running."
+          exit 1
+      - name: Restore healthy routing after the verified release
+        uses: CodeForAfrica/iac-cfa-pulumi/.github/actions/wake-frozen-app@f6908d03e529587960dd51574e343be28e76e524
+        with:
+          configuration: ${{ steps.contract.outputs.wake }}
+          phase: complete
+      - name: Verify canonical HTTPS endpoint
+        env:
+          APP_URL: ${{ steps.contract.outputs.url }}
+        run: curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --connect-timeout 10 --max-time 60 --retry 3 "$APP_URL" >/dev/null
