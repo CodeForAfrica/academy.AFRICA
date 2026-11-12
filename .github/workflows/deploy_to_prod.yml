@@ -83,10 +83,47 @@ jobs:
           aws-region: ${{ steps.contract.outputs.region }}
           role-to-assume: ${{ steps.contract.outputs.role }}
           role-session-name: academy-content-${{ github.run_id }}
-      - name: Wake opted-in infrastructure
-        uses: CodeForAfrica/iac-cfa-pulumi/.github/actions/wake-frozen-app@f6908d03e529587960dd51574e343be28e76e524
-        with:
-          configuration: ${{ steps.contract.outputs.wake }}
+      - name: Request bounded wake-up through AWS and wait for readiness
+        timeout-minutes: 31
+        run: |
+          set -euo pipefail
+          contract="$RUNNER_TEMP/content-contract.json"
+          if jq -e '.uptimeDeploymentWake == null' "$contract" >/dev/null; then exit 0; fi
+          jq -e '
+            . as $c | .uptimeDeploymentWake |
+            (.uptimeWakeOnDeployHours | type == "number" and . == floor and . >= 1 and . <= 168)
+            and (.uptimeAppKey | test("^[a-f0-9]{64}$"))
+            and (.uptimeManifestBucket | test("^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"))
+            and (.awsRegion == $c.region)
+            and (.uptimeControllerArn | test("^arn:aws:lambda:" + $c.region + ":[0-9]{12}:function:[A-Za-z0-9_-]+$"))
+          ' "$contract" >/dev/null
+          bucket="$(jq -r .uptimeDeploymentWake.uptimeManifestBucket "$contract")"
+          key="$(jq -r .uptimeDeploymentWake.uptimeAppKey "$contract")"
+          controller="$(jq -r .uptimeDeploymentWake.uptimeControllerArn "$contract")"
+          hours="$(jq -r .uptimeDeploymentWake.uptimeWakeOnDeployHours "$contract")"
+          id="$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          started="$(date -u +%s)"
+          jq -n --arg deploymentId "$id" '{deploymentId: $deploymentId}' > "$RUNNER_TEMP/wake-request.json"
+          echo "Requesting $hours-hour availability for deployment $id."
+          aws s3api put-object --bucket "$bucket" --key "apps/$key/wake-request.json" --body "$RUNNER_TEMP/wake-request.json" --server-side-encryption AES256 >/dev/null
+          aws lambda invoke --function-name "$controller" --invocation-type Event --cli-binary-format raw-in-base64-out --payload "$(jq -nc --arg appKey "$key" '{appKey: $appKey}')" "$RUNNER_TEMP/wake-invoke.json" >/dev/null
+          for attempt in {1..120}; do
+            echo "Waiting for host/database readiness: $attempt/120"
+            if aws s3api get-object --bucket "$bucket" --key "apps/$key/status.json" "$RUNNER_TEMP/wake-status.json" 2> "$RUNNER_TEMP/wake-error" >/dev/null; then
+              jq -e 'type == "object"' "$RUNNER_TEMP/wake-status.json" >/dev/null
+              if jq -e --arg id "$id" --argjson minimum "$((started + hours * 3600))" '
+                def epoch: sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601;
+                .deploymentReady == true and (.error // "") == ""
+                and .deploymentWake.deploymentId == $id
+                and (.deploymentWake.expiresAt | epoch) >= $minimum
+                and (.deploymentWake.expiresAt | epoch) > now
+              ' "$RUNNER_TEMP/wake-status.json" >/dev/null; then echo "Infrastructure ready; shutdown deadline retained."; exit 0; fi
+              jq -r '.error // .phase // "Waiting for controller"' "$RUNNER_TEMP/wake-status.json"
+            elif ! grep -q NoSuchKey "$RUNNER_TEMP/wake-error"; then cat "$RUNNER_TEMP/wake-error"; exit 1; fi
+            sleep 15
+          done
+          echo "::error::Wake-up timed out; inspect the uptime controller logs."
+          exit 1
       - name: Inspect the actual runtime PHP version without changing the site
         id: runtime
         run: |
@@ -205,11 +242,32 @@ jobs:
           done
           echo "::error::SSM wait timed out; inspect $COMMAND_ID before retrying. It may still be running."
           exit 1
-      - name: Restore healthy routing after the verified release
-        uses: CodeForAfrica/iac-cfa-pulumi/.github/actions/wake-frozen-app@f6908d03e529587960dd51574e343be28e76e524
-        with:
-          configuration: ${{ steps.contract.outputs.wake }}
-          phase: complete
+      - name: Restore healthy routing without extending the shutdown deadline
+        timeout-minutes: 11
+        run: |
+          set -euo pipefail
+          contract="$RUNNER_TEMP/content-contract.json"
+          if jq -e '.uptimeDeploymentWake == null' "$contract" >/dev/null; then exit 0; fi
+          bucket="$(jq -r .uptimeDeploymentWake.uptimeManifestBucket "$contract")"
+          key="$(jq -r .uptimeDeploymentWake.uptimeAppKey "$contract")"
+          controller="$(jq -r .uptimeDeploymentWake.uptimeControllerArn "$contract")"
+          started="$(date -u +%s)"
+          echo "Requesting healthy routing; not writing another wake request."
+          aws lambda invoke --function-name "$controller" --invocation-type Event --cli-binary-format raw-in-base64-out --payload "$(jq -nc --arg appKey "$key" '{appKey: $appKey}')" "$RUNNER_TEMP/route-invoke.json" >/dev/null
+          for attempt in {1..40}; do
+            echo "Waiting for healthy routing: $attempt/40"
+            aws s3api get-object --bucket "$bucket" --key "apps/$key/status.json" "$RUNNER_TEMP/route-status.json" >/dev/null
+            jq -e 'type == "object"' "$RUNNER_TEMP/route-status.json" >/dev/null
+            if jq -e --arg id "$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" --argjson started "$started" '
+              def epoch: sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601;
+              .phase == "running" and (.error // "") == ""
+              and .deploymentWake.deploymentId == $id
+              and (.checkedAt | epoch) >= $started and (.deploymentWake.expiresAt | epoch) > now
+            ' "$RUNNER_TEMP/route-status.json" >/dev/null; then echo "Healthy routing restored."; exit 0; fi
+            sleep 15
+          done
+          echo "::error::Healthy routing was not confirmed; inspect the uptime controller logs."
+          exit 1
       - name: Verify canonical HTTPS endpoint
         env:
           APP_URL: ${{ steps.contract.outputs.url }}
