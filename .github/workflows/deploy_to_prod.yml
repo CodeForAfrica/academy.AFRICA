@@ -20,7 +20,7 @@ jobs:
       id-token: write
     env:
       DEPLOY_ENV: prod
-      DEPLOY_BRANCH: main
+      DEPLOY_BRANCH: develop
       AWS_PAGER: ""
     steps:
       - name: Check out selected revision without saved credentials
