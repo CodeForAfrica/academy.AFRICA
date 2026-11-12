@@ -1,0 +1,41 @@
+.wp-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.wp-block-buttons > p:empty,
+.wp-block-buttons > br {
+  display: none;
+}
+
+.wp-block-button .wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px !important;
+  font-family: "Open Sans" !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
+  line-height: 19px !important;
+  letter-spacing: 1.6px !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  color: #FFFFFF !important;
+  background: #0C1A81 !important;
+  border: 1px solid #0C1A81 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+.wp-block-button .wp-block-button__link:hover, .wp-block-button .wp-block-button__link:focus-visible {
+  color: #0C1A81 !important;
+  background: #EFF0FD !important;
+}
+.wp-block-button .wp-block-button__link:focus-visible {
+  outline: 2px solid #4556EE;
+  outline-offset: 2px;
+}
+
+/*# sourceMappingURL=editor-style.css.map */
