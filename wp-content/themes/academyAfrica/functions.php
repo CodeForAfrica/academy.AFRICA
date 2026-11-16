@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
-define('ACADEMY_AFRICA_VERSION', '1.7.21');
+define('ACADEMY_AFRICA_VERSION', '1.7.22');
 const MINIMUM_ELEMENTOR_VERSION = '3.16.6';
 
 
@@ -727,23 +727,7 @@ if (defined('WP_CLI') && WP_CLI) {
     });
 }
 
-/**
- * Social sign-ups (Google, etc.) authenticate an already-verified email, so mark
- * the account verified and suppress the standard activation email for them.
- */
-function academyafrica_suppress_activation_for_social($profile_data = null)
-{
-    remove_action('user_register', 'send_activation_link', 10);
-}
-add_action('the_champ_before_registration', 'academyafrica_suppress_activation_for_social', 10, 1);
-
-function academyafrica_mark_social_user_verified($user_id)
-{
-    if ($user_id) {
-        update_user_meta($user_id, 'is_verified', true);
-    }
-}
-add_action('the_champ_user_successfully_created', 'academyafrica_mark_social_user_verified', 10, 1);
+// Google sign-up verification handling lives in includes/functions/google-login.php.
 
 function set_html_content_type()
 {
@@ -1180,7 +1164,7 @@ if (!function_exists('get_coauthors')) {
 require_once __DIR__ . '/includes/utils/cache.php';
 
 $inc_dir = __DIR__ . '/includes/functions/';
-foreach (['learndash', 'login', 'password_reset', 'password_protected', 'polylang-strings', 'register'] as $_inc) {
+foreach (['learndash', 'login', 'google-login', 'password_reset', 'password_protected', 'polylang-strings', 'register'] as $_inc) {
     require_once $inc_dir . $_inc . '.php';
 }
 // add_action('init', 'custom_login_page');

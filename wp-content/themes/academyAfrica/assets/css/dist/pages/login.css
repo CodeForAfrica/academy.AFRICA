@@ -159,7 +159,8 @@
   flex-direction: column;
   gap: 24px;
 }
-.login .social-login button {
+.login .social-login button,
+.login .social-login a.aa-google-login {
   border-radius: 10px;
   background: #fff;
   padding: 15px;
@@ -174,11 +175,13 @@
   text-transform: none;
   border: 1px solid transparent;
 }
-.login .social-login button:hover {
+.login .social-login button:hover,
+.login .social-login a.aa-google-login:hover {
   border: 1px solid #0c1a81;
   background-color: #eff0fd;
 }
-.login .social-login button.google {
+.login .social-login button.google,
+.login .social-login a.aa-google-login.google {
   color: rgba(0, 0, 0, 0.54);
   font-family: Open Sans;
   font-size: 20px;
@@ -187,7 +190,8 @@
   line-height: normal;
   text-transform: none;
 }
-.login .social-login button.facebook {
+.login .social-login button.facebook,
+.login .social-login a.aa-google-login.facebook {
   gap: 15px;
   color: #1877f2;
   font-family: Open Sans;
@@ -197,7 +201,8 @@
   line-height: normal;
   text-transform: none;
 }
-.login .social-login button.twitter {
+.login .social-login button.twitter,
+.login .social-login a.aa-google-login.twitter {
   color: var(--shades-black, #000);
   font-family: Open Sans;
   font-size: 20px;
