@@ -20,12 +20,6 @@ function custom_login_page()
     $to_redirect = array("lostpassword");
     $reset_password_page = home_url('/login?action=lostpassword');
     $check_path = parse_url($_SERVER['REQUEST_URI'])['path'];
-    // Google OAuth callback (Log in with Google returns to wp-login.php with
-    // ?code=&state=). It must reach wp-login.php untouched or the sign-in is lost;
-    // see includes/functions/google-login.php.
-    if ($check_path == "/wp-login.php" && isset($_GET['code'], $_GET['state'])) {
-        return;
-    }
     check_register_action();
     if ($check_path == "/wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'lostpassword') {
         wp_redirect($reset_password_page);

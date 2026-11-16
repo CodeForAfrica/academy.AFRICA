@@ -9,7 +9,8 @@
  *
  * - renders the theme's own Google button with the plugin's authorisation URL;
  * - sets the plugin's CSRF state cookie in the browser on click (assets/js/google-login.js);
- * - lets the OAuth callback through to wp-login.php (see custom_login_page());
+ * - uses the theme's /login page as the OAuth callback, so users never see
+ *   wp-login.php;
  * - keeps the account-verification rules for Google sign-ups;
  * - sends failed Google sign-ins back to the theme's friendly error.
  *
@@ -150,6 +151,77 @@ function academyafrica_google_login_scripts()
     );
 }
 add_action('wp_enqueue_scripts', 'academyafrica_google_login_scripts');
+
+/**
+ * Path of the theme's login page, which is also the OAuth callback.
+ */
+function academyafrica_google_login_callback_url()
+{
+    return home_url('/login');
+}
+
+/**
+ * Send Google back to /login instead of the plugin's default wp_login_url(),
+ * so users never see wp-login.php. The token exchange uses the same filter, so
+ * both requests agree on the redirect_uri. Runs after the plugin's own filter
+ * (priority 10), which only strips redirect_to.
+ *
+ * This URL must be listed under "Authorised redirect URIs" on the Google OAuth
+ * client, e.g. https://academy.africa/login.
+ */
+add_filter('rtcamp.google_redirect_url', 'academyafrica_google_login_callback_url', 20);
+
+/**
+ * Complete a Google sign-in when Google redirects back to /login?code=&state=.
+ *
+ * wp_signon() with no credentials is what wp-login.php does: it runs the
+ * `authenticate` chain, where the plugin exchanges the code and resolves the
+ * user, and the theme's verify_user_on_login() applies. On success the plugin's
+ * `wp_login` handler redirects to the redirect_to stored in the state; on a
+ * Google failure academyafrica_google_login_failed() redirects to the friendly
+ * error. Runs early on init, before any page/template redirects.
+ */
+function academyafrica_google_login_callback()
+{
+    if (!isset($_GET['code'], $_GET['state']) || is_user_logged_in() || !academyafrica_google_login_available()) {
+        return;
+    }
+
+    $request_path = isset($_SERVER['REQUEST_URI']) ? (string) wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH) : '';
+    $login_path = (string) wp_parse_url(academyafrica_google_login_callback_url(), PHP_URL_PATH);
+    if (untrailingslashit($request_path) !== untrailingslashit($login_path)) {
+        return;
+    }
+
+    // Only handle Google's callback; ignore any other code/state pair.
+    $state = json_decode((string) base64_decode(wp_unslash($_GET['state']), true), true);
+    if (!is_array($state) || ($state['provider'] ?? '') !== 'google') {
+        return;
+    }
+
+    nocache_headers();
+    // If the state's redirect_to is rejected (another host), the plugin's
+    // wp_safe_redirect() would fall back to wp-admin; send learners to the
+    // dashboard instead.
+    add_filter('wp_safe_redirect_fallback', function () {
+        return home_url('/learning-pathways');
+    });
+    $user = wp_signon([], is_ssl());
+
+    if ($user instanceof WP_User) {
+        // The plugin normally redirects (and exits) on wp_login; this is the
+        // fallback for a state without redirect_to.
+        wp_safe_redirect(home_url('/learning-pathways'));
+        exit;
+    }
+
+    // Any remaining failure (e.g. a stale nonce, which the plugin ignores
+    // silently) still goes to the friendly error rather than a bare login form.
+    error_log('[academyafrica] Google sign-in not completed: ' . (is_wp_error($user) ? $user->get_error_code() : 'unknown'));
+    wp_safe_redirect(home_url('/?login_type=social'));
+    exit;
+}
+add_action('init', 'academyafrica_google_login_callback', 1);
 
 /**
  * Google sign-ups authenticate an already-verified email, so skip the
