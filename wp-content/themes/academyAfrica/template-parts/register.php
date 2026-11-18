@@ -44,18 +44,7 @@ if ($success) {
                 <?php echo esc_html(academyafrica_translate('Sign up to access all the features on academy.AFRICA')); ?>
             </p>
             <div class="social-login">
-                <button class="google" onclick="theChampInitiateLogin(this, 'google')">
-                    <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="Google">
-                    <?php echo esc_html(academyafrica_translate('Sign up with Google')); ?>
-                </button>
-                <!-- <button onclick="theChampInitiateLogin(this, 'facebook')" class="facebook">
-                <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Google">
-                Sign In with Facebook
-            </button>
-            <button onclick="theChampInitiateLogin(this, 'x')" class="twitter">
-                <img src="/wp-content/themes/academyAfrica/assets/images/icons/twitter.svg" alt="Google">
-                Sign In with X (formerly Twitter)
-            </button> -->
+                <?php academyafrica_google_login_button(academyafrica_translate('Sign up with Google')); ?>
             </div>
             <div class="content-divider">
                 <div></div><span><?php echo esc_html(academyafrica_translate('or')); ?></span>

@@ -1318,7 +1318,8 @@ label {
   flex-direction: column;
   gap: 24px;
 }
-.modal-content .social-login button {
+.modal-content .social-login button,
+.modal-content .social-login a.aa-google-login {
   border-radius: 10px;
   background: #fff;
   padding: 15px;
@@ -1333,11 +1334,13 @@ label {
   text-transform: none;
   border: 1px solid transparent;
 }
-.modal-content .social-login button:hover {
+.modal-content .social-login button:hover,
+.modal-content .social-login a.aa-google-login:hover {
   border: 1px solid #0c1a81;
   background-color: #eff0fd;
 }
-.modal-content .social-login button.google {
+.modal-content .social-login button.google,
+.modal-content .social-login a.aa-google-login.google {
   color: rgba(0, 0, 0, 0.54);
   font-family: Open Sans;
   font-size: 20px;
@@ -1346,7 +1349,8 @@ label {
   line-height: normal;
   text-transform: none;
 }
-.modal-content .social-login button.facebook {
+.modal-content .social-login button.facebook,
+.modal-content .social-login a.aa-google-login.facebook {
   gap: 15px;
   color: #1877f2;
   font-family: Open Sans;
@@ -1356,7 +1360,8 @@ label {
   line-height: normal;
   text-transform: none;
 }
-.modal-content .social-login button.twitter {
+.modal-content .social-login button.twitter,
+.modal-content .social-login a.aa-google-login.twitter {
   color: var(--shades-black, #000);
   font-family: Open Sans;
   font-size: 20px;

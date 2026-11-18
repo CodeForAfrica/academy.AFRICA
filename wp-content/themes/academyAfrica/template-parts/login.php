@@ -69,18 +69,7 @@ if (isset($_GET['email_sent'])) {
                     <?php echo esc_html(academyafrica_translate('Sign up to access all the features on academy.AFRICA')); ?>
                 </p>
                 <div class="social-login">
-                    <button class="google" onclick="theChampInitiateLogin(this, 'google')" id="google-login">
-                        <img src="/wp-content/themes/academyAfrica/assets/images/icons/google.svg" alt="Google">
-                        <?php echo esc_html(academyafrica_translate('Sign in with Google')); ?>
-                    </button>
-                    <!-- <button onclick="theChampInitiateLogin(this, 'facebook')" class="facebook">
-                <img src="/wp-content/themes/academyAfrica/assets/images/icons/facebook.svg" alt="Facebook">
-                Sign In with Facebook
-            </button>
-            <button onclick="theChampInitiateLogin(this, 'x')" class="twitter">
-                <img src="/wp-content/themes/academyAfrica/assets/images/icons/twitter.svg" alt="Twitter">
-                Sign In with X (formerly Twitter)
-            </button> -->
+                    <?php academyafrica_google_login_button(academyafrica_translate('Sign in with Google'), 'google-login'); ?>
                 </div>
                 <div class="content-divider">
                     <div></div><span><?php echo esc_html(academyafrica_translate('or')); ?></span>

@@ -132,7 +132,9 @@ label {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    button {
+    // Google sign-in renders as a link (includes/functions/google-login.php).
+    button,
+    a.aa-google-login {
       border-radius: 10px;
       background: #fff;
       padding: 15px;
